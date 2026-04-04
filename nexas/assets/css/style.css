@@ -4772,23 +4772,23 @@ ul.solarsystem li.saturn.bottom-2 {
 }
 
 /*--------------------------------------------------
-  TAI Engineering — logo sizing (height = template logo.png 30px; width auto)
+  TAI Engineering — logo sizing (50% of prior 30px/28px; width auto)
 ---------------------------------------------------*/
 .navbar-area .nav-container .logo .main-logo img {
-  height: 30px;
+  height: 15px;
   width: auto;
   max-width: none;
 }
 
 .footer-area .footer-widget .logo img {
-  height: 30px;
+  height: 15px;
   width: auto;
   max-width: none;
 }
 
 @media all and (max-width: 575px) {
   .navbar-area .nav-container .logo .main-logo img {
-    height: 28px;
+    height: 14px;
     width: auto;
   }
   .navbar-area .nav-container .logo a img {
@@ -4828,6 +4828,161 @@ ul.solarsystem li.saturn.bottom-2 {
   color: #fff;
   background: rgba(255, 255, 255, 0.12);
   border-color: #fff;
+}
+
+/*--------------------------------------------------
+  TAI 메인 랜딩 (전환 중심)
+---------------------------------------------------*/
+.tai-landing-hero {
+  position: relative;
+  background-color: #0b1324;
+  background-size: cover;
+  background-position: center right;
+  min-height: 520px;
+  padding-top: 100px;
+  padding-bottom: 90px;
+}
+.tai-landing-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(11, 19, 36, 0.94) 0%,
+    rgba(11, 19, 36, 0.78) 45%,
+    rgba(11, 19, 36, 0.35) 100%
+  );
+  z-index: 0;
+}
+.tai-landing-hero .container {
+  position: relative;
+  z-index: 1;
+}
+.tai-landing-hero .banner-inner h6 {
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
+}
+.tai-landing-hero .banner-inner h1 {
+  color: #fff;
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  line-height: 1.25;
+}
+.tai-landing-hero .banner-inner .tai-hero-lead {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+  max-width: 32rem;
+}
+.tai-landing-hero .tai-hero-ctas .btn {
+  margin: 0.35rem 0.35rem 0.35rem 0;
+}
+.tai-landing-hero .tai-hero-thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+.tai-landing-hero .tai-hero-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+.tai-problem-card .thumb {
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 200px;
+}
+.tai-problem-card .thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.tai-problem-card p {
+  font-weight: 500;
+  color: var(--heading-color);
+}
+.tai-how-thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(12, 0, 46, 0.12);
+}
+.tai-how-thumb img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tai-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tai-step-list li {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  align-items: flex-start;
+}
+.tai-step-list .num {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--main-color);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tai-free-diagnosis {
+  margin-top: 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(var(--main-color-opacity), 0.95) 0%, rgba(12, 0, 46, 0.92) 100%);
+}
+.tai-free-diagnosis .tai-free-inner {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.tai-free-diagnosis .tai-free-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 280px;
+}
+.tai-trust-card .thumb {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  max-height: 140px;
+}
+.tai-trust-card .thumb img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+.tai-final-cta {
+  background-image: url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.tai-final-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 19, 36, 0.82);
+  z-index: 0;
+}
+.tai-final-cta .container {
+  position: relative;
+  z-index: 1;
+}
+.tai-final-cta h2,
+.tai-final-cta p {
+  color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */
