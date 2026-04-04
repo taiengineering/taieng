@@ -5044,4 +5044,94 @@ ul.solarsystem li.saturn.bottom-2 {
   margin-top: 0.45rem;
 }
 
+/* 안전정보 (index-5) — API 연동 목록 */
+.tai-safety-banner {
+  background: linear-gradient(120deg, rgba(12, 0, 46, 0.92), rgba(var(--main-color-opacity), 0.88));
+  padding: 3.5rem 0 3rem;
+}
+.tai-safety-banner h1 {
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+.tai-safety-banner .lead {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1rem;
+}
+.tai-stat-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  color: #fff;
+}
+.tai-stat-box .label {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+.tai-stat-box .value {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.tai-cat-tab {
+  border-radius: 2rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid #dee2e6;
+  background: #fff;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0.2rem;
+}
+.tai-cat-tab:hover {
+  border-color: var(--main-color);
+  color: var(--main-color);
+}
+.tai-cat-tab.active {
+  background: var(--main-color);
+  border-color: var(--main-color);
+  color: #fff;
+}
+.tai-safety-card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  padding: 1.25rem !important;
+  height: 100%;
+  border-radius: 10px;
+}
+.tai-safety-card-link:hover .tai-safety-card {
+  box-shadow: 0 12px 32px rgba(12, 0, 46, 0.12);
+  transform: translateY(-2px);
+}
+.tai-safety-card-link .title {
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--heading-color);
+}
+.tai-src-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2rem;
+  display: inline-block;
+}
+.tai-src-live {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.tai-src-kosha {
+  background: #dcfce7;
+  color: #15803d;
+}
+.tai-src-law {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.tai-src-tai {
+  background: #f3f4f6;
+  color: #374151;
+}
+#tai-posts-loading {
+  min-height: 120px;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>안전정보 | TAI Engineering</title>
-    <!--fivicon icon-->
     <link rel="icon" href="assets/img/fevicon.png">
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/magnific.min.css">
@@ -18,33 +15,25 @@
     <link rel="stylesheet" href="assets/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
-
-    <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-
-
 </head>
-<body class='home-5 sc5'>
-    <!-- preloader area start -->
+<body class="home-5 sc5">
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
-            <div id="wave1">
-            </div>
+            <div id="wave1"></div>
             <div class="spinner">
                 <div class="dot1"></div>
                 <div class="dot2"></div>
             </div>
         </div>
     </div>
-    <!-- preloader area end -->
     <div class="body-overlay" id="body-overlay"></div>
-    <!-- navbar start -->
+
     <header class="navbar-area">
         <nav class="navbar navbar-expand-lg">
             <div class="container nav-container">
                 <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
-                    aria-expanded="false" aria-label="메뉴 열기">
+                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기">
                         <span class="icon-left"></span>
                         <span class="icon-right"></span>
                     </button>
@@ -89,523 +78,70 @@
             </div>
         </nav>
     </header>
-    <!-- navbar end -->
 
-    <!-- Banner Area Start-->
-    <section class="banner-area style-5" style="background-image: url(assets/img/home-5/banner/bg.png)">
+    <!-- TAI: 안전정보 — api.taieng.co.kr/posts 데이터 -->
+    <section class="tai-safety-banner">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 align-self-center">
-                    <div class="banner-inner">
-                        <h1>Fast & Secure Web Hosting                        </h1>
-                        <p class="mx-lg-5">선임·점검·이력을 한 화면에서 관리하고, 현장과 본사가 같은 정보를 공유합니다.</p>
-                        <div class="single-input-wrap">
-                            <input type="text" placeholder="도메인을 입력하세요">
-                            <select class="single-select">
-                                <option>.com</option>
-                                <option value="asc">.net</option>
-                                <option value="desc">.org</option>
-                                <option value="pop">.info</option>
-                              </select>
-                            <button class="btn btn-base">검색</button>
-                        </div>
-                        <ul class="hosting-price">
-                            <li>.com $8.99</li>
-                            <li>.net $14.99</li>
-                            <li>.org $12.20</li>
-                            <li>.info $9.12</li>
-                            <li><a href="#">& much more</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Banner Area End -->
-
-    <!--about-area start-->
-    <section class="about-area pd-top-150 pd-bottom-150 text-center text-lg-start">
-        <div class="container">
-            <div class="row justify-content-center justify-content-lg-start">
-                <div class="col-lg-6 align-self-center order-lg-2">
-                    <div class="thumb text-center mb-lg-0 mb-4">
-                        <img src="assets/img/home-5/work/1.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="section-title mb-0">
-                        <h2 class="title">Quick Website Building</h2>
-                        <p> Quis incididunt dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis.  sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis sed do eiusmod tempor incid idunt magna.</p>
-                        <a class="btn btn-base mt-5" href="#">더 알아보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about Area End -->
-
-    <!--about-area start-->
-    <section class="about-area text-center text-lg-start">
-        <div class="container">
-            <div class="row justify-content-center justify-content-lg-start">
-                <div class="col-lg-6 align-self-center">
-                    <div class="thumb text-center mb-lg-0 mb-5">
-                        <img src="assets/img/home-5/work/2.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="section-title mb-0">
-                        <h2 class="title">Easy Website Transfer</h2>
-                        <p> Quis incididunt dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis.  sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis sed do eiusmod tempor incid idunt magna.</p>
-                        <a class="btn btn-base mt-5" href="#">더 알아보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about Area End -->
-
-    <!--service-area start-->
-    <section class="service-area default-pd-top">
-        <div class="container">
-            <div class="row justify-content-center">
+            <div class="row align-items-center gy-4">
                 <div class="col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">Web Hosting Essentials</h2>
-                        <p>Risus commodo dolor sit amet, consec tetur adipi scing elit, sed do eiusmod tempor incididunt ut dolore magna aliqua. Quis ipsum suspen gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                    </div>                    
+                    <h6 class="text-white mb-2" style="opacity:0.9;">국가·공인 데이터 기반</h6>
+                    <h1 class="mb-2">산업안전 안전정보</h1>
+                    <p class="lead mb-0">공개 API와 동일하게 최신 게시글을 불러옵니다. (api.taieng.co.kr/posts)</p>
                 </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/01.png" alt="">
-                        </div>
-                        <h4><a href="service.html">UI/UX Design</a></h4>
-                        <p>Risus commodo dolor sit amet, consec tetur adipi scing elit, sed do eiusmod tempor incididunt ut dolore magna aliqua. Quis ipsum suspen gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/02.png" alt="">
-                        </div>
-                        <h4><a href="service.html">Prototyping</a></h4>
-                        <p>선임·점검·보고를 한 화면에서 정리해, 현장 의사결정이 빨라집니다. </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/03.png" alt="">
-                        </div>
-                        <h4><a href="service.html">App Development</a></h4>
-                        <p>Development magna aliqua sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut et. Quis suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/04.png" alt="">
-                        </div>
-                        <h4><a href="service.html">TAI 앱 다운로드</a></h4>
-                        <p>Risus commodo dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut dolore magna aliqua. Quis ipsum suspen gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/05.png" alt="">
-                        </div>
-                        <h4><a href="service.html">서비스 알아보기</a></h4>
-                        <p>Development magna aliqua sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut et. Quis suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner">
-                        <div class="thumb">
-                            <img class="rounded-0" src="assets/img/service/06.png" alt="">
-                        </div>
-                        <h4><a href="service.html">업무 프로세스</a></h4>
-                        <p>선임·점검·보고를 한 화면에서 정리해, 현장 의사결정이 빨라집니다.</p>
+                <div class="col-lg-4">
+                    <div class="tai-stat-box">
+                        <div class="label mb-1">집계</div>
+                        <div class="value" id="tai-stat-today">불러오는 중…</div>
+                        <div class="value mt-2" style="font-size:0.95rem;font-weight:500;opacity:0.9;" id="tai-stat-total">—</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- service Area End -->
 
-    <!--pricing-area start-->
-    <section class="pricing-area pd-top-110 text-center">
+    <section class="service-area default-pd-top pd-bottom-100" id="tai-safety-list">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">Shared Hosting Plans</h2>
-                        <p>법령·점검 주기에 맞춰 업무 흐름을 안내합니다.</p>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="pricing-tabs-2">
-                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">월간</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Yearly</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                <div class="row justify-content-center g-xl-0">
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">StartUp Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">5.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $19.95/mo.</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2 focused">
-                                            <span class="tag">RECOMMENDED</span>    
-                                            <h4 class="pricing-title">GrowBig Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">11.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $34.95/mo.</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                                <li><i class="fas fa-check"></i>Save Rides use next mo.</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">Business Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">35.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $50.95/mo.</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <div class="row justify-content-center g-xl-0">
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">StartUp Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">115.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $119.95/year</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2 focused">
-                                            <span class="tag">RECOMMENDED</span>    
-                                            <h4 class="pricing-title">GrowBig Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">111.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $134.95/year</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                                <li><i class="fas fa-check"></i>Save Rides use next mo.</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">Business Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">135.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $150.95/year</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-    </section>
-    <!--pricing-area end-->
-
-    <!--testimonial-area start-->
-    <section class="testimonial-area-2 pd-top-110">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">고객 후기</h2>
-                        <p class="px-5">산업안전 관련 안내와 최신 정보를 제공합니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="testimonial-slider-2">
-                        <div class="slider testimonial-slider-nav">
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/1.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/2.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/3.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/4.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/5.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/3.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-9">
-                    <div class="slider testimonial-slider-for">                            
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 제조업 안전관리자</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>도입 후 점검·기록·보고가 한 화면에 모여, 현장과 본사가 같은 기준으로 소통하게 되었습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>Ariful Isalam Abid <span>- Gamer</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>법정 점검 주기와 증빙 자료를 놓치지 않게 되어, 감사·인증 대응 부담이 줄었습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>대행사·수급사와 일정·이력을 공유하니 협업이 훨씬 수월해졌습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>이○○ <span>· UX 디자인</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>리스크 요인을 사전에 정리해 두니, 교육·개선 활동에 집중할 수 있습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>Ariful Isalam Abid <span>- Gamer</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>대행사·수급사와 일정·이력을 공유하니 협업이 훨씬 수월해졌습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>현장 피드백을 데이터로 남겨, 반복 재발을 줄이는 데 도움이 됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--testimonial-area end-->
-
-    <!--faq-area start-->
-    <section class="faq-area pd-top-130 pd-bottom-150">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-title text-center">
-                        <h2 class="title">Frequently Asked Questions:</h2>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="faq-accordion mb-5" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    TAI 서비스를 선택해야 하는 이유는 무엇인가요?
-                                </button>
-                            </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    산업안전 규정·점검·실무를 한곳에서 정리하는 TAI 플랫폼 안내입니다. 상세 내용은 각 서비스 페이지에서 확인하세요. 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Why is domain name registration required?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    산업안전 규정·점검·실무를 한곳에서 정리하는 TAI 플랫폼 안내입니다. 상세 내용은 각 서비스 페이지에서 확인하세요. 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                How does domain registration work?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    산업안전 규정·점검·실무를 한곳에서 정리하는 TAI 플랫폼 안내입니다. 상세 내용은 각 서비스 페이지에서 확인하세요. 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item mb-0">
-                            <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                어떤 산업안전 영역을 다루나요?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    산업안전 규정·점검·실무를 한곳에서 정리하는 TAI 플랫폼 안내입니다. 상세 내용은 각 서비스 페이지에서 확인하세요. 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-4">
                 <div class="col-12">
-                    <div class="section-title text-center mb-0">
-                        <h2 class="title">도움이 필요하신가요? 언제든 연락 주세요.</h2>
-                        <a class="btn btn-base" href="faq.html">상담 요청</a>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--faq-area end-->   
-
-    <!-- subscribe-Area Start-->
-    <section class="subscribe-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="subscribe-inner">
-                        <div class="row no-gutters">
-                            <div class="col-xl-5 col-lg-6">
-                                <h2>뉴스레터 구독</h2>
-                                <p class="pe-5">뉴스레터를 구독하시면 최신 소식을 보내드립니다.</p>
+                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mb-3">
+                        <button type="button" class="tai-cat-tab active" data-cat="">전체</button>
+                        <button type="button" class="tai-cat-tab" data-cat="safety_news">안전뉴스</button>
+                        <button type="button" class="tai-cat-tab" data-cat="accident_case">사고사례</button>
+                        <button type="button" class="tai-cat-tab" data-cat="kosha_guide">기술지침</button>
+                        <button type="button" class="tai-cat-tab" data-cat="law_update">법령안내</button>
+                        <button type="button" class="tai-cat-tab" data-cat="general">안전팁</button>
+                        <button type="button" class="tai-cat-tab" data-cat="notice">공지</button>
+                    </div>
+                    <div class="row g-2 align-items-center flex-wrap">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="input-group input-group-sm">
+                                <input type="search" class="form-control" id="tai-posts-search" placeholder="제목 검색" aria-label="검색">
+                                <button class="btn btn-base" type="button" id="tai-posts-search-btn">검색</button>
                             </div>
-                            <div class="col-lg-6 offset-xl-1 align-self-center">
-                                <div class="single-input-wrap">
-                                    <input type="text" placeholder="이메일 주소를 입력하세요">
-                                    <button class="btn btn-base">구독하기</button>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-md-4 col-lg-3 ms-md-auto">
+                            <select class="form-select form-select-sm" id="tai-posts-sort" aria-label="정렬">
+                                <option value="latest">최신순</option>
+                                <option value="views">조회순</option>
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="small text-muted" id="tai-posts-count"></span>
+            </div>
+
+            <div class="text-center py-4 d-none" id="tai-posts-loading">
+                <span class="text-muted">목록을 불러오는 중…</span>
+            </div>
+
+            <div class="row g-4" id="tai-posts-grid"></div>
+            <div id="tai-posts-pagination" class="mt-4"></div>
         </div>
     </section>
-    <!-- subscribe-Area end-->
 
-    <!-- footer area start -->
     <footer class="footer-area style-1">
         <div class="footer-inner">
             <div class="container">
@@ -625,12 +161,13 @@
                     </div>
                     <div class="col-xl-2 col-lg-2 col-6">
                         <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">Product</h6>
+                            <h6 class="widget-title">메뉴</h6>
                             <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>How It Works?</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>Download App</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>Terms of Service</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>Privacing Price</a></li>
+                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
+                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
+                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
+                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
+                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
                             </ul>
                         </div>
                     </div>
@@ -638,11 +175,10 @@
                         <div class="footer-widget widget widget_link">
                             <h6 class="widget-title">서비스</h6>
                             <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>그래픽 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>웹 디자인 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>웹 개발 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>SEO</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>My account</a></li>
+                                <li><a href="diagnosis-start.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
+                                <li><a href="service.html"><i class="fas fa-angle-right"></i>공정 분석</a></li>
+                                <li><a href="service.html"><i class="fas fa-angle-right"></i>설비 분석</a></li>
+                                <li><a href="service.html"><i class="fas fa-angle-right"></i>SaaS 자동 관리</a></li>
                             </ul>
                         </div>
                     </div>
@@ -650,45 +186,38 @@
                         <div class="footer-widget widget widget_link">
                             <h6 class="widget-title">바로가기</h6>
                             <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>도움말 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>고객 지원 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>고객 사례 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>연락처</a></li>
+                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
+                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
+                                <li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
+                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Footer bottom-->
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 align-self-center">
                         <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>       
+                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>
                         </div>
                     </div>
                     <div class="col-md-6 align-self-center text-md-end">
                         <div class="author-area">
-                            <p>원본 테마: Themefie</p>       
+                            <p>원본 테마: Themefie</p>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
-        <!--Footer bottom-->
     </footer>
-    <!-- footer area end -->    
 
-    <!-- back-to-top end -->
     <div class="back-to-top">
         <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
     </div>
 
-    
-
-    <!-- all plugins here -->
     <script src="assets/js/jquery.3.6.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/imageloded.min.js"></script>
@@ -701,8 +230,8 @@
     <script src="assets/js/owl.min.js"></script>
     <script src="assets/js/slick-slider.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
-    <!-- main js  -->
     <script src="assets/js/nav-auth.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/tai-safety-posts.js"></script>
 </body>
 </html>
