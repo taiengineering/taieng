@@ -1,0 +1,12 @@
+{
+  "name": "taieng",
+  "private": true,
+  "description": "TAI public site — Railway entry (delegates to nexas/)",
+  "scripts": {
+    "build": "npm --prefix nexas ci && npm --prefix nexas run build",
+    "start": "npm --prefix nexas start"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
