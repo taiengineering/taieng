@@ -39,18 +39,6 @@
     </div>
     <!-- preloader area end -->
     <div class="body-overlay" id="body-overlay"></div>
-
-    <!-- search popup area start -->
-    <div class="search-popup" id="search-popup">
-        <form action="index.html" class="search-form">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search.....">
-            </div>
-            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
-    <!-- //. search Popup -->
-
     <!-- navbar start -->
     <header class="navbar-area">
         <nav class="navbar navbar-expand-lg">
@@ -65,14 +53,12 @@
                 <div class="logo">
                     <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="img"></a>
                 </div>
-                <div class="nav-right-part nav-right-part-mobile">
-                    <ul>
-                        <li><a class="search header-search" href="#"><i class="fa fa-search"></i></a></li>
-                    </ul>
-                </div>
                 <div class="collapse navbar-collapse" id="themefie_main_menu">
                     <ul class="navbar-nav menu-open text-end">
-                        <li><a href="index-1.html">TAI SAFE</a></li>
+                        <li class="tai-safe-wrap">
+                            <a href="index-1.html">TAI SAFE</a>
+                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
+                        </li>
                         <li class="menu-item-has-children">
                             <a href="index-2.html">TAI MANAGER</a>
                             <ul class="sub-menu">
@@ -95,23 +81,10 @@
                             </ul>
                         </li>
                         <li><a href="index-5.html">안전정보</a></li>
-                        <li class="menu-item-has-children">
-                            <a href="#">계정</a>
-                            <ul class="sub-menu">
-                                <li><a href="log-in.html">로그인</a></li>
-                                <li><a href="mypage.html">마이페이지</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-right-part nav-right-part-desktop">
-                    <ul>
-                        <li><a class="search header-search" href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="">
-                            <a href="contact.html" class="btn btn-white">
-                                문의하기
-                            </a>
-                        </li>
+                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
+                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
+                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
+                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage.html">마이페이지</a></li>
                     </ul>
                 </div>
             </div>
@@ -272,6 +245,7 @@
     <script src="assets/js/slick-slider.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <!-- main js  -->
+    <script src="assets/js/nav-auth.js"></script>
     <script src="assets/js/main.js"></script>
     </body>
 </html>

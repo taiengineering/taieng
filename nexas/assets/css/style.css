@@ -4772,28 +4772,62 @@ ul.solarsystem li.saturn.bottom-2 {
 }
 
 /*--------------------------------------------------
-  TAI Engineering — logo sizing (wide horizontal PNG)
+  TAI Engineering — logo sizing (height = template logo.png 30px; width auto)
 ---------------------------------------------------*/
 .navbar-area .nav-container .logo .main-logo img {
-  height: auto;
-  max-height: 48px;
+  height: 30px;
   width: auto;
-  max-width: 280px;
+  max-width: none;
 }
 
 .footer-area .footer-widget .logo img {
-  height: auto;
-  max-height: 44px;
+  height: 30px;
   width: auto;
-  max-width: 260px;
+  max-width: none;
 }
 
 @media all and (max-width: 575px) {
+  .navbar-area .nav-container .logo .main-logo img {
+    height: 28px;
+    width: auto;
+  }
   .navbar-area .nav-container .logo a img {
     width: auto !important;
-    max-width: 200px;
-    max-height: 40px;
+    max-width: none;
+    max-height: none;
   }
+}
+
+/*--------------------------------------------------
+  TAI — TAI SAFE 옆 + 버튼 · 인증 메뉴
+---------------------------------------------------*/
+.navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-safe-wrap {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+.navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-safe-wrap > a.tai-nav-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 4px;
+  margin-top: 0;
+  line-height: 1;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #fff;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-safe-wrap > a.tai-nav-plus:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */
