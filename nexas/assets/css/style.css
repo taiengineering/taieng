@@ -5134,4 +5134,35 @@ ul.solarsystem li.saturn.bottom-2 {
   min-height: 120px;
 }
 
+/* TAI footer — 특허 안내 & 회사 정보 */
+.footer-patent-bar {
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.footer-patent-bar p {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+@media (max-width: 575px) {
+  .footer-patent-bar p {
+    font-size: 0.72rem;
+  }
+}
+.footer-company-info {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin-top: 0.75rem;
+}
+.footer-company-info p {
+  margin-bottom: 0.35rem;
+}
+.footer-company-info .footer-company-name {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.footer-company-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=style.css.map */
