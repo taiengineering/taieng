@@ -6,7 +6,7 @@
   "scripts": {
     "build": "sass assets/sass/style.scss assets/css/style.css --style=expanded",
     "build:min": "sass assets/sass/style.scss assets/css/style.css --style=compressed --no-source-map",
-    "start": "serve -s . -l tcp://0.0.0.0:${PORT:-3000}"
+    "start": "serve . -l tcp://0.0.0.0:${PORT:-3000}"
   },
   "dependencies": {
     "serve": "^14.2.4"
