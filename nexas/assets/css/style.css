@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 Theme Name: Nexas
 Theme URI: http://themefie.com/nexas
@@ -4768,6 +4769,31 @@ ul.solarsystem li.saturn.bottom-2 {
   margin: -50px 0 0 -50px;
   color: var(--main-color);
   font-size: 24px;
+}
+
+/*--------------------------------------------------
+  TAI Engineering — logo sizing (wide horizontal PNG)
+---------------------------------------------------*/
+.navbar-area .nav-container .logo .main-logo img {
+  height: auto;
+  max-height: 48px;
+  width: auto;
+  max-width: 280px;
+}
+
+.footer-area .footer-widget .logo img {
+  height: auto;
+  max-height: 44px;
+  width: auto;
+  max-width: 260px;
+}
+
+@media all and (max-width: 575px) {
+  .navbar-area .nav-container .logo a img {
+    width: auto !important;
+    max-width: 200px;
+    max-height: 40px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

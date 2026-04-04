@@ -1,0 +1,24 @@
+/*--------------------------------------------------
+  TAI Engineering — logo sizing (wide horizontal PNG)
+---------------------------------------------------*/
+.navbar-area .nav-container .logo .main-logo img {
+  height: auto;
+  max-height: 48px;
+  width: auto;
+  max-width: 280px;
+}
+
+.footer-area .footer-widget .logo img {
+  height: auto;
+  max-height: 44px;
+  width: auto;
+  max-width: 260px;
+}
+
+@media all and (max-width: 575px) {
+  .navbar-area .nav-container .logo a img {
+    width: auto !important;
+    max-width: 200px;
+    max-height: 40px;
+  }
+}
