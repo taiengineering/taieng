@@ -1,0 +1,13 @@
+{
+  "name": "taieng-nexas",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Nexas template — SCSS build for TAI public site",
+  "scripts": {
+    "build": "sass assets/sass/style.scss assets/css/style.css --style=expanded",
+    "build:min": "sass assets/sass/style.scss assets/css/style.css --style=compressed --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.85.0"
+  }
+}
