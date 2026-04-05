@@ -49,6 +49,21 @@
   background: rgba(var(--tai-primary-rgb), 0.85);
 }
 
+/* 메인 히어로 우측 비주얼 (크롭/투명 PNG) */
+#tai-hero .tai-hero-thumb {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#tai-hero .tai-hero-thumb img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: min(520px, 68vh);
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.28));
+}
+
 /* ── 상단 메뉴: TAI SAFE ~ 안전정보 균일 간격 + 로그인/회원가입 구역 분리 ── */
 @media (min-width: 992px) {
   .navbar-area .nav-container .navbar-collapse .navbar-nav.menu-open {
