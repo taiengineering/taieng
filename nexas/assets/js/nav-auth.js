@@ -20,6 +20,8 @@
       'user_name',
       'user_email',
       'role_code',
+      'partner_role',
+      'tai_flags',
       'user_id',
       'company_id',
       'factory_id',

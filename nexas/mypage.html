@@ -111,21 +111,34 @@
     </section>
     <!-- breadcrumb Area End -->
 
-    <!-- mypage placeholder Start-->
+    <!-- mypage Start-->
     <div class="login-area" style="background: var(--main-gradient)">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="login-form default-form-wrap text-center py-5">
+                    <div id="taiMypageGuest" class="login-form default-form-wrap text-center py-5">
                         <p class="mb-3">회원 전용 영역입니다. 추후 서비스 연동 시 프로필·이용 내역·알림 등이 표시됩니다.</p>
                         <p class="mb-4"><a href="log-in.html" class="btn btn-base">로그인으로 이동</a></p>
                         <p class="text-muted small mb-0">비회원은 <a href="index.html">홈</a>에서 서비스 소개를 확인하세요.</p>
+                    </div>
+                    <div id="taiMypageUser" class="login-form default-form-wrap text-center py-5 d-none">
+                        <p class="mb-2 fw-semibold"><span id="taiMypageUserName">회원</span>님 환영합니다.</p>
+                        <p class="mb-3">
+                            <span id="taiMypageRoleBadge" class="badge rounded-pill" style="background: var(--tai-primary, #0d6efd); font-weight: 600;">—</span>
+                        </p>
+                        <p class="mb-3 text-muted small">역할 코드: <code id="taiMypageRoleCode" class="small">—</code></p>
+                        <p class="mb-4 small text-start mx-auto" style="max-width: 28rem;">선임자격회원은 안전관리 파트너로 승인된 계정입니다. 실서비스에서는 <code>GET /me</code>의 <code>flags.canAccessPartnerDashboard</code>로 동일하게 분기합니다.</p>
+                        <p class="mb-3" id="taiMypagePartnerDash">
+                            <a href="index-4.html" class="btn btn-base me-2">파트너 업무 안내 (TAI CARE)</a>
+                            <a href="contact.html" class="btn btn-outline-secondary">문의</a>
+                        </p>
+                        <p class="text-muted small mb-0"><a href="#" class="tai-logout">로그아웃</a> · <a href="index.html">홈</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- mypage placeholder end-->
+    <!-- mypage end-->
 
      <!-- contact-Area Start-->
     <section class="contact-area pd-top-150 mt-250">
@@ -280,5 +293,40 @@
     <!-- main js  -->
     <script src="assets/js/nav-auth.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+(function () {
+  var token = localStorage.getItem('access_token');
+  var guest = document.getElementById('taiMypageGuest');
+  var userPanel = document.getElementById('taiMypageUser');
+  if (!guest || !userPanel) return;
+  if (!token) {
+    guest.classList.remove('d-none');
+    userPanel.classList.add('d-none');
+    return;
+  }
+  guest.classList.add('d-none');
+  userPanel.classList.remove('d-none');
+  var u = {};
+  try {
+    u = JSON.parse(localStorage.getItem('user') || '{}');
+  } catch (e) {}
+  var nameEl = document.getElementById('taiMypageUserName');
+  var roleBadge = document.getElementById('taiMypageRoleBadge');
+  var roleCodeEl = document.getElementById('taiMypageRoleCode');
+  var dashBlock = document.getElementById('taiMypagePartnerDash');
+  if (nameEl) nameEl.textContent = u.name || localStorage.getItem('user_name') || '회원';
+  if (roleBadge) roleBadge.textContent = u.role_label || '회원';
+  if (roleCodeEl) roleCodeEl.textContent = u.role_code || localStorage.getItem('role_code') || '—';
+  var flags = {};
+  try {
+    flags = JSON.parse(localStorage.getItem('tai_flags') || '{}');
+  } catch (e2) {}
+  var canDash =
+    flags.canAccessPartnerDashboard === true ||
+    u.partner_role === 'SAFETY' ||
+    u.partner_role === 'REPAIR';
+  if (dashBlock) dashBlock.classList.toggle('d-none', !canDash);
+})();
+    </script>
 </body>
 </html>

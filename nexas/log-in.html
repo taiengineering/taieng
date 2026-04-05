@@ -129,7 +129,7 @@
 				<p class="small text-muted mb-3" style="font-size:0.8rem;line-height:1.45;">
 					<strong>테스트용 계정:</strong><br>
 					이메일 <code style="font-size:0.78rem;">demo@taieng.co.kr</code> · 비밀번호 <code style="font-size:0.78rem;">Taidemo2026!</code><br>
-					<span class="text-muted" style="font-size:0.75rem;">실제 API 없이 프론트에서만 인증됩니다. 운영 배포 전 안내 문구 제거를 검토하세요.</span>
+					<span class="text-muted" style="font-size:0.75rem;">선임자격회원(안전관리 파트너 승인) 권한이 부여된 데모입니다. 실제 API 없이 프론트만 인증합니다.</span>
 				</p>
 
 				<div class="tai-auth-divider">또는</div>
@@ -284,7 +284,7 @@
 	<script>
 var TAI_API = 'https://api.taieng.co.kr';
 
-/** 프론트 테스트용 더미 로그인 (assets/data/demo-login.json 과 동일 값) */
+/** 프론트 테스트용 더미 로그인 (assets/data/demo-login.json 과 동일 값) — 선임자격(안전관리 파트너 승인) 권한 포함 */
 var TAI_DEMO_LOGIN = {
 	loginId: 'demo@taieng.co.kr',
 	password: 'Taidemo2026!',
@@ -292,9 +292,14 @@ var TAI_DEMO_LOGIN = {
 		id: '00000000-0000-0000-0000-00000000d3m0',
 		name: '데모 사용자',
 		email: 'demo@taieng.co.kr',
-		role_code: 'USER',
+		account_role: 'USER',
+		role_code: 'SAFETY_PARTNER',
+		role_label: '선임자격회원',
+		partner_role: 'SAFETY',
+		partner_status: 'APPROVED',
 		company_id: '',
-		factory_id: ''
+		factory_id: '',
+		flags: { canAccessPartnerDashboard: true, hasPendingPartnerApplication: false }
 	}
 };
 function taiApplyDemoLogin(loginId, pw) {
@@ -302,15 +307,22 @@ function taiApplyDemoLogin(loginId, pw) {
 	if (id !== TAI_DEMO_LOGIN.loginId.toLowerCase()) return false;
 	if (pw !== TAI_DEMO_LOGIN.password) return false;
 	var u = TAI_DEMO_LOGIN.user;
-	var token = 'dummy.' + btoa(JSON.stringify({ sub: u.id, demo: true })).replace(/=+$/, '');
+	var token = 'dummy.' + btoa(JSON.stringify({
+		sub: u.id,
+		demo: true,
+		partner_role: u.partner_role,
+		canAccessPartnerDashboard: !!(u.flags && u.flags.canAccessPartnerDashboard)
+	})).replace(/=+$/, '');
 	localStorage.setItem('access_token', token);
 	localStorage.setItem('user_name', u.name);
 	localStorage.setItem('user_email', u.email);
 	localStorage.setItem('role_code', u.role_code || '');
+	localStorage.setItem('partner_role', u.partner_role || '');
 	localStorage.setItem('user_id', u.id);
 	localStorage.setItem('company_id', u.company_id || '');
 	localStorage.setItem('factory_id', u.factory_id || '');
 	localStorage.setItem('user', JSON.stringify(u));
+	localStorage.setItem('tai_flags', JSON.stringify(u.flags || {}));
 	localStorage.setItem('tai_session', '1');
 	return true;
 }
@@ -421,10 +433,15 @@ async function taiDoLogin() {
     if (data.status === 'success' && data.data && data.data.access_token) {
       var token = data.data.access_token;
       var user = data.data.user || {};
+      var flags = data.data.flags || user.flags || null;
       localStorage.setItem('access_token', token);
       localStorage.setItem('user_name', user.name || '');
       localStorage.setItem('user_email', user.email || loginId);
       localStorage.setItem('role_code', user.role_code || '');
+      if (user.partner_role) localStorage.setItem('partner_role', user.partner_role);
+      else localStorage.removeItem('partner_role');
+      if (flags) localStorage.setItem('tai_flags', JSON.stringify(flags));
+      else localStorage.removeItem('tai_flags');
       localStorage.setItem('user_id', user.id || '');
       localStorage.setItem('company_id', user.company_id || '');
       localStorage.setItem('factory_id', user.factory_id || '');

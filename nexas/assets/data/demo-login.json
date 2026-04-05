@@ -1,5 +1,16 @@
 {
   "login_id": "demo@taieng.co.kr",
   "password": "Taidemo2026!",
-  "note": "log-in.html의 TAI_DEMO_LOGIN과 동일합니다. 브라우저에서 이 값으로 로그인하면 API 호출 없이 localStorage에 세션이 저장됩니다. 운영 공개 시 로그인 페이지의 테스트 안내 및 이 파일을 제거하거나 비밀번호를 교체하세요."
+  "user_profile": {
+    "account_role": "USER",
+    "role_code": "SAFETY_PARTNER",
+    "role_label": "선임자격회원",
+    "partner_role": "SAFETY",
+    "partner_status": "APPROVED",
+    "flags": {
+      "canAccessPartnerDashboard": true,
+      "hasPendingPartnerApplication": false
+    }
+  },
+  "note": "log-in.html TAI_DEMO_LOGIN과 동일. 선임자격(안전관리 파트너 승인) 데모. localStorage: user(JSON), partner_role, tai_flags(JSON). 운영 시 안내·파일 정리 권장."
 }
