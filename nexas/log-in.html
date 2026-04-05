@@ -189,7 +189,7 @@
 						<div class="footer-widget widget widget_link">
 							<h6 class="widget-title">서비스</h6>
 							<ul>
-								<li><a href="diagnosis-start.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
+								<li><a href="free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
 								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
 								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
 								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
@@ -275,15 +275,37 @@ async function taiDoLogin() {
       body: JSON.stringify({ email: email, password: pw })
     });
     var data = await res.json().catch(function () { return {}; });
-    if (res.ok && data.access_token) {
+    var inner = data.data || data;
+    var tok = inner.access_token;
+    if (res.ok && tok) {
       try {
-        localStorage.setItem('access_token', data.access_token);
-        if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('access_token', tok);
+        if (inner.refresh_token) localStorage.setItem('refresh_token', inner.refresh_token);
         localStorage.setItem('tai_session', '1');
       } catch (e) {}
+      var pending = null;
+      try {
+        pending = localStorage.getItem('pendingDiagnosisToken');
+      } catch (e2) {}
+      if (pending && tok) {
+        try {
+          await fetch(TAI_API + '/anonymous-diagnosis/' + encodeURIComponent(pending) + '/claim', {
+            method: 'POST',
+            headers: { Authorization: 'Bearer ' + tok, 'Content-Type': 'application/json' }
+          });
+        } catch (e3) {}
+        try {
+          localStorage.removeItem('pendingDiagnosisToken');
+        } catch (e4) {}
+      }
+      var next = null;
+      try {
+        next = localStorage.getItem('postLoginRedirect');
+        if (next) localStorage.removeItem('postLoginRedirect');
+      } catch (e5) {}
+      if (!next) next = new URLSearchParams(window.location.search).get('redirect') || 'mypage.html';
       taiAuthToast('success', '로그인 성공!');
-      var next = new URLSearchParams(window.location.search).get('redirect') || 'mypage.html';
-      setTimeout(function () { location.href = next; }, 600);
+      setTimeout(function () { location.href = next; }, 500);
       return;
     }
     var msg = '로그인에 실패했습니다.';

@@ -86,3 +86,78 @@
     display: none !important;
   }
 }
+
+/* 푸터 회사 블록: 회사명·대표·주소·연락처 등 글자 크기 통일 (테마 .footer-widget p 16px·.small·회사명 1.05rem 덮음) */
+.footer-company-info .footer-company-name {
+  font-size: inherit;
+  margin-bottom: 0;
+}
+.footer-company-info p,
+.footer-company-info .small {
+  font-size: inherit !important;
+}
+
+/* 무료진단 결과 하단 — 다음 단계(B2B 톤, 쇼핑몰형 테이블 지양) */
+.tai-pricing-next {
+  padding: 4rem 0 5rem;
+  background: linear-gradient(180deg, #f6f8fc 0%, #eef2f9 100%);
+  border-top: 1px solid rgba(var(--tai-primary-rgb), 0.12);
+}
+.tai-pricing-next h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1d2e;
+  margin-bottom: 0.5rem;
+}
+.tai-pricing-next .tai-pricing-lead {
+  color: #5c6070;
+  font-size: 0.95rem;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+}
+.tai-pricing-card {
+  background: #fff;
+  border: 1px solid #e2e6ef;
+  border-radius: 12px;
+  padding: 1.35rem 1.25rem;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(11, 19, 36, 0.06);
+}
+.tai-pricing-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+.tai-pricing-card p.desc {
+  font-size: 0.88rem;
+  color: #5c6070;
+  margin-bottom: 1rem;
+  min-height: 2.75rem;
+}
+.tai-pricing-card .tai-price-hint {
+  font-size: 0.8rem;
+  color: #8b909f;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eef0f5;
+}
+.tai-diag-risk-pill {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.tai-diag-risk-HIGH {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.tai-diag-risk-MEDIUM {
+  background: #fef3c7;
+  color: #b45309;
+}
+.tai-diag-risk-LOW {
+  background: #dcfce7;
+  color: #15803d;
+}
