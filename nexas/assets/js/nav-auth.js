@@ -95,7 +95,7 @@
       e.preventDefault();
       window.localStorage.setItem(STORAGE_KEY, '1');
       var params = new URLSearchParams(window.location.search);
-      var next = params.get('redirect') || 'mypage.html';
+      var next = params.get('redirect') || 'mypage/';
       window.location.href = next;
     });
   }
@@ -106,7 +106,7 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       window.localStorage.setItem(STORAGE_KEY, '1');
-      window.location.href = 'mypage.html';
+      window.location.href = 'mypage/';
     });
   }
 

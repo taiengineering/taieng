@@ -12,10 +12,12 @@
 | `/index-5.html` | 안전정보(콘텐츠 허브) | `/safety-info` |
 | `/index-6.html` | (예비) 별도 랜딩 또는 리다이렉트 | `/legacy-home-6` |
 | `/log-in.html` | 로그인 | `/login` |
-| `/mypage.html` | 마이페이지(플레이스홀더) | `/mypage` |
+| `/mypage.html` | 마이페이지 → `mypage/` 리다이렉트 | `/mypage` |
+| `/mypage/` | 마이페이지 대시보드(회원) | `/mypage` |
+| `/mypage/profile/` … | 내 정보·계약·결제·진단·파트너 신청 등 | 아래 동일 |
 | `/contact.html` | 문의 | `/contact` |
 
-**index-6**: 상단 메뉴는 `log-in.html` + `mypage.html`로 연결. `index-6.html`은 템플릿 변형 홈으로 남겨 두고, 추후 리다이렉트·삭제·통합 가능.
+**index-6**: 상단 메뉴는 `log-in.html` + `mypage/`로 연결. `index-6.html`은 템플릿 변형 홈으로 남겨 두고, 추후 리다이렉트·삭제·통합 가능.
 
 ## B. 파일 배치안 (index-1 ~ 6 역할)
 
@@ -55,5 +57,6 @@
 - `about.html`, `blog.html`, `blog-2.html`, `blog-3.html`, `blog-single.html`, `blog-single-2.html`, `blog-single-3.html`, `contact.html`, `faq.html`, `log-in.html`, `sign-up.html`, `service.html`, `service-details.html`, `team.html`, `team-details.html`: 동일 TAI 네비 + 우측 `문의하기`
 - `index.html`: 서비스 카드 링크
 - `index-1`~`index-4`: 섹션에 앵커 `id` 부여
-- `mypage.html`: 마이페이지 플레이스홀더(로그인 유도 문구)
+- `mypage.html`: `mypage/`로 리다이렉트(구 북마크 호환)
+- `mypage/index.html` 및 하위: 회원 마이페이지 뼈대(사이드 메뉴, mock 상태 `assets/js/tai-mypage-state.js`)
 - `demo.html`: 테마 데모 전용 네비 유지(템플릿 쇼케이스)

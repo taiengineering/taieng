@@ -298,6 +298,19 @@
         document.getElementById('taiLoginGate').style.display = 'none';
         renderFull(d.fullResult);
       } else {
+        // 이미 로그인 상태인데 아직 claim 안 됨 → 자동 claim 후 재로드
+        var accessTok = null;
+        try { accessTok = localStorage.getItem('access_token'); } catch (e) {}
+        if (accessTok && !d.claimed) {
+          try {
+            await fetch(TAI_API + '/anonymous-diagnosis/' + encodeURIComponent(token) + '/claim', {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + accessTok, 'Content-Type': 'application/json' }
+            });
+            location.reload();
+            return;
+          } catch (e2) {}
+        }
         document.getElementById('taiFullBlock').style.display = 'none';
         document.getElementById('taiLoginGate').style.display = 'block';
         document.getElementById('btnViewFull').onclick = function () {

@@ -23,7 +23,7 @@
 <body class="sc5 tai-auth-body">
 <script>
 (function(){
-  if (localStorage.getItem('access_token')) location.replace('mypage.html');
+  if (localStorage.getItem('access_token')) location.replace('mypage/');
 })();
 </script>
 	<div class="preloader" id="preloader">
@@ -303,7 +303,7 @@ async function taiDoLogin() {
         next = localStorage.getItem('postLoginRedirect');
         if (next) localStorage.removeItem('postLoginRedirect');
       } catch (e5) {}
-      if (!next) next = new URLSearchParams(window.location.search).get('redirect') || 'mypage.html';
+      if (!next) next = new URLSearchParams(window.location.search).get('redirect') || 'mypage/';
       taiAuthToast('success', '로그인 성공!');
       setTimeout(function () { location.href = next; }, 500);
       return;
