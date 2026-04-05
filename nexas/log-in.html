@@ -125,7 +125,12 @@
 					<a href="javascript:void(0)" class="link-tai-auth" data-bs-toggle="modal" data-bs-target="#taiForgotPwModal">비밀번호 찾기</a>
 				</div>
 
-				<button type="button" class="btn-tai-auth-primary mb-3" id="btnLogin" onclick="taiDoLogin()">로그인</button>
+				<button type="button" class="btn-tai-auth-primary mb-2" id="btnLogin" onclick="taiDoLogin()">로그인</button>
+				<p class="small text-muted mb-3" style="font-size:0.8rem;line-height:1.45;">
+					<strong>테스트용 계정:</strong><br>
+					이메일 <code style="font-size:0.78rem;">demo@taieng.co.kr</code> · 비밀번호 <code style="font-size:0.78rem;">Taidemo2026!</code><br>
+					<span class="text-muted" style="font-size:0.75rem;">실제 API 없이 프론트에서만 인증됩니다. 운영 배포 전 안내 문구 제거를 검토하세요.</span>
+				</p>
 
 				<div class="tai-auth-divider">또는</div>
 
@@ -278,6 +283,37 @@
 	<script src="assets/js/main.js"></script>
 	<script>
 var TAI_API = 'https://api.taieng.co.kr';
+
+/** 프론트 테스트용 더미 로그인 (assets/data/demo-login.json 과 동일 값) */
+var TAI_DEMO_LOGIN = {
+	loginId: 'demo@taieng.co.kr',
+	password: 'Taidemo2026!',
+	user: {
+		id: '00000000-0000-0000-0000-00000000d3m0',
+		name: '데모 사용자',
+		email: 'demo@taieng.co.kr',
+		role_code: 'USER',
+		company_id: '',
+		factory_id: ''
+	}
+};
+function taiApplyDemoLogin(loginId, pw) {
+	var id = (loginId || '').trim().toLowerCase();
+	if (id !== TAI_DEMO_LOGIN.loginId.toLowerCase()) return false;
+	if (pw !== TAI_DEMO_LOGIN.password) return false;
+	var u = TAI_DEMO_LOGIN.user;
+	var token = 'dummy.' + btoa(JSON.stringify({ sub: u.id, demo: true })).replace(/=+$/, '');
+	localStorage.setItem('access_token', token);
+	localStorage.setItem('user_name', u.name);
+	localStorage.setItem('user_email', u.email);
+	localStorage.setItem('role_code', u.role_code || '');
+	localStorage.setItem('user_id', u.id);
+	localStorage.setItem('company_id', u.company_id || '');
+	localStorage.setItem('factory_id', u.factory_id || '');
+	localStorage.setItem('user', JSON.stringify(u));
+	localStorage.setItem('tai_session', '1');
+	return true;
+}
 function taiAuthToast(type, msg) {
   var wrap = document.getElementById('taiAuthToastWrap');
   var el = document.createElement('div');
@@ -369,6 +405,13 @@ async function taiDoLogin() {
   var prev = btn.innerHTML;
   btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>로그인 중...';
   try {
+    if (taiApplyDemoLogin(loginId, pw)) {
+      taiAuthToast('success', '로그인 성공! (테스트 계정)');
+      var next0 = new URLSearchParams(location.search).get('next');
+      var dest0 = (next0 && /^[a-zA-Z0-9._-]+\.html$/.test(next0)) ? next0 : 'mypage.html';
+      setTimeout(function () { location.replace(dest0); }, 600);
+      return;
+    }
     var res = await fetch(TAI_API + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

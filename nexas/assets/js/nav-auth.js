@@ -1,12 +1,35 @@
 /**
  * TAI — 헤더 로그인 상태 (localStorage, 실서비스 시 API·세션으로 교체)
- * 키: tai_session === '1' 이면 로그인으로 간주
+ * tai_session === '1' 또는 access_token 존재 시 로그인으로 간주
  */
 (function () {
   var STORAGE_KEY = 'tai_session';
 
   function isLoggedIn() {
-    return window.localStorage.getItem(STORAGE_KEY) === '1';
+    return (
+      window.localStorage.getItem(STORAGE_KEY) === '1' ||
+      !!window.localStorage.getItem('access_token')
+    );
+  }
+
+  function clearAuthStorage() {
+    var keys = [
+      STORAGE_KEY,
+      'access_token',
+      'refresh_token',
+      'user_name',
+      'user_email',
+      'role_code',
+      'user_id',
+      'company_id',
+      'factory_id',
+      'user'
+    ];
+    keys.forEach(function (k) {
+      try {
+        window.localStorage.removeItem(k);
+      } catch (e) {}
+    });
   }
 
   function applyNavAuth() {
@@ -24,7 +47,7 @@
   function onLogout(e) {
     if (!e.target.closest || !e.target.closest('a.tai-logout')) return;
     e.preventDefault();
-    window.localStorage.removeItem(STORAGE_KEY);
+    clearAuthStorage();
     applyNavAuth();
     window.location.href = 'index.html';
   }

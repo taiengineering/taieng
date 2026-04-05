@@ -1,0 +1,5 @@
+{
+  "login_id": "demo@taieng.co.kr",
+  "password": "Taidemo2026!",
+  "note": "log-in.html의 TAI_DEMO_LOGIN과 동일합니다. 브라우저에서 이 값으로 로그인하면 API 호출 없이 localStorage에 세션이 저장됩니다. 운영 공개 시 로그인 페이지의 테스트 안내 및 이 파일을 제거하거나 비밀번호를 교체하세요."
+}
