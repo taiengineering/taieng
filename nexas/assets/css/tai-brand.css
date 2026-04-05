@@ -48,3 +48,31 @@
 .home-6 .navbar-area-fixed {
   background: rgba(var(--tai-primary-rgb), 0.85);
 }
+
+/* ── 상단 메뉴: TAI SAFE ~ 안전정보 균일 간격 + 로그인/회원가입 구역 분리 ── */
+@media (min-width: 992px) {
+  .navbar-area .nav-container .navbar-collapse .navbar-nav.menu-open {
+    display: flex !important;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: clamp(1.1rem, 1.8vw, 1.65rem);
+    row-gap: 0.5rem;
+    width: auto;
+  }
+  .navbar-area .nav-container .navbar-collapse .navbar-nav.menu-open > li {
+    margin-left: 0 !important;
+    display: inline-flex;
+    align-items: center;
+  }
+  .navbar-area .nav-container .navbar-collapse .navbar-nav.menu-open > li.menu-item-has-children {
+    margin-right: 0;
+    padding-right: 15px;
+  }
+  /* 안전정보(5번째) 오른쪽: 메인 메뉴와 인증 메뉴 사이 */
+  .navbar-area .nav-container .navbar-collapse .navbar-nav.menu-open > li:nth-child(5) {
+    margin-right: clamp(0.75rem, 2vw, 1.25rem);
+    padding-right: clamp(1rem, 2.5vw, 1.75rem);
+    border-right: 1px solid rgba(255, 255, 255, 0.28);
+  }
+}
