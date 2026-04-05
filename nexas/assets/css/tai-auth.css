@@ -52,27 +52,41 @@
   margin-left: auto;
   margin-right: auto;
   letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 20, 60, 0.45);
 }
 
 .tai-auth-brand p.lead {
-  opacity: 0.9;
-  font-size: clamp(0.86rem, 1.9vw, 0.95rem);
+  color: #f5f9ff;
+  font-size: clamp(0.88rem, 1.9vw, 0.98rem);
   line-height: 1.65;
   margin-bottom: 0;
   max-width: 22em;
   margin-left: auto;
   margin-right: auto;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 25, 70, 0.45);
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.5rem;
+  background: rgba(6, 28, 72, 0.38);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* 진단 → 점검 → 관리 → 연결 (보조, 과장 없이) */
+/* 진단 → 점검 → 관리 → 연결 — 그라데이션 위에서도 분리되어 보이도록 */
 .tai-auth-flow-note {
   margin: 0.85rem 0 0;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.72;
+  color: #e8f4ff;
+  text-shadow: 0 1px 3px rgba(0, 20, 50, 0.5);
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.35rem;
+  background: rgba(8, 30, 80, 0.35);
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .tai-auth-badge-list {
