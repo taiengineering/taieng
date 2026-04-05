@@ -50,11 +50,39 @@
 }
 
 /*
- * Bootstrap 5(.navbar-expand-lg)가 .navbar의 justify-content: space-between 을
- * flex-start 로 덮어써 로고·메뉴가 한쪽(좌)에 붙는 문제 → 테마 원래 동작으로 복구
+ * 헤더 정렬: 이 테마는 <nav> 직계 자식이 .container 하나뿐이라
+ * Bootstrap의 .navbar { justify-content: space-between }가 로고·메뉴에 닿지 않음.
+ * 로고와 .navbar-collapse는 .nav-container 안의 형제이므로 여기서 flex로 양끝 정렬.
  */
 @media (min-width: 992px) {
-  .navbar-area .nav-container .navbar.navbar-expand-lg {
+  .navbar-area .nav-container {
+    display: flex !important;
+    flex-wrap: nowrap;
+    align-items: center;
     justify-content: space-between;
+    position: relative;
+  }
+  .navbar-area .nav-container .navbar-collapse {
+    justify-content: flex-end !important;
+    flex: 0 1 auto;
+  }
+  .navbar-area .nav-container .navbar-collapse .navbar-nav {
+    width: auto !important;
+    text-align: right;
+  }
+}
+
+/* 안전정보 뒤 구분선(  |  ); 모바일 세로 메뉴에서는 숨김 */
+.navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-nav-sep {
+  pointer-events: none;
+  user-select: none;
+}
+.navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-nav-sep span {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 300;
+}
+@media (max-width: 991px) {
+  .navbar-area .nav-container .navbar-collapse .navbar-nav li.tai-nav-sep {
+    display: none !important;
   }
 }

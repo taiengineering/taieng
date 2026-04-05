@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>TAI Engineering — 로그인</title>
+	<title>로그인 | TAI Engineering</title>
 	<link rel="icon" href="assets/img/fevicon.png">
 	<link rel="stylesheet" href="assets/css/animate.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -23,11 +23,7 @@
 <body class="sc5 tai-auth-body">
 <script>
 (function(){
-  var token = localStorage.getItem('access_token');
-  if (!token) return;
-  var p = new URLSearchParams(location.search).get('next');
-  if (p && /^[a-zA-Z0-9._-]+\.html$/.test(p)) location.replace(p);
-  else location.replace('mypage.html');
+  if (localStorage.getItem('access_token')) location.replace('mypage.html');
 })();
 </script>
 	<div class="preloader" id="preloader">
@@ -76,10 +72,9 @@
 							</ul>
 						</li>
 						<li><a href="index-5.html">안전정보</a></li>
+						<li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
 						<li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-						<li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
 						<li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-						<li class="nav-auth-user tai-nav-auth d-none"><a href="mypage.html">마이페이지</a></li>
 					</ul>
 				</div>
 			</div>
@@ -108,41 +103,16 @@
 				<h3>로그인</h3>
 				<p class="sub">이메일과 비밀번호로 로그인하세요</p>
 
-				<div class="mb-3">
-					<label class="form-label" for="loginId">이메일 또는 휴대폰 번호</label>
-					<input type="text" class="form-control" id="loginId" placeholder="example@email.com" autocomplete="username">
-				</div>
-				<div class="mb-1">
-					<label class="form-label" for="password">비밀번호</label>
-					<div class="input-group tai-auth-input-group">
-						<input type="password" class="form-control" id="password" placeholder="비밀번호 입력" autocomplete="current-password">
-						<button type="button" class="input-group-text" id="togglePw" onclick="taiTogglePassword()" aria-label="비밀번호 표시 전환">
-							<i class="fas fa-eye" id="eyeIcon"></i>
-						</button>
-					</div>
-				</div>
-				<div class="text-end mb-3">
-					<a href="javascript:void(0)" class="link-tai-auth" data-bs-toggle="modal" data-bs-target="#taiForgotPwModal">비밀번호 찾기</a>
-				</div>
-
-				<button type="button" class="btn-tai-auth-primary mb-2" id="btnLogin" onclick="taiDoLogin()">로그인</button>
-				<p class="small text-muted mb-3" style="font-size:0.8rem;line-height:1.45;">
-					<strong>테스트용 계정:</strong><br>
-					이메일 <code style="font-size:0.78rem;">demo@taieng.co.kr</code> · 비밀번호 <code style="font-size:0.78rem;">Taidemo2026!</code><br>
-					<span class="text-muted" style="font-size:0.75rem;">선임자격회원(안전관리 파트너 승인) 권한이 부여된 데모입니다. 실제 API 없이 프론트만 인증합니다.</span>
-				</p>
-
-				<div class="tai-auth-divider">또는</div>
-
+				<p class="small fw-bold text-body-secondary mb-2">간편 로그인</p>
 				<div class="row g-2 mb-3">
 					<div class="col-12 col-md-4">
 						<button type="button" class="tai-social-btn tai-social-btn--naver" onclick="taiSocialLogin('naver')">
-							<span style="font-weight:900;font-size:0.95rem;">N</span> 네이버
+							<span style="font-weight:900;">N</span> 네이버
 						</button>
 					</div>
 					<div class="col-12 col-md-4">
 						<button type="button" class="tai-social-btn tai-social-btn--kakao" onclick="taiSocialLogin('kakao')">
-							<i class="fas fa-comment" style="font-size:0.9rem;"></i> 카카오
+							<i class="fas fa-comment"></i> 카카오
 						</button>
 					</div>
 					<div class="col-12 col-md-4">
@@ -153,6 +123,20 @@
 					</div>
 				</div>
 
+				<div class="tai-auth-divider">또는 이메일로 로그인</div>
+
+				<form onsubmit="return false;">
+					<div class="mb-3">
+						<label class="form-label" for="login-email">이메일</label>
+						<input type="email" class="form-control" id="login-email" placeholder="name@company.co.kr" autocomplete="email" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="login-password">비밀번호</label>
+						<input type="password" class="form-control" id="login-password" placeholder="비밀번호" autocomplete="current-password" required>
+					</div>
+					<button type="button" class="btn-tai-auth-primary mb-2" id="btnLogin" onclick="taiDoLogin()">로그인</button>
+				</form>
+
 				<p class="text-center mb-0" style="font-size:0.88rem;color:#6c757d;">
 					계정이 없으신가요?
 					<a href="sign-up.html" class="link-tai-auth ms-1">회원가입</a>
@@ -160,27 +144,6 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- 비밀번호 찾기: 가입 휴대폰 → 등록 이메일로 재설정 링크 (POST /auth/reset-password) -->
-	<div class="modal fade tai-auth-modal" id="taiForgotPwModal" tabindex="-1" aria-labelledby="taiForgotPwModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="taiForgotPwModalLabel">비밀번호 찾기</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
-				</div>
-				<div class="modal-body">
-					<p class="small text-muted mb-3">가입 시 등록한 <strong>휴대폰 번호</strong>를 입력하세요. 회원 정보에 등록된 이메일로 비밀번호 재설정 링크를 보냅니다.</p>
-					<label class="form-label" for="forgotPhone">휴대폰 번호</label>
-					<input type="tel" class="form-control" id="forgotPhone" placeholder="010-0000-0000" autocomplete="tel" maxlength="13">
-				</div>
-				<div class="modal-footer flex-nowrap gap-2">
-					<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-tai-modal-primary flex-grow-1" id="btnForgotPw">인증 메일 발송</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<footer class="footer-area style-1">
 		<div class="footer-patent-bar text-center py-2 small">
@@ -195,8 +158,7 @@
 						<div class="footer-widget widget">
 							<a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
 							<div class="footer-company-info">
-								<p class="footer-company-name mb-1 fw-bold">TAI 엔지니어링</p>
-								<p class="mb-1 small">대표 심태왕</p>
+								<p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
 								<p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
 								<p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
 								<p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
@@ -283,49 +245,6 @@
 	<script src="assets/js/main.js"></script>
 	<script>
 var TAI_API = 'https://api.taieng.co.kr';
-
-/** 프론트 테스트용 더미 로그인 (assets/data/demo-login.json 과 동일 값) — 선임자격(안전관리 파트너 승인) 권한 포함 */
-var TAI_DEMO_LOGIN = {
-	loginId: 'demo@taieng.co.kr',
-	password: 'Taidemo2026!',
-	user: {
-		id: '00000000-0000-0000-0000-00000000d3m0',
-		name: '데모 사용자',
-		email: 'demo@taieng.co.kr',
-		account_role: 'USER',
-		role_code: 'SAFETY_PARTNER',
-		role_label: '선임자격회원',
-		partner_role: 'SAFETY',
-		partner_status: 'APPROVED',
-		company_id: '',
-		factory_id: '',
-		flags: { canAccessPartnerDashboard: true, hasPendingPartnerApplication: false }
-	}
-};
-function taiApplyDemoLogin(loginId, pw) {
-	var id = (loginId || '').trim().toLowerCase();
-	if (id !== TAI_DEMO_LOGIN.loginId.toLowerCase()) return false;
-	if (pw !== TAI_DEMO_LOGIN.password) return false;
-	var u = TAI_DEMO_LOGIN.user;
-	var token = 'dummy.' + btoa(JSON.stringify({
-		sub: u.id,
-		demo: true,
-		partner_role: u.partner_role,
-		canAccessPartnerDashboard: !!(u.flags && u.flags.canAccessPartnerDashboard)
-	})).replace(/=+$/, '');
-	localStorage.setItem('access_token', token);
-	localStorage.setItem('user_name', u.name);
-	localStorage.setItem('user_email', u.email);
-	localStorage.setItem('role_code', u.role_code || '');
-	localStorage.setItem('partner_role', u.partner_role || '');
-	localStorage.setItem('user_id', u.id);
-	localStorage.setItem('company_id', u.company_id || '');
-	localStorage.setItem('factory_id', u.factory_id || '');
-	localStorage.setItem('user', JSON.stringify(u));
-	localStorage.setItem('tai_flags', JSON.stringify(u.flags || {}));
-	localStorage.setItem('tai_session', '1');
-	return true;
-}
 function taiAuthToast(type, msg) {
   var wrap = document.getElementById('taiAuthToastWrap');
   var el = document.createElement('div');
@@ -333,130 +252,43 @@ function taiAuthToast(type, msg) {
   el.style.borderLeft = '4px solid ' + (type === 'success' ? '#16a34a' : type === 'error' ? '#dc2626' : type === 'warning' ? '#d97706' : 'var(--tai-primary)');
   el.textContent = msg;
   wrap.appendChild(el);
-  setTimeout(function () { el.remove(); }, 3500);
-}
-function taiTogglePassword() {
-  var pw = document.getElementById('password');
-  var icon = document.getElementById('eyeIcon');
-  if (pw.type === 'password') {
-    pw.type = 'text';
-    icon.className = 'fas fa-eye-slash';
-  } else {
-    pw.type = 'password';
-    icon.className = 'fas fa-eye';
-  }
+  setTimeout(function () { el.remove(); }, 4000);
 }
 function taiSocialLogin(provider) {
   taiAuthToast('info', (provider === 'naver' ? '네이버' : provider === 'kakao' ? '카카오' : 'Google') + ' 로그인 연동은 준비 중입니다. 이메일 로그인을 이용해 주세요.');
 }
-function taiHideForgotModal() {
-  var el = document.getElementById('taiForgotPwModal');
-  if (!el) return;
-  var dismiss = el.querySelector('[data-bs-dismiss="modal"]');
-  if (dismiss) dismiss.click();
-}
-async function taiSendResetPassword() {
-  var phoneEl = document.getElementById('forgotPhone');
-  var raw = (phoneEl && phoneEl.value ? phoneEl.value : '').replace(/\D/g, '');
-  if (raw.length < 10 || raw.length > 11) {
-    taiAuthToast('warning', '휴대폰 번호를 올바르게 입력해 주세요.');
-    return;
-  }
-  var btn = document.getElementById('btnForgotPw');
-  btn.disabled = true;
-  var prev = btn.innerHTML;
-  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>발송 중...';
-  try {
-    var res = await fetch(TAI_API + '/auth/reset-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone: raw })
-    });
-    var data = await res.json().catch(function () { return {}; });
-    if (res.ok && data.status === 'success') {
-      taiAuthToast('success', data.message || '재설정 링크를 발송했습니다. 메일함을 확인해 주세요.');
-      phoneEl.value = '';
-      taiHideForgotModal();
-      return;
-    }
-    var msg = '요청을 처리할 수 없습니다.';
-    if (typeof data.detail === 'string') msg = data.detail;
-    else if (Array.isArray(data.detail) && data.detail[0] && data.detail[0].msg) msg = data.detail[0].msg;
-    taiAuthToast('error', msg);
-  } catch (e) {
-    taiAuthToast('error', '서버 연결에 실패했습니다. 잠시 후 다시 시도하세요.');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = prev;
-  }
-}
-document.addEventListener('keydown', function (e) {
-  if (e.key !== 'Enter') return;
-  var modal = document.getElementById('taiForgotPwModal');
-  if (modal && modal.classList.contains('show')) {
-    e.preventDefault();
-    taiSendResetPassword();
-    return;
-  }
-  taiDoLogin();
-});
-document.getElementById('btnForgotPw').addEventListener('click', taiSendResetPassword);
-document.getElementById('forgotPhone').addEventListener('input', function () {
-  var d = (this.value || '').replace(/\D/g, '');
-  if (d.length <= 3) this.value = d;
-  else if (d.length <= 7) this.value = d.slice(0, 3) + '-' + d.slice(3);
-  else this.value = d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7, 11);
-});
 async function taiDoLogin() {
-  var loginId = document.getElementById('loginId').value.trim();
-  var pw = document.getElementById('password').value;
+  var email = document.getElementById('login-email').value.trim();
+  var pw = document.getElementById('login-password').value;
+  if (!email || !pw) {
+    taiAuthToast('warning', '이메일과 비밀번호를 입력해 주세요.');
+    return;
+  }
   var btn = document.getElementById('btnLogin');
-  if (!loginId) { taiAuthToast('warning', '이메일 또는 휴대폰 번호를 입력하세요.'); return; }
-  if (!pw) { taiAuthToast('warning', '비밀번호를 입력하세요.'); return; }
   btn.disabled = true;
   var prev = btn.innerHTML;
   btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>로그인 중...';
   try {
-    if (taiApplyDemoLogin(loginId, pw)) {
-      taiAuthToast('success', '로그인 성공! (테스트 계정)');
-      var next0 = new URLSearchParams(location.search).get('next');
-      var dest0 = (next0 && /^[a-zA-Z0-9._-]+\.html$/.test(next0)) ? next0 : 'mypage.html';
-      setTimeout(function () { location.replace(dest0); }, 600);
-      return;
-    }
     var res = await fetch(TAI_API + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login_id: loginId, password: pw })
+      body: JSON.stringify({ email: email, password: pw })
     });
     var data = await res.json().catch(function () { return {}; });
-    if (data.status === 'success' && data.data && data.data.access_token) {
-      var token = data.data.access_token;
-      var user = data.data.user || {};
-      var flags = data.data.flags || user.flags || null;
-      localStorage.setItem('access_token', token);
-      localStorage.setItem('user_name', user.name || '');
-      localStorage.setItem('user_email', user.email || loginId);
-      localStorage.setItem('role_code', user.role_code || '');
-      if (user.partner_role) localStorage.setItem('partner_role', user.partner_role);
-      else localStorage.removeItem('partner_role');
-      if (flags) localStorage.setItem('tai_flags', JSON.stringify(flags));
-      else localStorage.removeItem('tai_flags');
-      localStorage.setItem('user_id', user.id || '');
-      localStorage.setItem('company_id', user.company_id || '');
-      localStorage.setItem('factory_id', user.factory_id || '');
-      if (data.data.refresh_token) localStorage.setItem('refresh_token', data.data.refresh_token);
-      localStorage.setItem('user', JSON.stringify(user));
+    if (res.ok && data.access_token) {
+      try {
+        localStorage.setItem('access_token', data.access_token);
+        if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('tai_session', '1');
+      } catch (e) {}
       taiAuthToast('success', '로그인 성공!');
-      var next = new URLSearchParams(location.search).get('next');
-      var dest = (next && /^[a-zA-Z0-9._-]+\.html$/.test(next)) ? next : 'mypage.html';
-      setTimeout(function () { location.replace(dest); }, 600);
+      var next = new URLSearchParams(window.location.search).get('redirect') || 'mypage.html';
+      setTimeout(function () { location.href = next; }, 600);
       return;
     }
     var msg = '로그인에 실패했습니다.';
-    if (res.status === 401) msg = '이메일 또는 비밀번호가 올바르지 않습니다.';
-    else if (res.status === 403) msg = '접근이 제한된 계정입니다. 관리자에게 문의하세요.';
-    else if (typeof data.detail === 'string') msg = data.detail;
+    if (typeof data.detail === 'string') msg = data.detail;
+    else if (Array.isArray(data.detail) && data.detail[0] && data.detail[0].msg) msg = data.detail[0].msg;
     else if (data.message) msg = data.message;
     taiAuthToast('error', msg);
   } catch (e) {
