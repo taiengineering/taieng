@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="TAI — 법령 기반 필수 Task 자동 생성·실행·관리. 진단, 생성, 보장. Trusted AI for Industrial Safety.">
+    <title>TAI | Trusted AI for Industrial Safety — 법령 실행 통합 시스템</title>
+    <link rel="icon" href="assets/img/fevicon.png">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/magnific.min.css">
+    <link rel="stylesheet" href="assets/css/nice-select.min.css">
+    <link rel="stylesheet" href="assets/css/owl.min.css">
+    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/tai-brand.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      /* index-8 전용: Navy / Blue / Green + 그리드 톤 */
+      body.tai-index8 {
+        font-family: 'Noto Sans KR', 'Lato', sans-serif;
+        color: #0f172a;
+        background: #f8fafc;
+      }
+      .tai8-hero {
+        position: relative;
+        padding: 120px 0 90px;
+        background:
+          linear-gradient(118deg, rgba(11, 19, 36, 0.94) 0%, rgba(15, 63, 143, 0.88) 48%, rgba(22, 101, 52, 0.12) 100%),
+          url('assets/img/banner/1.png') center/cover no-repeat;
+        overflow: hidden;
+      }
+      .tai8-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+        opacity: 0.5;
+      }
+      .tai8-hero .container { position: relative; z-index: 1; }
+      .tai8-hero h1 {
+        color: #fff;
+        font-weight: 800;
+        font-size: clamp(1.65rem, 4vw, 2.45rem);
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+      .tai8-hero .tai8-lead {
+        color: rgba(255, 255, 255, 0.92);
+        font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+        line-height: 1.75;
+        max-width: 36rem;
+      }
+      .tai8-badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #86efac;
+        border: 1px solid rgba(134, 239, 172, 0.45);
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        margin-bottom: 1rem;
+      }
+      .tai8-btn-outline-light {
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        color: #fff !important;
+        background: transparent;
+        font-weight: 600;
+        padding: 0.55rem 1.35rem;
+        border-radius: 0.5rem;
+      }
+      .tai8-btn-outline-light:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff !important;
+      }
+      .tai8-hero-thumb img {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.35));
+      }
+      .tai8-section-title .sub-title {
+        color: var(--tai-primary);
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .tai8-section-title .title {
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.3;
+      }
+      .tai8-card {
+        background: #fff;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        padding: 1.5rem 1.35rem;
+        height: 100%;
+        transition: box-shadow 0.25s ease, border-color 0.25s ease;
+      }
+      .tai8-card:hover {
+        box-shadow: 0 12px 40px rgba(15, 63, 143, 0.1);
+        border-color: rgba(26, 95, 212, 0.25);
+      }
+      .tai8-card .tai8-card-ico {
+        width: 48px;
+        height: 48px;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .tai8-card .tai8-card-ico.navy { background: rgba(15, 63, 143, 0.12); color: var(--tai-primary-dark); }
+      .tai8-card .tai8-card-ico.blue { background: rgba(26, 95, 212, 0.12); color: var(--tai-primary); }
+      .tai8-card .tai8-card-ico.green { background: rgba(22, 101, 52, 0.12); color: #166534; }
+      .tai8-engine {
+        background: linear-gradient(180deg, #0b1324 0%, #0f2847 100%);
+        color: #e2e8f0;
+      }
+      .tai8-engine .tai8-section-title .sub-title { color: #7dd3fc; }
+      .tai8-engine .tai8-section-title .title { color: #fff; }
+      .tai8-engine-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .tai8-engine-item:last-child { border-bottom: 0; }
+      .tai8-engine-num {
+        flex-shrink: 0;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.5rem;
+        background: rgba(26, 95, 212, 0.35);
+        color: #fff;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+      }
+      .tai8-process {
+        background: #fff;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .tai8-step {
+        text-align: center;
+        padding: 1rem 0.5rem;
+        position: relative;
+      }
+      .tai8-step-num {
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto 0.75rem;
+        border-radius: 50%;
+        background: var(--main-gradient);
+        color: #fff;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+      }
+      .tai8-step h4 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 0.35rem;
+      }
+      .tai8-step p { font-size: 0.82rem; color: #64748b; margin: 0; }
+      .tai8-arrow {
+        display: none;
+        color: var(--tai-primary);
+        font-size: 1.25rem;
+        align-self: center;
+      }
+      @media (min-width: 992px) {
+        .tai8-arrow { display: flex !important; align-items: center; padding: 0 0.15rem; }
+      }
+      .tai8-brand-card {
+        display: block;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        text-decoration: none;
+        color: #0f172a;
+        font-weight: 700;
+        font-size: 0.95rem;
+        height: 100%;
+        transition: all 0.2s ease;
+      }
+      .tai8-brand-card:hover {
+        border-color: var(--tai-primary);
+        color: var(--tai-primary-dark);
+        box-shadow: 0 8px 28px rgba(26, 95, 212, 0.15);
+      }
+      .tai8-brand-card small {
+        display: block;
+        font-weight: 400;
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 0.35rem;
+      }
+      .tai8-img-cover {
+        border-radius: 0.75rem;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+      }
+      .tai8-img-cover img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+      }
+      @media (max-width: 991px) {
+        .tai8-hero { padding-top: 100px; }
+      }
+    </style>
+</head>
+<body class="sc5 tai-index8">
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+        </div>
+    </div>
+    <div class="body-overlay" id="body-overlay"></div>
+
+    <header class="navbar-area">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기">
+                        <span class="icon-left"></span>
+                        <span class="icon-right"></span>
+                    </button>
+                </div>
+                <div class="logo">
+                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI Engineering"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="themefie_main_menu">
+                    <ul class="navbar-nav menu-open text-end">
+                        <li class="tai-safe-wrap">
+                            <a href="index-1.html">TAI SAFE</a>
+                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="index-2.html">TAI MANAGER</a>
+                            <ul class="sub-menu">
+                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
+                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="index-3.html">TAI FIX</a>
+                            <ul class="sub-menu">
+                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
+                                <li><a href="index-3.html#vendor">수선업체</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="index-4.html">TAI CARE</a>
+                            <ul class="sub-menu">
+                                <li><a href="index-4.html#manager">안전관리자</a></li>
+                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="index-5.html">안전정보</a></li>
+                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
+                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
+                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
+                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage.html">마이페이지</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section 1: Hero -->
+    <section id="tai8-hero" class="tai8-hero">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 col-md-10 mb-5 mb-lg-0">
+                    <span class="tai8-badge">Trusted AI for Industrial Safety</span>
+                    <h1>안전은 컨설팅이 아니라 <span class="text-white">'실행'</span>입니다.</h1>
+                    <p class="tai8-lead mt-3 mb-4">법령 누락 0%, 사고 예방, 완벽한 감사 대응까지. TAI는 법령 기반의 필수 Task를 자동으로 <strong>생성</strong>하고 <strong>실행</strong>하는 통합 시스템입니다.</p>
+                    <div class="d-flex flex-wrap gap-2 justify-content-lg-start justify-content-center">
+                        <a href="diagnosis-start.html" class="btn btn-base">무료 법령 진단 시작하기</a>
+                        <a href="#tai8-engine" class="btn tai8-btn-outline-light">서비스 상세 보기</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-8 text-lg-end text-center">
+                    <div class="tai8-hero-thumb">
+                        <img class="animated phone-bounce" src="assets/img/banner/01.png" width="520" height="auto" alt="법령 실행·점검 관리 인터페이스" loading="eager">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Problem & Risk -->
+    <section id="tai8-problem" class="service-area default-pd-top pd-bottom-90">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-9 text-center">
+                    <div class="tai8-section-title">
+                        <h4 class="sub-title mb-2">Finding 생성</h4>
+                        <h2 class="title">요청은 사용자가 아니라, <span class="text-primary">'시스템'</span>이 만듭니다.</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <div class="col-md-4">
+                    <div class="tai8-img-cover mb-3 mb-md-0 d-none d-md-block">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="산업 현장 안전 점검" loading="lazy" width="800" height="220">
+                    </div>
+                    <div class="tai8-card">
+                        <div class="tai8-card-ico navy"><i class="fas fa-user-shield"></i></div>
+                        <h4 class="fw-bold mb-2">미선임 리스크</h4>
+                        <p class="text-muted small mb-0">사업장 규모에 따른 안전관리자 선임 의무 <strong>준수 여부 진단</strong>. 법령에서 요구하는 선임 조건을 자동 대조합니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tai8-img-cover mb-3 mb-md-0 d-none d-md-block">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="설비·현장 평가" loading="lazy" width="800" height="220">
+                    </div>
+                    <div class="tai8-card">
+                        <div class="tai8-card-ico blue"><i class="fas fa-clipboard-check"></i></div>
+                        <h4 class="fw-bold mb-2">평가 누락</h4>
+                        <p class="text-muted small mb-0">법적 기준에 부합하는 위험성평가 <strong>실시 및 기록 보존 여부 확인</strong>. 누락 구간을 Finding으로 <strong>생성</strong>합니다.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tai8-img-cover mb-3 mb-md-0 d-none d-md-block">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="데이터 기반 점검 리포트" loading="lazy" width="800" height="220">
+                    </div>
+                    <div class="tai8-card">
+                        <div class="tai8-card-ico green"><i class="fas fa-cogs"></i></div>
+                        <h4 class="fw-bold mb-2">점검 공백</h4>
+                        <p class="text-muted small mb-0">설비별 정기 점검 주기와 리포트 <strong>생성 자동화</strong>. 공백 구간을 시스템이 식별하고 과업으로 연결합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Core Engine -->
+    <section id="tai8-engine" class="tai8-engine pd-top-100 pd-bottom-100">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-5">
+                    <div class="tai8-img-cover" style="border-color: rgba(255,255,255,0.15);">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="규칙 기반 데이터·감사 대응" loading="lazy" style="height: 280px; object-fit: cover;" width="900" height="280">
+                    </div>
+                </div>
+                <div class="col-lg-7 ps-lg-5">
+                    <div class="tai8-section-title mb-4">
+                        <h4 class="sub-title mb-2">Technical Authority</h4>
+                        <h2 class="title">AI의 추측이 아닌, <span style="color:#86efac;">'철저한 규칙 기반'</span>의 안정성</h2>
+                    </div>
+                    <div class="tai8-engine-item">
+                        <div class="tai8-engine-num">01</div>
+                        <div>
+                            <h4 class="text-white fw-bold mb-2">Laws-to-Rules</h4>
+                            <p class="mb-0 small" style="color:#cbd5e1;">법령 데이터를 엄격한 규칙으로 전환하여 팩트 기반 Finding <strong class="text-white">도출</strong>. 추측이 아닌 근거로 리스크를 <strong class="text-white">보장</strong>합니다.</p>
+                        </div>
+                    </div>
+                    <div class="tai8-engine-item">
+                        <div class="tai8-engine-num">02</div>
+                        <div>
+                            <h4 class="text-white fw-bold mb-2">Task-Execution Bridge</h4>
+                            <p class="mb-0 small" style="color:#cbd5e1;">발견된 문제를 선임·점검·문서·수선 등 실행 과업으로 즉시 연결. <strong class="text-white">진단</strong>에서 <strong class="text-white">실행</strong>까지 단절 없이 이어집니다.</p>
+                        </div>
+                    </div>
+                    <div class="tai8-engine-item">
+                        <div class="tai8-engine-num">03</div>
+                        <div>
+                            <h4 class="text-white fw-bold mb-2">Audit-Ready</h4>
+                            <p class="mb-0 small" style="color:#cbd5e1;">수정 로그와 시간 데이터가 포함된 문서 자동 <strong class="text-white">생성</strong>으로 감사 대응 인프라를 <strong class="text-white">보장</strong>합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Process -->
+    <section id="tai8-process" class="tai8-process pd-top-90 pd-bottom-90">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <div class="tai8-section-title">
+                        <h4 class="sub-title mb-2">Service Flow</h4>
+                        <h2 class="title">진단 → 과업생성 → 매칭 → 관리</h2>
+                        <p class="text-muted mt-2 mb-0">법령 기반 파이프라인을 한 흐름으로 설계했습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 justify-content-center align-items-center">
+                <div class="col-6 col-md-3 col-lg-2">
+                    <div class="tai8-step">
+                        <div class="tai8-step-num">1</div>
+                        <h4>진단</h4>
+                        <p>Diagnosis</p>
+                    </div>
+                </div>
+                <div class="col-auto tai8-arrow d-none d-lg-flex" aria-hidden="true"><i class="fas fa-chevron-right"></i></div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <div class="tai8-step">
+                        <div class="tai8-step-num">2</div>
+                        <h4>과업생성</h4>
+                        <p>Tasking</p>
+                    </div>
+                </div>
+                <div class="col-auto tai8-arrow d-none d-lg-flex" aria-hidden="true"><i class="fas fa-chevron-right"></i></div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <div class="tai8-step">
+                        <div class="tai8-step-num">3</div>
+                        <h4>매칭</h4>
+                        <p>Matching</p>
+                    </div>
+                </div>
+                <div class="col-auto tai8-arrow d-none d-lg-flex" aria-hidden="true"><i class="fas fa-chevron-right"></i></div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <div class="tai8-step">
+                        <div class="tai8-step-num">4</div>
+                        <h4>관리</h4>
+                        <p>Managing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Brand Ecosystem -->
+    <section id="tai8-brands" class="service-area default-pd-top pd-bottom-100" style="background:#f1f5f9;">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <div class="tai8-section-title">
+                        <h4 class="sub-title mb-2">Brand Ecosystem</h4>
+                        <h2 class="title">TAI 패밀리 — 실행을 나눈 전문 라인업</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-3 justify-content-center">
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a class="tai8-brand-card" href="index-1.html">TAI SAFE<small>법령·선임·점검</small></a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a class="tai8-brand-card" href="index-2.html">TAI MANAGER<small>경영·기술·대행</small></a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a class="tai8-brand-card" href="index-3.html">TAI FIX<small>시설·수선</small></a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a class="tai8-brand-card" href="index-4.html">TAI CARE<small>안전관리·대행</small></a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a class="tai8-brand-card" href="index-5.html">TAI 정보<small>안전 뉴스·가이드</small></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="subscribe-area pd-top-100 pd-bottom-100 text-center" style="background: var(--main-gradient);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="title text-white mb-3">법령 기반 Task를 지금 <strong>진단</strong>하고, 실행을 <strong>보장</strong>하세요</h2>
+                    <p class="text-white mb-4 opacity-90">무료 법령 진단으로 우리 사업장에 맞는 의무와 리스크를 먼저 확인할 수 있습니다.</p>
+                    <a href="diagnosis-start.html" class="btn btn-base btn-lg">무료 법령 진단 시작하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-area style-1">
+        <div class="footer-patent-bar text-center py-2 small">
+            <div class="container">
+                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
+            </div>
+        </div>
+        <div class="footer-inner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-sm-6">
+                        <div class="footer-widget widget">
+                            <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
+                            <div class="footer-company-info">
+                                <p class="footer-company-name mb-1 fw-bold">TAI 엔지니어링</p>
+                                <p class="mb-1 small">대표 심태왕</p>
+                                <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
+                                <p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
+                                <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
+                                <p class="mb-1 small">사업자등록번호 : 134-81-08473</p>
+                                <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
+                            </div>
+                            <ul class="social-area">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-6">
+                        <div class="footer-widget widget widget_link">
+                            <h6 class="widget-title">메뉴</h6>
+                            <ul>
+                                <li><a href="index-8.html"><i class="fas fa-angle-right"></i>메인 (TAI v1)</a></li>
+                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
+                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
+                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
+                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
+                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
+                        <div class="footer-widget widget widget_link">
+                            <h6 class="widget-title">서비스</h6>
+                            <ul>
+                                <li><a href="diagnosis-start.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
+                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
+                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
+                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
+                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
+                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
+                        <div class="footer-widget widget widget_link">
+                            <h6 class="widget-title">바로가기</h6>
+                            <ul>
+                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
+                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
+                                <li><a href="faq.html"><i class="fas fa-angle-right"></i>자주하는 질문</a></li>
+                                <li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
+                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 align-self-center">
+                        <div class="copyright-area"><p>© TAI Engineering. 무단 복제를 금합니다.</p></div>
+                    </div>
+                    <div class="col-md-6 align-self-center text-md-end">
+                        <div class="author-area"><p>원본 테마: Themefie</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+    <script src="assets/js/jquery.3.6.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/imageloded.min.js"></script>
+    <script src="assets/js/counterup.js"></script>
+    <script src="assets/js/waypoint.js"></script>
+    <script src="assets/js/magnific.min.js"></script>
+    <script src="assets/js/nice-select.min.js"></script>
+    <script src="assets/js/fontawesome.min.js"></script>
+    <script src="assets/js/ripple.js"></script>
+    <script src="assets/js/owl.min.js"></script>
+    <script src="assets/js/slick-slider.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/nav-auth.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
