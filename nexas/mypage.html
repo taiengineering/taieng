@@ -294,7 +294,7 @@
     <script src="assets/js/nav-auth.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-(function () {
+function taiRefreshMypagePanel() {
   var token = localStorage.getItem('access_token');
   var guest = document.getElementById('taiMypageGuest');
   var userPanel = document.getElementById('taiMypageUser');
@@ -326,7 +326,18 @@
     u.partner_role === 'SAFETY' ||
     u.partner_role === 'REPAIR';
   if (dashBlock) dashBlock.classList.toggle('d-none', !canDash);
-})();
+}
+window.taiOnPageShowAuth = function () {
+  taiRefreshMypagePanel();
+};
+window.taiOnAuthCleared = function () {
+  taiRefreshMypagePanel();
+};
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', taiRefreshMypagePanel);
+} else {
+  taiRefreshMypagePanel();
+}
     </script>
 </body>
 </html>

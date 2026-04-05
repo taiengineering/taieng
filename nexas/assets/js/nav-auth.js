@@ -32,6 +32,20 @@
         window.localStorage.removeItem(k);
       } catch (e) {}
     });
+    try {
+      var all = Object.keys(window.localStorage);
+      for (var i = 0; i < all.length; i++) {
+        var k = all[i];
+        if (/^tai_/i.test(k) || /^sb-/i.test(k) || k.indexOf('supabase') === 0) {
+          window.localStorage.removeItem(k);
+        }
+      }
+    } catch (e2) {}
+    try {
+      ['tai_session', 'access_token'].forEach(function (k) {
+        window.sessionStorage.removeItem(k);
+      });
+    } catch (e3) {}
   }
 
   function applyNavAuth() {
@@ -46,12 +60,32 @@
     });
   }
 
+  function isIndexPage() {
+    var p = window.location.pathname || '';
+    return (
+      /index\.html$/i.test(p) ||
+      p === '/' ||
+      /\/nexas\/?$/i.test(p)
+    );
+  }
+
   function onLogout(e) {
-    if (!e.target.closest || !e.target.closest('a.tai-logout')) return;
+    var a = e.target && e.target.closest ? e.target.closest('a.tai-logout') : null;
+    if (!a) return;
     e.preventDefault();
+    e.stopPropagation();
     clearAuthStorage();
     applyNavAuth();
-    window.location.href = 'index.html';
+    if (typeof window.taiOnAuthCleared === 'function') {
+      try {
+        window.taiOnAuthCleared();
+      } catch (err) {}
+    }
+    if (isIndexPage()) {
+      window.location.reload();
+      return;
+    }
+    window.location.replace('index.html');
   }
 
   function bindLoginForm() {
@@ -78,8 +112,20 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     applyNavAuth();
-    document.body.addEventListener('click', onLogout);
+    document.body.addEventListener('click', onLogout, true);
     bindLoginForm();
     bindSignupForm();
   });
+
+  window.addEventListener('pageshow', function (ev) {
+    applyNavAuth();
+    if (typeof window.taiOnPageShowAuth === 'function') {
+      try {
+        window.taiOnPageShowAuth(!!(ev && ev.persisted));
+      } catch (e) {}
+    }
+  });
+
+  window.taiClearAuth = clearAuthStorage;
+  window.taiApplyNavAuth = applyNavAuth;
 })();
