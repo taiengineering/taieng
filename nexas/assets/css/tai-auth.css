@@ -1,0 +1,269 @@
+/**
+ * 로그인·회원가입 (front-pages/login 구조 + TAI 브랜드 변수)
+ */
+.tai-auth-body {
+  background: #f0f4ff;
+}
+
+.tai-auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem 3rem;
+  min-height: calc(100vh - 80px);
+}
+
+.tai-auth-wrap {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 520px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(var(--tai-primary-rgb), 0.18);
+}
+
+.tai-auth-brand {
+  flex: 1;
+  background: var(--main-gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.75rem;
+  color: #fff;
+  text-align: center;
+}
+
+.tai-auth-brand .tai-auth-logo {
+  height: 72px;
+  width: auto;
+  margin-bottom: 1.25rem;
+  filter: brightness(0) invert(1);
+}
+
+.tai-auth-brand h2 {
+  font-weight: 900;
+  font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+  margin-bottom: 0.5rem;
+  line-height: 1.35;
+}
+
+.tai-auth-brand p.lead {
+  opacity: 0.88;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+.tai-auth-badge-list {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.tai-auth-badge-item {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.tai-auth-form-panel {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+}
+
+.tai-auth-form-panel h3 {
+  font-weight: 900;
+  color: var(--tai-primary-dark);
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.tai-auth-form-panel .sub {
+  color: #6c757d;
+  font-size: 0.88rem;
+  margin-bottom: 1.75rem;
+}
+
+.tai-auth-form-panel .form-label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+}
+
+.tai-auth-form-panel .form-control {
+  height: 48px;
+  border-radius: 0.75rem;
+  border-color: #dee2e6;
+  font-size: 0.95rem;
+}
+
+.tai-auth-form-panel .form-control:focus {
+  border-color: var(--tai-primary);
+  box-shadow: 0 0 0 0.2rem rgba(var(--tai-primary-rgb), 0.15);
+}
+
+.tai-auth-input-group .form-control {
+  border-radius: 0.75rem 0 0 0.75rem;
+  border-right: 0;
+}
+
+.tai-auth-input-group .input-group-text {
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: #f8f9fa;
+  border-color: #dee2e6;
+  cursor: pointer;
+}
+
+.btn-tai-auth-primary {
+  height: 50px;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1rem;
+  background: var(--tai-primary);
+  border: none;
+  color: #fff;
+  width: 100%;
+}
+
+.btn-tai-auth-primary:hover:not(:disabled) {
+  background: var(--tai-primary-dark);
+  color: #fff;
+}
+
+.btn-tai-auth-primary:disabled {
+  opacity: 0.65;
+}
+
+.tai-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  color: #adb5bd;
+  font-size: 0.82rem;
+}
+
+.tai-auth-divider::before,
+.tai-auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #dee2e6;
+}
+
+.tai-social-btn {
+  height: 44px;
+  border-radius: 0.75rem;
+  border: 1.5px solid #dee2e6;
+  background: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  width: 100%;
+}
+
+.tai-social-btn:hover {
+  border-color: var(--tai-primary);
+  background: #f0f4ff;
+}
+
+.tai-social-btn--naver {
+  background: #03c75a;
+  border-color: #03c75a;
+  color: #fff;
+}
+
+.tai-social-btn--naver:hover {
+  background: #02b351;
+  border-color: #02b351;
+  color: #fff;
+}
+
+.tai-social-btn--kakao {
+  background: #fee500;
+  border-color: #fee500;
+  color: #3c1e1e;
+}
+
+.tai-social-btn--kakao:hover {
+  background: #f5dc00;
+  border-color: #f5dc00;
+  color: #3c1e1e;
+}
+
+.link-tai-auth {
+  color: var(--tai-primary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.link-tai-auth:hover {
+  text-decoration: underline;
+  color: var(--tai-primary-dark);
+}
+
+.tai-auth-toast-wrap {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(360px, 92vw);
+}
+
+.tai-auth-toast {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 1.1rem;
+  font-size: 0.88rem;
+  animation: taiAuthSlideIn 0.2s ease;
+}
+
+@keyframes taiAuthSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .tai-auth-brand {
+    display: none;
+  }
+  .tai-auth-wrap {
+    max-width: 420px;
+    min-height: auto;
+  }
+  .tai-auth-form-panel {
+    padding: 2rem 1.35rem;
+  }
+}

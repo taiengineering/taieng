@@ -4,300 +4,332 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<!--Title-->
-	<title>로그인 | TAI Engineering</title>
-
-	<!--fivicon icon-->
-    <link rel="icon" href="assets/img/fevicon.png">
-
-	<!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
-
-    <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-
-
+	<title>TAI Engineering — 로그인</title>
+	<link rel="icon" href="assets/img/fevicon.png">
+	<link rel="stylesheet" href="assets/css/animate.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/magnific.min.css">
+	<link rel="stylesheet" href="assets/css/nice-select.min.css">
+	<link rel="stylesheet" href="assets/css/owl.min.css">
+	<link rel="stylesheet" href="assets/css/slick-slide.min.css">
+	<link rel="stylesheet" href="assets/css/fontawesome.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/responsive.css">
+	<link rel="stylesheet" href="assets/css/tai-brand.css">
+	<link rel="stylesheet" href="assets/css/tai-auth.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+	<style>body.tai-auth-body{font-family:'Noto Sans KR','Lato',sans-serif;}</style>
 </head>
-<body class='sc5'>
-	<!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
-    <div class="body-overlay" id="body-overlay"></div>
-    <!-- navbar start -->
-    <header class="navbar-area">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
-                    aria-expanded="false" aria-label="메뉴 열기">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="themefie_main_menu">
-                    <ul class="navbar-nav menu-open text-end">
-                        <li class="tai-safe-wrap">
-                            <a href="index-1.html">TAI SAFE</a>
-                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-2.html">TAI MANAGER</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-3.html">TAI FIX</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-3.html#vendor">수선업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-4.html">TAI CARE</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-4.html#manager">안전관리자</a></li>
-                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index-5.html">안전정보</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage.html">마이페이지</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- navbar end -->
+<body class="sc5 tai-auth-body">
+<script>
+(function(){
+  var token = localStorage.getItem('access_token');
+  if (!token) return;
+  var p = new URLSearchParams(location.search).get('next');
+  if (p && /^[a-zA-Z0-9._-]+\.html$/.test(p)) location.replace(p);
+  else location.replace('mypage.html');
+})();
+</script>
+	<div class="preloader" id="preloader">
+		<div class="preloader-inner">
+			<div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+		</div>
+	</div>
+	<div class="body-overlay" id="body-overlay"></div>
 
-    <!-- breadcrumb Area Start-->
-    <section class="breadcrumb-area text-center"><!--style-overlay-->
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 align-self-center">
-                    <div class="breadcrumb-inner">
-                        <h1 class="page-title">로그인</h1>
-                        <ul class="page-list breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">로그인</li>
-                        </ul>                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb Area End -->
+	<header class="navbar-area">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container nav-container">
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기">
+						<span class="icon-left"></span><span class="icon-right"></span>
+					</button>
+				</div>
+				<div class="logo">
+					<a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI Engineering"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open text-end">
+						<li class="tai-safe-wrap">
+							<a href="index-1.html">TAI SAFE</a>
+							<a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
+						</li>
+						<li class="menu-item-has-children">
+							<a href="index-2.html">TAI MANAGER</a>
+							<ul class="sub-menu">
+								<li><a href="index-2.html#client">건물·공장 경영자</a></li>
+								<li><a href="index-2.html#partner">기술자·대행업체</a></li>
+							</ul>
+						</li>
+						<li class="menu-item-has-children">
+							<a href="index-3.html">TAI FIX</a>
+							<ul class="sub-menu">
+								<li><a href="index-3.html#client">건물·공장 경영자</a></li>
+								<li><a href="index-3.html#vendor">수선업체</a></li>
+							</ul>
+						</li>
+						<li class="menu-item-has-children">
+							<a href="index-4.html">TAI CARE</a>
+							<ul class="sub-menu">
+								<li><a href="index-4.html#manager">안전관리자</a></li>
+								<li><a href="index-4.html#agency">안전대행·진단업체</a></li>
+							</ul>
+						</li>
+						<li><a href="index-5.html">안전정보</a></li>
+						<li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
+						<li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
+						<li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
+						<li class="nav-auth-user tai-nav-auth d-none"><a href="mypage.html">마이페이지</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    <!-- login-Area Start-->
-    <div class="login-area" style="background: var(--main-gradient)">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form id="tai-login-form" class="login-form default-form-wrap">
-                        <div class="single-input-wrap mb-4">
-                            <label class="form-label">아이디</label>
-                            <input type="text" placeholder="이름">
-                        </div>
-                        <div class="single-input-wrap mb-4">
-                            <label class="form-label">비밀번호</label>
-                            <input type="password" placeholder="비밀번호">
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">로그인 상태 유지</label>
-                                </div>  
-                            </div>
-                            <div class="col-sm-6 text-sm-end align-self-center">
-                                <a class="reset-pass" href="#">비밀번호를 잊으셨나요?</a>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-base w-100">로그인</button>
-                        <p>아직 계정이 없으신가요? <a href="sign-up.html">회원가입</a></p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- login-Area end-->
+	<div id="taiAuthToastWrap" class="tai-auth-toast-wrap" aria-live="polite"></div>
 
-     <!-- contact-Area Start-->
-    <section class="contact-area pd-top-150 mt-250">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact-inner">
-                        <div class="row no-gutters">
-                            <div class="col-lg-5">
-                                <h2 class="mt-n1">문의하기</h2>
-                                <p class="pe-5">뉴스레터를 구독하시면 최신 소식을 보내드립니다.</p>
-                                <div class="footer-widget widget mt-5">
-                                    <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                                    <div class="footer-company-info">
-                                        <p class="footer-company-name mb-1 fw-bold">TAI 엔지니어링</p>
-                                        <p class="mb-1 small">대표 심태왕</p>
-                                        <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-                                        <p class="mb-1 small">TEL : 02-6233-3000</p>
-                                        <p class="mb-1 small">FAX : 02-6670-9790</p>
-                                        <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-                                        <p class="mb-1 small">사업자등록번호 : 134-81-08473</p>
-                                        <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-                                    </div>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 offset-lg-1 align-self-center">
-                                <form class="contact-form">
-                                    <div class="single-input-wrap mb-4">
-                                        <input type="text" placeholder="이름을 입력하세요">
-                                    </div>
-                                    <div class="single-input-wrap mb-4">
-                                        <input type="text" placeholder="이메일 주소를 입력하세요">
-                                    </div>
-                                    <div class="single-input-wrap mb-4">
-                                        <textarea rows="5" placeholder="문의 내용을 입력하세요"></textarea>
-                                    </div>                                    
-                                    <button type="submit" class="btn btn-base">문의 보내기</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- contact-Area end-->
+	<section class="tai-auth-main">
+		<div class="tai-auth-wrap">
+			<div class="tai-auth-brand">
+				<a href="index.html" class="text-decoration-none">
+					<img src="assets/img/tai-logo.png" alt="TAI Engineering" class="tai-auth-logo">
+				</a>
+				<h2>산업안전 AI 플랫폼</h2>
+				<p class="lead">건물·공장·건설현장의 안전관리를<br>AI가 자동으로 처리해 드립니다</p>
+				<div class="tai-auth-badge-list">
+					<div class="tai-auth-badge-item"><i class="fas fa-shield-alt"></i> 415개 법령 자동 매칭</div>
+					<div class="tai-auth-badge-item"><i class="fas fa-user-friends"></i> 선임 전문가 즉시 매칭</div>
+					<div class="tai-auth-badge-item"><i class="fas fa-tools"></i> 전문 설비업체 연결</div>
+					<div class="tai-auth-badge-item"><i class="fas fa-chart-line"></i> 중대재해 방어 리포트</div>
+				</div>
+			</div>
+			<div class="tai-auth-form-panel">
+				<h3>로그인</h3>
+				<p class="sub">이메일과 비밀번호로 로그인하세요</p>
 
-    <!-- footer area start -->
-    <footer class="footer-area style-2">
-        <div class="footer-patent-bar text-center py-2 small">
-            <div class="container">
-                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
-            </div>
-        </div>
+				<div class="mb-3">
+					<label class="form-label" for="loginId">이메일 또는 휴대폰 번호</label>
+					<input type="text" class="form-control" id="loginId" placeholder="example@email.com" autocomplete="username">
+				</div>
+				<div class="mb-1">
+					<label class="form-label" for="password">비밀번호</label>
+					<div class="input-group tai-auth-input-group">
+						<input type="password" class="form-control" id="password" placeholder="비밀번호 입력" autocomplete="current-password">
+						<button type="button" class="input-group-text" id="togglePw" onclick="taiTogglePassword()" aria-label="비밀번호 표시 전환">
+							<i class="fas fa-eye" id="eyeIcon"></i>
+						</button>
+					</div>
+				</div>
+				<div class="text-end mb-3">
+					<a href="javascript:void(0)" class="link-tai-auth" onclick="taiAuthToast('info','비밀번호 찾기는 고객센터로 문의해 주세요.')">비밀번호 찾기</a>
+				</div>
 
-        <div class="footer-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">메뉴</h6>
-                            <ul>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>서비스</a></li>
-                                <li><a href="team.html"><i class="fas fa-angle-right"></i>팀</a></li>
-                                <li><a href="blog.html"><i class="fas fa-angle-right"></i>블로그</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">회사 소개</h6>
-                            <ul>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사</a></li>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>리더십</a></li>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>다양성</a></li>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>채용</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">서비스</h6>
-                            <ul>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>그래픽 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>웹 디자인 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>웹 개발 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>SEO</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">바로가기</h6>
-                            <ul>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>도움말 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>고객 지원 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>고객 사례 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>연락처</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Footer bottom-->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>       
-                        </div>
-                    </div>
-                    <div class="col-md-6 align-self-center text-md-end">
-                        <div class="author-area">
-                            <p>원본 테마: Themefie</p>       
-                        </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        <!--Footer bottom-->
-    </footer>
-    <!-- footer area end -->
+				<button type="button" class="btn-tai-auth-primary mb-3" id="btnLogin" onclick="taiDoLogin()">로그인</button>
 
-    <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
-    </div>
+				<div class="tai-auth-divider">또는</div>
 
-	
+				<div class="row g-2 mb-3">
+					<div class="col-12 col-md-4">
+						<button type="button" class="tai-social-btn tai-social-btn--naver" onclick="taiSocialLogin('naver')">
+							<span style="font-weight:900;font-size:0.95rem;">N</span> 네이버
+						</button>
+					</div>
+					<div class="col-12 col-md-4">
+						<button type="button" class="tai-social-btn tai-social-btn--kakao" onclick="taiSocialLogin('kakao')">
+							<i class="fas fa-comment" style="font-size:0.9rem;"></i> 카카오
+						</button>
+					</div>
+					<div class="col-12 col-md-4">
+						<button type="button" class="tai-social-btn" onclick="taiSocialLogin('google')">
+							<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+							Google
+						</button>
+					</div>
+				</div>
 
-	<!-- all plugins here -->
-    <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/imageloded.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/waypoint.js"></script>
-    <script src="assets/js/magnific.min.js"></script>
-    <script src="assets/js/nice-select.min.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/owl.min.js"></script>
-    <script src="assets/js/slick-slider.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/main.js"></script>
+				<p class="text-center mb-0" style="font-size:0.88rem;color:#6c757d;">
+					계정이 없으신가요?
+					<a href="sign-up.html" class="link-tai-auth ms-1">회원가입</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<footer class="footer-area style-1">
+		<div class="footer-patent-bar text-center py-2 small">
+			<div class="container">
+				<p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
+			</div>
+		</div>
+		<div class="footer-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-4 col-lg-4 col-sm-6">
+						<div class="footer-widget widget">
+							<a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
+							<div class="footer-company-info">
+								<p class="footer-company-name mb-1 fw-bold">TAI 엔지니어링</p>
+								<p class="mb-1 small">대표 심태왕</p>
+								<p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
+								<p class="mb-1 small">TEL : 02-6233-3000</p>
+								<p class="mb-1 small">FAX : 02-6670-9790</p>
+								<p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
+								<p class="mb-1 small">사업자등록번호 : 134-81-08473</p>
+								<p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
+							</div>
+							<ul class="social-area">
+								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+								<li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xl-2 col-lg-2 col-6">
+						<div class="footer-widget widget widget_link">
+							<h6 class="widget-title">메뉴</h6>
+							<ul>
+								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
+								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
+								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
+								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
+								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
+						<div class="footer-widget widget widget_link">
+							<h6 class="widget-title">서비스</h6>
+							<ul>
+								<li><a href="diagnosis-start.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
+								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
+								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
+								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
+								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
+								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
+						<div class="footer-widget widget widget_link">
+							<h6 class="widget-title">바로가기</h6>
+							<ul>
+								<li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
+								<li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
+								<li><a href="faq.html"><i class="fas fa-angle-right"></i>자주하는 질문</a></li>
+								<li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
+								<li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 align-self-center">
+						<div class="copyright-area"><p>© TAI Engineering. 무단 복제를 금합니다.</p></div>
+					</div>
+					<div class="col-md-6 align-self-center text-md-end">
+						<div class="author-area"><p>원본 테마: Themefie</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+	<script src="assets/js/jquery.3.6.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/imageloded.min.js"></script>
+	<script src="assets/js/counterup.js"></script>
+	<script src="assets/js/waypoint.js"></script>
+	<script src="assets/js/magnific.min.js"></script>
+	<script src="assets/js/nice-select.min.js"></script>
+	<script src="assets/js/fontawesome.min.js"></script>
+	<script src="assets/js/ripple.js"></script>
+	<script src="assets/js/owl.min.js"></script>
+	<script src="assets/js/slick-slider.min.js"></script>
+	<script src="assets/js/wow.min.js"></script>
+	<script src="assets/js/nav-auth.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+var TAI_API = 'https://api.taieng.co.kr';
+function taiAuthToast(type, msg) {
+  var wrap = document.getElementById('taiAuthToastWrap');
+  var el = document.createElement('div');
+  el.className = 'tai-auth-toast';
+  el.style.borderLeft = '4px solid ' + (type === 'success' ? '#16a34a' : type === 'error' ? '#dc2626' : type === 'warning' ? '#d97706' : 'var(--tai-primary)');
+  el.textContent = msg;
+  wrap.appendChild(el);
+  setTimeout(function () { el.remove(); }, 3500);
+}
+function taiTogglePassword() {
+  var pw = document.getElementById('password');
+  var icon = document.getElementById('eyeIcon');
+  if (pw.type === 'password') {
+    pw.type = 'text';
+    icon.className = 'fas fa-eye-slash';
+  } else {
+    pw.type = 'password';
+    icon.className = 'fas fa-eye';
+  }
+}
+function taiSocialLogin(provider) {
+  taiAuthToast('info', (provider === 'naver' ? '네이버' : provider === 'kakao' ? '카카오' : 'Google') + ' 로그인 연동은 준비 중입니다. 이메일 로그인을 이용해 주세요.');
+}
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') taiDoLogin();
+});
+async function taiDoLogin() {
+  var loginId = document.getElementById('loginId').value.trim();
+  var pw = document.getElementById('password').value;
+  var btn = document.getElementById('btnLogin');
+  if (!loginId) { taiAuthToast('warning', '이메일 또는 휴대폰 번호를 입력하세요.'); return; }
+  if (!pw) { taiAuthToast('warning', '비밀번호를 입력하세요.'); return; }
+  btn.disabled = true;
+  var prev = btn.innerHTML;
+  btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>로그인 중...';
+  try {
+    var res = await fetch(TAI_API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ login_id: loginId, password: pw })
+    });
+    var data = await res.json().catch(function () { return {}; });
+    if (data.status === 'success' && data.data && data.data.access_token) {
+      var token = data.data.access_token;
+      var user = data.data.user || {};
+      localStorage.setItem('access_token', token);
+      localStorage.setItem('user_name', user.name || '');
+      localStorage.setItem('user_email', user.email || loginId);
+      localStorage.setItem('role_code', user.role_code || '');
+      localStorage.setItem('user_id', user.id || '');
+      localStorage.setItem('company_id', user.company_id || '');
+      localStorage.setItem('factory_id', user.factory_id || '');
+      if (data.data.refresh_token) localStorage.setItem('refresh_token', data.data.refresh_token);
+      localStorage.setItem('user', JSON.stringify(user));
+      taiAuthToast('success', '로그인 성공!');
+      var next = new URLSearchParams(location.search).get('next');
+      var dest = (next && /^[a-zA-Z0-9._-]+\.html$/.test(next)) ? next : 'mypage.html';
+      setTimeout(function () { location.replace(dest); }, 600);
+      return;
+    }
+    var msg = '로그인에 실패했습니다.';
+    if (res.status === 401) msg = '이메일 또는 비밀번호가 올바르지 않습니다.';
+    else if (res.status === 403) msg = '접근이 제한된 계정입니다. 관리자에게 문의하세요.';
+    else if (typeof data.detail === 'string') msg = data.detail;
+    else if (data.message) msg = data.message;
+    taiAuthToast('error', msg);
+  } catch (e) {
+    taiAuthToast('error', '서버 연결에 실패했습니다. 잠시 후 다시 시도하세요.');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = prev;
+  }
+}
+	</script>
 </body>
 </html>
