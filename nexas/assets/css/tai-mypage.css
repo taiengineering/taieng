@@ -1,0 +1,180 @@
+/* 마이페이지 공통 레이아웃 — tai-brand 톤과 정렬 */
+.tai-mypage-body {
+  font-family: 'Noto Sans KR', 'Lato', sans-serif;
+  background: #f4f6fa;
+}
+
+.tai-mypage-hero {
+  background: var(--main-gradient);
+  color: #fff;
+  padding: 2.25rem 0 2.75rem;
+}
+
+.tai-mypage-hero h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.tai-mypage-hero p {
+  margin: 0;
+  opacity: 0.92;
+  font-size: 0.95rem;
+}
+
+.tai-mypage-wrap {
+  padding: 2rem 0 4rem;
+}
+
+.tai-mypage-nav {
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  background: #fff;
+  border: 1px solid #e8ecf4;
+  box-shadow: 0 8px 24px rgba(11, 19, 36, 0.06);
+}
+
+.tai-mypage-nav-head {
+  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+}
+
+.tai-mypage-nav-link {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  color: #3a3f4f;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tai-mypage-nav-link:hover {
+  background: rgba(var(--tai-primary-rgb), 0.08);
+  color: var(--tai-primary-dark);
+}
+
+.tai-mypage-nav-link.active {
+  background: rgba(var(--tai-primary-rgb), 0.14);
+  color: var(--tai-primary-dark);
+  font-weight: 700;
+}
+
+.tai-mypage-card {
+  background: #fff;
+  border: 1px solid #e8ecf4;
+  border-radius: 12px;
+  padding: 1.35rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(11, 19, 36, 0.05);
+  height: 100%;
+}
+
+.tai-mypage-card h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #8b909f;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tai-mypage-card .tai-mypage-stat {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a1d2e;
+  line-height: 1.2;
+}
+
+.tai-mypage-card .tai-mypage-stat-sub {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-top: 0.35rem;
+}
+
+.tai-mypage-section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1d2e;
+  margin-bottom: 1rem;
+}
+
+.tai-mypage-empty {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  border: 1px dashed #cfd6e6;
+  border-radius: 12px;
+  background: #fafbfd;
+  color: #5c6070;
+}
+
+.tai-mypage-empty i {
+  font-size: 2rem;
+  color: #b8c0d4;
+  margin-bottom: 0.75rem;
+}
+
+.tai-mypage-empty h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3a3f4f;
+  margin-bottom: 0.5rem;
+}
+
+.tai-mypage-partner-guard {
+  border: 1px solid #e8ecf4;
+  border-radius: 12px;
+  padding: 2rem;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(11, 19, 36, 0.05);
+}
+
+.tai-mypage-partner-guard h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.tai-mypage-badge-soft {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: rgba(var(--tai-primary-rgb), 0.12);
+  color: var(--tai-primary-dark);
+}
+
+.tai-mypage-table-placeholder {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.88rem;
+}
+
+.tai-mypage-table-placeholder th,
+.tai-mypage-table-placeholder td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #eef0f5;
+  text-align: left;
+}
+
+.tai-mypage-table-placeholder th {
+  color: #8b909f;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tai-mypage-quick .btn {
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .tai-mypage-nav {
+    margin-bottom: 1.5rem;
+  }
+}

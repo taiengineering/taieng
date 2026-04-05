@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>마이페이지 | TAI Engineering</title>
+	<link rel="icon" href="../assets/img/fevicon.png">
+	<link rel="stylesheet" href="../assets/css/animate.min.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/responsive.css">
+	<link rel="stylesheet" href="../assets/css/tai-brand.css">
+	<link rel="stylesheet" href="../assets/css/tai-mypage.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="sc5 tai-mypage-body" data-tai-active="dashboard">
+<script>window.TAI_NEXAS_ROOT = '../';</script>
+<script src="../assets/js/tai-mypage-state.js"></script>
+<script>
+(function(){
+  try { if (localStorage.getItem('access_token')) return; } catch(e){}
+  try { if (new URLSearchParams(location.search).get('preview') === '1') return; } catch(e2){}
+  var root = window.TAI_NEXAS_ROOT || '../';
+  location.replace(root + 'log-in.html?redirect=' + encodeURIComponent(location.pathname + location.search));
+})();
+</script>
+<script src="../assets/js/tai-mypage-nav.js" defer></script>
+
+	<div class="preloader" id="preloader">
+		<div class="preloader-inner">
+			<div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+		</div>
+	</div>
+	<div class="body-overlay" id="body-overlay"></div>
+
+	<header class="navbar-area">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container nav-container">
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기"><span class="icon-left"></span><span class="icon-right"></span></button>
+				</div>
+				<div class="logo"><a class="main-logo" href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI Engineering"></a></div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open text-end">
+						<li class="tai-safe-wrap"><a href="../index-1.html">TAI SAFE</a><a href="../contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a></li>
+						<li class="menu-item-has-children"><a href="../index-2.html">TAI MANAGER</a><ul class="sub-menu"><li><a href="../index-2.html#client">건물·공장 경영자</a></li><li><a href="../index-2.html#partner">기술자·대행업체</a></li></ul></li>
+						<li class="menu-item-has-children"><a href="../index-3.html">TAI FIX</a><ul class="sub-menu"><li><a href="../index-3.html#client">건물·공장 경영자</a></li><li><a href="../index-3.html#vendor">수선업체</a></li></ul></li>
+						<li class="menu-item-has-children"><a href="../index-4.html">TAI CARE</a><ul class="sub-menu"><li><a href="../index-4.html#manager">안전관리자</a></li><li><a href="../index-4.html#agency">안전대행·진단업체</a></li></ul></li>
+						<li><a href="../index-5.html">안전정보</a></li>
+						<li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
+						<li class="nav-auth-guest tai-nav-auth"><a href="../log-in.html">로그인</a></li>
+						<li class="nav-auth-guest tai-nav-auth"><a href="../sign-up.html">회원가입</a></li>
+						<li class="nav-auth-user tai-nav-auth d-none"><a href="./">마이페이지</a></li>
+						<li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<section class="tai-mypage-hero">
+		<div class="container">
+			<h1>마이페이지</h1>
+			<p><span id="taiDashWelcomeName">회원</span>님, 산업안전 법령 준수 현황을 한눈에 관리하세요.</p>
+		</div>
+	</section>
+
+	<div class="tai-mypage-wrap">
+		<div class="container">
+			<div class="row g-4">
+				<aside class="col-lg-3">
+					<nav class="tai-mypage-nav" id="taiMypageSidebar" aria-label="마이페이지 메뉴"></nav>
+				</aside>
+				<main class="col-lg-9">
+					<h2 class="tai-mypage-section-title">대시보드</h2>
+					<p class="text-muted small mb-4">계약·진단·결제 요약과 파트너 신청 상태를 확인할 수 있습니다. (데모: <code>?mock=review</code> 등으로 상태 변경)</p>
+
+					<div class="row g-3 mb-4">
+						<div class="col-md-4">
+							<div class="tai-mypage-card">
+								<h3>진행 중 계약</h3>
+								<div class="tai-mypage-stat" id="taiDashContracts">0</div>
+								<p class="tai-mypage-stat-sub">건</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="tai-mypage-card">
+								<h3>최근 법령진단</h3>
+								<div class="tai-mypage-stat" id="taiDashDiag">0</div>
+								<p class="tai-mypage-stat-sub">건 (30일)</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="tai-mypage-card">
+								<h3>결제 건수</h3>
+								<div class="tai-mypage-stat" id="taiDashPay">0</div>
+								<p class="tai-mypage-stat-sub">건</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="tai-mypage-card mb-4">
+						<h3 class="mb-2">파트너 전환 신청</h3>
+						<p class="mb-2"><span class="tai-mypage-badge-soft" id="taiDashPartnerBadge">—</span></p>
+						<p class="small text-muted mb-0" id="taiDashPartnerHint">신청 현황은 아래에서 상세히 확인할 수 있습니다.</p>
+					</div>
+
+					<div class="tai-mypage-card tai-mypage-quick">
+						<h3 class="mb-3">빠른 이동</h3>
+						<div class="d-flex flex-wrap gap-2">
+							<a href="../free-diagnosis.html" class="btn btn-base btn-sm">무료 법령진단</a>
+							<a href="contracts/" class="btn btn-outline-secondary btn-sm">계약 관리</a>
+							<a href="partner-application/" class="btn btn-outline-secondary btn-sm">파트너 전환 신청</a>
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer-area style-2 mt-0">
+		<div class="footer-inner pt-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6"><p class="small mb-0">© TAI Engineering.</p></div>
+					<div class="col-md-6 text-md-end"><a href="../index.html" class="small me-3">홈</a><a href="../contact.html" class="small">문의</a></div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+	<script src="../assets/js/jquery.3.6.min.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/imageloded.min.js"></script>
+	<script src="../assets/js/nav-auth.js"></script>
+	<script src="../assets/js/main.js"></script>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var u = {};
+  try { u = JSON.parse(localStorage.getItem('user') || '{}'); } catch (e) {}
+  var name = u.name || localStorage.getItem('user_name') || '회원';
+  var el = document.getElementById('taiDashWelcomeName');
+  if (el) el.textContent = name;
+  var st = TaiMypageState.load();
+  var sum = st.summary || {};
+  document.getElementById('taiDashContracts').textContent = sum.contractsActive != null ? sum.contractsActive : 0;
+  document.getElementById('taiDashDiag').textContent = sum.diagnosisRecent != null ? sum.diagnosisRecent : 0;
+  document.getElementById('taiDashPay').textContent = sum.paymentsCount != null ? sum.paymentsCount : 0;
+  document.getElementById('taiDashPartnerBadge').textContent = TaiMypageState.partnerStatusLabel();
+  var hint = document.getElementById('taiDashPartnerHint');
+  if (st.partnerStatus === 'APPROVED') {
+    hint.textContent = '파트너로 승인되었습니다. 좌측 메뉴에서 파트너 전용 기능을 이용하세요.';
+  } else if (st.partnerStatus && st.partnerStatus !== 'NONE') {
+    hint.textContent = '심사 진행 중이거나 보완이 필요할 수 있습니다. 파트너 전환 신청 메뉴에서 확인하세요.';
+  } else {
+    hint.textContent = '안전관리·시공 파트너로 전환하려면 신청을 진행해 주세요.';
+  }
+});
+window.taiOnPageShowAuth = function () { try { taiMypageRenderNav(); } catch (e) {} };
+	</script>
+</body>
+</html>

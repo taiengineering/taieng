@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>내 정보 | 마이페이지 | TAI Engineering</title>
+	<link rel="icon" href="../../assets/img/fevicon.png">
+	<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
+	<link rel="stylesheet" href="../../assets/css/responsive.css">
+	<link rel="stylesheet" href="../../assets/css/tai-brand.css">
+	<link rel="stylesheet" href="../../assets/css/tai-mypage.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="sc5 tai-mypage-body" data-tai-active="profile">
+<script>window.TAI_NEXAS_ROOT = '../../';</script>
+<script src="../../assets/js/tai-mypage-state.js"></script>
+<script>
+(function(){
+  try { if (localStorage.getItem('access_token')) return; } catch(e){}
+  try { if (new URLSearchParams(location.search).get('preview') === '1') return; } catch(e2){}
+  location.replace('../../log-in.html?redirect=' + encodeURIComponent(location.pathname + location.search));
+})();
+</script>
+<script src="../../assets/js/tai-mypage-nav.js" defer></script>
+
+	<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+	<div class="body-overlay" id="body-overlay"></div>
+
+	<header class="navbar-area">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container nav-container">
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기"><span class="icon-left"></span><span class="icon-right"></span></button>
+				</div>
+				<div class="logo"><a class="main-logo" href="../../index.html"><img src="../../assets/img/tai-logo.png" alt="TAI Engineering"></a></div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open text-end">
+						<li class="tai-nav-sep d-none d-lg-block" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
+						<li class="nav-auth-user tai-nav-auth"><a href="#" class="tai-logout">로그아웃</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<section class="tai-mypage-hero"><div class="container"><h1>내 정보</h1><p>회원·회사 기본 정보를 확인합니다.</p></div></section>
+
+	<div class="tai-mypage-wrap">
+		<div class="container">
+			<div class="row g-4">
+				<aside class="col-lg-3"><nav class="tai-mypage-nav" id="taiMypageSidebar" aria-label="마이페이지 메뉴"></nav></aside>
+				<main class="col-lg-9">
+					<h2 class="tai-mypage-section-title">기본 회원 정보</h2>
+					<div class="tai-mypage-card mb-4">
+						<div class="row g-3">
+							<div class="col-md-6">
+								<label class="small text-muted d-block mb-1">이름</label>
+								<p class="mb-0 fw-semibold" id="taiProfName">—</p>
+							</div>
+							<div class="col-md-6">
+								<label class="small text-muted d-block mb-1">이메일</label>
+								<p class="mb-0 fw-semibold" id="taiProfEmail">—</p>
+							</div>
+							<div class="col-md-6">
+								<label class="small text-muted d-block mb-1">연락처</label>
+								<p class="mb-0 fw-semibold" id="taiProfPhone">—</p>
+							</div>
+							<div class="col-md-6">
+								<label class="small text-muted d-block mb-1">회사명</label>
+								<p class="mb-0 fw-semibold" id="taiProfCo">—</p>
+							</div>
+						</div>
+						<hr class="my-4">
+						<button type="button" class="btn btn-base btn-sm" disabled title="준비 중입니다">정보 수정</button>
+						<span class="small text-muted ms-2">프로필 API 연동 후 활성화됩니다.</span>
+					</div>
+				</main>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer-area style-2 mt-0">
+		<div class="footer-inner pt-4"><div class="container"><div class="row"><div class="col-md-6"><p class="small mb-0">© TAI Engineering.</p></div><div class="col-md-6 text-md-end"><a href="../../index.html" class="small me-3">홈</a><a href="../../contact.html" class="small">문의</a></div></div></div></div>
+	</footer>
+	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+	<script src="../../assets/js/jquery.3.6.min.js"></script>
+	<script src="../../assets/js/bootstrap.min.js"></script>
+	<script src="../../assets/js/imageloded.min.js"></script>
+	<script src="../../assets/js/nav-auth.js"></script>
+	<script src="../../assets/js/main.js"></script>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var u = {};
+  try { u = JSON.parse(localStorage.getItem('user') || '{}'); } catch (e) {}
+  document.getElementById('taiProfName').textContent = u.name || localStorage.getItem('user_name') || '—';
+  document.getElementById('taiProfEmail').textContent = u.email || localStorage.getItem('user_email') || '—';
+  document.getElementById('taiProfPhone').textContent = u.phone || '—';
+  document.getElementById('taiProfCo').textContent = u.company_name || u.companyName || '—';
+});
+window.taiOnPageShowAuth = function () { try { taiMypageRenderNav(); } catch (e) {} };
+	</script>
+</body>
+</html>

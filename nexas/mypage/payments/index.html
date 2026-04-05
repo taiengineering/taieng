@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>결제 내역 | 마이페이지 | TAI Engineering</title>
+	<link rel="icon" href="../../assets/img/fevicon.png">
+	<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
+	<link rel="stylesheet" href="../../assets/css/style.css">
+	<link rel="stylesheet" href="../../assets/css/responsive.css">
+	<link rel="stylesheet" href="../../assets/css/tai-brand.css">
+	<link rel="stylesheet" href="../../assets/css/tai-mypage.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="sc5 tai-mypage-body" data-tai-active="payments">
+<script>window.TAI_NEXAS_ROOT = '../../';</script>
+<script src="../../assets/js/tai-mypage-state.js"></script>
+<script>
+(function(){
+  try { if (localStorage.getItem('access_token')) return; } catch(e){}
+  try { if (new URLSearchParams(location.search).get('preview') === '1') return; } catch(e2){}
+  location.replace('../../log-in.html?redirect=' + encodeURIComponent(location.pathname + location.search));
+})();
+</script>
+<script src="../../assets/js/tai-mypage-nav.js" defer></script>
+
+	<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+	<div class="body-overlay" id="body-overlay"></div>
+	<header class="navbar-area"><nav class="navbar navbar-expand-lg"><div class="container nav-container">
+		<div class="logo"><a class="main-logo" href="../../index.html"><img src="../../assets/img/tai-logo.png" alt=""></a></div>
+		<ul class="navbar-nav menu-open text-end ms-auto"><li class="nav-auth-user tai-nav-auth"><a href="#" class="tai-logout">로그아웃</a></li></ul>
+	</div></nav></header>
+	<section class="tai-mypage-hero"><div class="container"><h1>결제 내역</h1><p>서비스 결제·청구 기록을 조회합니다.</p></div></section>
+	<div class="tai-mypage-wrap"><div class="container"><div class="row g-4">
+		<aside class="col-lg-3"><nav class="tai-mypage-nav" id="taiMypageSidebar"></nav></aside>
+		<main class="col-lg-9">
+			<h2 class="tai-mypage-section-title">결제 목록</h2>
+			<div class="tai-mypage-empty">
+				<i class="fas fa-receipt d-block"></i>
+				<h4>결제 내역이 없습니다</h4>
+				<p class="mb-0 small">결제가 발생하면 일시·금액·상품명이 표시됩니다.</p>
+			</div>
+		</main>
+	</div></div></div>
+	<footer class="footer-area style-2 mt-0"><div class="footer-inner pt-4"><div class="container"><div class="row"><div class="col-md-6"><p class="small mb-0">© TAI Engineering.</p></div><div class="col-md-6 text-md-end"><a href="../../index.html" class="small">홈</a></div></div></div></div></footer>
+	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+	<script src="../../assets/js/jquery.3.6.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/imageloded.min.js"></script><script src="../../assets/js/nav-auth.js"></script><script src="../../assets/js/main.js"></script>
+	<script>window.taiOnPageShowAuth = function () { try { taiMypageRenderNav(); } catch (e) {} };</script>
+</body>
+</html>
