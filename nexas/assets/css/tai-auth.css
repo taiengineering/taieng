@@ -296,6 +296,48 @@
   }
 }
 
+/* 비밀번호 찾기 모달 */
+.tai-auth-modal .modal-content {
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+.tai-auth-modal .modal-header {
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem 1.25rem;
+}
+.tai-auth-modal .modal-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--tai-primary-dark);
+}
+.tai-auth-modal .modal-body {
+  padding: 1.25rem;
+}
+.tai-auth-modal .modal-body .form-control {
+  border-radius: 0.75rem;
+  min-height: 2.75rem;
+}
+.tai-auth-modal .modal-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 0.75rem 1.25rem 1rem;
+}
+.btn-tai-modal-primary {
+  background: var(--tai-primary);
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+}
+.btn-tai-modal-primary:hover:not(:disabled) {
+  background: var(--tai-primary-dark);
+  color: #fff;
+}
+.btn-tai-modal-primary:disabled {
+  opacity: 0.65;
+}
+
 @media (max-width: 640px) {
   .tai-auth-brand {
     display: none;
