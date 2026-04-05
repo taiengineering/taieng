@@ -48,3 +48,13 @@
 .home-6 .navbar-area-fixed {
   background: rgba(var(--tai-primary-rgb), 0.85);
 }
+
+/*
+ * Bootstrap 5(.navbar-expand-lg)가 .navbar의 justify-content: space-between 을
+ * flex-start 로 덮어써 로고·메뉴가 한쪽(좌)에 붙는 문제 → 테마 원래 동작으로 복구
+ */
+@media (min-width: 992px) {
+  .navbar-area .nav-container .navbar.navbar-expand-lg {
+    justify-content: space-between;
+  }
+}
