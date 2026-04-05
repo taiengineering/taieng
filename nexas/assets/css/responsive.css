@@ -549,11 +549,11 @@
     background: #fff;
   }
   .home-6 .navbar-area {
-    background: rgba(68, 72, 255, 0.45);
+    background: rgba(var(--tai-primary-rgb), 0.45);
     backdrop-filter: blur(8px);
   }
   .home-6 .navbar-area-fixed {
-    background: rgba(68, 72, 255, 0.85);
+    background: rgba(var(--tai-primary-rgb), 0.85);
   }
   .home-6 .banner-inner {
     margin-top: 0;

@@ -1,0 +1,50 @@
+/**
+ * TAI 브랜드 색상 (단일 관리)
+ * ─────────────────────────
+ * 버튼·링크·그라데이션 등 테마 변수(--main-color, --main-gradient)를
+ * 사이트 전체에서 같은 톤으로 맞춥니다.
+ *
+ * 조정 시 주로 건드릴 값:
+ *   --tai-primary / --tai-primary-dark / --tai-primary-rgb  … 브랜드 블루
+ *   --tai-surface-dark / --tai-surface-dark-rgb              … 히어로·CTA 다크 배경·오버레이
+ *   --tai-ink-deep-rgb                                       … 그림자·그라데이션 딥 네이비
+ */
+:root {
+  --tai-primary: #1a5fd4;
+  --tai-primary-dark: #0f3f8f;
+  --tai-primary-rgb: 26, 95, 212;
+
+  /* 히어로·CTA 다크 배경·오버레이 (랜딩 상단 톤) */
+  --tai-surface-dark: #0b1324;
+  --tai-surface-dark-rgb: 11, 19, 36;
+  /* 그림자·그라데이션 끝 등 딥 네이비 악센트 */
+  --tai-ink-deep-rgb: 12, 0, 46;
+
+  --main-color: var(--tai-primary);
+  --main-color-opacity: var(--tai-primary-rgb);
+  --main-gradient: linear-gradient(
+    135deg,
+    var(--tai-primary) 0%,
+    var(--tai-primary-dark) 100%
+  );
+}
+
+/* 테마 데모용 .home-2 ~ .home-6 가 서로 다른 색을 쓰지 않도록 통일 */
+.home-2,
+.home-3,
+.home-4,
+.home-5,
+.home-6 {
+  --main-color: var(--tai-primary);
+  --main-color-opacity: var(--tai-primary-rgb);
+  --main-gradient: linear-gradient(
+    135deg,
+    var(--tai-primary) 0%,
+    var(--tai-primary-dark) 100%
+  );
+}
+
+/* home-6 전용 스티키 내비가 테마 보라색을 쓰지 않도록 */
+.home-6 .navbar-area-fixed {
+  background: rgba(var(--tai-primary-rgb), 0.85);
+}

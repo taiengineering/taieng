@@ -538,7 +538,7 @@ ul {
 }
 
 .post-password-form input[type=submit]:hover {
-  background-color: #121A2F;
+  background-color: var(--tai-primary-dark);
 }
 
 .footer-widget .table td,
@@ -675,7 +675,7 @@ ul {
 }
 
 .read-more-btn {
-  color: #3c6be0;
+  color: var(--main-color);
   font-size: 16px;
   font-weight: 700;
   position: relative;
@@ -691,7 +691,7 @@ ul {
   background: var(--main-color);
 }
 .read-more-btn:focus, .read-more-btn:active {
-  color: #3c6be0;
+  color: var(--main-color);
 }
 .read-more-btn:hover:after {
   width: 100%;
@@ -826,7 +826,7 @@ ul {
   margin-right: 10px;
 }
 .pagination .page-item .page-link {
-  border: 1px solid rgb(60, 107, 224);
+  border: 1px solid var(--main-color);
   height: 48px;
   padding: 0px 18.4px;
   border-radius: 0;
@@ -2064,7 +2064,7 @@ ul {
   color: #fff;
 }
 .navbar-area-fixed {
-  box-shadow: 0px 4px 6px 0px rgba(12, 0, 46, 0.05);
+  box-shadow: 0px 4px 6px 0px rgba(var(--tai-ink-deep-rgb), 0.05);
   top: 0;
   backdrop-filter: blur(8px);
   background: rgba(var(--main-color-opacity), 0.8);
@@ -4568,9 +4568,6 @@ ul.solarsystem li.saturn.bottom-2 {
   --heading-color: #363636;
   --paragraph-color: #647381;
 }
-.home-6 .navbar-area-fixed {
-  background: rgba(68, 72, 255, 0.85);
-}
 .home-6 .btn {
   height: 50px;
   line-height: 50px;
@@ -4835,7 +4832,7 @@ ul.solarsystem li.saturn.bottom-2 {
 ---------------------------------------------------*/
 .tai-landing-hero {
   position: relative;
-  background-color: #0b1324;
+  background-color: var(--tai-surface-dark);
   background-size: cover;
   background-position: center right;
   min-height: 520px;
@@ -4848,9 +4845,9 @@ ul.solarsystem li.saturn.bottom-2 {
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(11, 19, 36, 0.94) 0%,
-    rgba(11, 19, 36, 0.78) 45%,
-    rgba(11, 19, 36, 0.35) 100%
+    rgba(var(--tai-surface-dark-rgb), 0.94) 0%,
+    rgba(var(--tai-surface-dark-rgb), 0.78) 45%,
+    rgba(var(--tai-surface-dark-rgb), 0.35) 100%
   );
   z-index: 0;
 }
@@ -4909,7 +4906,7 @@ ul.solarsystem li.saturn.bottom-2 {
 .tai-how-thumb {
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(12, 0, 46, 0.12);
+  box-shadow: 0 12px 40px rgba(var(--tai-ink-deep-rgb), 0.12);
 }
 .tai-how-thumb img {
   width: 100%;
@@ -4944,7 +4941,7 @@ ul.solarsystem li.saturn.bottom-2 {
   margin-top: 0;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, rgba(var(--main-color-opacity), 0.95) 0%, rgba(12, 0, 46, 0.92) 100%);
+  background: linear-gradient(135deg, rgba(var(--main-color-opacity), 0.95) 0%, rgba(var(--tai-ink-deep-rgb), 0.92) 100%);
 }
 .tai-free-diagnosis .tai-free-inner {
   border-radius: 14px;
@@ -4989,7 +4986,7 @@ ul.solarsystem li.saturn.bottom-2 {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(11, 19, 36, 0.82);
+  background: rgba(var(--tai-surface-dark-rgb), 0.82);
   z-index: 0;
 }
 .tai-final-cta .container {
@@ -5006,8 +5003,8 @@ ul.solarsystem li.saturn.bottom-2 {
   position: relative;
   overflow: hidden;
   background: linear-gradient(
-      rgba(11, 19, 36, 0.9),
-      rgba(11, 19, 36, 0.88)
+      rgba(var(--tai-surface-dark-rgb), 0.9),
+      rgba(var(--tai-surface-dark-rgb), 0.88)
     ),
     url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=80")
       center/cover no-repeat;
@@ -5019,7 +5016,7 @@ ul.solarsystem li.saturn.bottom-2 {
 .tai-problem-cta-thumb {
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 14px 40px rgba(12, 0, 46, 0.12);
+  box-shadow: 0 14px 40px rgba(var(--tai-ink-deep-rgb), 0.12);
 }
 .tai-problem-cta-thumb img {
   width: 100%;
@@ -5031,7 +5028,7 @@ ul.solarsystem li.saturn.bottom-2 {
 .tai-trust-cta-thumb {
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 12px 36px rgba(12, 0, 46, 0.1);
+  box-shadow: 0 12px 36px rgba(var(--tai-ink-deep-rgb), 0.1);
 }
 .tai-trust-cta-thumb img {
   width: 100%;
@@ -5046,7 +5043,7 @@ ul.solarsystem li.saturn.bottom-2 {
 
 /* 안전정보 (index-5) — API 연동 목록 */
 .tai-safety-banner {
-  background: linear-gradient(120deg, rgba(12, 0, 46, 0.92), rgba(var(--main-color-opacity), 0.88));
+  background: linear-gradient(120deg, rgba(var(--tai-ink-deep-rgb), 0.92), rgba(var(--main-color-opacity), 0.88));
   padding: 3.5rem 0 3rem;
 }
 .tai-safety-banner h1 {
@@ -5099,7 +5096,7 @@ ul.solarsystem li.saturn.bottom-2 {
   border-radius: 10px;
 }
 .tai-safety-card-link:hover .tai-safety-card {
-  box-shadow: 0 12px 32px rgba(12, 0, 46, 0.12);
+  box-shadow: 0 12px 32px rgba(var(--tai-ink-deep-rgb), 0.12);
   transform: translateY(-2px);
 }
 .tai-safety-card-link .title {
@@ -5124,7 +5121,7 @@ ul.solarsystem li.saturn.bottom-2 {
 }
 .tai-src-law {
   background: #dbeafe;
-  color: #1d4ed8;
+  color: var(--tai-primary);
 }
 .tai-src-tai {
   background: #f3f4f6;
