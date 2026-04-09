@@ -5,7 +5,7 @@
 (function () {
   const FOOTER_HTML = `
 <footer class="tai-footer">
-  <div class="footer-patent" style="color:rgba(255,255,255,.55);">
+  <div class="footer-patent" style="color:#fff;">
     본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다.
     (출원번호: 10-2026-0056330)
   </div>
