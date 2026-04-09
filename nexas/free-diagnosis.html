@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 무료 법령 진단 — 3분 안에 우리 사업장 법령 위반 여부를 확인하세요.">
+  <meta name="description" content="TAI 무료 법령 진단 — 3분 안엔 사업장 법령 위반 여부 확인">
   <title>무료 법령 진단 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -12,25 +12,19 @@
   <style>
   .diag-layout { min-height:calc(100vh - 64px); display:grid; grid-template-columns:1fr 1.6fr; }
   @media(max-width:900px){ .diag-layout { grid-template-columns:1fr; } }
-  .diag-left {
-    background:var(--navy);
-    padding:60px 48px;
-    display:flex; flex-direction:column; justify-content:center;
-  }
+  .diag-left { background:var(--navy); padding:60px 48px; display:flex; flex-direction:column; justify-content:center; }
   .diag-left h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:#fff; line-height:1.15; margin-bottom:16px; }
   .diag-left p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.7; margin-bottom:32px; }
-  .what-you-get { display:flex; flex-direction:column; gap:12px; }
-  .wyg-item { display:flex; gap:12px; align-items:center; }
+  .wyg-item { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
   .wyg-icon { width:34px; height:34px; border-radius:8px; background:rgba(230,57,70,.2); color:var(--red); display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; }
   .wyg-item span { font-size:.88rem; color:rgba(255,255,255,.75); }
   .diag-right { background:#fff; padding:60px 48px; overflow-y:auto; }
   @media(max-width:900px){ .diag-left { padding:40px 24px; } .diag-right { padding:40px 24px; } }
   .step-bar { display:flex; gap:0; margin-bottom:36px; }
-  .step-dot { display:flex; align-items:center; }
   .step-num { width:28px; height:28px; border-radius:50%; background:var(--border); color:var(--sub); font-size:.78rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
   .step-num.active { background:var(--red); color:#fff; }
   .step-num.done { background:var(--navy); color:#fff; }
-  .step-line { width:40px; height:2px; background:var(--border); margin:0 4px; }
+  .step-line { width:40px; height:2px; background:var(--border); margin:0 4px; align-self:center; }
   .step-line.done { background:var(--navy); }
   .panel { display:none; }
   .panel.active { display:block; }
@@ -38,27 +32,18 @@
   .panel-sub { font-size:.88rem; color:var(--sub); margin-bottom:28px; }
   .sector-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
   @media(max-width:500px){ .sector-grid { grid-template-columns:repeat(2,1fr); } }
-  .sector-btn {
-    border:2px solid var(--border); border-radius:12px; padding:20px 12px;
-    text-align:center; cursor:pointer; transition:all .15s; background:#fff;
-  }
+  .sector-btn { border:2px solid var(--border); border-radius:12px; padding:20px 12px; text-align:center; cursor:pointer; transition:all .15s; background:#fff; }
   .sector-btn:hover { border-color:var(--red); }
   .sector-btn.selected { border-color:var(--red); background:#fff9f9; }
   .sector-btn .s-icon { font-size:1.8rem; margin-bottom:8px; }
   .sector-btn .s-name { font-size:.82rem; font-weight:700; color:var(--navy); }
   .form-label-tai { font-size:.85rem; font-weight:700; color:var(--navy); margin-bottom:6px; display:block; }
-  .form-input-tai {
-    width:100%; border:1.5px solid var(--border); border-radius:8px;
-    padding:11px 14px; font-size:.9rem; color:var(--text); outline:none;
-    transition:border-color .15s; background:#fff;
-    font-family:inherit;
-  }
+  .form-input-tai { width:100%; border:1.5px solid var(--border); border-radius:8px; padding:11px 14px; font-size:.9rem; color:var(--text); outline:none; transition:border-color .15s; background:#fff; font-family:inherit; }
   .form-input-tai:focus { border-color:var(--red); }
   .form-row { margin-bottom:18px; }
   .btn-next { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px 32px; border-radius:8px; border:none; cursor:pointer; width:100%; margin-top:8px; transition:background .2s; }
   .btn-next:hover { background:#c1121f; }
   .btn-back { background:none; border:none; color:var(--sub); font-size:.88rem; cursor:pointer; margin-top:12px; display:block; width:100%; text-align:center; }
-  .privacy-note { font-size:.76rem; color:var(--sub); text-align:center; margin-top:14px; line-height:1.5; }
   </style>
 </head>
 <body>
@@ -73,34 +58,23 @@
     </div>
   </div>
 </nav>
-
 <div class="diag-layout">
-  <!-- 좌: 설명 -->
   <div class="diag-left">
     <span style="display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.3);border-radius:4px;padding:4px 10px;margin-bottom:20px;">무료 법령 진단</span>
     <h2>법령위반<br>중이십니다!!</h2>
     <p>사업장 기본 정보만 입력하시면 3분 안에 적용 법령과 의무 항목, 위반 리스크를 정리해드립니다.</p>
-    <div class="what-you-get">
-      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-file-alt"></i></div><span>적용 법령 목록 자동 도출</span></div>
-      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-user-tie"></i></div><span>선임 의무 여부 확인</span></div>
-      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-clipboard-check"></i></div><span>법정 점검 항목 목록</span></div>
-      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-exclamation-triangle"></i></div><span>현재 위반 리스크 수준</span></div>
-    </div>
+    <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-file-alt"></i></div><span>적용 법령 목록 자동 도출</span></div>
+    <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-user-tie"></i></div><span>선임 의무 여부 확인</span></div>
+    <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-clipboard-check"></i></div><span>법정 점검 항목 목록</span></div>
+    <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-exclamation-triangle"></i></div><span>현재 위반 리스크 수준</span></div>
     <p style="margin-top:32px; font-size:.78rem; color:rgba(255,255,255,.35);">로그인 불필요 · 시설 정보 기준 1차 분석 무료</p>
   </div>
-
-  <!-- 우: 폼 위저드 -->
   <div class="diag-right">
-    <!-- 진행 바 -->
     <div class="step-bar" id="stepBar">
-      <div class="step-dot"><div class="step-num active" id="sn1">1</div></div>
-      <div class="step-line" id="sl1"></div>
-      <div class="step-dot"><div class="step-num" id="sn2">2</div></div>
-      <div class="step-line" id="sl2"></div>
-      <div class="step-dot"><div class="step-num" id="sn3">3</div></div>
+      <div class="step-num active" id="sn1">1</div><div class="step-line" id="sl1"></div>
+      <div class="step-num" id="sn2">2</div><div class="step-line" id="sl2"></div>
+      <div class="step-num" id="sn3">3</div>
     </div>
-
-    <!-- Step 1: 섹터 선택 -->
     <div class="panel active" id="step1">
       <p class="panel-title">어떤 사업장인가요?</p>
       <p class="panel-sub">해당하는 사업장 유형을 선택하세요</p>
@@ -114,78 +88,58 @@
       </div>
       <button class="btn-next" onclick="goStep(2)">다음 단계</button>
     </div>
-
-    <!-- Step 2: 사업장 정보 -->
     <div class="panel" id="step2">
       <p class="panel-title">사업장 기본 정보</p>
       <p class="panel-sub">법령 진단에 필요한 정보를 입력해주세요</p>
       <div class="form-row"><label class="form-label-tai">상시 근로자 수</label>
-        <select class="form-input-tai" id="workerCount">
-          <option value="">선택하세요</option>
-          <option>5인 미만</option>
-          <option>5 ~ 9인</option>
-          <option>10 ~ 29인</option>
-          <option>30 ~ 49인</option>
-          <option>50 ~ 99인</option>
-          <option>100 ~ 299인</option>
-          <option>300인 이상</option>
-        </select>
+        <select class="form-input-tai"><option value="">선택하세요</option><option>5인 미만</option><option>5 ~ 9인</option><option>10 ~ 29인</option><option>30 ~ 49인</option><option>50 ~ 99인</option><option>100 ~ 299인</option><option>300인 이상</option></select>
       </div>
-      <div class="form-row"><label class="form-label-tai">주요 위험 설비 (복수 선택 가능)</label>
+      <div class="form-row"><label class="form-label-tai">주요 위험 설비 (복수 선택)</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="forklift"> 지게차</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="press"> 프레스</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="crane"> 크레인·호이스트</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="conveyor"> 컨베이어</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="boiler"> 보일러·압력용기</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="chemical"> 화학물질 취급</label>
-          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="none"> 해당 없음</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 지게차</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 프레스</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 크레인·호이스트</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 컨베이어</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 보일러·압력용기</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 화학물질 취급</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox"> 해당 없음</label>
         </div>
       </div>
       <button class="btn-next" onclick="goStep(3)">다음 단계</button>
       <button class="btn-back" onclick="goStep(1)">← 이전으로</button>
     </div>
-
-    <!-- Step 3: 연락처 -->
     <div class="panel" id="step3">
       <p class="panel-title">결과를 받으실 정보</p>
       <p class="panel-sub">진단 결과 리포트를 이메일로 보내드립니다</p>
       <div class="form-row"><label class="form-label-tai">이름 (선택)</label><input type="text" class="form-input-tai" placeholder="홍길동"></div>
       <div class="form-row"><label class="form-label-tai">이메일 <span style="color:var(--red);">*</span></label><input type="email" class="form-input-tai" placeholder="example@company.com" id="diagEmail"></div>
       <div class="form-row"><label class="form-label-tai">연락처 (선택)</label><input type="tel" class="form-input-tai" placeholder="010-0000-0000"></div>
-      <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:20px;">
-        <input type="checkbox" id="agreePrivacy" style="margin-top:3px;">
-        <label for="agreePrivacy" style="font-size:.82rem;color:var(--sub);cursor:pointer;">개인정보 수집 및 이용에 동의합니다. <a href="privacy.html" style="color:var(--red);">개인정보처리방침</a></label>
-      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:20px;"><input type="checkbox" id="agreePrivacy" style="margin-top:3px;"><label for="agreePrivacy" style="font-size:.82rem;color:var(--sub);cursor:pointer;">개인정보 수집 및 이용에 동의합니다. <a href="privacy.html" style="color:var(--red);">개인정보처리방침</a></label></div>
       <button class="btn-next" onclick="submitDiag()">진단 결과 받기</button>
       <button class="btn-back" onclick="goStep(2)">← 이전으로</button>
-      <p class="privacy-note">수집된 정보는 법령 진단 결과 제공 목적으로만 사용되며, 외부에 공유되지 않습니다.</p>
+      <p style="font-size:.76rem;color:var(--sub);text-align:center;margin-top:14px;line-height:1.5;">수집된 정보는 법령 진단 결과 제공 목적으로만 사용됩니다.</p>
     </div>
   </div>
 </div>
-
 <script src="assets/js/nav-auth.js"></script>
 <script>
-let selectedSector = '';
-function selectSector(el, val) {
-  document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected'); selectedSector = val;
-}
-function goStep(n) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+let selectedSector='';
+function selectSector(el,val){document.querySelectorAll('.sector-btn').forEach(b=>b.classList.remove('selected'));el.classList.add('selected');selectedSector=val;}
+function goStep(n){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');
-  [1,2,3].forEach(i => {
-    const sn = document.getElementById('sn'+i);
-    sn.className = 'step-num' + (i < n ? ' done' : i === n ? ' active' : '');
-    if(i < 3) document.getElementById('sl'+i).className = 'step-line' + (i < n ? ' done' : '');
+  [1,2,3].forEach(i=>{
+    const sn=document.getElementById('sn'+i);
+    sn.className='step-num'+(i<n?' done':i===n?' active':'');
+    if(i<3)document.getElementById('sl'+i).className='step-line'+(i<n?' done':'');
   });
 }
-function submitDiag() {
-  const email = document.getElementById('diagEmail').value;
-  const agreed = document.getElementById('agreePrivacy').checked;
-  if(!email) { alert('이메일을 입력해주세요.'); return; }
-  if(!agreed) { alert('개인정보 수집에 동의해주세요.'); return; }
-  window.location.href = 'free-diagnosis-result.html';
+function submitDiag(){
+  const email=document.getElementById('diagEmail').value;
+  const agreed=document.getElementById('agreePrivacy').checked;
+  if(!email){alert('이메일을 입력해주세요.');return;}
+  if(!agreed){alert('개인정보 수집에 동의해주세요.');return;}
+  window.location.href='free-diagnosis-result.html';
 }
 </script>
 </body></html>

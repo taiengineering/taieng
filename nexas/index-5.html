@@ -17,7 +17,6 @@
   .cat-btn.active, .cat-btn:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
   .news-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.06); height:100%; transition:transform .2s; }
   .news-card:hover { transform:translateY(-4px); }
-  .news-card-img { width:100%; height:180px; object-fit:cover; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; color:var(--sub); font-size:.8rem; }
   .news-card-body { padding:20px; }
   .news-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:3px 8px; margin-bottom:10px; }
   .tag-law { background:#fff0f0; color:var(--red); }
@@ -45,22 +44,10 @@
     </div>
   </div>
 </nav>
-
-<div class="news-hero">
-  <div class="sec-inner">
-    <h1>안전정보</h1>
-    <p>산업안전 법령 개정 소식, 현장 가이드, TAI 공지사항을 확인하세요</p>
-  </div>
-</div>
-
+<div class="news-hero"><div class="sec-inner"><h1>안전정보</h1><p>산업안전 법령 개정 소식, 현장 가이드, TAI 공지사항을 확인하세요</p></div></div>
 <div class="sec" style="background:var(--gray-bg); padding-top:40px;">
   <div class="sec-inner">
-
-    <div class="notice-bar">
-      <div class="icon"><i class="fas fa-bullhorn"></i></div>
-      <p><strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요. <a href="#" style="color:#92400e; text-decoration:underline;">자세히 보기</a></p>
-    </div>
-
+    <div class="notice-bar"><div class="icon"><i class="fas fa-bullhorn"></i></div><p><strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요. <a href="#" style="color:#92400e; text-decoration:underline;">자세히 보기</a></p></div>
     <div class="cat-filter">
       <button class="cat-btn active" onclick="filterNews('all',this)">전체</button>
       <button class="cat-btn" onclick="filterNews('law',this)">법령 개정</button>
@@ -68,93 +55,20 @@
       <button class="cat-btn" onclick="filterNews('notice',this)">공지사항</button>
       <button class="cat-btn" onclick="filterNews('guide',this)">실무 가이드</button>
     </div>
-
     <div class="row g-4" id="newsGrid">
-      <div class="col-lg-4 col-md-6" data-cat="law">
-        <div class="news-card">
-          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-law">법령 개정</span>
-            <h5>산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화</h5>
-            <p>2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출이 의무화됩니다.</p>
-            <div class="news-meta"><span>2026.03.15</span><span>TAI 법령팀</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6" data-cat="safe">
-        <div class="news-card">
-          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-safe">안전 가이드</span>
-            <h5>끼임 사고 예방 — 프레스 작업 10대 안전수칙</h5>
-            <p>제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다. 필수 안전수칙을 확인하세요.</p>
-            <div class="news-meta"><span>2026.03.10</span><span>TAI 안전팀</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6" data-cat="notice">
-        <div class="news-card">
-          <div class="news-card-img" style="background:#f0fff4; color:#1a8f4b;"><div style="text-align:center;"><i class="fas fa-bullhorn fa-2x" style="margin-bottom:8px;"></i><p style="margin:0;">TAI 공지</p></div></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-notice">공지사항</span>
-            <h5>TAI Safe SaaS 정식 서비스 오픈 — 건설·산업 섹터 지원 시작</h5>
-            <p>건설현장 및 산업·제조 사업장 대상 TAI Safe SaaS 정식 서비스를 시작합니다.</p>
-            <div class="news-meta"><span>2026.03.01</span><span>TAI 엔지니어링</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6" data-cat="law">
-        <div class="news-card">
-          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-law">법령 개정</span>
-            <h5>중대재해처벌법 — 50인 미만 사업장 전면 적용 주요 사항</h5>
-            <p>2026년 1월부터 50인 미만 사업장도 중대재해처벌법 적용 대상입니다. 지금 확인하세요.</p>
-            <div class="news-meta"><span>2026.02.20</span><span>TAI 법령팀</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6" data-cat="guide">
-        <div class="news-card">
-          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-guide">실무 가이드</span>
-            <h5>안전관리자 선임 완전 가이드 — 조건·절차·서류 총정리</h5>
-            <p>어떤 사업장에서 누구를 선임해야 하는지, 절차와 서류를 한 번에 정리했습니다.</p>
-            <div class="news-meta"><span>2026.02.10</span><span>TAI 실무팀</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6" data-cat="safe">
-        <div class="news-card">
-          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
-          <div class="news-card-body">
-            <span class="news-tag tag-safe">안전 가이드</span>
-            <h5>건설현장 추락사고 예방 — 작업발판 설치 기준 완전 정리</h5>
-            <p>추락사고는 건설현장 사망의 49%를 차지합니다. 법정 설치 기준을 확인하세요.</p>
-            <div class="news-meta"><span>2026.01.25</span><span>TAI 안전팀</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="col-lg-4 col-md-6" data-cat="law"><div class="news-card"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag tag-law">법령 개정</span><h5>산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화</h5><p>2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출 의무화.</p><div class="news-meta"><span>2026.03.15</span><span>TAI 법령팀</span></div></div></div></div>
+      <div class="col-lg-4 col-md-6" data-cat="safe"><div class="news-card"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag tag-safe">안전 가이드</span><h5>끼임 사고 예방 — 프레스 작업 10대 안전수칙</h5><p>제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다. 필수 안전수칙을 확인하세요.</p><div class="news-meta"><span>2026.03.10</span><span>TAI 안전팀</span></div></div></div></div>
+      <div class="col-lg-4 col-md-6" data-cat="notice"><div class="news-card"><div style="background:#f0fff4; height:180px; display:flex; align-items:center; justify-content:center; color:#1a8f4b;"><div style="text-align:center;"><i class="fas fa-bullhorn fa-2x" style="margin-bottom:8px;"></i><p style="margin:0;">TAI 공지</p></div></div><div class="news-card-body"><span class="news-tag tag-notice">공지사항</span><h5>TAI Safe SaaS 정식 서비스 오픈 — 건설·산업 섹터 지원 시작</h5><p>건설현장 및 산업·제조 사업장 대상 TAI Safe SaaS 정식 서비스를 시작합니다.</p><div class="news-meta"><span>2026.03.01</span><span>TAI 엔지니어링</span></div></div></div></div>
+      <div class="col-lg-4 col-md-6" data-cat="law"><div class="news-card"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag tag-law">법령 개정</span><h5>중대재해처벌법 — 50인 미만 사업장 전면 적용 주요 사항</h5><p>2026년 1월부터 50인 미만 사업장도 중대재해처벌법 적용 대상입니다. 지금 확인하세요.</p><div class="news-meta"><span>2026.02.20</span><span>TAI 법령팀</span></div></div></div></div>
+      <div class="col-lg-4 col-md-6" data-cat="guide"><div class="news-card"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag tag-guide">실무 가이드</span><h5>안전관리자 선임 완전 가이드 — 조건·절차·서류 총정리</h5><p>어떤 사업장에서 누구를 선임해야 하는지, 절차와 서류를 한 번에 정리했습니다.</p><div class="news-meta"><span>2026.02.10</span><span>TAI 실무팀</span></div></div></div></div>
+      <div class="col-lg-4 col-md-6" data-cat="safe"><div class="news-card"><img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag tag-safe">안전 가이드</span><h5>건설현장 추락사고 예방 — 작업발판 설치 기준 완전 정리</h5><p>추락사고는 건설현장 사망의 49%를 차지합니다. 법정 설치 기준을 확인하세요.</p><div class="news-meta"><span>2026.01.25</span><span>TAI 안전팀</span></div></div></div></div>
     </div>
-
-    <div class="text-center mt-5">
-      <button class="btn-outline" style="padding:12px 36px;">더 보기</button>
-    </div>
+    <div class="text-center mt-5"><button class="btn-outline" style="padding:12px 36px;">더 보기</button></div>
   </div>
 </div>
-
-<footer class="tai-footer">
-  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
-  <div class="footer-main"><div class="footer-grid">
-    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
-    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
-    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li></ul></div>
-    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li></ul></div>
-  </div></div>
-  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
-</footer>
+<div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 <script>
 function filterNews(cat, btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
