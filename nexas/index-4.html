@@ -1,633 +1,119 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TAI CARE | TAI Engineering</title>
-    <!--fivicon icon-->
-    <link rel="icon" href="assets/img/fevicon.png">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
-
-    <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI CARE — 안전관리 컨설팅·교육. 2026 하반기 오픈 예정.">
+  <title>TAI CARE | 안전관리 컨설팅·교육</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .hero4 {
+    min-height:80vh; display:flex; align-items:center;
+    background:linear-gradient(160deg,#0a0f1e 0%,#0d2038 60%,#12294a 100%);
+    padding:80px 0; text-align:center;
+  }
+  .coming-badge { display:inline-block; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.7); font-size:.78rem; font-weight:700; letter-spacing:.1em; border-radius:999px; padding:6px 18px; margin-bottom:24px; }
+  .care-card {
+    border-radius:16px; padding:36px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    height:100%; text-align:left;
+  }
+  .care-card .cc-icon { font-size:2.4rem; margin-bottom:16px; }
+  .care-card .cc-badge { display:inline-block; font-size:.68rem; font-weight:700; border-radius:999px; padding:3px 10px; margin-bottom:12px; }
+  .care-card .cc-badge.coming { background:rgba(230,57,70,.2); color:var(--red); }
+  .care-card .cc-badge.live { background:rgba(45,198,83,.2); color:#2dc653; }
+  .care-card h4 { font-size:1.2rem; font-weight:800; color:#fff; margin-bottom:10px; }
+  .care-card p { font-size:.86rem; color:rgba(255,255,255,.55); line-height:1.65; margin:0; }
+  .notify-form input {
+    background:rgba(255,255,255,.08);
+    border:1.5px solid rgba(255,255,255,.2);
+    border-radius:8px; color:#fff;
+    padding:12px 16px; font-size:.9rem; width:100%;
+    outline:none; margin-bottom:12px;
+  }
+  .notify-form input::placeholder { color:rgba(255,255,255,.4); }
+  .notify-form input:focus { border-color:rgba(255,255,255,.5); }
+  </style>
 </head>
-<body class='home-4 sc5'>
-    <!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div id="wave1">
-            </div>
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html" class="active">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
     </div>
-    <!-- preloader area end -->
-    <div class="body-overlay" id="body-overlay"></div>
-    <!-- navbar start -->
-    <header class="navbar-area">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
-                    aria-expanded="false" aria-label="메뉴 열기">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="themefie_main_menu">
-                    <ul class="navbar-nav menu-open text-end">
-                        <li class="tai-safe-wrap">
-                            <a href="index-1.html">TAI SAFE</a>
-                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-2.html">TAI MANAGER</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-3.html">TAI FIX</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-3.html#vendor">수선업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-4.html">TAI CARE</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-4.html#manager">안전관리자</a></li>
-                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index-5.html">안전정보</a></li>
-                        <li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- navbar end -->
+  </div>
+</nav>
 
-    <!-- Banner Area Start-->
-    <section id="manager" class="banner-area style-4" style="background-image: url(assets/img/home-4/banner/bg.png)">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-10 align-self-center order-lg-1 order-2">
-                    <div class="banner-inner text-lg-start text-center">
-                        <div class="section-title style-2">
-                            <h4 class="sub-title">A Startup </h4>
-                            <h1 class="title">산업안전 전문 파트너 TAI</h1>
-                            <p> Development magna aliqua sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut et. Quis suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                            <a class="btn btn-base" href="#">시작하기</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-8 order-1 order-lg-2">
-                    <div class="thumb text-end">
-                        <img src="assets/img/home-4/banner/1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Banner Area End -->
-
-    <!--about-area start-->
-    <section id="agency" class="about-area pd-top-150 pd-bottom-150 text-center text-lg-start">
-        <div class="container">
-            <div class="row justify-content-center justify-content-lg-start">
-                <div class="col-xl-7 col-lg-6 col-md-8 align-self-center">
-                    <div class="thumb text-center">
-                        <img src="assets/img/home-4/about/1.png" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 align-self-center">
-                    <div class="section-title style-2 mb-lg-0">
-                        <h4 class="sub-title">회사 소개</h4>
-                        <h2 class="title">TAI 이야기</h2>
-                        <p> Quis incididunt dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis.</p>
-                        <a class="btn btn-base mt-5" href="#">더 알아보기</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- about Area End -->
-
-    <!--service-area start-->
-    <section class="service-area bg-gray-gradient pd-bottom-120 text-center text-md-start">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-3 col-md-6">
-                    <div class="section-title style-2 mb-lg-0">
-                        <h4 class="sub-title">Service</h4>
-                        <h2 class="title">함께 해결해 드립니다</h2>
-                        <p> Quis incididunt dolor sit amet, adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo facilisis.</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="single-service-inner style-3">
-                        <div class="thumb">
-                            <img src="assets/img/service/1.jpg" alt="">
-                        </div>
-                        <h4><a href="service.html">UI/UX Design</a></h4>
-                        <p>Risus commodo sit amet, elit, sed do eiusmod inci didunt ut dolore magna aliqua. </p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="single-service-inner style-3">
-                        <div class="thumb">
-                            <img src="assets/img/service/2.jpg" alt="">
-                        </div>
-                        <h4><a href="service.html">Prototyping</a></h4>
-                        <p>In a free hour, when our power of choice is untra mmelled and when nothing.</p>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="single-service-inner style-3">
-                        <div class="thumb">
-                            <img src="assets/img/service/3.jpg" alt="">
-                        </div>
-                        <h4><a href="service.html">App Development</a></h4>
-                        <p>Development magna aliqua sit amet, adipiscing elit maec enas accumsan lacus vel. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- service Area End -->
-
-    <!--work-area start-->
-    <section class="work-area pd-top-130 pd-bottom-120 text-center text-lg-start">
-        <div class="container">
-            <div class="row justify-content-center justify-content-lg-start">
-                <div class="col-xl-4 col-lg-6 align-self-center order-lg-2">
-                    <div class="section-title style-2 mb-lg-0">
-                        <h4 class="sub-title">Work Process</h4>
-                        <h2 class="title">업무 프로세스</h2>
-                        <p> Incididunt dolor sit amet, Quis consectetur adipiscing elit, sed do eiusmod tempor incid idunt magna. Risus commodo viverra maecenas accumsan facilisis.</p>
-                        <a class="btn btn-base mt-5" href="#">더 알아보기</a>
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-6 order-lg-1 align-self-center">
-                    <div class="thumb text-center">
-                        <img src="assets/img/home-4/about/2.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- work Area End -->
-
-    <!--fact-area start-->
-    <section class="fact-area text-center pd-top-110 pd-bottom-65" style="background-image: url(assets/img/other/3.png); background-size: contain; background-position: center; background-repeat: no-repeat; ">
-        <div class="bg-main"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 align-self-center">
-                    <div class="section-title">
-                        <h2 class="title text-white">누적 1,700건 이상의 프로젝트 경험</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-fact-wrap">
-                        <h2><span class="counter">4500</span><span>+</span></h2>
-                        <h4>Complete Project </h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-fact-wrap">
-                        <h2><span class="counter">19</span></h2>
-                        <h4>Available County</h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-fact-wrap">
-                        <h2><span class="counter">296</span></h2>
-                        <h4>구성원</h4>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-fact-wrap">
-                        <h2><span class="counter">215</span><span>M+</span></h2>
-                        <h4>Wordwide User</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--fact-area end-->
-
-    <!--project-area start-->
-    <section class="project-area pd-top-135 text-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-title text-center">
-                        <h2 class="title">주요 프로젝트</h2>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <div class="project-tabs">
-                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">UI & UX Design <span>Quis ipsum suspendisse </span></button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Illustration design <span>Incididunt dolor sit amet</span></button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-developer-tab" data-bs-toggle="pill" data-bs-target="#pills-developer" type="button" role="tab" aria-controls="pills-developer" aria-selected="false">Web Developments <span>Incididunt dolor sit amet</span></button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="project-tab-content">
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/1.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/2.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/3.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/4.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/3.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/4.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/1.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/2.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-developer" role="tabpanel" aria-labelledby="pills-developer-tab">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/2.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/1.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/3.png" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="#">
-                                            <img src="assets/img/home-4/project/4.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-    </section>
-    <!--project-area end-->
-
-    <!--testimonial-area start-->
-    <section class="testimonial-area-3 pd-top-150 pd-bottom-150">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-5 col-lg-6">
-                    <div class="testimonial-slider-3">
-                        <div class="slider testimonial-slider-nav-2">
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/1.png" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/2.png" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/3.png" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/4.png" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/5.png" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-4/testimonial/6.png" alt="">
-                                </div>
-                            </div>
-                        </div>   
-                        <div class="action">
-                            <a class="item-2" href="#" data-slide="2"><img src="assets/img/home-4/testimonial/2.png" alt=""></a>
-                            <a class="item-3" href="#" data-slide="3"><img src="assets/img/home-4/testimonial/3.png" alt=""></a>
-                            <a class="item-4" href="#" data-slide="4"><img src="assets/img/home-4/testimonial/4.png" alt=""></a>
-                            <a class="item-5" href="#" data-slide="5"><img src="assets/img/home-4/testimonial/5.png" alt=""></a>
-                            <a class="item-6" href="#" data-slide="6"><img src="assets/img/home-4/testimonial/6.png" alt=""></a>
-                        </div>                     
-                    </div>
-                </div>
-                <div class="col-xl-7 col-lg-6 align-self-center">
-                    <div class="slider testimonial-slider-for-2">                            
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>김○○ <span>· 제조업 안전관리자</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>김○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>박○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>이○○ <span>· UX 디자인</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>Angela D Costa <span>- Gamer</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <p><i class="fas fa-quote-left"></i>산업안전 업무를 체계적으로 정리해, 현장과 경영진이 같은 기준으로 움직일 수 있었습니다.</p>
-                            <h6>최○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--testimonial-area end-->
-
-    <!-- contact-Area Start-->
-    <section class="contact-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact-inner">
-                        <div class="row no-gutters">
-                            <div class="col-lg-5">
-                                <h2 class="mt-n1">문의하기</h2>
-                                <p class="pe-5">뉴스레터를 구독하시면 최신 소식을 보내드립니다.</p>
-                                <div class="footer-widget widget mt-5">
-                                    <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                                    <div class="footer-company-info">
-                                        <p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-                                        <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-                                        <p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-                                        <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-                                        <p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-                                        <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-                                    </div>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 offset-lg-1 align-self-center">
-                                <form class="contact-form">
-                                    <div class="single-input-wrap mb-4">
-                                        <input type="text" placeholder="이름을 입력하세요">
-                                    </div>
-                                    <div class="single-input-wrap mb-4">
-                                        <input type="text" placeholder="이메일 주소를 입력하세요">
-                                    </div>
-                                    <div class="single-input-wrap mb-4">
-                                        <textarea rows="5" placeholder="문의 내용을 입력하세요"></textarea>
-                                    </div>                                    
-                                    <button type="submit" class="btn btn-base">문의 보내기</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- contact-Area end-->
-
-    <!-- footer area start -->
-    <footer class="footer-area style-2">
-        <div class="footer-patent-bar text-center py-2 small">
-            <div class="container">
-                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
-            </div>
-        </div>
-
-        <div class="footer-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-2 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">Product</h6>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>Deme</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>Listio</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>TAI</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>OnWave</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-xl-1 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">회사 소개</h6>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>회사</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>리더십</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>다양성</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>채용</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-xl-1 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">서비스</h6>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>그래픽 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>웹 디자인 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>웹 개발 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>SEO</a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>My account</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-xl-1 col-lg-3 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">바로가기</h6>
-                            <ul>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>도움말 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>고객 지원 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>고객 사례 </a></li>
-                                <li><a href="#"><i class="fas fa-angle-right"></i>연락처</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Footer bottom-->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>       
-                        </div>
-                    </div>
-                    <div class="col-md-6 align-self-center text-md-end">
-                        <div class="author-area">
-                            <p>원본 테마: Themefie</p>       
-                        </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        <!--Footer bottom-->
-    </footer>
-    <!-- footer area end -->  
-
-    <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+<section class="hero4">
+  <div class="sec-inner" style="text-align:center;">
+    <span class="coming-badge">2026 하반기 오픈 예정</span>
+    <h1 style="font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px;">안전관리,<br>아는 사람이 있어야죠</h1>
+    <p style="font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.65); margin-bottom:12px; max-width:560px; margin-left:auto; margin-right:auto;">
+      현장을 아는 전문가와 함께하는 컨설팅·교육 서비스를 준비하고 있습니다.
+    </p>
+    <p style="color:rgba(255,255,255,.45); font-size:.88rem; margin-bottom:40px;">오픈 시 알림을 받으시면 먼저 확인하실 수 있습니다.</p>
+    <div class="notify-form" style="max-width:400px; margin:0 auto;">
+      <input type="email" placeholder="이메일을 입력하시면 오픈 시 알려드립니다">
+      <button onclick="alert('신청해주셔서 감사합니다! 오픈 시 알려드리겠습니다.')" class="btn-red w-100">오픈 알림 신청</button>
     </div>
+  </div>
+</section>
 
-    
+<!-- 준비 중 서비스 -->
+<section class="sec" style="background:linear-gradient(160deg,#0a0f1e 0%,#0d2038 100%);">
+  <div class="sec-inner">
+    <div class="text-center mb-5">
+      <span class="sec-tag">준비 중인 서비스</span>
+      <h2 class="sec-h2" style="color:#fff;">이런 서비스가<br>준비되고 있습니다</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4" id="manager">
+        <div class="care-card">
+          <div class="cc-icon">🧑‍💼</div>
+          <span class="cc-badge coming">준비 중</span>
+          <h4>안전관리자 대상 컨설팅</h4>
+          <p>현장 경험이 풍부한 전문가가 사업장을 직접 방문해 안전관리 체계를 구축해드립니다. TAI Safe 시스템 도입 지원 포함.</p>
+        </div>
+      </div>
+      <div class="col-lg-4" id="agency">
+        <div class="care-card">
+          <div class="cc-icon">📚</div>
+          <span class="cc-badge coming">준비 중</span>
+          <h4>법령 기반 실무 교육</h4>
+          <p>안전관리자·작업자를 위한 법령 기반 실무 교육. 이론이 아닌 현장에서 바로 쓸 수 있는 내용으로만 구성합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="care-card">
+          <div class="cc-icon">🏢</div>
+          <span class="cc-badge live">서비스 중</span>
+          <h4>법령 진단 대행</h4>
+          <p>TAI Safe 무료 법령 진단을 통해 지금 바로 사업장의 법령 위반 리스크를 확인할 수 있습니다.</p>
+          <div style="margin-top:16px;"><a href="free-diagnosis.html" style="color:var(--red); font-weight:700; font-size:.88rem;">지금 무료로 진단하기 →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- all plugins here -->
-    <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/imageloded.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/waypoint.js"></script>
-    <script src="assets/js/magnific.min.js"></script>
-    <script src="assets/js/nice-select.min.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/owl.min.js"></script>
-    <script src="assets/js/slick-slider.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
-</html>
+<footer class="tai-footer">
+  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
+  <div class="footer-main"><div class="footer-grid">
+    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
+    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
+    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li></ul></div>
+    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li></ul></div>
+  </div></div>
+  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
+</footer>
+<script src="assets/js/nav-auth.js"></script>
+</body></html>

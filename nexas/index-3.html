@@ -1,723 +1,132 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<!--Title-->
-	<title>TAI FIX | TAI Engineering</title>
-
-	<!--fivicon icon-->
-    <link rel="icon" href="assets/img/fevicon.png">
-
-	<!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
-
-    <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI FIX — 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠.">
+  <title>TAI FIX | 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .hero3 {
+    min-height:65vh; display:flex; align-items:center;
+    background:linear-gradient(135deg,#0d1b2a 0%,#1c2e1c 60%,#0a1a0a 100%);
+    padding:80px 0;
+  }
+  .hero3 h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
+  .hero3 .sub { font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.7); margin-bottom:36px; }
+  .cat-card {
+    background:var(--navy); border-radius:14px; padding:28px;
+    color:#fff; height:100%; cursor:pointer;
+    transition:transform .2s, box-shadow .2s;
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .cat-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.3); }
+  .cat-card .icon { font-size:2.4rem; margin-bottom:14px; }
+  .cat-card h5 { font-weight:800; font-size:1.05rem; margin-bottom:8px; }
+  .cat-card p { font-size:.84rem; color:rgba(255,255,255,.6); margin:0; line-height:1.55; }
+  .cat-card .cat-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:rgba(230,57,70,.2); color:var(--red); border-radius:4px; padding:3px 8px; margin-bottom:12px; }
+  .flow-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 2px 14px rgba(0,0,0,.06); text-align:center; }
+  .flow-card .fc-num { width:44px; height:44px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; font-size:1rem; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; }
+  .flow-card h6 { font-weight:800; font-size:.92rem; color:var(--navy); margin-bottom:6px; }
+  .flow-card p { font-size:.8rem; color:var(--sub); margin:0; }
+  </style>
 </head>
-<body class='home-3 sc5'>
-	<!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html" class="active">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
     </div>
-    <!-- preloader area end -->
-    <div class="body-overlay" id="body-overlay"></div>
-    <!-- navbar start -->
-    <header class="navbar-area">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
-                    aria-expanded="false" aria-label="메뉴 열기">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="themefie_main_menu">
-                    <ul class="navbar-nav menu-open text-end">
-                        <li class="tai-safe-wrap">
-                            <a href="index-1.html">TAI SAFE</a>
-                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-2.html">TAI MANAGER</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-3.html">TAI FIX</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-3.html#vendor">수선업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-4.html">TAI CARE</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-4.html#manager">안전관리자</a></li>
-                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index-5.html">안전정보</a></li>
-                        <li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- navbar end -->
+  </div>
+</nav>
 
-    <!-- Banner Area Start-->
-    <section id="client" class="banner-area style-3" style="background-image: url(assets/img/home-3/banner/1.png)">
-        <div class="bg-animation">
-            <ul class="solarsystem">
-              <li class="mercury"><a href="#"><img src="assets/img/home-3/banner/icon-4.png" alt=""></a></li>
-              <li class="mercury bottom-2"><a href="#"><img src="assets/img/home-3/banner/icon-1.png" alt=""></a></li>
-              <li class="venus"><a href="#"><img src="assets/img/home-3/banner/icon-2.png" alt=""></a></li>
-              <li class="venus bottom-2"><a href="#"><img src="assets/img/home-3/banner/icon-3.png" alt=""></a></li>
-              <li class="mars"><a href="#"><img src="assets/img/home-3/banner/icon-3.png" alt=""></a></li>
-              <li class="mars bottom-2"><a href="#"><img src="assets/img/home-3/banner/icon-2.png" alt=""></a></li>
-              <li class="saturn"><a href="#"><img src="assets/img/home-3/banner/icon-1.png" alt=""></a></li>
-              <li class="saturn bottom-2"><a href="#"><img src="assets/img/home-3/banner/icon-3.png" alt=""></a></li>
-            </ul>            
-        </div>        
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-9 col-lg-12 col-md-10 align-self-center">
-                    <div class="banner-inner">
-                        <h1>TAI로 산업안전 업무를 쉽게 관리하세요.</h1>
-                        <p class="mx-lg-5">선임·점검·이력을 한 화면에서 관리하고, 현장과 본사가 같은 정보를 공유합니다.</p>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                	<div class="thumb text-center" style="animation-delay: 0.5s; animation-name: fadeInUp;">
-                		<img src="assets/img/home-3/banner/01.png" alt="">
-                	</div>
-                </div>
-            </div>
+<section class="hero3">
+  <div class="sec-inner">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="page-hero-tag">전문가 연결 — 수선</span>
+        <h1>이번에도<br>고장이네.</h1>
+        <p class="sub">이런 건 전문가에게 맡기셔야죠</p>
+        <p style="color:rgba(255,255,255,.55); font-size:.9rem; margin-bottom:32px; line-height:1.65;">
+          법정 점검 결과 이상이 발생했거나, 반복적으로 같은 설비가 고장나고 있다면.<br>검증된 수선 전문업체를 바로 연결해드립니다.
+        </p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="contact.html" class="btn-red">수선 전문가 찾기</a>
+          <a href="#categories" class="btn-outline-white">수선 분야 보기</a>
         </div>
-    </section>
-    <!-- Banner Area End -->
-
-    <section id="vendor" class="home-3-featured-area bg-main">
-        <div class="container">
-            <div class="featured-inner">
-                <div class="row justify-content-center">
-                    <div class="col-lg-3 col-md-10 text-center text-lg-start">
-                        <div class="featured-wrap">
-                            <h4>TAI에서 기대할 수 있는 것</h4>
-                            <p>현장 요구에 맞춰 점검 항목과 보고서 양식을 조정할 수 있습니다.</p>
-                            <a class="btn btn-base" href="#">Downoload Now</a>
-                        </div>                    
-                    </div>
-                    <div class="col-lg-4 col-md-6 offset-lg-1">
-                        <div class="featured-wrap me-4">
-                            <img src="assets/img/home-3/featured/1.png" alt="">
-                            <h4>Awesome design</h4>
-                            <p>대시보드에서 의무 이행 현황과 다음 점검 일정을 한눈에 확인합니다.</p>
-                        </div>                    
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="featured-wrap me-4">
-                            <img src="assets/img/home-3/featured/2.png" alt="">
-                            <h4>비즈니스 성장을 함께합니다</h4>
-                            <p>협력사·수급사와 공유할 보고서와 증빙을 표준 양식으로 정리합니다.</p>
-                        </div>                    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="client-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="client-slider owl-carousel">
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/1.png" alt=""></a></div>
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/2.png" alt=""></a></div>
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/3.png" alt=""></a></div>
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/4.png" alt=""></a></div>
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/5.png" alt=""></a></div>
-                        <div class="item"><a href="#"><img src="assets/img/home-3/client/1.png" alt=""></a></div>
-                    </div>                  
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=800&q=80" alt="설비 수선" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      </div>
     </div>
+  </div>
+</section>
 
-    <!--service-area start-->
-    <section class="service-area home-3-service default-pd-top">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">어디서나 접속하는 TAI</h2>
-                        <p>법령·지침 변경 시 알림과 체크리스트로 누락을 줄입니다.</p>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner single-app-service-inner-2">
-                        <div class="thumb">
-                            <img src="assets/img/home-3/service/1.png" alt="">
-                        </div>
-                        <h4><a href="service-details.html">TAI 앱 다운로드</a></h4>
-                        <p>In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be pain. But in certain circumstances and owing accepted.  </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner single-app-service-inner-2">
-                        <div class="thumb">
-                            <img src="assets/img/home-3/service/2.png" alt="">
-                        </div>
-                        <h4><a href="service-details.html">서비스 알아보기</a></h4>
-                        <p>But in certain circumstances and owing accepted. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every is to be and every pain avoided.  </p>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-service-inner single-app-service-inner-2">
-                        <div class="thumb">
-                            <img src="assets/img/home-3/service/3.png" alt="">
-                        </div>
-                        <h4><a href="service-details.html">MovingSafely With Us!</a></h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. In a free hour, when our power of choice is when nothing prevents  ut labore et dolore magna aliqua.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- service Area End -->
-
-    <!--work-area start-->
-    <section class="work-area pd-top-120 pd-bottom-150">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-5 align-self-center">
-                    <div class="thumb mb-lg-0 mb-5">
-                        <img src="assets/img/home-3/work/1.png" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6 col-md-10 offset-lg-1 align-self-center text-center text-md-start">
-                    <div class="section-title mb-0">
-                        <h2 class="title">업무 프로세스</h2>
-                        <p class="mb-2">Risus commodo viverra maecenas accumsan lacus ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <a class="btn btn-base" href="about.html">더 알아보기</a>
-                    </div>   
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--work-area end-->
-
-    <!--cta-area-->
-    <section class="cta-area bg-main pd-top-70 " style="background-image: url(assets/img/home-3/banner/1.png); background-size: 100% 100%; background-attachment: fixed;">
-        <div class="bg-main-gradient"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-5 col-sm-8 offset-lg-1 order-lg-2">
-                    <div class="thumb mb-lg-0 mb-5">
-                        <img src="assets/img/home-3/other/cta.png" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-6 mt-xl-4 order-lg-1 text-lg-start text-center">
-                    <div class="section-title mb-0 pb-5">
-                        <h2 class="title text-white">TAI 무료 체험·상담</h2>
-                        <p class="text-white">Risus commodo viverra maecenas accumsan lacus ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-                    </div>
-                    <a class="btn btn-border-white " href="about.html">Try For Free</a>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--cta-area end-->
-
-    <!--pricing-area start-->
-    <section class="pricing-area pd-top-140 text-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">Shared Hosting Plans</h2>
-                        <p>법령·점검 주기에 맞춰 업무 흐름을 안내합니다.</p>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="pricing-tabs-2">
-                        <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">월간</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Yearly</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                <div class="row justify-content-center g-xl-0">
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">StartUp Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">5.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $19.95/mo.</p>
-                                            <a class="btn btn-border" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2 focused">
-                                            <span class="tag">RECOMMENDED</span>    
-                                            <h4 class="pricing-title">GrowBig Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">11.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $34.95/mo.</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                                <li><i class="fas fa-check"></i>Save Rides use next mo.</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">Business Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">35.95</span>
-                                                <span class="category">/mo</span>
-                                            </div>
-                                            <p>Regular $50.95/mo.</p>
-                                            <a class="btn btn-border" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                <div class="row justify-content-center g-xl-0">
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">StartUp Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">115.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $119.95/year</p>
-                                            <a class="btn btn-border" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2 focused">
-                                            <span class="tag">RECOMMENDED</span>    
-                                            <h4 class="pricing-title">GrowBig Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">111.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $134.95/year</p>
-                                            <a class="btn btn-base" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                                <li><i class="fas fa-check"></i>Save Rides use next mo.</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-6">
-                                        <div class="single-price style-2">    
-                                            <h4 class="pricing-title">Business Plan</h4>
-                                            <div class="price-details">
-                                                <span>$</span>
-                                                <span class="price">135.95</span>
-                                                <span class="category">/year</span>
-                                            </div>
-                                            <p>Regular $150.95/year</p>
-                                            <a class="btn btn-border" href="index.html">시작하기</a>
-                                            <ul class="pricing-list">
-                                                <li><i class="fas fa-check"></i>1 Free Ride in Dhaka</li>
-                                                <li><i class="fas fa-check"></i>5 Rides per month </li>
-                                                <li><i class="fas fa-check"></i>10% cashback per ride</li>
-                                            </ul>       
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>  
-        </div>
-    </section>
-    <!--pricing-area end-->
-
-    <!--testimonial-area start-->
-    <section class="testimonial-area-2 pd-top-110 pd-bottom-130">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-                    <div class="section-title text-center">
-                        <h2 class="title">고객 후기</h2>
-                        <p class="px-md-5">산업안전 관련 안내와 최신 정보를 제공합니다.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="testimonial-slider-2">
-                        <div class="slider testimonial-slider-nav">
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/1.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/2.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/3.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/4.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/5.jpg" alt="">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="thumb">
-                                    <img src="assets/img/home-2/testimonial/3.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>                        
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-9">
-                    <div class="slider testimonial-slider-for">                            
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 제조업 안전관리자</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>도입 후 점검·기록·보고가 한 화면에 모여, 현장과 본사가 같은 기준으로 소통하게 되었습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>Ariful Isalam Abid <span>- Gamer</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>법정 점검 주기와 증빙 자료를 놓치지 않게 되어, 감사·인증 대응 부담이 줄었습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>대행사·수급사와 일정·이력을 공유하니 협업이 훨씬 수월해졌습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>이○○ <span>· UX 디자인</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>리스크 요인을 사전에 정리해 두니, 교육·개선 활동에 집중할 수 있습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>Ariful Isalam Abid <span>- Gamer</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>대행사·수급사와 일정·이력을 공유하니 협업이 훨씬 수월해졌습니다.</p>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <h6>김○○ <span>· 솔루션 개발</span></h6>
-                            <span class="rating-inner">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </span>
-                            <p>현장 피드백을 데이터로 남겨, 반복 재발을 줄이는 데 도움이 됩니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--testimonial-area end-->
-
-    <!--blog-area start-->
-    <section class="blog-area pd-bottom-120">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="section-title text-center">
-                        <h2 class="title">블로그</h2>
-                        <p>교육·개선·재발방지 활동까지 이어지는 기록을 남깁니다.</p>
-                    </div>                    
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-xl-4 col-sm-6">
-                    <div class="single-blog-inner">
-                        <div class="thumb">
-                            <img src="assets/img/blog/1.jpg" alt="">
-                        </div>
-                        <div class="wrap-details">
-                            <h6><a href="blog-single.html">Top Saas landing page design 2021.</a></h6>
-                            <p>산업안전과 관련된 다양한 주제를 다룹니다.</p>
-                            <a class="read-more-btn" href="#">더 보기</a>
-                            <span class="date float-end">05 Feb 2020</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6">
-                    <div class="single-blog-inner">
-                        <div class="thumb">
-                            <img src="assets/img/blog/3.jpg" alt="">
-                        </div>
-                        <div class="wrap-details">
-                            <h6><a href="blog-single.html">App landing page design 2021.</a></h6>
-                            <p>App landing page are many variations of passages of available in some form.</p>
-                            <a class="read-more-btn" href="#">더 보기</a>
-                            <span class="date float-end">05 Feb 2020</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6">
-                    <div class="single-blog-inner">
-                        <div class="thumb">
-                            <img src="assets/img/blog/6.jpg" alt="">
-                        </div>
-                        <div class="wrap-details">
-                            <h6><a href="blog-single.html">Agency business landing page design 2021.</a></h6>
-                            <p>산업안전과 관련된 다양한 주제를 다룹니다.</p>
-                            <a class="read-more-btn" href="#">더 보기</a>
-                            <span class="date float-end">05 Feb 2020</span>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </div>
-    </section>
-    <!-- blog Area End -->
-
-    <!-- subscribe-Area Start-->
-    <section class="subscribe-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="subscribe-inner">
-                        <div class="row no-gutters">
-                            <div class="col-xl-5 col-lg-6">
-                                <h2>뉴스레터 구독</h2>
-                                <p class="pe-5">뉴스레터를 구독하시면 최신 소식을 보내드립니다.</p>
-                            </div>
-                            <div class="col-lg-6 offset-xl-1 align-self-center">
-                                <div class="single-input-wrap">
-                                    <input type="text" placeholder="이메일 주소를 입력하세요">
-                                    <button class="btn btn-base">구독하기</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- subscribe-Area end-->
-
-    <!-- footer area start -->
-    <footer class="footer-area-3">
-        <div class="footer-patent-bar text-center py-2 small">
-            <div class="container">
-                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
-            </div>
-        </div>
-
-        <div class="footer-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-sm-6">
-                        <div class="footer-widget widget">
-                            <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                            <div class="footer-company-info">
-                                <p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-                                <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-                                <p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-                                <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-                                <p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-                                <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-                            </div>
-                            <ul class="social-area">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">메뉴</h6>
-                            <ul>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>서비스</a></li>
-                                <li><a href="team.html"><i class="fas fa-angle-right"></i>팀</a></li>
-                                <li><a href="blog.html"><i class="fas fa-angle-right"></i>블로그</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">서비스</h6>
-                            <ul>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>그래픽 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>웹 디자인 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>웹 개발 </a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>SEO</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">바로가기</h6>
-                            <ul>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>도움말 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>고객 지원 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>고객 사례 </a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>연락처</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Footer bottom-->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>       
-                        </div>
-                    </div>
-                    <div class="col-md-6 align-self-center text-md-end">
-                        <div class="author-area">
-                            <p>Made theme by&nbsp;<a href="https://themeforest.net/user/themefie">Themefie.</a></p>       
-                        </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        <!--Footer bottom-->
-    </footer>
-    <!-- footer area end -->   
-
-    <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+<!-- 수선 카테고리 -->
+<section id="categories" class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="text-center mb-5">
+      <span class="sec-tag">수선 분야</span>
+      <h2 class="sec-h2">어떤 분야든<br>전문업체가 있습니다</h2>
     </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">⚡</div><span class="cat-tag">전기</span><h5>전기·소방 설비</h5><p>전기패널, 소방설비, 비상조명, 자동화재탐지설비 점검 및 수선</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🔧</div><span class="cat-tag">기계</span><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 등 산업용 기계 수선</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🏗️</div><span class="cat-tag">시설</span><h5>건물·시설 보수</h5><p>건물 구조물, 옥상방수, 외벽, 창호 등 시설 보수 및 유지관리</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🌡️</div><span class="cat-tag">설비</span><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 점검 및 수선</p></div></div>
+    </div>
+  </div>
+</section>
 
-	
+<!-- 기업 / 수선업체 -->
+<section class="sec" style="background:#fff;">
+  <div class="sec-inner">
+    <div class="row g-5">
+      <div class="col-lg-6" id="client">
+        <div style="background:var(--gray-bg); border-radius:16px; padding:36px; height:100%;">
+          <span class="sec-tag">건물·공장 경영자</span>
+          <h3 style="font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:20px;">수선 필요하면<br>바로 연결됩니다</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-search"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">원인 진단 먼저</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">어떤 전문업체가 필요한지 안내해드립니다</p></div></div>
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-tools"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">검증된 업체 연결</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">면허·실적 확인된 전문업체를 바로 연결</p></div></div>
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-file-alt"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">수선 기록 자동 보관</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">수선 결과가 플랫폼에 자동 저장됩니다</p></div></div>
+          </div>
+          <div style="margin-top:28px;"><a href="contact.html" class="btn-red">수선 업체 찾기</a></div>
+        </div>
+      </div>
+      <div class="col-lg-6" id="vendor">
+        <div style="background:var(--navy); border-radius:16px; padding:36px; height:100%;">
+          <span style="color:var(--red); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:14px;">수선업체</span>
+          <h3 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:20px;">새 수주 기회를<br>플랫폼에서</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-handshake"></i></div><div><strong style="font-size:.9rem;color:#fff;">지역 수요 우선 연결</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">내 활동 지역에서 발생한 수선 요청 먼저 확인</p></div></div>
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-star"></i></div><div><strong style="font-size:.9rem;color:#fff;">실적 자동 누적</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">수선 완료 건이 포트폴리오로 자동 기록</p></div></div>
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-won-sign"></i></div><div><strong style="font-size:.9rem;color:#fff;">정산 자동 처리</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">계약부터 정산까지 플랫폼에서 관리</p></div></div>
+          </div>
+          <div style="margin-top:28px;"><a href="contact.html" style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-weight:700;padding:12px 24px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);">수선업체 등록하기</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-	<!-- all plugins here -->
-    <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/imageloded.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/waypoint.js"></script>
-    <script src="assets/js/magnific.min.js"></script>
-    <script src="assets/js/nice-select.min.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/owl.min.js"></script>
-    <script src="assets/js/slick-slider.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
-</html>
+<footer class="tai-footer">
+  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
+  <div class="footer-main"><div class="footer-grid">
+    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
+    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
+    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li></ul></div>
+    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li><li><a href="terms.html">이용약관</a></li><li><a href="privacy.html">개인정보처리방침</a></li></ul></div>
+  </div></div>
+  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
+</footer>
+<script src="assets/js/nav-auth.js"></script>
+</body></html>
