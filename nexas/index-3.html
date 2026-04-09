@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI FIX — 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠.">
+  <meta name="description" content="TAI FIX — 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠">
   <title>TAI FIX | 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -10,28 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .hero3 {
-    min-height:65vh; display:flex; align-items:center;
-    background:linear-gradient(135deg,#0d1b2a 0%,#1c2e1c 60%,#0a1a0a 100%);
-    padding:80px 0;
-  }
+  .hero3 { min-height:65vh; display:flex; align-items:center; background:linear-gradient(135deg,#0d1b2a 0%,#1c2e1c 60%,#0a1a0a 100%); padding:80px 0; }
   .hero3 h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
   .hero3 .sub { font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.7); margin-bottom:36px; }
-  .cat-card {
-    background:var(--navy); border-radius:14px; padding:28px;
-    color:#fff; height:100%; cursor:pointer;
-    transition:transform .2s, box-shadow .2s;
-    border:1px solid rgba(255,255,255,.08);
-  }
+  .cat-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; height:100%; cursor:pointer; transition:transform .2s, box-shadow .2s; border:1px solid rgba(255,255,255,.08); }
   .cat-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.3); }
   .cat-card .icon { font-size:2.4rem; margin-bottom:14px; }
   .cat-card h5 { font-weight:800; font-size:1.05rem; margin-bottom:8px; }
   .cat-card p { font-size:.84rem; color:rgba(255,255,255,.6); margin:0; line-height:1.55; }
-  .cat-card .cat-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; background:rgba(230,57,70,.2); color:var(--red); border-radius:4px; padding:3px 8px; margin-bottom:12px; }
-  .flow-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 2px 14px rgba(0,0,0,.06); text-align:center; }
-  .flow-card .fc-num { width:44px; height:44px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; font-size:1rem; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; }
-  .flow-card h6 { font-weight:800; font-size:.92rem; color:var(--navy); margin-bottom:6px; }
-  .flow-card p { font-size:.8rem; color:var(--sub); margin:0; }
+  .cat-card .cat-tag { display:inline-block; font-size:.68rem; font-weight:700; text-transform:uppercase; background:rgba(230,57,70,.2); color:var(--red); border-radius:4px; padding:3px 8px; margin-bottom:12px; }
   </style>
 </head>
 <body>
@@ -55,45 +42,36 @@
         <span class="page-hero-tag">전문가 연결 — 수선</span>
         <h1>이번에도<br>고장이네.</h1>
         <p class="sub">이런 건 전문가에게 맡기셔야죠</p>
-        <p style="color:rgba(255,255,255,.55); font-size:.9rem; margin-bottom:32px; line-height:1.65;">
-          법정 점검 결과 이상이 발생했거나, 반복적으로 같은 설비가 고장나고 있다면.<br>검증된 수선 전문업체를 바로 연결해드립니다.
-        </p>
+        <p style="color:rgba(255,255,255,.55); font-size:.9rem; margin-bottom:32px; line-height:1.65;">법정 점검 중 이상이 발생했거나, 반복적으로 같은 설비가 고장나고 있다면.<br>검증된 수선 전문업체를 바로 연결해드립니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="contact.html" class="btn-red">수선 전문가 찾기</a>
           <a href="#categories" class="btn-outline-white">수선 분야 보기</a>
         </div>
       </div>
-      <div class="col-lg-6">
-        <img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=800&q=80" alt="설비 수선" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);">
-      </div>
+      <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=800&q=80" alt="설비 수선" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);"></div>
     </div>
   </div>
 </section>
 
-<!-- 수선 카테고리 -->
 <section id="categories" class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
-    <div class="text-center mb-5">
-      <span class="sec-tag">수선 분야</span>
-      <h2 class="sec-h2">어떤 분야든<br>전문업체가 있습니다</h2>
-    </div>
+    <div class="text-center mb-5"><span class="sec-tag">수선 분야</span><h2 class="sec-h2">어떤 분야든 전문업체가 있습니다</h2></div>
     <div class="row g-4">
       <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">⚡</div><span class="cat-tag">전기</span><h5>전기·소방 설비</h5><p>전기패널, 소방설비, 비상조명, 자동화재탐지설비 점검 및 수선</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🔧</div><span class="cat-tag">기계</span><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 등 산업용 기계 수선</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🏗️</div><span class="cat-tag">시설</span><h5>건물·시설 보수</h5><p>건물 구조물, 옥상방수, 외벽, 창호 등 시설 보수 및 유지관리</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🌡️</div><span class="cat-tag">설비</span><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 점검 및 수선</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🔧</div><span class="cat-tag">기계</span><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 등 수선</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🏗️</div><span class="cat-tag">시설</span><h5>건물·시설 보수</h5><p>건물 구조물, 옥상방수, 외벽, 창호 보수 및 유지관리</p></div></div>
+      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🌡️</div><span class="cat-tag">설비</span><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 수선</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- 기업 / 수선업체 -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
     <div class="row g-5">
       <div class="col-lg-6" id="client">
         <div style="background:var(--gray-bg); border-radius:16px; padding:36px; height:100%;">
           <span class="sec-tag">건물·공장 경영자</span>
-          <h3 style="font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:20px;">수선 필요하면<br>바로 연결됩니다</h3>
+          <h3 style="font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:20px;">수선 필요하면 바로 연결됩니다</h3>
           <div style="display:flex; flex-direction:column; gap:14px;">
             <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-search"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">원인 진단 먼저</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">어떤 전문업체가 필요한지 안내해드립니다</p></div></div>
             <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-tools"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">검증된 업체 연결</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">면허·실적 확인된 전문업체를 바로 연결</p></div></div>
@@ -105,9 +83,9 @@
       <div class="col-lg-6" id="vendor">
         <div style="background:var(--navy); border-radius:16px; padding:36px; height:100%;">
           <span style="color:var(--red); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:14px;">수선업체</span>
-          <h3 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:20px;">새 수주 기회를<br>플랫폼에서</h3>
+          <h3 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:20px;">새 수주 기회를 플랫폼에서</h3>
           <div style="display:flex; flex-direction:column; gap:14px;">
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-handshake"></i></div><div><strong style="font-size:.9rem;color:#fff;">지역 수요 우선 연결</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">내 활동 지역에서 발생한 수선 요청 먼저 확인</p></div></div>
+            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-handshake"></i></div><div><strong style="font-size:.9rem;color:#fff;">지역 수요 우선 연결</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);"> 내 활동 지역 수선 요청 먼저 확인</p></div></div>
             <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-star"></i></div><div><strong style="font-size:.9rem;color:#fff;">실적 자동 누적</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">수선 완료 건이 포트폴리오로 자동 기록</p></div></div>
             <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-won-sign"></i></div><div><strong style="font-size:.9rem;color:#fff;">정산 자동 처리</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">계약부터 정산까지 플랫폼에서 관리</p></div></div>
           </div>
@@ -118,15 +96,7 @@
   </div>
 </section>
 
-<footer class="tai-footer">
-  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
-  <div class="footer-main"><div class="footer-grid">
-    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
-    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
-    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li></ul></div>
-    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li><li><a href="terms.html">이용약관</a></li><li><a href="privacy.html">개인정보처리방침</a></li></ul></div>
-  </div></div>
-  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
-</footer>
+<div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 </body></html>

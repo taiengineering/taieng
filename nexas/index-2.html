@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI MANAGER — 안전관리자 선임, 언제까지 미루세요? 저희가 꼼꼼히 안내드리겠습니다.">
+  <meta name="description" content="TAI MANAGER — 선임, 언제까지 미루세요?">
   <title>TAI MANAGER | 선임, 언제까지 미루세요?</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -10,19 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .hero2 {
-    min-height:65vh; display:flex; align-items:center;
-    background:linear-gradient(135deg,#1a0a0a 0%,#2d1010 40%,#0d1b2a 100%);
-    padding:80px 0;
-  }
+  .hero2 { min-height:65vh; display:flex; align-items:center; background:linear-gradient(135deg,#1a0a0a 0%,#2d1010 40%,#0d1b2a 100%); padding:80px 0; }
   .hero2 h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
   .hero2 .sub { font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.7); margin-bottom:36px; }
   .audience-tabs { display:flex; gap:0; border-bottom:2px solid var(--border); margin-bottom:40px; }
-  .audience-tab {
-    padding:12px 24px; font-weight:700; font-size:.95rem; color:var(--sub);
-    cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px;
-    transition:all .2s;
-  }
+  .audience-tab { padding:12px 24px; font-weight:700; font-size:.95rem; color:var(--sub); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .2s; }
   .audience-tab.active { color:var(--red); border-bottom-color:var(--red); }
   .tab-panel { display:none; }
   .tab-panel.active { display:block; }
@@ -59,9 +51,6 @@
         <span class="page-hero-tag">전문가 연결 — 선임</span>
         <h1>선임, 언제까지<br>미루세요?</h1>
         <p class="sub">저희가 꼼꼼히 안내드리겠습니다.</p>
-        <p style="color:rgba(255,255,255,.55); font-size:.9rem; margin-bottom:32px;">
-          인력소개업이 아닙니다. 수요자와 전문가를 연결하는 플랫폼이용료 모델입니다.
-        </p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="contact.html" class="btn-red">선임 연결 신청</a>
           <a href="#how" class="btn-outline-white">진행 방식 보기</a>
@@ -86,37 +75,32 @@
   </div>
 </section>
 
-<!-- 수요자 / 전문가 탭 -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
     <div class="audience-tabs">
-      <div class="audience-tab active" onclick="switchTab('client')">기업 (수요자)</div>
-      <div class="audience-tab" onclick="switchTab('expert')">전문가 (공급자)</div>
+      <div class="audience-tab active" onclick="switchTab('client',this)">기업 (수요자)</div>
+      <div class="audience-tab" onclick="switchTab('expert',this)">전문가 (공급자)</div>
     </div>
     <div id="tab-client" class="tab-panel active">
       <div class="row align-items-center g-5">
         <div class="col-lg-6">
           <span class="sec-tag">기업 혜택</span>
-          <h2 class="sec-h2" style="color:var(--navy);">선임, 이제<br>어렵지 않습니다</h2>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-check"></i></div><div><strong>선임 요건 3분 확인</strong><span>내 사업장에 선임 의무가 있는지 법령 진단으로 즉시 확인</span></div></div>
+          <h2 class="sec-h2" style="color:var(--navy);">선임, 이제 어렵지 않습니다</h2>
+          <div class="benefit-row"><div class="b-icon"><i class="fas fa-check"></i></div><div><strong>선임 요건 3분 확인</strong><span>내 사업장에 선임 의무가 있는지 법령 진단으로 확인</span></div></div>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-user-tie"></i></div><div><strong>검증된 전문가 연결</strong><span>자격·경력·활동지역이 확인된 전문가를 플랫폼에서 직접 선택</span></div></div>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-file-contract"></i></div><div><strong>법정 서류 관리</strong><span>선임 신고 서류부터 월별 보고까지 플랫폼에서 처리</span></div></div>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-shield-alt"></i></div><div><strong>법령 변경 자동 반영</strong><span>법령 개정 시 자동으로 알림. 위반 리스크를 사전 차단</span></div></div>
           <div class="mt-4"><a href="contact.html" class="btn-red">선임 연결 신청하기</a></div>
         </div>
-        <div class="col-lg-6">
-          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="선임" class="img-fluid" style="border-radius:14px;">
-        </div>
+        <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="선임" class="img-fluid" style="border-radius:14px;"></div>
       </div>
     </div>
     <div id="tab-expert" class="tab-panel">
       <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="전문가" class="img-fluid" style="border-radius:14px;">
-        </div>
+        <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="전문가" class="img-fluid" style="border-radius:14px;"></div>
         <div class="col-lg-6">
           <span class="sec-tag">전문가 혜택</span>
-          <h2 class="sec-h2" style="color:var(--navy);">활동 지역의<br>수요를 먼저 받으세요</h2>
+          <h2 class="sec-h2" style="color:var(--navy);">활동 지역의 수요를 먼저 받으세요</h2>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-map-marker-alt"></i></div><div><strong>지역별 수요 우선 연결</strong><span>내 활동 지역에서 선임 의무가 발생한 기업에 먼저 연결</span></div></div>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-won-sign"></i></div><div><strong>계약·정산 플랫폼 처리</strong><span>계약서 작성, 월별 정산 모두 플랫폼에서 자동 처리</span></div></div>
           <div class="benefit-row"><div class="b-icon"><i class="fas fa-star"></i></div><div><strong>포트폴리오 관리</strong><span>담당 사업장 이력, 실적 기록으로 신뢰도 자동 축적</span></div></div>
@@ -127,42 +111,30 @@
   </div>
 </section>
 
-<!-- 진행 프로세스 -->
 <section id="how" class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
-    <div class="text-center mb-5">
-      <span class="sec-tag">진행 방식</span>
-      <h2 class="sec-h2">선임까지<br>이렇게 진행됩니다</h2>
-    </div>
+    <div class="text-center mb-5"><span class="sec-tag">진행 방식</span><h2 class="sec-h2">선임까지 이렇게 진행됩니다</h2></div>
     <div class="row g-3 align-items-start">
-      <div class="col"><div class="process-step"><div class="ps-num">1</div><div class="ps-title">법령 진단</div><div class="ps-desc">선임 의무 여부를 3분 안에 확인합니다</div></div></div>
+      <div class="col"><div class="process-step"><div class="ps-num">1</div><div class="ps-title">법령 진단</div><div class="ps-desc">선임 의무 여부를 3분 안에 확인</div></div></div>
       <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col"><div class="process-step"><div class="ps-num">2</div><div class="ps-title">전문가 확인</div><div class="ps-desc">조건에 맞는 전문가 목록을 직접 확인합니다</div></div></div>
+      <div class="col"><div class="process-step"><div class="ps-num">2</div><div class="ps-title">전문가 확인</div><div class="ps-desc">조건에 맞는 전문가 목록을 직접 확인</div></div></div>
       <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col"><div class="process-step"><div class="ps-num">3</div><div class="ps-title">연결 신청</div><div class="ps-desc">원하는 전문가에게 연결 신청을 합니다</div></div></div>
+      <div class="col"><div class="process-step"><div class="ps-num">3</div><div class="ps-title">연결 신청</div><div class="ps-desc">원하는 전문가에게 연결 신청</div></div></div>
       <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
       <div class="col"><div class="process-step"><div class="ps-num">4</div><div class="ps-title">계약·선임</div><div class="ps-desc">플랫폼에서 계약 체결 및 선임 신고까지</div></div></div>
     </div>
   </div>
 </section>
 
-<footer class="tai-footer">
-  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
-  <div class="footer-main"><div class="footer-grid">
-    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
-    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
-    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li></ul></div>
-    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li><li><a href="terms.html">이용약관</a></li><li><a href="privacy.html">개인정보처리방침</a></li></ul></div>
-  </div></div>
-  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
-</footer>
+<div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 <script>
-function switchTab(t){
+function switchTab(t, btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.audience-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.audience-tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 </body></html>

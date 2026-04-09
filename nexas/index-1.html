@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe — 산업안전 법령 기반 SaaS. 법령진단부터 작업자 배정·완료 기록까지 자동화.">
+  <meta name="description" content="TAI Safe — 산업안전 법령 기반 SaaS">
   <title>TAI SAFE | 이걸 혼자 다~ 제가 해결해드리겠습니다</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -10,47 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .hero1 {
-    min-height:70vh; display:flex; align-items:center;
-    background:linear-gradient(120deg,#0d1b2a 55%,#1a3a5c 100%);
-    padding:80px 0;
-  }
+  .hero1 { min-height:70vh; display:flex; align-items:center; background:linear-gradient(120deg,#0d1b2a 55%,#1a3a5c 100%); padding:80px 0; }
   .hero1 h1 { font-size:clamp(2.4rem,5vw,4rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
   .hero1 .sub { font-size:clamp(1.1rem,2vw,1.4rem); color:rgba(255,255,255,.75); margin-bottom:36px; }
-  .flow-step {
-    display:flex; gap:20px; align-items:flex-start; padding:22px 0;
-    border-bottom:1px solid var(--border);
-  }
+  .flow-step { display:flex; gap:20px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--border); }
   .flow-step:last-child { border-bottom:none; }
-  .flow-num {
-    width:40px; height:40px; border-radius:50%;
-    background:var(--red); color:#fff;
-    font-weight:900; display:flex; align-items:center; justify-content:center;
-    flex-shrink:0; font-size:1rem;
-  }
+  .flow-num { width:40px; height:40px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
   .flow-step strong { font-size:1rem; font-weight:800; color:var(--navy); display:block; margin-bottom:5px; }
   .flow-step p { margin:0; font-size:.88rem; color:var(--sub); line-height:1.55; }
-  .sector-card {
-    background:#fff; border-radius:14px; padding:28px;
-    box-shadow:0 2px 20px rgba(0,0,0,.07); height:100%;
-    border-top:4px solid var(--red);
-  }
+  .sector-card { background:#fff; border-radius:14px; padding:28px; box-shadow:0 2px 20px rgba(0,0,0,.07); height:100%; border-top:4px solid var(--red); }
   .sector-card .icon { font-size:2.2rem; margin-bottom:14px; }
   .sector-card h4 { font-size:1.1rem; font-weight:800; color:var(--navy); margin-bottom:10px; }
   .sector-card ul { padding-left:16px; margin:0; }
   .sector-card ul li { font-size:.85rem; color:var(--sub); margin-bottom:6px; }
-  .price-card {
-    background:#fff; border-radius:16px; padding:36px 28px;
-    box-shadow:0 4px 30px rgba(0,0,0,.08);
-    height:100%; position:relative;
-  }
+  .price-card { background:#fff; border-radius:16px; padding:36px 28px; box-shadow:0 4px 30px rgba(0,0,0,.08); height:100%; position:relative; }
   .price-card.featured { border:2px solid var(--red); }
-  .price-badge {
-    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
-    background:var(--red); color:#fff;
-    font-size:.7rem; font-weight:700; border-radius:999px;
-    padding:4px 14px; white-space:nowrap;
-  }
+  .price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--red); color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:4px 14px; }
   .price-plan { font-size:.82rem; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
   .price-amount { font-size:clamp(2rem,3.5vw,2.6rem); font-weight:900; color:var(--navy); line-height:1; margin-bottom:4px; }
   .price-unit { font-size:.85rem; color:var(--sub); margin-bottom:20px; }
@@ -64,22 +39,15 @@
   <div class="inner">
     <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
     <div class="nav-links">
-      <a href="index-1.html" class="active">TAI SAFE</a>
-      <a href="index-2.html">TAI MANAGER</a>
-      <a href="index-3.html">TAI FIX</a>
-      <a href="index-4.html">TAI CARE</a>
-      <a href="index-5.html">안전정보</a>
+      <a href="index-1.html" class="active">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
       <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a>
-      <a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a>
-      <a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
       <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
     </div>
   </div>
 </nav>
 
-<!-- 히어로 -->
 <section class="hero1">
   <div class="sec-inner">
     <div class="row align-items-center g-5">
@@ -87,33 +55,27 @@
         <span class="page-hero-tag">TAI Safe SaaS</span>
         <h1>이걸 혼자 다~</h1>
         <p class="sub">제가 해결해드리겠습니다.</p>
-        <p style="color:rgba(255,255,255,.6); font-size:.95rem; margin-bottom:32px; line-height:1.65;">
-          법령진단 → 점검일정 자동생성 → 작업자 배정 → D-3 알림 → 완료 기록까지.<br>
-          안전관리자가 혼자 하던 모든 것을 시스템이 분산합니다.
-        </p>
+        <p style="color:rgba(255,255,255,.6); font-size:.95rem; margin-bottom:32px; line-height:1.65;">법령진단 → 자동 일정 생성 → 작업자 배정 → D-3 알림 → 완료 기록<br>안전관리자가 혼자 하던 모든 것을 시스템이 분산합니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="free-diagnosis.html" class="btn-red">무료 법령 진단 시작하기</a>
           <a href="#pricing" class="btn-outline-white">요금 보기</a>
         </div>
       </div>
-      <div class="col-lg-6">
-        <img src="assets/img/app-screen/1.png" alt="TAI Safe 대시보드" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);">
-      </div>
+      <div class="col-lg-6"><img src="assets/img/app-screen/1.png" alt="TAI Safe" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);"></div>
     </div>
   </div>
 </section>
 
-<!-- 작동 방식 -->
 <section class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
     <div class="row g-5 align-items-center">
       <div class="col-lg-5">
         <span class="sec-tag">작동 방식</span>
-        <h2 class="sec-h2">4단계로<br>자동 완성됩니다</h2>
-        <p class="sec-sub" style="color:var(--sub); margin-bottom:0;">법령 진단 한 번이면 이후 모든 흐름이 자동입니다.</p>
+        <h2 class="sec-h2">4단계로 자동 완성됩니다</h2>
+        <p class="sec-sub" style="color:var(--sub);">법령 진단 한 번이면 이후 모든 흐름이 자동입니다.</p>
       </div>
       <div class="col-lg-7">
-        <div class="flow-step"><div class="flow-num">1</div><div><strong>법령 자동 진단</strong><p>사업장·설비 정보를 입력하면 적용 법령과 의무 항목이 자동으로 도출됩니다.</p></div></div>
+        <div class="flow-step"><div class="flow-num">1</div><div><strong>법령 자동 진단</strong><p>사업장·설비 정보를 입력하면 적용 법령과 의무 항목이 자동 도출됩니다.</p></div></div>
         <div class="flow-step"><div class="flow-num">2</div><div><strong>점검 일정 자동 생성</strong><p>법령 주기에 맞춰 점검 일정이 생성되고, 담당자가 자동 배정됩니다.</p></div></div>
         <div class="flow-step"><div class="flow-num">3</div><div><strong>D-3 알림 발송</strong><p>점검 3일 전 담당 작업자에게 자동 알림. 누락이 없어집니다.</p></div></div>
         <div class="flow-step"><div class="flow-num">4</div><div><strong>완료 기록 + 이상 보고</strong><p>완료 내용은 자동 저장되고, 이상 발생 시 관리자에게 즉시 알립니다.</p></div></div>
@@ -122,123 +84,29 @@
   </div>
 </section>
 
-<!-- 섹터별 기능 -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
-    <div class="text-center mb-5">
-      <span class="sec-tag">섹터별 기능</span>
-      <h2 class="sec-h2">산업·건설·건물<br>모두 커버합니다</h2>
-    </div>
+    <div class="text-center mb-5"><span class="sec-tag">섹터별 기능</span><h2 class="sec-h2">산업·건설·건물 모두 커버합니다</h2></div>
     <div class="row g-4">
-      <div class="col-lg-4">
-        <div class="sector-card">
-          <div class="icon">🏭</div>
-          <h4>산업·공장</h4>
-          <ul>
-            <li>지게차·프레스 등 설비별 법정 점검 자동화</li>
-            <li>안전보건 교육 일정 관리</li>
-            <li>위험성평가 기록 관리</li>
-            <li>작업자별 점검 이력 누적</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="sector-card">
-          <div class="icon">🏗️</div>
-          <h4>건설현장</h4>
-          <ul>
-            <li>공종별 안전점검 체크리스트 자동 생성</li>
-            <li>TBM 미팅 기록 관리</li>
-            <li>하도급 작업자 안전교육 관리</li>
-            <li>현장 위험 요소 신고 및 조치</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="sector-card">
-          <div class="icon">🏢</div>
-          <h4>건물·시설</h4>
-          <ul>
-            <li>소방·전기·승강기 법정 점검 일정 관리</li>
-            <li>건물 안전관리자 선임 의무 진단</li>
-            <li>시설 점검 결과 보고서 자동 생성</li>
-            <li>다중 시설 통합 관리</li>
-          </ul>
-        </div>
-      </div>
+      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏭</div><h4>산업·공장</h4><ul><li>지게차·프레스 등 설비별 법정 점검 자동화</li><li>안전보건 교육 일정 관리</li><li>위험성평가 기록 관리</li><li>작업자별 점검 이력 누적</li></ul></div></div>
+      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏗️</div><h4>건설현장</h4><ul><li>공종별 안전점검 체크리스트 자동 생성</li><li>TBM 미팅 기록 관리</li><li>하도급 작업자 안전교육 관리</li><li>현장 위험 요소 신고 및 조치</li></ul></div></div>
+      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏢</div><h4>건물·시설</h4><ul><li>소방·전기·승강기 등 다중 법령 의무</li><li>건물 안전관리자 선임 의무 진단</li><li>시설 점검 결과 보고서 자동 생성</li><li>다중 시설 통합 관리</li></ul></div></div>
     </div>
   </div>
 </section>
 
-<!-- 요금 -->
 <section id="pricing" class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
-    <div class="text-center mb-5">
-      <span class="sec-tag">요금제</span>
-      <h2 class="sec-h2">부담 없이 시작하세요</h2>
-      <p style="color:var(--sub);">첫 달 무료 법령 진단 후 구독을 시작할 수 있습니다</p>
-    </div>
+    <div class="text-center mb-5"><span class="sec-tag">요금제</span><h2 class="sec-h2">부담 없이 시작하세요</h2><p style="color:var(--sub);">첫 달 무료 법령 진단 후 구독을 시작할 수 있습니다</p></div>
     <div class="row g-4 justify-content-center">
-      <div class="col-lg-4 col-md-6">
-        <div class="price-card">
-          <p class="price-plan">Basic</p>
-          <p class="price-amount">79,000<span style="font-size:1.2rem;">원</span></p>
-          <p class="price-unit">/ 월 (VAT 별도)</p>
-          <ul class="price-list">
-            <li><i class="fas fa-check"></i>법령 자동 진단 1개 사업장</li>
-            <li><i class="fas fa-check"></i>점검 일정 자동 생성</li>
-            <li><i class="fas fa-check"></i>작업자 배정 + 알림</li>
-            <li><i class="fas fa-check"></i>완료 기록 보관 1년</li>
-            <li><i class="fas fa-check"></i>이메일 지원</li>
-          </ul>
-          <a href="free-diagnosis.html" class="btn-outline w-100 text-center">무료로 시작하기</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="price-card featured">
-          <span class="price-badge">추천</span>
-          <p class="price-plan">Premium</p>
-          <p class="price-amount">149,000<span style="font-size:1.2rem;">원</span></p>
-          <p class="price-unit">/ 월 (VAT 별도)</p>
-          <ul class="price-list">
-            <li><i class="fas fa-check"></i>법령 자동 진단 무제한 사업장</li>
-            <li><i class="fas fa-check"></i>점검 일정 자동 생성</li>
-            <li><i class="fas fa-check"></i>작업자 배정 + 알림 (SMS 포함)</li>
-            <li><i class="fas fa-check"></i>완료 기록 보관 무제한</li>
-            <li><i class="fas fa-check"></i>법정 서류 자동 생성</li>
-            <li><i class="fas fa-check"></i>전용 고객 지원</li>
-          </ul>
-          <a href="free-diagnosis.html" class="btn-red w-100 text-center">무료로 시작하기</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="price-card">
-          <p class="price-plan">Enterprise</p>
-          <p class="price-amount" style="font-size:1.8rem;">별도 협의</p>
-          <p class="price-unit">&nbsp;</p>
-          <ul class="price-list">
-            <li><i class="fas fa-check"></i>Premium 모든 기능</li>
-            <li><i class="fas fa-check"></i>전용 서버·데이터 분리</li>
-            <li><i class="fas fa-check"></i>API 연동</li>
-            <li><i class="fas fa-check"></i>전담 매니저 배정</li>
-            <li><i class="fas fa-check"></i>온보딩 컨설팅 포함</li>
-          </ul>
-          <a href="contact.html" class="btn-navy w-100 text-center">문의하기</a>
-        </div>
-      </div>
+      <div class="col-lg-4 col-md-6"><div class="price-card"><p class="price-plan">Basic</p><p class="price-amount">79,000<span style="font-size:1.2rem;">월</span></p><p class="price-unit">/ 월 (VAT 별도)</p><ul class="price-list"><li><i class="fas fa-check"></i>법령 자동 진단 1개 사업장</li><li><i class="fas fa-check"></i>점검 일정 자동 생성</li><li><i class="fas fa-check"></i>작업자 배정 + 알림</li><li><i class="fas fa-check"></i>완료 기록 보관 1년</li><li><i class="fas fa-check"></i>이메일 지원</li></ul><a href="free-diagnosis.html" class="btn-outline w-100 text-center">무료로 시작하기</a></div></div>
+      <div class="col-lg-4 col-md-6"><div class="price-card featured"><span class="price-badge">추천</span><p class="price-plan">Premium</p><p class="price-amount">149,000<span style="font-size:1.2rem;">월</span></p><p class="price-unit">/ 월 (VAT 별도)</p><ul class="price-list"><li><i class="fas fa-check"></i>법령 자동 진단 무제한 사업장</li><li><i class="fas fa-check"></i>점검 일정 자동 생성</li><li><i class="fas fa-check"></i>작업자 배정 + 알림 (SMS 포함)</li><li><i class="fas fa-check"></i>완료 기록 보관 무제한</li><li><i class="fas fa-check"></i>법정 서류 자동 생성</li><li><i class="fas fa-check"></i>전용 고객 지원</li></ul><a href="free-diagnosis.html" class="btn-red w-100 text-center">무료로 시작하기</a></div></div>
+      <div class="col-lg-4 col-md-6"><div class="price-card"><p class="price-plan">Enterprise</p><p class="price-amount" style="font-size:1.8rem;">별도 협의</p><p class="price-unit">&nbsp;</p><ul class="price-list"><li><i class="fas fa-check"></i>Premium 모든 기능</li><li><i class="fas fa-check"></i>전용 서버·데이터 분리</li><li><i class="fas fa-check"></i>API 연동</li><li><i class="fas fa-check"></i>전담 매니저 배정</li><li><i class="fas fa-check"></i>온보딩 컨설팅 포함</li></ul><a href="contact.html" class="btn-navy w-100 text-center">문의하기</a></div></div>
     </div>
   </div>
 </section>
 
-<footer class="tai-footer">
-  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
-  <div class="footer-main"><div class="footer-grid">
-    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
-    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
-    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li></ul></div>
-    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li><li><a href="terms.html">이용약관</a></li><li><a href="privacy.html">개인정보처리방침</a></li></ul></div>
-  </div></div>
-  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
-</footer>
+<div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 </body></html>
