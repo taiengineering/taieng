@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.0 */
+/* TAI 공통 스타일 v1.1 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -39,32 +39,72 @@ a { text-decoration: none; }
 }
 .tai-nav .nav-cta:hover { background: #c1121f !important; }
 
-/* FOOTER */
-.tai-footer { background: #090e17; border-top: 1px solid rgba(255,255,255,.07); margin-top: 0; }
+/* ================================================
+   FOOTER
+================================================ */
+.tai-footer {
+  background: #090e17;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
 .footer-patent {
   background: rgba(255,255,255,.03);
   text-align: center; padding: 8px 24px;
   font-size: .72rem; color: rgba(255,255,255,.3);
+  line-height: 1.5;
 }
 .footer-main { padding: 56px 24px 36px; max-width: 1260px; margin: 0 auto; }
 .footer-grid {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 36px;
+  display: grid;
+  grid-template-columns: 2.4fr 1fr 1fr 1fr;
+  gap: 40px;
 }
-@media(max-width:768px){ .footer-grid { grid-template-columns: 1fr 1fr; } }
-.footer-logo img { height: 30px; margin-bottom: 16px; display: block; }
-.footer-info p { font-size: .76rem; color: rgba(255,255,255,.38); margin-bottom: 3px; line-height:1.5; }
+@media(max-width:900px){ .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+@media(max-width:640px){ .footer-grid { grid-template-columns: 1fr 1fr; } }
+
+.footer-logo img { height: 32px; margin-bottom: 18px; display: block; }
+
+.footer-info p {
+  font-size: .77rem;
+  color: rgba(255,255,255,.38);
+  margin-bottom: 3px;
+  line-height: 1.6;
+}
 .footer-info a { color: rgba(255,255,255,.38); }
-.footer-col h6 { font-size: .76rem; font-weight: 700; color: rgba(255,255,255,.6); margin-bottom:12px; text-transform:uppercase; letter-spacing:.1em; }
-.footer-col ul { list-style:none; padding:0; margin:0; }
-.footer-col ul li { margin-bottom:7px; }
-.footer-col ul li a { font-size:.8rem; color:rgba(255,255,255,.38); transition:color .15s; }
-.footer-col ul li a:hover { color:#fff; }
+.footer-info a:hover { color: rgba(255,255,255,.7); }
+.footer-info .co-name {
+  font-size: .82rem;
+  font-weight: 700;
+  color: rgba(255,255,255,.6);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.footer-col h6 {
+  font-size: .72rem; font-weight: 700;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul li a {
+  font-size: .82rem;
+  color: rgba(255,255,255,.4);
+  transition: color .15s;
+}
+.footer-col ul li a:hover { color: #fff; }
+
 .footer-bottom {
-  max-width:1260px; margin:0 auto;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:16px 24px;
-  border-top:1px solid rgba(255,255,255,.06);
-  font-size:.74rem; color:rgba(255,255,255,.25);
+  max-width: 1260px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 24px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  font-size: .74rem;
+  color: rgba(255,255,255,.22);
+}
+@media(max-width:640px){
+  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
 }
 
 /* 공통 버튼 */
@@ -113,7 +153,6 @@ a { text-decoration: none; }
 }
 .sec-sub { font-size:1.05rem; line-height:1.65; }
 
-/* 페이지 히어로 (서브페이지용 — 배너 아님) */
 .page-hero {
   padding:80px 0 70px;
   background:var(--navy);
@@ -128,7 +167,6 @@ a { text-decoration: none; }
   border-radius:4px; padding:4px 10px;
 }
 
-/* 반응형 */
 @media(max-width:768px){
   .sec { padding:60px 0; }
   .page-hero { padding:60px 0 50px; }
