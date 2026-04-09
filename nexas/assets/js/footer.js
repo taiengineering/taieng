@@ -3,6 +3,17 @@
  * 모든 페이지에서 <div id="tai-footer"></div> + <script src="assets/js/footer.js"> 로 사용
  */
 (function () {
+
+  /* ── 파비콘 설정 ── */
+  (function(){
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/svg+xml';
+    link.rel  = 'icon';
+    link.href = 'assets/img/favicon.svg';
+    document.head.appendChild(link);
+  })();
+
+  /* ── Footer HTML ── */
   const FOOTER_HTML = `
 <footer class="tai-footer">
   <div class="footer-patent" style="color:#fff;">
@@ -73,4 +84,5 @@
   } else {
     document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
   }
+
 })();
