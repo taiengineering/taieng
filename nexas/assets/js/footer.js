@@ -62,8 +62,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 TAI Engineering. All rights reserved.</span>
-    <span>이걸 왜 몰랐지?</span>
+    <span>© TAI Engineering. All rights reserved.</span>
   </div>
 </footer>
 `;
