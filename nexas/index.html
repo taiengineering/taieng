@@ -281,8 +281,8 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-// 히어로 목업 이미지 — JS 변수로 한 번만 로드 (65KB WebP)
-var _hmi = "HERO_IMAGE_PLACEHOLDER";
+// 히어로 목업 이미지 — 한 번만 로드해서 6개 슬라이드 전체 적용
+var _hmi = "assets/img/hero-mockup.webp";
 document.querySelectorAll(".hero-mockup-img").forEach(function(el){ el.src = _hmi; });
 
 $(function(){
