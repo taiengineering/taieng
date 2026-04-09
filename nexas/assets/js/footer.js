@@ -18,7 +18,7 @@
           <img src="assets/img/tai-logo.png" alt="TAI 엔지니어링">
         </a>
         <div class="footer-info">
-          <p><strong style="color:rgba(255,255,255,.65);">주식회사 TAI엔지니어링</strong>&nbsp;&nbsp;대표: 심태왕</p>
+          <p><strong style="color:rgba(255,255,255,.65);">TAI엔지니어링</strong>&nbsp;&nbsp;대표: 심태왕</p>
           <p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
           <p>TEL: 070-8080-1858 &nbsp;·&nbsp; FAX: 0504-845-8888</p>
           <p>EMAIL: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>
@@ -68,12 +68,10 @@
 </footer>
 `;
 
-  // #tai-footer 요소에 주입
   const el = document.getElementById('tai-footer');
   if (el) {
     el.outerHTML = FOOTER_HTML;
   } else {
-    // fallback: body 끝에 append
     document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
   }
 })();
