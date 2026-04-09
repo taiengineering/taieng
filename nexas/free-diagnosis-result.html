@@ -1,337 +1,128 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>무료 법령 진단 결과 | TAI Engineering</title>
-	<link rel="icon" href="assets/img/fevicon.png">
-	<link rel="stylesheet" href="assets/css/animate.min.css">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/magnific.min.css">
-	<link rel="stylesheet" href="assets/css/nice-select.min.css">
-	<link rel="stylesheet" href="assets/css/owl.min.css">
-	<link rel="stylesheet" href="assets/css/slick-slide.min.css">
-	<link rel="stylesheet" href="assets/css/fontawesome.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/responsive.css">
-	<link rel="stylesheet" href="assets/css/tai-brand.css">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>법령 진단 결과 | TAI 엔지니어링</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .result-hero { background:var(--navy); padding:60px 0 50px; text-align:center; }
+  .result-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
+  .risk-badge { display:inline-block; background:var(--red); color:#fff; font-weight:700; font-size:1rem; border-radius:999px; padding:8px 24px; margin-bottom:16px; }
+  .result-card { background:#fff; border-radius:14px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:28px; margin-bottom:20px; }
+  .result-card h4 { font-size:1rem; font-weight:800; color:var(--navy); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .result-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:.88rem; }
+  .result-row:last-child { border-bottom:none; }
+  .result-row .label { color:var(--sub); }
+  .result-row .value { font-weight:700; color:var(--navy); }
+  .risk-item { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border); }
+  .risk-item:last-child { border-bottom:none; }
+  .risk-level { font-size:.7rem; font-weight:700; border-radius:4px; padding:3px 8px; white-space:nowrap; }
+  .risk-high { background:#fef2f2; color:var(--red); }
+  .risk-mid { background:#fffbeb; color:#d97706; }
+  .risk-low { background:#f0fff4; color:#1a8f4b; }
+  .risk-item .ri-title { font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
+  .risk-item .ri-desc { font-size:.8rem; color:var(--sub); }
+  .cta-box { background:var(--navy); border-radius:14px; padding:36px; text-align:center; }
+  .cta-box h3 { color:#fff; font-weight:900; margin-bottom:10px; }
+  .cta-box p { color:rgba(255,255,255,.65); font-size:.9rem; margin-bottom:24px; }
+  </style>
 </head>
-<body class="sc5">
-	<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div></div>
-	<div class="body-overlay" id="body-overlay"></div>
-	<header class="navbar-area">
-		<nav class="navbar navbar-expand-lg">
-			<div class="container nav-container">
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기"><span class="icon-left"></span><span class="icon-right"></span></button>
-				</div>
-				<div class="logo"><a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a></div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open text-end">
-						<li class="tai-safe-wrap"><a href="index-1.html">TAI SAFE</a><a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a></li>
-						<li class="menu-item-has-children"><a href="index-2.html">TAI MANAGER</a><ul class="sub-menu"><li><a href="index-2.html#client">건물·공장 경영자</a></li><li><a href="index-2.html#partner">기술자·대행업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="index-3.html">TAI FIX</a><ul class="sub-menu"><li><a href="index-3.html#client">건물·공장 경영자</a></li><li><a href="index-3.html#vendor">수선업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="index-4.html">TAI CARE</a><ul class="sub-menu"><li><a href="index-4.html#manager">안전관리자</a></li><li><a href="index-4.html#agency">안전대행·진단업체</a></li></ul></li>
-						<li><a href="index-5.html">안전정보</a></li>
-						<li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-						<li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-						<li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-						<li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-						<li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
+    </div>
+  </div>
+</nav>
 
-	<section class="breadcrumb-area text-center">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8 align-self-center">
-					<div class="breadcrumb-inner">
-						<h1 class="page-title">진단 결과</h1>
-						<ul class="page-list breadcrumb">
-							<li class="breadcrumb-item"><a href="index.html">홈</a></li>
-							<li class="breadcrumb-item"><a href="free-diagnosis.html">무료 진단</a></li>
-							<li class="breadcrumb-item active" aria-current="page">결과</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<div class="result-hero">
+  <div class="sec-inner">
+    <p style="color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:12px;">법령 진단 완료</p>
+    <span class="risk-badge">⚠ 위험도 : 높음</span>
+    <h1>현재 3개 항목 위반<br>가능성이 있습니다</h1>
+    <p style="color:rgba(255,255,255,.55); font-size:.9rem;">아래 결과는 입력하신 시설 정보 기반 1차 분석 결과입니다. 정확한 진단은 상세 점검이 필요합니다.</p>
+  </div>
+</div>
 
-	<section class="pd-top-90 pd-bottom-60" id="taiDiagSection">
-		<div class="container">
-			<div id="taiDiagLoading" class="text-center py-5"><p class="text-muted">결과를 불러오는 중입니다…</p></div>
-			<div id="taiDiagError" class="alert alert-danger" style="display:none;"></div>
-			<div id="taiDiagContent" style="display:none;">
-				<div class="text-center mb-4">
-					<span id="taiRiskPill" class="tai-diag-risk-pill"></span>
-					<p class="mt-3 mb-1 text-muted small" id="taiEvalAt"></p>
-					<h2 class="h4 mt-2" id="taiSummaryHead">요약</h2>
-					<p id="taiPartialMsg" class="small text-muted"></p>
-				</div>
-				<div class="row justify-content-center mb-4">
-					<div class="col-lg-10">
-						<div class="table-responsive">
-							<table class="table table-bordered table-hover bg-white" id="taiRulesPreviewTable">
-								<thead class="table-light"><tr><th>법령</th><th>조항</th><th>의무 요지</th></tr></thead>
-								<tbody></tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div id="taiFullBlock" style="display:none;">
-					<h3 class="h5 mb-3">전체 의무·법령 목록</h3>
-					<div id="taiObligationsFull" class="mb-4"></div>
-				</div>
-				<div id="taiLoginGate" class="text-center py-4 border rounded bg-light" style="display:none;">
-					<p class="mb-3 fw-bold">전체 결과는 로그인 후 확인할 수 있습니다.</p>
-					<p class="small text-muted mb-3">이미 실행한 진단은 로그인하면 같은 화면에서 이어서 볼 수 있습니다. 입력을 다시 하실 필요가 없습니다.</p>
-					<button type="button" class="btn btn-base" id="btnViewFull">전체 결과 보기 (로그인)</button>
-				</div>
-			</div>
-		</div>
-	</section>
+<section class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="row g-4">
+      <div class="col-lg-8">
 
-	<!-- 프라이싱/다음 단계: 결과 확인 후에만 의미 있음 → 이 페이지 하단에만 배치 -->
-	<section class="tai-pricing-next" id="taiPricingSection" style="display:none;">
-		<div class="container">
-			<h2 class="text-center">진단 결과를 바탕으로 다음 단계를 선택하세요</h2>
-			<p class="tai-pricing-lead text-center">문제 인식 → 결과 확인 → 실행·관리까지 TAI가 연결합니다.</p>
-			<div class="row g-4">
-				<div class="col-md-4">
-					<div class="tai-pricing-card d-flex flex-column">
-						<h3>무료진단 결과를 계속 관리하려면</h3>
-						<p class="desc">점검 일정·의무 이행 현황을 SaaS에서 추적하세요.</p>
-						<a href="contact.html" class="btn btn-base btn-sm mt-auto align-self-start">SaaS 시작하기</a>
-						<p class="tai-price-hint mb-0">월 이용료 별도 문의</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="tai-pricing-card d-flex flex-column">
-						<h3>더 정확하고 상세한 법령 분석이 필요하다면</h3>
-						<p class="desc">현장·설비 맞춤 프리미엄 법령진단으로 심화합니다.</p>
-						<a href="contact.html" class="btn btn-base btn-sm mt-auto align-self-start">프리미엄 법령진단</a>
-						<p class="tai-price-hint mb-0">맞춤 견적</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="tai-pricing-card d-flex flex-column">
-						<h3>지금 바로 선임·평가·문서 작업이 필요하다면</h3>
-						<p class="desc">선임·위험성평가·정기점검·계획문서 등 실행을 요청하세요.</p>
-						<a href="contact.html" class="btn btn-base btn-sm mt-auto align-self-start">실행 요청하기</a>
-						<p class="tai-price-hint mb-0">건별 문의</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+        <!-- 진단 요약 -->
+        <div class="result-card">
+          <h4><i class="fas fa-clipboard-list" style="color:var(--red);"></i> 진단 요약</h4>
+          <div class="result-row"><span class="label">사업장 유형</span><span class="value">산업·제조</span></div>
+          <div class="result-row"><span class="label">상시 근로자 수</span><span class="value">50 ~ 99인</span></div>
+          <div class="result-row"><span class="label">적용 법령 수</span><span class="value">산업안전보건법 외 4개</span></div>
+          <div class="result-row"><span class="label">선임 의무 여부</span><span class="value" style="color:var(--red);">필요 (안전관리자 1인 이상)</span></div>
+          <div class="result-row"><span class="label">법정 점검 항목</span><span class="value">17개 항목</span></div>
+        </div>
 
-	<footer class="footer-area style-1">
-		<div class="footer-patent-bar text-center py-2 small">
-			<div class="container"><p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p></div>
-		</div>
-		<div class="footer-inner">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-4 col-lg-4 col-sm-6">
-						<div class="footer-widget widget">
-							<a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-							<div class="footer-company-info">
-								<p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-								<p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-								<p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-								<p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-								<p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-								<p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-							</div>
-							<ul class="social-area">
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">메뉴</h6>
-							<ul>
-								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">서비스</h6>
-							<ul>
-								<li><a href="free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
-								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">바로가기</h6>
-							<ul>
-								<li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-								<li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
-								<li><a href="faq.html"><i class="fas fa-angle-right"></i>자주하는 질문</a></li>
-								<li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
-								<li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 align-self-center"><div class="copyright-area"><p>© TAI Engineering. 무단 복제를 금합니다.</p></div></div>
-					<div class="col-md-6 align-self-center text-md-end"><div class="author-area"><p>원본 테마: Themefie</p></div></div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+        <!-- 위험 항목 -->
+        <div class="result-card">
+          <h4><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i> 주요 위험 항목</h4>
+          <div class="risk-item">
+            <span class="risk-level risk-high">높음</span>
+            <div><div class="ri-title">안전관리자 미선임</div><div class="ri-desc">50인 이상 사업장은 안전관리자 선임 의무가 있습니다. 위반 시 최대 500만원 과태료.</div></div>
+          </div>
+          <div class="risk-item">
+            <span class="risk-level risk-high">높음</span>
+            <div><div class="ri-title">지게차 작업계획서 미작성</div><div class="ri-desc">3톤 이상 지게차 운행 시 작업계획서 작성·비치 의무. 2026년 3월부터 강화.</div></div>
+          </div>
+          <div class="risk-item">
+            <span class="risk-level risk-mid">중간</span>
+            <div><div class="ri-title">안전보건교육 미실시 가능성</div><div class="ri-desc">채용 시 교육(8시간), 분기별 정기교육 실시 여부를 확인하세요.</div></div>
+          </div>
+          <div class="risk-item">
+            <span class="risk-level risk-low">낮음</span>
+            <div><div class="ri-title">위험성평가 기록 관리</div><div class="ri-desc">연 1회 이상 위험성평가 실시 및 결과 기록 보존 의무.</div></div>
+          </div>
+        </div>
 
-	<script src="assets/js/jquery.3.6.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/imageloded.min.js"></script>
-	<script src="assets/js/counterup.js"></script>
-	<script src="assets/js/waypoint.js"></script>
-	<script src="assets/js/magnific.min.js"></script>
-	<script src="assets/js/nice-select.min.js"></script>
-	<script src="assets/js/fontawesome.min.js"></script>
-	<script src="assets/js/ripple.js"></script>
-	<script src="assets/js/owl.min.js"></script>
-	<script src="assets/js/slick-slider.min.js"></script>
-	<script src="assets/js/wow.min.js"></script>
-	<script src="assets/js/nav-auth.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/tai-free-diagnosis.js"></script>
-	<script>
-(function () {
-  var TAI_API = window.TAI_API_BASE || 'https://api.taieng.co.kr';
-  var params = new URLSearchParams(window.location.search);
-  var token = params.get('token');
-  function esc(s) {
-    if (s == null || s === '') return '';
-    var d = document.createElement('div');
-    d.textContent = s;
-    return d.innerHTML;
-  }
-  function renderTable(partial) {
-    var tbody = document.querySelector('#taiRulesPreviewTable tbody');
-    tbody.innerHTML = '';
-    var rules = (partial && partial.rules_preview) ? partial.rules_preview : [];
-    rules.forEach(function (r) {
-      var tr = document.createElement('tr');
-      tr.innerHTML = '<td>' + esc(r.law_name) + '</td><td>' + esc(r.law_article) + '</td><td>' + esc(r.obligation) + '</td>';
-      tbody.appendChild(tr);
-    });
-  }
-  function renderFull(full) {
-    var box = document.getElementById('taiObligationsFull');
-    box.innerHTML = '';
-    var obs = (full && full.obligations) ? full.obligations : [];
-    obs.forEach(function (o) {
-      var h = document.createElement('h4');
-      h.className = 'h6 mt-3';
-      h.textContent = o.label || o.category || '';
-      box.appendChild(h);
-      var ul = document.createElement('ul');
-      (o.items || []).forEach(function (it) {
-        var li = document.createElement('li');
-        li.textContent = (it.law_name || '') + ' ' + (it.law_article || '') + ' — ' + (it.description || it.obligation_summary || '');
-        ul.appendChild(li);
-      });
-      box.appendChild(ul);
-    });
-  }
-  async function load() {
-    if (!token) {
-      document.getElementById('taiDiagLoading').style.display = 'none';
-      document.getElementById('taiDiagError').style.display = 'block';
-      document.getElementById('taiDiagError').textContent = '유효한 진단 링크가 없습니다. 무료 진단을 다시 실행해 주세요.';
-      return;
-    }
-    try {
-      var res = await fetch(TAI_API + '/anonymous-diagnosis/' + encodeURIComponent(token), {
-        headers: typeof taiDiagApiHeaders === 'function' ? taiDiagApiHeaders() : { 'Content-Type': 'application/json' }
-      });
-      var json = await res.json().catch(function () { return {}; });
-      document.getElementById('taiDiagLoading').style.display = 'none';
-      if (!res.ok || !json.data) {
-        document.getElementById('taiDiagError').style.display = 'block';
-        document.getElementById('taiDiagError').textContent = (json.detail || '결과를 불러올 수 없습니다.');
-        return;
-      }
-      var d = json.data;
-      var partial = d.partialResult || {};
-      document.getElementById('taiDiagContent').style.display = 'block';
-      document.getElementById('taiPricingSection').style.display = 'block';
+      </div>
+      <div class="col-lg-4">
+        <!-- CTA -->
+        <div class="cta-box">
+          <h3>지금 바로<br>해결하세요</h3>
+          <p>TAI Safe SaaS를 통해 법령 의무를 자동으로 관리하고 위반 리스크를 줄이세요.</p>
+          <a href="index-1.html" class="btn-red d-block text-center" style="margin-bottom:12px;">TAI Safe 시작하기</a>
+          <a href="contact.html" style="display:block;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.2);border-radius:7px;padding:12px;text-align:center;font-size:.9rem;font-weight:600;">전문가 상담 신청</a>
+        </div>
+        <!-- 결과 다시받기 -->
+        <div style="background:#fff;border-radius:14px;padding:24px;margin-top:16px;box-shadow:0 2px 14px rgba(0,0,0,.06);">
+          <p style="font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:12px;">결과 이메일로 받기</p>
+          <input type="email" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.85rem;margin-bottom:10px;" placeholder="이메일 입력">
+          <button class="btn-red" style="width:100%;font-size:.9rem;padding:11px;">결과 전송</button>
+        </div>
+      </div>
+    </div>
 
-      var risk = partial.risk_level || '—';
-      var pill = document.getElementById('taiRiskPill');
-      pill.textContent = '위험도: ' + risk;
-      pill.className = 'tai-diag-risk-pill tai-diag-risk-' + risk;
-      document.getElementById('taiEvalAt').textContent = partial.evaluated_at ? ('기준 시각: ' + partial.evaluated_at) : '';
-      var sm = partial.summary || {};
-      document.getElementById('taiSummaryHead').textContent = '적용 가능 의무 ' + (partial.applicable_count != null ? partial.applicable_count : '—') + '건 · 섹터 ' + (partial.sector || '—');
-      document.getElementById('taiPartialMsg').textContent = partial.message || '';
+    <div class="text-center mt-4">
+      <a href="free-diagnosis.html" style="color:var(--sub);font-size:.85rem;">← 다시 진단하기</a>
+    </div>
+  </div>
+</section>
 
-      renderTable(partial);
-
-      if (d.canViewFull && d.fullResult) {
-        document.getElementById('taiFullBlock').style.display = 'block';
-        document.getElementById('taiLoginGate').style.display = 'none';
-        renderFull(d.fullResult);
-      } else {
-        // 이미 로그인 상태인데 아직 claim 안 됨 → 자동 claim 후 재로드
-        var accessTok = null;
-        try { accessTok = localStorage.getItem('access_token'); } catch (e) {}
-        if (accessTok && !d.claimed) {
-          try {
-            await fetch(TAI_API + '/anonymous-diagnosis/' + encodeURIComponent(token) + '/claim', {
-              method: 'POST',
-              headers: { 'Authorization': 'Bearer ' + accessTok, 'Content-Type': 'application/json' }
-            });
-            location.reload();
-            return;
-          } catch (e2) {}
-        }
-        document.getElementById('taiFullBlock').style.display = 'none';
-        document.getElementById('taiLoginGate').style.display = 'block';
-        document.getElementById('btnViewFull').onclick = function () {
-          if (typeof taiDiagGoLoginForFull === 'function') taiDiagGoLoginForFull(token);
-          else {
-            localStorage.setItem('pendingDiagnosisToken', token);
-            localStorage.setItem('postLoginRedirect', 'free-diagnosis-result.html?token=' + encodeURIComponent(token));
-            location.href = 'log-in.html';
-          }
-        };
-      }
-    } catch (e) {
-      document.getElementById('taiDiagLoading').style.display = 'none';
-      document.getElementById('taiDiagError').style.display = 'block';
-      document.getElementById('taiDiagError').textContent = '네트워크 오류로 결과를 불러오지 못했습니다.';
-    }
-  }
-  load();
-})();
-	</script>
-</body>
-</html>
+<footer class="tai-footer">
+  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
+  <div class="footer-main"><div class="footer-grid">
+    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p></div></div>
+    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li></ul></div>
+    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li></ul></div>
+    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li></ul></div>
+  </div></div>
+  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
+</footer>
+<script src="assets/js/nav-auth.js"></script>
+</body></html>

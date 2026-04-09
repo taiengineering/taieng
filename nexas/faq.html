@@ -1,247 +1,155 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-	<!--Title-->
-	<title>자주 묻는 질문 | TAI Engineering</title>
-
-	<!--fivicon icon-->
-    <link rel="icon" href="assets/img/fevicon.png">
-
-	<!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
-
-    <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
-
-
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자주하는 질문 | TAI 엔지니어링</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .faq-hero { background:var(--navy); padding:60px 0 50px; }
+  .faq-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
+  .faq-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
+  .faq-cat-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
+  .faq-tab { padding:8px 18px; border-radius:999px; font-size:.84rem; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:#fff; color:var(--sub); transition:all .15s; }
+  .faq-tab.active, .faq-tab:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .faq-item { border:1px solid var(--border); border-radius:12px; margin-bottom:10px; overflow:hidden; background:#fff; }
+  .faq-q { display:flex; justify-content:space-between; align-items:center; padding:18px 22px; cursor:pointer; font-size:.92rem; font-weight:700; color:var(--navy); }
+  .faq-q .q-icon { color:var(--red); font-weight:900; font-size:1rem; flex-shrink:0; margin-left:12px; transition:transform .2s; }
+  .faq-a { display:none; padding:0 22px 20px; font-size:.88rem; color:var(--sub); line-height:1.7; border-top:1px solid var(--border); padding-top:16px; }
+  .faq-a.open { display:block; }
+  .faq-q.open .q-icon { transform:rotate(45deg); }
+  .still-question { background:var(--navy); border-radius:16px; padding:36px; text-align:center; margin-top:40px; }
+  .still-question h4 { color:#fff; font-weight:800; margin-bottom:8px; }
+  .still-question p { color:rgba(255,255,255,.6); font-size:.88rem; margin-bottom:20px; }
+  </style>
 </head>
-<body class='sc5'>
-	<!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
     </div>
-    <!-- preloader area end -->
-    <div class="body-overlay" id="body-overlay"></div>
-    <!-- navbar start -->
-    <header class="navbar-area">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
-                    aria-expanded="false" aria-label="메뉴 열기">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="themefie_main_menu">
-                    <ul class="navbar-nav menu-open text-end">
-                        <li class="tai-safe-wrap">
-                            <a href="index-1.html">TAI SAFE</a>
-                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-2.html">TAI MANAGER</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-3.html">TAI FIX</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-3.html#vendor">수선업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-4.html">TAI CARE</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-4.html#manager">안전관리자</a></li>
-                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index-5.html">안전정보</a></li>
-                        <li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- navbar end -->
+  </div>
+</nav>
 
-    <!-- breadcrumb Area Start-->
-    <section class="breadcrumb-area text-center"><!--style-overlay-->
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 align-self-center">
-                    <div class="breadcrumb-inner">
-                        <h1 class="page-title">자주 묻는 질문</h1>
-                        <ul class="page-list breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">자주 묻는 질문</li>
-                        </ul>                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb Area End -->
+<div class="faq-hero">
+  <div class="sec-inner">
+    <h1>자주 묻는 질문</h1>
+    <p>TAI 서비스에 대해 가장 많이 묻는 질문들을 정리했습니다</p>
+  </div>
+</div>
 
-    <!-- faq-Area Start-->
-    <section class="faq-area" style="background: var(--main-gradient)">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="faq-inner">
-                        <div class="faq-accordion" id="faqAccordion">
-                            <p class="text-center py-4 mb-0 text-white-50">불러오는 중…</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- faq-Area end-->
-
-    <!-- footer area start -->
-    <footer class="footer-area style-5">
-        <div class="footer-patent-bar text-center py-2 small">
-            <div class="container">
-                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
-            </div>
+<section class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <div class="faq-cat-tabs">
+          <button class="faq-tab active" onclick="filterFaq('all',this)">전체</button>
+          <button class="faq-tab" onclick="filterFaq('diagnosis',this)">법령 진단</button>
+          <button class="faq-tab" onclick="filterFaq('saas',this)">TAI Safe SaaS</button>
+          <button class="faq-tab" onclick="filterFaq('appointment',this)">선임</button>
+          <button class="faq-tab" onclick="filterFaq('fix',this)">수선</button>
+          <button class="faq-tab" onclick="filterFaq('billing',this)">요금</button>
         </div>
 
-        <div class="footer-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-sm-6">
-                        <div class="footer-widget widget">
-                            <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                            <div class="footer-company-info">
-                                <p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-                                <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-                                <p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-                                <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-                                <p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-                                <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-                            </div>
-                            <ul class="social-area">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">메뉴</h6>
-                            <ul>
-                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">서비스</h6>
-                            <ul>
-                                <li><a href="free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
-                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">바로가기</h6>
-                            <ul>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
-                                <li><a href="faq.html"><i class="fas fa-angle-right"></i>자주하는 질문</a></li>
-                                <li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
-                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="faqList">
+          <div class="faq-item" data-cat="diagnosis">
+            <div class="faq-q" onclick="toggleFaq(this)">무료 법령 진단은 정말 무료인가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, 시설 정보 기준 1차 분석은 완전 무료입니다. 로그인 없이도 이용 가능하며, 적용 법령·선임 의무·점검 항목·리스크 수준을 확인하실 수 있습니다. 정밀 진단 및 상세 리포트는 유료 서비스입니다.</div>
+          </div>
+          <div class="faq-item" data-cat="diagnosis">
+            <div class="faq-q" onclick="toggleFaq(this)">진단 결과는 얼마나 정확한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">입력하신 시설 정보를 기반으로 적용 가능성이 높은 법령 의무를 자동 도출합니다. 특허 출원된 조건코드 기반 자동 판정 시스템(출원번호: 10-2026-0056330)을 활용합니다. 다만 1차 분석이므로 현장 상황에 따라 실제와 다를 수 있습니다. 정확한 진단은 전문가 상담을 권장합니다.</div>
+          </div>
+          <div class="faq-item" data-cat="saas">
+            <div class="faq-q" onclick="toggleFaq(this)">TAI Safe SaaS를 사용하면 안전관리자가 없어도 되나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">아닙니다. TAI Safe는 안전관리자의 업무를 자동화하여 효율화하는 도구이지, 안전관리자를 대체하는 시스템이 아닙니다. 법령상 선임 의무가 있는 경우 반드시 안전관리자를 선임하셔야 합니다. TAI MANAGER 서비스를 통해 적합한 전문가를 연결해드릴 수 있습니다.</div>
+          </div>
+          <div class="faq-item" data-cat="saas">
+            <div class="faq-q" onclick="toggleFaq(this)">기존 안전 관리 시스템과 연동이 가능한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">현재는 독립 SaaS로 운영됩니다. Enterprise 플랜의 경우 API 연동을 지원하며, 기존 ERP·HR 시스템과의 연동은 별도 협의가 필요합니다. 자세한 내용은 문의해주세요.</div>
+          </div>
+          <div class="faq-item" data-cat="appointment">
+            <div class="faq-q" onclick="toggleFaq(this)">선임 의무가 있는지 어떻게 확인하나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">무료 법령 진단을 통해 3분 안에 확인하실 수 있습니다. 사업장 유형, 근로자 수, 설비 종류를 입력하면 선임 의무 여부와 해당 법령 근거를 자동으로 도출해드립니다.</div>
+          </div>
+          <div class="faq-item" data-cat="appointment">
+            <div class="faq-q" onclick="toggleFaq(this)">선임 전문가와 계약 후 문제가 생기면 어떻게 되나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">TAI MANAGER는 플랫폼 연결 서비스이며, 계약은 기업과 전문가 간에 직접 체결됩니다. 다만 TAI는 전문가의 자격·경력 검증을 지원하며, 분쟁 발생 시 중재 지원을 제공합니다. 자세한 내용은 이용약관을 참고해주세요.</div>
+          </div>
+          <div class="faq-item" data-cat="fix">
+            <div class="faq-q" onclick="toggleFaq(this)">수선 전문업체는 어떻게 검증하나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">사업자등록증, 해당 분야 면허·인증, 시공 실적 등을 기준으로 검토 후 등록합니다. 등록 완료된 업체만 플랫폼에 노출되며, 이용자 리뷰 시스템으로 품질을 지속 관리합니다.</div>
+          </div>
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">구독을 언제든지 취소할 수 있나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, 언제든지 취소 가능합니다. 월 단위 구독이며, 취소 시 다음 결제일부터 청구되지 않습니다. 이미 결제된 기간은 서비스를 계속 이용하실 수 있습니다. 위약금은 없습니다.</div>
+          </div>
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">세금계산서 발행이 가능한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, TAI 엔지니어링은 일반과세자로 등록되어 있어 B2B 세금계산서 발행이 가능합니다. 결제 시 사업자 정보를 입력하시면 자동으로 발행됩니다.</div>
+          </div>
         </div>
-        <!--Footer bottom-->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>       
-                        </div>
-                    </div>
-                    <div class="col-md-6 align-self-center text-md-end">
-                        <div class="author-area">
-                            <p>원본 테마: Themefie</p>       
-                        </div>
-                    </div>
-                </div>                
-            </div>
-        </div>
-        <!--Footer bottom-->
-    </footer>
-    <!-- footer area end -->
 
-    <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+        <div class="still-question">
+          <h4>더 궁금한 점이 있으신가요?</h4>
+          <p>문의하시면 영업일 1일 이내 답변드립니다</p>
+          <a href="contact.html" class="btn-red">문의하기</a>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:80px;">
+          <h5 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:16px;">빠른 시작</h5>
+          <a href="free-diagnosis.html" class="btn-red d-block text-center" style="margin-bottom:12px;">무료 법령 진단 시작</a>
+          <a href="sign-up.html" class="btn-outline d-block text-center" style="margin-bottom:20px;">무료 회원가입</a>
+          <div style="padding-top:16px;border-top:1px solid var(--border);">
+            <p style="font-size:.82rem;color:var(--sub);margin-bottom:12px;">관련 서비스</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <a href="index-1.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI Safe SaaS</a>
+              <a href="index-2.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI MANAGER (선임)</a>
+              <a href="index-3.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI FIX (수선)</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-	
-
-	<!-- all plugins here -->
-    <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/imageloded.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/waypoint.js"></script>
-    <script src="assets/js/magnific.min.js"></script>
-    <script src="assets/js/nice-select.min.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/owl.min.js"></script>
-    <script src="assets/js/slick-slider.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <!-- main js  -->
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/tai-faq-public.js?v=20260402"></script>
-</body>
-</html>
+<footer class="tai-footer">
+  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
+  <div class="footer-main"><div class="footer-grid">
+    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p></div></div>
+    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li></ul></div>
+    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li></ul></div>
+    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li></ul></div>
+  </div></div>
+  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
+</footer>
+<script src="assets/js/nav-auth.js"></script>
+<script>
+function toggleFaq(el) {
+  const a = el.nextElementSibling;
+  const isOpen = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+  if(!isOpen) { a.classList.add('open'); el.classList.add('open'); }
+}
+function filterFaq(cat, btn) {
+  document.querySelectorAll('.faq-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body></html>

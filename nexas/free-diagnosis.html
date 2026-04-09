@@ -1,248 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>무료 법령 진단 입력 | TAI Engineering</title>
-	<link rel="icon" href="assets/img/fevicon.png">
-	<link rel="stylesheet" href="assets/css/animate.min.css">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/magnific.min.css">
-	<link rel="stylesheet" href="assets/css/nice-select.min.css">
-	<link rel="stylesheet" href="assets/css/owl.min.css">
-	<link rel="stylesheet" href="assets/css/slick-slide.min.css">
-	<link rel="stylesheet" href="assets/css/fontawesome.min.css">
-	<link rel="stylesheet" href="assets/css/style.css">
-	<link rel="stylesheet" href="assets/css/responsive.css">
-	<link rel="stylesheet" href="assets/css/tai-brand.css">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 무료 법령 진단 — 3분 안에 우리 사업장 법령 위반 여부를 확인하세요.">
+  <title>무료 법령 진단 | TAI 엔지니어링</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .diag-layout { min-height:calc(100vh - 64px); display:grid; grid-template-columns:1fr 1.6fr; }
+  @media(max-width:900px){ .diag-layout { grid-template-columns:1fr; } }
+  .diag-left {
+    background:var(--navy);
+    padding:60px 48px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .diag-left h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:#fff; line-height:1.15; margin-bottom:16px; }
+  .diag-left p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.7; margin-bottom:32px; }
+  .what-you-get { display:flex; flex-direction:column; gap:12px; }
+  .wyg-item { display:flex; gap:12px; align-items:center; }
+  .wyg-icon { width:34px; height:34px; border-radius:8px; background:rgba(230,57,70,.2); color:var(--red); display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; }
+  .wyg-item span { font-size:.88rem; color:rgba(255,255,255,.75); }
+  .diag-right { background:#fff; padding:60px 48px; overflow-y:auto; }
+  @media(max-width:900px){ .diag-left { padding:40px 24px; } .diag-right { padding:40px 24px; } }
+  .step-bar { display:flex; gap:0; margin-bottom:36px; }
+  .step-dot { display:flex; align-items:center; }
+  .step-num { width:28px; height:28px; border-radius:50%; background:var(--border); color:var(--sub); font-size:.78rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .step-num.active { background:var(--red); color:#fff; }
+  .step-num.done { background:var(--navy); color:#fff; }
+  .step-line { width:40px; height:2px; background:var(--border); margin:0 4px; }
+  .step-line.done { background:var(--navy); }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .panel-title { font-size:1.2rem; font-weight:900; color:var(--navy); margin-bottom:6px; }
+  .panel-sub { font-size:.88rem; color:var(--sub); margin-bottom:28px; }
+  .sector-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:28px; }
+  @media(max-width:500px){ .sector-grid { grid-template-columns:repeat(2,1fr); } }
+  .sector-btn {
+    border:2px solid var(--border); border-radius:12px; padding:20px 12px;
+    text-align:center; cursor:pointer; transition:all .15s; background:#fff;
+  }
+  .sector-btn:hover { border-color:var(--red); }
+  .sector-btn.selected { border-color:var(--red); background:#fff9f9; }
+  .sector-btn .s-icon { font-size:1.8rem; margin-bottom:8px; }
+  .sector-btn .s-name { font-size:.82rem; font-weight:700; color:var(--navy); }
+  .form-label-tai { font-size:.85rem; font-weight:700; color:var(--navy); margin-bottom:6px; display:block; }
+  .form-input-tai {
+    width:100%; border:1.5px solid var(--border); border-radius:8px;
+    padding:11px 14px; font-size:.9rem; color:var(--text); outline:none;
+    transition:border-color .15s; background:#fff;
+    font-family:inherit;
+  }
+  .form-input-tai:focus { border-color:var(--red); }
+  .form-row { margin-bottom:18px; }
+  .btn-next { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px 32px; border-radius:8px; border:none; cursor:pointer; width:100%; margin-top:8px; transition:background .2s; }
+  .btn-next:hover { background:#c1121f; }
+  .btn-back { background:none; border:none; color:var(--sub); font-size:.88rem; cursor:pointer; margin-top:12px; display:block; width:100%; text-align:center; }
+  .privacy-note { font-size:.76rem; color:var(--sub); text-align:center; margin-top:14px; line-height:1.5; }
+  </style>
 </head>
-<body class="sc5">
-	<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div></div>
-	<div class="body-overlay" id="body-overlay"></div>
-	<header class="navbar-area">
-		<nav class="navbar navbar-expand-lg">
-			<div class="container nav-container">
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기"><span class="icon-left"></span><span class="icon-right"></span></button>
-				</div>
-				<div class="logo"><a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a></div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open text-end">
-						<li class="tai-safe-wrap"><a href="index-1.html">TAI SAFE</a><a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a></li>
-						<li class="menu-item-has-children"><a href="index-2.html">TAI MANAGER</a><ul class="sub-menu"><li><a href="index-2.html#client">건물·공장 경영자</a></li><li><a href="index-2.html#partner">기술자·대행업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="index-3.html">TAI FIX</a><ul class="sub-menu"><li><a href="index-3.html#client">건물·공장 경영자</a></li><li><a href="index-3.html#vendor">수선업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="index-4.html">TAI CARE</a><ul class="sub-menu"><li><a href="index-4.html#manager">안전관리자</a></li><li><a href="index-4.html#agency">안전대행·진단업체</a></li></ul></li>
-						<li><a href="index-5.html">안전정보</a></li>
-						<li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-						<li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-						<li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-						<li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-						<li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+    </div>
+  </div>
+</nav>
 
-	<section class="breadcrumb-area text-center">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 align-self-center">
-					<div class="breadcrumb-inner">
-						<h1 class="page-title">무료 법령 진단</h1>
-						<ul class="page-list breadcrumb">
-							<li class="breadcrumb-item"><a href="index.html">홈</a></li>
-							<li class="breadcrumb-item active" aria-current="page">무료 진단</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<div class="diag-layout">
+  <!-- 좌: 설명 -->
+  <div class="diag-left">
+    <span style="display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.3);border-radius:4px;padding:4px 10px;margin-bottom:20px;">무료 법령 진단</span>
+    <h2>법령위반<br>중이십니다!!</h2>
+    <p>사업장 기본 정보만 입력하시면 3분 안에 적용 법령과 의무 항목, 위반 리스크를 정리해드립니다.</p>
+    <div class="what-you-get">
+      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-file-alt"></i></div><span>적용 법령 목록 자동 도출</span></div>
+      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-user-tie"></i></div><span>선임 의무 여부 확인</span></div>
+      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-clipboard-check"></i></div><span>법정 점검 항목 목록</span></div>
+      <div class="wyg-item"><div class="wyg-icon"><i class="fas fa-exclamation-triangle"></i></div><span>현재 위반 리스크 수준</span></div>
+    </div>
+    <p style="margin-top:32px; font-size:.78rem; color:rgba(255,255,255,.35);">로그인 불필요 · 시설 정보 기준 1차 분석 무료</p>
+  </div>
 
-	<div class="contact-area pd-top-90 pd-bottom-110" style="background: var(--main-gradient);">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8">
-					<div class="contact-inner">
-						<p class="text-white text-center mb-4 small">로그인 없이 빠르게 입력할 수 있습니다. 요금·상품 안내는 <strong>결과 확인 후</strong>에만 표시됩니다.</p>
-						<form id="freeDiagForm" class="contact-form" novalidate>
-							<div class="single-input-wrap mb-4">
-								<label class="d-block mb-1 small fw-bold text-white" for="site_kind">업종·현장 유형 <span class="text-warning">*</span></label>
-								<select id="site_kind" class="form-select border-0 rounded-0" style="height: 55px; padding-left: 20px;" required>
-									<option value="">선택</option>
-									<option value="construction">건설현장</option>
-									<option value="manufacturing">제조·공장</option>
-									<option value="building">건물·시설</option>
-									<option value="other">기타(특수시설 등)</option>
-								</select>
-							</div>
-							<div class="single-input-wrap mb-4">
-								<label class="d-block mb-1 small fw-bold text-white" for="scale">사업장·현장 규모(가이드) <span class="text-warning">*</span></label>
-								<select id="scale" class="form-select border-0 rounded-0" style="height: 55px; padding-left: 20px;" required>
-									<option value="">선택</option>
-									<option value="small">소규모</option>
-									<option value="medium">중규모</option>
-									<option value="large">대규모</option>
-								</select>
-							</div>
-							<div class="single-input-wrap mb-4">
-								<label class="d-block mb-1 small fw-bold text-white" for="workers">상시 인원·근로자 수 <span class="text-warning">*</span></label>
-								<input type="number" id="workers" class="form-control" min="1" max="50000" placeholder="예: 35" required>
-							</div>
-							<div class="single-input-wrap mb-4">
-								<label class="d-block mb-1 small fw-bold text-white" for="region">지역</label>
-								<input type="text" id="region" class="form-control" placeholder="예: 경기 성남시" maxlength="80">
-							</div>
-							<button type="submit" class="btn btn-white w-100" id="freeDiagSubmit">진단 실행하기</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <!-- 우: 폼 위저드 -->
+  <div class="diag-right">
+    <!-- 진행 바 -->
+    <div class="step-bar" id="stepBar">
+      <div class="step-dot"><div class="step-num active" id="sn1">1</div></div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-dot"><div class="step-num" id="sn2">2</div></div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-dot"><div class="step-num" id="sn3">3</div></div>
+    </div>
 
-	<footer class="footer-area style-1">
-		<div class="footer-patent-bar text-center py-2 small">
-			<div class="container"><p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p></div>
-		</div>
-		<div class="footer-inner">
-			<div class="container">
-				<div class="row">
-					<div class="col-xl-4 col-lg-4 col-sm-6">
-						<div class="footer-widget widget">
-							<a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-							<div class="footer-company-info">
-								<p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-								<p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-								<p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-								<p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-								<p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-								<p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-							</div>
-							<ul class="social-area">
-								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-								<li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">메뉴</h6>
-							<ul>
-								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">서비스</h6>
-							<ul>
-								<li><a href="free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
-								<li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-								<li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-								<li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-								<li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-								<li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-						<div class="footer-widget widget widget_link">
-							<h6 class="widget-title">바로가기</h6>
-							<ul>
-								<li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-								<li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
-								<li><a href="faq.html"><i class="fas fa-angle-right"></i>자주하는 질문</a></li>
-								<li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
-								<li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 align-self-center"><div class="copyright-area"><p>© TAI Engineering. 무단 복제를 금합니다.</p></div></div>
-					<div class="col-md-6 align-self-center text-md-end"><div class="author-area"><p>원본 테마: Themefie</p></div></div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+    <!-- Step 1: 섹터 선택 -->
+    <div class="panel active" id="step1">
+      <p class="panel-title">어떤 사업장인가요?</p>
+      <p class="panel-sub">해당하는 사업장 유형을 선택하세요</p>
+      <div class="sector-grid">
+        <div class="sector-btn" onclick="selectSector(this,'industry')"><div class="s-icon">🏭</div><div class="s-name">산업·제조</div></div>
+        <div class="sector-btn" onclick="selectSector(this,'construction')"><div class="s-icon">🏗️</div><div class="s-name">건설현장</div></div>
+        <div class="sector-btn" onclick="selectSector(this,'building')"><div class="s-icon">🏢</div><div class="s-name">건물·시설</div></div>
+        <div class="sector-btn" onclick="selectSector(this,'warehouse')"><div class="s-icon">🏪</div><div class="s-name">물류·창고</div></div>
+        <div class="sector-btn" onclick="selectSector(this,'food')"><div class="s-icon">🍽️</div><div class="s-name">식품·외식</div></div>
+        <div class="sector-btn" onclick="selectSector(this,'etc')"><div class="s-icon">📋</div><div class="s-name">기타</div></div>
+      </div>
+      <button class="btn-next" onclick="goStep(2)">다음 단계</button>
+    </div>
 
-	<script src="assets/js/jquery.3.6.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/imageloded.min.js"></script>
-	<script src="assets/js/counterup.js"></script>
-	<script src="assets/js/waypoint.js"></script>
-	<script src="assets/js/magnific.min.js"></script>
-	<script src="assets/js/nice-select.min.js"></script>
-	<script src="assets/js/fontawesome.min.js"></script>
-	<script src="assets/js/ripple.js"></script>
-	<script src="assets/js/owl.min.js"></script>
-	<script src="assets/js/slick-slider.min.js"></script>
-	<script src="assets/js/wow.min.js"></script>
-	<script src="assets/js/nav-auth.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/tai-free-diagnosis.js"></script>
-	<script>
-(function () {
-  var TAI_API = window.TAI_API_BASE || 'https://api.taieng.co.kr';
-  var form = document.getElementById('freeDiagForm');
-  if (!form) return;
-  form.addEventListener('submit', async function (e) {
-    e.preventDefault();
-    var site_kind = document.getElementById('site_kind').value;
-    var scale = document.getElementById('scale').value;
-    var workers = parseInt(document.getElementById('workers').value, 10);
-    var region = document.getElementById('region').value.trim();
-    if (!site_kind || !scale || !workers) {
-      alert('필수 항목을 입력해 주세요.');
-      return;
-    }
-    var btn = document.getElementById('freeDiagSubmit');
-    var prev = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>진단 중...';
-    try {
-      var res = await fetch(TAI_API + '/anonymous-diagnosis', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          site_kind: site_kind,
-          scale: scale,
-          workers: workers,
-          region: region
-        })
-      });
-      var data = await res.json().catch(function () { return {}; });
-      if (res.ok && data.publicToken) {
-        try {
-          localStorage.setItem('lastDiagnosisToken', data.publicToken);
-        } catch (err) {}
-        location.href = 'free-diagnosis-result.html?token=' + encodeURIComponent(data.publicToken);
-        return;
-      }
-      var msg = (data && data.detail) ? (typeof data.detail === 'string' ? data.detail : JSON.stringify(data.detail)) : '진단 요청에 실패했습니다.';
-      alert(msg);
-    } catch (err) {
-      alert('서버에 연결할 수 없습니다. 네트워크를 확인하거나 잠시 후 다시 시도해 주세요.');
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = prev;
-    }
+    <!-- Step 2: 사업장 정보 -->
+    <div class="panel" id="step2">
+      <p class="panel-title">사업장 기본 정보</p>
+      <p class="panel-sub">법령 진단에 필요한 정보를 입력해주세요</p>
+      <div class="form-row"><label class="form-label-tai">상시 근로자 수</label>
+        <select class="form-input-tai" id="workerCount">
+          <option value="">선택하세요</option>
+          <option>5인 미만</option>
+          <option>5 ~ 9인</option>
+          <option>10 ~ 29인</option>
+          <option>30 ~ 49인</option>
+          <option>50 ~ 99인</option>
+          <option>100 ~ 299인</option>
+          <option>300인 이상</option>
+        </select>
+      </div>
+      <div class="form-row"><label class="form-label-tai">주요 위험 설비 (복수 선택 가능)</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="forklift"> 지게차</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="press"> 프레스</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="crane"> 크레인·호이스트</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="conveyor"> 컨베이어</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="boiler"> 보일러·압력용기</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="chemical"> 화학물질 취급</label>
+          <label style="display:flex;gap:8px;align-items:center;font-size:.85rem;cursor:pointer;"><input type="checkbox" value="none"> 해당 없음</label>
+        </div>
+      </div>
+      <button class="btn-next" onclick="goStep(3)">다음 단계</button>
+      <button class="btn-back" onclick="goStep(1)">← 이전으로</button>
+    </div>
+
+    <!-- Step 3: 연락처 -->
+    <div class="panel" id="step3">
+      <p class="panel-title">결과를 받으실 정보</p>
+      <p class="panel-sub">진단 결과 리포트를 이메일로 보내드립니다</p>
+      <div class="form-row"><label class="form-label-tai">이름 (선택)</label><input type="text" class="form-input-tai" placeholder="홍길동"></div>
+      <div class="form-row"><label class="form-label-tai">이메일 <span style="color:var(--red);">*</span></label><input type="email" class="form-input-tai" placeholder="example@company.com" id="diagEmail"></div>
+      <div class="form-row"><label class="form-label-tai">연락처 (선택)</label><input type="tel" class="form-input-tai" placeholder="010-0000-0000"></div>
+      <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:20px;">
+        <input type="checkbox" id="agreePrivacy" style="margin-top:3px;">
+        <label for="agreePrivacy" style="font-size:.82rem;color:var(--sub);cursor:pointer;">개인정보 수집 및 이용에 동의합니다. <a href="privacy.html" style="color:var(--red);">개인정보처리방침</a></label>
+      </div>
+      <button class="btn-next" onclick="submitDiag()">진단 결과 받기</button>
+      <button class="btn-back" onclick="goStep(2)">← 이전으로</button>
+      <p class="privacy-note">수집된 정보는 법령 진단 결과 제공 목적으로만 사용되며, 외부에 공유되지 않습니다.</p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/nav-auth.js"></script>
+<script>
+let selectedSector = '';
+function selectSector(el, val) {
+  document.querySelectorAll('.sector-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected'); selectedSector = val;
+}
+function goStep(n) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  [1,2,3].forEach(i => {
+    const sn = document.getElementById('sn'+i);
+    sn.className = 'step-num' + (i < n ? ' done' : i === n ? ' active' : '');
+    if(i < 3) document.getElementById('sl'+i).className = 'step-line' + (i < n ? ' done' : '');
   });
-})();
-	</script>
-</body>
-</html>
+}
+function submitDiag() {
+  const email = document.getElementById('diagEmail').value;
+  const agreed = document.getElementById('agreePrivacy').checked;
+  if(!email) { alert('이메일을 입력해주세요.'); return; }
+  if(!agreed) { alert('개인정보 수집에 동의해주세요.'); return; }
+  window.location.href = 'free-diagnosis-result.html';
+}
+</script>
+</body></html>

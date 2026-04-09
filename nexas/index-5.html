@@ -1,251 +1,167 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>안전정보 | TAI Engineering</title>
-    <link rel="icon" href="assets/img/fevicon.png">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>안전정보 | TAI 엔지니어링</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .news-hero { background:var(--navy); padding:60px 0 50px; }
+  .news-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
+  .news-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
+  .cat-filter { display:flex; gap:8px; flex-wrap:wrap; padding:28px 0; border-bottom:1px solid var(--border); margin-bottom:36px; }
+  .cat-btn { padding:7px 16px; border-radius:999px; font-size:.82rem; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:#fff; color:var(--sub); transition:all .15s; }
+  .cat-btn.active, .cat-btn:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .news-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.06); height:100%; transition:transform .2s; }
+  .news-card:hover { transform:translateY(-4px); }
+  .news-card-img { width:100%; height:180px; object-fit:cover; background:var(--gray-bg); display:flex; align-items:center; justify-content:center; color:var(--sub); font-size:.8rem; }
+  .news-card-body { padding:20px; }
+  .news-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:3px 8px; margin-bottom:10px; }
+  .tag-law { background:#fff0f0; color:var(--red); }
+  .tag-safe { background:#e8f4fd; color:#1a6fb5; }
+  .tag-notice { background:#f0fff4; color:#1a8f4b; }
+  .tag-guide { background:#fdf6e8; color:#9a6b00; }
+  .news-card h5 { font-size:.95rem; font-weight:800; color:var(--navy); margin-bottom:8px; line-height:1.4; }
+  .news-card p { font-size:.82rem; color:var(--sub); margin:0; line-height:1.55; }
+  .news-meta { display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:.76rem; color:var(--sub); }
+  .notice-bar { background:#fffbeb; border:1px solid #fcd34d; border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:12px; align-items:center; }
+  .notice-bar .icon { color:#f59e0b; font-size:1.1rem; flex-shrink:0; }
+  .notice-bar p { margin:0; font-size:.88rem; color:#92400e; }
+  </style>
 </head>
-<body class="home-5 sc5">
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div id="wave1"></div>
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html" class="active">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
     </div>
-    <div class="body-overlay" id="body-overlay"></div>
+  </div>
+</nav>
 
-    <header class="navbar-area">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container nav-container">
-                <div class="responsive-mobile-menu">
-                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴 열기">
-                        <span class="icon-left"></span>
-                        <span class="icon-right"></span>
-                    </button>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                </div>
-                <div class="collapse navbar-collapse" id="themefie_main_menu">
-                    <ul class="navbar-nav menu-open text-end">
-                        <li class="tai-safe-wrap">
-                            <a href="index-1.html">TAI SAFE</a>
-                            <a href="contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-2.html">TAI MANAGER</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-2.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-2.html#partner">기술자·대행업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-3.html">TAI FIX</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-3.html#client">건물·공장 경영자</a></li>
-                                <li><a href="index-3.html#vendor">수선업체</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="index-4.html">TAI CARE</a>
-                            <ul class="sub-menu">
-                                <li><a href="index-4.html#manager">안전관리자</a></li>
-                                <li><a href="index-4.html#agency">안전대행·진단업체</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index-5.html">안전정보</a></li>
-                        <li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="log-in.html">로그인</a></li>
-                        <li class="nav-auth-guest tai-nav-auth"><a href="sign-up.html">회원가입</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="mypage/">마이페이지</a></li>
-                        <li class="nav-auth-user tai-nav-auth d-none"><a href="#" class="tai-logout">로그아웃</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+<div class="news-hero">
+  <div class="sec-inner">
+    <h1>안전정보</h1>
+    <p>산업안전 법령 개정 소식, 현장 가이드, TAI 공지사항을 확인하세요</p>
+  </div>
+</div>
 
-    <!-- TAI: 안전정보 — api.taieng.co.kr/posts 데이터 -->
-    <section class="tai-safety-banner">
-        <div class="container">
-            <div class="row align-items-center gy-4">
-                <div class="col-lg-8">
-                    <h6 class="text-white mb-2" style="opacity:0.9;">국가·공인 데이터 기반</h6>
-                    <h1 class="mb-2">산업안전 안전정보</h1>
-                    <p class="lead mb-0">공개 API와 동일하게 최신 게시글을 불러옵니다. (api.taieng.co.kr/posts)</p>
-                </div>
-                <div class="col-lg-4">
-                    <div class="tai-stat-box">
-                        <div class="label mb-1">집계</div>
-                        <div class="value" id="tai-stat-today">불러오는 중…</div>
-                        <div class="value mt-2" style="font-size:0.95rem;font-weight:500;opacity:0.9;" id="tai-stat-total">—</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="sec" style="background:var(--gray-bg); padding-top:40px;">
+  <div class="sec-inner">
 
-    <section class="service-area default-pd-top pd-bottom-100" id="tai-safety-list">
-        <div class="container">
-            <div class="row justify-content-center mb-4">
-                <div class="col-12">
-                    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start mb-3">
-                        <button type="button" class="tai-cat-tab active" data-cat="">전체</button>
-                        <button type="button" class="tai-cat-tab" data-cat="safety_news">안전뉴스</button>
-                        <button type="button" class="tai-cat-tab" data-cat="accident_case">사고사례</button>
-                        <button type="button" class="tai-cat-tab" data-cat="kosha_guide">기술지침</button>
-                        <button type="button" class="tai-cat-tab" data-cat="law_update">법령안내</button>
-                        <button type="button" class="tai-cat-tab" data-cat="general">안전팁</button>
-                        <button type="button" class="tai-cat-tab" data-cat="notice">공지</button>
-                    </div>
-                    <div class="row g-2 align-items-center flex-wrap">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="input-group input-group-sm">
-                                <input type="search" class="form-control" id="tai-posts-search" placeholder="제목 검색" aria-label="검색">
-                                <button class="btn btn-base" type="button" id="tai-posts-search-btn">검색</button>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-lg-3 ms-md-auto">
-                            <select class="form-select form-select-sm" id="tai-posts-sort" aria-label="정렬">
-                                <option value="latest">최신순</option>
-                                <option value="views">조회순</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <span class="small text-muted" id="tai-posts-count"></span>
-            </div>
-
-            <div class="text-center py-4 d-none" id="tai-posts-loading">
-                <span class="text-muted">목록을 불러오는 중…</span>
-            </div>
-
-            <div class="row g-4" id="tai-posts-grid"></div>
-            <div id="tai-posts-pagination" class="mt-4"></div>
-        </div>
-    </section>
-
-    <footer class="footer-area style-1">
-        <div class="footer-patent-bar text-center py-2 small">
-            <div class="container">
-                <p class="mb-0">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호:10-2026-0056330)</p>
-            </div>
-        </div>
-
-        <div class="footer-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-sm-6">
-                        <div class="footer-widget widget">
-                            <a class="logo" href="index.html"><img src="assets/img/tai-logo.png" alt=""></a>
-                            <div class="footer-company-info">
-                                <p class="mb-1"><span class="footer-company-name fw-bold">TAI 엔지니어링</span><span class="tai-footer-name-gap">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="small">대표 심태왕</span></p>
-                                <p class="mb-2 small">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-                                <p class="mb-1 small">TEL : 02-6233-3000 · FAX : 02-6670-9790</p>
-                                <p class="mb-1 small">EMAIL: <a href="mailto:contact@taieng.co.kr">contact@taieng.co.kr</a></p>
-                                <p class="mb-1 small">사업자등록번호 : 723-39-01422</p>
-                                <p class="mb-3 small">통신판매신고번호 : 제2011-강원춘천-0039호</p>
-                            </div>
-                            <ul class="social-area">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">메뉴</h6>
-                            <ul>
-                                <li><a href="index-1.html"><i class="fas fa-angle-right"></i>TAI SAFE</a></li>
-                                <li><a href="index-2.html"><i class="fas fa-angle-right"></i>TAI MANAGER</a></li>
-                                <li><a href="index-3.html"><i class="fas fa-angle-right"></i>TAI FIX</a></li>
-                                <li><a href="index-4.html"><i class="fas fa-angle-right"></i>TAI CARE</a></li>
-                                <li><a href="index-5.html"><i class="fas fa-angle-right"></i>안전정보</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">서비스</h6>
-                            <ul>
-                                <li><a href="free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령 진단</a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>공정 분석</a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>설비 분석</a></li>
-                                <li><a href="service.html"><i class="fas fa-angle-right"></i>SaaS 자동 관리</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 offset-lg-1 col-lg-2 col-6">
-                        <div class="footer-widget widget widget_link">
-                            <h6 class="widget-title">바로가기</h6>
-                            <ul>
-                                <li><a href="about.html"><i class="fas fa-angle-right"></i>회사 소개</a></li>
-                                <li><a href="contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>
-                                <li><a href="terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>
-                                <li><a href="privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 align-self-center">
-                        <div class="copyright-area">
-                            <p>© TAI Engineering. 무단 복제를 금합니다.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 align-self-center text-md-end">
-                        <div class="author-area">
-                            <p>원본 테마: Themefie</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+    <div class="notice-bar">
+      <div class="icon"><i class="fas fa-bullhorn"></i></div>
+      <p><strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요. <a href="#" style="color:#92400e; text-decoration:underline;">자세히 보기</a></p>
     </div>
 
-    <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/imageloded.min.js"></script>
-    <script src="assets/js/counterup.js"></script>
-    <script src="assets/js/waypoint.js"></script>
-    <script src="assets/js/magnific.min.js"></script>
-    <script src="assets/js/nice-select.min.js"></script>
-    <script src="assets/js/fontawesome.min.js"></script>
-    <script src="assets/js/ripple.js"></script>
-    <script src="assets/js/owl.min.js"></script>
-    <script src="assets/js/slick-slider.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/tai-safety-posts.js"></script>
-</body>
-</html>
+    <div class="cat-filter">
+      <button class="cat-btn active" onclick="filterNews('all',this)">전체</button>
+      <button class="cat-btn" onclick="filterNews('law',this)">법령 개정</button>
+      <button class="cat-btn" onclick="filterNews('safe',this)">안전 가이드</button>
+      <button class="cat-btn" onclick="filterNews('notice',this)">공지사항</button>
+      <button class="cat-btn" onclick="filterNews('guide',this)">실무 가이드</button>
+    </div>
+
+    <div class="row g-4" id="newsGrid">
+      <div class="col-lg-4 col-md-6" data-cat="law">
+        <div class="news-card">
+          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-law">법령 개정</span>
+            <h5>산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화</h5>
+            <p>2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출이 의무화됩니다.</p>
+            <div class="news-meta"><span>2026.03.15</span><span>TAI 법령팀</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-cat="safe">
+        <div class="news-card">
+          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-safe">안전 가이드</span>
+            <h5>끼임 사고 예방 — 프레스 작업 10대 안전수칙</h5>
+            <p>제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다. 필수 안전수칙을 확인하세요.</p>
+            <div class="news-meta"><span>2026.03.10</span><span>TAI 안전팀</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-cat="notice">
+        <div class="news-card">
+          <div class="news-card-img" style="background:#f0fff4; color:#1a8f4b;"><div style="text-align:center;"><i class="fas fa-bullhorn fa-2x" style="margin-bottom:8px;"></i><p style="margin:0;">TAI 공지</p></div></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-notice">공지사항</span>
+            <h5>TAI Safe SaaS 정식 서비스 오픈 — 건설·산업 섹터 지원 시작</h5>
+            <p>건설현장 및 산업·제조 사업장 대상 TAI Safe SaaS 정식 서비스를 시작합니다.</p>
+            <div class="news-meta"><span>2026.03.01</span><span>TAI 엔지니어링</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-cat="law">
+        <div class="news-card">
+          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-law">법령 개정</span>
+            <h5>중대재해처벌법 — 50인 미만 사업장 전면 적용 주요 사항</h5>
+            <p>2026년 1월부터 50인 미만 사업장도 중대재해처벌법 적용 대상입니다. 지금 확인하세요.</p>
+            <div class="news-meta"><span>2026.02.20</span><span>TAI 법령팀</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-cat="guide">
+        <div class="news-card">
+          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-guide">실무 가이드</span>
+            <h5>안전관리자 선임 완전 가이드 — 조건·절차·서류 총정리</h5>
+            <p>어떤 사업장에서 누구를 선임해야 하는지, 절차와 서류를 한 번에 정리했습니다.</p>
+            <div class="news-meta"><span>2026.02.10</span><span>TAI 실무팀</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6" data-cat="safe">
+        <div class="news-card">
+          <div class="news-card-img"><img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=80" alt="" style="width:100%;height:180px;object-fit:cover;"></div>
+          <div class="news-card-body">
+            <span class="news-tag tag-safe">안전 가이드</span>
+            <h5>건설현장 추락사고 예방 — 작업발판 설치 기준 완전 정리</h5>
+            <p>추락사고는 건설현장 사망의 49%를 차지합니다. 법정 설치 기준을 확인하세요.</p>
+            <div class="news-meta"><span>2026.01.25</span><span>TAI 안전팀</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <button class="btn-outline" style="padding:12px 36px;">더 보기</button>
+    </div>
+  </div>
+</div>
+
+<footer class="tai-footer">
+  <div class="footer-patent">본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다. (출원번호: 10-2026-0056330)</div>
+  <div class="footer-main"><div class="footer-grid">
+    <div><a href="index.html" class="footer-logo"><img src="assets/img/tai-logo.png" alt="TAI"></a><div class="footer-info"><p><strong style="color:rgba(255,255,255,.55);">TAI 엔지니어링</strong>&nbsp;&nbsp;대표 심태왕</p><p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p><p>TEL: 02-6233-3000 · contact@taieng.co.kr</p><p>사업자등록번호: 723-39-01422</p></div></div>
+    <div class="footer-col"><h6>메뉴</h6><ul><li><a href="index-1.html">TAI SAFE</a></li><li><a href="index-2.html">TAI MANAGER</a></li><li><a href="index-3.html">TAI FIX</a></li><li><a href="index-4.html">TAI CARE</a></li><li><a href="index-5.html">안전정보</a></li></ul></div>
+    <div class="footer-col"><h6>서비스</h6><ul><li><a href="free-diagnosis.html">무료 법령 진단</a></li><li><a href="index-1.html">TAI SAFE</a></li></ul></div>
+    <div class="footer-col"><h6>바로가기</h6><ul><li><a href="about.html">회사 소개</a></li><li><a href="contact.html">문의하기</a></li><li><a href="faq.html">자주하는 질문</a></li></ul></div>
+  </div></div>
+  <div class="footer-bottom"><span>© TAI Engineering.</span><span>이걸 왜 몰랐지?</span></div>
+</footer>
+<script src="assets/js/nav-auth.js"></script>
+<script>
+function filterNews(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#newsGrid [data-cat]').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body></html>
