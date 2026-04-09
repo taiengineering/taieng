@@ -5,17 +5,12 @@
   <title>로그인 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
   .auth-layout { min-height:calc(100vh - 64px); display:grid; grid-template-columns:1fr 1fr; }
   @media(max-width:768px){ .auth-layout { grid-template-columns:1fr; } .auth-bg { display:none; } }
-  .auth-bg {
-    background:linear-gradient(135deg,#0d1b2a,#1a3a5c);
-    display:flex; flex-direction:column; justify-content:center; align-items:center;
-    padding:60px 48px; text-align:center;
-  }
+  .auth-bg { background:linear-gradient(135deg,#0d1b2a,#1a3a5c); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:60px 48px; text-align:center; }
   .auth-bg h2 { font-size:2rem; font-weight:900; color:#fff; margin-bottom:12px; }
   .auth-bg p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.7; }
   .auth-form-wrap { display:flex; flex-direction:column; justify-content:center; padding:60px 48px; background:#fff; }
@@ -25,7 +20,7 @@
   .form-label-tai { font-size:.83rem; font-weight:700; color:var(--navy); margin-bottom:6px; display:block; }
   .form-input-tai { width:100%; border:1.5px solid var(--border); border-radius:8px; padding:12px 14px; font-size:.9rem; color:var(--text); outline:none; transition:border-color .15s; background:#fff; font-family:inherit; margin-bottom:16px; }
   .form-input-tai:focus { border-color:var(--red); }
-  .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px; border-radius:8px; border:none; cursor:pointer; width:100%; margin-top:4px; transition:background .2s; }
+  .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s; }
   .submit-btn:hover { background:#c1121f; }
   .divider { display:flex; align-items:center; gap:12px; margin:20px 0; color:var(--sub); font-size:.8rem; }
   .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
@@ -48,7 +43,6 @@
     </div>
   </div>
 </nav>
-
 <div class="auth-layout">
   <div class="auth-bg">
     <img src="assets/img/tai-logo.png" alt="TAI" style="height:40px;margin-bottom:32px;">
@@ -67,14 +61,13 @@
     <label class="form-label-tai">비밀번호</label>
     <input type="password" class="form-input-tai" placeholder="비밀번호를 입력하세요">
     <button class="submit-btn">로그인</button>
-    <div class="auth-links">
-      <a href="#">비밀번호 찾기</a>
-      <a href="sign-up.html">계정 만들기</a>
-    </div>
+    <div class="auth-links"><a href="#">비밀번호 찾기</a><a href="sign-up.html">계정 만들기</a></div>
     <div class="divider">또는</div>
     <div class="social-btn"><img src="https://www.google.com/favicon.ico" style="width:16px;height:16px;"> Google로 로그인</div>
-    <div class="social-btn" style="background:#fee500;border-color:#fee500;"><img src="https://www.kakaocorp.com/favicon.ico" style="width:16px;height:16px;"> 카카오로 로그인</div>
+    <div class="social-btn" style="background:#fee500;border-color:#fee500;"><span style="font-weight:900;">K</span>&nbsp; 카카오로 로그인</div>
   </div>
 </div>
+<div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 </body></html>
