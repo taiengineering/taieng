@@ -2,23 +2,62 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI FIX — 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠">
-  <title>TAI FIX | 이번에도 고장이네. 이런 건 전문가에게 맡기셔야죠</title>
+  <meta name="description" content="TAI Agent — 안전관리 대행부터 설비 수선까지. 안전관리자가 할 일을 우리가 대신합니다.">
+  <title>TAI Agent | 안전관리, 저희가 대신합니다</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .hero3 { min-height:65vh; display:flex; align-items:center; background:linear-gradient(135deg,#0d1b2a 0%,#1c2e1c 60%,#0a1a0a 100%); padding:80px 0; }
-  .hero3 h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
-  .hero3 .sub { font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.7); margin-bottom:36px; }
-  .cat-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; height:100%; cursor:pointer; transition:transform .2s, box-shadow .2s; border:1px solid rgba(255,255,255,.08); }
-  .cat-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.3); }
-  .cat-card .icon { font-size:2.4rem; margin-bottom:14px; }
-  .cat-card h5 { font-weight:800; font-size:1.05rem; margin-bottom:8px; }
-  .cat-card p { font-size:.84rem; color:rgba(255,255,255,.6); margin:0; line-height:1.55; }
-  .cat-card .cat-tag { display:inline-block; font-size:.68rem; font-weight:700; text-transform:uppercase; background:rgba(230,57,70,.2); color:var(--red); border-radius:4px; padding:3px 8px; margin-bottom:12px; }
+  /* 히어로 */
+  .hero-agent { min-height:68vh; display:flex; align-items:center; background:linear-gradient(135deg,#050a14 0%,#0d1b2e 55%,#0a1a14 100%); padding:80px 0; position:relative; overflow:hidden; }
+  .hero-agent::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 50% 70% at 8% 50%, rgba(39,174,96,.07) 0%, transparent 60%), radial-gradient(ellipse 40% 60% at 92% 25%, rgba(26,95,210,.1) 0%, transparent 65%); pointer-events:none; }
+  .hero-agent h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
+  .hero-agent .sub { font-size:clamp(1rem,2vw,1.25rem); color:rgba(255,255,255,.72); margin-bottom:36px; line-height:1.55; }
+  /* 2개 서비스 카드 */
+  .svc-intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media(max-width:768px){ .svc-intro-grid { grid-template-columns:1fr; } }
+  .svc-intro-card { border-radius:20px; padding:40px 32px; height:100%; }
+  .svc-intro-card.agent { background:linear-gradient(135deg,#0d2e1a,#0f3d22); border:1px solid rgba(39,174,96,.25); }
+  .svc-intro-card.fix { background:linear-gradient(135deg,#1a0d0d,#2e1515); border:1px solid rgba(230,57,70,.25); }
+  .svc-intro-card .svc-icon { font-size:2.8rem; margin-bottom:18px; }
+  .svc-intro-card h3 { font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:10px; }
+  .svc-intro-card .svc-desc { font-size:.9rem; color:rgba(255,255,255,.65); line-height:1.65; margin-bottom:24px; }
+  .svc-intro-card .svc-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+  .svc-tag { font-size:.75rem; font-weight:700; padding:5px 12px; border-radius:999px; }
+  .svc-tag.g { background:rgba(39,174,96,.2); color:#4ade80; }
+  .svc-tag.r { background:rgba(230,57,70,.2); color:#f87171; }
+  /* 섹터 탭 */
+  .agent-sector-tabs { display:flex; gap:8px; justify-content:center; margin-bottom:32px; flex-wrap:wrap; }
+  .agent-sector-tab { border:2px solid var(--border,#e2e4e8); background:#fff; border-radius:999px; padding:8px 24px; font-size:.92rem; font-weight:700; color:var(--sub,#6b7280); cursor:pointer; transition:all .2s; }
+  .agent-sector-tab.active { background:var(--navy,#0d1b2a); border-color:var(--navy,#0d1b2a); color:#fff; }
+  /* 대행 플랜 카드 */
+  .agent-card { background:#fff; border-radius:16px; padding:32px 24px; box-shadow:0 4px 24px rgba(0,0,0,.08); height:100%; position:relative; border-top:4px solid var(--border,#e2e4e8); }
+  .agent-card.featured { border-top-color:#27ae60; }
+  .agent-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#27ae60; color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:4px 14px; white-space:nowrap; }
+  .agent-tier { font-size:.78rem; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+  .agent-price { font-size:clamp(1.8rem,3vw,2.3rem); font-weight:900; color:var(--navy); line-height:1; margin-bottom:4px; }
+  .agent-unit { font-size:.85rem; color:var(--sub); margin-bottom:18px; min-height:20px; }
+  .agent-feats { list-style:none; padding:0; margin:0 0 24px; }
+  .agent-feats li { font-size:.85rem; color:var(--sub); padding:7px 0; border-bottom:1px solid #f0f1f3; display:flex; gap:8px; align-items:flex-start; }
+  .agent-feats li i { color:#27ae60; margin-top:3px; flex-shrink:0; }
+  .price-loading { text-align:center; padding:60px 0; color:var(--sub); }
+  /* 수선 안내 */
+  .fix-card-item { background:#fff; border-radius:14px; padding:24px 20px; box-shadow:0 2px 16px rgba(0,0,0,.06); display:flex; gap:16px; align-items:flex-start; transition:transform .2s; }
+  .fix-card-item:hover { transform:translateY(-3px); }
+  .fix-icon-box { width:44px; height:44px; border-radius:10px; background:#fff0f0; color:var(--red); display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .fix-card-item h5 { font-size:.95rem; font-weight:800; color:var(--navy); margin-bottom:4px; }
+  .fix-card-item p { font-size:.82rem; color:var(--sub); margin:0; line-height:1.5; }
+  /* 비교 배너 */
+  .diff-table { width:100%; border-collapse:collapse; }
+  .diff-table th { background:var(--navy); color:#fff; font-size:.85rem; padding:14px 16px; text-align:center; }
+  .diff-table th:first-child { text-align:left; }
+  .diff-table td { padding:13px 16px; font-size:.84rem; color:var(--sub); border-bottom:1px solid #f0f1f3; text-align:center; }
+  .diff-table td:first-child { text-align:left; font-weight:700; color:var(--navy); }
+  .diff-table tr:last-child td { border-bottom:none; }
+  .check-y { color:#27ae60; font-size:1rem; }
+  .check-n { color:#ccc; font-size:1rem; }
   </style>
 </head>
 <body>
@@ -26,7 +65,7 @@
   <div class="inner">
     <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
     <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html" class="active">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html" class="active">TAI AGENT</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
       <span class="nav-sep">|</span>
       <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
       <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
@@ -35,63 +74,153 @@
   </div>
 </nav>
 
-<section class="hero3">
-  <div class="sec-inner">
+<!-- 히어로 -->
+<section class="hero-agent">
+  <div class="sec-inner" style="position:relative;z-index:2;">
     <div class="row align-items-center g-5">
       <div class="col-lg-6">
-        <span class="page-hero-tag">전문가 연결 — 수선</span>
-        <h1>이번에도<br>고장이네.</h1>
-        <p class="sub">이런 건 전문가에게 맡기셔야죠</p>
-        <p style="color:rgba(255,255,255,.55); font-size:.9rem; margin-bottom:32px; line-height:1.65;">법정 점검 중 이상이 발생했거나, 반복적으로 같은 설비가 고장나고 있다면.<br>검증된 수선 전문업체를 바로 연결해드립니다.</p>
+        <span class="page-hero-tag">TAI Agent</span>
+        <h1>안전관리,<br>저희가 대신합니다</h1>
+        <p class="sub">업무 대행부터 설비 수선까지.<br>안전관리자 없는 사업장도, 바쁜 담당자도 안심하세요.</p>
         <div class="d-flex gap-3 flex-wrap">
-          <a href="contact.html" class="btn-red">수선 전문가 찾기</a>
-          <a href="#categories" class="btn-outline-white">수선 분야 보기</a>
+          <a href="#agent-plans" class="btn-red">대행 서비스 보기</a>
+          <a href="#fix" class="btn-outline-white">설비 수선 연결</a>
         </div>
       </div>
-      <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=800&q=80" alt="설비 수선" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);"></div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1664575600796-ffa828c5cb6e?auto=format&fit=crop&w=800&q=80" alt="안전관리 대행" class="img-fluid" style="border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.5);">
+      </div>
     </div>
   </div>
 </section>
 
-<section id="categories" class="sec" style="background:var(--gray-bg);">
+<!-- 2개 서비스 소개 -->
+<section class="sec" style="background:var(--navy);">
   <div class="sec-inner">
-    <div class="text-center mb-5"><span class="sec-tag">수선 분야</span><h2 class="sec-h2">어떤 분야든 전문업체가 있습니다</h2></div>
-    <div class="row g-4">
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">⚡</div><span class="cat-tag">전기</span><h5>전기·소방 설비</h5><p>전기패널, 소방설비, 비상조명, 자동화재탐지설비 점검 및 수선</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🔧</div><span class="cat-tag">기계</span><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 등 수선</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🏗️</div><span class="cat-tag">시설</span><h5>건물·시설 보수</h5><p>건물 구조물, 옥상방수, 외벽, 창호 보수 및 유지관리</p></div></div>
-      <div class="col-lg-3 col-md-6"><div class="cat-card"><div class="icon">🌡️</div><span class="cat-tag">설비</span><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 수선</p></div></div>
+    <div class="text-center mb-5">
+      <span class="sec-tag">2가지 서비스</span>
+      <h2 class="sec-h2" style="color:#fff;">필요한 것만 골라 쓰세요</h2>
+      <p style="color:rgba(255,255,255,.55);">대행과 수선, 두 서비스를 조합해 사용할 수 있습니다</p>
+    </div>
+    <div class="svc-intro-grid">
+      <div class="svc-intro-card agent">
+        <div class="svc-icon">🤝</div>
+        <h3>안전관리 대행</h3>
+        <p class="svc-desc">안전관리자가 직접 해야 하는 점검 기록, 보고서 작성, 일정 관리 등 법정 의무 업무를 전문 매니저가 대신합니다. 중소사업장에서 가장 많이 요청하는 서비스입니다.</p>
+        <div class="svc-tags">
+          <span class="svc-tag g">점검 기록 대행</span>
+          <span class="svc-tag g">보고서 작성</span>
+          <span class="svc-tag g">일정 관리</span>
+          <span class="svc-tag g">법정 서류</span>
+          <span class="svc-tag g">위험성평가 보조</span>
+        </div>
+        <a href="#agent-plans" class="btn-red">대행 플랜 보기</a>
+      </div>
+      <div class="svc-intro-card fix">
+        <div class="svc-icon">🔧</div>
+        <h3>설비 수선 연결</h3>
+        <p class="svc-desc">법정 점검 중 이상이 발견되거나 설비가 반복적으로 고장난다면, 면허·실적 검증된 수선 전문업체를 바로 연결해드립니다. 수선 결과는 플랫폼에 자동 기록됩니다.</p>
+        <div class="svc-tags">
+          <span class="svc-tag r">전기·소방</span>
+          <span class="svc-tag r">기계·산업설비</span>
+          <span class="svc-tag r">건물·시설</span>
+          <span class="svc-tag r">냉난방·공조</span>
+          <span class="svc-tag r">수선 기록 보관</span>
+        </div>
+        <a href="#fix" class="btn-outline-white">수선 업체 연결</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- 대행 서비스 플랜 (API) -->
+<section id="agent-plans" class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="text-center mb-4">
+      <span class="sec-tag">안전관리 대행</span>
+      <h2 class="sec-h2">섹터별 대행 플랜</h2>
+      <p style="color:var(--sub);">어드민에서 수정하면 이 페이지에 즉시 반영됩니다</p>
+    </div>
+    <div class="agent-sector-tabs">
+      <button class="agent-sector-tab active" data-sector="facility" onclick="switchSector(this,'facility')">🏢 건물·시설</button>
+      <button class="agent-sector-tab" data-sector="industry" onclick="switchSector(this,'industry')">🏭 산업</button>
+      <button class="agent-sector-tab" data-sector="construction" onclick="switchSector(this,'construction')">🏗 건설</button>
+    </div>
+    <div id="agentCards" class="row g-4 justify-content-center">
+      <div class="price-loading"><i class="fas fa-spinner fa-spin me-2"></i>대행 플랜을 불러오는 중...</div>
+    </div>
+  </div>
+</section>
+
+<!-- 대행 vs DIY 비교 -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
-    <div class="row g-5">
-      <div class="col-lg-6" id="client">
-        <div style="background:var(--gray-bg); border-radius:16px; padding:36px; height:100%;">
-          <span class="sec-tag">건물·공장 경영자</span>
-          <h3 style="font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:20px;">수선 필요하면 바로 연결됩니다</h3>
-          <div style="display:flex; flex-direction:column; gap:14px;">
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-search"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">원인 진단 먼저</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">어떤 전문업체가 필요한지 안내해드립니다</p></div></div>
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-tools"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">검증된 업체 연결</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">면허·실적 확인된 전문업체를 바로 연결</p></div></div>
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:#fff0f0;color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-file-alt"></i></div><div><strong style="font-size:.9rem;color:var(--navy);">수선 기록 자동 보관</strong><p style="margin:0;font-size:.82rem;color:var(--sub);">수선 결과가 플랫폼에 자동 저장됩니다</p></div></div>
-          </div>
-          <div style="margin-top:28px;"><a href="contact.html" class="btn-red">수선 업체 찾기</a></div>
+    <div class="text-center mb-5">
+      <span class="sec-tag">왜 대행인가요?</span>
+      <h2 class="sec-h2">직접 관리 vs TAI 대행</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div style="overflow-x:auto;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,.07);">
+          <table class="diff-table">
+            <thead>
+              <tr>
+                <th style="width:40%;">항목</th>
+                <th>직접 관리</th>
+                <th>TAI 대행</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>법령 파악</td><td>담당자가 직접 공부</td><td><i class="fas fa-check check-y"></i> TAI가 자동 도출</td></tr>
+              <tr><td>점검 일정 생성</td><td>엑셀·수기로 관리</td><td><i class="fas fa-check check-y"></i> 시스템 자동 생성</td></tr>
+              <tr><td>보고서 작성</td><td>매번 수작업</td><td><i class="fas fa-check check-y"></i> 전문 매니저 대행</td></tr>
+              <tr><td>이상 발생 대응</td><td>담당자가 직접 처리</td><td><i class="fas fa-check check-y"></i> 즉시 알림 + 수선 연결</td></tr>
+              <tr><td>법정 서류 보관</td><td>개인 보관 (분실 위험)</td><td><i class="fas fa-check check-y"></i> 플랫폼 자동 저장</td></tr>
+              <tr><td>인력 공백 대응</td><td><i class="fas fa-times check-n"></i> 공백 발생 시 위험</td><td><i class="fas fa-check check-y"></i> 매니저 교체 없이 지속</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="col-lg-6" id="vendor">
-        <div style="background:var(--navy); border-radius:16px; padding:36px; height:100%;">
-          <span style="color:var(--red); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:14px;">수선업체</span>
-          <h3 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:20px;">새 수주 기회를 플랫폼에서</h3>
-          <div style="display:flex; flex-direction:column; gap:14px;">
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-handshake"></i></div><div><strong style="font-size:.9rem;color:#fff;">지역 수요 우선 연결</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);"> 내 활동 지역 수선 요청 먼저 확인</p></div></div>
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-star"></i></div><div><strong style="font-size:.9rem;color:#fff;">실적 자동 누적</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">수선 완료 건이 포트폴리오로 자동 기록</p></div></div>
-            <div style="display:flex; gap:12px; align-items:center;"><div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-won-sign"></i></div><div><strong style="font-size:.9rem;color:#fff;">정산 자동 처리</strong><p style="margin:0;font-size:.82rem;color:rgba(255,255,255,.55);">계약부터 정산까지 플랫폼에서 관리</p></div></div>
-          </div>
-          <div style="margin-top:28px;"><a href="contact.html" style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-weight:700;padding:12px 24px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);">수선업체 등록하기</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 설비 수선 안내 -->
+<section id="fix" class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <span class="sec-tag">설비 수선 연결</span>
+        <h2 class="sec-h2">이번에도<br>고장이네.</h2>
+        <p style="color:var(--sub); margin-bottom:28px; line-height:1.65;">법정 점검 중 이상이 발생했거나, 반복적으로 같은 설비가 고장나고 있다면 검증된 수선 전문업체를 바로 연결해드립니다.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px;">
+          <a href="contact.html" class="btn-red">수선 업체 찾기</a>
+          <a href="contact.html" class="btn-outline">수선업체 등록</a>
+        </div>
+        <p style="font-size:.83rem; color:var(--sub);"><i class="fas fa-shield-alt me-1" style="color:var(--red);"></i>면허·실적 검증 후 등록된 업체만 연결됩니다</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">⚡</div><div><h5>전기·소방 설비</h5><p>전기패널, 소방설비, 비상조명, 자동화재탐지 점검·수선</p></div></div></div>
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">🔧</div><div><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 수선·정비</p></div></div></div>
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">🏗️</div><div><h5>건물·시설 보수</h5><p>구조물, 옥상방수, 외벽, 창호 보수 및 유지관리</p></div></div></div>
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">🌡️</div><div><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 수선</p></div></div></div>
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">🚒</div><div><h5>승강기·운반설비</h5><p>엘리베이터, 에스컬레이터, 지게차 정기 점검·수선</p></div></div></div>
+          <div class="col-md-6"><div class="fix-card-item"><div class="fix-icon-box">💧</div><div><h5>배관·위생설비</h5><p>급수·배수·오수 설비, 정화조 관리</p></div></div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec" style="background:var(--navy); padding:72px 0;">
+  <div class="sec-inner text-center">
+    <h2 class="sec-h2" style="color:#fff; margin-bottom:14px;">지금 바로 시작하세요</h2>
+    <p style="color:rgba(255,255,255,.6); margin-bottom:36px;">법령진단 → 맞춤 대행 플랜 선택 → 전담 매니저 배정</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="free-diagnosis.html" class="btn-red">무료 법령 진단하기</a>
+      <a href="contact.html" class="btn-ghost">도입 문의하기</a>
     </div>
   </div>
 </section>
@@ -99,4 +228,65 @@
 <div id="tai-footer"></div>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+<script>
+const API = 'https://api.taieng.co.kr';
+let _agentData = [];
+let _curSector = 'facility';
+
+const FEATURED = { facility:'STANDARD', industry:'STANDARD', construction:'STANDARD' };
+
+function fmtPrice(item) {
+  if (item.price_display) return item.price_display;
+  if (item.price === 0) return '무료';
+  if (item.price < 0) return '협의';
+  return item.price.toLocaleString('ko-KR') + '<span style="font-size:.9em;">원</span>';
+}
+
+function renderAgentCards(sector) {
+  const plans = _agentData.filter(d => d.sector === sector && d.is_active)
+    .sort((a,b) => a.sort_order - b.sort_order);
+  const wrap = document.getElementById('agentCards');
+  if (!plans.length) { wrap.innerHTML = '<p class="price-loading">대행 플랜 정보가 없습니다.</p>'; return; }
+  const featured = FEATURED[sector];
+  wrap.innerHTML = plans.map(p => {
+    const isFeat = p.tier_code === featured;
+    const isCustom = p.price < 0;
+    const feats = p.description ? p.description.split('/').map(f => f.trim()).filter(Boolean) : [];
+    const priceUnit = (p.price <= 0) ? '&nbsp;' : '/ 월 (VAT 별도)';
+    return `
+    <div class="col-lg-4 col-md-6">
+      <div class="agent-card${isFeat ? ' featured' : ''}">
+        ${isFeat ? '<span class="agent-badge">추천</span>' : ''}
+        <p class="agent-tier">${p.label}</p>
+        <p class="agent-price">${fmtPrice(p)}</p>
+        <p class="agent-unit">${priceUnit}</p>
+        <ul class="agent-feats">
+          ${feats.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
+        </ul>
+        <a href="${isCustom ? 'contact.html' : 'contact.html'}" class="${isFeat ? 'btn-red' : 'btn-outline'} w-100 text-center">${isCustom ? '문의하기' : '도입 문의하기'}</a>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function switchSector(btn, sector) {
+  document.querySelectorAll('.agent-sector-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  _curSector = sector;
+  renderAgentCards(sector);
+}
+
+async function loadAgent() {
+  try {
+    const res = await fetch(API + '/price-policy?category=agent');
+    const json = await res.json();
+    _agentData = (json.data || []).filter(d => d.is_active);
+    renderAgentCards(_curSector);
+  } catch(e) {
+    document.getElementById('agentCards').innerHTML = '<p class="price-loading">플랜 정보를 불러올 수 없습니다.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadAgent);
+</script>
 </body></html>
