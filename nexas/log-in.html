@@ -87,77 +87,14 @@
   .msg-box.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
   .msg-box.show    { display: block; }
 
-  .divider { display:flex; align-items:center; gap:12px; margin:18px 0; color:var(--sub); font-size:.8rem; }
-  .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
-
-  .social-btn {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; padding: 11px; border-radius: 8px;
-    border: 1.5px solid var(--border); background: #fff;
-    font-size: .88rem; font-weight: 600; color: var(--text);
-    cursor: pointer; margin-bottom: 10px; transition: background .15s;
-  }
-  .social-btn:hover { background: var(--gray-bg); }
-
   .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
   .required-star { color: var(--red); }
 
-  /* ════════════════════════════════════════
-     Floating Label (이메일 필드 선적용)
-  ════════════════════════════════════════ */
-  .form-floating > .form-control {
-    border: 1.5px solid var(--border, #e2e8f0);
-    border-radius: 8px;
-    font-family: inherit;
-    font-size: .9rem;
-    color: var(--text, #0f172a);
-    transition: border-color .15s;
-  }
-  .form-floating > .form-control:focus {
-    border-color: var(--red, #dc2626);
-    box-shadow: none;
-  }
-  /* 에러 상태 */
-  .form-floating > .form-control.is-error {
-    border-color: #ef4444;
-  }
-  .form-floating > label {
-    color: var(--sub, #94a3b8);
-    font-size: .88rem;
-    font-weight: 600;
-  }
-  .form-floating > .form-control:focus ~ label,
-  .form-floating > .form-control:not(:placeholder-shown) ~ label {
-    color: var(--red, #dc2626);
-    font-size: .72rem;
-    font-weight: 700;
-  }
-  .form-floating > .form-control.is-error ~ label {
-    color: #ef4444;
-  }
-
-  /* focus 안내 텍스트 */
-  .field-focus-hint {
-    font-size: .76rem;
-    color: var(--sub, #94a3b8);
-    margin-top: 5px;
-    margin-bottom: 4px;
-    display: none;            /* 기본: 숨김 */
-    padding-left: 2px;
-  }
-  .form-control:focus ~ .field-focus-hint,
-  .form-floating:focus-within .field-focus-hint {
-    display: block;           /* focus 시 노출 */
-  }
-
-  /* 필드 에러 메시지 */
+  /* ── 필드 에러 메시지 ── */
   .field-error {
-    font-size: .76rem;
-    color: #ef4444;
-    margin-top: 5px;
-    margin-bottom: 8px;
-    padding-left: 2px;
-    display: none;
+    font-size: .76rem; color: #ef4444;
+    margin-top: 5px; margin-bottom: 8px;
+    padding-left: 2px; display: none;
   }
   .field-error.show { display: block; }
   </style>
@@ -186,23 +123,23 @@
 
   <!-- 우측 폼 -->
   <div class="auth-form-wrap">
-    <!-- 탭 -->
     <div class="auth-tabs">
       <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">로그인</div>
       <div class="auth-tab" id="tab-register" onclick="switchTab('register')">회원가입</div>
     </div>
 
-    <!-- 전체 메시지 박스 -->
     <div class="msg-box" id="msg-box"></div>
 
     <!-- ── 로그인 폼 ── -->
     <div id="panel-login">
       <label class="form-label-tai">이메일</label>
-      <input type="email" class="form-input-tai" id="login-email" placeholder="example@company.com" autocomplete="email">
+      <input type="email" class="form-input-tai" id="login-email"
+        placeholder="example@company.com" autocomplete="email">
 
       <label class="form-label-tai">비밀번호</label>
-      <input type="password" class="form-input-tai" id="login-pw" placeholder="비밀번호 입력"
-        autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+      <input type="password" class="form-input-tai" id="login-pw"
+        placeholder="비밀번호 입력" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter') doLogin()">
 
       <div style="text-align:right; margin-top:-10px; margin-bottom:16px;">
         <a href="#" style="font-size:.8rem; color:var(--sub);" onclick="showForgot(event)">비밀번호 찾기</a>
@@ -210,12 +147,7 @@
 
       <button class="submit-btn" id="btn-login" onclick="doLogin()">로그인</button>
 
-      <div class="divider">또는</div>
-      <div class="social-btn" onclick="doKakaoLogin()">
-        <span style="font-weight:900; font-size:1rem;">K</span> 카카오로 로그인
-      </div>
-
-      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:16px;">
+      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:20px;">
         계정이 없으신가요?
         <a href="#" style="color:var(--red);font-weight:700;" onclick="switchTab('register');return false;">회원가입</a>
       </p>
@@ -224,33 +156,28 @@
     <!-- ── 회원가입 폼 ── -->
     <div id="panel-register" style="display:none;">
       <label class="form-label-tai">이름 <span class="required-star">*</span></label>
-      <input type="text" class="form-input-tai" id="reg-name" placeholder="홍길동" autocomplete="name">
+      <input type="text" class="form-input-tai" id="reg-name"
+        placeholder="홍길동" autocomplete="name">
 
-      <!-- ✅ 이메일: Floating Label + Focus 안내 + 빨간 에러 선적용 -->
-      <div class="form-floating mb-1">
-        <input type="email" class="form-control" id="reg-email"
-          placeholder=" " autocomplete="email"
-          oninput="clearEmailError()" onblur="validateEmail()">
-        <label for="reg-email">이메일 *</label>
-      </div>
-      <!-- focus 시 안내 (form-floating:focus-within 으로 제어) -->
-      <div class="field-focus-hint" id="email-hint">
-        💡 로그인과 공지 수신에 사용됩니다. 실제 사용 중인 이메일을 입력하세요.
-      </div>
-      <!-- 유효성 에러 -->
+      <label class="form-label-tai">이메일 <span class="required-star">*</span></label>
+      <input type="email" class="form-input-tai" id="reg-email"
+        placeholder="example@company.com" autocomplete="email"
+        oninput="clearEmailError()" onblur="validateEmail()">
       <div class="field-error" id="email-error"></div>
 
-      <label class="form-label-tai mt-2">휴대폰 번호 <span class="required-star">*</span></label>
-      <input type="tel" class="form-input-tai" id="reg-phone" placeholder="01012345678"
-        autocomplete="tel" maxlength="11">
+      <label class="form-label-tai">휴대폰 번호 <span class="required-star">*</span></label>
+      <input type="tel" class="form-input-tai" id="reg-phone"
+        placeholder="01012345678" autocomplete="tel" maxlength="11">
       <div class="form-hint">숫자만 입력 (예: 01012345678)</div>
 
       <label class="form-label-tai">비밀번호 <span class="required-star">*</span></label>
-      <input type="password" class="form-input-tai" id="reg-pw" placeholder="8자 이상" autocomplete="new-password">
+      <input type="password" class="form-input-tai" id="reg-pw"
+        placeholder="8자 이상" autocomplete="new-password">
 
       <label class="form-label-tai">비밀번호 확인 <span class="required-star">*</span></label>
-      <input type="password" class="form-input-tai" id="reg-pw2" placeholder="비밀번호 재입력"
-        autocomplete="new-password" onkeydown="if(event.key==='Enter') doRegister()">
+      <input type="password" class="form-input-tai" id="reg-pw2"
+        placeholder="비밀번호 재입력" autocomplete="new-password"
+        onkeydown="if(event.key==='Enter') doRegister()">
 
       <label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--sub);margin-bottom:14px;cursor:pointer;">
         <input type="checkbox" id="reg-agree" style="margin-top:2px;">
@@ -288,13 +215,11 @@ function switchTab(tab) {
   clearMsg();
   history.replaceState(null, '', '#' + tab);
 }
-
 (function(){
-  const h = location.hash.replace('#','');
-  if (h === 'register') switchTab('register');
+  if (location.hash.replace('#','') === 'register') switchTab('register');
 })();
 
-/* ── 전체 메시지 ── */
+/* ── 메시지 ── */
 function showMsg(text, type) {
   const box = document.getElementById('msg-box');
   box.textContent = text;
@@ -306,48 +231,24 @@ function clearMsg() {
   box.textContent = '';
 }
 
-/* ── 이메일 필드 유효성 ── */
+/* ── 이메일 유효성 ── */
 function validateEmail() {
-  const input = document.getElementById('reg-email');
-  const errEl = document.getElementById('email-error');
-  const val   = input.value.trim();
-  const ok    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-
-  if (!val) {
-    setEmailError('이메일을 입력해 주세요.');
-  } else if (!ok) {
+  const val = document.getElementById('reg-email').value.trim();
+  if (!val) { setEmailError('이메일을 입력해 주세요.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
     setEmailError('올바른 이메일 형식이 아닙니다. (예: example@company.com)');
-  } else {
-    clearEmailError();
-  }
+  } else { clearEmailError(); }
 }
-
 function setEmailError(msg) {
-  const input = document.getElementById('reg-email');
-  const errEl = document.getElementById('email-error');
-  input.classList.add('is-error');
-  errEl.textContent = '⚠ ' + msg;
-  errEl.classList.add('show');
+  document.getElementById('reg-email').classList.add('is-error');
+  const e = document.getElementById('email-error');
+  e.textContent = '⚠ ' + msg; e.classList.add('show');
 }
-
 function clearEmailError() {
-  const input = document.getElementById('reg-email');
-  const errEl = document.getElementById('email-error');
-  input.classList.remove('is-error');
-  errEl.classList.remove('show');
-  errEl.textContent = '';
+  document.getElementById('reg-email').classList.remove('is-error');
+  const e = document.getElementById('email-error');
+  e.classList.remove('show'); e.textContent = '';
 }
-
-/* focus 안내 — form-floating:focus-within CSS로 처리하되
-   hint div가 floating 바깥에 있으므로 JS로 보조 */
-document.addEventListener('DOMContentLoaded', function() {
-  const emailInput = document.getElementById('reg-email');
-  const hint = document.getElementById('email-hint');
-  if (emailInput && hint) {
-    emailInput.addEventListener('focus',  () => hint.style.display = 'block');
-    emailInput.addEventListener('blur',   () => hint.style.display = 'none');
-  }
-});
 
 /* ── localStorage 저장 ── */
 function saveSession(data) {
@@ -370,12 +271,10 @@ async function doLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pw    = document.getElementById('login-pw').value;
   clearMsg();
-
   if (!email || !pw) { showMsg('이메일과 비밀번호를 입력해 주세요.', 'error'); return; }
 
   const btn = document.getElementById('btn-login');
   btn.disabled = true; btn.textContent = '로그인 중...';
-
   try {
     const res = await fetch(API + '/auth/login', {
       method: 'POST',
@@ -383,18 +282,11 @@ async function doLogin() {
       body: JSON.stringify({ email, password: pw })
     });
     const d = await res.json();
-
-    if (!res.ok) {
-      showMsg(d.detail || '이메일 또는 비밀번호가 올바르지 않습니다.', 'error');
-      return;
-    }
-
+    if (!res.ok) { showMsg(d.detail || '이메일 또는 비밀번호가 올바르지 않습니다.', 'error'); return; }
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
-
     const redirect = new URLSearchParams(location.search).get('redirect');
     location.href = redirect || 'mypage/';
-
   } catch(e) {
     showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
   } finally {
@@ -413,14 +305,10 @@ async function doRegister() {
   clearMsg();
 
   if (!name)  { showMsg('이름을 입력해 주세요.', 'error'); return; }
-
-  /* 이메일 — 필드 에러 방식으로 처리 */
   if (!email) { setEmailError('이메일을 입력해 주세요.'); return; }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    setEmailError('올바른 이메일 형식이 아닙니다. (예: example@company.com)');
-    return;
+    setEmailError('올바른 이메일 형식이 아닙니다.'); return;
   }
-
   if (!phone || phone.length < 10) { showMsg('올바른 휴대폰 번호를 입력해 주세요.', 'error'); return; }
   if (pw.length < 8)  { showMsg('비밀번호는 8자 이상이어야 합니다.', 'error'); return; }
   if (pw !== pw2)     { showMsg('비밀번호가 일치하지 않습니다.', 'error'); return; }
@@ -428,7 +316,6 @@ async function doRegister() {
 
   const btn = document.getElementById('btn-reg');
   btn.disabled = true; btn.textContent = '가입 중...';
-
   try {
     const res = await fetch(API + '/auth/register', {
       method: 'POST',
@@ -436,30 +323,22 @@ async function doRegister() {
       body: JSON.stringify({ name, email, phone, password: pw })
     });
     const d = await res.json();
-
     if (!res.ok) {
       const detail = d.detail;
-      if (typeof detail === 'string') { showMsg(detail, 'error'); }
-      else if (Array.isArray(detail)) { showMsg(detail.map(e=>e.msg).join(', '), 'error'); }
-      else { showMsg('회원가입에 실패했습니다. 입력 정보를 확인해 주세요.', 'error'); }
+      if (typeof detail === 'string') showMsg(detail, 'error');
+      else if (Array.isArray(detail)) showMsg(detail.map(e=>e.msg).join(', '), 'error');
+      else showMsg('회원가입에 실패했습니다. 입력 정보를 확인해 주세요.', 'error');
       return;
     }
-
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
     showMsg('🎉 가입이 완료되었습니다! 마이페이지로 이동합니다...', 'success');
     setTimeout(() => { location.href = 'mypage/'; }, 1200);
-
   } catch(e) {
     showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
   } finally {
     btn.disabled = false; btn.textContent = '회원가입';
   }
-}
-
-/* ── 카카오 로그인 ── */
-function doKakaoLogin() {
-  showMsg('카카오 로그인은 준비 중입니다.', 'error');
 }
 
 /* ── 비밀번호 찾기 ── */
