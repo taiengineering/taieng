@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI FIX — 설비 수선 전문업체 연결. 법정 점검 중 이상 발생 시 면허·실적 검증된 업체를 바로 연결합니다.">
+  <title>TAI FIX | 이번에도 고장이네. 전문가에게 맡기세요</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <style>
+  .hero-fix { min-height:65vh; display:flex; align-items:center; background:linear-gradient(135deg,#0d1b2a 0%,#1c2e1c 55%,#0a1a0a 100%); padding:80px 0; position:relative; overflow:hidden; }
+  .hero-fix::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 50% 70% at 8% 50%, rgba(255,140,0,.07) 0%, transparent 60%); pointer-events:none; }
+  .hero-fix h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
+  .hero-fix .sub { font-size:clamp(1rem,2vw,1.25rem); color:rgba(255,255,255,.7); margin-bottom:36px; line-height:1.55; }
+  /* 카테고리 카드 */
+  .cat-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; height:100%; transition:transform .2s, box-shadow .2s; border:1px solid rgba(255,255,255,.08); }
+  .cat-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,.3); }
+  .cat-card .icon { font-size:2.4rem; margin-bottom:14px; }
+  .cat-card h5 { font-weight:800; font-size:1.05rem; margin-bottom:8px; }
+  .cat-card p { font-size:.84rem; color:rgba(255,255,255,.6); margin:0; line-height:1.55; }
+  .cat-card .cat-tag { display:inline-block; font-size:.68rem; font-weight:700; text-transform:uppercase; background:rgba(230,57,70,.2); color:var(--red); border-radius:4px; padding:3px 8px; margin-bottom:12px; }
+  /* 프로세스 */
+  .process-step { display:flex; gap:18px; align-items:flex-start; padding:20px 0; border-bottom:1px solid #e8eaed; }
+  .process-step:last-child { border-bottom:none; }
+  .process-num { width:38px; height:38px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .process-step strong { font-size:1rem; font-weight:800; color:var(--navy); display:block; margin-bottom:4px; }
+  .process-step p { margin:0; font-size:.88rem; color:var(--sub); }
+  /* 양면 카드 */
+  .dual-card { border-radius:16px; padding:36px; height:100%; }
+  .dual-card.client { background:var(--gray-bg); }
+  .dual-card.vendor { background:var(--navy); }
+  .dual-card-row { display:flex; gap:12px; align-items:center; padding:14px 0; border-bottom:1px solid rgba(0,0,0,.07); }
+  .dual-card.vendor .dual-card-row { border-color:rgba(255,255,255,.1); }
+  .dual-card-row:last-of-type { border-bottom:none; }
+  .dual-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:.95rem; }
+  .dual-card.client .dual-icon { background:#fff0f0; color:var(--red); }
+  .dual-card.vendor .dual-icon { background:rgba(255,255,255,.1); color:#fff; }
+  .dual-card.client strong { font-size:.9rem; color:var(--navy); display:block; margin-bottom:2px; }
+  .dual-card.client span  { font-size:.82rem; color:var(--sub); }
+  .dual-card.vendor strong { font-size:.9rem; color:#fff; display:block; margin-bottom:2px; }
+  .dual-card.vendor span  { font-size:.82rem; color:rgba(255,255,255,.55); }
+  </style>
+</head>
+<body>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links"><!-- JS 로드 --></div>
+  </div>
+</nav>
+
+<!-- 히어로 -->
+<section class="hero-fix">
+  <div class="sec-inner" style="position:relative;z-index:2;">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="page-hero-tag">전문가 연결 — 수선</span>
+        <h1>이번에도<br>고장이네.</h1>
+        <p class="sub">이런 건 전문가에게 맡기셔야죠<br>면허·실적 검증된 수선 전문업체를 바로 연결해드립니다.</p>
+        <p style="color:rgba(255,255,255,.5); font-size:.88rem; margin-bottom:32px; line-height:1.65;">법정 점검 중 이상이 발생했거나, 반복적으로 같은 설비가 고장난다면<br>수선 결과는 TAI Safe 플랫폼에 자동 저장됩니다.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="contact.html" class="btn-red">수선 업체 찾기</a>
+          <a href="#categories" class="btn-outline-white">수선 분야 보기</a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <img src="https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=800&q=80" alt="설비 수선" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 수선 분야 -->
+<section id="categories" class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="text-center mb-5">
+      <span class="sec-tag">수선 분야</span>
+      <h2 class="sec-h2">어떤 분야든 전문업체가 있습니다</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">⚡</div><span class="cat-tag">전기</span><h5>전기·소방 설비</h5><p>전기패널, 소방설비, 비상조명, 자동화재탐지설비 점검·수선</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">🔧</div><span class="cat-tag">기계</span><h5>기계·산업설비</h5><p>프레스, 크레인, 컨베이어, 공기압축기 수선·정비</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">🏗️</div><span class="cat-tag">시설</span><h5>건물·시설 보수</h5><p>건물 구조물, 옥상방수, 외벽, 창호 보수 및 유지관리</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">🌡️</div><span class="cat-tag">설비</span><h5>냉난방·공조</h5><p>에어컨, 보일러, 환기설비, 공조시스템 수선</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">🚒</div><span class="cat-tag">승강기</span><h5>승강기·운반설비</h5><p>엘리베이터, 에스컬레이터, 지게차 정기 점검·수선</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="cat-card"><div class="icon">💧</div><span class="cat-tag">배관</span><h5>배관·위생설비</h5><p>급수·배수·오수 설비, 정화조 관리</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 이용 과정 -->
+<section class="sec" style="background:#fff;">
+  <div class="sec-inner">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <span class="sec-tag">이용 과정</span>
+        <h2 class="sec-h2">신청부터 수선 완료까지</h2>
+        <p style="color:var(--sub); margin-bottom:8px;">TAI를 통하면 간단하게 신청하고, 매칭된 업체에서 바로 연락이 옵니다.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="process-step"><div class="process-num">1</div><div><strong>수선 요청 접수</strong><p>설비 종류, 증상, 위치 입력 — 3분 안에 접수 완료</p></div></div>
+        <div class="process-step"><div class="process-num">2</div><div><strong>전문업체 매칭</strong><p>면허·지역·실적 기준으로 적합한 업체 선정</p></div></div>
+        <div class="process-step"><div class="process-num">3</div><div><strong>업체 직접 연락</strong><p>1영업일 이내 업체에서 연락, 현장 실사 후 견적</p></div></div>
+        <div class="process-step"><div class="process-num">4</div><div><strong>수선 완료 + 자동 기록</strong><p>결과가 TAI Safe에 자동 저장되어 감사 대응이 가능합니다</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 객소 / 업체 -->
+<section class="sec" style="background:var(--gray-bg);">
+  <div class="sec-inner">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="dual-card client">
+          <span class="sec-tag" style="display:block; margin-bottom:14px;">건물·공장 경영자</span>
+          <h3 style="font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:24px;">수선 필요하면 바로 연결됩니다</h3>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-search"></i></div><div><strong>원인 진단 먼저</strong><span>어떤 전문업체가 필요한지 안내해드립니다</span></div></div>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-tools"></i></div><div><strong>검증된 업체 연결</strong><span>면허·실적 확인된 업체를 바로 연결</span></div></div>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-file-alt"></i></div><div><strong>수선 기록 자동 보관</strong><span>수선 결과가 플랫폼에 자동 저장됩니다</span></div></div>
+          <div style="margin-top:28px;"><a href="contact.html" class="btn-red">수선 업체 찾기</a></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="dual-card vendor">
+          <span style="color:var(--red); font-size:.7rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; display:block; margin-bottom:14px;">수선업체</span>
+          <h3 style="font-size:1.5rem; font-weight:900; color:#fff; margin-bottom:24px;">새 수주 기회를 플랫폼에서</h3>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-handshake"></i></div><div><strong>지역 수요 우선 연결</strong><span>내 활동 지역 수선 요청 먼저 확인</span></div></div>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-star"></i></div><div><strong>실적 자동 누적</strong><span>수선 완료 건이 포트폴리오로 자동 기록</span></div></div>
+          <div class="dual-card-row"><div class="dual-icon"><i class="fas fa-won-sign"></i></div><div><strong>정산 자동 처리</strong><span>계약부터 정산까지 플랫폼에서 관리</span></div></div>
+          <div style="margin-top:28px;"><a href="contact.html" style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;font-weight:700;padding:12px 24px;border-radius:7px;border:1.5px solid rgba(255,255,255,.3);">수선업체 등록하기</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec" style="background:var(--navy); padding:72px 0;">
+  <div class="sec-inner text-center">
+    <h2 class="sec-h2" style="color:#fff; margin-bottom:14px;">지금 바로 수선만 맡기세요</h2>
+    <p style="color:rgba(255,255,255,.6); margin-bottom:36px;">안전관리 업무까지 대행이 필요하시면 TAI Agent를 사용해보세요</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="contact.html" class="btn-red">수선 업체 찾기</a>
+      <a href="index-3.html" class="btn-ghost">TAI Agent 보기</a>
+    </div>
+  </div>
+</section>
+
+<div id="tai-footer"></div>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+</body></html>
