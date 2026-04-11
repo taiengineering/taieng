@@ -18,7 +18,7 @@
 <footer class="tai-footer">
   <div class="footer-patent" style="color:#fff;">
     본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다.
-    특허 출원 중 (Patent Pending) · 출원번호: 제10-2026-0056330 외 4건 · 상표출원: 제40-2026-0061564
+    출원번호: 제10-2026-0056330 외 4건 · 상표출원: 제40-2026-0061564
   </div>
   <div class="footer-main">
     <div class="footer-grid">
@@ -75,7 +75,6 @@
   </div>
   <div class="footer-bottom">
     <span>© TAI Engineering. All rights reserved.</span>
-    <span style="margin-left:16px; opacity:.5; font-size:.8em;">특허 출원 중 (Patent Pending) · 제10-2026-0056330 외 4건</span>
   </div>
 </footer>
 `;
