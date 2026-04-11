@@ -17,8 +17,9 @@
   const FOOTER_HTML = `
 <footer class="tai-footer">
   <div class="footer-patent" style="color:#fff;">
-    본 서비스는 산업안전 법령 진단 및 관리 자동화 기술에 대해 특허 출원을 진행한 기술을 기반으로 합니다.
-    출원번호: 제10-2026-0056330 외 4건 · 상표출원: 제40-2026-0061564
+    본 서비스의 핵심 기술은 특허 출원 중입니다.
+    특허출원: 제10-2026-0056330 외 4건 · 상표출원: 제40-2026-0061564
+    <a href="patents.html" style="color:rgba(255,255,255,.6); margin-left:8px;">기술 혁신 보기 →</a>
   </div>
   <div class="footer-main">
     <div class="footer-grid">
@@ -57,7 +58,7 @@
           <li><a href="faq.html">FAQ</a></li>
           <li><a href="about.html">회사소개</a></li>
           <li><a href="contact.html">이용문의</a></li>
-          <li><a href="patents.html">🔒 특허출원 현황</a></li>
+          <li><a href="patents.html" style="color:#ff6b6b;">🔒 기술 혁신</a></li>
         </ul>
       </div>
 
