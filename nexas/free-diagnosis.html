@@ -2,36 +2,79 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>법령 진단 | TAI 엔지니어링</title>
+  <title>무료 법령진단 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
   /* ── 레이아웃 ── */
-  .diag-wrap {
-    min-height: calc(100vh - 64px);
-    background: #f4f6f8;
-    display: flex; align-items: flex-start; justify-content: center;
-    padding: 48px 16px 80px;
-  }
-  .diag-card {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 4px 32px rgba(0,0,0,.08);
-    width: 100%; max-width: 680px;
-    padding: 40px 44px;
-  }
-  @media(max-width:600px){ .diag-card { padding: 28px 20px; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: 'Noto Sans KR', sans-serif; }
 
-  /* ── 진행 표시 ── */
+  .diag-layout {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+  }
+  @media(max-width:900px) {
+    .diag-layout { grid-template-columns: 1fr; }
+    .diag-left   { display: none; }
+  }
+
+  /* ── 좌측 패널 ── */
+  .diag-left {
+    background: linear-gradient(135deg, #0d1b2a, #1a3a5c);
+    padding: 64px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+    color: #fff;
+    position: sticky; top: 64px; height: calc(100vh - 64px);
+  }
+  .diag-left .dl-tag {
+    font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(255,255,255,.5);
+    margin-bottom: 16px;
+  }
+  .diag-left h2 {
+    font-size: 2rem; font-weight: 900; line-height: 1.25;
+    margin-bottom: 20px; color: #fff;
+  }
+  .diag-left .dl-desc {
+    font-size: .88rem; color: rgba(255,255,255,.7);
+    line-height: 1.75; margin-bottom: 32px;
+  }
+  .diag-left .dl-list { list-style: none; padding: 0; margin: 0; }
+  .diag-left .dl-list li {
+    font-size: .85rem; color: rgba(255,255,255,.85);
+    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .diag-left .dl-list li::before {
+    content: '✓'; color: #4ade80; font-weight: 900; flex-shrink: 0;
+  }
+  .diag-left .dl-badge {
+    display: inline-block; background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+    padding: 6px 16px; font-size: .78rem; font-weight: 700;
+    color: rgba(255,255,255,.85); margin-top: 28px;
+  }
+
+  /* ── 우측 패널 ── */
+  .diag-right {
+    padding: 60px 52px;
+    overflow-y: auto;
+    background: #fff;
+  }
+  @media(max-width:600px) { .diag-right { padding: 36px 20px; } }
+
+  /* ── 진행 표시 (2단계) ── */
   .progress-bar-wrap {
-    display: flex; align-items: center; gap: 0;
+    display: flex; align-items: center;
     margin-bottom: 36px;
   }
   .pb-step {
     display: flex; flex-direction: column; align-items: center; gap: 5px;
-    flex: 1;
+    flex: 0 0 auto;
   }
   .pb-dot {
     width: 30px; height: 30px; border-radius: 50%;
@@ -40,32 +83,28 @@
     display: flex; align-items: center; justify-content: center;
     transition: all .2s;
   }
-  .pb-dot.active { background: var(--red); color: #fff; }
-  .pb-dot.done   { background: var(--navy); color: #fff; }
+  .pb-dot.active { background: var(--red, #c62828); color: #fff; }
+  .pb-dot.done   { background: #0f172a; color: #fff; }
   .pb-label { font-size: .68rem; color: #94a3b8; font-weight: 600; white-space: nowrap; }
-  .pb-label.active { color: var(--red); }
-  .pb-label.done   { color: var(--navy); }
+  .pb-label.active { color: var(--red, #c62828); }
+  .pb-label.done   { color: #0f172a; }
   .pb-line {
     flex: 1; height: 2px; background: #e8eaed;
-    margin: 0; margin-bottom: 18px;
+    margin: 0 4px; margin-bottom: 18px;
     transition: background .2s;
   }
-  .pb-line.done { background: var(--navy); }
+  .pb-line.done { background: #0f172a; }
 
   /* ── 패널 ── */
   .panel { display: none; }
   .panel.active { display: block; }
-  .panel-title { font-size: 1.3rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
-  .panel-sub   { font-size: .88rem; color: var(--sub); margin-bottom: 28px; line-height: 1.6; }
+  .panel-title { font-size: 1.3rem; font-weight: 900; color: #0f172a; margin-bottom: 6px; }
+  .panel-sub   { font-size: .88rem; color: #6b7280; margin-bottom: 28px; line-height: 1.6; }
 
-  /* ── 선택 카드 공통 ── */
+  /* ── 섹터 선택 카드 ── */
   .choice-grid   { display: grid; gap: 12px; margin-bottom: 24px; }
   .choice-grid-3 { grid-template-columns: repeat(3,1fr); }
-  .choice-grid-2 { grid-template-columns: repeat(2,1fr); }
-  @media(max-width:480px){
-    .choice-grid-3 { grid-template-columns: repeat(2,1fr); }
-    .choice-grid-2 { grid-template-columns: 1fr; }
-  }
+  @media(max-width:480px){ .choice-grid-3 { grid-template-columns: repeat(2,1fr); } }
 
   .choice-card {
     border: 2px solid #e8eaed; border-radius: 14px;
@@ -73,81 +112,72 @@
     cursor: pointer; transition: all .15s;
     background: #fff; user-select: none;
   }
-  .choice-card:hover { border-color: var(--red); background: #fff9f9; }
-  .choice-card.selected { border-color: var(--red); background: #fff2f2; }
+  .choice-card:hover { border-color: var(--red, #c62828); background: #fff9f9; }
+  .choice-card.selected { border-color: var(--red, #c62828); background: #fff2f2; }
   .choice-card .cc-icon { font-size: 2rem; margin-bottom: 8px; }
-  .choice-card .cc-name { font-size: .88rem; font-weight: 800; color: var(--navy); }
-  .choice-card .cc-desc { font-size: .76rem; color: var(--sub); margin-top: 4px; line-height: 1.4; }
-
-  /* ── 등급 카드 ── */
-  .grade-card {
-    border: 2px solid #e8eaed; border-radius: 16px;
-    padding: 20px; cursor: pointer; transition: all .15s;
-    background: #fff; text-align: left;
-    display: flex; flex-direction: column; gap: 8px;
-  }
-  .grade-card:hover { border-color: var(--red); }
-  .grade-card.selected { border-color: var(--red); background: #fff9f9; }
-  .grade-card.recommended { border-color: var(--navy); }
-  .grade-card.recommended.selected { border-color: var(--red); }
-  .grade-badge {
-    display: inline-block; font-size: .68rem; font-weight: 700;
-    padding: 2px 8px; border-radius: 4px;
-    background: var(--navy); color: #fff;
-    align-self: flex-start;
-  }
-  .grade-badge.free { background: #22c55e; }
-  .grade-badge.rec  { background: var(--red); }
-  .grade-name  { font-size: 1rem; font-weight: 900; color: var(--navy); }
-  .grade-price { font-size: 1.2rem; font-weight: 900; color: var(--red); }
-  .grade-items { font-size: .78rem; color: var(--sub); line-height: 1.8; margin-top: 4px; }
-  .grade-items span { display: block; }
-  .grade-items span::before { content: '✓ '; color: #22c55e; font-weight: 700; }
-  .grade-items span.locked::before { content: '🔒 '; }
-  .grade-items span.locked { color: #cbd5e1; }
+  .choice-card .cc-name { font-size: .88rem; font-weight: 800; color: #0f172a; }
+  .choice-card .cc-desc { font-size: .76rem; color: #6b7280; margin-top: 4px; line-height: 1.4; }
 
   /* ── 입력 폼 ── */
-  .form-label-tai { font-size: .84rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; display: block; }
+  .form-label-tai { font-size: .84rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: block; }
   .form-input-tai {
     width: 100%; border: 1.5px solid #e8eaed; border-radius: 8px;
-    padding: 11px 14px; font-size: .9rem; color: var(--text);
+    padding: 11px 14px; font-size: .9rem; color: #0f172a;
     outline: none; transition: border-color .15s;
     background: #fff; font-family: inherit;
   }
-  .form-input-tai:focus { border-color: var(--red); }
+  .form-input-tai:focus { border-color: var(--red, #c62828); }
   .form-row { margin-bottom: 20px; }
 
-  /* ── 슬라이더 ── */
-  .slider-wrap { margin-bottom: 20px; }
-  .slider-display {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 8px;
+  /* ── 숫자 입력 (슬라이더 대체) ── */
+  .num-input-wrap {
+    display: flex; align-items: center; gap: 8px;
   }
-  .slider-val {
-    font-size: 1.4rem; font-weight: 900; color: var(--red);
-    min-width: 80px; text-align: right;
+  .num-input-wrap input[type=number] {
+    width: 140px; text-align: right;
+    border: 1.5px solid #e8eaed; border-radius: 8px;
+    padding: 11px 14px; font-size: .9rem; color: #0f172a;
+    outline: none; font-family: inherit;
+    transition: border-color .15s;
   }
-  input[type=range] {
-    width: 100%; accent-color: var(--red);
-    height: 6px; cursor: pointer;
-  }
-  .slider-ticks {
-    display: flex; justify-content: space-between;
-    font-size: .7rem; color: #94a3b8; margin-top: 4px;
-  }
+  .num-input-wrap input[type=number]:focus { border-color: var(--red, #c62828); }
+  .num-unit { color: #6b7280; font-weight: 600; font-size: .9rem; }
 
-  /* ── 체크 카드 (설비 선택) ── */
-  .check-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 20px; }
+  /* ── YN 토글 ── */
+  .yn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0; }
+  .yn-btn {
+    border: 2px solid #e8eaed; border-radius: 10px;
+    padding: 14px; text-align: center; cursor: pointer;
+    font-size: .9rem; font-weight: 700; color: #6b7280;
+    transition: all .15s; user-select: none;
+  }
+  .yn-btn:hover { border-color: #0f172a; }
+  .yn-btn.selected-yes { border-color: var(--red, #c62828); background: #fff2f2; color: var(--red, #c62828); }
+  .yn-btn.selected-no  { border-color: #0f172a; background: #f0f4f8; color: #0f172a; }
+
+  /* ── 금액 버튼 ── */
+  .amount-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0; }
+  .amount-btn {
+    border: 1.5px solid #e8eaed; border-radius: 8px;
+    padding: 9px 16px; font-size: .84rem; font-weight: 700;
+    cursor: pointer; transition: all .15s;
+    color: #0f172a; background: #fff; user-select: none;
+  }
+  .amount-btn:hover { border-color: var(--red, #c62828); }
+  .amount-btn.selected { border-color: var(--red, #c62828); background: #fff2f2; color: var(--red, #c62828); }
+
+  /* ── 체크 카드 ── */
+  .check-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 0; }
   @media(max-width:400px){ .check-grid { grid-template-columns: 1fr; } }
   .check-card {
     border: 1.5px solid #e8eaed; border-radius: 10px;
     padding: 12px 14px; cursor: pointer; transition: all .15s;
     display: flex; align-items: center; gap: 10px;
-    font-size: .85rem; font-weight: 600; color: var(--navy);
+    font-size: .85rem; font-weight: 600; color: #0f172a;
     user-select: none;
   }
-  .check-card:hover { border-color: var(--red); }
-  .check-card.checked { border-color: var(--red); background: #fff2f2; }
+  .check-card:hover { border-color: var(--red, #c62828); }
+  .check-card.checked { border-color: var(--red, #c62828); background: #fff2f2; }
   .check-card .ck-icon { font-size: 1.2rem; flex-shrink: 0; }
   .check-card .ck-chk {
     width: 18px; height: 18px; border-radius: 4px;
@@ -156,76 +186,65 @@
     flex-shrink: 0; font-size: .75rem; color: #fff;
     transition: all .15s;
   }
-  .check-card.checked .ck-chk { background: var(--red); border-color: var(--red); }
-
-  /* ── 토글 YN ── */
-  .yn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .yn-btn {
-    border: 2px solid #e8eaed; border-radius: 10px;
-    padding: 14px; text-align: center; cursor: pointer;
-    font-size: .9rem; font-weight: 700; color: var(--sub);
-    transition: all .15s; user-select: none;
-  }
-  .yn-btn:hover { border-color: var(--navy); }
-  .yn-btn.selected-yes { border-color: var(--red); background: #fff2f2; color: var(--red); }
-  .yn-btn.selected-no  { border-color: var(--navy); background: #f0f4f8; color: var(--navy); }
-
-  /* ── 금액 버튼 ── */
-  .amount-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .amount-btn {
-    border: 1.5px solid #e8eaed; border-radius: 8px;
-    padding: 9px 16px; font-size: .84rem; font-weight: 700;
-    cursor: pointer; transition: all .15s;
-    color: var(--navy); background: #fff; user-select: none;
-  }
-  .amount-btn:hover { border-color: var(--red); }
-  .amount-btn.selected { border-color: var(--red); background: #fff2f2; color: var(--red); }
+  .check-card.checked .ck-chk { background: var(--red, #c62828); border-color: var(--red, #c62828); }
 
   /* ── 주소 검색 ── */
   .addr-search-wrap { display: flex; gap: 8px; margin-bottom: 8px; }
   .addr-search-wrap .form-input-tai { flex: 1; }
   .btn-addr-search {
-    background: var(--navy); color: #fff; font-size: .85rem;
+    background: #0f172a; color: #fff; font-size: .85rem;
     font-weight: 700; padding: 0 18px; border: none;
     border-radius: 8px; cursor: pointer; white-space: nowrap;
-    transition: background .15s;
   }
-  .btn-addr-search:hover { background: #162535; }
+  .btn-addr-search:hover { background: #1e293b; }
   .addr-result {
     background: #f4f6f8; border-radius: 8px; padding: 10px 14px;
-    font-size: .84rem; color: var(--navy); font-weight: 600;
-    display: none; margin-bottom: 16px;
+    font-size: .84rem; color: #0f172a; font-weight: 600;
+    display: none; margin-bottom: 0;
   }
   .addr-result.show { display: block; }
 
   /* ── 버튼 ── */
   .btn-next {
-    background: var(--red); color: #fff; font-weight: 700;
+    background: var(--red, #c62828); color: #fff; font-weight: 700;
     font-size: 1rem; padding: 14px; border-radius: 10px;
     border: none; cursor: pointer; width: 100%; margin-top: 8px;
     transition: background .2s;
   }
-  .btn-next:hover { background: #c1121f; }
+  .btn-next:hover { background: #a21010; }
+  .btn-next:disabled { background: #ccc; cursor: not-allowed; }
   .btn-back {
-    background: none; border: none; color: var(--sub);
+    background: none; border: none; color: #6b7280;
     font-size: .88rem; cursor: pointer; margin-top: 12px;
     display: block; width: 100%; text-align: center;
   }
 
-  /* ── 연락처 ── */
-  .contact-row { margin-bottom: 16px; }
-  .contact-note {
-    background: #f4f6f8; border-radius: 10px;
-    padding: 14px 16px; font-size: .8rem; color: var(--sub);
-    line-height: 1.6; margin-bottom: 20px;
+  /* ── 업종 카드 (산업) ── */
+  .industry-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 8px; margin-bottom: 0;
   }
+  @media(max-width:400px){ .industry-grid { grid-template-columns: repeat(2,1fr); } }
+  .industry-card {
+    border: 1.5px solid #e8eaed; border-radius: 10px;
+    padding: 12px 8px; text-align: center; cursor: pointer;
+    font-size: .78rem; font-weight: 800; color: #0f172a;
+    transition: all .15s; user-select: none;
+  }
+  .industry-card:hover { border-color: var(--red, #c62828); background: #fff9f9; }
+  .industry-card.selected { border-color: var(--red, #c62828); background: #fff2f2; }
 
   /* ── 구분선 ── */
   .form-section-label {
     font-size: .72rem; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--sub);
+    text-transform: uppercase; color: #6b7280;
     margin: 24px 0 14px; padding-bottom: 8px;
     border-bottom: 1px solid #e8eaed;
+  }
+
+  /* ── 안내 노트 ── */
+  .form-note {
+    font-size: .76rem; color: #6b7280; margin-top: 5px; line-height: 1.5;
   }
   </style>
 </head>
@@ -233,15 +252,35 @@
 <nav class="tai-nav">
   <div class="inner">
     <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links"></div>
+    <div class="nav-links"><!-- nav-auth.js --></div>
   </div>
 </nav>
 
-<div class="diag-wrap">
-  <div class="diag-card">
+<div class="diag-layout">
 
-    <!-- 진행 표시 -->
-    <div class="progress-bar-wrap" id="progressBar">
+  <!-- ── 좌측 패널 ── -->
+  <div class="diag-left">
+    <div class="dl-tag">Grade 1 · 무료 법령진단</div>
+    <h2>법령위반<br>중이십니까?</h2>
+    <p class="dl-desc">
+      사업장 기본 정보만 입력하면 적용되는<br>
+      산업안전 법령과 선임 의무를 즉시 확인합니다.<br>
+      1분이면 충분합니다.
+    </p>
+    <ul class="dl-list">
+      <li>업종·규모 기반 선임 의무 자동 판정</li>
+      <li>핵심 법정 점검 항목 안내</li>
+      <li>중대재해처벌법 해당 여부 확인</li>
+      <li>진단 결과 즉시 확인 (로그인 필요)</li>
+    </ul>
+    <span class="dl-badge">🔒 로그인 후 이용 가능</span>
+  </div>
+
+  <!-- ── 우측 폼 ── -->
+  <div class="diag-right">
+
+    <!-- 진행 표시 (2단계) -->
+    <div class="progress-bar-wrap">
       <div class="pb-step">
         <div class="pb-dot active" id="pd1">1</div>
         <div class="pb-label active" id="pl1">업종</div>
@@ -249,17 +288,7 @@
       <div class="pb-line" id="pline1"></div>
       <div class="pb-step">
         <div class="pb-dot" id="pd2">2</div>
-        <div class="pb-label" id="pl2">등급</div>
-      </div>
-      <div class="pb-line" id="pline2"></div>
-      <div class="pb-step">
-        <div class="pb-dot" id="pd3">3</div>
-        <div class="pb-label" id="pl3">정보입력</div>
-      </div>
-      <div class="pb-line" id="pline3"></div>
-      <div class="pb-step">
-        <div class="pb-dot" id="pd4">4</div>
-        <div class="pb-label" id="pl4">제출</div>
+        <div class="pb-label" id="pl2">정보입력</div>
       </div>
     </div>
 
@@ -287,454 +316,219 @@
       <button class="btn-next" onclick="goStep(2)">다음</button>
     </div>
 
-    <!-- STEP 2: 등급 선택 -->
+    <!-- STEP 2: 정보 입력 -->
     <div class="panel" id="step2">
-      <p class="panel-title">진단 등급을 선택하세요</p>
-      <p class="panel-sub">더 많은 정보를 입력할수록 더 정확한 법령이 판정됩니다</p>
-      <div class="choice-grid" style="grid-template-columns:1fr;" id="gradeGrid">
-        <!-- JS로 렌더링 -->
-      </div>
-      <button class="btn-next" onclick="goStep(3)">다음</button>
+      <p class="panel-title" id="step2Title">기본 정보 입력</p>
+      <p class="panel-sub">1분이면 충분합니다 — 핵심 항목만 입력하세요</p>
+      <div id="formArea"><!-- JS 동적 렌더링 --></div>
+      <button class="btn-next" id="btnSubmit" onclick="submitDiag()">진단 결과 받기</button>
       <button class="btn-back" onclick="goStep(1)">← 이전</button>
     </div>
 
-    <!-- STEP 3: 정보 입력 (섹터+등급 조합) -->
-    <div class="panel" id="step3">
-      <p class="panel-title" id="step3Title">기본 정보 입력</p>
-      <p class="panel-sub" id="step3Sub">입력하신 정보를 바탕으로 법령을 판정합니다</p>
-      <div id="formArea">
-        <!-- JS로 동적 렌더링 -->
-      </div>
-      <button class="btn-next" onclick="goStep(4)">다음</button>
-      <button class="btn-back" onclick="goStep(2)">← 이전</button>
-    </div>
-
-    <!-- STEP 4: 연락처 + 제출 -->
-    <div class="panel" id="step4">
-      <p class="panel-title">결과를 받을 정보</p>
-      <p class="panel-sub">진단 결과를 이메일로 발송해 드립니다</p>
-
-      <div class="contact-note">
-        📋 선택하신 등급: <strong id="selectedGradeName">기본 진단</strong><br>
-        결과 링크를 이메일로 발송하며, 로그인 후 전체 결과를 확인하실 수 있습니다.
-      </div>
-
-      <div class="contact-row">
-        <label class="form-label-tai">이름</label>
-        <input type="text" class="form-input-tai" id="contactName" placeholder="홍길동">
-      </div>
-      <div class="contact-row">
-        <label class="form-label-tai">이메일 <span style="color:var(--red);">*</span></label>
-        <input type="email" class="form-input-tai" id="contactEmail" placeholder="example@company.com">
-      </div>
-      <div class="contact-row">
-        <label class="form-label-tai">연락처</label>
-        <input type="tel" class="form-input-tai" id="contactPhone" placeholder="01012345678" maxlength="11">
-      </div>
-
-      <label style="display:flex;gap:8px;align-items:flex-start;font-size:.82rem;color:var(--sub);margin-bottom:20px;cursor:pointer;">
-        <input type="checkbox" id="agreePrivacy" style="margin-top:3px; flex-shrink:0;">
-        <span>
-          <a href="privacy.html" target="_blank" style="color:var(--red);">개인정보처리방침</a>에 동의하며, 수집된 정보는 법령 진단 결과 제공 목적으로만 사용됩니다. (필수)
-        </span>
-      </label>
-
-      <button class="btn-next" id="btnSubmit" onclick="submitDiag()">진단 결과 받기</button>
-      <button class="btn-back" onclick="goStep(3)">← 이전</button>
-    </div>
-
-  </div>
-</div>
+  </div><!-- /diag-right -->
+</div><!-- /diag-layout -->
 
 <script src="assets/js/nav-auth.js"></script>
 <script>
-/* ══════════════════════════════════
-   상태
-══════════════════════════════════ */
-let sector = '';   // building / construction / industry
-let grade  = 1;    // 1 / 2 / 3
-let formData = {}; // 수집된 폼 데이터
+/* ── 로그인 체크 ── */
+document.addEventListener('DOMContentLoaded', function () {
+  if (!localStorage.getItem('access_token')) {
+    window.location.replace('log-in.html?redirect=free-diagnosis.html');
+  }
+});
 
-/* ══════════════════════════════════
-   진행 표시 업데이트
-══════════════════════════════════ */
+/* ── 상태 ── */
+let sector   = '';
+let formData = {};
+
+/* ── 진행 표시 (2단계) ── */
 function updateProgress(current) {
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 2; i++) {
     const dot   = document.getElementById('pd' + i);
     const label = document.getElementById('pl' + i);
     dot.className   = 'pb-dot'   + (i < current ? ' done' : i === current ? ' active' : '');
     label.className = 'pb-label' + (i < current ? ' done' : i === current ? ' active' : '');
   }
-  for (let i = 1; i <= 3; i++) {
-    const line = document.getElementById('pline' + i);
-    line.className = 'pb-line' + (i < current ? ' done' : '');
-  }
+  const line = document.getElementById('pline1');
+  if (line) line.className = 'pb-line' + (current > 1 ? ' done' : '');
 }
 
-/* ══════════════════════════════════
-   Step 이동
-══════════════════════════════════ */
+/* ── Step 이동 ── */
 function goStep(n) {
   if (n === 2 && !sector) { alert('사업장 유형을 선택해주세요.'); return; }
-  if (n === 3 && !grade)  { alert('진단 등급을 선택해주세요.'); return; }
-  if (n === 3) renderFormArea();
-  if (n === 4) renderStep4();
-
+  if (n === 2) renderFormArea();
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('step' + n).classList.add('active');
   updateProgress(n);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ══════════════════════════════════
-   업종 선택
-══════════════════════════════════ */
+/* ── 업종 선택 ── */
 function selectSector(el, val) {
   document.querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   sector = val;
 }
 
-/* ══════════════════════════════════
-   등급 카드 렌더링
-══════════════════════════════════ */
-const GRADE_DEF = {
-  building: [
-    {
-      id: 1, name: '기본 진단', badge: '무료', badgeClass: 'free', price: '0원',
-      include: ['주소 기반 건축물 기본정보', '상시근로자/수용인원 기준', '핵심 선임 의무 판정'],
-      locked:  ['위험설비·수전용량 기준 법령', '승강기·냉난방 관련 법령', '위험물·에너지법 전체']
-    },
-    {
-      id: 2, name: '표준 진단', badge: '추천', badgeClass: 'rec', price: '가격 확인',
-      include: ['기본 진단 전체 포함', '수전용량·가스용량 기준 법령', '위험설비 관련 법령', '전기안전관리법 판정'],
-      locked:  ['승강기·냉난방 용량 기준', '위험물·에너지법 전체']
-    },
-    {
-      id: 3, name: '정밀 진단', badge: '전체', badgeClass: '', price: '가격 확인',
-      include: ['표준 진단 전체 포함', '승강기·냉난방·저수조 용량', '위험물·에너지법 전체', '적용 법령 100% 판정'],
-      locked:  []
-    }
-  ],
-  construction: [
-    {
-      id: 1, name: '기본 진단', badge: '무료', badgeClass: 'free', price: '0원',
-      include: ['공사금액 기준 선임 의무', '하도급 여부 판정', '위험요소별 핵심 법령'],
-      locked:  ['상세 공종별 법령', '근로자수 기준 전체 법령', '유해위험방지계획서 판정']
-    },
-    {
-      id: 2, name: '표준 진단', badge: '추천', badgeClass: 'rec', price: '가격 확인',
-      include: ['기본 진단 전체 포함', '공종·공사기간 기준 법령', '근로자수 기준 전체 법령'],
-      locked:  ['하도급업체 수 기준 법령', '유해위험방지계획서 판정']
-    },
-    {
-      id: 3, name: '정밀 진단', badge: '전체', badgeClass: '', price: '가격 확인',
-      include: ['표준 진단 전체 포함', '하도급 업체 수 기준', '외국인근로자 관련 법령', '적용 법령 100% 판정'],
-      locked:  []
-    }
-  ],
-  industry: [
-    {
-      id: 1, name: '기본 진단', badge: '무료', badgeClass: 'free', price: '0원',
-      include: ['업종·근로자수 기준 선임 의무', '기본 안전보건관리 의무', '핵심 법정 점검 항목'],
-      locked:  ['산업코드별 세부 법령', '공정·설비별 법령', '위험물·화학물질 법령']
-    },
-    {
-      id: 2, name: '표준 진단', badge: '추천', badgeClass: 'rec', price: '가격 확인',
-      include: ['기본 진단 전체 포함', '산업코드(KSIC) 기준 법령', '주요 공정별 법령', '위험설비 관련 법령'],
-      locked:  ['설비 상세 수량 기준', '화학물질·위험물 전체 법령']
-    },
-    {
-      id: 3, name: '정밀 진단', badge: '전체', badgeClass: '', price: '가격 확인',
-      include: ['표준 진단 전체 포함', '설비 대수별 정밀 판정', '위험물·화학물질 전체', '적용 법령 100% 판정'],
-      locked:  []
-    }
-  ]
-};
-
-function renderGradeGrid() {
-  const defs = GRADE_DEF[sector];
-  document.getElementById('gradeGrid').innerHTML = defs.map(d => `
-    <div class="grade-card${d.id === 2 ? ' recommended' : ''}" onclick="selectGrade(this, ${d.id})" id="gc${d.id}">
-      <span class="grade-badge ${d.badgeClass}">${d.badge}</span>
-      <div class="grade-name">${d.name}</div>
-      <div class="grade-price">${d.price}</div>
-      <div class="grade-items">
-        ${d.include.map(t => `<span>${t}</span>`).join('')}
-        ${d.locked.map(t => `<span class="locked">${t}</span>`).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-function selectGrade(el, val) {
-  document.querySelectorAll('.grade-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  grade = val;
-}
-
-/* ══════════════════════════════════
-   폼 렌더링 — 섹터×등급
-══════════════════════════════════ */
+/* ── 폼 렌더링 ── */
 function renderFormArea() {
-  const titles = {
-    building: ['건물 기본 정보', '건물 시설 정보', '건물 상세 정보'],
-    construction: ['공사 기본 정보', '공사 상세 정보', '공사 전체 정보'],
-    industry: ['사업장 기본 정보', '공정·설비 정보', '사업장 전체 정보']
-  };
-  document.getElementById('step3Title').textContent = titles[sector][grade - 1];
-  document.getElementById('step3Sub').textContent =
-    grade === 1 ? '핵심 항목만 입력하세요 — 1분이면 충분합니다' :
-    grade === 2 ? '추가 정보를 입력하면 더 많은 법령이 판정됩니다' :
-                  '전체 정보를 입력해 100% 법령 판정을 받으세요';
+  const titles = { building: '건물 기본 정보', construction: '공사 기본 정보', industry: '사업장 기본 정보' };
+  document.getElementById('step2Title').textContent = titles[sector];
 
-  const render = {
-    building: [formBuilding1, formBuilding2, formBuilding3],
-    construction: [formConstruction1, formConstruction2, formConstruction3],
-    industry: [formIndustry1, formIndustry2, formIndustry3]
-  };
-  document.getElementById('formArea').innerHTML = render[sector][grade - 1]();
-  bindEvents();
+  const renders = { building: formBuilding, construction: formConstruction, industry: formIndustry };
+  document.getElementById('formArea').innerHTML = renders[sector]();
 }
 
-/* ── 공통: 주소 검색 ── */
-function addrSearchHTML(id) {
+/* ────────────────────────────────
+   건물 폼 (Grade 1)
+──────────────────────────────── */
+function formBuilding() {
   return `
+    <!-- 주소 검색 -->
     <div class="form-row">
       <label class="form-label-tai">사업장 주소</label>
       <div class="addr-search-wrap">
-        <input type="text" class="form-input-tai" id="${id}Input" placeholder="주소 검색 (도로명 또는 지번)">
-        <button class="btn-addr-search" onclick="searchAddr('${id}')">검색</button>
+        <input type="text" class="form-input-tai" id="bAddrInput" placeholder="주소 검색 (도로명 또는 지번)">
+        <button class="btn-addr-search" onclick="searchAddr('bAddr')">검색</button>
       </div>
-      <div class="addr-result" id="${id}Result"></div>
-    </div>`;
-}
+      <div class="addr-result" id="bAddrResult"></div>
+    </div>
 
-/* ── 공통: 슬라이더 ── */
-function sliderHTML(id, label, min, max, step, unit, ticks) {
-  return `
-    <div class="slider-wrap">
-      <div class="slider-display">
-        <label class="form-label-tai" style="margin:0;">${label}</label>
-        <div class="slider-val" id="${id}Val">${min}${unit}</div>
-      </div>
-      <input type="range" id="${id}Slider" min="${min}" max="${max}" step="${step}" value="${min}"
-        oninput="updateSlider('${id}','${unit}')">
-      <div class="slider-ticks">${ticks.map(t=>`<span>${t}</span>`).join('')}</div>
-    </div>`;
-}
-
-/* ── 공통: YN 토글 ── */
-function ynHTML(id, label) {
-  return `
+    <!-- 상시근로자 수 -->
     <div class="form-row">
-      <label class="form-label-tai">${label}</label>
+      <label class="form-label-tai">상시근로자 수</label>
+      <div class="num-input-wrap">
+        <input type="number" class="form-input-tai" id="bWorker" min="0" placeholder="0"
+          style="width:140px;text-align:right;" oninput="formData.bWorker=this.value">
+        <span class="num-unit">명</span>
+      </div>
+    </div>
+
+    <!-- 수용인원 수 -->
+    <div class="form-row">
+      <label class="form-label-tai">수용인원 수</label>
+      <div class="num-input-wrap">
+        <input type="number" class="form-input-tai" id="bCapacity" min="0" placeholder="0"
+          style="width:140px;text-align:right;" oninput="formData.bCapacity=this.value">
+        <span class="num-unit">명</span>
+      </div>
+      <div class="form-note">근로자 수 또는 수용인원 중 하나 이상 입력</div>
+    </div>
+  `;
+}
+
+/* ────────────────────────────────
+   건설 폼 (Grade 1)
+──────────────────────────────── */
+function formConstruction() {
+  const sidos = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
+  return `
+    <!-- 공사 지역 -->
+    <div class="form-row">
+      <label class="form-label-tai">공사 지역</label>
+      <select class="form-input-tai" id="cSido" onchange="formData.cSido=this.value">
+        <option value="">시/도 선택</option>
+        ${sidos.map(s => `<option value="${s}">${s}</option>`).join('')}
+      </select>
+    </div>
+
+    <!-- 공사금액 -->
+    <div class="form-row">
+      <label class="form-label-tai">공사금액</label>
+      <div class="amount-grid">
+        ${[
+          {val:'under1',   label:'1억 미만'},
+          {val:'1to5',     label:'1억~5억'},
+          {val:'5to20',    label:'5억~20억'},
+          {val:'20to50',   label:'20억~50억'},
+          {val:'50to120',  label:'50억~120억'},
+          {val:'over120',  label:'120억 이상'}
+        ].map(o => `<div class="amount-btn" onclick="selectAmount('cAmount',this)" data-val="${o.val}">${o.label}</div>`).join('')}
+      </div>
+    </div>
+
+    <!-- 하도급 여부 -->
+    <div class="form-row">
+      <label class="form-label-tai">하도급이 있나요?</label>
       <div class="yn-grid">
-        <div class="yn-btn" onclick="selectYN('${id}',true,this)">예</div>
-        <div class="yn-btn" onclick="selectYN('${id}',false,this)">아니오</div>
+        <div class="yn-btn" onclick="selectYN('cSub',true,this)">예</div>
+        <div class="yn-btn" onclick="selectYN('cSub',false,this)">아니오</div>
       </div>
-    </div>`;
-}
+    </div>
 
-/* ── 공통: 체크 카드 그리드 ── */
-function checkGridHTML(id, label, items) {
-  return `
+    <!-- 위험 요소 -->
     <div class="form-row">
-      <label class="form-label-tai">${label} (복수 선택 가능)</label>
+      <label class="form-label-tai">위험 요소 <span style="font-weight:400;color:#6b7280;">(복수 선택 가능)</span></label>
       <div class="check-grid">
-        ${items.map(item => `
-          <div class="check-card" onclick="toggleCheck(this,'${id}')" data-val="${item.val}">
+        ${[
+          {val:'crane',    icon:'🏗️', label:'타워크레인'},
+          {val:'excavate', icon:'⛏️', label:'굴착·터파기'},
+          {val:'demolish', icon:'🔨', label:'해체 공사'},
+          {val:'scaffold', icon:'🪜', label:'달비계·비계'},
+          {val:'tunnel',   icon:'🚇', label:'터널 공사'},
+          {val:'none',     icon:'✅', label:'해당 없음'}
+        ].map(item => `
+          <div class="check-card" onclick="toggleCheck(this,'cDanger')" data-val="${item.val}">
             <span class="ck-icon">${item.icon}</span>
             <span>${item.label}</span>
             <span class="ck-chk">✓</span>
           </div>`).join('')}
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
-/* ── 공통: 금액 버튼 ── */
-function amountHTML(id, label, options) {
+/* ────────────────────────────────
+   산업 폼 (Grade 1)
+──────────────────────────────── */
+function formIndustry() {
+  const types = [
+    {val:'food',      label:'식품·음료'},
+    {val:'textile',   label:'섬유·의류'},
+    {val:'wood',      label:'목재·가구'},
+    {val:'chemical',  label:'화학·석유'},
+    {val:'metal',     label:'금속·기계'},
+    {val:'elec',      label:'전기·전자'},
+    {val:'auto',      label:'자동차·조선'},
+    {val:'warehouse', label:'물류·창고'},
+    {val:'etc',       label:'기타 제조'}
+  ];
   return `
-    <div class="form-row">
-      <label class="form-label-tai">${label}</label>
-      <div class="amount-grid">
-        ${options.map(o => `<div class="amount-btn" onclick="selectAmount('${id}',this)" data-val="${o.val}">${o.label}</div>`).join('')}
-      </div>
-    </div>`;
-}
-
-/* ── 공통: 시/도 드롭다운 ── */
-function sidoHTML(id) {
-  const list = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
-  return `
-    <div class="form-row">
-      <label class="form-label-tai">공사 지역</label>
-      <select class="form-input-tai" id="${id}">
-        <option value="">시/도 선택</option>
-        ${list.map(s=>`<option value="${s}">${s}</option>`).join('')}
-      </select>
-    </div>`;
-}
-
-/* ════════════════════════
-   건물 폼
-════════════════════════ */
-function formBuilding1() {
-  return addrSearchHTML('bAddr') +
-    sliderHTML('bWorker','상시근로자 수',0,300,5,'명',['0','50명','100명','200명','300명+']) +
-    sliderHTML('bCapacity','수용인원 수',0,1000,50,'명',['0','250명','500명','750명','1,000명+']);
-}
-function formBuilding2() {
-  return formBuilding1() +
-    '<div class="form-section-label">시설 정보 (Grade 2)</div>' +
-    ynHTML('bDanger','위험설비가 있나요?') +
-    sliderHTML('bElec','수전용량 (kW)',0,2000,50,'kW',['0','500','1,000','1,500','2,000+']) +
-    ynHTML('bGas','가스 설비가 있나요?') +
-    sliderHTML('bGasVol','가스 저장 용량 (m³)',0,500,10,'m³',['0','100','200','300','500+']);
-}
-function formBuilding3() {
-  return formBuilding2() +
-    '<div class="form-section-label">상세 정보 (Grade 3)</div>' +
-    sliderHTML('bElev','승강기 수',0,20,1,'대',['0','5','10','15','20+']) +
-    sliderHTML('bCool','냉난방 용량 (RT)',0,500,10,'RT',['0','100','200','300','500+']) +
-    ynHTML('bHazmat','위험물 취급 여부') +
-    ynHTML('bReservoir','저수조 설비 여부') +
-    sliderHTML('bEnergy','연간 에너지 사용량 (TOE)',0,2000,50,'TOE',['0','500','1,000','1,500','2,000+']);
-}
-
-/* ════════════════════════
-   건설 폼
-════════════════════════ */
-function formConstruction1() {
-  return sidoHTML('cSido') +
-    amountHTML('cAmount','공사금액',[
-      {val:'under1',label:'1억 미만'},
-      {val:'1to5',label:'1억~5억'},
-      {val:'5to20',label:'5억~20억'},
-      {val:'20to50',label:'20억~50억'},
-      {val:'50to120',label:'50억~120억'},
-      {val:'over120',label:'120억 이상'}
-    ]) +
-    ynHTML('cSub','하도급이 있나요?') +
-    checkGridHTML('cDanger','위험 요소',[
-      {val:'crane',    icon:'🏗️', label:'타워크레인'},
-      {val:'excavate', icon:'⛏️', label:'굴착·터파기'},
-      {val:'demolish', icon:'🔨', label:'해체 공사'},
-      {val:'scaffold', icon:'🪜', label:'달비계·비계'},
-      {val:'tunnel',   icon:'🚇', label:'터널 공사'},
-      {val:'none',     icon:'✅', label:'해당 없음'}
-    ]);
-}
-function formConstruction2() {
-  return formConstruction1() +
-    '<div class="form-section-label">공사 상세 정보 (Grade 2)</div>' +
-    amountHTML('cType','공사 유형',[
-      {val:'architecture',label:'건축'},
-      {val:'civil',label:'토목'},
-      {val:'machine',label:'기계설치'},
-      {val:'demolish',label:'해체'}
-    ]) +
-    sliderHTML('cWorker','총 근로자 수',0,500,10,'명',['0','100','200','300','500+']) +
-    sliderHTML('cMonth','공사기간',1,60,1,'개월',['1','15','30','45','60+']);
-}
-function formConstruction3() {
-  return formConstruction2() +
-    '<div class="form-section-label">전체 정보 (Grade 3)</div>' +
-    sliderHTML('cSubCount','하도급업체 수',0,30,1,'개',['0','5','10','20','30+']) +
-    ynHTML('cForeign','외국인 근로자 포함 여부') +
-    ynHTML('cHazPlan','유해위험방지계획서 제출 대상 여부');
-}
-
-/* ════════════════════════
-   산업 폼
-════════════════════════ */
-const INDUSTRY_TYPES = [
-  {val:'food',label:'식품·음료'},
-  {val:'textile',label:'섬유·의류'},
-  {val:'wood',label:'목재·가구'},
-  {val:'chemical',label:'화학·석유'},
-  {val:'metal',label:'금속·기계'},
-  {val:'elec',label:'전기·전자'},
-  {val:'auto',label:'자동차·조선'},
-  {val:'warehouse',label:'물류·창고'},
-  {val:'etc',label:'기타 제조'}
-];
-function formIndustry1() {
-  return `
+    <!-- 업종 분류 -->
     <div class="form-row">
       <label class="form-label-tai">업종 분류</label>
-      <div class="choice-grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:0;">
-        ${INDUSTRY_TYPES.map(t=>`
-          <div class="choice-card" style="padding:12px 8px;" onclick="selectSingle(this,'iType','${t.val}')">
-            <div class="cc-name" style="font-size:.78rem;">${t.label}</div>
-          </div>`).join('')}
+      <div class="industry-grid">
+        ${types.map(t => `
+          <div class="industry-card" onclick="selectIndustry(this,'${t.val}')">${t.label}</div>`).join('')}
       </div>
-    </div>` +
-    sliderHTML('iWorker','상시근로자 수',0,500,5,'명',['0','100명','200명','300명','500명+']);
-}
-function formIndustry2() {
-  return formIndustry1() +
-    '<div class="form-section-label">공정·설비 정보 (Grade 2)</div>' +
-    `<div class="form-row">
-      <label class="form-label-tai">KSIC 산업분류 코드 (선택)</label>
-      <input type="text" class="form-input-tai" id="iKsic" placeholder="예: 2810 (금속 주조)">
-      <div style="font-size:.76rem;color:var(--sub);margin-top:4px;">모르시면 비워두세요 — 업종 분류로 자동 판단합니다</div>
-    </div>` +
-    checkGridHTML('iProcess','주요 공정',[
-      {val:'press',     icon:'🔧', label:'프레스·절단'},
-      {val:'welding',   icon:'⚡', label:'용접·열처리'},
-      {val:'coating',   icon:'🎨', label:'도장·도금'},
-      {val:'chemical',  icon:'🧪', label:'화학물질 취급'},
-      {val:'lift',      icon:'📦', label:'중량물 취급'},
-      {val:'conveyor',  icon:'🔄', label:'컨베이어'},
-    ]) +
-    ynHTML('iHazmat','위험물 취급 여부') +
-    ynHTML('iDanger','위험설비가 있나요?');
-}
-function formIndustry3() {
-  return formIndustry2() +
-    '<div class="form-section-label">설비 상세 정보 (Grade 3)</div>' +
-    sliderHTML('iForklift','지게차 보유 수',0,20,1,'대',['0','5','10','15','20+']) +
-    sliderHTML('iCrane','크레인·호이스트 수',0,20,1,'대',['0','5','10','15','20+']) +
-    sliderHTML('iBoiler','보일러·압력용기 수',0,10,1,'대',['0','2','5','7','10+']) +
-    ynHTML('iChem','화학물질관리법 대상 여부');
+    </div>
+
+    <!-- 상시근로자 수 -->
+    <div class="form-row" style="margin-top:20px;">
+      <label class="form-label-tai">상시근로자 수</label>
+      <div class="num-input-wrap">
+        <input type="number" class="form-input-tai" id="iWorker" min="0" placeholder="0"
+          style="width:140px;text-align:right;" oninput="formData.iWorker=this.value">
+        <span class="num-unit">명</span>
+      </div>
+    </div>
+  `;
 }
 
-/* ══════════════════════════════════
-   이벤트 바인딩 & 헬퍼
-══════════════════════════════════ */
-function bindEvents() {
-  // 슬라이더 초기값 표시
-  document.querySelectorAll('input[type=range]').forEach(slider => {
-    const id   = slider.id.replace('Slider','');
-    const unit = document.getElementById(id+'Val')?.textContent.replace(/[0-9]/g,'').trim() || '';
-  });
-}
-
-function updateSlider(id, unit) {
-  const val = document.getElementById(id + 'Slider').value;
-  const el  = document.getElementById(id + 'Val');
-  if (el) el.textContent = Number(val).toLocaleString() + unit;
-  formData[id] = val;
-}
-
+/* ── 헬퍼 ── */
 function selectYN(id, val, el) {
-  const wrap = el.parentNode;
-  wrap.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
+  el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
   el.className = 'yn-btn ' + (val ? 'selected-yes' : 'selected-no');
   formData[id] = val;
+
+  const sub = document.getElementById(id + '_sub');
+  if (sub) sub.style.display = val ? 'block' : 'none';
 }
 
 function selectAmount(id, el) {
   el.parentNode.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   formData[id] = el.dataset.val;
-}
-
-function selectSingle(el, id, val) {
-  el.closest('.choice-grid').querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  formData[id] = val;
 }
 
 function toggleCheck(el, id) {
@@ -746,84 +540,65 @@ function toggleCheck(el, id) {
   else formData[id].splice(idx, 1);
 }
 
-/* ── 주소 검색 (JUSO API 연동) ── */
+function selectIndustry(el, val) {
+  document.querySelectorAll('.industry-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  formData.iType = val;
+}
+
+/* ── 주소 검색 ── */
 async function searchAddr(prefix) {
   const query = document.getElementById(prefix + 'Input').value.trim();
   if (!query) { alert('주소를 입력해주세요.'); return; }
 
+  const resultEl = document.getElementById(prefix + 'Result');
   try {
-    const res = await fetch(`https://api.taieng.co.kr/juso/search?query=${encodeURIComponent(query)}&size=1`);
-    const d = await res.json();
-    const addr = d.data?.results?.[0]?.road_address || d.data?.results?.[0]?.address || query;
-    const resultEl = document.getElementById(prefix + 'Result');
+    const res = await fetch(`https://api.taieng.co.kr/juso/coord?query=${encodeURIComponent(query)}`);
+    const d   = await res.json();
+    const addr = d.data?.road_address || d.data?.address || query;
     resultEl.textContent = '📍 ' + addr;
     resultEl.classList.add('show');
     formData[prefix] = addr;
+    if (d.data?.lat) formData[prefix + '_lat'] = d.data.lat;
+    if (d.data?.lng) formData[prefix + '_lng'] = d.data.lng;
   } catch {
-    // API 실패 시 입력값 그대로 사용
-    const resultEl = document.getElementById(prefix + 'Result');
     resultEl.textContent = '📍 ' + query;
     resultEl.classList.add('show');
     formData[prefix] = query;
   }
 }
 
-/* ══════════════════════════════════
-   Step 4: 등급명 표시
-══════════════════════════════════ */
-function renderStep4() {
-  const gradeNames = ['기본 진단 (무료)', '표준 진단', '정밀 진단'];
-  document.getElementById('selectedGradeName').textContent =
-    gradeNames[grade - 1];
-}
-
-/* ══════════════════════════════════
-   Step 2 진입 시 등급 카드 렌더링
-══════════════════════════════════ */
-const origGoStep = goStep;
-function goStep(n) {
-  if (n === 2 && !sector) { alert('사업장 유형을 선택해주세요.'); return; }
-  if (n === 2) renderGradeGrid();
-  if (n === 3 && !grade)  { alert('진단 등급을 선택해주세요.'); return; }
-  if (n === 3) renderFormArea();
-  if (n === 4) renderStep4();
-
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('step' + n).classList.add('active');
-  updateProgress(n);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-/* ══════════════════════════════════
-   제출
-══════════════════════════════════ */
+/* ── 제출 ── */
 async function submitDiag() {
-  const email = document.getElementById('contactEmail').value.trim();
-  const agreed = document.getElementById('agreePrivacy').checked;
-
-  if (!email)  { alert('이메일을 입력해주세요.'); return; }
-  if (!agreed) { alert('개인정보처리방침에 동의해주세요.'); return; }
-
   const btn = document.getElementById('btnSubmit');
-  btn.disabled = true; btn.textContent = '제출 중...';
+  btn.disabled = true; btn.textContent = '진단 중...';
 
   const payload = {
-    sector, grade,
-    email,
-    name:  document.getElementById('contactName').value.trim(),
-    phone: document.getElementById('contactPhone').value.replace(/[^0-9]/g,''),
-    form_data: formData
+    sector,
+    grade: 1,
+    user_id:    localStorage.getItem('user_id'),
+    user_name:  localStorage.getItem('user_name'),
+    user_email: localStorage.getItem('user_email'),
+    form_data:  formData
   };
 
   try {
-    await fetch('https://api.taieng.co.kr/quotes/survey', {
+    const res = await fetch('https://api.taieng.co.kr/quotes/survey', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + (localStorage.getItem('access_token') || '')
+      },
       body: JSON.stringify(payload)
     });
-  } catch(e) { /* 실패해도 결과 페이지로 이동 */ }
-
-  window.location.href = 'free-diagnosis-result.html';
+    const d   = await res.json();
+    const rid = d.data?.request_id || d.request_id || '';
+    window.location.href = 'free-diagnosis-result.html' + (rid ? '?id=' + rid : '');
+  } catch(e) {
+    window.location.href = 'free-diagnosis-result.html';
+  } finally {
+    btn.disabled = false; btn.textContent = '진단 결과 받기';
+  }
 }
 </script>
 </body>
