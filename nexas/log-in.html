@@ -41,25 +41,40 @@
   @media(max-width:768px){ .auth-form-wrap { padding: 40px 24px; } }
 
   /* ── 타이틀 ── */
-  .auth-title {
-    font-size: 1.6rem; font-weight: 900;
-    color: var(--navy); margin-bottom: 6px;
-  }
-  .auth-subtitle {
-    font-size: .88rem; color: var(--sub);
-    margin-bottom: 28px;
-  }
+  .auth-title    { font-size: 1.6rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; }
+  .auth-subtitle { font-size: .88rem; color: var(--sub); margin-bottom: 28px; }
 
   /* ── 폼 공통 ── */
-  .form-label-tai  { font-size: .83rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; display: block; }
-  .form-input-tai  {
+  .form-label-tai { font-size: .83rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; display: block; }
+  .form-input-tai {
     width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
     padding: 11px 14px; font-size: .9rem; color: var(--text);
     outline: none; transition: border-color .15s;
     background: #fff; font-family: inherit; margin-bottom: 14px;
   }
-  .form-input-tai:focus  { border-color: var(--red); }
-  .form-input-tai.is-error  { border-color: #ef4444; margin-bottom: 4px; }
+  .form-input-tai:focus { border-color: var(--red); }
+  .form-input-tai.is-error { border-color: #ef4444; margin-bottom: 4px; }
+
+  /* ── 비밀번호 래퍼 (눈 아이콘) ── */
+  .pw-wrap {
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .pw-wrap .form-input-tai {
+    margin-bottom: 0;
+    padding-right: 44px;   /* 눈 아이콘 공간 */
+  }
+  .pw-toggle {
+    position: absolute;
+    top: 50%; right: 13px;
+    transform: translateY(-50%);
+    background: none; border: none; padding: 0;
+    cursor: pointer; color: var(--sub);
+    display: flex; align-items: center;
+    transition: color .15s;
+  }
+  .pw-toggle:hover { color: var(--navy); }
+  .pw-toggle svg { width: 18px; height: 18px; }
 
   .submit-btn {
     background: var(--red); color: #fff; font-weight: 700;
@@ -67,7 +82,7 @@
     border: none; cursor: pointer; width: 100%;
     transition: background .2s; margin-top: 4px;
   }
-  .submit-btn:hover   { background: #c1121f; }
+  .submit-btn:hover    { background: #c1121f; }
   .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
 
   .msg-box {
@@ -78,24 +93,19 @@
   .msg-box.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
   .msg-box.show    { display: block; }
 
-  .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
+  .form-hint     { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
   .required-star { color: var(--red); }
 
   /* ── 하단 이동 링크 ── */
   .auth-switch {
-    text-align: center; font-size: .85rem;
-    color: var(--sub); margin-top: 20px;
-    padding-top: 20px;
+    text-align: center; font-size: .85rem; color: var(--sub);
+    margin-top: 20px; padding-top: 20px;
     border-top: 1px solid var(--border);
   }
   .auth-switch a { color: var(--red); font-weight: 700; }
 
-  /* ── 필드 에러 메시지 ── */
-  .field-error {
-    font-size: .76rem; color: #ef4444;
-    margin-top: 5px; margin-bottom: 8px;
-    padding-left: 2px; display: none;
-  }
+  /* ── 필드 에러 ── */
+  .field-error { font-size: .76rem; color: #ef4444; margin-top: 5px; margin-bottom: 8px; padding-left: 2px; display: none; }
   .field-error.show { display: block; }
   </style>
 </head>
@@ -131,16 +141,30 @@
       <div class="auth-title">로그인</div>
       <div class="auth-subtitle">TAI 엔지니어링 계정으로 로그인하세요</div>
 
-      <label class="form-label-tai">이메일</label>
-      <input type="email" class="form-input-tai" id="login-email"
-        placeholder="example@company.com" autocomplete="email">
-
-      <label class="form-label-tai">비밀번호</label>
-      <input type="password" class="form-input-tai" id="login-pw"
-        placeholder="비밀번호 입력" autocomplete="current-password"
+      <label class="form-label-tai">이메일 또는 휴대폰 번호</label>
+      <input type="text" class="form-input-tai" id="login-id"
+        placeholder="" autocomplete="username"
         onkeydown="if(event.key==='Enter') doLogin()">
 
-      <div style="text-align:right; margin-top:-10px; margin-bottom:16px;">
+      <label class="form-label-tai">비밀번호</label>
+      <div class="pw-wrap">
+        <input type="password" class="form-input-tai" id="login-pw"
+          placeholder="" autocomplete="current-password"
+          onkeydown="if(event.key==='Enter') doLogin()">
+        <button type="button" class="pw-toggle" onclick="togglePw('login-pw', this)" aria-label="비밀번호 표시">
+          <!-- 눈 아이콘 (기본: 가림) -->
+          <svg id="icon-eye-login" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <!-- 눈 가림 아이콘 (표시 중) -->
+          <svg id="icon-eye-login-off" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="display:none;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+        </button>
+      </div>
+
+      <div style="text-align:right; margin-top:2px; margin-bottom:16px;">
         <a href="#" style="font-size:.8rem; color:var(--sub);" onclick="showForgot(event)">비밀번호 찾기</a>
       </div>
 
@@ -173,13 +197,35 @@
       <div class="form-hint">숫자만 입력 (예: 01012345678)</div>
 
       <label class="form-label-tai">비밀번호 <span class="required-star">*</span></label>
-      <input type="password" class="form-input-tai" id="reg-pw"
-        placeholder="8자 이상" autocomplete="new-password">
+      <div class="pw-wrap">
+        <input type="password" class="form-input-tai" id="reg-pw"
+          placeholder="8자 이상" autocomplete="new-password">
+        <button type="button" class="pw-toggle" onclick="togglePw('reg-pw', this)" aria-label="비밀번호 표시">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="display:none;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+        </button>
+      </div>
 
       <label class="form-label-tai">비밀번호 확인 <span class="required-star">*</span></label>
-      <input type="password" class="form-input-tai" id="reg-pw2"
-        placeholder="비밀번호 재입력" autocomplete="new-password"
-        onkeydown="if(event.key==='Enter') doRegister()">
+      <div class="pw-wrap">
+        <input type="password" class="form-input-tai" id="reg-pw2"
+          placeholder="비밀번호 재입력" autocomplete="new-password"
+          onkeydown="if(event.key==='Enter') doRegister()">
+        <button type="button" class="pw-toggle" onclick="togglePw('reg-pw2', this)" aria-label="비밀번호 확인 표시">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" style="display:none;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+        </button>
+      </div>
 
       <label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--sub);margin-bottom:14px;cursor:pointer;">
         <input type="checkbox" id="reg-agree" style="margin-top:2px;">
@@ -216,14 +262,21 @@ function switchPanel(panel) {
   document.getElementById('panel-register').style.display = isLogin ? 'none' : '';
   clearMsg();
   history.replaceState(null, '', '#' + panel);
-  // 페이지 타이틀 동기화
   document.title = (isLogin ? '로그인' : '회원가입') + ' | TAI 엔지니어링';
 }
-
-/* URL hash로 초기 패널 결정 */
 (function(){
   if (location.hash.replace('#','') === 'register') switchPanel('register');
 })();
+
+/* ── 비밀번호 표시 토글 ── */
+function togglePw(inputId, btn) {
+  const input = document.getElementById(inputId);
+  const icons = btn.querySelectorAll('svg');
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  icons[0].style.display = isHidden ? 'none' : '';   /* 눈 */
+  icons[1].style.display = isHidden ? '' : 'none';   /* 눈-가림 */
+}
 
 /* ── 메시지 ── */
 function showMsg(text, type) {
@@ -274,10 +327,16 @@ function saveSession(data) {
 
 /* ── 로그인 ── */
 async function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pw    = document.getElementById('login-pw').value;
+  const loginId = document.getElementById('login-id').value.trim();
+  const pw      = document.getElementById('login-pw').value;
   clearMsg();
-  if (!email || !pw) { showMsg('이메일과 비밀번호를 입력해 주세요.', 'error'); return; }
+  if (!loginId || !pw) { showMsg('이메일(또는 휴대폰 번호)과 비밀번호를 입력해 주세요.', 'error'); return; }
+
+  /* 이메일 / 휴대폰 자동 판별 */
+  const isPhone = /^[0-9]{10,11}$/.test(loginId.replace(/-/g, ''));
+  const body = isPhone
+    ? { phone: loginId.replace(/-/g, ''), password: pw }
+    : { email: loginId, password: pw };
 
   const btn = document.getElementById('btn-login');
   btn.disabled = true; btn.textContent = '로그인 중...';
@@ -285,10 +344,10 @@ async function doLogin() {
     const res = await fetch(API + '/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pw })
+      body: JSON.stringify(body)
     });
     const d = await res.json();
-    if (!res.ok) { showMsg(d.detail || '이메일 또는 비밀번호가 올바르지 않습니다.', 'error'); return; }
+    if (!res.ok) { showMsg(d.detail || '입력 정보가 올바르지 않습니다.', 'error'); return; }
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
     const redirect = new URLSearchParams(location.search).get('redirect');
