@@ -1,7 +1,8 @@
 /**
- * TAI — nav-auth.js v2.1
+ * TAI — nav-auth.js v2.2
  * 1) 공통 nav 링크 자동 렌더링 (tai-nav 내 .nav-links 대상)
  * 2) 로그인 상태에 따른 게스트/유저 토글
+ * 3) 무료 진단 클릭 시 미로그인이면 안내 후 로그인 페이지로 이동
  *
  * 안전정보 → safety-news.html (뉴스 + 판례 하이라이트)
  * 판례 전용 검색 → index-5.html (safety-news에서 링크)
@@ -24,7 +25,6 @@
     var wrap = document.querySelector('.tai-nav .nav-links');
     if (!wrap) return;
 
-    // 현재 파일명으로 active 판단 (index-5.html도 안전정보 active 처리)
     var currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
     var safetyPages = ['safety-news.html', 'index-5.html'];
 
@@ -39,9 +39,90 @@
     menuHTML += '<a href="sign-up.html" class="nav-auth-guest">회원가입</a>';
     menuHTML += '<a href="mypage/" class="nav-auth-user d-none">마이페이지</a>';
     menuHTML += '<a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>';
-    menuHTML += '<a href="free-diagnosis.html" class="nav-cta" style="margin-left:8px;">무료 진단</a>';
+    // 무료 진단 버튼 — 클릭 시 로그인 체크
+    menuHTML += '<a href="free-diagnosis.html" class="nav-cta tai-diag-btn" style="margin-left:8px;" onclick="return taiDiagClick(event)">무료 진단</a>';
 
     wrap.innerHTML = menuHTML;
+  }
+
+  // ─── 무료 진단 클릭 핸들러 ────────────────────────────────
+  window.taiDiagClick = function (e) {
+    if (isLoggedIn()) return true; // 로그인 상태면 정상 이동
+    e.preventDefault();
+    showLoginRequiredModal();
+    return false;
+  };
+
+  // ─── 로그인 필요 안내 모달 ────────────────────────────────
+  function showLoginRequiredModal() {
+    // 이미 있으면 제거
+    var existing = document.getElementById('tai-login-required-modal');
+    if (existing) existing.remove();
+
+    var modal = document.createElement('div');
+    modal.id = 'tai-login-required-modal';
+    modal.style.cssText = [
+      'position:fixed;inset:0;z-index:99999;',
+      'display:flex;align-items:center;justify-content:center;',
+      'background:rgba(15,23,42,.55);backdrop-filter:blur(4px);',
+      'animation:taiModalFadeIn .2s ease;'
+    ].join('');
+
+    modal.innerHTML = [
+      '<div style="',
+        'background:#fff;border-radius:20px;padding:40px 36px;',
+        'max-width:400px;width:90%;text-align:center;',
+        'box-shadow:0 24px 60px rgba(0,0,0,.18);',
+        'animation:taiModalSlideUp .25s ease;',
+      '">',
+        '<div style="font-size:2.5rem;margin-bottom:16px;">🔒</div>',
+        '<h3 style="font-size:1.15rem;font-weight:900;color:#0f172a;margin-bottom:10px;">',
+          '로그인이 필요한 서비스입니다',
+        '</h3>',
+        '<p style="font-size:.88rem;color:#6b7280;line-height:1.65;margin-bottom:28px;">',
+          '무료 법령진단은 회원 전용 서비스입니다.<br>',
+          '로그인 후 바로 이용하실 수 있습니다.',
+        '</p>',
+        '<div style="display:flex;gap:10px;">',
+          '<button onclick="document.getElementById(\'tai-login-required-modal\').remove()" style="',
+            'flex:1;padding:12px;border:1.5px solid #e8eaed;border-radius:10px;',
+            'background:#fff;font-size:.9rem;font-weight:700;color:#6b7280;cursor:pointer;',
+          '">취소</button>',
+          '<button onclick="taiGoLogin()" style="',
+            'flex:1;padding:12px;border:none;border-radius:10px;',
+            'background:#c62828;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;',
+          '">로그인하기</button>',
+        '</div>',
+      '</div>'
+    ].join('');
+
+    // ESC 키 닫기
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) modal.remove();
+    });
+    document.addEventListener('keydown', function escHandler(e) {
+      if (e.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', escHandler); }
+    });
+
+    document.body.appendChild(modal);
+  }
+
+  window.taiGoLogin = function () {
+    var modal = document.getElementById('tai-login-required-modal');
+    if (modal) modal.remove();
+    window.location.href = 'log-in.html?redirect=free-diagnosis.html';
+  };
+
+  // ─── 모달 애니메이션 CSS ─────────────────────────────────
+  function injectModalCSS() {
+    if (document.getElementById('tai-modal-css')) return;
+    var style = document.createElement('style');
+    style.id = 'tai-modal-css';
+    style.textContent = [
+      '@keyframes taiModalFadeIn{from{opacity:0}to{opacity:1}}',
+      '@keyframes taiModalSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}'
+    ].join('');
+    document.head.appendChild(style);
   }
 
   // ─── 인증 ─────────────────────────────────────────────────
@@ -115,6 +196,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    injectModalCSS();
     renderNavLinks();
     applyNavAuth();
     document.body.addEventListener('click', onLogout, true);
@@ -129,6 +211,6 @@
     }
   });
 
-  window.taiClearAuth   = clearAuthStorage;
+  window.taiClearAuth    = clearAuthStorage;
   window.taiApplyNavAuth = applyNavAuth;
 })();
