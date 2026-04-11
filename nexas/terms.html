@@ -6,7 +6,9 @@
     <title>이용약관 | TAI Engineering</title>
     <link rel="icon" href="assets/img/fevicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/tai-main.css">
     <style>
         :root {
           --primary: #0f172a;
@@ -98,33 +100,13 @@
           margin-bottom: 16px;
           font-style: italic;
         }
-        .terms-footer {
+        .terms-bottom {
           background: var(--light);
           padding: 24px 40px;
           border-radius: 0 0 12px 12px;
           text-align: center;
           font-size: 0.85rem;
           color: var(--secondary);
-        }
-
-        nav.tai-nav {
-          background: white;
-          border-bottom: 1px solid var(--border);
-          padding: 16px 0;
-          position: sticky;
-          top: 0;
-          z-index: 100;
-        }
-        nav.tai-nav .inner {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-        nav.tai-nav .logo img {
-          height: 32px;
         }
 
         @media (max-width: 768px) {
@@ -141,11 +123,18 @@
     </style>
 </head>
 <body>
-    <nav class="tai-nav">
-      <div class="inner">
-        <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI Engineering"></a>
-      </div>
-    </nav>
+<nav class="tai-nav">
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
+    <div class="nav-links">
+      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
+      <span class="nav-sep">|</span>
+      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
+      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
+      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
+    </div>
+  </div>
+</nav>
 
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -281,20 +270,17 @@
 
                     </div>
 
-                    <div class="terms-footer">
+                    <div class="terms-bottom">
                         <p>© 2026 TAI Engineering. All Rights Reserved.</p>
                         <p>마지막 업데이트: 2026년 4월 11일</p>
                     </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 32px;">
-                    <a href="index.html" class="btn btn-outline-dark">메인으로 돌아가기</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="assets/js/nav-auth.js"></script>
-    <script src="assets/js/footer.js"></script>
+<div id="tai-footer"></div>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 </body>
 </html>
