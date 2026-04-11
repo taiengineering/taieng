@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전문가 등록 — 정보 입력 | TAI Engineering</title>
+  <link rel="icon" href="../../assets/img/fevicon.png">
+  <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/css/tai-brand.css">
+  <link rel="stylesheet" href="../../assets/css/tai-mypage.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body { background:#f8fafc; font-family:'Noto Sans KR',sans-serif; }
+  .ea-wrap { max-width:720px; margin:0 auto; padding:48px 20px 80px; }
+  .ea-back  { display:inline-flex; align-items:center; gap:6px; color:#64748b;
+              font-size:.88rem; text-decoration:none; margin-bottom:28px; }
+  .ea-back:hover { color:#0d1b2a; }
+
+  .ea-progress { display:flex; align-items:center; gap:0; margin-bottom:40px; }
+  .ea-step { display:flex; flex-direction:column; align-items:center; gap:4px; flex:0 0 auto; }
+  .ea-dot  { width:28px; height:28px; border-radius:50%; display:flex;
+              align-items:center; justify-content:center; font-size:.75rem; font-weight:800; }
+  .ea-dot.active { background:#0d1b2a; color:#fff; }
+  .ea-dot.done   { background:#22c55e; color:#fff; }
+  .ea-dot.idle   { background:#e8eaed; color:#94a3b8; }
+  .ea-step-label { font-size:.68rem; color:#94a3b8; font-weight:600; white-space:nowrap; }
+  .ea-step-label.active { color:#0d1b2a; }
+  .ea-step-label.done   { color:#22c55e; }
+  .ea-line { flex:1; height:2px; background:#e8eaed; margin:0 6px 14px; }
+  .ea-line.done { background:#22c55e; }
+
+  .ea-card { background:#fff; border:1.5px solid #e8eaed; border-radius:16px;
+              padding:28px 24px; margin-bottom:16px; }
+  .ea-card h3 { font-size:1rem; font-weight:800; color:#0d1b2a; margin-bottom:20px;
+                padding-bottom:10px; border-bottom:1px solid #f1f5f9; }
+
+  .ea-label { font-size:.84rem; font-weight:700; color:#0d1b2a; margin-bottom:6px; display:block; }
+  .ea-input { width:100%; border:1.5px solid #e8eaed; border-radius:8px; padding:11px 14px;
+               font-size:.9rem; outline:none; font-family:inherit; transition:border-color .15s; }
+  .ea-input:focus    { border-color:#0d1b2a; }
+  .ea-input.valid    { border-color:#22c55e; }
+  .ea-input.invalid  { border-color:#e63946; }
+  .ea-input-err { font-size:.75rem; color:#e63946; margin-top:4px; display:none; }
+  .ea-input-err.show { display:block; }
+  .ea-form-row { margin-bottom:18px; }
+
+  /* 지역 체크카드 */
+  .ea-region-grid { display:flex; flex-wrap:wrap; gap:6px; }
+  .ea-region-btn {
+    border:1.5px solid #e8eaed; border-radius:8px; padding:7px 12px;
+    font-size:.8rem; font-weight:600; cursor:pointer; user-select:none;
+    background:#fff; color:#374151; transition:all .15s;
+  }
+  .ea-region-btn.selected { border-color:#0d1b2a; background:#0d1b2a; color:#fff; }
+
+  /* 체크카드 (자격증·분야) */
+  .ea-check-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  @media(max-width:480px){ .ea-check-grid { grid-template-columns:1fr; } }
+  .ea-check-card {
+    border:1.5px solid #e8eaed; border-radius:10px; padding:12px 14px;
+    cursor:pointer; transition:all .15s; display:flex; align-items:center;
+    gap:8px; font-size:.85rem; font-weight:600; color:#374151; user-select:none;
+  }
+  .ea-check-card:hover { border-color:#0d1b2a; }
+  .ea-check-card.checked { border-color:#0d1b2a; background:#f0f4f8; }
+  .ea-check-card .ck { width:16px; height:16px; border-radius:4px; border:1.5px solid #cbd5e1;
+                         margin-left:auto; flex-shrink:0; display:flex;
+                         align-items:center; justify-content:center;
+                         font-size:.7rem; color:#fff; transition:all .15s; }
+  .ea-check-card.checked .ck { background:#0d1b2a; border-color:#0d1b2a; }
+
+  /* YN 버튼 */
+  .ea-yn-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .ea-yn-btn {
+    border:2px solid #e8eaed; border-radius:10px; padding:12px;
+    text-align:center; cursor:pointer; font-size:.9rem; font-weight:700;
+    color:#64748b; transition:all .15s; user-select:none;
+  }
+  .ea-yn-btn.sel-y { border-color:#0d1b2a; background:#f0f4f8; color:#0d1b2a; }
+  .ea-yn-btn.sel-n { border-color:#94a3b8; background:#f8fafc; color:#475569; }
+
+  /* 글자수 카운터 */
+  .ea-counter { text-align:right; font-size:.72rem; color:#94a3b8; margin-top:3px; }
+
+  /* 제출 버튼 */
+  .ea-submit-btn {
+    background:#0d1b2a; color:#fff; border:none; border-radius:12px;
+    padding:16px; font-size:1rem; font-weight:700; width:100%;
+    cursor:pointer; transition:background .2s; margin-top:8px;
+  }
+  .ea-submit-btn:hover:not(:disabled) { background:#1a3a5c; }
+  .ea-submit-btn:disabled { background:#cbd5e1; cursor:not-allowed; }
+
+  /* 완료 화면 */
+  .ea-complete { text-align:center; padding:48px 24px; }
+  .ea-complete .ec-icon { font-size:3rem; margin-bottom:16px; }
+  .ea-complete h2 { font-size:1.3rem; font-weight:900; color:#0d1b2a; margin-bottom:10px; }
+  .ea-complete p  { color:#64748b; line-height:1.7; margin-bottom:20px; }
+  .ea-complete .ec-info { background:#f8fafc; border-radius:12px; padding:16px;
+                            margin-bottom:24px; font-size:.88rem; color:#475569; line-height:1.7; }
+  .ea-complete .ec-back { background:#0d1b2a; color:#fff; border-radius:8px;
+                           padding:12px 28px; font-weight:700; text-decoration:none;
+                           display:inline-block; }
+  .ea-complete .ec-back:hover { background:#1a3a5c; color:#fff; }
+
+  .ea-notice { background:#fef3c7; border:1px solid #fcd34d; border-radius:12px;
+                padding:16px 18px; margin-bottom:24px; font-size:.88rem; color:#78350f; }
+  </style>
+</head>
+<body>
+<div class="ea-wrap" id="mainWrap">
+  <a href="../expert-terms.html?type=safety" class="ea-back" id="backLink">← 약관 동의로</a>
+
+  <!-- 진행 표시 -->
+  <div class="ea-progress">
+    <div class="ea-step">
+      <div class="ea-dot done">✓</div>
+      <div class="ea-step-label done">혜택 확인</div>
+    </div>
+    <div class="ea-line done"></div>
+    <div class="ea-step">
+      <div class="ea-dot done">✓</div>
+      <div class="ea-step-label done">약관 동의</div>
+    </div>
+    <div class="ea-line done"></div>
+    <div class="ea-step">
+      <div class="ea-dot active">3</div>
+      <div class="ea-step-label active">정보 입력</div>
+    </div>
+  </div>
+
+  <!-- 안내 박스 -->
+  <div class="ea-notice">
+    📋 <strong>등록 후 영업일 기준 3~5일 내</strong> 검토 완료 시 활성화됩니다.
+    검토 결과는 가입하신 이메일로 안내드립니다.
+  </div>
+
+  <!-- 폼 영역 -->
+  <div id="formArea"></div>
+
+  <!-- 완료 화면 (숨김) -->
+  <div class="ea-complete" id="completeArea" style="display:none;">
+    <div class="ec-icon">✅</div>
+    <h2>등록이 접수되었습니다</h2>
+    <p>영업일 기준 <strong>3~5일 내</strong> 검토 완료 후<br>가입하신 이메일로 결과를 안내드립니다.</p>
+    <div class="ec-info">검토 중에는 마이페이지 &gt; 전문가 등록에서<br>진행 상태를 확인하실 수 있습니다.</div>
+    <a href="../" class="ec-back">마이페이지로 돌아가기</a>
+  </div>
+</div>
+
+<script>
+var type = (new URLSearchParams(location.search)).get('type') || 'safety';
+document.getElementById('backLink').href = '../expert-terms.html?type=' + type;
+
+/* 진입 체크 */
+if (localStorage.getItem('identity_verified') !== 'true') {
+  location.replace('../expert-intro.html?type=' + type);
+} else if (!localStorage.getItem('expert_terms_agreed_' + type)) {
+  location.replace('../expert-terms.html?type=' + type);
+}
+
+var formData = {};
+
+/* 지역 목록 */
+var SIDOS = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
+
+/* 사업자번호 검증 */
+function validateBizNo(val) {
+  var v = val.replace(/[^0-9]/g,'');
+  if (v.length !== 10) return false;
+  var key = [1,3,7,1,3,7,1,3,5];
+  var sum = 0;
+  for (var i=0;i<9;i++) sum += key[i] * parseInt(v[i]);
+  sum += Math.floor((5*parseInt(v[8]))/10);
+  return (10-(sum%10))%10 === parseInt(v[9]);
+}
+
+/* 공통 폼 HTML */
+function commonFormHTML() {
+  var regionsHTML = SIDOS.map(function(s){
+    return '<button type="button" class="ea-region-btn" onclick="toggleRegion(this,\'' + s + '\')">' + s + '</button>';
+  }).join('');
+
+  return '<div class="ea-card">'
+    + '<h3>기본 정보</h3>'
+    + '<div class="ea-form-row"><label class="ea-label">업체명 또는 성명 <span style="color:#e63946">*</span></label>'
+    + '<input type="text" class="ea-input" id="fBizName" placeholder="홍길동 / (주)TAI엔지니어링">'
+    + '</div>'
+    + '<div class="ea-form-row"><label class="ea-label">사업자등록번호 <span style="color:#e63946">*</span></label>'
+    + '<input type="text" class="ea-input" id="fBizNo" maxlength="12" placeholder="000-00-00000"'
+    + ' onblur="onBizNoBlur(this)" oninput="formatBizNo(this)">'
+    + '<div class="ea-input-err" id="fBizNoErr">올바른 사업자등록번호가 아닙니다</div>'
+    + '</div>'
+    + '<div class="ea-form-row"><label class="ea-label">대표자명</label>'
+    + '<input type="text" class="ea-input" id="fRepresentative" placeholder="대표자 이름">'
+    + '</div>'
+    + '<div class="ea-form-row"><label class="ea-label">연락처 <span style="color:#e63946">*</span></label>'
+    + '<input type="tel" class="ea-input" id="fPhone" maxlength="11" placeholder="01012345678"'
+    + ' oninput="this.value=this.value.replace(/[^0-9]/g,\'\')">'
+    + '</div>'
+    + '</div>'
+    + '<div class="ea-card">'
+    + '<h3>활동 지역</h3>'
+    + '<div class="ea-form-row"><label class="ea-label">활동 가능 지역 (복수 선택)</label>'
+    + '<div class="ea-region-grid">' + regionsHTML + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div class="ea-card">'
+    + '<h3>소개글</h3>'
+    + '<div class="ea-form-row"><label class="ea-label">소개글 <span style="color:#94a3b8;font-weight:400;">(최대 200자)</span></label>'
+    + '<textarea class="ea-input" id="fIntro" rows="4" maxlength="200" placeholder="전문 분야와 경력을 간략히 소개해 주세요." oninput="countIntro(this)"></textarea>'
+    + '<div class="ea-counter" id="introCounter">0 / 200</div>'
+    + '</div>'
+    + '</div>';
+}
+
+/* 타입별 추가 폼 */
+function typeFormHTML() {
+  if (type === 'safety') {
+    return '<div class="ea-card">'
+      + '<h3>안전관리 전문가 정보</h3>'
+      + '<div class="ea-form-row"><label class="ea-label">보유 자격증 (복수 선택)</label>'
+      + '<div class="ea-check-grid">'
+      + checkCard('산업안전지도사','lic_1') + checkCard('건설안전기술사','lic_2')
+      + checkCard('안전관리사','lic_3')    + checkCard('기타','lic_4')
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">자격증 첨부 <span style="color:#94a3b8;font-weight:400;">(PDF·이미지)</span></label>'
+      + '<input type="file" class="ea-input" id="fLicFile" accept=".pdf,.jpg,.jpeg,.png" style="padding:8px;">'
+      + '</div>'
+      + '<div class="ea-form-row"><label class="ea-label">대행 가능 업종 (복수 선택)</label>'
+      + '<div class="ea-check-grid">'
+      + checkCard('건물·시설','sec_1') + checkCard('건설현장','sec_2') + checkCard('산업·제조','sec_3')
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">최대 수탁 가능 사업장 수</label>'
+      + '<div style="display:flex;align-items:center;gap:8px;">'
+      + '<input type="number" class="ea-input" id="fMaxSite" min="1" placeholder="0" style="width:140px;text-align:right;">'
+      + '<span style="color:#64748b;font-weight:600;">개소</span></div>'
+      + '</div>'
+      + '</div>';
+  }
+  if (type === 'fix') {
+    return '<div class="ea-card">'
+      + '<h3>시공·수선 업체 정보</h3>'
+      + '<div class="ea-form-row"><label class="ea-label">전문 분야 (복수 선택)</label>'
+      + '<div class="ea-check-grid">'
+      + checkCard('전기','fld_1') + checkCard('소방','fld_2') + checkCard('기계','fld_3')
+      + checkCard('건축','fld_4') + checkCard('배관','fld_5') + checkCard('냉난방','fld_6')
+      + checkCard('기타','fld_7')
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">건설업 면허 보유</label>'
+      + '<div class="ea-yn-grid">'
+      + '<div class="ea-yn-btn" onclick="selectYN(this,true,\'license_yn\')" id="licYes">예</div>'
+      + '<div class="ea-yn-btn" onclick="selectYN(this,false,\'license_yn\')" id="licNo">아니오</div>'
+      + '</div>'
+      + '<div id="licenseTypeSub" style="display:none;margin-top:10px;">'
+      + '<label class="ea-label">면허 종류</label>'
+      + '<input type="text" class="ea-input" id="fLicenseType" placeholder="예: 소방시설공사업">'
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">보유 기술자 수</label>'
+      + '<div style="display:flex;align-items:center;gap:8px;">'
+      + '<input type="number" class="ea-input" id="fTechCount" min="0" placeholder="0" style="width:140px;text-align:right;">'
+      + '<span style="color:#64748b;font-weight:600;">명</span></div>'
+      + '</div>'
+      + '</div>';
+  }
+  if (type === 'consult') {
+    return '<div class="ea-card">'
+      + '<h3>진단·컨설팅 전문가 정보</h3>'
+      + '<div class="ea-form-row"><label class="ea-label">전문 분야 (복수 선택)</label>'
+      + '<div class="ea-check-grid">'
+      + checkCard('법령진단','cf_1') + checkCard('위험성평가','cf_2') + checkCard('PSM','cf_3')
+      + checkCard('화학물질','cf_4') + checkCard('건설안전','cf_5') + checkCard('기타','cf_6')
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">보유 자격 (복수 선택)</label>'
+      + '<div class="ea-check-grid">'
+      + checkCard('산업안전지도사','cq_1') + checkCard('기술사','cq_2')
+      + checkCard('박사','cq_3') + checkCard('기타','cq_4')
+      + '</div></div>'
+      + '<div class="ea-form-row"><label class="ea-label">자격증 첨부 <span style="color:#94a3b8;font-weight:400;">(PDF·이미지)</span></label>'
+      + '<input type="file" class="ea-input" id="fLicFile" accept=".pdf,.jpg,.jpeg,.png" style="padding:8px;">'
+      + '</div>'
+      + '<div class="ea-form-row"><label class="ea-label">연간 수행 가능 진단 건수</label>'
+      + '<div style="display:flex;align-items:center;gap:8px;">'
+      + '<input type="number" class="ea-input" id="fDiagCount" min="1" placeholder="0" style="width:140px;text-align:right;">'
+      + '<span style="color:#64748b;font-weight:600;">건/년</span></div>'
+      + '</div>'
+      + '</div>';
+  }
+  return '';
+}
+
+function checkCard(label, id) {
+  return '<div class="ea-check-card" onclick="toggleCheck(this)" data-id="' + id + '">'
+    + '<span>' + label + '</span><span class="ck">✓</span></div>';
+}
+
+/* 폼 렌더링 */
+document.getElementById('formArea').innerHTML =
+  commonFormHTML() + typeFormHTML()
+  + '<button class="ea-submit-btn" id="btnSubmit" onclick="submitApplication()">등록 신청하기</button>';
+
+/* 헬퍼 함수들 */
+var selectedRegions = [];
+function toggleRegion(el, sido) {
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    selectedRegions = selectedRegions.filter(function(s){return s!==sido;});
+  } else {
+    el.classList.add('selected');
+    selectedRegions.push(sido);
+  }
+}
+
+var checkedItems = {};
+function toggleCheck(el) {
+  var id = el.dataset.id;
+  el.classList.toggle('checked');
+  checkedItems[id] = el.classList.contains('checked');
+}
+
+function selectYN(el, val, key) {
+  var grid = el.parentNode;
+  grid.querySelectorAll('.ea-yn-btn').forEach(function(b){b.className='ea-yn-btn';});
+  el.classList.add(val ? 'sel-y' : 'sel-n');
+  formData[key] = val;
+  if (key === 'license_yn') {
+    var sub = document.getElementById('licenseTypeSub');
+    if (sub) sub.style.display = val ? 'block' : 'none';
+  }
+}
+
+function formatBizNo(el) {
+  var v = el.value.replace(/[^0-9]/g,'');
+  if (v.length <= 3) el.value = v;
+  else if (v.length <= 5) el.value = v.slice(0,3)+'-'+v.slice(3);
+  else el.value = v.slice(0,3)+'-'+v.slice(3,5)+'-'+v.slice(5,10);
+  el.className = 'ea-input';
+  document.getElementById('fBizNoErr').className = 'ea-input-err';
+}
+
+function onBizNoBlur(el) {
+  var raw = el.value.replace(/[^0-9]/g,'');
+  var errEl = document.getElementById('fBizNoErr');
+  if (!raw) return;
+  if (validateBizNo(raw)) {
+    el.classList.add('valid'); el.classList.remove('invalid');
+    errEl.className = 'ea-input-err';
+  } else {
+    el.classList.add('invalid'); el.classList.remove('valid');
+    errEl.className = 'ea-input-err show';
+  }
+}
+
+function countIntro(el) {
+  var c = document.getElementById('introCounter');
+  if (c) c.textContent = el.value.length + ' / 200';
+}
+
+/* 제출 */
+async function submitApplication() {
+  var bizName = (document.getElementById('fBizName')||{}).value||'';
+  var bizNo   = ((document.getElementById('fBizNo')||{}).value||'').replace(/[^0-9]/g,'');
+  var phone   = (document.getElementById('fPhone')||{}).value||'';
+  var intro   = (document.getElementById('fIntro')||{}).value||'';
+
+  if (!bizName.trim()) { alert('업체명 또는 성명을 입력해주세요.'); return; }
+  if (!validateBizNo(bizNo)) { alert('올바른 사업자등록번호를 입력해주세요.'); return; }
+  if (!phone.trim()) { alert('연락처를 입력해주세요.'); return; }
+  if (selectedRegions.length === 0) { alert('활동 가능 지역을 하나 이상 선택해주세요.'); return; }
+
+  var btn = document.getElementById('btnSubmit');
+  btn.disabled = true; btn.textContent = '제출 중...';
+
+  var typeData = {};
+  if (type === 'safety') {
+    typeData.max_sites = parseInt((document.getElementById('fMaxSite')||{}).value||0);
+  } else if (type === 'fix') {
+    typeData.license_yn = formData.license_yn || false;
+    typeData.license_type = (document.getElementById('fLicenseType')||{}).value||'';
+    typeData.tech_count = parseInt((document.getElementById('fTechCount')||{}).value||0);
+  } else if (type === 'consult') {
+    typeData.diag_count = parseInt((document.getElementById('fDiagCount')||{}).value||0);
+  }
+
+  var payload = {
+    expert_type:     type,
+    biz_name:        bizName.trim(),
+    biz_number:      bizNo,
+    representative:  (document.getElementById('fRepresentative')||{}).value||'',
+    contact_phone:   phone,
+    service_regions: selectedRegions,
+    intro_text:      intro,
+    terms_agreed:    true,
+    terms_agreed_at: localStorage.getItem('expert_terms_agreed_' + type),
+    type_data:       typeData
+  };
+
+  try {
+    var res = await fetch('https://api.taieng.co.kr/experts/apply', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + (localStorage.getItem('access_token')||'')
+      },
+      body: JSON.stringify(payload)
+    });
+    var d = await res.json();
+    if (res.ok) {
+      if (window.TaiMypageState) TaiMypageState.setExpertStatus(type, 'pending');
+      document.getElementById('formArea').style.display = 'none';
+      document.querySelector('.ea-back').style.display  = 'none';
+      document.querySelector('.ea-notice').style.display = 'none';
+      document.getElementById('completeArea').style.display = 'block';
+    } else {
+      alert((d.detail || d.message) || '제출 중 오류가 발생했습니다.');
+      btn.disabled = false; btn.textContent = '등록 신청하기';
+    }
+  } catch(e) {
+    alert('네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    btn.disabled = false; btn.textContent = '등록 신청하기';
+  }
+}
+</script>
+</body>
+</html>

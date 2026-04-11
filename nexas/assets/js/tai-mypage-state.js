@@ -4,6 +4,7 @@
  */
 (function (w) {
   var STORAGE_KEY = 'tai_mypage_mock_state';
+  var EXPERT_KEY  = 'tai_expert_status';
 
   var DEFAULT = {
     accountType: 'USER',
@@ -23,12 +24,12 @@
       SUBMITTED: '제출 완료',
       UNDER_REVIEW: '검토 중',
       REVISION_REQUESTED: '보완 요청',
-      APPROVED: '승인 완료',
+      APPROVED: '활성화 완료',
       REJECTED: '반려',
     },
     partnerRole: {
-      SAFETY: '안전관리 파트너',
-      REPAIR: '시공·수선업체 파트너',
+      SAFETY: '안전관리 전문가',
+      REPAIR: '시공·수선 전문가',
     },
   };
 
@@ -62,9 +63,6 @@
     } catch (e) {}
   }
 
-  /**
-   * URL ?mock=under_review | approved | none 등으로 임시 덮어쓰기 (세션만, 저장 안 함)
-   */
   function applyQueryMock() {
     try {
       var q = new URLSearchParams(w.location.search).get('mock');
@@ -79,9 +77,7 @@
         rejected: { partnerStatus: 'REJECTED', partnerRole: null },
       };
       var m = map[q.toLowerCase()];
-      if (m) {
-        w.__TAI_MYPAGE_QUERY_OVERRIDE = m;
-      }
+      if (m) { w.__TAI_MYPAGE_QUERY_OVERRIDE = m; }
     } catch (e) {}
   }
 
@@ -103,6 +99,22 @@
     return LABELS.partnerRole[r] || r;
   }
 
+  /* ── 전문가 상태 관리 ── */
+  function getExpertStatus(type) {
+    try {
+      var st = JSON.parse(w.localStorage.getItem(EXPERT_KEY) || '{}');
+      return st[type] || 'none';
+    } catch(e) { return 'none'; }
+  }
+
+  function setExpertStatus(type, status) {
+    try {
+      var st = JSON.parse(w.localStorage.getItem(EXPERT_KEY) || '{}');
+      st[type] = status;
+      w.localStorage.setItem(EXPERT_KEY, JSON.stringify(st));
+    } catch(e) {}
+  }
+
   w.TaiMypageState = {
     load: get,
     save: save,
@@ -112,7 +124,8 @@
     },
     partnerStatusLabel: partnerStatusLabel,
     partnerRoleLabel: partnerRoleLabel,
+    getExpertStatus: getExpertStatus,
+    setExpertStatus: setExpertStatus,
     DEFAULT: DEFAULT,
-    /** 콘솔에서 TaiMypageState.save({ partnerStatus: 'APPROVED', partnerRole: 'SAFETY' }) */
   };
 })(typeof window !== 'undefined' ? window : this);
