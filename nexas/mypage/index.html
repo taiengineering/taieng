@@ -13,6 +13,33 @@
 	<link rel="stylesheet" href="../assets/css/tai-brand.css">
 	<link rel="stylesheet" href="../assets/css/tai-mypage.css">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+	.tai-expert-card {
+	  border: 1.5px solid #e8eaed; border-radius: 16px;
+	  padding: 24px 18px; text-align: center; height: 100%;
+	  display: flex; flex-direction: column; gap: 10px;
+	  transition: border-color .15s;
+	}
+	.tai-expert-card:hover     { border-color: #e63946; }
+	.tai-expert-card.pending   { border-color: #f59e0b; }
+	.tai-expert-card.registered{ border-color: #22c55e; }
+	.tai-expert-icon { font-size: 2rem; }
+	.tai-expert-name { font-size: 1rem; font-weight: 800; color: #0d1b2a; }
+	.tai-expert-desc { font-size: .8rem; color: #64748b; line-height: 1.6; flex: 1; }
+	.tai-expert-status {
+	  font-size: .76rem; font-weight: 700;
+	  padding: 4px 10px; border-radius: 20px; display: inline-block;
+	}
+	.tai-expert-status.none    { background:#f1f5f9; color:#94a3b8; }
+	.tai-expert-status.pending { background:#fef3c7; color:#d97706; }
+	.tai-expert-status.active  { background:#dcfce7; color:#16a34a; }
+	.tai-expert-btn {
+	  display: block; background: #0d1b2a; color: #fff;
+	  border-radius: 8px; padding: 10px; font-size: .88rem;
+	  font-weight: 700; text-decoration: none; transition: background .15s;
+	}
+	.tai-expert-btn:hover { background: #1a3a5c; color: #fff; }
+	</style>
 </head>
 <body class="sc5 tai-mypage-body" data-tai-active="dashboard">
 <script>window.TAI_NEXAS_ROOT = '../';</script>
@@ -44,9 +71,7 @@
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
 					<ul class="navbar-nav menu-open text-end">
 						<li class="tai-safe-wrap"><a href="../index-1.html">TAI SAFE</a><a href="../contact.html" class="tai-nav-plus" title="문의" aria-label="문의">+</a></li>
-						<li class="menu-item-has-children"><a href="../index-2.html">TAI MANAGER</a><ul class="sub-menu"><li><a href="../index-2.html#client">건물·공장 경영자</a></li><li><a href="../index-2.html#partner">기술자·대행업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="../index-3.html">TAI FIX</a><ul class="sub-menu"><li><a href="../index-3.html#client">건물·공장 경영자</a></li><li><a href="../index-3.html#vendor">수선업체</a></li></ul></li>
-						<li class="menu-item-has-children"><a href="../index-4.html">TAI CARE</a><ul class="sub-menu"><li><a href="../index-4.html#manager">안전관리자</a></li><li><a href="../index-4.html#agency">안전대행·진단업체</a></li></ul></li>
+						<li class="menu-item-has-children"><a href="../index-2.html">TAI MANAGER</a></li>
 						<li><a href="../index-5.html">안전정보</a></li>
 						<li class="tai-nav-sep" aria-hidden="true"><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span></li>
 						<li class="nav-auth-guest tai-nav-auth"><a href="../log-in.html">로그인</a></li>
@@ -74,7 +99,7 @@
 				</aside>
 				<main class="col-lg-9">
 					<h2 class="tai-mypage-section-title">대시보드</h2>
-					<p class="text-muted small mb-4">계약·진단·결제 요약과 파트너 신청 상태를 확인할 수 있습니다. (데모: <code>?mock=review</code> 등으로 상태 변경)</p>
+					<p class="text-muted small mb-4">계약·진단·결제 요약과 전문가 등록 상태를 확인할 수 있습니다.</p>
 
 					<div class="row g-3 mb-4">
 						<div class="col-md-4">
@@ -100,18 +125,48 @@
 						</div>
 					</div>
 
-					<div class="tai-mypage-card mb-4">
-						<h3 class="mb-2">파트너 전환 신청</h3>
-						<p class="mb-2"><span class="tai-mypage-badge-soft" id="taiDashPartnerBadge">—</span></p>
-						<p class="small text-muted mb-0" id="taiDashPartnerHint">신청 현황은 아래에서 상세히 확인할 수 있습니다.</p>
-					</div>
+					<!-- 전문가 등록 섹션 -->
+					<section class="tai-mypage-expert-section mb-4">
+						<h2 class="tai-mypage-section-title">전문가 등록</h2>
+						<p class="text-muted small mb-4">
+							등록 후 영업일 기준 <strong>3~5일 내</strong> 검토 완료 시 전용 메뉴가 활성화됩니다.
+						</p>
+						<div class="row g-3" id="expertCards">
+							<div class="col-md-4">
+								<div class="tai-expert-card" id="card-safety">
+									<div class="tai-expert-icon">🛡️</div>
+									<div class="tai-expert-name">안전관리 대행</div>
+									<div class="tai-expert-desc">안전관리자 업무 수탁, 점검·교육 대행</div>
+									<div class="tai-expert-status none" id="status-safety">미등록</div>
+									<a href="expert-intro.html?type=safety" class="tai-expert-btn" id="btn-safety">등록하기</a>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="tai-expert-card" id="card-fix">
+									<div class="tai-expert-icon">🔧</div>
+									<div class="tai-expert-name">시공·수선 업체</div>
+									<div class="tai-expert-desc">설비 수선·시설 개선 전문</div>
+									<div class="tai-expert-status none" id="status-fix">미등록</div>
+									<a href="expert-intro.html?type=fix" class="tai-expert-btn" id="btn-fix">등록하기</a>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="tai-expert-card" id="card-consult">
+									<div class="tai-expert-icon">📋</div>
+									<div class="tai-expert-name">진단·컨설팅</div>
+									<div class="tai-expert-desc">법령진단·위험성평가 전문가</div>
+									<div class="tai-expert-status none" id="status-consult">미등록</div>
+									<a href="expert-intro.html?type=consult" class="tai-expert-btn" id="btn-consult">등록하기</a>
+								</div>
+							</div>
+						</div>
+					</section>
 
 					<div class="tai-mypage-card tai-mypage-quick">
 						<h3 class="mb-3">빠른 이동</h3>
 						<div class="d-flex flex-wrap gap-2">
 							<a href="../free-diagnosis.html" class="btn btn-base btn-sm">무료 법령진단</a>
 							<a href="contracts/" class="btn btn-outline-secondary btn-sm">계약 관리</a>
-							<a href="partner-application/" class="btn btn-outline-secondary btn-sm">파트너 전환 신청</a>
 						</div>
 					</div>
 				</main>
@@ -148,16 +203,50 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('taiDashContracts').textContent = sum.contractsActive != null ? sum.contractsActive : 0;
   document.getElementById('taiDashDiag').textContent = sum.diagnosisRecent != null ? sum.diagnosisRecent : 0;
   document.getElementById('taiDashPay').textContent = sum.paymentsCount != null ? sum.paymentsCount : 0;
-  document.getElementById('taiDashPartnerBadge').textContent = TaiMypageState.partnerStatusLabel();
-  var hint = document.getElementById('taiDashPartnerHint');
-  if (st.partnerStatus === 'APPROVED') {
-    hint.textContent = '파트너로 승인되었습니다. 좌측 메뉴에서 파트너 전용 기능을 이용하세요.';
-  } else if (st.partnerStatus && st.partnerStatus !== 'NONE') {
-    hint.textContent = '심사 진행 중이거나 보완이 필요할 수 있습니다. 파트너 전환 신청 메뉴에서 확인하세요.';
-  } else {
-    hint.textContent = '안전관리·시공 파트너로 전환하려면 신청을 진행해 주세요.';
-  }
+
+  loadExpertStatus();
 });
+
+async function loadExpertStatus() {
+  var token = localStorage.getItem('access_token');
+  if (!token) return;
+  try {
+    var res = await fetch('https://api.taieng.co.kr/experts/status', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    var d = await res.json();
+    var apps = (d.data && d.data.applications) ? d.data.applications : {};
+    if (d.data && d.data.identity_verified) {
+      localStorage.setItem('identity_verified', 'true');
+    }
+    ['safety','fix','consult'].forEach(function(type) {
+      var st  = (apps[type] && apps[type].status) ? apps[type].status : 'none';
+      var card    = document.getElementById('card-' + type);
+      var statusEl= document.getElementById('status-' + type);
+      var btnEl   = document.getElementById('btn-' + type);
+      if (!card || !statusEl || !btnEl) return;
+      if (st === 'approved') {
+        statusEl.textContent = '✓ 활성화됨';
+        statusEl.className = 'tai-expert-status active';
+        card.classList.add('registered');
+        btnEl.textContent = '관리하기';
+        btnEl.href = 'expert/' + type + '/';
+        TaiMypageState.setExpertStatus(type, 'approved');
+      } else if (st === 'pending') {
+        statusEl.textContent = '검토 중 (3~5영업일)';
+        statusEl.className = 'tai-expert-status pending';
+        card.classList.add('pending');
+        btnEl.textContent = '현황 확인';
+        btnEl.href = 'expert-application/?type=' + type;
+        TaiMypageState.setExpertStatus(type, 'pending');
+      } else {
+        statusEl.textContent = '미등록';
+        statusEl.className = 'tai-expert-status none';
+      }
+    });
+  } catch(e) {}
+}
+
 window.taiOnPageShowAuth = function () { try { taiMypageRenderNav(); } catch (e) {} };
 	</script>
 </body>
