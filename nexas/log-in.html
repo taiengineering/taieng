@@ -40,23 +40,14 @@
   }
   @media(max-width:768px){ .auth-form-wrap { padding: 40px 24px; } }
 
-  /* ── 탭 ── */
-  .auth-tabs {
-    display: flex; gap: 0;
-    border-bottom: 2px solid var(--border);
+  /* ── 타이틀 ── */
+  .auth-title {
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .auth-subtitle {
+    font-size: .88rem; color: var(--sub);
     margin-bottom: 28px;
-  }
-  .auth-tab {
-    flex: 1; padding: 12px; text-align: center;
-    font-size: .95rem; font-weight: 700;
-    color: var(--sub); cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: all .15s;
-  }
-  .auth-tab.active {
-    color: var(--red);
-    border-bottom-color: var(--red);
   }
 
   /* ── 폼 공통 ── */
@@ -89,6 +80,15 @@
 
   .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
   .required-star { color: var(--red); }
+
+  /* ── 하단 이동 링크 ── */
+  .auth-switch {
+    text-align: center; font-size: .85rem;
+    color: var(--sub); margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .auth-switch a { color: var(--red); font-weight: 700; }
 
   /* ── 필드 에러 메시지 ── */
   .field-error {
@@ -123,15 +123,14 @@
 
   <!-- 우측 폼 -->
   <div class="auth-form-wrap">
-    <div class="auth-tabs">
-      <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">로그인</div>
-      <div class="auth-tab" id="tab-register" onclick="switchTab('register')">회원가입</div>
-    </div>
 
     <div class="msg-box" id="msg-box"></div>
 
-    <!-- ── 로그인 폼 ── -->
+    <!-- ── 로그인 ── -->
     <div id="panel-login">
+      <div class="auth-title">로그인</div>
+      <div class="auth-subtitle">TAI 엔지니어링 계정으로 로그인하세요</div>
+
       <label class="form-label-tai">이메일</label>
       <input type="email" class="form-input-tai" id="login-email"
         placeholder="example@company.com" autocomplete="email">
@@ -147,14 +146,17 @@
 
       <button class="submit-btn" id="btn-login" onclick="doLogin()">로그인</button>
 
-      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:20px;">
-        계정이 없으신가요?
-        <a href="#" style="color:var(--red);font-weight:700;" onclick="switchTab('register');return false;">회원가입</a>
-      </p>
+      <div class="auth-switch">
+        아직 계정이 없으신가요?
+        <a href="#" onclick="switchPanel('register');return false;">회원가입</a>
+      </div>
     </div>
 
-    <!-- ── 회원가입 폼 ── -->
+    <!-- ── 회원가입 ── -->
     <div id="panel-register" style="display:none;">
+      <div class="auth-title">회원가입</div>
+      <div class="auth-subtitle">무료로 시작하세요</div>
+
       <label class="form-label-tai">이름 <span class="required-star">*</span></label>
       <input type="text" class="form-input-tai" id="reg-name"
         placeholder="홍길동" autocomplete="name">
@@ -189,14 +191,16 @@
 
       <button class="submit-btn" id="btn-reg" onclick="doRegister()">회원가입</button>
 
-      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:16px;">
-        이미 계정이 있으신가요?
-        <a href="#" style="color:var(--red);font-weight:700;" onclick="switchTab('login');return false;">로그인</a>
-      </p>
-      <p style="text-align:center; font-size:.78rem; color:var(--sub); margin-top:6px;">
+      <p style="text-align:center; font-size:.78rem; color:var(--sub); margin-top:12px;">
         가입 후 마이페이지에서 서비스 설정을 진행합니다.
       </p>
+
+      <div class="auth-switch">
+        이미 계정이 있으신가요?
+        <a href="#" onclick="switchPanel('login');return false;">로그인</a>
+      </div>
     </div>
+
   </div>
 </div>
 
@@ -205,18 +209,20 @@
 <script>
 const API = 'https://api.taieng.co.kr';
 
-/* ── 탭 전환 ── */
-function switchTab(tab) {
-  const isLogin = tab === 'login';
+/* ── 패널 전환 ── */
+function switchPanel(panel) {
+  const isLogin = panel === 'login';
   document.getElementById('panel-login').style.display    = isLogin ? '' : 'none';
   document.getElementById('panel-register').style.display = isLogin ? 'none' : '';
-  document.getElementById('tab-login').classList.toggle('active', isLogin);
-  document.getElementById('tab-register').classList.toggle('active', !isLogin);
   clearMsg();
-  history.replaceState(null, '', '#' + tab);
+  history.replaceState(null, '', '#' + panel);
+  // 페이지 타이틀 동기화
+  document.title = (isLogin ? '로그인' : '회원가입') + ' | TAI 엔지니어링';
 }
+
+/* URL hash로 초기 패널 결정 */
 (function(){
-  if (location.hash.replace('#','') === 'register') switchTab('register');
+  if (location.hash.replace('#','') === 'register') switchPanel('register');
 })();
 
 /* ── 메시지 ── */
