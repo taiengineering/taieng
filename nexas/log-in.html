@@ -68,7 +68,7 @@
     background: #fff; font-family: inherit; margin-bottom: 14px;
   }
   .form-input-tai:focus  { border-color: var(--red); }
-  .form-input-tai.error  { border-color: #ef4444; }
+  .form-input-tai.is-error  { border-color: #ef4444; margin-bottom: 4px; }
 
   .submit-btn {
     background: var(--red); color: #fff; font-weight: 700;
@@ -102,17 +102,24 @@
   .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
   .required-star { color: var(--red); }
 
-  /* ── Floating Label (이메일 필드 선적용) ── */
+  /* ════════════════════════════════════════
+     Floating Label (이메일 필드 선적용)
+  ════════════════════════════════════════ */
   .form-floating > .form-control {
     border: 1.5px solid var(--border, #e2e8f0);
     border-radius: 8px;
     font-family: inherit;
     font-size: .9rem;
     color: var(--text, #0f172a);
+    transition: border-color .15s;
   }
   .form-floating > .form-control:focus {
     border-color: var(--red, #dc2626);
     box-shadow: none;
+  }
+  /* 에러 상태 */
+  .form-floating > .form-control.is-error {
+    border-color: #ef4444;
   }
   .form-floating > label {
     color: var(--sub, #94a3b8);
@@ -125,6 +132,34 @@
     font-size: .72rem;
     font-weight: 700;
   }
+  .form-floating > .form-control.is-error ~ label {
+    color: #ef4444;
+  }
+
+  /* focus 안내 텍스트 */
+  .field-focus-hint {
+    font-size: .76rem;
+    color: var(--sub, #94a3b8);
+    margin-top: 5px;
+    margin-bottom: 4px;
+    display: none;            /* 기본: 숨김 */
+    padding-left: 2px;
+  }
+  .form-control:focus ~ .field-focus-hint,
+  .form-floating:focus-within .field-focus-hint {
+    display: block;           /* focus 시 노출 */
+  }
+
+  /* 필드 에러 메시지 */
+  .field-error {
+    font-size: .76rem;
+    color: #ef4444;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    padding-left: 2px;
+    display: none;
+  }
+  .field-error.show { display: block; }
   </style>
 </head>
 <body>
@@ -157,7 +192,7 @@
       <div class="auth-tab" id="tab-register" onclick="switchTab('register')">회원가입</div>
     </div>
 
-    <!-- 메시지 박스 -->
+    <!-- 전체 메시지 박스 -->
     <div class="msg-box" id="msg-box"></div>
 
     <!-- ── 로그인 폼 ── -->
@@ -191,13 +226,21 @@
       <label class="form-label-tai">이름 <span class="required-star">*</span></label>
       <input type="text" class="form-input-tai" id="reg-name" placeholder="홍길동" autocomplete="name">
 
-      <!-- ✅ 이메일: Floating Label 선적용 -->
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="reg-email" placeholder=" " autocomplete="email">
+      <!-- ✅ 이메일: Floating Label + Focus 안내 + 빨간 에러 선적용 -->
+      <div class="form-floating mb-1">
+        <input type="email" class="form-control" id="reg-email"
+          placeholder=" " autocomplete="email"
+          oninput="clearEmailError()" onblur="validateEmail()">
         <label for="reg-email">이메일 *</label>
       </div>
+      <!-- focus 시 안내 (form-floating:focus-within 으로 제어) -->
+      <div class="field-focus-hint" id="email-hint">
+        💡 로그인과 공지 수신에 사용됩니다. 실제 사용 중인 이메일을 입력하세요.
+      </div>
+      <!-- 유효성 에러 -->
+      <div class="field-error" id="email-error"></div>
 
-      <label class="form-label-tai">휴대폰 번호 <span class="required-star">*</span></label>
+      <label class="form-label-tai mt-2">휴대폰 번호 <span class="required-star">*</span></label>
       <input type="tel" class="form-input-tai" id="reg-phone" placeholder="01012345678"
         autocomplete="tel" maxlength="11">
       <div class="form-hint">숫자만 입력 (예: 01012345678)</div>
@@ -251,7 +294,7 @@ function switchTab(tab) {
   if (h === 'register') switchTab('register');
 })();
 
-/* ── 메시지 ── */
+/* ── 전체 메시지 ── */
 function showMsg(text, type) {
   const box = document.getElementById('msg-box');
   box.textContent = text;
@@ -262,6 +305,49 @@ function clearMsg() {
   box.className = 'msg-box';
   box.textContent = '';
 }
+
+/* ── 이메일 필드 유효성 ── */
+function validateEmail() {
+  const input = document.getElementById('reg-email');
+  const errEl = document.getElementById('email-error');
+  const val   = input.value.trim();
+  const ok    = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+
+  if (!val) {
+    setEmailError('이메일을 입력해 주세요.');
+  } else if (!ok) {
+    setEmailError('올바른 이메일 형식이 아닙니다. (예: example@company.com)');
+  } else {
+    clearEmailError();
+  }
+}
+
+function setEmailError(msg) {
+  const input = document.getElementById('reg-email');
+  const errEl = document.getElementById('email-error');
+  input.classList.add('is-error');
+  errEl.textContent = '⚠ ' + msg;
+  errEl.classList.add('show');
+}
+
+function clearEmailError() {
+  const input = document.getElementById('reg-email');
+  const errEl = document.getElementById('email-error');
+  input.classList.remove('is-error');
+  errEl.classList.remove('show');
+  errEl.textContent = '';
+}
+
+/* focus 안내 — form-floating:focus-within CSS로 처리하되
+   hint div가 floating 바깥에 있으므로 JS로 보조 */
+document.addEventListener('DOMContentLoaded', function() {
+  const emailInput = document.getElementById('reg-email');
+  const hint = document.getElementById('email-hint');
+  if (emailInput && hint) {
+    emailInput.addEventListener('focus',  () => hint.style.display = 'block');
+    emailInput.addEventListener('blur',   () => hint.style.display = 'none');
+  }
+});
 
 /* ── localStorage 저장 ── */
 function saveSession(data) {
@@ -327,7 +413,14 @@ async function doRegister() {
   clearMsg();
 
   if (!name)  { showMsg('이름을 입력해 주세요.', 'error'); return; }
-  if (!email) { showMsg('이메일을 입력해 주세요.', 'error'); return; }
+
+  /* 이메일 — 필드 에러 방식으로 처리 */
+  if (!email) { setEmailError('이메일을 입력해 주세요.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    setEmailError('올바른 이메일 형식이 아닙니다. (예: example@company.com)');
+    return;
+  }
+
   if (!phone || phone.length < 10) { showMsg('올바른 휴대폰 번호를 입력해 주세요.', 'error'); return; }
   if (pw.length < 8)  { showMsg('비밀번호는 8자 이상이어야 합니다.', 'error'); return; }
   if (pw !== pw2)     { showMsg('비밀번호가 일치하지 않습니다.', 'error'); return; }
@@ -364,7 +457,7 @@ async function doRegister() {
   }
 }
 
-/* ── 카카오 로그인 (추후 연동) ── */
+/* ── 카카오 로그인 ── */
 function doKakaoLogin() {
   showMsg('카카오 로그인은 준비 중입니다.', 'error');
 }
