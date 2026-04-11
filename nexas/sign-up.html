@@ -3,75 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 | TAI 엔지니어링</title>
-  <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/tai-main.css">
-  <style>
-  .signup-wrap { min-height:calc(100vh - 64px); background:var(--gray-bg); display:flex; align-items:flex-start; justify-content:center; padding:60px 24px; }
-  .signup-box { background:#fff; border-radius:20px; box-shadow:0 4px 30px rgba(0,0,0,.08); padding:48px 44px; width:100%; max-width:520px; }
-  @media(max-width:600px){ .signup-box { padding:32px 24px; } }
-  .signup-box h2 { font-size:1.6rem; font-weight:900; color:var(--navy); margin-bottom:6px; }
-  .signup-box .sub { font-size:.88rem; color:var(--sub); margin-bottom:32px; }
-  .form-label-tai { font-size:.83rem; font-weight:700; color:var(--navy); margin-bottom:6px; display:block; }
-  .form-input-tai { width:100%; border:1.5px solid var(--border); border-radius:8px; padding:11px 14px; font-size:.9rem; color:var(--text); outline:none; transition:border-color .15s; background:#fff; font-family:inherit; }
-  .form-input-tai:focus { border-color:var(--red); }
-  .form-row { margin-bottom:16px; }
-  .user-type-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:4px; }
-  .utype-btn { border:1.5px solid var(--border); border-radius:10px; padding:14px 10px; text-align:center; cursor:pointer; transition:all .15s; }
-  .utype-btn:hover { border-color:var(--red); }
-  .utype-btn.selected { border-color:var(--red); background:#fff9f9; }
-  .utype-btn .u-icon { font-size:1.5rem; margin-bottom:6px; }
-  .utype-btn .u-name { font-size:.82rem; font-weight:700; color:var(--navy); }
-  .utype-btn .u-desc { font-size:.74rem; color:var(--sub); margin-top:3px; }
-  .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s; }
-  .submit-btn:hover { background:#c1121f; }
-  .agree-row { display:flex; gap:8px; align-items:flex-start; font-size:.8rem; color:var(--sub); margin-bottom:12px; cursor:pointer; }
-  .agree-row input { margin-top:2px; }
-  .agree-row a { color:var(--red); }
-  </style>
+  <script>location.replace('log-in.html#register');</script>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html">로그인</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
-    </div>
-  </div>
-</nav>
-<div class="signup-wrap">
-  <div class="signup-box">
-    <h2>무료로 시작하기</h2>
-    <p class="sub">첫 달 무료 &nbsp;·&nbsp; 신용카드 불필요</p>
-    <div class="form-row">
-      <label class="form-label-tai">가입 유형</label>
-      <div class="user-type-grid">
-        <div class="utype-btn selected" onclick="selectType(this)"><div class="u-icon">🏭</div><div class="u-name">기업·사업장</div><div class="u-desc">안전관리 SaaS 이용</div></div>
-        <div class="utype-btn" onclick="selectType(this)"><div class="u-icon">👨‍💼</div><div class="u-name">전문가·대행업</div><div class="u-desc">선임·수선 전문가 등록</div></div>
-      </div>
-    </div>
-    <div class="form-row"><label class="form-label-tai">이름</label><input type="text" class="form-input-tai" placeholder="홍길동"></div>
-    <div class="form-row"><label class="form-label-tai">이메일 <span style="color:var(--red);">*</span></label><input type="email" class="form-input-tai" placeholder="example@company.com"></div>
-    <div class="form-row"><label class="form-label-tai">비밀번호 <span style="color:var(--red);">*</span></label><input type="password" class="form-input-tai" placeholder="8자 이상"></div>
-    <div class="form-row"><label class="form-label-tai">회사명 (선택)</label><input type="text" class="form-input-tai" placeholder="(주)TAI엔지니어링"></div>
-    <div class="form-row"><label class="form-label-tai">연락처 (선택)</label><input type="tel" class="form-input-tai" placeholder="010-0000-0000"></div>
-    <label class="agree-row"><input type="checkbox"> <span><a href="terms.html">이용약관</a> 및 <a href="privacy.html">개인정보처리방침</a>에 동의합니다 (필수)</span></label>
-    <label class="agree-row"><input type="checkbox"> 법령 개정·서비스 업데이트 이메일 수신에 동의합니다 (선택)</label>
-    <button class="submit-btn">무료 회원가입</button>
-    <p style="text-align:center;font-size:.82rem;color:var(--sub);margin-top:16px;">이미 계정이 있으신가요? <a href="log-in.html" style="color:var(--red);font-weight:700;">로그인</a></p>
-  </div>
-</div>
-<div id="tai-footer"></div>
-<script src="assets/js/nav-auth.js"></script>
-<script src="assets/js/footer.js"></script>
-<script>
-function selectType(el){
-  document.querySelectorAll('.utype-btn').forEach(b=>b.classList.remove('selected'));
-  el.classList.add('selected');
-}
-</script>
-</body></html>
+<body></body>
+</html>

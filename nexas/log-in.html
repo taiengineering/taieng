@@ -2,72 +2,355 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로그인 | TAI 엔지니어링</title>
+  <title>로그인 / 회원가입 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .auth-layout { min-height:calc(100vh - 64px); display:grid; grid-template-columns:1fr 1fr; }
-  @media(max-width:768px){ .auth-layout { grid-template-columns:1fr; } .auth-bg { display:none; } }
-  .auth-bg { background:linear-gradient(135deg,#0d1b2a,#1a3a5c); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:60px 48px; text-align:center; }
-  .auth-bg h2 { font-size:2rem; font-weight:900; color:#fff; margin-bottom:12px; }
-  .auth-bg p { color:rgba(255,255,255,.6); font-size:.9rem; line-height:1.7; }
-  .auth-form-wrap { display:flex; flex-direction:column; justify-content:center; padding:60px 48px; background:#fff; }
-  @media(max-width:768px){ .auth-form-wrap { padding:40px 24px; } }
-  .auth-form-wrap h3 { font-size:1.5rem; font-weight:900; color:var(--navy); margin-bottom:6px; }
-  .auth-form-wrap p { font-size:.88rem; color:var(--sub); margin-bottom:32px; }
-  .form-label-tai { font-size:.83rem; font-weight:700; color:var(--navy); margin-bottom:6px; display:block; }
-  .form-input-tai { width:100%; border:1.5px solid var(--border); border-radius:8px; padding:12px 14px; font-size:.9rem; color:var(--text); outline:none; transition:border-color .15s; background:#fff; font-family:inherit; margin-bottom:16px; }
-  .form-input-tai:focus { border-color:var(--red); }
-  .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:13px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s; }
-  .submit-btn:hover { background:#c1121f; }
-  .divider { display:flex; align-items:center; gap:12px; margin:20px 0; color:var(--sub); font-size:.8rem; }
+  .auth-layout {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  @media(max-width:768px) {
+    .auth-layout { grid-template-columns: 1fr; }
+    .auth-bg { display: none; }
+  }
+
+  /* ── 좌측 브랜드 패널 ── */
+  .auth-bg {
+    background: linear-gradient(135deg, #0d1b2a, #1a3a5c);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 60px 48px; text-align: center;
+  }
+  .auth-bg h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .auth-bg p  { color: rgba(255,255,255,.6); font-size: .9rem; line-height: 1.7; }
+  .auth-kv    { margin-top: 40px; padding: 20px; background: rgba(255,255,255,.07);
+                border-radius: 12px; border: 1px solid rgba(255,255,255,.12); }
+  .auth-kv li { list-style: none; color: rgba(255,255,255,.75); font-size: .85rem;
+                padding: 5px 0; text-align: left; }
+  .auth-kv li::before { content: '✓ '; color: #4ade80; }
+
+  /* ── 우측 폼 패널 ── */
+  .auth-form-wrap {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 60px 52px; background: #fff;
+  }
+  @media(max-width:768px){ .auth-form-wrap { padding: 40px 24px; } }
+
+  /* ── 탭 ── */
+  .auth-tabs {
+    display: flex; gap: 0;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 28px;
+  }
+  .auth-tab {
+    flex: 1; padding: 12px; text-align: center;
+    font-size: .95rem; font-weight: 700;
+    color: var(--sub); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all .15s;
+  }
+  .auth-tab.active {
+    color: var(--red);
+    border-bottom-color: var(--red);
+  }
+
+  /* ── 폼 공통 ── */
+  .form-label-tai  { font-size: .83rem; font-weight: 700; color: var(--navy); margin-bottom: 5px; display: block; }
+  .form-input-tai  {
+    width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 11px 14px; font-size: .9rem; color: var(--text);
+    outline: none; transition: border-color .15s;
+    background: #fff; font-family: inherit; margin-bottom: 14px;
+  }
+  .form-input-tai:focus  { border-color: var(--red); }
+  .form-input-tai.error  { border-color: #ef4444; }
+
+  .submit-btn {
+    background: var(--red); color: #fff; font-weight: 700;
+    font-size: 1rem; padding: 13px; border-radius: 8px;
+    border: none; cursor: pointer; width: 100%;
+    transition: background .2s; margin-top: 4px;
+  }
+  .submit-btn:hover   { background: #c1121f; }
+  .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+  .msg-box {
+    border-radius: 8px; padding: 11px 14px;
+    font-size: .84rem; margin-bottom: 14px; display: none;
+  }
+  .msg-box.error   { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+  .msg-box.success { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+  .msg-box.show    { display: block; }
+
+  .divider { display:flex; align-items:center; gap:12px; margin:18px 0; color:var(--sub); font-size:.8rem; }
   .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
-  .social-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:11px; border-radius:8px; border:1.5px solid var(--border); background:#fff; font-size:.88rem; font-weight:600; color:var(--text); cursor:pointer; margin-bottom:10px; transition:background .15s; }
-  .social-btn:hover { background:var(--gray-bg); }
-  .auth-links { display:flex; justify-content:space-between; margin-top:20px; font-size:.82rem; }
-  .auth-links a { color:var(--sub); }
-  .auth-links a:hover { color:var(--red); }
+
+  .social-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; padding: 11px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: #fff;
+    font-size: .88rem; font-weight: 600; color: var(--text);
+    cursor: pointer; margin-bottom: 10px; transition: background .15s;
+  }
+  .social-btn:hover { background: var(--gray-bg); }
+
+  .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
+  .required-star { color: var(--red); }
   </style>
 </head>
 <body>
 <nav class="tai-nav">
   <div class="inner">
     <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="sign-up.html">회원가입</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
-    </div>
+    <div class="nav-links"></div>
   </div>
 </nav>
+
 <div class="auth-layout">
+  <!-- 좌측 브랜드 -->
   <div class="auth-bg">
-    <img src="assets/img/tai-logo.png" alt="TAI" style="height:40px;margin-bottom:32px;">
+    <img src="assets/img/tai-logo.png" alt="TAI" style="height:36px;margin-bottom:28px;filter:brightness(0) invert(1);">
     <h2>이걸 왜<br>몰랐지?</h2>
-    <p>로그인하면 법령 진단 결과 이력, 점검 일정, 완료 기록을 모두 확인할 수 있습니다.</p>
-    <div style="margin-top:40px; padding:20px; background:rgba(255,255,255,.07); border-radius:12px; border:1px solid rgba(255,255,255,.12);">
-      <p style="color:rgba(255,255,255,.5); font-size:.75rem; margin-bottom:8px;">아직 계정이 없으신가요?</p>
-      <a href="sign-up.html" style="color:#fff; font-weight:700; font-size:.9rem;">무료로 시작하기 →</a>
+    <p>법령 의무 자동 진단, 점검 일정 관리,<br>작업자 배정까지 TAI가 다합니다.</p>
+    <ul class="auth-kv">
+      <li>법령 자동 진단 — 입력만 하면 끝</li>
+      <li>30분 기상 작업중지 자동 감시</li>
+      <li>TBM · 위험성평가 · 하도급 관리</li>
+      <li>역할은 마이페이지에서 설정</li>
+    </ul>
+  </div>
+
+  <!-- 우측 폼 -->
+  <div class="auth-form-wrap">
+    <!-- 탭 -->
+    <div class="auth-tabs">
+      <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">로그인</div>
+      <div class="auth-tab" id="tab-register" onclick="switchTab('register')">회원가입</div>
+    </div>
+
+    <!-- 메시지 박스 -->
+    <div class="msg-box" id="msg-box"></div>
+
+    <!-- ── 로그인 폼 ── -->
+    <div id="panel-login">
+      <label class="form-label-tai">이메일</label>
+      <input type="email" class="form-input-tai" id="login-email" placeholder="example@company.com" autocomplete="email">
+
+      <label class="form-label-tai">비밀번호</label>
+      <input type="password" class="form-input-tai" id="login-pw" placeholder="비밀번호 입력"
+        autocomplete="current-password" onkeydown="if(event.key==='Enter') doLogin()">
+
+      <div style="text-align:right; margin-top:-10px; margin-bottom:16px;">
+        <a href="#" style="font-size:.8rem; color:var(--sub);" onclick="showForgot(event)">비밀번호 찾기</a>
+      </div>
+
+      <button class="submit-btn" id="btn-login" onclick="doLogin()">로그인</button>
+
+      <div class="divider">또는</div>
+      <div class="social-btn" onclick="doKakaoLogin()">
+        <span style="font-weight:900; font-size:1rem;">K</span> 카카오로 로그인
+      </div>
+
+      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:16px;">
+        계정이 없으신가요?
+        <a href="#" style="color:var(--red);font-weight:700;" onclick="switchTab('register');return false;">회원가입</a>
+      </p>
+    </div>
+
+    <!-- ── 회원가입 폼 ── -->
+    <div id="panel-register" style="display:none;">
+      <label class="form-label-tai">이름 <span class="required-star">*</span></label>
+      <input type="text" class="form-input-tai" id="reg-name" placeholder="홍길동" autocomplete="name">
+
+      <label class="form-label-tai">이메일 <span class="required-star">*</span></label>
+      <input type="email" class="form-input-tai" id="reg-email" placeholder="example@company.com" autocomplete="email">
+
+      <label class="form-label-tai">휴대폰 번호 <span class="required-star">*</span></label>
+      <input type="tel" class="form-input-tai" id="reg-phone" placeholder="01012345678"
+        autocomplete="tel" maxlength="11">
+      <div class="form-hint">숫자만 입력 (예: 01012345678)</div>
+
+      <label class="form-label-tai">비밀번호 <span class="required-star">*</span></label>
+      <input type="password" class="form-input-tai" id="reg-pw" placeholder="8자 이상" autocomplete="new-password">
+
+      <label class="form-label-tai">비밀번호 확인 <span class="required-star">*</span></label>
+      <input type="password" class="form-input-tai" id="reg-pw2" placeholder="비밀번호 재입력"
+        autocomplete="new-password" onkeydown="if(event.key==='Enter') doRegister()">
+
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--sub);margin-bottom:14px;cursor:pointer;">
+        <input type="checkbox" id="reg-agree" style="margin-top:2px;">
+        <span>
+          <a href="terms.html" target="_blank" style="color:var(--red);">이용약관</a> 및
+          <a href="privacy.html" target="_blank" style="color:var(--red);">개인정보처리방침</a>에 동의합니다 (필수)
+        </span>
+      </label>
+
+      <button class="submit-btn" id="btn-reg" onclick="doRegister()">회원가입</button>
+
+      <p style="text-align:center; font-size:.82rem; color:var(--sub); margin-top:16px;">
+        이미 계정이 있으신가요?
+        <a href="#" style="color:var(--red);font-weight:700;" onclick="switchTab('login');return false;">로그인</a>
+      </p>
+      <p style="text-align:center; font-size:.78rem; color:var(--sub); margin-top:6px;">
+        역할(안전관리자·현장소장 등)은 가입 후 마이페이지에서 신청합니다.
+      </p>
     </div>
   </div>
-  <div class="auth-form-wrap">
-    <h3>로그인</h3>
-    <p>TAI 엔지니어링 계정으로 로그인하세요</p>
-    <label class="form-label-tai">이메일</label>
-    <input type="email" class="form-input-tai" placeholder="example@company.com">
-    <label class="form-label-tai">비밀번호</label>
-    <input type="password" class="form-input-tai" placeholder="비밀번호를 입력하세요">
-    <button class="submit-btn">로그인</button>
-    <div class="auth-links"><a href="#">비밀번호 찾기</a><a href="sign-up.html">계정 만들기</a></div>
-    <div class="divider">또는</div>
-    <div class="social-btn"><img src="https://www.google.com/favicon.ico" style="width:16px;height:16px;"> Google로 로그인</div>
-    <div class="social-btn" style="background:#fee500;border-color:#fee500;"><span style="font-weight:900;">K</span>&nbsp; 카카오로 로그인</div>
-  </div>
 </div>
-<div id="tai-footer"></div>
+
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
-</body></html>
+<script>
+const API = 'https://api.taieng.co.kr';
+
+/* ── 탭 전환 ── */
+function switchTab(tab) {
+  const isLogin = tab === 'login';
+  document.getElementById('panel-login').style.display    = isLogin ? '' : 'none';
+  document.getElementById('panel-register').style.display = isLogin ? 'none' : '';
+  document.getElementById('tab-login').classList.toggle('active', isLogin);
+  document.getElementById('tab-register').classList.toggle('active', !isLogin);
+  clearMsg();
+  // URL hash 반영
+  history.replaceState(null, '', '#' + tab);
+}
+
+/* 페이지 로드 시 hash 처리 */
+(function(){
+  const h = location.hash.replace('#','');
+  if (h === 'register') switchTab('register');
+})();
+
+/* ── 메시지 ── */
+function showMsg(text, type) {
+  const box = document.getElementById('msg-box');
+  box.textContent = text;
+  box.className = 'msg-box ' + type + ' show';
+}
+function clearMsg() {
+  const box = document.getElementById('msg-box');
+  box.className = 'msg-box';
+  box.textContent = '';
+}
+
+/* ── localStorage 저장 ── */
+function saveSession(data) {
+  if (data.access_token)  localStorage.setItem('access_token',  data.access_token);
+  if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+  if (data.user) {
+    const u = data.user;
+    if (u.id)           localStorage.setItem('user_id',       u.id);
+    if (u.name)         localStorage.setItem('user_name',     u.name);
+    if (u.email)        localStorage.setItem('user_email',    u.email);
+    if (u.role_code)    localStorage.setItem('role_code',     u.role_code);
+    if (u.company_id)   localStorage.setItem('company_id',   u.company_id);
+    if (u.company_name) localStorage.setItem('company_name', u.company_name);
+  }
+  localStorage.setItem('tai_session', '1');
+}
+
+/* ── 로그인 ── */
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pw    = document.getElementById('login-pw').value;
+  clearMsg();
+
+  if (!email || !pw) { showMsg('이메일과 비밀번호를 입력해 주세요.', 'error'); return; }
+
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = '로그인 중...';
+
+  try {
+    const res = await fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pw })
+    });
+    const d = await res.json();
+
+    if (!res.ok) {
+      showMsg(d.detail || '이메일 또는 비밀번호가 올바르지 않습니다.', 'error');
+      return;
+    }
+
+    saveSession(d.data || d);
+    if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
+
+    // redirect 파라미터 또는 mypage
+    const redirect = new URLSearchParams(location.search).get('redirect');
+    location.href = redirect || 'mypage/';
+
+  } catch(e) {
+    showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '로그인';
+  }
+}
+
+/* ── 회원가입 ── */
+async function doRegister() {
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const phone = document.getElementById('reg-phone').value.replace(/[^0-9]/g, '');
+  const pw    = document.getElementById('reg-pw').value;
+  const pw2   = document.getElementById('reg-pw2').value;
+  const agree = document.getElementById('reg-agree').checked;
+  clearMsg();
+
+  if (!name)  { showMsg('이름을 입력해 주세요.', 'error'); return; }
+  if (!email) { showMsg('이메일을 입력해 주세요.', 'error'); return; }
+  if (!phone || phone.length < 10) { showMsg('올바른 휴대폰 번호를 입력해 주세요.', 'error'); return; }
+  if (pw.length < 8)  { showMsg('비밀번호는 8자 이상이어야 합니다.', 'error'); return; }
+  if (pw !== pw2)     { showMsg('비밀번호가 일치하지 않습니다.', 'error'); return; }
+  if (!agree)         { showMsg('이용약관 및 개인정보처리방침에 동의해 주세요.', 'error'); return; }
+
+  const btn = document.getElementById('btn-reg');
+  btn.disabled = true; btn.textContent = '가입 중...';
+
+  try {
+    const res = await fetch(API + '/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, phone, password: pw })
+    });
+    const d = await res.json();
+
+    if (!res.ok) {
+      const detail = d.detail;
+      if (typeof detail === 'string') { showMsg(detail, 'error'); }
+      else if (Array.isArray(detail)) { showMsg(detail.map(e=>e.msg).join(', '), 'error'); }
+      else { showMsg('회원가입에 실패했습니다. 입력 정보를 확인해 주세요.', 'error'); }
+      return;
+    }
+
+    saveSession(d.data || d);
+    if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
+    showMsg('🎉 가입이 완료되었습니다! 마이페이지로 이동합니다...', 'success');
+    setTimeout(() => { location.href = 'mypage/'; }, 1200);
+
+  } catch(e) {
+    showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = '회원가입';
+  }
+}
+
+/* ── 카카오 로그인 (추후 연동) ── */
+function doKakaoLogin() {
+  showMsg('카카오 로그인은 준비 중입니다.', 'error');
+}
+
+/* ── 비밀번호 찾기 ── */
+function showForgot(e) {
+  e.preventDefault();
+  showMsg('비밀번호 재설정 메일을 발송합니다.', 'success');
+  // TODO: /auth/reset-password 연동
+}
+</script>
+</body>
+</html>
