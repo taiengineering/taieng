@@ -1,7 +1,10 @@
 /**
- * TAI — nav-auth.js v2
+ * TAI — nav-auth.js v2.1
  * 1) 공통 nav 링크 자동 렌더링 (tai-nav 내 .nav-links 대상)
  * 2) 로그인 상태에 따른 게스트/유저 토글
+ *
+ * 안전정보 → safety-news.html (뉴스 + 판례 하이라이트)
+ * 판례 전용 검색 → index-5.html (safety-news에서 링크)
  */
 (function () {
   var STORAGE_KEY = 'tai_session';
@@ -13,7 +16,7 @@
     { label: 'TAI FIX',    href: 'tai-fix.html' },
     { label: 'TAI AGENT',  href: 'index-3.html' },
     { label: 'TAI CARE',   href: 'index-4.html' },
-    { label: '안전정보',     href: 'index-5.html' },
+    { label: '안전정보',     href: 'safety-news.html' },
   ];
 
   // ─── nav 렌더링 ───────────────────────────────────────────
@@ -21,11 +24,13 @@
     var wrap = document.querySelector('.tai-nav .nav-links');
     if (!wrap) return;
 
-    // 현재 파일명으로 active 판단
+    // 현재 파일명으로 active 판단 (index-5.html도 안전정보 active 처리)
     var currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    var safetyPages = ['safety-news.html', 'index-5.html'];
 
     var menuHTML = TAI_NAV_ITEMS.map(function (item) {
-      var isActive = currentFile === item.href.toLowerCase();
+      var isActive = currentFile === item.href.toLowerCase() ||
+                     (item.href === 'safety-news.html' && safetyPages.indexOf(currentFile) !== -1);
       return '<a href="' + item.href + '"' + (isActive ? ' class="active"' : '') + '>' + item.label + '</a>';
     }).join('');
 
