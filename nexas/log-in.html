@@ -101,6 +101,30 @@
 
   .form-hint { font-size: .78rem; color: var(--sub); margin-top: -10px; margin-bottom: 12px; }
   .required-star { color: var(--red); }
+
+  /* ── Floating Label (이메일 필드 선적용) ── */
+  .form-floating > .form-control {
+    border: 1.5px solid var(--border, #e2e8f0);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: .9rem;
+    color: var(--text, #0f172a);
+  }
+  .form-floating > .form-control:focus {
+    border-color: var(--red, #dc2626);
+    box-shadow: none;
+  }
+  .form-floating > label {
+    color: var(--sub, #94a3b8);
+    font-size: .88rem;
+    font-weight: 600;
+  }
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--red, #dc2626);
+    font-size: .72rem;
+    font-weight: 700;
+  }
   </style>
 </head>
 <body>
@@ -167,8 +191,11 @@
       <label class="form-label-tai">이름 <span class="required-star">*</span></label>
       <input type="text" class="form-input-tai" id="reg-name" placeholder="홍길동" autocomplete="name">
 
-      <label class="form-label-tai">이메일 <span class="required-star">*</span></label>
-      <input type="email" class="form-input-tai" id="reg-email" placeholder="example@company.com" autocomplete="email">
+      <!-- ✅ 이메일: Floating Label 선적용 -->
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="reg-email" placeholder=" " autocomplete="email">
+        <label for="reg-email">이메일 *</label>
+      </div>
 
       <label class="form-label-tai">휴대폰 번호 <span class="required-star">*</span></label>
       <input type="tel" class="form-input-tai" id="reg-phone" placeholder="01012345678"
@@ -216,11 +243,9 @@ function switchTab(tab) {
   document.getElementById('tab-login').classList.toggle('active', isLogin);
   document.getElementById('tab-register').classList.toggle('active', !isLogin);
   clearMsg();
-  // URL hash 반영
   history.replaceState(null, '', '#' + tab);
 }
 
-/* 페이지 로드 시 hash 처리 */
 (function(){
   const h = location.hash.replace('#','');
   if (h === 'register') switchTab('register');
@@ -281,7 +306,6 @@ async function doLogin() {
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
 
-    // redirect 파라미터 또는 mypage
     const redirect = new URLSearchParams(location.search).get('redirect');
     location.href = redirect || 'mypage/';
 
@@ -349,7 +373,6 @@ function doKakaoLogin() {
 function showForgot(e) {
   e.preventDefault();
   showMsg('비밀번호 재설정 메일을 발송합니다.', 'success');
-  // TODO: /auth/reset-password 연동
 }
 </script>
 </body>
