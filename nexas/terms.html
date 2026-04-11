@@ -5,19 +5,269 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이용약관 | TAI Engineering</title>
     <link rel="icon" href="assets/img/fevicon.png">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/tai-brand.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+          --primary: #0f172a;
+          --secondary: #64748b;
+          --light: #f8fafc;
+          --border: #e2e8f0;
+        }
+        body {
+          font-family: 'Noto Sans KR', sans-serif;
+          background: var(--light);
+          color: var(--primary);
+        }
+        .terms-container {
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+        }
+        .terms-header {
+          padding: 40px;
+          border-bottom: 2px solid var(--border);
+          text-align: center;
+        }
+        .terms-header h1 {
+          font-size: 2rem;
+          font-weight: 900;
+          margin-bottom: 12px;
+          color: var(--primary);
+        }
+        .terms-header p {
+          color: var(--secondary);
+          font-size: 0.95rem;
+          margin: 0;
+        }
+        .terms-content {
+          padding: 40px;
+        }
+        .terms-article {
+          margin-bottom: 32px;
+          padding-bottom: 24px;
+          border-bottom: 1px solid var(--border);
+        }
+        .terms-article:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+        .terms-article h2 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: var(--primary);
+          margin-bottom: 16px;
+          display: flex;
+          align-items: center;
+        }
+        .terms-article h2::before {
+          content: '';
+          width: 4px;
+          height: 24px;
+          background: #0f172a;
+          border-radius: 2px;
+          margin-right: 12px;
+        }
+        .terms-article ol {
+          margin: 0;
+          padding-left: 24px;
+        }
+        .terms-article li {
+          margin-bottom: 12px;
+          line-height: 1.7;
+          color: #475569;
+          font-size: 0.95rem;
+        }
+        .terms-article li strong {
+          color: var(--primary);
+          font-weight: 600;
+        }
+        .terms-footer {
+          background: var(--light);
+          padding: 24px 40px;
+          border-radius: 0 0 12px 12px;
+          text-align: center;
+          font-size: 0.85rem;
+          color: var(--secondary);
+        }
+        .section-intro {
+          font-size: 0.95rem;
+          color: var(--secondary);
+          margin-bottom: 16px;
+          font-style: italic;
+        }
+
+        nav.tai-nav {
+          background: white;
+          border-bottom: 1px solid var(--border);
+          padding: 16px 0;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+        }
+        nav.tai-nav .inner {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        nav.tai-nav .logo img {
+          height: 32px;
+        }
+
+        @media (max-width: 768px) {
+          .terms-header {
+            padding: 24px;
+          }
+          .terms-header h1 {
+            font-size: 1.5rem;
+          }
+          .terms-content {
+            padding: 24px;
+          }
+        }
+    </style>
 </head>
-<body class="sc5">
-    <div class="container py-5 my-5">
+<body>
+    <nav class="tai-nav">
+      <div class="inner">
+        <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI Engineering"></a>
+      </div>
+    </nav>
+
+    <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <h1 class="title mb-4">이용약관</h1>
-                <p class="text-muted">약관 전문은 준비 후 이 페이지에 반영하세요.</p>
-                <p><a href="index.html">메인으로</a></p>
+            <div class="col-lg-10">
+                <div class="terms-container">
+                    <div class="terms-header">
+                        <h1>TAI Engineering 이용약관</h1>
+                        <p>서비스 이용 전 약관을 꼼꼼히 읽어주시기 바랍니다.</p>
+                    </div>
+
+                    <div class="terms-content">
+                        <!-- 제1조 -->
+                        <div class="terms-article">
+                            <h2>제1조 (목적)</h2>
+                            <p class="section-intro">본 약관은 다음을 목적으로 합니다.</p>
+                            <p>
+                                본 약관은 TAI Engineering(이하 "회사")이 제공하는 산업안전 관리 서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.
+                            </p>
+                        </div>
+
+                        <!-- 제2조 -->
+                        <div class="terms-article">
+                            <h2>제2조 (정의)</h2>
+                            <ol>
+                                <li><strong>"서비스"</strong>란 회사가 제공하는 법령진단, 점검관리, 위험분석, 전문가 연결 등의 일체의 시스템을 의미합니다.</li>
+                                <li><strong>"이용자"</strong>란 본 약관에 따라 서비스를 이용하는 회원 및 비회원을 의미합니다.</li>
+                                <li><strong>"회원"</strong>이란 회사에 가입하여 서비스를 이용하는 자를 의미합니다.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제3조 -->
+                        <div class="terms-article">
+                            <h2>제3조 (약관의 효력 및 변경)</h2>
+                            <ol>
+                                <li>본 약관은 서비스 화면에 게시하거나 기타 방법으로 공지함으로써 효력이 발생합니다.</li>
+                                <li>회사는 관련 법령을 위반하지 않는 범위에서 약관을 변경할 수 있습니다.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제4조 -->
+                        <div class="terms-article">
+                            <h2>제4조 (서비스의 제공)</h2>
+                            <p class="section-intro">회사는 다음과 같은 서비스를 제공합니다.</p>
+                            <ol>
+                                <li>산업안전 법령 자동 진단</li>
+                                <li>점검 및 일정 관리 시스템</li>
+                                <li>위험 상태 분석 및 경고 제공</li>
+                                <li>전문가 및 수선업체 연결 서비스</li>
+                                <li>기타 회사가 정하는 서비스</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제5조 -->
+                        <div class="terms-article">
+                            <h2>제5조 (서비스 이용)</h2>
+                            <ol>
+                                <li>서비스는 연중무휴, 24시간 제공함을 원칙으로 합니다.</li>
+                                <li>시스템 점검, 서버 장애 등의 사유로 일시 중단될 수 있습니다.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제6조 -->
+                        <div class="terms-article">
+                            <h2>제6조 (이용자의 의무)</h2>
+                            <p class="section-intro">이용자는 다음 행위를 해서는 안 됩니다.</p>
+                            <ol>
+                                <li>허위 정보 입력</li>
+                                <li>타인의 정보 도용</li>
+                                <li>서비스의 정상적인 운영 방해</li>
+                                <li>법령 위반 행위</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제7조 -->
+                        <div class="terms-article">
+                            <h2>제7조 (서비스의 책임 범위)</h2>
+                            <ol>
+                                <li>본 서비스는 산업안전 관리 지원을 위한 도구이며, 최종 책임은 이용자에게 있습니다.</li>
+                                <li>회사는 제공된 정보의 정확성을 보장하지 않으며, 이용자가 이를 활용하여 발생한 손해에 대해 책임을 지지 않습니다.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제8조 -->
+                        <div class="terms-article">
+                            <h2>제8조 (전문가 및 수선 연결)</h2>
+                            <ol>
+                                <li>회사는 전문가 및 업체를 연결하는 플랫폼을 제공하며 계약 당사자가 아닙니다.</li>
+                                <li>계약 및 거래에 대한 책임은 이용자와 해당 업체 간에 있습니다.</li>
+                            </ol>
+                        </div>
+
+                        <!-- 제9조 -->
+                        <div class="terms-article">
+                            <h2>제9조 (지식재산권)</h2>
+                            <p>서비스 및 관련 콘텐츠의 모든 권리는 회사에 귀속됩니다.</p>
+                        </div>
+
+                        <!-- 제10조 -->
+                        <div class="terms-article">
+                            <h2>제10조 (계약 해지 및 이용 제한)</h2>
+                            <p>회사는 이용자가 약관을 위반할 경우 서비스 이용을 제한하거나 해지할 수 있습니다.</p>
+                        </div>
+
+                        <!-- 제11조 -->
+                        <div class="terms-article">
+                            <h2>제11조 (면책조항)</h2>
+                            <p>회사는 천재지변, 시스템 장애 등 불가항력으로 인한 손해에 대해 책임을 지지 않습니다.</p>
+                        </div>
+
+                        <!-- 제12조 -->
+                        <div class="terms-article">
+                            <h2>제12조 (준거법 및 관할)</h2>
+                            <p>본 약관은 대한민국 법령에 따르며, 분쟁은 회사 소재지 관할 법원을 따릅니다.</p>
+                        </div>
+
+                    </div>
+
+                    <div class="terms-footer">
+                        <p>© 2026 TAI Engineering. All Rights Reserved.</p>
+                        <p>마지막 업데이트: 2026년 4월 11일</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 32px;">
+                    <a href="index.html" class="btn btn-outline-dark">메인으로 돌아가기</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="assets/js/nav-auth.js"></script>
+    <script src="assets/js/footer.js"></script>
 </body>
 </html>
