@@ -1,0 +1,284 @@
+/*----------------------------------------------
+    ## Home 3 Banner
+----------------------------------------------*/
+.home-3 {
+  background: #f9fbfe;
+  .section-title {
+    margin-bottom: 55px;
+  }
+  .btn {
+    height: 50px;
+    line-height: 50px;
+  }
+}
+.banner-area {
+  &.style-3 {
+    background-color: var(--main-color);
+    padding: 193px 0 65px;
+    position: relative;
+    overflow: hidden;
+    background-position: left !important;
+    .banner-inner {
+      text-align: center;
+      margin-bottom: 100px;
+      h1 {
+        font-size: 50px;
+        margin-bottom: 13px;
+      }
+    }
+    .bg-animation {
+      position: absolute;
+      top: 350px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+  }
+}
+.home-3-service {
+  .single-service-inner.single-app-service-inner-2:hover {
+    background: var(--main-color);
+    border-color: #9f65e7;
+    &:after {
+      display: none;
+    }
+  }
+}
+.home-3-featured-area {
+  margin-bottom: 287px;
+  margin-top: -1px;
+}
+.featured-inner {
+  background-color: #fff;
+  box-shadow: 7px 12.124px 30px 0px rgb(27 28 29 / 6%);
+  border: 3px solid #fff;
+  padding: 100px 100px 55px;
+  border-radius: 5px;
+  margin-bottom: -237px;
+  display: inline-block;
+}
+.featured-wrap {
+  img {
+    margin-bottom: 25px;
+  }
+  h4 {
+    margin-bottom: 18px;
+  }
+  p {
+    margin-bottom: 32px;
+  }
+}
+.client-slider {
+  position: relative;
+  &:hover {
+    .owl-nav {
+      opacity: 1;
+      .owl-prev {
+        left: -40px;
+      }
+      .owl-next {
+        right: -40px;
+      }
+    }
+  }
+  .owl-nav {
+    opacity: 0;
+    transition: $transition;
+    button {
+      position: absolute;
+      top: 50%;
+      margin-top: -25px;
+      height: 40px;
+      width: 40px;
+      background: var(--main-color);
+      color: #fff;
+      line-height: 40px;
+      font-size: 14px;
+      &:hover {
+        border-color: var(--main-color);
+        background: #fff;
+        color: var(--main-color);
+      }
+      &.owl-prev {
+        left: -50px;
+      }
+      &.owl-next {
+        right: -50px;
+      }
+    }
+  }
+  .item {
+    a {
+      img {
+        width: auto;
+        margin: auto;
+      }
+    }
+  }
+}
+.footer-area-3 {
+  .footer-inner {
+    background: #fff;
+  }
+}
+
+/* Solar System Styles */
+ul.solarsystem {
+  position: relative;
+  height: 100%;
+  list-style: none;
+  transition: $transition;
+  z-index: 0;
+  li {
+    text-indent: -9999px;
+    display: block;
+    position: absolute;
+    border: 1px solid rgba(194, 210, 250, 0.412);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    &.bottom-2 {
+      border: 0;
+    }
+    a {
+      display: block;
+      img {
+        display: block;
+        border-radius: 50%;
+        margin: -48px auto;
+        box-shadow: 7px 11px 29px rgba(39, 44, 55, 0.27);
+      }
+    }
+  }
+  li.mercury {
+    width: 600px;
+    height: 600px;
+    margin: -114px 0 0 -300px;
+    a {
+      img {
+        margin: -33px auto;
+      }
+    }
+  }
+  li.venus {
+    width: 800px;
+    height: 800px;
+    margin: -240px 0 0 -400px;
+  }
+  li.mars {
+    width: 1000px;
+    height: 1000px;
+    margin: -334px 0 0 -500px;
+  }
+  li.saturn {
+    width: 1200px;
+    height: 1200px;
+    margin: -425px 0 0 -600px;
+  }
+}
+
+/* CSS3 Animations */
+ul.solarsystem {
+  li {
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-name: orbit;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -moz-animation-name: orbit;
+  }
+  li.mercury {
+    animation-name: orbit-2;
+    animation-duration: 70s;
+  }
+  li.venus {
+    animation-duration: 50s;
+    animation-name: orbit;
+  }
+  li.mars {
+    animation-duration: 80s;
+    animation-name: orbit-2;
+  }
+  li.saturn {
+    animation-duration: 60s;
+  }
+  li.mercury.bottom-2 {
+    animation-name: orbit-3;
+  }
+  li.venus.bottom-2 {
+    animation-name: orbit-4;
+  }
+  li.mars.bottom-2 {
+    animation-name: orbit-3;
+  }
+  li.saturn.bottom-2 {
+    animation-name: orbit-4;
+  }
+}
+@keyframes orbit-4 {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes orbit-3 {
+  from {
+    transform: rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbit-2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes orbit-2 {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes orbit {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes orbit-2 {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(-360deg);
+  }
+}
+@-moz-keyframes orbit {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}

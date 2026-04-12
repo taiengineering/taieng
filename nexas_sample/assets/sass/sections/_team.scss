@@ -1,0 +1,78 @@
+/*---------------------------------------------------
+	Team style
+----------------------------------------------------*/
+/**team-area**/
+.single-team-inner {
+	box-shadow: 0px 5px 30px rgb(126 86 255 / 10%);
+	border-radius: 10px;
+	margin-bottom: 30px;
+	transition: $transition;
+	&:hover {
+		box-shadow: 0px 5px 30px rgb(126 86 255 / 20%);
+	}
+	.thumb {
+		img {
+			width: 100%;
+			border-radius: 10px;
+		}
+	}
+	.wrap-details {
+		padding: 18px 30px;
+		h4 {
+			color: #1d2a3b;
+			font-size: 20px;
+			margin-bottom: 4px;
+		}
+		p {
+			font-weight: 700;
+			color: #7c7d94;
+			font-size: 14px;
+		}
+		.social-area {
+
+		}
+	}
+}
+.team-slider {
+	.item {
+		padding: 0 25px;
+	}
+	.owl-nav {
+		position: absolute;
+		right: -110px;
+		bottom: 10%;
+		button {
+			border: 0;
+			height: auto;
+			width: auto;
+			background: transparent;
+			&.owl-prev {
+				padding-right: 10px;
+			}
+			&:hover {
+				color: var(--main-color);
+				opacity: 0.7;
+			}
+		}
+	}
+}
+.team-details-area {
+	.thumb {
+		border-radius: 10px;
+		img {
+			border-radius: 10px;
+		}
+	}
+	.designation {
+		color: var(--main-color);
+	}
+	.nx-inner {
+		li {
+			color: var(--body-color);
+			font-weight: 400;
+		}
+		i,svg {
+			color: var(--main-color);
+		}
+	}
+}

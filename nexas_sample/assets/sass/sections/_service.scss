@@ -1,0 +1,45 @@
+/*---------------------------------------------------
+	Service style
+----------------------------------------------------*/
+/**service-area**/
+.single-service-inner {
+	position: relative;
+	border-radius: 8px;
+	background: #fff;
+	margin-bottom: 30px;
+	box-shadow: 0px 5px 30px rgba(126, 86, 255, 0.10);
+	transition: $transition;
+	/*clip-path: polygon(0 10%, 100% 0%, 100% 90%, 0% 100%);*/
+	padding: 70px 40px 50px;
+	&.style-2 {
+		padding: 40px 40px 50px;
+		.thumb {
+		    margin-bottom: 23px;
+		    img {
+		    	width: auto;
+		    }
+		}
+	}
+	&:hover {
+		box-shadow: 0px 5px 30px rgba(126, 86, 255, 0.20);
+	}
+	.thumb {
+		margin-bottom: 35px;
+		img {
+			border-radius: 50%;
+		}
+	}
+	h4 {
+		margin-bottom: 14px;
+	}
+	p {
+		transition: $transition;
+	}
+}
+.service--details-area {
+	p {
+		font-size: 18px;;
+	}
+}
+
+

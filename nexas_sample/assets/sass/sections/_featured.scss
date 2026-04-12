@@ -1,0 +1,51 @@
+/*---------------------------------------------------
+	Featured style
+----------------------------------------------------*/
+/**featured-area**/
+.featured-accordion {
+	.accordion-item {
+		clip-path: initial;
+		border: 0;
+		margin-bottom: 20px;
+		background: var(--main-gradient);
+		.accordion-header {
+			background: transparent;
+			border: 0;
+			outline: 0;
+			.accordion-button {
+				border: 0;
+				outline: 0;
+				box-shadow: 0px 5px 30px rgb(126 86 255 / 20%);
+				background: transparent;
+				font-size: 24px;
+				border-radius: 0;
+				color: #fff;
+				padding: 41px 30px 26px;
+				&.collapsed {
+					background: #fff;
+					padding: 26px 30px;
+					color: #1b1c1d;
+					img {
+						filter: invert(0);
+					}
+				}
+				img {
+					margin-right: 10px;
+					filter: invert(1);
+					width: 27px;
+				}
+				&:after {
+					display: none;
+				}
+			}
+		}
+		.accordion-collapse {
+			background: var(--main-gradient);
+			border: 0;
+			.accordion-body {
+				color: #fff;
+				padding: 0 50px 37px 67px;
+			}
+		}
+	}
+}
