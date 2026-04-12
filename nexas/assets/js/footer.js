@@ -76,6 +76,7 @@
   </div>
   <div class="footer-bottom">
     <span>© TAI Engineering. All rights reserved.</span>
+    <a href="site-map.html" style="color:rgba(255,255,255,.45); margin-left:14px; font-size:.78rem; text-decoration:none;">사이트맵 (점검)</a>
   </div>
 </footer>
 `;
