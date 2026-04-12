@@ -121,6 +121,71 @@
   @media(max-width:992px){ .hero-img-col { display: none !important; } }
   @media(max-width:768px){ .sec { padding: 64px 0; } .stat-grid { grid-template-columns: 1fr 1fr 1fr; gap: 10px; } .saas-grid { grid-template-columns: 1fr 1fr; } .hero-h1 { font-size: 2.2rem; } }
   @media(max-width:480px){ .stat-grid { grid-template-columns: 1fr; } .saas-grid { grid-template-columns: 1fr; } .hero-h1 { font-size: 2rem; } }
+
+  /* 지게차·일일 점검 UI (TAI Safe / tai-main 토큰) */
+  #s-forklift { background: var(--gray-bg); }
+  #s-forklift .tai-fk-head { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:28px; }
+  #s-forklift .tai-fk-badge {
+    display:inline-flex; align-items:center; padding:8px 14px; font-size:13px; font-weight:700;
+    color:var(--red); background:rgba(230,57,70,.08); border:1px solid var(--border); border-radius:7px;
+  }
+  #s-forklift .tai-fk-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:24px; align-items:start; }
+  #s-forklift .tai-fk-card {
+    background:#fff; border-radius:14px; padding:24px; margin-bottom:20px;
+    box-shadow:0 2px 16px rgba(0,0,0,.06); border:1px solid var(--border);
+  }
+  #s-forklift .tai-fk-card:last-child { margin-bottom:0; }
+  #s-forklift .tai-fk-card h3 { font-size:1.25rem; font-weight:800; color:var(--navy); margin:0 0 18px; }
+  #s-forklift .tai-fk-item {
+    border:1px solid var(--border); border-radius:12px; padding:18px; margin-bottom:14px;
+    background:#fff; transition:border-color .2s, background .2s;
+  }
+  #s-forklift .tai-fk-item:last-child { margin-bottom:0; }
+  #s-forklift .tai-fk-item.is-ok { border-color:#28a745; background:#e8f8ed; }
+  #s-forklift .tai-fk-item.is-ng { border-color:#dc3545; background:#ffeef0; }
+  #s-forklift .tai-fk-item.is-hold { border-color:#ffc107; background:#fff8e1; }
+  #s-forklift .tai-fk-tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+  #s-forklift .tai-fk-tag { font-size:12px; font-weight:700; padding:4px 10px; border-radius:6px; }
+  #s-forklift .tai-fk-tag.type { background:rgba(230,57,70,.1); color:var(--red); }
+  #s-forklift .tai-fk-tag.req { background:#ffeef0; color:#dc3545; }
+  #s-forklift .tai-fk-title { font-size:18px; font-weight:800; color:var(--navy); margin:0 0 4px; }
+  #s-forklift .tai-fk-desc { font-size:15px; color:var(--sub); margin:0 0 14px; line-height:1.55; }
+  #s-forklift .tai-fk-btns { display:flex; flex-wrap:wrap; gap:8px; pointer-events:none; }
+  #s-forklift .tai-fk-btns button {
+    flex:1 1 auto; min-width:88px; min-height:42px; padding:0 14px; font-size:14px; font-weight:700;
+    font-family:inherit; border-radius:7px; cursor:pointer; border:1.5px solid var(--border);
+    background:#fafbfc; color:var(--navy); transition:background .2s, border-color .2s, color .2s;
+  }
+  #s-forklift .tai-fk-btns button.on-ok { background:var(--navy); border-color:var(--navy); color:#fff; }
+  #s-forklift .tai-fk-btns button.on-ng { background:#dc3545; border-color:#dc3545; color:#fff; }
+  #s-forklift .tai-fk-btns button.on-hold { background:#ffc107; border-color:#e0a800; color:#1a1a1a; }
+  #s-forklift .tai-fk-field label { display:block; font-size:14px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+  #s-forklift .tai-fk-field input {
+    width:100%; max-width:400px; padding:12px 14px; font-size:16px; border-radius:7px;
+    border:1px solid var(--border); font-family:inherit; color:var(--text);
+  }
+  #s-forklift .tai-fk-field input:focus { outline:none; border-color:var(--red); }
+  #s-forklift .tai-fk-actions { margin-top:20px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  #s-forklift .tai-fk-metric {
+    border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:14px;
+    background:linear-gradient(180deg, rgba(13,27,42,.04) 0%, #fff 100%);
+  }
+  #s-forklift .tai-fk-metric .k { font-size:14px; font-weight:700; color:var(--sub); margin:0 0 4px; }
+  #s-forklift .tai-fk-metric .v { font-size:36px; font-weight:900; color:var(--red); line-height:1.1; margin:0; }
+  #s-forklift .tai-fk-risk { border:1px solid var(--border); border-radius:12px; padding:18px; margin-bottom:14px; background:#fff; }
+  #s-forklift .tai-fk-risk .k { font-size:14px; font-weight:700; color:var(--sub); margin:0 0 4px; }
+  #s-forklift .tai-fk-risk .v { font-size:22px; font-weight:800; margin:0; color:#ffc107; }
+  #s-forklift .tai-fk-risk.bad .v { color:#dc3545; }
+  #s-forklift .tai-fk-alert {
+    border:1px solid #ffc107; border-radius:12px; padding:16px; background:#fff8e1;
+  }
+  #s-forklift .tai-fk-alert strong { display:block; font-size:15px; color:#856404; margin-bottom:6px; }
+  #s-forklift .tai-fk-alert p { margin:0; font-size:14px; color:#856404; line-height:1.55; }
+  @media(max-width:1080px){ #s-forklift .tai-fk-grid { grid-template-columns:1fr; } }
+  @media(max-width:720px){
+    #s-forklift .tai-fk-metric .v { font-size:30px; }
+    #s-forklift .tai-fk-btns button { flex:1 1 calc(50% - 4px); }
+  }
   </style>
 </head>
 <body>
@@ -134,6 +199,7 @@
       <a href="index-3.html">TAI AGENT</a>
       <a href="index-4.html">TAI CARE</a>
       <a href="index-5.html">안전정보</a>
+      <a href="#s-forklift">현장 점검</a>
       <span class="nav-sep">|</span>
       <a href="log-in.html" class="nav-auth-guest">로그인</a>
       <a href="sign-up.html" class="nav-auth-guest">회원가입</a>
@@ -213,6 +279,97 @@
         </div>
         <a href="index-1.html" class="btn-red" style="display:inline-block; padding:13px 28px; border-radius:7px; font-size:.95rem;">TAI Safe 자세히 보기</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="s-forklift" class="sec">
+  <div class="sec-inner">
+    <div class="tai-fk-head">
+      <div>
+        <span class="sec-tag">TAI Safe · 모바일 점검</span>
+        <h2 class="sec-h2" style="color:var(--navy);">지게차 일일 점검</h2>
+        <p class="sec-sub" style="color:var(--sub); margin-bottom:0;">설비 QR 스캔 후 현장에서 바로 체크·기록합니다. (화면 예시)</p>
+      </div>
+      <div class="tai-fk-badge">항목 5 · 필수 5</div>
+    </div>
+
+    <div class="tai-fk-grid">
+      <div class="tai-fk-main">
+        <div class="tai-fk-card">
+          <h3>점검 항목</h3>
+          <div class="tai-fk-item is-ok">
+            <div class="tai-fk-tags">
+              <span class="tai-fk-tag type">전도</span>
+              <span class="tai-fk-tag req">필수</span>
+            </div>
+            <div class="tai-fk-title">타이어 상태</div>
+            <p class="tai-fk-desc">마모·파손·공기압 저하 확인</p>
+            <div class="tai-fk-btns">
+              <button type="button" class="on-ok">정상</button>
+              <button type="button">이상</button>
+              <button type="button">보류</button>
+            </div>
+          </div>
+          <div class="tai-fk-item is-ng">
+            <div class="tai-fk-tags">
+              <span class="tai-fk-tag type">충돌</span>
+              <span class="tai-fk-tag req">필수</span>
+            </div>
+            <div class="tai-fk-title">브레이크 작동</div>
+            <p class="tai-fk-desc">제동 시 밀림·지연 반응 확인</p>
+            <div class="tai-fk-btns">
+              <button type="button">정상</button>
+              <button type="button" class="on-ng">이상</button>
+              <button type="button">보류</button>
+            </div>
+          </div>
+          <div class="tai-fk-item is-hold">
+            <div class="tai-fk-tags">
+              <span class="tai-fk-tag type">충돌</span>
+              <span class="tai-fk-tag req">필수</span>
+            </div>
+            <div class="tai-fk-title">경적 작동</div>
+            <p class="tai-fk-desc">경적이 정상 울리는지 확인</p>
+            <div class="tai-fk-btns">
+              <button type="button">정상</button>
+              <button type="button">이상</button>
+              <button type="button" class="on-hold">보류</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tai-fk-card">
+          <h3>작업자 정보</h3>
+          <div class="tai-fk-field">
+            <label for="taiFkWorkerName">이름 <span style="color:#dc3545">*</span></label>
+            <input id="taiFkWorkerName" type="text" placeholder="작업자 이름 입력" maxlength="20" autocomplete="off" readonly />
+          </div>
+          <div class="tai-fk-actions">
+            <span class="btn-red" style="display:inline-block; padding:13px 28px; border-radius:7px; font-size:.95rem; opacity:.85; cursor:default;">점검 완료 저장</span>
+            <span class="btn-outline" style="display:inline-block; padding:13px 28px; border-radius:7px; font-size:.95rem; opacity:.6; cursor:default;">취소</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="tai-fk-aside">
+        <div class="tai-fk-metric">
+          <p class="k">오늘 완료율</p>
+          <p class="v">72%</p>
+        </div>
+        <div class="tai-fk-risk">
+          <p class="k">위험도 (예시)</p>
+          <p class="v">주의</p>
+        </div>
+        <div class="tai-fk-risk bad">
+          <p class="k">고위험 예시</p>
+          <p class="v">위험</p>
+        </div>
+        <div class="tai-fk-alert">
+          <strong>이상 항목 안내</strong>
+          <p>이상이 있으면 안전관리자에게 알림이 발송됩니다. 조치 전까지 가동을 중단해 주세요.</p>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
