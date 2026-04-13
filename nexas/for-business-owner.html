@@ -3,141 +3,396 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="사업주의 안전 리스크를 TAI가 줄여드립니다. 중대재해처벌법 대응, 법적 증거 확보, 전문가 연결.">
+  <meta name="description" content="사고 나면 내가 책임집니다. 중대재해처벌법 대응, 법적 증거 자동 확보, 전문가 연결까지 TAI가 도와드립니다.">
   <title>사업주·현장소장을 위한 TAI | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/owl.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-  body { font-family: 'Noto Sans KR', sans-serif; }
-  .role-hero { background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 55%, #0d0a00 100%); padding: 110px 0 80px; position: relative; overflow: hidden; }
-  .role-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 10% 50%, rgba(230,57,70,.12) 0%, transparent 65%); pointer-events: none; }
-  .role-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #e63946; background: rgba(230,57,70,.15); border: 1px solid rgba(230,57,70,.4); border-radius: 4px; padding: 5px 12px; margin-bottom: 22px; }
-  .role-hero h1 { font-size: clamp(2.4rem,5vw,4.2rem); font-weight: 900; color: #fff; line-height: 1.08; margin-bottom: 18px; }
-  .role-hero h1 em { color: #e63946; font-style: normal; }
-  .role-hero .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); margin-bottom: 36px; line-height: 1.65; }
-  .risk-alert { background: rgba(230,57,70,.1); border: 1px solid rgba(230,57,70,.4); border-radius: 12px; padding: 20px 24px; margin-bottom: 12px; }
-  .risk-alert p { color: rgba(255,255,255,.8); font-size: .9rem; line-height: 1.6; margin: 0; }
-  .risk-alert strong { color: #f87171; }
-  .value-section { background: #f8fafc; padding: 80px 0; }
-  .value-card { background: #fff; border-radius: 18px; padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,.07); height: 100%; border-top: 4px solid #e63946; }
-  .value-card .vc-icon { font-size: 2.2rem; margin-bottom: 16px; }
-  .value-card h4 { font-size: 1.05rem; font-weight: 800; color: #0d1b2a; margin-bottom: 10px; }
-  .value-card p { font-size: .88rem; color: #64748b; line-height: 1.65; margin: 0; }
-  .law-section { background: #0d1b2a; padding: 80px 0; }
-  .law-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 14px; padding: 28px; }
-  .law-card h5 { color: #e63946; font-weight: 800; font-size: .95rem; margin-bottom: 10px; }
-  .law-card p { color: rgba(255,255,255,.6); font-size: .87rem; line-height: 1.65; margin: 0; }
-  .proof-section { background: #fff; padding: 80px 0; }
-  .proof-item { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
-  .proof-num { width: 36px; height: 36px; border-radius: 50%; background: #e63946; color: #fff; font-weight: 900; font-size: .9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-  .proof-text h5 { font-weight: 700; color: #0d1b2a; margin-bottom: 4px; font-size: .95rem; }
-  .proof-text p { font-size: .87rem; color: #64748b; line-height: 1.6; margin: 0; }
-  .cta-section { background: linear-gradient(135deg, #e63946, #c1121f); padding: 80px 0; text-align: center; }
-  .cta-section h2 { color: #fff; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 900; margin-bottom: 14px; }
-  .cta-section p { color: rgba(255,255,255,.8); margin-bottom: 32px; }
+    /* ── 히어로 오버라이드 ── */
+    .banner-area.style-3 {
+      background: linear-gradient(135deg, #0d0005 0%, #1a0008 50%, #0d0a00 100%) !important;
+      background-image: none !important;
+      min-height: 580px;
+      display: flex; align-items: center;
+    }
+    .banner-inner h1 { color: #fff; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+    .banner-inner h1 em { color: #e63946; font-style: normal; }
+    .banner-inner p { color: rgba(255,255,255,.75); font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px; }
+    .banner-eyebrow {
+      display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: #e63946; background: rgba(230,57,70,.15);
+      border: 1px solid rgba(230,57,70,.4); border-radius: 4px;
+      padding: 5px 12px; margin-bottom: 22px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ── 법적 숫자 3개 (risk-banner) ── */
+    .risk-banner { background: #e63946; padding: 30px 0; }
+    .risk-stat { text-align: center; color: #fff; }
+    .risk-stat .num { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1; margin-bottom: 8px; }
+    .risk-stat .lbl { font-size: .82rem; opacity: .88; line-height: 1.5; }
+    .risk-sep { width: 1px; background: rgba(255,255,255,.25); margin: 0 auto; }
+
+    /* ── 6개 카드 섹션 ── */
+    .risk-card-section { background: #f8fafc; padding: 88px 0; }
+    .risk-card-section .section-title h2 { color: #0d1b2a; }
+    .risk-card {
+      background: #fff; border-radius: 18px; padding: 34px 28px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%;
+      border-top: 4px solid #e63946; transition: transform .2s, box-shadow .2s;
+    }
+    .risk-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
+    .risk-card .rc-icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .risk-card h4 { font-size: 1.05rem; font-weight: 800; color: #0d1b2a; margin-bottom: 10px; }
+    .risk-card p { font-size: .88rem; color: #64748b; line-height: 1.7; margin: 0; }
+    .risk-card .highlight {
+      margin-top: 12px; background: #fef2f2; border-left: 3px solid #e63946;
+      padding: 10px 14px; border-radius: 0 8px 8px 0;
+      font-size: .82rem; color: #9b1c1c; font-weight: 700;
+    }
+
+    /* ── 법적 증거 work-area ── */
+    .evidence-section { padding: 100px 0; background: #fff; }
+    .evidence-section .step-item { display: flex; gap: 18px; align-items: flex-start; margin-bottom: 28px; }
+    .evidence-section .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #e63946; color: #fff; font-weight: 900; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .evidence-section .step-text h5 { color: #0d1b2a; font-weight: 700; margin-bottom: 5px; }
+    .evidence-section .step-text p { color: #64748b; font-size: .88rem; line-height: 1.65; margin: 0; }
+
+    /* ── 이미지 플레이스홀더 ── */
+    .img-placeholder {
+      background: rgba(255,255,255,.06); border: 1.5px dashed rgba(255,255,255,.2);
+      border-radius: 18px; min-height: 360px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.35); font-size: .85rem; text-align: center; gap: 10px;
+      padding: 24px;
+    }
+    .img-placeholder-light {
+      background: #f1f5f9; border: 1.5px dashed #cbd5e1;
+      border-radius: 18px; min-height: 380px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: #94a3b8; font-size: .85rem; text-align: center; gap: 10px; padding: 24px;
+    }
+    .img-placeholder .ph-icon, .img-placeholder-light .ph-icon { font-size: 2.8rem; opacity: .5; }
+
+    /* ── quote box ── */
+    .quote-box {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-left: 4px solid #e63946; border-radius: 0 14px 14px 0;
+      padding: 22px 24px; margin-top: 28px;
+    }
+    .quote-box p { color: rgba(255,255,255,.85); font-size: 1rem; line-height: 1.7; margin: 0; font-style: italic; }
+    .quote-box span { display: block; margin-top: 10px; font-size: .8rem; color: rgba(255,255,255,.5); }
   </style>
 </head>
-<body class="sc5">
-<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<body class="home-3 sc5">
+
+<!-- preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+  </div>
+</div>
 <div class="body-overlay" id="body-overlay"></div>
 
-<!-- HEADER -->
-<div id="tai-header"></div>
+<!-- navbar -->
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container nav-container">
+      <div class="responsive-mobile-menu">
+        <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu"
+          aria-expanded="false" aria-label="메뉴">
+          <span class="icon-left"></span><span class="icon-right"></span>
+        </button>
+      </div>
+      <div class="logo">
+        <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI 엔지니어링"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="themefie_main_menu">
+        <ul class="navbar-nav menu-open text-end">
+          <li class="menu-item-has-children">
+            <a href="#">서비스</a>
+            <ul class="sub-menu">
+              <li><a href="service/education.html">교육사업</a></li>
+              <li><a href="service/inapp.html">인앱 서비스</a></li>
+              <li><a href="service/repair.html">수선 연결</a></li>
+              <li><a href="service/consulting.html">컨설팅</a></li>
+              <li><a href="service/appointment.html">선임 연결</a></li>
+              <li><a href="service/saas.html">SaaS 구독</a></li>
+              <li><a href="service/diagnosis.html">법령진단</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="#">대상별</a>
+            <ul class="sub-menu">
+              <li><a href="target/building.html">건물·시설</a></li>
+              <li><a href="target/factory.html">제조공장</a></li>
+              <li><a href="target/construction.html">건설현장</a></li>
+            </ul>
+          </li>
+          <li><a href="pricing.html">요금제</a></li>
+          <li class="menu-item-has-children">
+            <a href="#">회사소개</a>
+            <ul class="sub-menu">
+              <li><a href="about.html">회사소개</a></li>
+              <li><a href="patents.html">특허출원</a></li>
+              <li><a href="faq.html">FAQ</a></li>
+              <li><a href="safety-news.html">안전정보</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-right-part nav-right-part-desktop">
+        <ul>
+          <li class="nav-auth-guest"><a href="log-in.html">로그인</a></li>
+          <li><a href="free-diagnosis.html" class="btn btn-base">무료 진단</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 
-<section class="role-hero">
+<!-- ══ 히어로 (index-3 style-3 구조 기반) ══ -->
+<section class="banner-area style-3">
   <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="role-eyebrow">🏭 사업주·현장소장을 위한 TAI</span>
-        <h1>사고 나면<br><em>내가 책임집니다</em></h1>
-        <p class="hero-sub">중대재해처벌법 시행 이후 사업주·현장소장의 법적 책임이 전례 없이 강화됐습니다.<br>TAI는 리스크를 줄이고, 법적 증거를 자동으로 쌓아드립니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;">지금 무료 진단하기</a>
-          <a href="contact.html" class="btn btn-border" style="font-size:1rem;padding:14px 28px;color:#fff;border-color:rgba(255,255,255,.4);">전문가 상담 요청</a>
+    <div class="row justify-content-center">
+      <div class="col-xl-8 col-lg-10 text-center align-self-center">
+        <div class="banner-inner">
+          <span class="banner-eyebrow">🏭 사업주·현장소장을 위한 TAI</span>
+          <h1>사고 나면<br><em>내가 책임집니다</em></h1>
+          <p class="mx-lg-4">
+            중대재해처벌법 시행 이후, 사업주·현장소장의 법적 책임은 전례 없이 강화됐습니다.<br>
+            TAI는 리스크를 줄이고, 법적 증거를 자동으로 쌓아드립니다.
+          </p>
+          <div class="hero-btns justify-content-center">
+            <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 36px;">지금 무료 진단하기</a>
+            <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 상담 요청</a>
+          </div>
         </div>
       </div>
-      <div class="col-lg-5">
-        <div class="risk-alert"><p>⚠️ <strong>중대재해처벌법:</strong> 1명 사망 시 사업주 최대 징역 1년 또는 벌금 10억 원</p></div>
-        <div class="risk-alert"><p>⚠️ <strong>산업안전보건법:</strong> 점검 의무 미이행 시 과태료 최대 1,500만 원</p></div>
-        <div class="risk-alert"><p>⚠️ <strong>적발 건수:</strong> 중대재해법 이후 감독 점검 347% 증가</p></div>
+      <div class="col-lg-8 mt-5">
+        <!-- [이미지: TAI Safe 관리자 대시보드 — 위험도 현황 + 점검 완료율 화면] -->
+        <div class="img-placeholder" style="min-height:280px;">
+          <span class="ph-icon">🖥️</span>
+          <strong style="color:rgba(255,255,255,.6);">TAI Safe 사업주 대시보드</strong>
+          <span>사업장 전체 안전 현황 + 위험도 지표<br>실제 스크린샷으로 교체 예정</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="value-section">
+<!-- ══ 법적 현실 숫자 3개 ══ -->
+<div class="risk-banner">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;">TAI가 사업주의 리스크를 줄이는 방법</h2>
-      <p style="color:#64748b;">사고 예방 + 법적 증거 자동 확보 + 전문가 연결까지</p>
+    <div class="row g-4 align-items-center">
+      <div class="col-6 col-md-3">
+        <div class="risk-stat">
+          <div class="num">10억</div>
+          <div class="lbl">1명 사망 시 최대 벌금<br>(중대재해처벌법)</div>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="risk-sep" style="height:52px;"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="risk-stat">
+          <div class="num">347%</div>
+          <div class="lbl">중대재해법 이후<br>감독 점검 증가율</div>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="risk-sep" style="height:52px;"></div></div>
+      <div class="col-6 col-md-3">
+        <div class="risk-stat">
+          <div class="num">5인</div>
+          <div class="lbl">미만까지 확대 예정<br>(현재 50인 이상 적용)</div>
+        </div>
+      </div>
+      <div class="col-md-auto d-none d-md-block"><div class="risk-sep" style="height:52px;"></div></div>
+      <div class="col-6 col-md-1">
+        <div class="risk-stat">
+          <div class="num" style="font-size:1.6rem;">1년+</div>
+          <div class="lbl">사망 사고 시<br>최소 징역</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAI가 리스크를 줄이는 방법 — 6개 카드 (기획서 표 그대로) ══ -->
+<section class="risk-card-section">
+  <div class="container">
+    <div class="section-title text-center mb-5">
+      <h2 class="title">TAI가 리스크를 줄이는 방법</h2>
+      <p>사고 예방 + 법적 증거 자동 확보 + 전문가 연결까지</p>
     </div>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">🛡️</div><h4>위험도 대시보드</h4><p>현장 전체 안전 상태를 한눈에 파악합니다. 점검 완료율·이상 발생·미조치 항목을 실시간으로 확인할 수 있습니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">📋</div><h4>법적 증거 자동 확보</h4><p>모든 점검 기록이 자동으로 저장됩니다. 감독 점검·감사·사고 발생 시 즉시 서류 제출이 가능합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">🔗</div><h4>전문가 즉시 연결</h4><p>안전관리자 선임·법정 검사·정비 업체 연결을 TAI가 처리합니다. 직접 찾아다닐 필요가 없습니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">⚡</div><h4>의무 누락 방지</h4><p>법령 의무 항목을 자동 추적합니다. D-3 사전 알림으로 과태료 유발 누락을 원천 차단합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">💰</div><h4>비용 구조 최적화</h4><p>월 79,000원으로 안전관리자 채용 없이 법정 관리 체계를 갖출 수 있습니다. 과태료 1건보다 저렴합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="value-card"><div class="vc-icon">📊</div><h4>경영진 보고 자동화</h4><p>월간 안전 현황 리포트가 자동 생성됩니다. 임원·오너에게 보고할 때 별도 취합 없이 즉시 제출 가능합니다.</p></div></div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">📊</div>
+          <h4>위험도 대시보드</h4>
+          <p>현장 전체 안전 상태를 한눈에 파악합니다. 점검 완료율·이상 발생·미조치 항목을 실시간으로 확인할 수 있습니다.</p>
+          <div class="highlight">회사의 안전관리 상황을 안전관리자 외에 상급자나 대표도 상세히 확인할 수 있습니다</div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">📋</div>
+          <h4>법적 증거 자동 확보</h4>
+          <p>모든 점검 기록이 자동으로 저장됩니다. 감독 점검·감사·사고 발생 시 즉시 서류 제출이 가능합니다.</p>
+          <div class="highlight">안전관리회의록 등의 기록을 철저히 보관하여, 안전점검 시 문제가 전혀 없습니다</div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">🔍</div>
+          <h4>법령진단 리포트</h4>
+          <p>법령진단 결과 리포트는 단순 정보가 아닙니다. 안전 점검 시 실질적인 증빙 문서가 됩니다.</p>
+          <div class="highlight">해당 건에 대해 계획하고 관리하고 있다고 어필할 수 있는 문서가 됩니다</div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">🛡️</div>
+          <h4>의무 누락 방지</h4>
+          <p>법령 의무 항목을 자동 추적하고 D-3 사전 알림으로 누락을 원천 차단합니다.</p>
+          <div class="highlight">이 시스템으로 관리한다면, 중대재해처벌법은 어림없습니다</div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">💰</div>
+          <h4>비용 최적화</h4>
+          <p>안전관리자 채용 없이도 법정 관리 체계를 갖출 수 있습니다. 과태료 1건보다 저렴합니다.</p>
+          <div class="highlight">SaaS 비용으로 안전관리 외 점검까지 하게 되어, 자산을 잘 지킬 수 있습니다</div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="risk-card">
+          <div class="rc-icon">🔗</div>
+          <h4>전문가 연결</h4>
+          <p>안전관리자 선임·법정 검사·정비 업체 연결을 TAI가 처리합니다. 직접 찾아다닐 필요가 없습니다.</p>
+          <div class="highlight">나라에서 정한 법에 따라 전문가에게 의뢰해야 하는데, TAI가 확실히 연결합니다</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section class="law-section">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">알아야 할 법적 현실</h2>
-      <p style="color:rgba(255,255,255,.55);">모르면 걸립니다. TAI가 대신 알아드립니다.</p>
-    </div>
-    <div class="row g-4">
-      <div class="col-md-4"><div class="law-card"><h5>중대재해처벌법</h5><p>사업주·경영책임자 개인에게 형사책임. 5인 이상 사업장 전면 적용. 1명 사망 시 1년 이상 징역 또는 10억 원 이하 벌금.</p></div></div>
-      <div class="col-md-4"><div class="law-card"><h5>산업안전보건법</h5><p>점검 의무 미이행·안전조치 미실시 시 과태료 최대 1,500만 원. 반복 위반 시 가중. 매년 감독 강화 추세.</p></div></div>
-      <div class="col-md-4"><div class="law-card"><h5>5인 미만도 확대 예정</h5><p>현재 50인 이상 적용 중이나 5인까지 확대 논의 중. 지금 준비해두면 추가 비용 없이 대응 가능합니다.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="proof-section">
+<!-- ══ 워크플로우 — 법적 증거 자동 확보 (index-3 work-area 구조) ══ -->
+<section class="evidence-section">
   <div class="container">
     <div class="row align-items-center g-5">
-      <div class="col-lg-5">
-        <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;margin-bottom:16px;">사고 발생 시<br>TAI가 지켜드립니다</h2>
-        <p style="color:#64748b;line-height:1.7;">점검 기록·서명·이상 보고·조치 내역이 모두 타임스탬프와 함께 저장됩니다. 감독 기관 요청 시 즉시 출력 가능합니다.</p>
+      <div class="col-xl-5 col-lg-6 order-lg-2">
+        <!-- [이미지: 점검 기록·타임스탬프·이상 신고 보고 화면 캡처] -->
+        <div class="img-placeholder-light">
+          <span class="ph-icon">🗂️</span>
+          <strong style="color:#64748b;">점검 기록 자동 저장 화면</strong>
+          <span style="font-size:.8rem;">타임스탬프 + 서명 + 이상 신고 내역<br>실제 스크린샷으로 교체 예정</span>
+        </div>
       </div>
-      <div class="col-lg-7">
-        <div class="proof-item"><div class="proof-num">1</div><div class="proof-text"><h5>점검 수행 기록 자동 저장</h5><p>누가, 언제, 어떤 설비를, 어떻게 점검했는지 타임스탬프와 함께 저장.</p></div></div>
-        <div class="proof-item"><div class="proof-num">2</div><div class="proof-text"><h5>이상 발생 즉시 보고 체계</h5><p>이상 발견 시 작업자 → 관리자 → 대표 순으로 알림 자동 전송.</p></div></div>
-        <div class="proof-item"><div class="proof-num">3</div><div class="proof-text"><h5>조치 내역 추적</h5><p>정비 요청·완료 일시·담당자 모두 기록. 미조치 상태 방치 불가.</p></div></div>
-        <div class="proof-item" style="margin-bottom:0;"><div class="proof-num">4</div><div class="proof-text"><h5>감사 대응 서류 즉시 출력</h5><p>법정 서식으로 자동 생성된 서류를 즉시 제출. 추가 작업 없음.</p></div></div>
+      <div class="col-xl-6 col-lg-6 order-lg-1 offset-xl-1">
+        <div class="section-title mb-4">
+          <h2 class="title">사고 발생 시<br>TAI가 지켜드립니다</h2>
+          <p>점검 기록·서명·이상 보고·조치 내역이 모두 타임스탬프와 함께 저장됩니다. 감독 기관 요청 시 즉시 출력 가능합니다.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h5>점검 수행 기록 자동 저장</h5>
+            <p>누가, 언제, 어떤 설비를, 어떻게 점검했는지 타임스탬프와 함께 저장.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h5>이상 발생 즉시 보고 체계</h5>
+            <p>이상 발견 시 작업자 → 관리자 → 대표 순으로 알림 자동 전송.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h5>조치 내역 추적 — 방치 불가</h5>
+            <p>정비 요청·완료 일시·담당자 모두 기록. 미조치 상태 자동 재알림.</p>
+          </div>
+        </div>
+        <div class="step-item" style="margin-bottom:0;">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <h5>감사 대응 서류 즉시 출력</h5>
+            <p>법정 서식으로 자동 생성된 서류를 즉시 제출. 추가 작업 없음.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<!-- ══ CTA (index-3 cta-area 구조 기반) ══ -->
+<section class="cta-area bg-main pd-top-70" style="background: linear-gradient(135deg, #e63946 0%, #c1121f 60%, #9b1c1c 100%);">
+  <div class="bg-main-gradient"></div>
   <div class="container">
-    <h2>리스크를 줄이세요</h2>
-    <p>3분 무료 진단으로 내 사업장의 법령 위반 여부를 지금 바로 확인하세요.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:14px 36px;font-weight:700;">무료 법령진단 시작</a>
-      <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 상담 요청</a>
+    <div class="row justify-content-center">
+      <div class="col-xl-5 col-lg-6 order-lg-2">
+        <div class="thumb mb-lg-0 mb-5 text-center">
+          <!-- [이미지: 무료 법령진단 결과 리포트 화면] -->
+          <div class="img-placeholder" style="min-height:260px;">
+            <span class="ph-icon">📄</span>
+            <strong style="color:rgba(255,255,255,.6);">무료 법령진단 결과 리포트</strong>
+            <span>의무 항목 자동 도출 + PDF 저장</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-5 col-lg-6 mt-xl-4 order-lg-1 text-lg-start text-center">
+        <div class="section-title mb-0 pb-5">
+          <h2 class="title text-white">리스크를 줄이세요</h2>
+          <p class="text-white" style="opacity:.85;">
+            3분 무료 진단으로 내 사업장의 법령 위반 여부를 지금 바로 확인하세요.<br>
+            법령진단 리포트가 안전점검 시 계획·관리 증거 문서가 됩니다.
+          </p>
+        </div>
+        <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center">
+          <a href="free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료 법령진단 시작</a>
+          <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 상담 요청</a>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- ══ 안전관리자용 링크 ══ -->
+<section style="background:#f8fafc;padding:48px 0;text-align:center;">
+  <div class="container">
+    <p style="color:#64748b;font-size:.95rem;margin-bottom:14px;">안전관리자라면 이 페이지를 확인하세요</p>
+    <a href="for-safety-manager.html" class="btn btn-border" style="color:#0d1b2a;border-color:#cbd5e1;">안전관리자용 TAI 보기 →</a>
   </div>
 </section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
-<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+<script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
 </html>
