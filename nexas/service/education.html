@@ -23,12 +23,6 @@
   .edu-card .ec-icon{font-size:2.2rem;margin-bottom:16px;}
   .edu-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
   .edu-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
-  .edu-type-section{background:#f8fafc;padding:80px 0;}
-  .edu-type-card{background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);height:100%;}
-  .edu-type-card h5{font-weight:800;color:#0d1b2a;margin-bottom:10px;font-size:1rem;}
-  .edu-type-card p{font-size:.87rem;color:#64748b;line-height:1.6;margin-bottom:12px;}
-  .edu-type-card .badge-edu{display:inline-block;background:#f0fdf4;color:#16a34a;border-radius:6px;padding:3px 10px;font-size:.78rem;font-weight:700;margin-bottom:4px;}
-  .law-badge{background:#fef3c7;color:#92400e;border-radius:6px;padding:2px 8px;font-size:.78rem;font-weight:700;margin-right:4px;}
   .process-section{background:#0d1b2a;padding:80px 0;}
   .process-step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.06);border-radius:12px;padding:22px;margin-bottom:12px;}
   .process-num{width:36px;height:36px;border-radius:50%;background:#10b981;color:#fff;font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -42,24 +36,7 @@
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-<header class="navbar-area">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container nav-container">
-      <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
-      <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
-      <div class="collapse navbar-collapse" id="nav1">
-        <ul class="navbar-nav menu-open text-end">
-          <li><a href="../index-1.html">TAI SAFE</a></li>
-          <li><a href="../index-2.html">TAI MANAGER</a></li>
-          <li><a href="../index-3.html">TAI AGENT</a></li>
-          <li><a href="../index-4.html">TAI CARE</a></li>
-          <li><a href="../safety-news.html">안전정보</a></li>
-        </ul>
-      </div>
-      <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
-    </div>
-  </nav>
-</header>
+<div id="tai-header"></div>
 
 <section class="svc-hero">
   <div class="container">
@@ -76,7 +53,7 @@
       <div class="col-lg-5">
         <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
           <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:1.8;">
-            <div style="margin-bottom:8px;">✅ 신규 채용자 안전교육 (8시간)</div>
+            <div style="margin-bottom:8px;">✅ 신규 체용자 안전교육 (8시간)</div>
             <div style="margin-bottom:8px;">✅ 관리감독자 교육 (연 16시간)</div>
             <div style="margin-bottom:8px;">✅ 특별 안전교육 (위험작업 전)</div>
             <div style="margin-bottom:8px;">✅ 건설업 기초안전·보건교육 (4시간)</div>
@@ -90,9 +67,7 @@
 
 <section style="background:#f8fafc;padding:80px 0;">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">교육 서비스 특징</h2>
-    </div>
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">교육 서비스 특징</h2></div>
     <div class="row g-4">
       <div class="col-lg-4 col-md-6"><div class="edu-card"><div class="ec-icon">💻</div><h4>온라인 교육</h4><p>PC·모바일 어디서나 수강 가능. 시간 제약 없이 법정 이수 시간을 채울 수 있습니다.</p></div></div>
       <div class="col-lg-4 col-md-6"><div class="edu-card"><div class="ec-icon">🏫</div><h4>오프라인·출강 교육</h4><p>강사가 현장에 직접 방문합니다. 특별 안전교육·관리감독자 교육 등 법정 교육 전 과정 지원.</p></div></div>
@@ -133,6 +108,8 @@
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/wow.min.js"></script>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/header.js"></script>
+<script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script>if(typeof WOW!=='undefined') new WOW().init();</script>
 </body>
