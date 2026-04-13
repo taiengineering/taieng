@@ -5,180 +5,59 @@
   <title>기술 혁신 | TAI 엔지니어링</title>
   <meta name="description" content="TAI 엔지니어링의 핵심 기술은 6건의 특허 출원을 통해 법적으로 보호받고 있습니다.">
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-  /* ── 히어로 ── */
-  .pat-hero {
-    background: linear-gradient(135deg, #0d1b2a 0%, #0f2744 100%);
-    padding: 80px 0 68px;
-    text-align: center;
-  }
+  body { font-family: 'Noto Sans KR', sans-serif; }
+  .pat-hero { background: linear-gradient(135deg, #0d1b2a 0%, #0f2744 100%); padding: 100px 0 68px; text-align: center; }
   .pat-hero .page-hero-tag { margin-bottom: 16px; display: inline-block; }
   .pat-hero h1 { font-size: clamp(2rem,4vw,2.8rem); font-weight: 900; color: #fff; margin-bottom: 14px; line-height: 1.2; }
   .pat-hero .sub { color: rgba(255,255,255,.65); font-size: .95rem; max-width: 540px; margin: 0 auto 28px; line-height: 1.7; }
-  .pending-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(184,150,12,.18); border: 1.5px solid #B8960C;
-    color: #f5d87a; border-radius: 999px;
-    padding: 9px 24px; font-size: .85rem; font-weight: 700; letter-spacing: .04em;
-  }
-  .pending-badge .dot {
-    width: 8px; height: 8px; border-radius: 50%; background: #f5d87a;
-    animation: blink 1.4s infinite;
-  }
+  .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,150,12,.18); border: 1.5px solid #B8960C; color: #f5d87a; border-radius: 999px; padding: 9px 24px; font-size: .85rem; font-weight: 700; letter-spacing: .04em; }
+  .pending-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #f5d87a; animation: blink 1.4s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-
-  /* ── 특허증 카드 ── */
-  .patent-card {
-    background: #FEFDF8;
-    border: 2px solid #B8960C;
-    border-radius: 8px;
-    padding: 28px 24px 22px;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    transition: box-shadow .2s, transform .2s;
-  }
-  .patent-card:hover {
-    box-shadow: 0 8px 28px rgba(184,150,12,.22);
-    transform: translateY(-4px);
-  }
-  /* 더블 라인 인셋 */
-  .patent-card::before {
-    content: '';
-    position: absolute;
-    inset: 6px;
-    border: 1px solid rgba(184,150,12,.5);
-    border-radius: 4px;
-    pointer-events: none;
-  }
-  /* PATENT PENDING 대각선 스탬프 */
-  .patent-stamp {
-    position: absolute;
-    top: 20px; right: -26px;
-    background: #dc2626;
-    color: #fff;
-    font-size: .6rem;
-    font-weight: 900;
-    letter-spacing: .12em;
-    padding: 4px 36px;
-    transform: rotate(35deg);
-    box-shadow: 0 2px 6px rgba(220,38,38,.4);
-    z-index: 1;
-  }
-  /* 카드 아이콘 */
-  .patent-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #B8960C, #e6c44a);
-    color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem;
-    margin: 14px auto 0;
-  }
-  /* 발명 명칭 — 세리프 */
-  .patent-title {
-    font-family: 'Noto Serif KR', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #0f172a;
-    text-align: center;
-    margin: 14px 0 0;
-    line-height: 1.55;
-    word-break: keep-all;
-  }
-  /* 구분선 */
-  .patent-divider {
-    border: none;
-    border-top: 1px solid rgba(184,150,12,.45);
-    margin: 14px 0;
-  }
-  /* 출원번호 */
-  .patent-number {
-    font-size: .71rem;
-    color: #999;
-    letter-spacing: .05em;
-    display: block;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-  /* 핵심 기술 */
-  .patent-desc {
-    font-size: .84rem;
-    color: #4b5563;
-    line-height: 1.65;
-    text-align: center;
-    margin: 0;
-  }
-  /* 연계 서비스 배지 */
-  .pat-svc {
-    display: inline-block;
-    font-size: .72rem; font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: #0f172a; color: #fff;
-    margin-top: 14px;
-  }
-
-  /* ── 통합 흐름도 ── */
+  .patent-card { background: #FEFDF8; border: 2px solid #B8960C; border-radius: 8px; padding: 28px 24px 22px; position: relative; overflow: hidden; height: 100%; transition: box-shadow .2s, transform .2s; }
+  .patent-card:hover { box-shadow: 0 8px 28px rgba(184,150,12,.22); transform: translateY(-4px); }
+  .patent-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(184,150,12,.5); border-radius: 4px; pointer-events: none; }
+  .patent-stamp { position: absolute; top: 20px; right: -26px; background: #dc2626; color: #fff; font-size: .6rem; font-weight: 900; letter-spacing: .12em; padding: 4px 36px; transform: rotate(35deg); box-shadow: 0 2px 6px rgba(220,38,38,.4); z-index: 1; }
+  .patent-icon { width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, #B8960C, #e6c44a); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin: 14px auto 0; }
+  .patent-title { font-family: 'Noto Serif KR', Georgia, serif; font-size: 1rem; font-weight: 700; color: #0f172a; text-align: center; margin: 14px 0 0; line-height: 1.55; word-break: keep-all; }
+  .patent-divider { border: none; border-top: 1px solid rgba(184,150,12,.45); margin: 14px 0; }
+  .patent-number { font-size: .71rem; color: #999; letter-spacing: .05em; display: block; text-align: center; margin-bottom: 10px; }
+  .patent-desc { font-size: .84rem; color: #4b5563; line-height: 1.65; text-align: center; margin: 0; }
+  .pat-svc { display: inline-block; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: #0f172a; color: #fff; margin-top: 14px; }
   .flow-sec { background: #f8fafc; padding: 64px 0; }
-  .flow-node {
-    text-align: center;
-    background: #fff;
-    border: 1.5px solid #B8960C;
-    border-radius: 12px;
-    padding: 20px 14px;
-    height: 100%;
-  }
+  .flow-node { text-align: center; background: #fff; border: 1.5px solid #B8960C; border-radius: 12px; padding: 20px 14px; height: 100%; }
   .flow-node .fn-icon { font-size: 1.8rem; margin-bottom: 8px; }
   .flow-node h6 { font-size: .82rem; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
   .flow-node p  { font-size: .74rem; color: #6b7280; margin: 0; line-height: 1.45; }
-  .flow-arrow {
-    display: flex; align-items: center; justify-content: center;
-    color: #B8960C; font-size: 1.3rem;
-  }
-
-  /* ── 법적 고지 ── */
-  .legal-notice {
-    background: #f8f9fa;
-    border-left: 4px solid var(--danger, #dc2626);
-    border-radius: 0 10px 10px 0;
-    padding: 24px 24px 20px;
-  }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; color: #B8960C; font-size: 1.3rem; }
+  .legal-notice { background: #f8f9fa; border-left: 4px solid #dc2626; border-radius: 0 10px 10px 0; padding: 24px 24px 20px; }
   .legal-notice h5 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
   .legal-notice p  { font-size: .86rem; color: #374151; line-height: 1.75; margin: 0; }
-
-  /* ── 반응형 ── */
-  @media (max-width: 767px) {
-    .flow-arrow { transform: rotate(90deg); margin: 6px 0; }
-  }
+  @media (max-width: 767px) { .flow-arrow { transform: rotate(90deg); margin: 6px 0; } }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links"><!-- nav-auth.js --></div>
-  </div>
-</nav>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
 
-<!-- ── Hero ── -->
+<!-- HEADER -->
+<div id="tai-header"></div>
+
 <section class="pat-hero">
   <div class="sec-inner">
     <span class="page-hero-tag">기술 혁신</span>
     <h1>TAI의 기술 혁신</h1>
     <p class="sub">산업안전 관리의 구조적 혁신을 이루는 TAI의 핵심 기술은<br>6건의 특허 출원을 통해 법적으로 보호받고 있습니다.</p>
-    <div class="pending-badge">
-      <span class="dot"></span>
-      🔒 Patent Pending &nbsp;·&nbsp; 출원번호 제10-2026-0056330 외 5건
-    </div>
+    <div class="pending-badge"><span class="dot"></span>🔒 Patent Pending &nbsp;·&nbsp; 출원번호 제10-2026-0056330 외 5건</div>
   </div>
 </section>
 
-<!-- ── 특허 카드 6개 ── -->
 <section class="sec" style="background:#fff; padding-top:56px;">
   <div class="sec-inner">
     <div class="text-center mb-5">
@@ -187,90 +66,16 @@
       <p style="color:var(--sub); font-size:.9rem;">이하 내용은 출원 기준이며, 등록 완료 전까지 "특허 출원 중(Patent Pending)" 상태입니다.</p>
     </div>
     <div class="row g-4">
-
-      <!-- 카드 1 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-balance-scale"></i></div>
-          <div class="patent-title">조건코드 기반 산업안전<br>법령 자동 판정 시스템</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0056330</span>
-          <p class="patent-desc">시설·공정·설비 데이터를 입력하면<br>적용 법령과 의무사항을 자동으로 산출합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Safe — 법령진단</span></div>
-        </div>
-      </div>
-
-      <!-- 카드 2 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-users"></i></div>
-          <div class="patent-title">작업자 입력 기반 분산형<br>산업안전 관리 시스템</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0061270</span>
-          <p class="patent-desc">안전관리자 1인 집중 구조를 전체 작업자 참여형<br>분산 구조로 전환하여 실행 공백을 제거합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Safe — 점검·TBM</span></div>
-        </div>
-      </div>
-
-      <!-- 카드 3 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-chart-line"></i></div>
-          <div class="patent-title">누적 데이터 기반<br>산업안전 위험 예측 시스템</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0061273</span>
-          <p class="patent-desc">작업자 입력 데이터를 누적·분석하여<br>사고 발생 전 위험을 예측하고 경고합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Safe — 위험예측</span></div>
-        </div>
-      </div>
-
-      <!-- 카드 4 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-cloud-sun"></i></div>
-          <div class="patent-title">외부 환경 데이터 기반 작업 안전 상태<br>판단 및 증빙 자동 생성 시스템</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0065716</span>
-          <p class="patent-desc">실시간 기상 데이터와 법적 작업중지 기준을<br>자동 대조하여 판단하고 법적 증빙을 생성합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Safe — 날씨·작업중지</span></div>
-        </div>
-      </div>
-
-      <!-- 카드 5 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-handshake"></i></div>
-          <div class="patent-title">법적 의무 기반 전문가 필요성<br>판단 및 매칭 시스템</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0065718</span>
-          <p class="patent-desc">법령에 따른 전문가 필요 여부를 자동 판단하고<br>적합한 전문가를 자동으로 연결합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Manager</span></div>
-        </div>
-      </div>
-
-      <!-- 카드 6: 분산 입력 데이터 기반 위험 판단 및 예측 시스템 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="patent-card">
-          <span class="patent-stamp">PATENT PENDING</span>
-          <div class="patent-icon"><i class="fas fa-shield-alt"></i></div>
-          <div class="patent-title">분산 입력 데이터 기반<br>안전 위험 상태 판단 및 예측</div>
-          <hr class="patent-divider">
-          <span class="patent-number">출원번호 제10-2026-0065782</span>
-          <p class="patent-desc">작업자·설비 데이터를 실시간 판단하고 누적 데이터로<br>위험 상태를 사전 예측하여 사고를 예방합니다.</p>
-          <div class="text-center"><span class="pat-svc">TAI Safe — 통합 분석</span></div>
-        </div>
-      </div>
-
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-balance-scale"></i></div><div class="patent-title">조건코드 기반 산업안전<br>법령 자동 판정 시스템</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0056330</span><p class="patent-desc">시설·공정·설비 데이터를 입력하면<br>적용 법령과 의무사항을 자동으로 산출합니다.</p><div class="text-center"><span class="pat-svc">TAI Safe — 법령진단</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-users"></i></div><div class="patent-title">작업자 입력 기반 분산형<br>산업안전 관리 시스템</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0061270</span><p class="patent-desc">안전관리자 1인 집중 구조를 전체 작업자 참여형<br>분산 구조로 전환하여 실행 공백을 제거합니다.</p><div class="text-center"><span class="pat-svc">TAI Safe — 점검·TBM</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-chart-line"></i></div><div class="patent-title">누적 데이터 기반<br>산업안전 위험 예측 시스템</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0061273</span><p class="patent-desc">작업자 입력 데이터를 누적·분석하여<br>사고 발생 전 위험을 예측하고 경고합니다.</p><div class="text-center"><span class="pat-svc">TAI Safe — 위험예측</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-cloud-sun"></i></div><div class="patent-title">외부 환경 데이터 기반 작업 안전 상태<br>판단 및 증빙 자동 생성 시스템</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0065716</span><p class="patent-desc">실시간 기상 데이터와 법적 작업중지 기준을<br>자동 대조하여 판단하고 법적 증빙을 생성합니다.</p><div class="text-center"><span class="pat-svc">TAI Safe — 날씨·작업중지</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-handshake"></i></div><div class="patent-title">법적 의무 기반 전문가 필요성<br>판단 및 매칭 시스템</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0065718</span><p class="patent-desc">법령에 따른 전문가 필요 여부를 자동 판단하고<br>적합한 전문가를 자동으로 연결합니다.</p><div class="text-center"><span class="pat-svc">TAI Manager</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="patent-card"><span class="patent-stamp">PATENT PENDING</span><div class="patent-icon"><i class="fas fa-shield-alt"></i></div><div class="patent-title">분산 입력 데이터 기반<br>안전 위험 상태 판단 및 예측</div><hr class="patent-divider"><span class="patent-number">출원번호 제10-2026-0065782</span><p class="patent-desc">작업자·설비 데이터를 실시간 판단하고 누적 데이터로<br>위험 상태를 사전 예측하여 사고를 예방합니다.</p><div class="text-center"><span class="pat-svc">TAI Safe — 통합 분석</span></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── 통합 흐름도 ── -->
 <section class="flow-sec">
   <div class="sec-inner">
     <div class="text-center mb-5">
@@ -279,50 +84,19 @@
       <p style="color:var(--sub); font-size:.9rem;">각 출원 기술은 독립적으로도, TAI Safe 플랫폼 안에서 유기적으로도 작동합니다.</p>
     </div>
     <div class="row g-2 align-items-center justify-content-center">
-      <div class="col-12 col-md">
-        <div class="flow-node">
-          <div class="fn-icon">⚖️</div>
-          <h6>법령 자동 판정</h6>
-          <p>조건코드 기반<br>법령·의무 자동 산출</p>
-        </div>
-      </div>
+      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">⚖️</div><h6>법령 자동 판정</h6><p>조건코드 기반<br>법령·의무 자동 산출</p></div></div>
       <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md">
-        <div class="flow-node">
-          <div class="fn-icon">👥</div>
-          <h6>분산형 안전관리</h6>
-          <p>전 작업자 참여형<br>실행 공백 제거</p>
-        </div>
-      </div>
+      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">👥</div><h6>분산형 안전관리</h6><p>전 작업자 참여형<br>실행 공백 제거</p></div></div>
       <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md">
-        <div class="flow-node">
-          <div class="fn-icon">📊</div>
-          <h6>데이터 누적·예측</h6>
-          <p>누적 분석으로<br>사전 위험 경고</p>
-        </div>
-      </div>
+      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">📊</div><h6>데이터 누적·예측</h6><p>누적 분석으로<br>사전 위험 경고</p></div></div>
       <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md">
-        <div class="flow-node">
-          <div class="fn-icon">🌤</div>
-          <h6>환경 기반 판단</h6>
-          <p>기상 데이터 연동<br>작업중지 자동 증빙</p>
-        </div>
-      </div>
+      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">🌤</div><h6>환경 기반 판단</h6><p>기상 데이터 연동<br>작업중지 자동 증빙</p></div></div>
       <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md">
-        <div class="flow-node">
-          <div class="fn-icon">🤝</div>
-          <h6>전문가 연계</h6>
-          <p>의무 판단 후<br>자동 매칭</p>
-        </div>
-      </div>
+      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">🤝</div><h6>전문가 연계</h6><p>의무 판단 후<br>자동 매칭</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── 법적 고지 ── -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
     <div class="row justify-content-center">
@@ -336,19 +110,23 @@
   </div>
 </section>
 
-<!-- ── CTA ── -->
 <section class="sec" style="background:var(--gray-bg); text-align:center;">
   <div class="sec-inner">
     <h2 class="sec-h2">특허 출원 기술을 직접 경험하세요</h2>
     <p style="color:var(--sub); margin-bottom:32px;">법령 자동 판정 기술이 적용된 무료 법령진단을 지금 바로 체험할 수 있습니다</p>
     <div class="d-flex gap-3 justify-content-center flex-wrap">
       <a href="free-diagnosis.html" class="btn-red">무료 법령진단 시작</a>
-      <a href="index-1.html" class="btn-outline">TAI Safe 서비스 소개</a>
+      <a href="service/saas.html" class="btn-outline">TAI Safe 서비스 소개</a>
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 </body></html>

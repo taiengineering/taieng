@@ -5,136 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이용약관 | TAI Engineering</title>
     <link rel="icon" href="assets/img/fevicon.png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/tai-main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-          --primary: #0f172a;
-          --secondary: #64748b;
-          --light: #f8fafc;
-          --border: #e2e8f0;
-        }
-        body {
-          font-family: 'Noto Sans KR', sans-serif;
-          background: var(--light);
-          color: var(--primary);
-        }
-        .terms-container {
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
-        }
-        .terms-header {
-          padding: 40px;
-          border-bottom: 2px solid var(--border);
-          text-align: center;
-        }
-        .terms-header h1 {
-          font-size: 2rem;
-          font-weight: 900;
-          margin-bottom: 12px;
-          color: var(--primary);
-        }
-        .terms-header p {
-          color: var(--secondary);
-          font-size: 0.95rem;
-          margin: 0;
-        }
-        .terms-content {
-          padding: 40px;
-        }
-        .terms-article {
-          margin-bottom: 32px;
-          padding-bottom: 24px;
-          border-bottom: 1px solid var(--border);
-        }
-        .terms-article:last-child {
-          border-bottom: none;
-          margin-bottom: 0;
-          padding-bottom: 0;
-        }
-        .terms-article h2 {
-          font-size: 1.2rem;
-          font-weight: 700;
-          color: var(--primary);
-          margin-bottom: 16px;
-          display: flex;
-          align-items: center;
-        }
-        .terms-article h2::before {
-          content: '';
-          width: 4px;
-          height: 24px;
-          background: #0f172a;
-          border-radius: 2px;
-          margin-right: 12px;
-        }
-        .terms-article ol, .terms-article ul {
-          margin: 0;
-          padding-left: 24px;
-        }
-        .terms-article li {
-          margin-bottom: 12px;
-          line-height: 1.7;
-          color: #475569;
-          font-size: 0.95rem;
-        }
-        .terms-article li strong {
-          color: var(--primary);
-          font-weight: 600;
-        }
-        .terms-article p {
-          margin-bottom: 12px;
-          line-height: 1.7;
-          color: #475569;
-          font-size: 0.95rem;
-        }
-        .terms-article p:last-child {
-          margin-bottom: 0;
-        }
-        .section-intro {
-          font-size: 0.95rem;
-          color: var(--secondary);
-          margin-bottom: 16px;
-          font-style: italic;
-        }
-        .terms-bottom {
-          background: var(--light);
-          padding: 24px 40px;
-          border-radius: 0 0 12px 12px;
-          text-align: center;
-          font-size: 0.85rem;
-          color: var(--secondary);
-        }
-
-        @media (max-width: 768px) {
-          .terms-header {
-            padding: 24px;
-          }
-          .terms-header h1 {
-            font-size: 1.5rem;
-          }
-          .terms-content {
-            padding: 24px;
-          }
-        }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #f8fafc; color: #0f172a; }
+        .terms-container { background: white; border-radius: 12px; box-shadow: 0 1px 3px rgba(15,23,42,.08); }
+        .terms-header { padding: 40px; border-bottom: 2px solid #e2e8f0; text-align: center; }
+        .terms-header h1 { font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: #0f172a; }
+        .terms-header p { color: #64748b; font-size: .95rem; margin: 0; }
+        .terms-content { padding: 40px; }
+        .terms-article { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; }
+        .terms-article:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .terms-article h2 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; }
+        .terms-article h2::before { content: ''; width: 4px; height: 24px; background: #0f172a; border-radius: 2px; margin-right: 12px; }
+        .terms-article ol, .terms-article ul { margin: 0; padding-left: 24px; }
+        .terms-article li { margin-bottom: 12px; line-height: 1.7; color: #475569; font-size: .95rem; }
+        .terms-article li strong { color: #0f172a; font-weight: 600; }
+        .terms-article p { margin-bottom: 12px; line-height: 1.7; color: #475569; font-size: .95rem; }
+        .terms-article p:last-child { margin-bottom: 0; }
+        .section-intro { font-size: .95rem; color: #64748b; margin-bottom: 16px; font-style: italic; }
+        .terms-bottom { background: #f8fafc; padding: 24px 40px; border-radius: 0 0 12px 12px; text-align: center; font-size: .85rem; color: #64748b; }
+        @media (max-width: 768px) { .terms-header, .terms-content { padding: 24px; } .terms-header h1 { font-size: 1.5rem; } }
     </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
-    </div>
-  </div>
-</nav>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
 
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -142,134 +45,23 @@
                 <div class="terms-container">
                     <div class="terms-header">
                         <h1>TAI Engineering 이용약관</h1>
-                        <p>서비스 이용 전 약관을 꼼꼼히 읽어주시기 바랍니다.</p>
+                        <p>서비스 이용 전 약관을 꼭꼭히 읽어주시기 바랍니다.</p>
                     </div>
-
                     <div class="terms-content">
-                        <!-- 제1조 -->
-                        <div class="terms-article">
-                            <h2>제1조 (목적)</h2>
-                            <p>본 약관은 TAI Engineering(이하 "회사")이 제공하는 산업안전 관리 플랫폼 서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p>
-                        </div>
-
-                        <!-- 제2조 -->
-                        <div class="terms-article">
-                            <h2>제2조 (서비스의 정의)</h2>
-                            <p class="section-intro">본 서비스는 다음 기능을 포함합니다.</p>
-                            <ol>
-                                <li>법령 자동 판정 및 의무사항 도출</li>
-                                <li>점검 일정 생성 및 작업자 배정</li>
-                                <li>작업자 입력 기반 점검 및 TBM 기록</li>
-                                <li>위험 상태 판단 및 경고 제공</li>
-                                <li>외부 환경 데이터 기반 작업 상태 판단</li>
-                                <li>전문가 및 수선업체 연결</li>
-                                <li>데이터 기반 위험 분석 및 예측</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제3조 -->
-                        <div class="terms-article">
-                            <h2>제3조 (약관의 효력 및 변경)</h2>
-                            <ol>
-                                <li>본 약관은 서비스 화면에 게시함으로써 효력이 발생합니다.</li>
-                                <li>회사는 관련 법령을 위반하지 않는 범위에서 약관을 변경할 수 있습니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제4조 -->
-                        <div class="terms-article">
-                            <h2>제4조 (서비스의 성격)</h2>
-                            <ol>
-                                <li>본 서비스는 산업안전 관리 업무를 지원하기 위한 보조 도구입니다.</li>
-                                <li>서비스에서 제공되는 결과(법령, 점검, 위험 판단 등)는 참고용이며, 최종 의사결정 및 책임은 이용자에게 있습니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제5조 -->
-                        <div class="terms-article">
-                            <h2>제5조 (서비스 이용)</h2>
-                            <ol>
-                                <li>이용자는 사업장, 설비, 작업정보 등을 입력하여 서비스를 이용할 수 있습니다.</li>
-                                <li>입력 데이터의 정확성은 이용자가 책임집니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제6조 -->
-                        <div class="terms-article">
-                            <h2>제6조 (데이터 입력 및 관리)</h2>
-                            <ol>
-                                <li>이용자가 입력한 데이터는 서비스 제공 및 개선을 위해 활용될 수 있습니다.</li>
-                                <li>회사는 입력 데이터의 정확성, 완전성에 대해 책임지지 않습니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제7조 -->
-                        <div class="terms-article">
-                            <h2>제7조 (위험 판단 및 경고)</h2>
-                            <ol>
-                                <li>서비스는 입력 데이터 및 외부 데이터를 기반으로 위험 상태를 판단합니다.</li>
-                                <li>해당 판단 결과는 참고용이며 실제 현장 상황과 차이가 있을 수 있습니다.</li>
-                                <li>이용자는 경고 및 알림에 대해 독립적으로 판단하고 조치하여야 합니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제8조 -->
-                        <div class="terms-article">
-                            <h2>제8조 (전문가 및 수선 연결 서비스)</h2>
-                            <ol>
-                                <li>회사는 전문가 및 업체를 연결하는 플랫폼을 제공합니다.</li>
-                                <li>회사는 계약의 당사자가 아니며 거래에 대한 책임을 지지 않습니다.</li>
-                                <li>이용자와 업체 간 발생하는 분쟁은 당사자 간 해결합니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제9조 -->
-                        <div class="terms-article">
-                            <h2>제9조 (서비스 이용 제한)</h2>
-                            <p class="section-intro">이용자는 다음 행위를 할 수 없습니다.</p>
-                            <ul>
-                                <li>허위 데이터 입력</li>
-                                <li>시스템 악용</li>
-                                <li>타인의 정보 도용</li>
-                                <li>법령 위반 행위</li>
-                            </ul>
-                        </div>
-
-                        <!-- 제10조 -->
-                        <div class="terms-article">
-                            <h2>제10조 (지식재산권)</h2>
-                            <p>서비스 및 시스템, 알고리즘, 데이터 구조에 대한 권리는 회사에 귀속됩니다.</p>
-                        </div>
-
-                        <!-- 제11조 -->
-                        <div class="terms-article">
-                            <h2>제11조 (면책조항 — 핵심)</h2>
-                            <ol>
-                                <li>회사는 다음 사항에 대해 책임을 지지 않습니다.
-                                    <ul style="margin-top: 8px; margin-left: 0; padding-left: 24px;">
-                                        <li>법령 해석 결과의 정확성</li>
-                                        <li>위험 예측 및 경고의 완전성</li>
-                                        <li>서비스 결과를 기반으로 한 의사결정</li>
-                                    </ul>
-                                </li>
-                                <li style="margin-top: 12px;">본 서비스는 안전관리의 보조 수단이며, 사업장의 안전관리 및 법적 책임은 전적으로 이용자에게 있습니다.</li>
-                            </ol>
-                        </div>
-
-                        <!-- 제12조 -->
-                        <div class="terms-article">
-                            <h2>제12조 (서비스 중단)</h2>
-                            <p>서버 점검, 장애, 천재지변 등으로 서비스가 중단될 수 있습니다.</p>
-                        </div>
-
-                        <!-- 제13조 -->
-                        <div class="terms-article">
-                            <h2>제13조 (준거법 및 관할)</h2>
-                            <p>본 약관은 대한민국 법을 따르며, 분쟁은 회사 소재지 관할 법원을 따릅니다.</p>
-                        </div>
-
+                        <div class="terms-article"><h2>제1조 (목적)</h2><p>본 약관은 TAI Engineering(이하 "회사")이 제공하는 산업안전 관리 플랫폼 서비스(이하 "서비스")의 이용과 관련하여 회사와 이용자 간의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.</p></div>
+                        <div class="terms-article"><h2>제2조 (서비스의 정의)</h2><p class="section-intro">본 서비스는 다음 기능을 포함합니다.</p><ol><li>법령 자동 판정 및 의무사항 도출</li><li>점검 일정 생성 및 작업자 배정</li><li>작업자 입력 기반 점검 및 TBM 기록</li><li>위험 상태 판단 및 경고 제공</li><li>외부 환경 데이터 기반 작업 상태 판단</li><li>전문가 및 수선업체 연결</li><li>데이터 기반 위험 분석 및 예측</li></ol></div>
+                        <div class="terms-article"><h2>제3조 (약관의 효력 및 변경)</h2><ol><li>본 약관은 서비스 화면에 게시함으로써 효력이 발생합니다.</li><li>회사는 관련 법령을 위반하지 않는 범위에서 약관을 변경할 수 있습니다.</li></ol></div>
+                        <div class="terms-article"><h2>제4조 (서비스의 성격)</h2><ol><li>본 서비스는 산업안전 관리 업무를 지원하기 위한 보조 도구입니다.</li><li>서비스에서 제공되는 결과(법령, 점검, 위험 판단 등)는 참고용이며, 최종 의사결정 및 책임은 이용자에게 있습니다.</li></ol></div>
+                        <div class="terms-article"><h2>제5조 (서비스 이용)</h2><ol><li>이용자는 사업장, 설비, 작업정보 등을 입력하여 서비스를 이용할 수 있습니다.</li><li>입력 데이터의 정확성은 이용자가 책임집니다.</li></ol></div>
+                        <div class="terms-article"><h2>제6조 (데이터 입력 및 관리)</h2><ol><li>이용자가 입력한 데이터는 서비스 제공 및 개선을 위해 활용될 수 있습니다.</li><li>회사는 입력 데이터의 정확성, 완전성에 대해 책임지지 않습니다.</li></ol></div>
+                        <div class="terms-article"><h2>제7조 (위험 판단 및 경고)</h2><ol><li>서비스는 입력 데이터 및 외부 데이터를 기반으로 위험 상태를 판단합니다.</li><li>해당 판단 결과는 참고용이며 실제 현장 상황과 차이가 있을 수 있습니다.</li><li>이용자는 경고 및 알림에 대해 독립적으로 판단하고 조치하여야 합니다.</li></ol></div>
+                        <div class="terms-article"><h2>제8조 (전문가 및 수선 연결 서비스)</h2><ol><li>회사는 전문가 및 업체를 연결하는 플랫폼을 제공합니다.</li><li>회사는 계약의 당사자가 아니며 거래에 대한 책임을 지지 않습니다.</li><li>이용자와 업체 간 발생하는 분쟁은 당사자 간 해결합니다.</li></ol></div>
+                        <div class="terms-article"><h2>제9조 (서비스 이용 제한)</h2><p class="section-intro">이용자는 다음 행위를 할 수 없습니다.</p><ul><li>허위 데이터 입력</li><li>시스템 악용</li><li>타인의 정보 도용</li><li>법령 위반 행위</li></ul></div>
+                        <div class="terms-article"><h2>제10조 (지식재산권)</h2><p>서비스 및 시스템, 알고리즘, 데이터 구조에 대한 권리는 회사에 귀속됩니다.</p></div>
+                        <div class="terms-article"><h2>제11조 (면책조항 — 핵심)</h2><ol><li>회사는 다음 사항에 대해 책임을 지지 않습니다.<ul style="margin-top:8px;padding-left:24px;"><li>법령 해석 결과의 정확성</li><li>위험 예측 및 경고의 완전성</li><li>서비스 결과를 기반으로 한 의사결정</li></ul></li><li style="margin-top:12px;">본 서비스는 안전관리의 보조 수단이며, 사업장의 안전관리 및 법적 책임은 전적으로 이용자에게 있습니다.</li></ol></div>
+                        <div class="terms-article"><h2>제12조 (서비스 중단)</h2><p>서버 점검, 장애, 천재지변 등으로 서비스가 중단될 수 있습니다.</p></div>
+                        <div class="terms-article"><h2>제13조 (준거법 및 관할)</h2><p>본 약관은 대한민국 법을 따르며, 분쟁은 회사 소재지 관할 법원을 따릅니다.</p></div>
                     </div>
-
                     <div class="terms-bottom">
                         <p>© 2026 TAI Engineering. All Rights Reserved.</p>
                         <p>마지막 업데이트: 2026년 4월 11일</p>
@@ -280,6 +72,11 @@
     </div>
 
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 </body>
