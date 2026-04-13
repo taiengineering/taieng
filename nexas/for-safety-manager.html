@@ -14,53 +14,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-  .role-hero {
-    background: linear-gradient(135deg, #050a14 0%, #0d1b2e 60%, #0a1628 100%);
-    padding: 110px 0 80px; position: relative; overflow: hidden;
-  }
-  .role-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 50% 70% at 10% 50%, rgba(26,95,210,.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .role-eyebrow {
-    display: inline-block; font-size: .72rem; font-weight: 700;
-    letter-spacing: .15em; text-transform: uppercase;
-    color: #1a5fd4; background: rgba(26,95,210,.15);
-    border: 1px solid rgba(26,95,210,.4); border-radius: 4px;
-    padding: 5px 12px; margin-bottom: 22px;
-  }
+  .role-hero { background: linear-gradient(135deg, #050a14 0%, #0d1b2e 60%, #0a1628 100%); padding: 110px 0 80px; position: relative; overflow: hidden; }
+  .role-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 10% 50%, rgba(26,95,210,.12) 0%, transparent 65%); pointer-events: none; }
+  .role-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: #1a5fd4; background: rgba(26,95,210,.15); border: 1px solid rgba(26,95,210,.4); border-radius: 4px; padding: 5px 12px; margin-bottom: 22px; }
   .role-hero h1 { font-size: clamp(2.4rem,5vw,4.2rem); font-weight: 900; color: #fff; line-height: 1.08; margin-bottom: 18px; }
   .role-hero h1 em { color: #60a5fa; font-style: normal; }
   .role-hero .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.72); margin-bottom: 36px; line-height: 1.65; }
-  .pain-box {
-    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px; padding: 28px; margin-bottom: 12px;
-  }
+  .pain-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 28px; margin-bottom: 12px; }
   .pain-box p { color: rgba(255,255,255,.7); font-size: .92rem; line-height: 1.6; margin: 0; }
   .pain-box strong { color: #fff; }
   .feature-section { background: #f8fafc; padding: 80px 0; }
-  .feature-card {
-    background: #fff; border-radius: 18px; padding: 32px 28px;
-    box-shadow: 0 4px 20px rgba(0,0,0,.07); height: 100%;
-    border-top: 4px solid #1a5fd4;
-  }
+  .feature-card { background: #fff; border-radius: 18px; padding: 32px 28px; box-shadow: 0 4px 20px rgba(0,0,0,.07); height: 100%; border-top: 4px solid #1a5fd4; }
   .feature-card .fc-icon { font-size: 2.2rem; margin-bottom: 16px; }
   .feature-card h4 { font-size: 1.05rem; font-weight: 800; color: #0d1b2a; margin-bottom: 10px; }
   .feature-card p { font-size: .88rem; color: #64748b; line-height: 1.65; margin: 0; }
   .workflow-section { background: #0d1b2a; padding: 80px 0; }
-  .wf-step {
-    display: flex; gap: 20px; align-items: flex-start;
-    background: rgba(255,255,255,.06); border-radius: 14px;
-    padding: 24px; margin-bottom: 14px;
-  }
-  .wf-num {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: #1a5fd4; color: #fff; font-weight: 900;
-    font-size: 1.1rem; display: flex; align-items: center;
-    justify-content: center; flex-shrink: 0;
-  }
+  .wf-step { display: flex; gap: 20px; align-items: flex-start; background: rgba(255,255,255,.06); border-radius: 14px; padding: 24px; margin-bottom: 14px; }
+  .wf-num { width: 40px; height: 40px; border-radius: 50%; background: #1a5fd4; color: #fff; font-weight: 900; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .wf-text h5 { color: #fff; font-weight: 700; margin-bottom: 6px; font-size: .95rem; }
   .wf-text p { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; margin: 0; }
   .compare-section { background: #fff; padding: 80px 0; }
@@ -77,68 +47,33 @@
   </style>
 </head>
 <body class="sc5">
-
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
 
-<header class="navbar-area">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container nav-container">
-      <div class="responsive-mobile-menu">
-        <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button>
-      </div>
-      <div class="logo"><a href="index.html"><img src="assets/img/tai-logo.png" alt="TAI 엔지니어링"></a></div>
-      <div class="collapse navbar-collapse" id="themefie_main_menu">
-        <ul class="navbar-nav menu-open text-end">
-          <li><a href="index-1.html">TAI SAFE</a></li>
-          <li><a href="index-2.html">TAI MANAGER</a></li>
-          <li><a href="index-3.html">TAI AGENT</a></li>
-          <li><a href="index-4.html">TAI CARE</a></li>
-          <li><a href="safety-news.html">안전정보</a></li>
-        </ul>
-      </div>
-      <div class="nav-right-part nav-right-part-desktop">
-        <ul>
-          <li class="nav-auth-guest"><a href="log-in.html">로그인</a></li>
-          <li><a href="free-diagnosis.html" class="btn btn-base">무료 진단</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<!-- HEADER -->
+<div id="tai-header"></div>
 
-<!-- 히어로 -->
 <section class="role-hero">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
         <span class="role-eyebrow">👷 안전관리자를 위한 TAI</span>
         <h1>혼자 다 하는 구조,<br><em>이제 끝냅니다</em></h1>
-        <p class="hero-sub">
-          법령 의무 파악부터 일정 생성·작업자 배정·서류 자동화까지.<br>
-          TAI Safe는 안전관리자가 "확인하고 대응하는" 역할로 전환되도록 설계됐습니다.
-        </p>
+        <p class="hero-sub">법령 의무 파악부터 일정 생성·작업자 배정·서류 자동화까지.<br>TAI Safe는 안전관리자가 "확인하고 대응하는" 역할로 전환되도록 설계됐습니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;">무료 진단 시작</a>
-          <a href="index-1.html" class="btn btn-border" style="font-size:1rem;padding:14px 28px;color:#fff;border-color:rgba(255,255,255,.4);">TAI Safe 자세히 보기</a>
+          <a href="service/saas.html" class="btn btn-border" style="font-size:1rem;padding:14px 28px;color:#fff;border-color:rgba(255,255,255,.4);">TAI Safe 자세히 보기</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <div class="pain-box">
-          <p>😤 <strong>"점검 일정을 직접 엑셀로 관리하고, 작업자한테 일일이 연락합니다"</strong></p>
-        </div>
-        <div class="pain-box">
-          <p>😤 <strong>"무슨 법령이 적용되는지 찾는 것만 하루가 걸립니다"</strong></p>
-        </div>
-        <div class="pain-box">
-          <p>😤 <strong>"보고서·서류·교육까지 혼자라 항상 뭔가 빠뜨릴까봐 불안합니다"</strong></p>
-        </div>
+        <div class="pain-box"><p>😤 <strong>"점검 일정을 직접 엑셀로 관리하고, 작업자한테 일일이 연락합니다"</strong></p></div>
+        <div class="pain-box"><p>😤 <strong>"무슨 법령이 적용되는지 찾는 것만 하루가 걸립니다"</strong></p></div>
+        <div class="pain-box"><p>😤 <strong>"보고서·서류·교육까지 혼자라 항상 뭔가 빠뜨릴까봐 불안합니다"</strong></p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 핵심 기능 -->
 <section class="feature-section">
   <div class="container">
     <div class="text-center mb-5">
@@ -146,58 +81,19 @@
       <p style="color:#64748b;">안전관리자는 할당·모니터링·이상대응만 하면 됩니다</p>
     </div>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">⚡</div>
-          <h4>법령 의무 자동 판정</h4>
-          <p>업종·규모·설비·공정 정보 입력 → 적용 법령과 의무 항목이 자동 도출됩니다. 법령 공부할 시간이 없어도 됩니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">📅</div>
-          <h4>점검 일정 자동 생성</h4>
-          <p>법령 기반으로 연간·월간 점검 일정이 자동 생성됩니다. 엑셀로 관리할 필요 없이 시스템이 알아서 배치합니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">👥</div>
-          <h4>작업자 분산 배정</h4>
-          <p>안전관리자가 처음 1회 배정하면 이후 자동으로 반복됩니다. 작업자가 직접 체크하고, 이상 발생 시 즉시 알림이 옵니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">🔔</div>
-          <h4>D-3 사전 알림</h4>
-          <p>마감 3일 전 SMS·카카오톡으로 담당자에게 자동 발송됩니다. 누락으로 인한 과태료 위험이 사라집니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">📄</div>
-          <h4>신고서식 자동화</h4>
-          <p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="feature-card">
-          <div class="fc-icon">📊</div>
-          <h4>현황 대시보드</h4>
-          <p>전체 완료율·미완료 항목·이상 발생 현황이 한 화면에 보입니다. 이상 탐지 시 즉시 알림 + 조치 연결.</p>
-        </div>
-      </div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">⚡</div><h4>법령 의무 자동 판정</h4><p>업종·규모·설비·공정 정보 입력 → 적용 법령과 의무 항목이 자동 도출됩니다. 법령 공부할 시간이 없어도 됩니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">📅</div><h4>점검 일정 자동 생성</h4><p>법령 기반으로 연간·월간 점검 일정이 자동 생성됩니다. 엑셀로 관리할 필요 없이 시스템이 알아서 배치합니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">👥</div><h4>작업자 분산 배정</h4><p>안전관리자가 처음 1회 배정하면 이후 자동으로 반복됩니다. 작업자가 직접 체크하고, 이상 발생 시 즉시 알림이 옵니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">🔔</div><h4>D-3 사전 알림</h4><p>마감 3일 전 SMS·카카오톡으로 담당자에게 자동 발송됩니다. 누락으로 인한 과태료 위험이 사라집니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">📄</div><h4>신고서식 자동화</h4><p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="fc-icon">📊</div><h4>현황 대시보드</h4><p>전체 완료율·미완료 항목·이상 발생 현황이 한 화면에 보입니다. 이상 탐지 시 즉시 알림 + 조치 연결.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- 워크플로우 -->
 <section class="workflow-section">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">도입 후 하루가 이렇게 바뀝니다</h2>
-    </div>
+    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">도입 후 하루가 이렇게 바뀝니다</h2></div>
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <div class="wf-step"><div class="wf-num">1</div><div class="wf-text"><h5>법령진단 (최초 1회, 3분)</h5><p>사업장 정보 입력 → 적용 의무 자동 도출. 이후 법령이 바뀌면 자동 업데이트.</p></div></div>
@@ -210,44 +106,16 @@
   </div>
 </section>
 
-<!-- Before / After -->
 <section class="compare-section">
   <div class="container">
-    <div class="text-center mb-5">
-      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">도입 전 vs 도입 후</h2>
-    </div>
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">도입 전 vs 도입 후</h2></div>
     <div class="row g-4 justify-content-center">
-      <div class="col-md-5">
-        <div class="compare-card before">
-          <h4>❌ 도입 전</h4>
-          <ul>
-            <li>법령 공부에 하루 소요</li>
-            <li>엑셀로 점검 일정 수동 관리</li>
-            <li>작업자에게 일일이 전화 연락</li>
-            <li>보고서 직접 수동 작성</li>
-            <li>누락 발생 시 과태료 리스크</li>
-            <li>안전관리자 1인 번아웃</li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="compare-card after">
-          <h4>✅ 도입 후</h4>
-          <ul>
-            <li>법령 의무 3분 자동 도출</li>
-            <li>연간 일정 시스템 자동 생성</li>
-            <li>D-3 카카오톡 자동 발송</li>
-            <li>신고서식 자동 작성·출력</li>
-            <li>누락 원천 차단</li>
-            <li>안전관리자는 확인·대응만</li>
-          </ul>
-        </div>
-      </div>
+      <div class="col-md-5"><div class="compare-card before"><h4>❌ 도입 전</h4><ul><li>법령 공부에 하루 소요</li><li>엑셀로 점검 일정 수동 관리</li><li>작업자에게 일일이 전화 연락</li><li>보고서 직접 수동 작성</li><li>누락 발생 시 과태료 리스크</li><li>안전관리자 1인 번아웃</li></ul></div></div>
+      <div class="col-md-5"><div class="compare-card after"><h4>✅ 도입 후</h4><ul><li>법령 의무 3분 자동 도출</li><li>연간 일정 시스템 자동 생성</li><li>D-3 카카오톡 자동 발송</li><li>신고서식 자동 작성·출력</li><li>누락 원천 차단</li><li>안전관리자는 확인·대응만</li></ul></div></div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section">
   <div class="container">
     <h2>지금 바로 시작하세요</h2>
@@ -265,6 +133,7 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>if(typeof WOW!=='undefined') new WOW().init();</script>

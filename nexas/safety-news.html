@@ -4,12 +4,15 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>안전정보 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  .news-hero { background:var(--navy); padding:60px 0 50px; }
+  body { font-family: 'Noto Sans KR', sans-serif; }
+  .news-hero { background:var(--navy); padding:100px 0 50px; }
   .news-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
   .news-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
   .cat-filter { display:flex; gap:8px; flex-wrap:wrap; padding:28px 0; border-bottom:1px solid var(--border); margin-bottom:32px; }
@@ -29,7 +32,6 @@
   .notice-bar { background:#fffbeb; border:1px solid #fcd34d; border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:12px; align-items:center; }
   .notice-bar .icon { color:#f59e0b; font-size:1.1rem; flex-shrink:0; }
   .notice-bar p { margin:0; font-size:.88rem; color:#92400e; }
-  /* 판례 */
   .prec-mini-card { background:#fff; border-radius:12px; padding:18px 16px; box-shadow:0 2px 12px rgba(0,0,0,.06); border-left:4px solid var(--navy); margin-bottom:12px; display:flex; gap:14px; align-items:flex-start; transition:transform .2s; text-decoration:none; }
   .prec-mini-card:hover { transform:translateX(3px); }
   .prec-mini-card.sanjae { border-left-color:#1a6fb5; }
@@ -42,13 +44,12 @@
   .prec-loading { text-align:center; padding:24px; color:var(--sub); font-size:.88rem; }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links"><!-- nav-auth.js --></div>
-  </div>
-</nav>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
 
 <div class="news-hero">
   <div class="sec-inner">
@@ -57,14 +58,12 @@
   </div>
 </div>
 
-<!-- 뉴스 -->
 <div class="sec" style="background:var(--gray-bg); padding-top:40px;">
   <div class="sec-inner">
     <div id="noticeBar" class="notice-bar" style="display:none;">
       <div class="icon"><i class="fas fa-bullhorn"></i></div>
       <p id="noticeText"></p>
     </div>
-    <!-- ✅ 탭 변경: 법령개정 / 재해사례 / 감독동향 -->
     <div class="cat-filter">
       <button class="cat-btn active" onclick="loadNews('all',   this)">전체</button>
       <button class="cat-btn"        onclick="loadNews('law',   this)">법령 개정</button>
@@ -80,7 +79,6 @@
   </div>
 </div>
 
-<!-- 판례 하이라이트 — API 연동 -->
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
     <div class="row align-items-center mb-4">
@@ -89,215 +87,87 @@
         <h2 class="sec-h2" style="margin-bottom:6px;">이 판례, 알고 계셨나요?</h2>
         <p style="color:var(--sub); font-size:.9rem;">현장에서 꼭 알아야 할 최신 산업안전·산재 판례를 요약합니다</p>
       </div>
-      <div class="col-auto">
-        <a href="index-5.html" class="btn-outline" style="font-size:.87rem; padding:9px 18px;">판례 전체 검색 →</a>
-      </div>
     </div>
     <div class="row g-3">
       <div class="col-lg-6">
         <div style="font-size:.75rem; font-weight:800; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid var(--border);">산업안전 판례</div>
-        <div id="precSafety">
-          <div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div>
-        </div>
+        <div id="precSafety"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
       </div>
       <div class="col-lg-6">
         <div style="font-size:.75rem; font-weight:800; color:#1a6fb5; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #e8f4fd;">산재 전문 판례</div>
-        <div id="precSanjae">
-          <div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div>
-        </div>
+        <div id="precSanjae"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
       </div>
     </div>
     <div class="text-center mt-4">
-      <a href="index-5.html" class="btn-red" style="display:inline-block;">판례 전체 검색하기 →</a>
+      <a href="faq.html" class="btn-red" style="display:inline-block;">더 많은 안전정보 보기 →</a>
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
 const API = 'https://api.taieng.co.kr';
-
-/* ── 태그 매핑 ── */
-const TAG_MAP = {
-  'law':        { label:'법령 개정', cls:'tag-law'      },
-  'accident':   { label:'재해 사례', cls:'tag-accident'  },
-  'inspection': { label:'감독 동향', cls:'tag-inspect'   },
-  'guide':      { label:'실무 가이드',cls:'tag-guide'    },
-};
-
-const IMG_FALLBACK = [
-  'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=70',
-  'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=70',
-  'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=70',
-  'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=70',
-  'https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=70',
-];
-
-const SAMPLE_NEWS = [
-  {id:'s1',post_type:'law',title:'산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화',content:'2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출 의무화.',published_at:'2026-03-15',source:'TAI 법령팀'},
-  {id:'s2',post_type:'accident',title:'끼임 사고 예방 — 프레스 작업 10대 안전수칙',content:'제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다.',published_at:'2026-03-10',source:'TAI 안전팀'},
-  {id:'s3',post_type:'inspection',title:'고용노동부 건설현장 기획감독 — 주요 적발 사례',content:'2026년 1분기 기획감독 결과 타워크레인·가설공사 위반이 집중적으로 적발.',published_at:'2026-03-05',source:'TAI 정보팀'},
-  {id:'s4',post_type:'law',title:'중대재해처벌법 — 50인 미만 사업장 전면 적용',content:'2026년 1월부터 50인 미만 사업장도 적용 대상입니다.',published_at:'2026-02-20',source:'TAI 법령팀'},
-  {id:'s5',post_type:'accident',title:'건설현장 추락사고 예방 — 작업발판 설치 기준',content:'추락사고는 건설현장 사망의 49%를 차지합니다.',published_at:'2026-02-10',source:'TAI 안전팀'},
-  {id:'s6',post_type:'inspection',title:'화학공장 PSM 감독 강화 — 2026년 중점 점검 방향',content:'공정안전관리(PSM) 대상 사업장의 자체감사 이행 여부 집중 점검.',published_at:'2026-01-25',source:'TAI 정보팀'},
-];
-
-let _allNews = [];
-let _curType = 'all';
-let _newsPage = 1;
-const PAGE_SZ = 6;
-
+const TAG_MAP = { 'law':{ label:'법령 개정', cls:'tag-law' }, 'accident':{ label:'재해 사례', cls:'tag-accident' }, 'inspection':{ label:'감독 동향', cls:'tag-inspect' }, 'guide':{ label:'실무 가이드',cls:'tag-guide' } };
+const IMG_FALLBACK = ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=70'];
+const SAMPLE_NEWS = [{id:'s1',post_type:'law',title:'산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화',content:'2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출 의무화.',published_at:'2026-03-15',source:'TAI 법령팀'},{id:'s2',post_type:'accident',title:'끼임 사고 예방 — 프레스 작업 10대 안전수칙',content:'제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다.',published_at:'2026-03-10',source:'TAI 안전팀'},{id:'s3',post_type:'inspection',title:'고용노동부 건설현장 기획감독 — 주요 적발 사례',content:'2026년 1분기 기획감독 결과 타워크레인·가설공사 위반이 집중적으로 적발.',published_at:'2026-03-05',source:'TAI 정보팀'},{id:'s4',post_type:'law',title:'중대재해처벌법 — 50인 미만 사업장 전면 적용',content:'2026년 1월부터 50인 미만 사업장도 적용 대상입니다.',published_at:'2026-02-20',source:'TAI 법령팀'},{id:'s5',post_type:'accident',title:'건설현장 추락사고 예방 — 작업발판 설치 기준',content:'추락사고는 건설현장 사망의 49%를 차지합니다.',published_at:'2026-02-10',source:'TAI 안전팀'},{id:'s6',post_type:'inspection',title:'화학공장 PSM 감독 강화 — 2026년 중점 점검 방향',content:'공정안전관리(PSM) 대상 사업장의 자체감사 이행 여부 집중 점검.',published_at:'2026-01-25',source:'TAI 정보팀'}];
+let _curType='all', _newsPage=1;
+const PAGE_SZ=6;
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function fmtDate(d){ return String(d||'').slice(0,10).replace(/-/g,'.'); }
-
-/* ── 뉴스 로드 ── */
 async function loadNews(type, btn) {
-  if (btn) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-  _curType = type;
-  _newsPage = 1;
-
-  const grid = document.getElementById('newsGrid');
-  grid.innerHTML = '<div class="news-loading"><i class="fas fa-spinner fa-spin me-2"></i>뉴스를 불러오는 중...</div>';
-
+  if(btn){ document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
+  _curType=type; _newsPage=1;
+  const grid=document.getElementById('newsGrid');
+  grid.innerHTML='<div class="news-loading"><i class="fas fa-spinner fa-spin me-2"></i>뉴스를 불러오는 중...</div>';
   try {
-    const params = type === 'all' ? '' : `&post_type=${type}`;
-    const res = await fetch(`${API}/posts?size=${PAGE_SZ}${params}`);
-    const data = await res.json();
-    const posts = (data.data && data.data.items) || data.data || [];
-    if (posts.length) {
-      _allNews = posts;
-      renderNews(posts);
-      document.getElementById('loadMoreWrap').style.display = posts.length < PAGE_SZ ? 'none' : '';
-      return;
-    }
+    const params=type==='all'?'':`&post_type=${type}`;
+    const res=await fetch(`${API}/posts?size=${PAGE_SZ}${params}`);
+    const data=await res.json();
+    const posts=(data.data&&data.data.items)||data.data||[];
+    if(posts.length){ renderNews(posts); document.getElementById('loadMoreWrap').style.display=posts.length<PAGE_SZ?'none':''; return; }
     throw new Error('empty');
   } catch {
-    const filtered = type === 'all' ? SAMPLE_NEWS : SAMPLE_NEWS.filter(p => p.post_type === type);
-    _allNews = filtered;
-    renderNews(filtered, true);
-    document.getElementById('loadMoreWrap').style.display = 'none';
+    const filtered=type==='all'?SAMPLE_NEWS:SAMPLE_NEWS.filter(p=>p.post_type===type);
+    renderNews(filtered,true); document.getElementById('loadMoreWrap').style.display='none';
   }
 }
-
-function renderNews(posts, isSample) {
-  const grid = document.getElementById('newsGrid');
-  if (!posts.length) {
-    grid.innerHTML = '<p style="text-align:center;padding:40px;color:var(--sub);">게시물이 없습니다.</p>';
-    return;
-  }
-  grid.innerHTML = posts.map((p, i) => {
-    const tag = TAG_MAP[p.post_type] || { label:'정보', cls:'tag-guide' };
-    const img = p.thumbnail_url || IMG_FALLBACK[i % IMG_FALLBACK.length];
-    const url = p.external_url || '#';
-    return `<div class="col-lg-4 col-md-6">
-      <div class="news-card">
-        <img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"
-          onerror="this.src='${IMG_FALLBACK[i%IMG_FALLBACK.length]}'">
-        <div class="news-card-body">
-          <span class="news-tag ${tag.cls}">${esc(tag.label)}</span>
-          <h5>${esc(p.title)}</h5>
-          <p>${esc((p.content||'').slice(0,80))}${(p.content||'').length>80?'…':''}</p>
-          <div class="news-meta">
-            <span>${fmtDate(p.published_at||p.created_at)}</span>
-            <span>${esc(p.source||'TAI')}</span>
-          </div>
-          ${url !== '#' ? `<div style="margin-top:8px;"><a href="${esc(url)}" target="_blank" rel="noopener" style="font-size:.8rem;color:var(--red);">원문 보기 →</a></div>` : ''}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
+function renderNews(posts) {
+  const grid=document.getElementById('newsGrid');
+  if(!posts.length){ grid.innerHTML='<p style="text-align:center;padding:40px;color:var(--sub);">게시물이 없습니다.</p>'; return; }
+  grid.innerHTML=posts.map((p,i)=>{ const tag=TAG_MAP[p.post_type]||{label:'정보',cls:'tag-guide'}; const img=p.thumbnail_url||IMG_FALLBACK[i%IMG_FALLBACK.length]; return `<div class="col-lg-4 col-md-6"><div class="news-card"><img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag ${tag.cls}">${esc(tag.label)}</span><h5>${esc(p.title)}</h5><p>${esc((p.content||'').slice(0,80))}${(p.content||'').length>80?'…':''}</p><div class="news-meta"><span>${fmtDate(p.published_at||p.created_at)}</span><span>${esc(p.source||'TAI')}</span></div></div></div></div>`; }).join('');
 }
-
 async function loadMoreNews() {
   _newsPage++;
-  try {
-    const params = _curType === 'all' ? '' : `&post_type=${_curType}`;
-    const res = await fetch(`${API}/posts?size=${PAGE_SZ}&page=${_newsPage}${params}`);
-    const data = await res.json();
-    const posts = (data.data && data.data.items) || data.data || [];
-    if (!posts.length) { document.getElementById('loadMoreWrap').style.display = 'none'; return; }
-    const grid = document.getElementById('newsGrid');
-    const html = posts.map((p, i) => {
-      const tag = TAG_MAP[p.post_type] || { label:'정보', cls:'tag-guide' };
-      const img = p.thumbnail_url || IMG_FALLBACK[i % IMG_FALLBACK.length];
-      return `<div class="col-lg-4 col-md-6"><div class="news-card">
-        <img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;">
-        <div class="news-card-body">
-          <span class="news-tag ${tag.cls}">${esc(tag.label)}</span>
-          <h5>${esc(p.title)}</h5>
-          <p>${esc((p.content||'').slice(0,80))}${(p.content||'').length>80?'…':''}</p>
-          <div class="news-meta"><span>${fmtDate(p.published_at)}</span><span>${esc(p.source||'TAI')}</span></div>
-        </div></div></div>`;
-    }).join('');
-    grid.insertAdjacentHTML('beforeend', html);
-    if (posts.length < PAGE_SZ) document.getElementById('loadMoreWrap').style.display = 'none';
-  } catch {}
+  try { const params=_curType==='all'?'':`&post_type=${_curType}`; const res=await fetch(`${API}/posts?size=${PAGE_SZ}&page=${_newsPage}${params}`); const data=await res.json(); const posts=(data.data&&data.data.items)||data.data||[]; if(!posts.length){ document.getElementById('loadMoreWrap').style.display='none'; return; } const grid=document.getElementById('newsGrid'); grid.insertAdjacentHTML('beforeend',posts.map((p,i)=>{ const tag=TAG_MAP[p.post_type]||{label:'정보',cls:'tag-guide'}; const img=p.thumbnail_url||IMG_FALLBACK[i%IMG_FALLBACK.length]; return `<div class="col-lg-4 col-md-6"><div class="news-card"><img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag ${tag.cls}">${esc(tag.label)}</span><h5>${esc(p.title)}</h5><p>${esc((p.content||'').slice(0,80))}…</p><div class="news-meta"><span>${fmtDate(p.published_at)}</span><span>${esc(p.source||'TAI')}</span></div></div></div></div>`; }).join('')); if(posts.length<PAGE_SZ) document.getElementById('loadMoreWrap').style.display='none'; } catch {}
 }
-
-/* ── 판례 하이라이트 — API 연동 ── */
-const PREC_SAMPLE_SAFETY = [
-  {title:'지게차 충돌 사망 — 안전관리자 선임 의무 위반',판시사항:'안전관리자 미선임 상태 작업 → 사망. 산안법+중대재해법 병합 적용.',법원명:'대법원',선고일자:'2024.11.14',판례상세링크:''},
-  {title:'프레스 방호장치 제거 → 손가락 절단',판시사항:'사업주가 방호장치 제거 지시. 손해배상 1억 2천만 원.',법원명:'서울고법',선고일자:'2024.09.03',판례상세링크:''},
-  {title:'밀폐공간 산소농도 미측정 → 2명 질식 사망',판시사항:'맨홀 작업 전 측정 의무 미이행. 벌금 5,000만 원.',법원명:'대법원',선고일자:'2024.04.11',판례상세링크:''},
-];
-const PREC_SAMPLE_SANJAE = [
-  {title:'출퇴근 재해 — 편의점 경유 후 교통사고, 산재 인정',판시사항:'통상 경로 소폭 이탈이라도 생활필수행위는 산재 인정.',법원명:'서울행법',선고일자:'2024.11.28',판례상세링크:''},
-  {title:'과로 뇌출혈 — 12주 평균 주 60시간 초과 시 산재 추정',판시사항:'발병 12주 전 평균 주 60시간 이상 시 업무상 재해 강하게 추정.',법원명:'서울행법',선고일자:'2024.08.20',판례상세링크:''},
-  {title:'직장 내 갑질 → 우울증 악화 → 자해, 업무상 재해',판시사항:'상사의 폭언·모욕으로 인한 정신질환 발병은 업무상 재해.',법원명:'부산고법',선고일자:'2024.06.14',판례상세링크:''},
-];
-
+const PREC_SAMPLE_SAFETY=[{title:'지게차 충돌 사망 — 안전관리자 선임 의무 위반',판시사항:'안전관리자 미선임 상태 작업 → 사망. 산안법+중대재해법 병합 적용.',법원명:'대법원',선고일자:'2024.11.14',판례상세링크:''},{title:'프레스 방호장치 제거 → 손가락 절단',판시사항:'사업주가 방호장치 제거 지시. 손해배상 1억 2천만 원.',법원명:'서울고법',선고일자:'2024.09.03',판례상세링크:''},{title:'밀폐공간 산소농도 미측정 → 2명 질식 사망',판시사항:'맨홀 작업 전 측정 의무 미이행. 벌금 5,000만 원.',법원명:'대법원',선고일자:'2024.04.11',판례상세링크:''}];
+const PREC_SAMPLE_SANJAE=[{title:'출퇴근 재해 — 편의점 경유 후 교통사고, 산재 인정',판시사항:'통상 경로 소폭 이탈이라도 생활필수행위는 산재 인정.',법원명:'서울행법',선고일자:'2024.11.28',판례상세링크:''},{title:'과로 뇌출혈 — 12주 평균 주 60시간 초과 시 산재 추정',판시사항:'발병 12주 전 평균 주 60시간 이상 시 업무상 재해 강하게 추정.',법원명:'서울행법',선고일자:'2024.08.20',판례상세링크:''},{title:'직장 내 갑질 → 우울증 악화 → 자해, 업무상 재해',판시사항:'상사의 폭언·모욕으로 인한 정신질환 발병은 업무상 재해.',법원명:'부산고법',선고일자:'2024.06.14',판례상세링크:''}];
 function renderPrecList(containerId, items, isSanjae) {
-  const el = document.getElementById(containerId);
-  if (!items.length) {
-    el.innerHTML = '<p class="prec-loading">판례 데이터 없음</p>';
-    return;
-  }
-  el.innerHTML = items.slice(0, 3).map(p => {
-    const link = p.판례상세링크 || '';
-    const tag = isSanjae ? 'sanjae' : '';
-    const icon = isSanjae ? 'fa-file-medical' : 'fa-gavel';
-    const card = `<div class="prec-mini-card ${tag}">
-      <div class="prec-mini-icon"><i class="fas ${icon}"></i></div>
-      <div>
-        <h6>${esc(p.사건명 || p.title || '')}</h6>
-        <p>${esc((p.판시사항||p.판결요지||'').slice(0,70))}${(p.판시사항||'').length>70?'…':''}</p>
-        <div class="prec-mini-meta">${esc(p.법원명||'')}${p.선고일자?' · '+esc(p.선고일자):''}</div>
-      </div>
-    </div>`;
-    return link
-      ? `<a href="${esc(link)}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${card}</a>`
-      : card;
-  }).join('');
+  const el=document.getElementById(containerId);
+  if(!items.length){ el.innerHTML='<p class="prec-loading">판례 데이터 없음</p>'; return; }
+  function esc2(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  el.innerHTML=items.slice(0,3).map(p=>{ const link=p.판례상세링크||''; const tag=isSanjae?'sanjae':''; const icon=isSanjae?'fa-file-medical':'fa-gavel'; const card=`<div class="prec-mini-card ${tag}"><div class="prec-mini-icon"><i class="fas ${icon}"></i></div><div><h6>${esc2(p.사건명||p.title||'')}</h6><p>${esc2((p.판시사항||p.판결요지||'').slice(0,70))}${(p.판시사항||'').length>70?'…':''}</p><div class="prec-mini-meta">${esc2(p.법원명||'')}${p.선고일자?' · '+esc2(p.선고일자):''}</div></div></div>`; return link?`<a href="${esc2(link)}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${card}</a>`:card; }).join('');
 }
-
 async function loadPrecHighlights() {
   try {
-    const [r1, r2] = await Promise.all([
-      fetch(`${API}/precedents/search?query=산업안전보건&size=3`),
-      fetch(`${API}/precedents/search?query=산재&source=sanjae&size=3`)
-    ]);
-    const [d1, d2] = await Promise.all([r1.json(), r2.json()]);
-    const safetyItems = (d1.data && d1.data.prec) || (d1.items) || [];
-    const sanjaeItems = (d2.data && d2.data.prec) || (d2.items) || [];
-    renderPrecList('precSafety', safetyItems.length ? safetyItems : PREC_SAMPLE_SAFETY, false);
-    renderPrecList('precSanjae', sanjaeItems.length ? sanjaeItems : PREC_SAMPLE_SANJAE, true);
-  } catch {
-    renderPrecList('precSafety', PREC_SAMPLE_SAFETY, false);
-    renderPrecList('precSanjae', PREC_SAMPLE_SANJAE, true);
-  }
+    const [r1,r2]=await Promise.all([fetch(`${API}/precedents/search?query=산업안전보건&size=3`),fetch(`${API}/precedents/search?query=산재&source=sanjae&size=3`)]);
+    const [d1,d2]=await Promise.all([r1.json(),r2.json()]);
+    renderPrecList('precSafety',(d1.data&&d1.data.prec)||(d1.items)||[],false);
+    renderPrecList('precSanjae',(d2.data&&d2.data.prec)||(d2.items)||[],true);
+  } catch { renderPrecList('precSafety',PREC_SAMPLE_SAFETY,false); renderPrecList('precSanjae',PREC_SAMPLE_SANJAE,true); }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded',function(){
   loadNews('all');
   loadPrecHighlights();
-  // 공지 고정 표시
-  document.getElementById('noticeBar').style.display = 'flex';
-  document.getElementById('noticeText').innerHTML = '<strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요.';
+  document.getElementById('noticeBar').style.display='flex';
+  document.getElementById('noticeText').innerHTML='<strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요.';
 });
 </script>
 </body>
