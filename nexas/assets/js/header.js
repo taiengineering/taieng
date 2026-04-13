@@ -1,35 +1,41 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v1.0.0 (2026-04-13): 통일된 사이트맵 기반 네비게이션
+ * v2.0.0 (2026-04-13): Nexas 원본 navbar-area 구조 적용 + btn-white 버튼
  *
  * 경로 자동 감지:
- *   루트 페이지 (nexas/*.html)         → base = ''
- *   서브폴더 (service/, target/, 등)   → base = '../'
+ *   루트 페이지 (nexas/*.html)       → base = ''
+ *   서브폴더 (service/, target/)    → base = '../'
  */
 (function () {
   'use strict';
 
   /* ── 경로 기준점 자동 감지 ── */
-  var path = window.location.pathname;
+  var path  = window.location.pathname;
   var inSub = /\/(service|target|mypage)\//.test(path);
-  var base = inSub ? '../' : '';
+  var base  = inSub ? '../' : '';
 
-  /* ── 네비게이션 HTML ── */
-  var NAV_HTML = [
+  /* ── 네비게이션 HTML (Nexas 원본 navbar-area 구조) ── */
+  var html = [
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
     '    <div class="container nav-container">',
+
+    /* 모바일 토글 버튼 */
     '      <div class="responsive-mobile-menu">',
-    '        <button class="menu toggle-btn d-block d-lg-none" data-target="#tai_main_menu" aria-expanded="false" aria-label="메뉴">',
+    '        <button class="menu toggle-btn d-block d-lg-none" data-target="#tai_main_menu" aria-expanded="false" aria-label="\uba54\ub274">',
     '          <span class="icon-left"></span><span class="icon-right"></span>',
     '        </button>',
     '      </div>',
+
+    /* 로고 */
     '      <div class="logo">',
     '        <a class="main-logo" href="' + base + 'index.html">',
     '          <img src="' + base + 'assets/img/tai-logo.png" alt="TAI 엔지니어링">',
     '        </a>',
     '      </div>',
+
+    /* 메뉴 */
     '      <div class="collapse navbar-collapse" id="tai_main_menu">',
     '        <ul class="navbar-nav menu-open text-end">',
 
@@ -73,13 +79,22 @@
 
     '        </ul>',
     '      </div>',
+
+    /* 우측 버튼 (데스크톱) */
     '      <div class="nav-right-part nav-right-part-desktop">',
     '        <ul>',
-    '          <li class="nav-auth-guest"><a href="' + base + 'log-in.html">로그인</a></li>',
-    '          <li class="nav-auth-user d-none"><a href="' + base + 'mypage/">마이페이지</a></li>',
-    '          <li><a href="' + base + 'free-diagnosis.html" class="btn btn-base">무료 진단</a></li>',
+    '          <li class="nav-auth-guest">',
+    '            <a href="' + base + 'log-in.html">로그인</a>',
+    '          </li>',
+    '          <li class="nav-auth-user d-none">',
+    '            <a href="' + base + 'mypage/">마이페이지</a>',
+    '          </li>',
+    '          <li>',
+    '            <a href="' + base + 'free-diagnosis.html" class="btn btn-white">무료 진단</a>',
+    '          </li>',
     '        </ul>',
     '      </div>',
+
     '    </div>',
     '  </nav>',
     '</header>',
@@ -87,36 +102,29 @@
 
   /* ── 삽입 ── */
   function inject() {
-    /* 1) id="tai-header" 요소가 있으면 교체 */
     var ph = document.getElementById('tai-header');
     if (ph) {
-      ph.outerHTML = NAV_HTML;
-      afterInject();
-      return;
+      ph.outerHTML = html;
+    } else {
+      var existing = document.querySelector('header.navbar-area');
+      if (existing) {
+        existing.outerHTML = html;
+      } else {
+        document.body.insertAdjacentHTML('afterbegin', html);
+      }
     }
-    /* 2) 기존 .navbar-area가 있으면 교체 */
-    var existing = document.querySelector('.navbar-area');
-    if (existing) {
-      existing.outerHTML = NAV_HTML;
-      afterInject();
-      return;
-    }
-    /* 3) body 맨 앞에 삽입 */
-    document.body.insertAdjacentHTML('afterbegin', NAV_HTML);
-    afterInject();
+    applyAuthState();
   }
 
-  /* ── 삽입 후 후처리: nav-auth.js와 동일한 로그인 상태 처리 ── */
-  function afterInject() {
+  /* ── 로그인 상태 적용 ── */
+  function applyAuthState() {
     try {
       var token = localStorage.getItem('access_token');
       if (token) {
-        var guests = document.querySelectorAll('.nav-auth-guest');
-        var users  = document.querySelectorAll('.nav-auth-user');
-        guests.forEach(function(el){ el.classList.add('d-none'); });
-        users.forEach(function(el){ el.classList.remove('d-none'); });
+        document.querySelectorAll('.nav-auth-guest').forEach(function(el) { el.classList.add('d-none'); });
+        document.querySelectorAll('.nav-auth-user').forEach(function(el) { el.classList.remove('d-none'); });
       }
-    } catch(e) {}
+    } catch (e) {}
   }
 
   if (document.readyState === 'loading') {

@@ -1,125 +1,154 @@
 /**
- * TAI 공통 Footer — 이 파일 하나만 수정하세요
- * 모든 페이지에서 <div id="tai-footer"></div> + <script src="assets/js/footer.js"> 로 사용
- * v2.0.0: 사이트맵 기준 전체 링크 갱신 (2026-04-13)
+ * TAI 공통 Footer — assets/js/footer.js
+ * 모든 페이지에서 <div id="tai-footer"></div> + <script src="...assets/js/footer.js"> 로 사용
+ * v2.1.0 (2026-04-13): Nexas 원본 footer-area style-1 구조 적용
  */
 (function () {
+  'use strict';
 
-  /* ── 파비콘 설정 ── */
-  (function(){
-    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-    link.type = 'image/svg+xml';
-    link.rel  = 'icon';
-    link.href = 'assets/img/favicon.svg';
-    document.head.appendChild(link);
-  })();
+  /* ── 경로 기준점 자동 감지 ── */
+  var path  = window.location.pathname;
+  var inSub = /\/(service|target|mypage)\//.test(path);
+  var b     = inSub ? '../' : '';
 
-  /* ── 현재 페이지가 service/ 또는 target/ 하위인지 확인해 경로 보정 ── */
-  const path   = window.location.pathname;
-  const isSubDir = /\/(service|target)\//.test(path);
-  const base   = isSubDir ? '../' : '';
+  /* ── Footer HTML (Nexas 원본 footer-area style-1 구조) ── */
+  var html = '<footer class="footer-area style-1">' +
 
-  /* ── Footer HTML ── */
-  const FOOTER_HTML = `
-<footer class="tai-footer">
-  <div class="footer-patent" style="color:#fff;">
-    본 서비스의 핵심 기술은 특허 출원 중입니다.
-    특허출원: 제10-2026-0056330 외 4건 · 상표출원: 제40-2026-0061564
-    <a href="${base}patents.html" style="color:rgba(255,255,255,.6); margin-left:8px;">기술 혁신 보기 →</a>
-  </div>
-  <div class="footer-main">
-    <div class="footer-grid" style="grid-template-columns: 1.6fr repeat(5, 1fr);">
+    /* 특허 안내 바 */
+    '<div class="footer-patent-bar" style="background:rgba(255,255,255,.05);padding:10px 0;text-align:center;">' +
+    '  <div class="container">' +
+    '    <p style="margin:0;font-size:.8rem;color:rgba(255,255,255,.55);">' +
+    '      특허 출원 중 (Patent Pending) &nbsp;·&nbsp; 제10-2026-0056330 외 5건 &nbsp;·&nbsp; 상표출원 증' +
+    '      <a href="' + b + 'patents.html" style="color:rgba(255,255,255,.45);margin-left:10px;">\uae30\uc220 \ud601\uc2e0 \ubcf4\uae30 \u2192</a>' +
+    '    </p>' +
+    '  </div>' +
+    '</div>' +
 
-      <!-- 회사 정보 -->
-      <div>
-        <a href="${base}index.html" class="footer-logo">
-          <img src="${base}assets/img/tai-logo.png" alt="TAI 엔지니어링">
-        </a>
-        <div class="footer-info">
-          <p><strong style="color:rgba(255,255,255,.65);">TAI엔지니어링</strong>&nbsp;&nbsp;대표: 심태왕</p>
-          <p>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</p>
-          <p>TEL: 070-8080-1858 &nbsp;·&nbsp; FAX: 0504-845-8888</p>
-          <p>EMAIL: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>
-          <p>사업자등록번호: 723-39-01422</p>
-          <p>통신판매업 신고번호: 제2026-서울강남-02132호</p>
-        </div>
-      </div>
+    /* 푸터 바디 */
+    '<div class="footer-inner">' +
+    '  <div class="container">' +
+    '    <div class="row">' +
 
-      <!-- 서비스 -->
-      <div class="footer-col">
-        <h6>서비스</h6>
-        <ul>
-          <li><a href="${base}service/education.html">교육사업</a></li>
-          <li><a href="${base}service/inapp.html">인앱 서비스</a></li>
-          <li><a href="${base}service/repair.html">수선 연결</a></li>
-          <li><a href="${base}service/consulting.html">컨설팅</a></li>
-          <li><a href="${base}service/appointment.html">선임 연결</a></li>
-          <li><a href="${base}service/saas.html">SaaS 구독</a></li>
-          <li><a href="${base}service/diagnosis.html">법령진단</a></li>
-        </ul>
-      </div>
+    /* 회사 정보 */
+    '      <div class="col-xl-4 col-lg-4 col-sm-6">' +
+    '        <div class="footer-widget widget">' +
+    '          <a class="logo" href="' + b + 'index.html"><img src="' + b + 'assets/img/tai-logo.png" alt="TAI 엔지니어링" style="height:36px;"></a>' +
+    '          <div class="footer-company-info" style="margin-top:16px;">' +
+    '            <p style="margin-bottom:4px;"><span class="footer-company-name" style="font-weight:700;">TAI 엔지니어링</span>&nbsp;&nbsp;<span style="font-size:.85rem;">대표 심태왕</span></p>' +
+    '            <p style="margin-bottom:3px;font-size:.85rem;">서울특별시 강남구 테헤란로79길 6 JS타워 3층</p>' +
+    '            <p style="margin-bottom:3px;font-size:.85rem;">TEL: 070-8080-1858 &nbsp;·&nbsp; FAX: 0504-845-8888</p>' +
+    '            <p style="margin-bottom:3px;font-size:.85rem;">EMAIL: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>' +
+    '            <p style="margin-bottom:3px;font-size:.85rem;">사업자등록번호: 723-39-01422</p>' +
+    '            <p style="font-size:.85rem;">통신판매업 신고번호: 제2026-서울강남-02132호</p>' +
+    '          </div>' +
+    '        </div>' +
+    '      </div>' +
 
-      <!-- 대상별 -->
-      <div class="footer-col">
-        <h6>대상별</h6>
-        <ul>
-          <li><a href="${base}target/building.html">건물·시설</a></li>
-          <li><a href="${base}target/factory.html">제조공장</a></li>
-          <li><a href="${base}target/construction.html">건설현장</a></li>
-        </ul>
-        <h6 style="margin-top:18px;">역할별</h6>
-        <ul>
-          <li><a href="${base}for-safety-manager.html">안전관리자</a></li>
-          <li><a href="${base}for-business-owner.html">사업주·현장소장</a></li>
-        </ul>
-      </div>
+    /* 서비스 */
+    '      <div class="col-xl-2 col-lg-2 col-6">' +
+    '        <div class="footer-widget widget widget_link">' +
+    '          <h6 class="widget-title">서비스</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'service/education.html"><i class="fas fa-angle-right"></i>교육사업</a></li>' +
+    '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
+    '            <li><a href="' + b + 'service/repair.html"><i class="fas fa-angle-right"></i>수선 연결</a></li>' +
+    '            <li><a href="' + b + 'service/consulting.html"><i class="fas fa-angle-right"></i>컨설팅</a></li>' +
+    '            <li><a href="' + b + 'service/appointment.html"><i class="fas fa-angle-right"></i>선임 연결</a></li>' +
+    '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
+    '            <li><a href="' + b + 'service/diagnosis.html"><i class="fas fa-angle-right"></i>법령진단</a></li>' +
+    '          </ul>' +
+    '        </div>' +
+    '      </div>' +
 
-      <!-- 요금·전환 -->
-      <div class="footer-col">
-        <h6>요금·시작</h6>
-        <ul>
-          <li><a href="${base}pricing.html">요금제</a></li>
-          <li><a href="${base}free-diagnosis.html">무료 법령진단</a></li>
-          <li><a href="${base}contact.html">도입 문의</a></li>
-          <li><a href="${base}sign-up.html">회원가입</a></li>
-          <li><a href="${base}log-in.html">로그인</a></li>
-        </ul>
-      </div>
+    /* 대상별 */
+    '      <div class="col-xl-2 col-lg-2 col-6">' +
+    '        <div class="footer-widget widget widget_link">' +
+    '          <h6 class="widget-title">대상별</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'target/building.html"><i class="fas fa-angle-right"></i>건물·시설</a></li>' +
+    '            <li><a href="' + b + 'target/factory.html"><i class="fas fa-angle-right"></i>제조공장</a></li>' +
+    '            <li><a href="' + b + 'target/construction.html"><i class="fas fa-angle-right"></i>건설현장</a></li>' +
+    '          </ul>' +
+    '          <h6 class="widget-title" style="margin-top:20px;">역할별</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'for-safety-manager.html"><i class="fas fa-angle-right"></i>안전관리자</a></li>' +
+    '            <li><a href="' + b + 'for-business-owner.html"><i class="fas fa-angle-right"></i>사업주·현장소장</a></li>' +
+    '          </ul>' +
+    '        </div>' +
+    '      </div>' +
 
-      <!-- 신뢰·지원 -->
-      <div class="footer-col">
-        <h6>신뢰·지원</h6>
-        <ul>
-          <li><a href="${base}about.html">회사소개</a></li>
-          <li><a href="${base}patents.html" style="color:#ff6b6b;">🔒 특허 출원 중</a></li>
-          <li><a href="${base}faq.html">FAQ</a></li>
-          <li><a href="${base}safety-news.html">안전정보</a></li>
-        </ul>
-      </div>
+    /* 지원 */
+    '      <div class="col-xl-2 col-lg-2 col-6">' +
+    '        <div class="footer-widget widget widget_link">' +
+    '          <h6 class="widget-title">시작하기</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
+    '            <li><a href="' + b + 'pricing.html"><i class="fas fa-angle-right"></i>요금제</a></li>' +
+    '            <li><a href="' + b + 'contact.html"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
+    '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
+    '            <li><a href="' + b + 'safety-news.html"><i class="fas fa-angle-right"></i>안전정보</a></li>' +
+    '          </ul>' +
+    '        </div>' +
+    '      </div>' +
 
-      <!-- 법적 고지 -->
-      <div class="footer-col">
-        <h6>법적 고지</h6>
-        <ul>
-          <li><a href="${base}terms.html">이용약관</a></li>
-          <li><a href="${base}privacy.html">개인정보처리방침</a></li>
-        </ul>
-      </div>
+    /* 회사 */
+    '      <div class="col-xl-2 col-lg-2 col-6">' +
+    '        <div class="footer-widget widget widget_link">' +
+    '          <h6 class="widget-title">회사</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'about.html"><i class="fas fa-angle-right"></i>회사소개</a></li>' +
+    '            <li><a href="' + b + 'patents.html"><i class="fas fa-angle-right"></i>특허 출원 중</a></li>' +
+    '            <li><a href="' + b + 'terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>' +
+    '            <li><a href="' + b + 'privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>' +
+    '          </ul>' +
+    '        </div>' +
+    '      </div>' +
 
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© TAI Engineering. All rights reserved.</span>
-    <a href="${base}site-map.html" style="color:rgba(255,255,255,.45); margin-left:14px; font-size:.78rem; text-decoration:none;">사이트맵</a>
-  </div>
-</footer>
-`;
+    '    </div>' +
+    '  </div>' +
+    '</div>' +
 
-  const el = document.getElementById('tai-footer');
-  if (el) {
-    el.outerHTML = FOOTER_HTML;
-  } else {
-    document.body.insertAdjacentHTML('beforeend', FOOTER_HTML);
+    /* 푸터 하단 */
+    '<div class="footer-bottom">' +
+    '  <div class="container">' +
+    '    <div class="row">' +
+    '      <div class="col-md-6 align-self-center">' +
+    '        <div class="copyright-area">' +
+    '          <p class="mb-0">&copy; 2026 TAI Engineering. All rights reserved.</p>' +
+    '        </div>' +
+    '      </div>' +
+    '      <div class="col-md-6 align-self-center text-md-end">' +
+    '        <div class="author-area">' +
+    '          <p class="mb-0" style="font-size:.82rem;">' +
+    '            특허 출원 중 (Patent Pending) &nbsp;·&nbsp;' +
+    '            <a href="' + b + 'site-map.html" style="opacity:.5;">사이트맵</a>' +
+    '          </p>' +
+    '        </div>' +
+    '      </div>' +
+    '    </div>' +
+    '  </div>' +
+    '</div>' +
+
+    '</footer>';
+
+  /* ── 삽입 ── */
+  function inject() {
+    var el = document.getElementById('tai-footer');
+    if (el) {
+      el.outerHTML = html;
+    } else {
+      var existing = document.querySelector('footer.footer-area');
+      if (existing) {
+        existing.outerHTML = html;
+      } else {
+        document.body.insertAdjacentHTML('beforeend', html);
+      }
+    }
   }
 
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
 })();
