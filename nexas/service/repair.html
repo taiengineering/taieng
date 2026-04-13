@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 수선 연결 서비스. 설비 정비·수리 전문업체 매칭 플랫폼. 플랫폼 이용료 방식.">
+  <title>수선 연결 | TAI 엔지니어링</title>
+  <link rel="icon" href="../assets/img/fevicon.png">
+  <link rel="stylesheet" href="../assets/css/animate.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body{font-family:'Noto Sans KR',sans-serif;}
+  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
+  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(234,88,12,.1) 0%,transparent 65%);pointer-events:none;}
+  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fb923c;background:rgba(234,88,12,.15);border:1px solid rgba(234,88,12,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
+  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
+  .svc-hero h1 em{color:#fdba74;font-style:normal;}
+  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
+  .repair-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #ea580c;}
+  .repair-card .rc-icon{font-size:2.2rem;margin-bottom:16px;}
+  .repair-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
+  .repair-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
+  .flow-section{background:#0d1b2a;padding:80px 0;}
+  .flow-step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.06);border-radius:12px;padding:22px;margin-bottom:12px;}
+  .flow-num{width:36px;height:36px;border-radius:50%;background:#ea580c;color:#fff;font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .flow-text h5{color:#fff;font-weight:700;margin-bottom:4px;font-size:.92rem;}
+  .flow-text p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6;margin:0;}
+  .notice-box{background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:20px 24px;margin-top:16px;}
+  .notice-box p{color:#9a3412;font-size:.88rem;line-height:1.6;margin:0;}
+  .cta-section{background:linear-gradient(135deg,#ea580c,#c2410c);padding:72px 0;text-align:center;}
+  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
+  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+  </style>
+</head>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg"><div class="container nav-container">
+    <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
+    <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
+    <div class="collapse navbar-collapse" id="nav1"><ul class="navbar-nav menu-open text-end"><li><a href="../index-1.html">TAI SAFE</a></li><li><a href="../index-2.html">TAI MANAGER</a></li><li><a href="../index-3.html">TAI AGENT</a></li><li><a href="../index-4.html">TAI CARE</a></li><li><a href="../safety-news.html">안전정보</a></li></ul></div>
+    <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
+  </div></nav>
+</header>
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="svc-eyebrow">🔧 수선 연결</span>
+        <h1>설비 이상 발생,<br><em>전문업체 바로 연결</em></h1>
+        <p>점검 중 이상이 발견되면 TAI가 검증된 수선 전문업체를 즉시 연결합니다. 직접 찾아다닐 필요 없이, 플랫폼 안에서 모든 것이 해결됩니다.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">수선 요청하기</a>
+          <a href="../contact.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">업체 등록 문의</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
+          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">연결 가능 분야</p>
+          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
+            <div>🔩 기계·설비 정비</div>
+            <div>⚡ 전기 시설 점검·수리</div>
+            <div>🔥 소방 시설 유지보수</div>
+            <div>🏗️ 건축물 안전 보수</div>
+            <div>🔬 법정 검사·측정</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f8fafc;padding:80px 0;">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">수선 연결 서비스 특징</h2></div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">⚡</div><h4>이상 탐지 즉시 연결</h4><p>작업자가 점검 중 이상을 선택하면 관리자에게 알림이 전송되고, TAI 플랫폼에서 수선 전문업체 요청이 가능합니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">🔍</div><h4>검증된 전문업체</h4><p>TAI가 사전 검증한 전문업체 네트워크를 통해 연결됩니다. 분야별·지역별로 적합한 업체가 매칭됩니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">📋</div><h4>수선 이력 자동 기록</h4><p>수선 요청·완료·비용·담당업체가 모두 자동으로 기록됩니다. 설비별 수선 이력을 언제든지 확인할 수 있습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">💰</div><h4>플랫폼 이용료 방식</h4><p>성사된 수선 건에 대해 플랫폼 이용료가 발생합니다. 연결되지 않으면 비용이 없습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">📊</div><h4>비용 추적 관리</h4><p>설비별 수선 비용이 자동으로 집계됩니다. 설비 교체 시기 판단에 활용할 수 있습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="repair-card"><div class="rc-icon">🔔</div><h4>조치 완료 알림</h4><p>수선이 완료되면 안전관리자와 담당자에게 자동으로 완료 알림이 발송됩니다.</p></div></div>
+    </div>
+    <div class="notice-box">
+      <p>💡 <strong>수선 연결 이용 안내:</strong> TAI는 수선 전문업체와 사업장을 연결하는 플랫폼 서비스를 제공합니다. 실제 수선 작업은 연결된 전문업체가 수행하며, TAI는 플랫폼 이용료를 수취합니다. 업체 선택·계약은 사업장과 업체 간 직접 진행됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="flow-section">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">수선 연결 프로세스</h2></div>
+    <div class="row justify-content-center"><div class="col-lg-7">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><h5>점검 중 이상 발견</h5><p>작업자가 모바일 점검에서 이상 항목 선택 → 관리자에게 즉시 알림 전송.</p></div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><h5>수선 업체 요청</h5><p>TAI 플랫폼에서 분야·지역 선택 후 수선 요청 → 검증된 업체 목록 제시.</p></div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><h5>업체 선택 & 일정 협의</h5><p>견적·일정을 확인하고 업체를 선택합니다. 플랫폼을 통해 커뮤니케이션.</p></div></div>
+      <div class="flow-step" style="margin-bottom:0;"><div class="flow-num">4</div><div class="flow-text"><h5>수선 완료 & 자동 기록</h5><p>수선 완료 후 이력이 자동 저장. 완료 알림 발송. 설비 상태 정상으로 복구.</p></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>설비 이상, 바로 해결하세요</h2>
+    <p>TAI Safe 구독 고객이라면 플랫폼 안에서 바로 수선 요청이 가능합니다.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="../free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">무료 시작하기</a>
+      <a href="../contact.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">업체 등록 문의</a>
+    </div>
+  </div>
+</section>
+
+<div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="../assets/js/jquery.3.6.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/wow.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/footer.js"></script>
+<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+</body>
+</html>

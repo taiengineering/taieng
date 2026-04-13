@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 법령진단 서비스. 3분 안에 사업장 법령 의무 항목을 자동으로 도출합니다. 1차 진단 무료.">
+  <title>법령진단 | TAI 엔지니어링</title>
+  <link rel="icon" href="../assets/img/fevicon.png">
+  <link rel="stylesheet" href="../assets/css/animate.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body{font-family:'Noto Sans KR',sans-serif;}
+  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
+  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(230,57,70,.1) 0%,transparent 65%);pointer-events:none;}
+  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#e63946;background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
+  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
+  .svc-hero h1 em{color:#f87171;font-style:normal;}
+  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
+  .diag-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #e63946;}
+  .diag-card .dc-icon{font-size:2.2rem;margin-bottom:16px;}
+  .diag-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
+  .diag-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
+  .price-section{background:#f8fafc;padding:80px 0;}
+  .price-card{background:#fff;border-radius:18px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,.07);height:100%;}
+  .price-card .sector-label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:12px;}
+  .price-card h4{font-size:1.1rem;font-weight:900;color:#0d1b2a;margin-bottom:16px;}
+  .price-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9;font-size:.9rem;}
+  .price-row:last-child{border-bottom:none;}
+  .price-row .tier{color:#374151;font-weight:600;}
+  .price-row .amt{color:#e63946;font-weight:800;}
+  .free-badge{background:#f0fdf4;color:#16a34a;border-radius:6px;padding:2px 10px;font-size:.8rem;font-weight:700;}
+  .process-section{background:#0d1b2a;padding:80px 0;}
+  .process-step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.06);border-radius:12px;padding:22px;margin-bottom:12px;}
+  .process-num{width:36px;height:36px;border-radius:50%;background:#e63946;color:#fff;font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .process-text h5{color:#fff;font-weight:700;margin-bottom:4px;font-size:.92rem;}
+  .process-text p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6;margin:0;}
+  .cta-section{background:linear-gradient(135deg,#e63946,#c1121f);padding:72px 0;text-align:center;}
+  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
+  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+  </style>
+</head>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg"><div class="container nav-container">
+    <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
+    <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
+    <div class="collapse navbar-collapse" id="nav1"><ul class="navbar-nav menu-open text-end"><li><a href="../index-1.html">TAI SAFE</a></li><li><a href="../index-2.html">TAI MANAGER</a></li><li><a href="../index-3.html">TAI AGENT</a></li><li><a href="../index-4.html">TAI CARE</a></li><li><a href="../safety-news.html">안전정보</a></li></ul></div>
+    <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
+  </div></nav>
+</header>
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="svc-eyebrow">🔍 법령진단</span>
+        <h1>3분 안에<br><em>법령 위반 여부 확인</em></h1>
+        <p>업종·규모·설비·공정을 입력하면 적용 법령과 의무 항목이 자동으로 도출됩니다. 1차 진단은 완전 무료입니다. SaaS 구독의 시작점입니다.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료 진단 시작</a>
+          <a href="../pricing.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">유료 진단 요금</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
+          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">진단 가능 분야</p>
+          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
+            <div>🏭 산업·제조 (산업안전보건법)</div>
+            <div>🏗️ 건설현장 (건설기술진흥법)</div>
+            <div>🏢 건물·시설 (소방·전기·승강기)</div>
+            <div>☢️ 특수 설비 (고압가스·화학물질)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f8fafc;padding:80px 0;">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">법령진단이란?</h2></div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6"><div class="diag-card"><div class="dc-icon">🤖</div><h4>조건코드 기반 자동 판정</h4><p>국내 특허 출원 기술. 사업장 조건 입력 시 2,080개+ 법령 규칙 엔진이 적용 의무를 자동 판정합니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="diag-card"><div class="dc-icon">📋</div><h4>의무 항목 전체 도출</h4><p>점검 의무, 선임 의무, 교육 의무, 신고 의무, 서류 보관 의무까지 전 항목을 리스트로 제공합니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="diag-card"><div class="dc-icon">📅</div><h4>SaaS 자동 연결</h4><p>진단 완료 후 SaaS 구독을 시작하면 의무 항목이 자동으로 점검 일정으로 전환됩니다. 수동 입력 없음.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="price-section">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">법령진단 요금</h2><p style="color:#64748b;">1차 진단은 무료입니다. 상세 진단은 업종별 요금이 적용됩니다.</p></div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 col-md-6"><div class="price-card"><div class="sector-label">산업·제조</div><h4>🏭 산업 법령진단</h4><div class="price-row"><span class="tier">1차 (FREE)</span><span class="free-badge">무료</span></div><div class="price-row"><span class="tier">기본 진단</span><span class="amt">79,000원</span></div><div class="price-row"><span class="tier">표준 진단</span><span class="amt">149,000원</span></div><div class="price-row"><span class="tier">프리미엄 진단</span><span class="amt">249,000원</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="price-card"><div class="sector-label">건물·시설</div><h4>🏢 건물 법령진단</h4><div class="price-row"><span class="tier">1차 (FREE)</span><span class="free-badge">무료</span></div><div class="price-row"><span class="tier">기본 진단</span><span class="amt">49,000원</span></div><div class="price-row"><span class="tier">표준 진단</span><span class="amt">99,000원</span></div><div class="price-row"><span class="tier">프리미엄 진단</span><span class="amt">149,000원</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="price-card"><div class="sector-label">건설현장</div><h4>🏗️ 건설 법령진단</h4><div class="price-row"><span class="tier">1차 (FREE)</span><span class="free-badge">무료</span></div><div class="price-row"><span class="tier">단일 플랜</span><span class="amt">199,000원</span></div><p style="color:#94a3b8;font-size:.8rem;margin-top:12px;">건설은 법령 복잡도가 가장 높아 단일 플랜으로 운영됩니다.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">법령진단 프로세스</h2></div>
+    <div class="row justify-content-center"><div class="col-lg-7">
+      <div class="process-step"><div class="process-num">1</div><div class="process-text"><h5>사업장 정보 입력 (3분)</h5><p>업종·규모·소재지·설비·공정 등 기본 정보를 입력합니다.</p></div></div>
+      <div class="process-step"><div class="process-num">2</div><div class="process-text"><h5>법령 자동 판정</h5><p>2,080개+ 법령 규칙 엔진이 적용 법령과 의무 항목을 자동으로 도출합니다.</p></div></div>
+      <div class="process-step"><div class="process-num">3</div><div class="process-text"><h5>진단 결과 리포트</h5><p>점검·선임·교육·신고·서류 의무 항목이 분류별로 정리된 리포트를 제공합니다.</p></div></div>
+      <div class="process-step" style="margin-bottom:0;"><div class="process-num">4</div><div class="process-text"><h5>SaaS 연결 (선택)</h5><p>구독 시작 시 진단 결과가 자동으로 점검 일정으로 전환됩니다.</p></div></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>지금 바로 진단해보세요</h2>
+    <p>1차 진단은 완전 무료입니다. 3분이면 내 사업장의 의무 항목을 모두 파악할 수 있습니다.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="../free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">무료 진단 시작</a>
+      <a href="../contact.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">진단 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="../assets/js/jquery.3.6.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/wow.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/footer.js"></script>
+<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+</body>
+</html>

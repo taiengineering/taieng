@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 인앱 서비스. 자동 신고, 문서서식 자동 생성, 라벨 자동생성 등 안전 관련 귀찮은 것들을 TAI가 대행합니다.">
+  <title>인앱 서비스 | TAI 엔지니어링</title>
+  <link rel="icon" href="../assets/img/fevicon.png">
+  <link rel="stylesheet" href="../assets/css/animate.min.css">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body{font-family:'Noto Sans KR',sans-serif;}
+  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
+  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(139,92,246,.1) 0%,transparent 65%);pointer-events:none;}
+  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a78bfa;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
+  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
+  .svc-hero h1 em{color:#c4b5fd;font-style:normal;}
+  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
+  .inapp-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #7c3aed;}
+  .inapp-card .ic-icon{font-size:2.4rem;margin-bottom:16px;}
+  .inapp-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
+  .inapp-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
+  .inapp-card .price-tag{display:inline-block;background:#f5f3ff;color:#7c3aed;border-radius:6px;padding:3px 10px;font-size:.78rem;font-weight:700;margin-top:12px;}
+  .pain-section{background:#f8fafc;padding:80px 0;}
+  .cta-section{background:linear-gradient(135deg,#7c3aed,#5b21b6);padding:72px 0;text-align:center;}
+  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
+  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+  </style>
+</head>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg"><div class="container nav-container">
+    <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
+    <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
+    <div class="collapse navbar-collapse" id="nav1"><ul class="navbar-nav menu-open text-end"><li><a href="../index-1.html">TAI SAFE</a></li><li><a href="../index-2.html">TAI MANAGER</a></li><li><a href="../index-3.html">TAI AGENT</a></li><li><a href="../index-4.html">TAI CARE</a></li><li><a href="../safety-news.html">안전정보</a></li></ul></div>
+    <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
+  </div></nav>
+</header>
+
+<section class="svc-hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span class="svc-eyebrow">⚡ 인앱 서비스</span>
+        <h1>안전 관련 귀찮은 것들,<br><em>TAI가 다 대행합니다</em></h1>
+        <p>자동 신고, 문서서식 생성, 라벨 자동 생성, 안전보건공단 자료 연동까지. SaaS 구독 안에서 추가 요금 없이 사용할 수 있는 인앱 기능들입니다.</p>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료로 시작하기</a>
+          <a href="../pricing.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">요금제 확인</a>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
+          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">포함 기능</p>
+          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
+            <div>✅ 신고서식 자동화</div>
+            <div>✅ 법정 점검일지 자동 생성</div>
+            <div>✅ 화학물질 라벨 자동 생성</div>
+            <div>✅ MSDS 자동 연동</div>
+            <div>✅ 안전보건공단 자료 자동 참조</div>
+            <div>✅ TBM 기록지 자동 생성</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pain-section">
+  <div class="container">
+    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">이런 것들을 직접 하고 계신가요?</h2></div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📝</div><h4>신고서식 자동화</h4><p>안전관리자 선임 신고, 각종 법정 신고서를 수동으로 작성하시나요? TAI가 데이터를 바탕으로 자동 작성합니다. 일부 서식은 팩스·우편 안내까지 포함.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📋</div><h4>법정 점검일지</h4><p>점검 완료 데이터를 바탕으로 법정 양식의 점검일지가 자동 생성됩니다. 출력 → 서명 → 보관만 하면 됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🏷️</div><h4>화학물질 라벨 자동 생성</h4><p>MSDS 정보를 기반으로 GHS 규정에 맞는 화학물질 라벨이 자동 생성됩니다. 출력 후 부착만 하면 됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🔬</div><h4>MSDS 자동 연동</h4><p>안전보건공단 MSDS DB와 연동하여 사업장 내 화학물질 MSDS를 자동으로 불러옵니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📊</div><h4>TBM 기록지 자동 생성</h4><p>TBM 미팅 완료 후 법정 양식의 Tool Box Meeting 기록지가 자동 생성됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🔗</div><h4>공공 API 자동 참조</h4><p>KOSHA·법령정보센터·전기안전공사 등 공공 데이터를 자동으로 참조하여 최신 정보를 유지합니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>귀찮은 것들을 TAI에 맡기세요</h2>
+    <p>SaaS 구독 안에 모두 포함되어 있습니다. 추가 요금 없습니다.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="../pricing.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">요금제 보기</a>
+      <a href="../free-diagnosis.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">무료 시작하기</a>
+    </div>
+  </div>
+</section>
+
+<div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="../assets/js/jquery.3.6.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/wow.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/footer.js"></script>
+<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+</body>
+</html>
