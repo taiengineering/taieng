@@ -1,47 +1,97 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 인앱 서비스. 자동 신고, 문서서식 자동 생성, 라벨 자동생성 등 안전 관련 귀찮은 것들을 TAI가 대행합니다.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 인앱 서비스. 신고서식 자동화·점검일지·화학물질 라벨·MSDS·TBM기록지·경영진 보고서까지 SaaS 구독 안에 모두 포함.">
   <title>인앱 서비스 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/magnific.min.css">
+  <link rel="stylesheet" href="../assets/css/owl.min.css">
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  body{font-family:'Noto Sans KR',sans-serif;}
-  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
-  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(139,92,246,.1) 0%,transparent 65%);pointer-events:none;}
-  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a78bfa;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
-  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
-  .svc-hero h1 em{color:#c4b5fd;font-style:normal;}
-  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
-  .inapp-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #7c3aed;}
-  .inapp-card .ic-icon{font-size:2.4rem;margin-bottom:16px;}
-  .inapp-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
-  .inapp-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
-  .inapp-card .price-tag{display:inline-block;background:#f5f3ff;color:#7c3aed;border-radius:6px;padding:3px 10px;font-size:.78rem;font-weight:700;margin-top:12px;}
-  .pain-section{background:#f8fafc;padding:80px 0;}
-  .cta-section{background:linear-gradient(135deg,#7c3aed,#5b21b6);padding:72px 0;text-align:center;}
-  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
-  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+  body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
+
+  /* ── 히어로 ── */
+  .inapp-hero {
+    background: linear-gradient(135deg, #050a14, #0d1b2e, #0a1628);
+    padding: 110px 0 80px;
+    position: relative; overflow: hidden;
+  }
+  .inapp-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 50% 70% at 10% 50%, rgba(139,92,246,.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .inapp-eyebrow {
+    display: inline-block;
+    font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    color: #a78bfa; background: rgba(139,92,246,.15);
+    border: 1px solid rgba(139,92,246,.4);
+    border-radius: 4px; padding: 5px 12px; margin-bottom: 22px;
+  }
+  .inapp-hero h1 { font-size: clamp(2.2rem,4.5vw,3.8rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 18px; }
+  .inapp-hero h1 em { color: #c4b5fd; font-style: normal; }
+  .inapp-hero p { font-size: 1.05rem; color: rgba(255,255,255,.72); margin-bottom: 32px; line-height: 1.65; }
+
+  /* ── 기능 카드 ── */
+  .feat-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    border-top: 4px solid #7c3aed;
+    display: flex; flex-direction: column;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .feat-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
+  .feat-icon { font-size: 2.2rem; margin-bottom: 14px; }
+  .feat-card h4 { font-size: 1rem; font-weight: 900; color: #0d1b2a; margin-bottom: 8px; }
+  .feat-card p { font-size: .87rem; color: #64748b; line-height: 1.65; flex: 1; margin-bottom: 14px; }
+  .feat-badge {
+    display: inline-block;
+    font-size: .7rem; font-weight: 700; letter-spacing: .05em;
+    background: #f5f3ff; color: #7c3aed;
+    border-radius: 5px; padding: 3px 10px;
+  }
+
+  /* ── 강조 섹션 ── */
+  .emphasis-section { background: #0d1b2a; padding: 80px 0; }
+  .emphasis-quote {
+    border-left: 4px solid #7c3aed;
+    padding: 24px 28px;
+    background: rgba(139,92,246,.08);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 20px;
+  }
+  .emphasis-quote p {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 800; color: #fff; margin: 0; line-height: 1.5;
+  }
+  .emphasis-quote span { font-size: .85rem; color: rgba(255,255,255,.5); font-weight: 400; display: block; margin-top: 8px; }
   </style>
 </head>
 <body class="sc5">
+
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<section class="svc-hero">
+<!-- ══ 히어로 ══ -->
+<section class="inapp-hero">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
-        <span class="svc-eyebrow">⚡ 인앱 서비스</span>
+        <span class="inapp-eyebrow">⚡ 인앱 서비스</span>
         <h1>안전 관련 귀찮은 것들,<br><em>TAI가 다 대행합니다</em></h1>
-        <p>자동 신고, 문서서식 생성, 라벨 자동 생성, 안전보건공단 자료 연동까지. SaaS 구독 안에서 추가 요금 없이 사용할 수 있는 인앱 기능들입니다.</p>
+        <p>SaaS 구독 안에서 추가 요금 없이 사용할 수 있는 인앱 기능들입니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료로 시작하기</a>
           <a href="../pricing.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">요금제 확인</a>
@@ -49,14 +99,15 @@
       </div>
       <div class="col-lg-5">
         <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">포함 기능</p>
-          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
+          <p style="color:rgba(255,255,255,.5);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">SaaS 구독 포함 기능</p>
+          <div style="color:rgba(255,255,255,.82);font-size:.88rem;line-height:2.1;">
             <div>✅ 신고서식 자동화</div>
             <div>✅ 법정 점검일지 자동 생성</div>
             <div>✅ 화학물질 라벨 자동 생성</div>
             <div>✅ MSDS 자동 연동</div>
-            <div>✅ 안전보건공단 자료 자동 참조</div>
             <div>✅ TBM 기록지 자동 생성</div>
+            <div>✅ 안전관리회의록 자동 생성</div>
+            <div>✅ 경영진 보고서 자동화</div>
           </div>
         </div>
       </div>
@@ -64,33 +115,152 @@
   </div>
 </section>
 
-<section class="pain-section">
+<!-- ══ 포함 기능 8개 (service-area) ══ -->
+<section class="service-area default-pd-top" style="background:#f8fafc;">
   <div class="container">
-    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">이런 것들을 직접 하고 계신가요?</h2></div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title text-center">
+          <h4 class="sub-title">SaaS 구독 포함</h4>
+          <h2 class="title">추가 요금 없이 모두 사용하세요</h2>
+        </div>
+      </div>
+    </div>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📝</div><h4>신고서식 자동화</h4><p>안전관리자 선임 신고, 각종 법정 신고서를 수동으로 작성하시나요? TAI가 데이터를 바탕으로 자동 작성합니다. 일부 서식은 팩스·우편 안내까지 포함.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📋</div><h4>법정 점검일지</h4><p>점검 완료 데이터를 바탕으로 법정 양식의 점검일지가 자동 생성됩니다. 출력 → 서명 → 보관만 하면 됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🏷️</div><h4>화학물질 라벨 자동 생성</h4><p>MSDS 정보를 기반으로 GHS 규정에 맞는 화학물질 라벨이 자동 생성됩니다. 출력 후 부착만 하면 됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🔬</div><h4>MSDS 자동 연동</h4><p>안전보건공단 MSDS DB와 연동하여 사업장 내 화학물질 MSDS를 자동으로 불러옵니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">📊</div><h4>TBM 기록지 자동 생성</h4><p>TBM 미팅 완료 후 법정 양식의 Tool Box Meeting 기록지가 자동 생성됩니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="inapp-card"><div class="ic-icon">🔗</div><h4>공공 API 자동 참조</h4><p>KOSHA·법령정보센터·전기안전공사 등 공공 데이터를 자동으로 참조하여 최신 정보를 유지합니다.</p><span class="price-tag">SaaS 구독 포함</span></div></div>
+
+      <!-- 1. 신고서식 자동화 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">📝</div>
+          <h4>신고서식 자동화</h4>
+          <p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 2. 법정 점검일지 자동 생성 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">📋</div>
+          <h4>법정 점검일지 자동 생성</h4>
+          <p>수기로 작성하던 점검일지가 자동으로 만들어집니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 3. 화학물질 라벨 자동 생성 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">🏷️</div>
+          <h4>화학물질 라벨 자동 생성</h4>
+          <p>GHS 기준 라벨이 자동으로 생성되어, 별도 제작 없이 바로 출력 가능합니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 4. MSDS 자동 연동 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">🔬</div>
+          <h4>MSDS 자동 연동</h4>
+          <p>물질안전보건자료를 자동으로 연동하여 최신 정보를 유지합니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 5. TBM 기록지 자동 생성 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">📅</div>
+          <h4>TBM 기록지 자동 생성</h4>
+          <p>전자서명까지 완료되면 기록지가 자동 저장됩니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 6. 안전보건공단 자료 자동 참조 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">🔗</div>
+          <h4>안전보건공단 자료 자동 참조</h4>
+          <p>KOSHA 가이드 등 관련 자료를 자동으로 참조합니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 7. 안전관리회의록 자동 생성 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">🗒️</div>
+          <h4>안전관리회의록 자동 생성</h4>
+          <p>회의 내용을 입력하면 법정 양식에 맞게 자동 생성됩니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
+      <!-- 8. 경영진 보고서 자동화 -->
+      <div class="col-lg-3 col-md-6">
+        <div class="feat-card">
+          <div class="feat-icon">📊</div>
+          <h4>경영진 보고서 자동화</h4>
+          <p>월간 안전 현황 리포트가 자동 생성됩니다. 별도 취합 없이 즉시 제출 가능합니다.</p>
+          <span class="feat-badge">SaaS 포함</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<section class="cta-section">
+<!-- ══ 강조 섹션 (management-area) ══ -->
+<section class="emphasis-section">
   <div class="container">
-    <h2>귀찮은 것들을 TAI에 맡기세요</h2>
-    <p>SaaS 구독 안에 모두 포함되어 있습니다. 추가 요금 없습니다.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="../pricing.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">요금제 보기</a>
-      <a href="../free-diagnosis.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">무료 시작하기</a>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title text-center" style="margin-bottom:48px;">
+          <h4 class="sub-title" style="color:#a78bfa;">TAI의 설계 철학</h4>
+          <h2 class="title" style="color:#fff;">왜 이것들을 만들었나요</h2>
+        </div>
+        <div class="emphasis-quote">
+          <p>"서류 작성 시간을 안전관리 시간으로 돌릴 수 있습니다."</p>
+          <span>서류를 쓰는 데 쓰는 시간이 결국 안전을 소홀하게 만듭니다. TAI는 그 시간을 되돌려 드립니다.</span>
+        </div>
+        <div class="emphasis-quote">
+          <p>"안전관리자와 현장의 입장에서 설계하고 만들었습니다."</p>
+          <span>실제 겸직 안전관리자가 가장 힘들어하는 것부터 자동화했습니다. 이론이 아닌 현장 기준입니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA (subscribe-area) ══ -->
+<section class="subscribe-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="subscribe-inner">
+          <div class="row no-gutters">
+            <div class="col-xl-5 col-lg-6">
+              <h2>귀찮은 것들을 TAI에 맡기세요</h2>
+              <p class="pe-5">SaaS 구독 안에 모두 포함되어 있습니다. 추가 요금이 없습니다.</p>
+            </div>
+            <div class="col-lg-6 offset-xl-1 align-self-center">
+              <div class="d-flex gap-3 flex-wrap">
+                <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료로 시작하기</a>
+                <a href="../pricing.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 24px;">요금제 확인</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
 <script src="../assets/js/jquery.3.6.min.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/wow.min.js"></script>
@@ -98,6 +268,6 @@
 <script src="../assets/js/header.js"></script>
 <script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
-<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+<script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
 </html>
