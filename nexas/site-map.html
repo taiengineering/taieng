@@ -17,56 +17,120 @@
     h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
     .sm-note { font-size: .85rem; color: rgba(255,255,255,.5); margin-bottom: 28px; }
     .sm-sec { margin-bottom: 28px; }
-    .sm-sec h2 { font-size: 1rem; font-weight: 700; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,.12); padding-bottom: 8px; }
+    .sm-sec h2 {
+      font-size: 1rem; font-weight: 700; color: rgba(255,255,255,.55);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.12); padding-bottom: 8px;
+    }
     .sm-sec ul { list-style: none; padding: 0; margin: 0; columns: 1; }
     @media (min-width: 576px) { .sm-sec ul { columns: 2; } }
     @media (min-width: 992px) { .sm-sec ul { columns: 3; } }
-    .sm-sec li { break-inside: avoid; margin-bottom: 6px; }
+    .sm-sec li { break-inside: avoid; margin-bottom: 7px; }
     .sm-sec a { color: #7eb8ff; text-decoration: none; font-size: .9rem; word-break: break-all; }
     .sm-sec a:hover { text-decoration: underline; color: #b8d4ff; }
     .sm-path { font-size: .72rem; color: rgba(255,255,255,.35); font-family: ui-monospace, monospace; }
     .badge-sm { font-size: .65rem; vertical-align: middle; margin-left: 6px; }
+    .sm-new { font-size: .65rem; background: #e63946; color: #fff; border-radius: 4px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
   </style>
 </head>
 <body>
   <nav class="tai-nav" style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(13,27,42,.96);border-bottom:1px solid rgba(255,255,255,.07);">
     <div class="inner" style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:56px;">
       <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI" style="height:32px;filter:brightness(0) invert(1);"></a>
-      <span style="font-size:.8rem;color:rgba(255,255,255,.45);">내부 점검용</span>
+      <span style="font-size:.8rem;color:rgba(255,255,255,.45);">내부 점검용 — 권한 무관 접근 가능</span>
     </div>
   </nav>
 
   <div class="sm-wrap">
     <div class="sm-back"><a href="index.html">← 홈으로</a></div>
     <h1>사이트맵 <span class="badge bg-secondary badge-sm">점검</span></h1>
-    <p class="sm-note">new.taieng.co.kr 배포본 기준 HTML 전체 링크입니다. 마이페이지·파트너 영역은 로그인 후 접근하는 화면입니다.</p>
+    <p class="sm-note">new.taieng.co.kr 배포본 기준 전체 HTML 링크 목록입니다. 이 페이지는 권한과 무관하게 모든 페이지를 점검할 수 있습니다. (noindex 적용)</p>
 
+    <!-- 메인 -->
     <section class="sm-sec">
-      <h2>메인 · 랜딩</h2>
+      <h2>메인</h2>
       <ul>
-        <li><a href="index.html">index.html</a> <span class="sm-path">/</span></li>
-        <li><a href="index-1.html">index-1.html</a> <span class="sm-path">TAI Safe</span></li>
-        <li><a href="index-2.html">index-2.html</a> <span class="sm-path">TAI Manager</span></li>
-        <li><a href="index-3.html">index-3.html</a> <span class="sm-path">TAI Fix</span></li>
-        <li><a href="index-4.html">index-4.html</a> <span class="sm-path">TAI Care</span></li>
-        <li><a href="index-5.html">index-5.html</a> <span class="sm-path">안전정보 허브</span></li>
-        <li><a href="index-6.html">index-6.html</a></li>
-        <li><a href="tai-fix.html">tai-fix.html</a></li>
-        <li><a href="construction.html">construction.html</a></li>
+        <li><a href="index.html">index.html</a> <span class="sm-path">/ 메인홈</span></li>
       </ul>
     </section>
 
+    <!-- 역할별 랜딩 -->
     <section class="sm-sec">
-      <h2>계정 · 인증</h2>
+      <h2>역할별 랜딩</h2>
       <ul>
-        <li><a href="log-in.html">log-in.html</a></li>
-        <li><a href="sign-up.html">sign-up.html</a></li>
-        <li><a href="mypage.html">mypage.html</a> <span class="sm-path">→ mypage/ 리다이렉트</span></li>
+        <li><a href="for-safety-manager.html">for-safety-manager.html</a> <span class="sm-path">안전관리자</span> <span class="sm-new">NEW</span></li>
+        <li><a href="for-business-owner.html">for-business-owner.html</a> <span class="sm-path">사업주·현장소장</span> <span class="sm-new">NEW</span></li>
       </ul>
     </section>
 
+    <!-- 서비스 -->
     <section class="sm-sec">
-      <h2>마이페이지 (로그인 후)</h2>
+      <h2>서비스</h2>
+      <ul>
+        <li><a href="service/education.html">service/education.html</a> <span class="sm-path">교육사업</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/inapp.html">service/inapp.html</a> <span class="sm-path">인앱 서비스</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/repair.html">service/repair.html</a> <span class="sm-path">수선 연결</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/consulting.html">service/consulting.html</a> <span class="sm-path">컨설팅</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/appointment.html">service/appointment.html</a> <span class="sm-path">선임 연결</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/saas.html">service/saas.html</a> <span class="sm-path">SaaS 구독</span> <span class="sm-new">NEW</span></li>
+        <li><a href="service/diagnosis.html">service/diagnosis.html</a> <span class="sm-path">법령진단</span> <span class="sm-new">NEW</span></li>
+      </ul>
+    </section>
+
+    <!-- 대상별 -->
+    <section class="sm-sec">
+      <h2>대상별</h2>
+      <ul>
+        <li><a href="target/building.html">target/building.html</a> <span class="sm-path">건물·시설</span> <span class="sm-new">NEW</span></li>
+        <li><a href="target/factory.html">target/factory.html</a> <span class="sm-path">제조공장</span> <span class="sm-new">NEW</span></li>
+        <li><a href="target/construction.html">target/construction.html</a> <span class="sm-path">건설현장</span> <span class="sm-new">NEW</span></li>
+      </ul>
+    </section>
+
+    <!-- 전환 -->
+    <section class="sm-sec">
+      <h2>요금 · 전환</h2>
+      <ul>
+        <li><a href="pricing.html">pricing.html</a> <span class="sm-path">요금제</span></li>
+        <li><a href="free-diagnosis.html">free-diagnosis.html</a> <span class="sm-path">무료 법령진단</span></li>
+        <li><a href="free-diagnosis-result.html">free-diagnosis-result.html</a> <span class="sm-path">진단 결과</span></li>
+        <li><a href="contact.html">contact.html</a> <span class="sm-path">도입 문의</span></li>
+      </ul>
+    </section>
+
+    <!-- 신뢰·지원 -->
+    <section class="sm-sec">
+      <h2>신뢰 · 지원</h2>
+      <ul>
+        <li><a href="about.html">about.html</a> <span class="sm-path">회사소개</span></li>
+        <li><a href="patents.html">patents.html</a> <span class="sm-path">특허 출원 중</span></li>
+        <li><a href="faq.html">faq.html</a> <span class="sm-path">FAQ</span></li>
+        <li><a href="safety-news.html">safety-news.html</a> <span class="sm-path">안전정보</span></li>
+        <li><a href="safety-news-detail.html">safety-news-detail.html</a> <span class="sm-path">안전정보 상세</span></li>
+      </ul>
+    </section>
+
+    <!-- 인증 -->
+    <section class="sm-sec">
+      <h2>인증</h2>
+      <ul>
+        <li><a href="log-in.html">log-in.html</a> <span class="sm-path">로그인</span></li>
+        <li><a href="sign-up.html">sign-up.html</a> <span class="sm-path">회원가입 (→ log-in.html#register)</span></li>
+      </ul>
+    </section>
+
+    <!-- 법적 고지 -->
+    <section class="sm-sec">
+      <h2>법적 고지</h2>
+      <ul>
+        <li><a href="terms.html">terms.html</a> <span class="sm-path">이용약관</span></li>
+        <li><a href="privacy.html">privacy.html</a> <span class="sm-path">개인정보처리방침</span></li>
+      </ul>
+    </section>
+
+    <!-- 마이페이지 (로그인 후) -->
+    <section class="sm-sec">
+      <h2>마이페이지 <small style="font-size:.7rem;color:rgba(255,255,255,.4);font-weight:400;">(로그인 후 접근)</small></h2>
       <ul>
         <li><a href="mypage/index.html">mypage/index.html</a></li>
         <li><a href="mypage/profile/index.html">mypage/profile/index.html</a></li>
@@ -85,55 +149,31 @@
       </ul>
     </section>
 
+    <!-- 구버전 · 기타 -->
     <section class="sm-sec">
-      <h2>진단 · 안전정보</h2>
+      <h2>기타 · 레거시</h2>
       <ul>
-        <li><a href="diagnosis-start.html">diagnosis-start.html</a></li>
-        <li><a href="free-diagnosis.html">free-diagnosis.html</a></li>
-        <li><a href="free-diagnosis-result.html">free-diagnosis-result.html</a></li>
-        <li><a href="safety-news.html">safety-news.html</a></li>
-        <li><a href="safety-news-detail.html">safety-news-detail.html</a></li>
-      </ul>
-    </section>
-
-    <section class="sm-sec">
-      <h2>회사 · 서비스 · 콘텐츠</h2>
-      <ul>
-        <li><a href="about.html">about.html</a></li>
-        <li><a href="contact.html">contact.html</a></li>
-        <li><a href="faq.html">faq.html</a></li>
-        <li><a href="pricing.html">pricing.html</a></li>
-        <li><a href="service.html">service.html</a></li>
+        <li><a href="index-1.html">index-1.html</a> <span class="sm-path">TAI Safe (구)</span></li>
+        <li><a href="index-2.html">index-2.html</a> <span class="sm-path">TAI Manager (구)</span></li>
+        <li><a href="index-3.html">index-3.html</a> <span class="sm-path">TAI Agent (구)</span></li>
+        <li><a href="index-4.html">index-4.html</a> <span class="sm-path">TAI Care (구)</span></li>
+        <li><a href="index-5.html">index-5.html</a> <span class="sm-path">안전정보 허브 (구)</span></li>
+        <li><a href="index-6.html">index-6.html</a></li>
+        <li><a href="tai-fix.html">tai-fix.html</a></li>
+        <li><a href="construction.html">construction.html</a> <span class="sm-path">→ target/construction.html로 이전</span></li>
+        <li><a href="service.html">service.html</a> <span class="sm-path">→ service/ 개별 페이지로 이전</span></li>
         <li><a href="service-details.html">service-details.html</a></li>
-        <li><a href="team.html">team.html</a></li>
-        <li><a href="team-details.html">team-details.html</a></li>
         <li><a href="blog.html">blog.html</a></li>
-        <li><a href="blog-2.html">blog-2.html</a></li>
-        <li><a href="blog-3.html">blog-3.html</a></li>
         <li><a href="blog-single.html">blog-single.html</a></li>
-        <li><a href="blog-single-2.html">blog-single-2.html</a></li>
-        <li><a href="blog-single-3.html">blog-single-3.html</a></li>
-        <li><a href="patents.html">patents.html</a></li>
-      </ul>
-    </section>
-
-    <section class="sm-sec">
-      <h2>법적 고지</h2>
-      <ul>
-        <li><a href="terms.html">terms.html</a></li>
-        <li><a href="privacy.html">privacy.html</a></li>
-      </ul>
-    </section>
-
-    <section class="sm-sec">
-      <h2>기타 · 데모 · 점검</h2>
-      <ul>
-        <li><a href="demo.html">demo.html</a> <span class="sm-path">테마 데모</span></li>
+        <li><a href="demo.html">demo.html</a></li>
+        <li><a href="diagnosis-start.html">diagnosis-start.html</a></li>
         <li><a href="site-map.html">site-map.html</a> <span class="sm-path">이 페이지</span></li>
       </ul>
     </section>
 
-    <p class="sm-note" style="margin-top:32px;margin-bottom:0;">fragment: <code style="font-size:.75rem;color:rgba(255,255,255,.4);">assets/html/footer.html</code> — 공통 푸터 조각(단독 페이지 아님)</p>
+    <p class="sm-note" style="margin-top:32px;margin-bottom:0;">
+      최종 갱신: 2026-04-13 · 사이트맵 기준 22페이지 + 레거시
+    </p>
   </div>
 
   <div id="tai-footer"></div>
