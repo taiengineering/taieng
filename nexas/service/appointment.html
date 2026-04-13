@@ -14,63 +14,26 @@
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
 
-  /* ── 히어로 ── */
   .svc-hero {
     background: linear-gradient(135deg, #050a14, #0d1b2e, #0a1628);
-    padding: 110px 0 80px;
-    position: relative;
-    overflow: hidden;
+    padding: 110px 0 80px; position: relative; overflow: hidden;
   }
   .svc-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(6,182,212,.12) 0%, transparent 65%);
     pointer-events: none;
   }
   .svc-eyebrow {
-    display: inline-block;
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: #22d3ee;
-    background: rgba(6,182,212,.15);
-    border: 1px solid rgba(6,182,212,.4);
-    border-radius: 4px;
-    padding: 5px 12px;
-    margin-bottom: 22px;
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+    text-transform: uppercase; color: #22d3ee; background: rgba(6,182,212,.15);
+    border: 1px solid rgba(6,182,212,.4); border-radius: 4px; padding: 5px 12px; margin-bottom: 22px;
   }
-  .svc-hero h1 {
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 18px;
-  }
+  .svc-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 18px; }
   .svc-hero h1 em { color: #67e8f9; font-style: normal; }
-  .svc-hero p {
-    font-size: 1.05rem;
-    color: rgba(255,255,255,.72);
-    margin-bottom: 32px;
-    line-height: 1.65;
-  }
+  .svc-hero p { font-size: 1.05rem; color: rgba(255,255,255,.72); margin-bottom: 32px; line-height: 1.65; }
 
-  /* 히어로 우측 양면 뱃지 */
-  .hero-badge-wrap {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 16px;
-    padding: 28px 24px;
-  }
-  .hero-badge {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-  }
+  .hero-badge-wrap { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 28px 24px; }
+  .hero-badge { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px; margin-bottom: 12px; }
   .hero-badge:last-child { margin-bottom: 0; }
   .hero-badge.blue { background: rgba(6,182,212,.12); border: 1px solid rgba(6,182,212,.25); }
   .hero-badge.purple { background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.25); }
@@ -78,165 +41,43 @@
   .hero-badge .badge-text strong { display: block; font-size: .9rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
   .hero-badge .badge-text span { font-size: .78rem; color: rgba(255,255,255,.55); }
 
-  /* ── 양면 섹션 공통 ── */
-  .section-label {
-    display: inline-block;
-    font-size: .7rem;
-    font-weight: 800;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    padding: 4px 10px;
-    margin-bottom: 14px;
-  }
+  .section-label { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; border-radius: 4px; padding: 4px 10px; margin-bottom: 14px; }
   .label-blue { background: rgba(6,182,212,.12); color: #22d3ee; border: 1px solid rgba(6,182,212,.3); }
   .label-purple { background: rgba(139,92,246,.12); color: #a78bfa; border: 1px solid rgba(139,92,246,.3); }
 
-  /* ── 사업장 섹션 ── */
-  .employer-section {
-    background: #f8fafc;
-    padding: 88px 0;
-  }
-  .employer-section .sec-title {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 900;
-    color: #0d1b2a;
-    margin-bottom: 8px;
-  }
-  .employer-section .sec-sub {
-    color: #64748b;
-    font-size: .95rem;
-    margin-bottom: 48px;
-  }
-  .emp-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 28px 24px;
-    height: 100%;
-    border-top: 4px solid #0891b2;
-    box-shadow: 0 2px 16px rgba(0,0,0,.06);
-  }
-  .emp-card .ec-num {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #e2f4f8;
-    line-height: 1;
-    margin-bottom: 10px;
-  }
-  .emp-card h4 {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #0d1b2a;
-    margin-bottom: 10px;
-  }
-  .emp-card p {
-    font-size: .87rem;
-    color: #64748b;
-    line-height: 1.7;
-    margin: 0;
-  }
+  .employer-section { background: #f8fafc; padding: 88px 0; }
+  .employer-section .sec-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: #0d1b2a; margin-bottom: 8px; }
+  .employer-section .sec-sub { color: #64748b; font-size: .95rem; margin-bottom: 48px; }
+  .emp-card { background: #fff; border-radius: 16px; padding: 28px 24px; height: 100%; border-top: 4px solid #0891b2; box-shadow: 0 2px 16px rgba(0,0,0,.06); }
+  .emp-card .ec-num { font-size: 2rem; font-weight: 900; color: #e2f4f8; line-height: 1; margin-bottom: 10px; }
+  .emp-card h4 { font-size: 1rem; font-weight: 800; color: #0d1b2a; margin-bottom: 10px; }
+  .emp-card p { font-size: .87rem; color: #64748b; line-height: 1.7; margin: 0; }
 
-  /* ── 전문가 섹션 ── */
-  .expert-section {
-    background: #0d1b2a;
-    padding: 88px 0;
-  }
-  .expert-section .sec-title {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-  .expert-section .sec-sub {
-    color: rgba(255,255,255,.5);
-    font-size: .95rem;
-    margin-bottom: 48px;
-  }
-  .exp-card {
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 16px;
-    padding: 28px 24px;
-    height: 100%;
-    border-top: 4px solid #7c3aed;
-  }
-  .exp-card .ec-num {
-    font-size: 2rem;
-    font-weight: 900;
-    color: rgba(139,92,246,.2);
-    line-height: 1;
-    margin-bottom: 10px;
-  }
-  .exp-card h4 {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #a78bfa;
-    margin-bottom: 10px;
-  }
-  .exp-card p {
-    font-size: .87rem;
-    color: rgba(255,255,255,.6);
-    line-height: 1.7;
-    margin: 0;
-  }
+  .expert-section { background: #0d1b2a; padding: 88px 0; }
+  .expert-section .sec-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: #fff; margin-bottom: 8px; }
+  .expert-section .sec-sub { color: rgba(255,255,255,.5); font-size: .95rem; margin-bottom: 48px; }
+  .exp-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 28px 24px; height: 100%; border-top: 4px solid #7c3aed; }
+  .exp-card .ec-num { font-size: 2rem; font-weight: 900; color: rgba(139,92,246,.2); line-height: 1; margin-bottom: 10px; }
+  .exp-card h4 { font-size: 1rem; font-weight: 800; color: #a78bfa; margin-bottom: 10px; }
+  .exp-card p { font-size: .87rem; color: rgba(255,255,255,.6); line-height: 1.7; margin: 0; }
 
-  /* ── 자격 섹션 ── */
-  .qual-section {
-    background: #fff;
-    padding: 80px 0;
-  }
-  .qual-badge {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: #f1f5f9;
-    border-radius: 12px;
-    padding: 18px 20px;
-    height: 100%;
-  }
+  .qual-section { background: #fff; padding: 80px 0; }
+  .qual-badge { display: flex; align-items: center; gap: 14px; background: #f1f5f9; border-radius: 12px; padding: 18px 20px; height: 100%; }
   .qual-badge .qi { font-size: 1.8rem; flex-shrink: 0; }
   .qual-badge .qt strong { display: block; font-size: .95rem; font-weight: 800; color: #0d1b2a; }
   .qual-badge .qt span { font-size: .8rem; color: #64748b; }
 
-  /* ── 공통 장점 띠 ── */
-  .common-strip {
-    background: linear-gradient(135deg, #0f172a, #1e293b);
-    padding: 60px 0;
-  }
-  .strip-item {
-    text-align: center;
-    padding: 20px;
-  }
+  .common-strip { background: linear-gradient(135deg, #0f172a, #1e293b); padding: 60px 0; }
+  .strip-item { text-align: center; padding: 20px; }
   .strip-item .si-icon { font-size: 2rem; margin-bottom: 12px; }
   .strip-item h5 { font-size: .95rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
   .strip-item p { font-size: .82rem; color: rgba(255,255,255,.5); margin: 0; line-height: 1.5; }
 
-  /* ── CTA ── */
-  .cta-dual {
-    padding: 88px 0;
-    background: #f8fafc;
-  }
-  .cta-box {
-    border-radius: 20px;
-    padding: 44px 36px;
-    height: 100%;
-  }
-  .cta-box.blue-box {
-    background: linear-gradient(135deg, #0891b2, #0e7490);
-    color: #fff;
-  }
-  .cta-box.purple-box {
-    background: linear-gradient(135deg, #7c3aed, #5b21b6);
-    color: #fff;
-  }
-  .cta-box .cb-label {
-    font-size: .72rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.6);
-    margin-bottom: 14px;
-  }
+  .cta-dual { padding: 88px 0; background: #f8fafc; }
+  .cta-box { border-radius: 20px; padding: 44px 36px; height: 100%; }
+  .cta-box.blue-box { background: linear-gradient(135deg, #0891b2, #0e7490); color: #fff; }
+  .cta-box.purple-box { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: #fff; }
+  .cta-box .cb-label { font-size: .72rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 14px; }
   .cta-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
   .cta-box p { font-size: .9rem; color: rgba(255,255,255,.75); margin-bottom: 28px; line-height: 1.6; }
   </style>
@@ -246,7 +87,7 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ───────────────────────── 히어로 ───────────────────────── -->
+<!-- 히어로 -->
 <section class="svc-hero">
   <div class="container">
     <div class="row align-items-center g-5">
@@ -283,7 +124,7 @@
   </div>
 </section>
 
-<!-- ───────────────────────── 사업장 관점 ───────────────────────── -->
+<!-- 사업장 관점 -->
 <section class="employer-section">
   <div class="container">
     <div class="text-center mb-5">
@@ -296,7 +137,7 @@
         <div class="emp-card">
           <div class="ec-num">01</div>
           <h4>맞는 사람 찾기가 어렵습니다</h4>
-          <p>구인광고를 내고 면접을 진행해도 알맞는 인재를 찾는 게 어렵습니다. TAI에서는 사업장에 적합한 전문가를 먼저 검증하고 연결합니다.</p>
+          <p>구인광고를 내고 면접을 진행해도 알맞은 인재를 찾는 게 어렵습니다. TAI에서는 사업장에 적합한 전문가를 먼저 검증하고 연결합니다.</p>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -327,7 +168,7 @@
   </div>
 </section>
 
-<!-- ───────────────────────── 전문가 관점 ───────────────────────── -->
+<!-- 전문가 관점 -->
 <section class="expert-section">
   <div class="container">
     <div class="text-center mb-5">
@@ -371,46 +212,22 @@
   </div>
 </section>
 
-<!-- ───────────────────────── 공통 장점 ───────────────────────── -->
+<!-- 공통 장점 -->
 <section class="common-strip">
   <div class="container">
     <div class="text-center mb-5">
       <h3 style="color:#fff;font-size:1.5rem;font-weight:900;">TAI 매칭 플랫폼의 공통 장점</h3>
     </div>
     <div class="row g-3">
-      <div class="col-md-3">
-        <div class="strip-item">
-          <div class="si-icon">📋</div>
-          <h5>전자계약</h5>
-          <p>도장 없이 즉시 체결.<br>계약서 영구 보관.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="strip-item">
-          <div class="si-icon">🔒</div>
-          <h5>분쟁 방지</h5>
-          <p>계약관리시스템으로<br>손해볼 일 없습니다.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="strip-item">
-          <div class="si-icon">✅</div>
-          <h5>자격 검증</h5>
-          <p>등록 전 자격증·경력<br>사전 검증 완료.</p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="strip-item">
-          <div class="si-icon">💬</div>
-          <h5>매칭 서비스료</h5>
-          <p>성사 후 플랫폼 이용료.<br>사전 비용 없음.</p>
-        </div>
-      </div>
+      <div class="col-md-3"><div class="strip-item"><div class="si-icon">📋</div><h5>전자계약</h5><p>도장 없이 즉시 체결.<br>계약서 영구 보관.</p></div></div>
+      <div class="col-md-3"><div class="strip-item"><div class="si-icon">🔒</div><h5>분쟁 방지</h5><p>계약관리시스템으로<br>손해볼 일 없습니다.</p></div></div>
+      <div class="col-md-3"><div class="strip-item"><div class="si-icon">✅</div><h5>자격 검증</h5><p>등록 전 자격증·경력<br>사전 검증 완료.</p></div></div>
+      <div class="col-md-3"><div class="strip-item"><div class="si-icon">💬</div><h5>매칭 서비스료</h5><p>성사 후 플랫폼 이용료.<br>사전 비용 없음.</p></div></div>
     </div>
   </div>
 </section>
 
-<!-- ───────────────────────── 자격 섹션 ───────────────────────── -->
+<!-- 자격 섹션 -->
 <section class="qual-section">
   <div class="container">
     <div class="text-center mb-5">
@@ -418,65 +235,17 @@
       <p style="color:#64748b;font-size:.95rem;">TAI에 등록된 전문가들이 보유한 주요 자격입니다</p>
     </div>
     <div class="row g-3">
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge">
-          <div class="qi">🔧</div>
-          <div class="qt">
-            <strong>산업안전기사</strong>
-            <span>제조·건설 전 업종 안전관리자 선임</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge">
-          <div class="qi">🏗️</div>
-          <div class="qt">
-            <strong>건설안전기사</strong>
-            <span>건설현장 안전관리자 선임</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge">
-          <div class="qi">⚖️</div>
-          <div class="qt">
-            <strong>산업안전지도사</strong>
-            <span>고위험 사업장 안전관리 전문 지도</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge">
-          <div class="qi">🔥</div>
-          <div class="qt">
-            <strong>소방안전관리자</strong>
-            <span>건물·시설 소방안전관리자 선임</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge">
-          <div class="qi">⚡</div>
-          <div class="qt">
-            <strong>전기안전관리자</strong>
-            <span>전기설비 법정 안전관리자 선임</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="qual-badge" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px dashed #bae6fd;">
-          <div class="qi">➕</div>
-          <div class="qt">
-            <strong>기타 자격</strong>
-            <span>사업장 필요 자격 별도 문의 가능</span>
-          </div>
-        </div>
-      </div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge"><div class="qi">🔧</div><div class="qt"><strong>산업안전기사</strong><span>제조·건설 전 업종 안전관리자 선임</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge"><div class="qi">🏗️</div><div class="qt"><strong>건설안전기사</strong><span>건설현장 안전관리자 선임</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge"><div class="qi">⚖️</div><div class="qt"><strong>산업안전지도사</strong><span>고위험 사업장 안전관리 전문 지도</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge"><div class="qi">🔥</div><div class="qt"><strong>소방안전관리자</strong><span>건물·시설 소방안전관리자 선임</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge"><div class="qi">⚡</div><div class="qt"><strong>전기안전관리자</strong><span>전기설비 법정 안전관리자 선임</span></div></div></div>
+      <div class="col-lg-4 col-md-6"><div class="qual-badge" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px dashed #bae6fd;"><div class="qi">➕</div><div class="qt"><strong>기타 자격</strong><span>사업장 필요 자격 별도 문의 가능</span></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- ───────────────────────── 이중 CTA ───────────────────────── -->
+<!-- 이중 CTA -->
 <section class="cta-dual">
   <div class="container">
     <div class="text-center mb-5">
