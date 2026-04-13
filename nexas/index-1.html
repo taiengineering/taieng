@@ -1,139 +1,528 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe — 산업안전 법령 기반 SaaS">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI Safe — 겸직 안전관리자를 위한 산업안전 법령 자동화 SaaS. 법령진단→일정자동생성→작업자배정→D-3알림→기록보관까지 한번에.">
   <title>TAI SAFE | 이걸 혼자 다~ 제가 해결해드리겠습니다</title>
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/owl.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  .hero1 { min-height:70vh; display:flex; align-items:center; background:linear-gradient(120deg,#0d1b2a 55%,#1a3a5c 100%); padding:80px 0; }
-  .hero1 h1 { font-size:clamp(2.4rem,5vw,4rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
-  .hero1 .sub { font-size:clamp(1.1rem,2vw,1.4rem); color:rgba(255,255,255,.75); margin-bottom:36px; }
-  .flow-step { display:flex; gap:20px; align-items:flex-start; padding:22px 0; border-bottom:1px solid var(--border); }
-  .flow-step:last-child { border-bottom:none; }
-  .flow-num { width:40px; height:40px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .flow-step strong { font-size:1rem; font-weight:800; color:var(--navy); display:block; margin-bottom:5px; }
-  .flow-step p { margin:0; font-size:.88rem; color:var(--sub); line-height:1.55; }
-  .sector-card { background:#fff; border-radius:14px; padding:28px; box-shadow:0 2px 20px rgba(0,0,0,.07); height:100%; border-top:4px solid var(--red); }
-  .sector-card .icon { font-size:2.2rem; margin-bottom:14px; }
-  .sector-card h4 { font-size:1.1rem; font-weight:800; color:var(--navy); margin-bottom:10px; }
-  .sector-card ul { padding-left:16px; margin:0; }
-  .sector-card ul li { font-size:.85rem; color:var(--sub); margin-bottom:6px; }
-  /* pricing */
+  body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
+
+  /* ── 히어로 (index-1 banner-area 구조 기반) ── */
+  .safe-hero {
+    background: linear-gradient(120deg, #0d1b2a 55%, #1a3a5c 100%);
+    padding: 110px 0 80px;
+    position: relative; overflow: hidden;
+  }
+  .safe-hero::after {
+    content: '';
+    position: absolute; right: -10%; top: -20%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,57,70,.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .safe-hero .hero-inner { position: relative; z-index: 2; }
+  .safe-hero h6 {
+    font-size: .78rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #e63946; margin-bottom: 18px;
+  }
+  .safe-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900; color: #fff; line-height: 1.1;
+    letter-spacing: -.03em; margin-bottom: 16px;
+  }
+  .safe-hero .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: rgba(255,255,255,.72); margin-bottom: 36px; line-height: 1.65;
+  }
+  .safe-hero .input-group {
+    max-width: 460px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px; overflow: hidden;
+  }
+  .safe-hero .input-group input {
+    background: transparent; border: none; color: #fff; padding: 14px 18px;
+    font-size: .95rem;
+  }
+  .safe-hero .input-group input::placeholder { color: rgba(255,255,255,.45); }
+  .safe-hero .input-group input:focus { box-shadow: none; outline: none; }
+  .safe-hero .play-area { margin-top: 28px; display: flex; align-items: center; gap: 14px; }
+  .safe-hero .play-area a { color: rgba(255,255,255,.7); font-size: .88rem; text-decoration: none; }
+
+  /* 히어로 우측 이미지 자리 */
+  .hero-phone-placeholder {
+    background: rgba(255,255,255,.05);
+    border: 1.5px dashed rgba(255,255,255,.2);
+    border-radius: 24px;
+    min-height: 420px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: rgba(255,255,255,.35); text-align: center; padding: 24px; gap: 12px;
+  }
+  .hero-phone-placeholder .ph-ico { font-size: 3rem; opacity: .35; }
+  .hero-phone-placeholder .ph-lbl { font-weight: 700; color: rgba(255,255,255,.5); font-size: .95rem; }
+  .hero-phone-placeholder .ph-desc { font-size: .78rem; line-height: 1.6; }
+
+  /* ── 공감 섹션 "당신의 하루" ── */
+  .empathy-section { background: #fff; padding: 80px 0; }
+  .empathy-section h2 { font-size: clamp(1.8rem,3vw,2.4rem); font-weight:900; color:#0d1b2a; margin-bottom: 12px; }
+  .empathy-section .lead-text { font-size: 1rem; color: #64748b; line-height: 1.7; }
+  .day-timeline { margin-top: 32px; }
+  .day-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 18px 0; border-bottom: 1px solid #f0f1f3;
+  }
+  .day-item:last-child { border-bottom: none; }
+  .day-time { font-size: .78rem; font-weight: 700; color: #94a3b8; white-space: nowrap; min-width: 52px; padding-top: 3px; }
+  .day-emoji { font-size: 1.4rem; flex-shrink: 0; }
+  .day-item .d-title { font-size: .95rem; font-weight: 800; color: #0d1b2a; margin-bottom: 4px; }
+  .day-item .d-body { font-size: .84rem; color: #64748b; margin: 0; line-height: 1.55; }
+  .day-item.stress .d-title { color: #e63946; }
+
+  /* 공감 우측 이미지 */
+  .empathy-img-placeholder {
+    background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px;
+    min-height: 440px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #94a3b8; text-align: center; padding: 24px; gap: 10px;
+  }
+  .empathy-img-placeholder .ei-ico { font-size: 2.5rem; opacity: .4; }
+  .empathy-img-placeholder .ei-lbl { font-weight: 700; color: #64748b; font-size: .95rem; }
+
+  /* ── 해결 섹션 아코디언 (index-1 featured-area 구조) ── */
+  .solution-section { background: #f8fafc; padding: 80px 0; }
+  .solution-section h2 { font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 900; color: #0d1b2a; margin-bottom: 10px; }
+  .featured-accordion .accordion-item {
+    border: none; border-bottom: 1px solid #e8eaed; background: transparent;
+    border-radius: 0 !important;
+  }
+  .featured-accordion .accordion-item:last-child { border-bottom: none; }
+  .featured-accordion .accordion-button {
+    background: transparent; font-size: 1rem; font-weight: 800;
+    color: #0d1b2a; padding: 20px 0; gap: 14px; border-radius: 0 !important;
+  }
+  .featured-accordion .accordion-button:not(.collapsed) { color: #e63946; box-shadow: none; }
+  .featured-accordion .accordion-button::after { margin-left: auto; }
+  .featured-accordion .accordion-button img { width: 28px; flex-shrink: 0; }
+  .featured-accordion .accordion-body {
+    padding: 0 0 20px 42px; font-size: .88rem; color: #64748b; line-height: 1.7;
+  }
+  /* 솔루션 우측 이미지 */
+  .solution-img-placeholder {
+    background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px;
+    min-height: 420px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #94a3b8; text-align: center; padding: 24px; gap: 10px;
+  }
+
+  /* ── 섹터별 기능 (서비스 카드 3개) ── */
+  .sector-section { background: #fff; padding: 80px 0; }
+  .single-service-inner {
+    background: #fff; border-radius: 14px; padding: 32px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%;
+    border-top: 4px solid #e63946; transition: transform .2s;
+  }
+  .single-service-inner:hover { transform: translateY(-5px); }
+  .single-service-inner .num-badge {
+    width: 40px; height: 40px; border-radius: 50%; background: #e63946; color: #fff;
+    font-size: 1rem; font-weight: 900; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .single-service-inner h4 { font-size: 1.05rem; font-weight: 800; color: #0d1b2a; margin-bottom: 12px; }
+  .single-service-inner p { font-size: .85rem; color: #64748b; line-height: 1.65; margin: 0; }
+  /* 서비스 섹션 이미지 */
+  .svc-img-placeholder {
+    background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px;
+    min-height: 200px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #94a3b8; font-size: .8rem; text-align: center; padding: 16px; gap: 6px;
+  }
+
+  /* ── 확신 섹션 "실제로 된다" ── */
+  .proof-section { background: #0d1b2a; padding: 80px 0; }
+  .proof-quote {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px; padding: 32px 28px; height: 100%;
+  }
+  .proof-quote blockquote {
+    font-size: .92rem; color: rgba(255,255,255,.75); line-height: 1.75; margin: 0 0 20px;
+    font-style: italic;
+  }
+  .proof-quote .q-author { font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.55); }
+  .proof-quote .q-author em { color: #e63946; font-style: normal; }
+  .proof-stat { text-align: center; padding: 32px 20px; }
+  .proof-stat .ps-num { font-size: clamp(2.2rem,4vw,3rem); font-weight: 900; color: #e63946; line-height: 1; margin-bottom: 8px; }
+  .proof-stat .ps-lbl { font-size: .82rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+  /* ── 요금제 ── */
+  .pricing-section { background: #f8fafc; padding: 80px 0; }
   .price-sector-tabs { display:flex; gap:8px; justify-content:center; margin-bottom:36px; flex-wrap:wrap; }
-  .price-sector-tab { border:2px solid var(--border,#e2e4e8); background:#fff; border-radius:999px; padding:8px 24px; font-size:.92rem; font-weight:700; color:var(--sub,#6b7280); cursor:pointer; transition:all .2s; }
-  .price-sector-tab.active { background:var(--navy,#0d1b2a); border-color:var(--navy,#0d1b2a); color:#fff; }
+  .price-sector-tab { border:2px solid #e2e4e8; background:#fff; border-radius:999px; padding:8px 24px; font-size:.92rem; font-weight:700; color:#6b7280; cursor:pointer; transition:all .2s; }
+  .price-sector-tab.active { background:#0d1b2a; border-color:#0d1b2a; color:#fff; }
   .price-card { background:#fff; border-radius:16px; padding:36px 28px; box-shadow:0 4px 30px rgba(0,0,0,.08); height:100%; position:relative; }
-  .price-card.featured { border:2px solid var(--red); }
-  .price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--red); color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:4px 14px; }
-  .price-plan { font-size:.82rem; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
-  .price-amount { font-size:clamp(2rem,3.5vw,2.6rem); font-weight:900; color:var(--navy); line-height:1; margin-bottom:4px; }
-  .price-unit { font-size:.85rem; color:var(--sub); margin-bottom:20px; }
+  .price-card.featured { border:2px solid #e63946; }
+  .price-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:#e63946; color:#fff; font-size:.7rem; font-weight:700; border-radius:999px; padding:4px 14px; }
+  .price-plan { font-size:.82rem; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+  .price-amount { font-size:clamp(2rem,3.5vw,2.6rem); font-weight:900; color:#0d1b2a; line-height:1; margin-bottom:4px; }
+  .price-unit { font-size:.85rem; color:#6b7280; margin-bottom:20px; }
   .price-list { list-style:none; padding:0; margin:0 0 28px; }
-  .price-list li { font-size:.86rem; color:var(--sub); padding:7px 0; border-bottom:1px solid #f0f1f3; display:flex; gap:8px; }
-  .price-list li i { color:var(--red); margin-top:2px; flex-shrink:0; }
-  .price-loading { text-align:center; padding:60px 0; color:var(--sub); }
+  .price-list li { font-size:.86rem; color:#6b7280; padding:7px 0; border-bottom:1px solid #f0f1f3; display:flex; gap:8px; }
+  .price-list li i { color:#e63946; margin-top:2px; flex-shrink:0; }
+  .price-loading { text-align:center; padding:60px 0; color:#6b7280; }
+
+  /* ── CTA ── */
+  .cta-safe {
+    background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+    padding: 72px 0; text-align: center;
+  }
+  .cta-safe h2 { font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .cta-safe p { color: rgba(255,255,255,.8); margin-bottom: 32px; font-size: 1rem; }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html" class="active">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
-    </div>
-  </div>
-</nav>
+<body class="sc5">
 
-<section class="hero1">
-  <div class="sec-inner">
+<div class="preloader" id="preloader">
+  <div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div>
+</div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- ══ NAVBAR (index-1 구조 원본 유지) ══ -->
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container nav-container">
+      <div class="responsive-mobile-menu">
+        <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu"
+          aria-expanded="false" aria-label="메뉴">
+          <span class="icon-left"></span><span class="icon-right"></span>
+        </button>
+      </div>
+      <div class="logo">
+        <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI 엔지니어링"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="themefie_main_menu">
+        <ul class="navbar-nav menu-open text-end">
+          <li class="current-menu-item"><a href="index-1.html">TAI SAFE</a></li>
+          <li><a href="index-2.html">TAI MANAGER</a></li>
+          <li><a href="index-3.html">TAI AGENT</a></li>
+          <li><a href="index-4.html">TAI CARE</a></li>
+          <li><a href="safety-news.html">안전정보</a></li>
+        </ul>
+      </div>
+      <div class="nav-right-part nav-right-part-desktop">
+        <ul>
+          <li class="nav-auth-guest"><a href="log-in.html">로그인</a></li>
+          <li class="nav-auth-user d-none"><a href="mypage/">마이페이지</a></li>
+          <li><a href="free-diagnosis.html" class="btn btn-base">무료 법령 진단</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO (index-1 banner-area 구조 기반) ══ -->
+<section class="safe-hero" style="background-image: url(assets/img/banner/1.png)">
+  <div class="container hero-inner">
     <div class="row align-items-center g-5">
       <div class="col-lg-6">
-        <span class="page-hero-tag">TAI Safe SaaS</span>
+        <h6>TAI Safe SaaS — 산업안전 법령 자동화 플랫폼</h6>
         <h1>이걸 혼자 다~</h1>
-        <p class="sub">제가 해결해드리겠습니다.</p>
-        <p style="color:rgba(255,255,255,.6); font-size:.95rem; margin-bottom:32px; line-height:1.65;">법령진단 → 자동 일정 생성 → 작업자 배정 → D-3 알림 → 완료 기록<br>안전관리자가 혼자 하던 모든 것을 시스템이 분산합니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="free-diagnosis.html" class="btn-red">무료 법령 진단 시작하기</a>
-          <a href="pricing.html" class="btn-outline-white">요금 보기</a>
+        <p class="hero-sub">
+          제가 해결해드리겠습니다.<br>
+          법령 진단부터 자동 일정·알림·기록까지, 안전관리를 혼자 감당하지 않아도 됩니다.
+        </p>
+        <!-- 이메일 입력 + 바로 시작 -->
+        <div class="input-group mb-3">
+          <input type="email" placeholder="이메일 입력 후 무료 진단 시작" id="heroEmail">
+          <button class="btn btn-base" onclick="location.href='free-diagnosis.html'">진단 시작</button>
+        </div>
+        <div class="play-area">
+          <a href="#empathy">▼ 내 상황 확인하기</a>
+          <a href="pricing.html">요금제 보기</a>
         </div>
       </div>
-      <div class="col-lg-6"><img src="assets/img/app-screen/1.png" alt="TAI Safe" class="img-fluid" style="border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.4);"></div>
+      <div class="col-lg-6">
+        <!-- [이미지 자리] TAI Safe 모바일 앱 화면 — 지게차 점검 체크리스트 완료 화면 -->
+        <div class="hero-phone-placeholder">
+          <span class="ph-ico">📱</span>
+          <span class="ph-lbl">TAI Safe 모바일 점검 화면</span>
+          <span class="ph-desc">지게차 일일 점검 체크리스트<br>정상·이상·보류 3-tap 완료 UI<br>실제 서비스 스크린샷으로 교체 예정</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="background:var(--gray-bg);">
-  <div class="sec-inner">
+<!-- ══ 공감 섹션 "당신의 하루" ══ -->
+<section id="empathy" class="empathy-section">
+  <div class="container">
     <div class="row g-5 align-items-center">
-      <div class="col-lg-5">
-        <span class="sec-tag">작동 방식</span>
-        <h2 class="sec-h2">4단계로 자동 완성됩니다</h2>
-        <p class="sec-sub" style="color:var(--sub);">법령 진단 한 번이면 이후 모든 흐름이 자동입니다.</p>
+      <div class="col-lg-6">
+        <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:14px;">공감</h6>
+        <h2>혼자 감당하는<br>안전관리자의 하루</h2>
+        <p class="lead-text">다른 업무까지 겸직하면서 안전관리까지. 이 페이지를 보고 있는 당신의 하루가 이렇지 않으신가요?</p>
+        <div class="day-timeline">
+          <div class="day-item">
+            <span class="day-time">오전 8시</span>
+            <span class="day-emoji">😓</span>
+            <div><p class="d-title">출근하자마자 점검일지 밀린 것 발견</p><p class="d-body">지난주 점검을 못 한 설비가 3개. 실태조사 나오면 어쩌나.</p></div>
+          </div>
+          <div class="day-item stress">
+            <span class="day-time">오전 10시</span>
+            <span class="day-emoji">📋</span>
+            <div><p class="d-title">법령 개정 공문 도착 — 어느 설비에 적용?</p><p class="d-body">법령 원문을 읽어도 우리 사업장에 해당하는지 모르겠습니다.</p></div>
+          </div>
+          <div class="day-item">
+            <span class="day-time">오후 2시</span>
+            <span class="day-emoji">📞</span>
+            <div><p class="d-title">본업 업무 처리 중 점검 독촉 전화</p><p class="d-body">안전교육 일정, 위험성평가, 보고서 작성… 언제 다 합니까?</p></div>
+          </div>
+          <div class="day-item stress">
+            <span class="day-time">오후 5시</span>
+            <span class="day-emoji">😰</span>
+            <div><p class="d-title">퇴근 전 내일 교육 자료 준비</p><p class="d-body">야근입니다. 이 구조가 언제까지 계속될까요?</p></div>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-7">
-        <div class="flow-step"><div class="flow-num">1</div><div><strong>법령 자동 진단</strong><p>사업장·설비 정보를 입력하면 적용 법령과 의무 항목이 자동 도출됩니다.</p></div></div>
-        <div class="flow-step"><div class="flow-num">2</div><div><strong>점검 일정 자동 생성</strong><p>법령 주기에 맞춰 점검 일정이 생성되고, 담당자가 자동 배정됩니다.</p></div></div>
-        <div class="flow-step"><div class="flow-num">3</div><div><strong>D-3 알림 발송</strong><p>점검 3일 전 담당 작업자에게 자동 알림. 누락이 없어집니다.</p></div></div>
-        <div class="flow-step"><div class="flow-num">4</div><div><strong>완료 기록 + 이상 보고</strong><p>완료 내용은 자동 저장되고, 이상 발생 시 관리자에게 즉시 알립니다.</p></div></div>
+      <div class="col-lg-6">
+        <!-- [이미지 자리] 서류 더미와 컴퓨터 앞에 지친 안전관리자 — 현장 공감 이미지 -->
+        <div class="empathy-img-placeholder">
+          <span class="ei-ico">🗂️</span>
+          <span class="ei-lbl">공감 이미지</span>
+          <span style="font-size:.8rem;color:#94a3b8;">서류 더미 앞 지친 안전관리자<br>또는 복잡한 엑셀 화면<br>실제 현장 사진으로 교체 예정</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="background:#fff;">
-  <div class="sec-inner">
-    <div class="text-center mb-5"><span class="sec-tag">섹터별 기능</span><h2 class="sec-h2">산업·건설·건물 모두 커버합니다</h2></div>
+<!-- ══ 해결 섹션 아코디언 (index-1 featured-area 구조) ══ -->
+<section class="solution-section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:14px;">해결</h6>
+        <h2>TAI Safe가<br>대신 처리합니다</h2>
+        <p style="color:#64748b;margin-bottom:32px;line-height:1.7;">안전관리자는 이상 상황 대응만. 나머지는 TAI Safe가 자동으로 합니다.</p>
+        <div class="featured-accordion" id="accordionSafe">
+          <div class="accordion-item active">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#acc1" aria-expanded="true">
+                <span style="font-size:1.3rem;">⚖️</span>&nbsp;&nbsp;법령 자동 진단
+              </button>
+            </h2>
+            <div id="acc1" class="accordion-collapse collapse show" data-bs-parent="#accordionSafe">
+              <div class="accordion-body">
+                사업장 정보(업종·규모·설비·공정)를 입력하면 적용 법령과 의무 항목이 자동 도출됩니다. 특허 출원 기술 기반 조건코드 엔진이 판단합니다. 법령 원문을 직접 읽을 필요가 없습니다.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc2" aria-expanded="false">
+                <span style="font-size:1.3rem;">📅</span>&nbsp;&nbsp;점검 일정 자동 생성 + 작업자 배정
+              </button>
+            </h2>
+            <div id="acc2" class="accordion-collapse collapse" data-bs-parent="#accordionSafe">
+              <div class="accordion-body">
+                법령 주기에 맞춰 점검 일정이 자동 생성되고, 담당 작업자에게 자동 배정됩니다. 안전관리자는 배정 현황을 확인하고 이상 상황에만 개입하면 됩니다.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc3" aria-expanded="false">
+                <span style="font-size:1.3rem;">🔔</span>&nbsp;&nbsp;D-3 자동 알림 발송
+              </button>
+            </h2>
+            <div id="acc3" class="accordion-collapse collapse" data-bs-parent="#accordionSafe">
+              <div class="accordion-body">
+                점검 3일 전 담당 작업자에게 SMS·카카오톡 알림이 자동 발송됩니다. 독촉 전화, 수동 연락이 사라집니다. 누락이 구조적으로 불가능해집니다.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#acc4" aria-expanded="false">
+                <span style="font-size:1.3rem;">📁</span>&nbsp;&nbsp;완료 기록 자동 저장 + 보고서 생성
+              </button>
+            </h2>
+            <div id="acc4" class="accordion-collapse collapse" data-bs-parent="#accordionSafe">
+              <div class="accordion-body">
+                작업자가 체크하면 즉시 저장됩니다. 이상 발생 시 관리자에게 실시간 알림. 감사·실태조사 대응용 보고서도 자동 생성됩니다. 서류 준비에 야근할 필요가 없습니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <!-- [이미지 자리] TAI Safe 대시보드 화면 — 법령 의무 목록 + 완료율 도넛차트 -->
+        <div class="solution-img-placeholder">
+          <span style="font-size:2rem;opacity:.4;">🖥️</span>
+          <span style="font-weight:700;color:#64748b;font-size:.95rem;">TAI Safe 관리자 대시보드</span>
+          <span style="font-size:.8rem;color:#94a3b8;">법령 의무 목록 + 완료율 현황<br>실제 서비스 스크린샷으로 교체 예정</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 섹터별 기능 (3단계 서비스 카드) ══ -->
+<section class="sector-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">섹터별 기능</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;">산업·건설·건물 모두 커버합니다</h2>
+    </div>
     <div class="row g-4">
-      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏭</div><h4>산업·공장</h4><ul><li>지게차·프레스 등 설비별 법정 점검 자동화</li><li>안전보건 교육 일정 관리</li><li>위험성평가 기록 관리</li><li>작업자별 점검 이력 누적</li></ul></div></div>
-      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏗️</div><h4>건설현장</h4><ul><li>공종별 안전점검 체크리스트 자동 생성</li><li>TBM 미팅 기록 관리</li><li>하도급 작업자 안전교육 관리</li><li>현장 위험 요소 신고 및 조치</li></ul></div></div>
-      <div class="col-lg-4"><div class="sector-card"><div class="icon">🏢</div><h4>건물·시설</h4><ul><li>소방·전기·승강기 등 다중 법령 의무</li><li>건물 안전관리자 선임 의무 진단</li><li>시설 점검 결과 보고서 자동 생성</li><li>다중 시설 통합 관리</li></ul></div></div>
+      <div class="col-lg-4 col-md-6">
+        <div class="single-service-inner">
+          <div class="num-badge">1</div>
+          <!-- [이미지 자리] 공장 내부 설비 점검 이미지 (150×100px) -->
+          <div class="svc-img-placeholder mb-3">
+            <span style="font-size:1.5rem;">🏭</span>
+            <span>산업·공장 현장 이미지</span>
+          </div>
+          <h4>산업·공장</h4>
+          <p>지게차·프레스 등 설비별 법정 점검 자동화. 위험성평가·교육 일정을 작업자에게 분산 배정합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="single-service-inner">
+          <div class="num-badge">2</div>
+          <!-- [이미지 자리] 건설현장 TBM 미팅 이미지 (150×100px) -->
+          <div class="svc-img-placeholder mb-3">
+            <span style="font-size:1.5rem;">🏗️</span>
+            <span>건설현장 TBM 이미지</span>
+          </div>
+          <h4>건설현장</h4>
+          <p>공종별 체크리스트 자동 생성. TBM 미팅 기록, 하도급 작업자 안전교육, 현장 위험 신고·조치까지.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="single-service-inner">
+          <div class="num-badge">3</div>
+          <!-- [이미지 자리] 건물 소방·전기 점검 이미지 (150×100px) -->
+          <div class="svc-img-placeholder mb-3">
+            <span style="font-size:1.5rem;">🏢</span>
+            <span>건물·시설 점검 이미지</span>
+          </div>
+          <h4>건물·시설</h4>
+          <p>소방·전기·승강기 다중 법령 의무를 통합 관리. 다중 시설도 한 계정에서. 보고서 자동 생성.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- pricing: API 동적 로드 -->
-<section id="pricing" class="sec" style="background:var(--gray-bg);">
-  <div class="sec-inner">
-    <div class="text-center mb-4">
-      <span class="sec-tag">요금제</span>
-      <h2 class="sec-h2">부담 없이 시작하세요</h2>
-      <p style="color:var(--sub);">첫 달 무료 법령 진단 후 구독을 시작할 수 있습니다</p>
+<!-- ══ 확신 섹션 "실제로 된다는 증거" ══ -->
+<section class="proof-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">확신</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#fff;margin-bottom:10px;">실제로 됩니다</h2>
+      <p style="color:rgba(255,255,255,.55);">숫자와 사용자 이야기로 확인하세요</p>
     </div>
-    <!-- 섹터 탭 -->
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="proof-stat">
+          <div class="ps-num">2,080<span style="font-size:1.2rem;">+</span></div>
+          <div class="ps-lbl">법령 규칙 엔진<br>의무 항목 DB</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="proof-stat">
+          <div class="ps-num">6건</div>
+          <div class="ps-lbl">특허 출원 완료<br>Patent Pending</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="proof-stat">
+          <div class="ps-num">0건</div>
+          <div class="ps-lbl">TAI 사용 사업장<br>감사 적발 건수</div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4 mt-2">
+      <div class="col-md-6">
+        <div class="proof-quote">
+          <!-- [이미지 자리] 사용자 프로필 사진 (40×40px 원형) -->
+          <blockquote>
+            "혼자 다 하던 점검 일정 잡는 게 제일 힘들었는데, TAI 쓰고 나서 그냥 배정하고 확인만 합니다. 야근이 줄었어요."
+          </blockquote>
+          <p class="q-author"><em>제조업 안전관리자</em> · 겸직 담당자 (금속 가공 50인)</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="proof-quote">
+          <blockquote>
+            "법령이 바뀔 때마다 뭘 해야 하는지 몰랐는데, TAI가 자동으로 알려줘서 대응이 빨라졌습니다."
+          </blockquote>
+          <p class="q-author"><em>건물 안전관리자</em> · 복합건물 관리팀</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 요금제 (API 동적 로드) ══ -->
+<section id="pricing" class="pricing-section">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">요금제</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;margin-bottom:10px;">부담 없이 시작하세요</h2>
+      <p style="color:#64748b;">첫 달 무료 법령 진단 후 구독을 시작할 수 있습니다</p>
+    </div>
     <div class="price-sector-tabs">
       <button class="price-sector-tab active" data-sector="facility" onclick="switchSector(this,'facility')">🏢 건물·시설</button>
       <button class="price-sector-tab" data-sector="industry" onclick="switchSector(this,'industry')">🏭 산업</button>
       <button class="price-sector-tab" data-sector="construction" onclick="switchSector(this,'construction')">🏗 건설</button>
     </div>
-    <!-- 카드 영역 -->
     <div id="priceCards" class="row g-4 justify-content-center">
       <div class="price-loading"><i class="fas fa-spinner fa-spin me-2"></i>요금 정보를 불러오는 중...</div>
     </div>
     <div class="text-center mt-4">
-      <a href="pricing.html" style="color:var(--sub); font-size:.9rem; text-decoration:underline;">법령진단 가격 포함 전체 요금표 보기 →</a>
+      <a href="pricing.html" style="color:#64748b;font-size:.9rem;text-decoration:underline;">법령진단 포함 전체 요금표 보기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-safe">
+  <div class="container">
+    <h2>오늘 바로 시작하세요</h2>
+    <p>무료 법령 진단으로 내 사업장의 위험을 먼저 확인하세요. 3분이면 충분합니다.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:14px 36px;font-weight:700;">무료 법령 진단 시작</a>
+      <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">도입 문의하기</a>
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/imageloded.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/main.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-const API = 'https://api.taieng.co.kr';
-let _saasData = [];
-let _curSector = 'facility';
+if (typeof WOW !== 'undefined') new WOW().init();
 
-const FEATURED = { facility:'PREMIUM', industry:'PREMIUM', construction:'SINGLE' };
-const SECTOR_LABEL = { facility:'건물·시설', industry:'산업·공장', construction:'건설현장' };
+const API = 'https://api.taieng.co.kr';
+let _saasData = [], _curSector = 'facility';
 
 function fmtPrice(item) {
   if (item.price_display) return item.price_display;
@@ -141,45 +530,31 @@ function fmtPrice(item) {
   if (item.price < 0) return '협의';
   return item.price.toLocaleString('ko-KR') + '<span style="font-size:1rem;">원</span>';
 }
-
 function renderCards(sector) {
-  const plans = _saasData.filter(d => d.sector === sector && d.is_active)
-    .sort((a,b) => a.sort_order - b.sort_order);
+  const plans = _saasData.filter(d => d.sector === sector && d.is_active).sort((a,b) => a.sort_order - b.sort_order);
   const wrap = document.getElementById('priceCards');
   if (!plans.length) { wrap.innerHTML = '<p class="price-loading">요금 정보가 없습니다.</p>'; return; }
-  const featured = FEATURED[sector];
-  const colClass = plans.length <= 2 ? 'col-lg-4 col-md-6' : plans.length === 3 ? 'col-lg-4 col-md-6' : 'col-lg-3 col-md-6';
   wrap.innerHTML = plans.map(p => {
-    const isFeat = p.tier_code === featured;
-    const isCustom = p.price < 0 || p.tier_code === 'CUSTOM' || p.tier_code === 'ENTERPRISE';
-    const btnHref = isCustom ? 'contact.html' : 'free-diagnosis.html';
-    const btnLabel = isCustom ? '문의하기' : '무료로 시작하기';
-    const btnClass = isFeat ? 'btn-red' : (isCustom ? 'btn-navy' : 'btn-outline');
-    const priceUnit = (p.price === 0 || p.price < 0) ? '&nbsp;' : '/ 월 (VAT 별도)';
+    const isFeat = p.tier_code === 'PREMIUM';
     const feats = p.description ? p.description.split('/').map(f => f.trim()).filter(Boolean) : [];
-    return `
-    <div class="${colClass}">
-      <div class="price-card${isFeat ? ' featured' : ''}">
+    return `<div class="col-lg-4 col-md-6">
+      <div class="price-card${isFeat?' featured':''}">
         ${isFeat ? '<span class="price-badge">추천</span>' : ''}
         <p class="price-plan">${p.label}</p>
         <p class="price-amount">${fmtPrice(p)}</p>
-        <p class="price-unit">${priceUnit}</p>
-        <ul class="price-list">
-          ${feats.map(f => `<li><i class="fas fa-check"></i>${f}</li>`).join('')}
-        </ul>
-        <a href="${btnHref}" class="${btnClass} w-100 text-center">${btnLabel}</a>
+        <p class="price-unit">${p.price > 0 ? '/ 월 (VAT 별도)' : '&nbsp;'}</p>
+        <ul class="price-list">${feats.map(f=>`<li><i class="fas fa-check"></i>${f}</li>`).join('')}</ul>
+        <a href="${p.price<0?'contact.html':'free-diagnosis.html'}" class="${isFeat?'btn btn-base':'btn btn-border'} w-100 text-center">${p.price<0?'문의하기':'무료로 시작하기'}</a>
       </div>
     </div>`;
   }).join('');
 }
-
 function switchSector(btn, sector) {
   document.querySelectorAll('.price-sector-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   _curSector = sector;
   renderCards(sector);
 }
-
 async function loadPricing() {
   try {
     const res = await fetch(API + '/price-policy?category=saas');
@@ -190,7 +565,7 @@ async function loadPricing() {
     document.getElementById('priceCards').innerHTML = '<p class="price-loading">요금 정보를 불러올 수 없습니다.</p>';
   }
 }
-
 document.addEventListener('DOMContentLoaded', loadPricing);
 </script>
-</body></html>
+</body>
+</html>
