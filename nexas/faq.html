@@ -4,12 +4,15 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>자주하는 질문 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .faq-hero { background:var(--navy); padding:60px 0 50px; }
+  body { font-family: 'Noto Sans KR', sans-serif; }
+  .faq-hero { background:var(--navy); padding:100px 0 50px; }
   .faq-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
   .faq-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
   .faq-cat-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px; }
@@ -26,20 +29,15 @@
   .still-question p { color:rgba(255,255,255,.6); font-size:.88rem; margin-bottom:20px; }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
-    </div>
-  </div>
-</nav>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
+
 <div class="faq-hero"><div class="sec-inner"><h1>자주 묻는 질문</h1><p>TAI 서비스에 대해 가장 많이 묻는 질문들을 정리했습니다</p></div></div>
+
 <section class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
     <div class="row g-5">
@@ -68,14 +66,27 @@
         <div style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:80px;">
           <h5 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:16px;">빠른 시작</h5>
           <a href="free-diagnosis.html" class="btn-red d-block text-center" style="margin-bottom:12px;">무료 법령 진단</a>
-          <a href="sign-up.html" class="btn-outline d-block text-center" style="margin-bottom:20px;">무료 회원가입</a>
-          <div style="padding-top:16px;border-top:1px solid var(--border);"><p style="font-size:.82rem;color:var(--sub);margin-bottom:12px;">관련 서비스</p><div style="display:flex;flex-direction:column;gap:8px;"><a href="index-1.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI Safe SaaS</a><a href="index-2.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI MANAGER (선임)</a><a href="index-3.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI FIX (수선)</a></div></div>
+          <a href="log-in.html" class="btn-outline d-block text-center" style="margin-bottom:20px;">로그인</a>
+          <div style="padding-top:16px;border-top:1px solid var(--border);">
+            <p style="font-size:.82rem;color:var(--sub);margin-bottom:12px;">관련 서비스</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <a href="service/saas.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI Safe SaaS</a>
+              <a href="service/appointment.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 선임 연결</a>
+              <a href="service/repair.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 수선 연결</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>

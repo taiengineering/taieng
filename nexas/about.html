@@ -7,9 +7,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <style>
-  .about-hero { min-height:60vh; display:flex; align-items:center; background:linear-gradient(140deg,#0d1b2a 0%,#0a3060 100%); padding:80px 0; }
+  body { font-family: 'Noto Sans KR', sans-serif; }
+  .about-hero { min-height:60vh; display:flex; align-items:center; background:linear-gradient(140deg,#0d1b2a 0%,#0a3060 100%); padding:100px 0 80px; }
   .about-hero h1 { font-size:clamp(2rem,5vw,3.6rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
   .about-hero p { color:rgba(255,255,255,.65); font-size:1rem; line-height:1.7; max-width:540px; }
   .value-card { background:#fff; border-radius:14px; padding:28px; box-shadow:0 2px 14px rgba(0,0,0,.06); height:100%; border-top:4px solid var(--red); }
@@ -34,23 +38,32 @@
   .tl-desc { font-size:.82rem; color:var(--sub); }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
+
+<section class="about-hero">
+  <div class="sec-inner">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <span style="display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.3);border-radius:4px;padding:4px 10px;margin-bottom:20px;">ABOUT TAI</span>
+        <h1>모두가<br>안전할 수 있습니다.</h1>
+        <p>법령 기반 산업안전 생태계를 만들어갑니다. 복잡한 법령을 이해하기 쉽게, 의무를 자동으로, 현장이 실제로 안전해지도록.</p>
+      </div>
     </div>
   </div>
-</nav>
-<section class="about-hero"><div class="sec-inner"><div class="row align-items-center g-5"><div class="col-lg-7"><span style="display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:rgba(230,57,70,.15);border:1px solid rgba(230,57,70,.3);border-radius:4px;padding:4px 10px;margin-bottom:20px;">ABOUT TAI</span><h1>모두가<br>안전할 수 있습니다.</h1><p>법령 기반 산업안전 생태계를 만들어갑니다. 복잡한 법령을 이해하기 쉽게, 의무를 자동으로, 현장이 실제로 안전해지도록.</p></div></div></div></section>
+</section>
+
 <section class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
-    <div class="text-center mb-5"><span class="sec-tag">핵심 가치</span><h2 class="sec-h2">이걸 왜 몰랐지?</h2><p style="color:var(--sub); max-width:480px; margin:0 auto;">모르고 위반하고, 모르고 다칩니다. TAI는 모르는 것이 없어지는 세상을 만듭니다.</p></div>
+    <div class="text-center mb-5">
+      <span class="sec-tag">핵심 가치</span>
+      <h2 class="sec-h2">이걸 왜 몰랐지?</h2>
+      <p style="color:var(--sub); max-width:480px; margin:0 auto;">모르고 위반하고, 모르고 다칩니다. TAI는 모르는 것이 없어지는 세상을 만듭니다.</p>
+    </div>
     <div class="row g-4">
       <div class="col-lg-4 col-md-6"><div class="value-card"><div class="v-icon">📐</div><h5>법령 기반</h5><p>감이 아닌 법령 조문을 기준으로 의무를 도출합니다. 2,000개 이상의 법령 규칙을 구조화했습니다.</p></div></div>
       <div class="col-lg-4 col-md-6"><div class="value-card"><div class="v-icon">🔄</div><h5>자동화</h5><p>안전관리자가 혼자 하던 반복 작업을 시스템이 대신합니다. 배정·알림·기록이 자동으로 이루어집니다.</p></div></div>
@@ -58,25 +71,32 @@
     </div>
   </div>
 </section>
+
 <section class="sec" style="background:#fff;">
   <div class="sec-inner">
     <div class="row g-5">
       <div class="col-lg-6">
-        <span class="sec-tag">회사 정보</span><h2 class="sec-h2" style="margin-bottom:28px;">TAI 엔지니어링</h2>
+        <span class="sec-tag">회사 정보</span>
+        <h2 class="sec-h2" style="margin-bottom:28px;">TAI 엔지니어링</h2>
         <div class="company-info-grid">
           <div class="ci-row"><div class="ci-label">대표</div><div class="ci-value">심태왕</div></div>
           <div class="ci-row"><div class="ci-label">설립</div><div class="ci-value">2026년</div></div>
           <div class="ci-row"><div class="ci-label">사업자등록번호</div><div class="ci-value">723-39-01422</div></div>
-          <div class="ci-row"><div class="ci-label">통신판매신고</div><div class="ci-value">제2011-강원춘천-0039호</div></div>
+          <div class="ci-row"><div class="ci-label">통신판매신고</div><div class="ci-value">제2026-서울강남-02132호</div></div>
           <div class="ci-row" style="grid-column:1/-1;"><div class="ci-label">주소</div><div class="ci-value">서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</div></div>
           <div class="ci-row"><div class="ci-label">전화</div><div class="ci-value">070-8080-1858</div></div>
           <div class="ci-row"><div class="ci-label">팩스</div><div class="ci-value">0504-845-8888</div></div>
           <div class="ci-row" style="grid-column:1/-1;"><div class="ci-label">이메일</div><div class="ci-value">tai@taieng.co.kr</div></div>
         </div>
-        <div class="patent-box" style="margin-top:24px;"><p class="p-label">특허 출원</p><h4>조건코드 기반 산업안전 법령 자동 판정 시스템</h4><p>출원번호: 10-2026-0056330<br>출원일: 2026년 3월 29일<br>심사청구 기한: 2029년 3월 29일</p></div>
+        <div class="patent-box" style="margin-top:24px;">
+          <p class="p-label">특허 출원</p>
+          <h4>조건코드 기반 산업안전 법령 자동 판정 시스템</h4>
+          <p>출원번호: 10-2026-0056330<br>출원일: 2026년 3월 29일<br>심사청구 기한: 2029년 3월 29일</p>
+        </div>
       </div>
       <div class="col-lg-6">
-        <span class="sec-tag">연혁</span><h2 class="sec-h2" style="margin-bottom:28px;">TAI의 여정</h2>
+        <span class="sec-tag">연혁</span>
+        <h2 class="sec-h2" style="margin-bottom:28px;">TAI의 여정</h2>
         <div class="timeline">
           <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026년 3월</div><div class="tl-title">특허 출원 완료</div><div class="tl-desc">조건코드 기반 산업안전 법령 자동 판정 시스템 (10-2026-0056330)</div></div>
           <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2026년 2월</div><div class="tl-title">법령 엔진 v1.0 완성</div><div class="tl-desc">건물·산업·건설 섹터 2,000개 이상 법령 규칙 구조화 완료</div></div>
@@ -87,10 +107,22 @@
     </div>
   </div>
 </section>
+
 <section style="background:var(--navy); padding:80px 0; text-align:center;">
-  <div class="sec-inner"><h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-bottom:12px;">함께 만들어가겠습니다</h2><p style="color:rgba(255,255,255,.6);margin-bottom:32px;">모두가 안전한 현장을 위해 TAI 엔지니어링이 함께합니다.</p><a href="contact.html" class="btn-red" style="margin-right:12px;">문의하기</a><a href="free-diagnosis.html" class="btn-outline-white">무료 진단 시작</a></div>
+  <div class="sec-inner">
+    <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-bottom:12px;">함께 만들어가겠습니다</h2>
+    <p style="color:rgba(255,255,255,.6);margin-bottom:32px;">모두가 안전한 현장을 위해 TAI 엔지니어링이 함께합니다.</p>
+    <a href="contact.html" class="btn-red" style="margin-right:12px;">문의하기</a>
+    <a href="free-diagnosis.html" class="btn-outline-white">무료 진단 시작</a>
+  </div>
 </section>
+
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 </body></html>
