@@ -31,7 +31,6 @@
   .plan-btn{display:block;text-align:center;padding:13px;border-radius:10px;font-weight:700;font-size:.95rem;text-decoration:none;}
   .plan-btn.primary{background:#1a5fd4;color:#fff;}
   .plan-btn.outline{background:#fff;border:1.5px solid #1a5fd4;color:#1a5fd4;}
-  .feature-table-section{background:#f8fafc;padding:80px 0;}
   .cta-section{background:linear-gradient(135deg,#1a5fd4,#1e40af);padding:72px 0;text-align:center;}
   .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
   .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
@@ -40,14 +39,7 @@
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-<header class="navbar-area">
-  <nav class="navbar navbar-expand-lg"><div class="container nav-container">
-    <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
-    <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
-    <div class="collapse navbar-collapse" id="nav1"><ul class="navbar-nav menu-open text-end"><li><a href="../index-1.html">TAI SAFE</a></li><li><a href="../index-2.html">TAI MANAGER</a></li><li><a href="../index-3.html">TAI AGENT</a></li><li><a href="../index-4.html">TAI CARE</a></li><li><a href="../safety-news.html">안전정보</a></li></ul></div>
-    <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
-  </div></nav>
-</header>
+<div id="tai-header"></div>
 
 <section class="svc-hero">
   <div class="container">
@@ -55,7 +47,7 @@
       <div class="col-lg-7">
         <span class="svc-eyebrow">☁️ SaaS 구독</span>
         <h1>월 79,000원으로<br><em>안전관리 완성</em></h1>
-        <p>법령 기반 자동화, 작업자 배정, D-3 알림, 서류 자동화까지. TAI Safe SaaS 하나로 사업장 안전관리 전 과정을 커버합니다.</p>
+        <p>법령 기반 자동화, 작업자 배정, D-3 알림, 신고서식 자동화까지. TAI Safe SaaS 하나로 사업장 안전관리 전 과정을 커버합니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료로 시작하기</a>
           <a href="../pricing.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">요금제 전체 보기</a>
@@ -91,7 +83,7 @@
             <li>✅ 법령 의무 자동 도출</li>
             <li>✅ 점검 일정 자동 생성</li>
             <li>✅ D-3 SMS 알림</li>
-            <li>✅ 신고서식 자동화 (월 10건)</li>
+            <li>✅ 신고서식 자동화 (포함 10건/월)</li>
             <li>✅ 작업자 최대 10명</li>
             <li>✅ 관리자 대시보드</li>
           </ul>
@@ -107,7 +99,7 @@
           <ul class="plan-feature">
             <li>✅ BASIC 모든 기능 포함</li>
             <li>✅ D-3 카카오톡 알림</li>
-            <li>✅ 신고서식 자동화 (월 30건)</li>
+            <li>✅ 신고서식 자동화 (포함 30건/월)</li>
             <li>✅ 작업자 최대 50명</li>
             <li>✅ TBM 기록 자동화</li>
             <li>✅ 화학물질 라벨 생성</li>
@@ -153,6 +145,8 @@
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/wow.min.js"></script>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/header.js"></script>
+<script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script>if(typeof WOW!=='undefined') new WOW().init();</script>
 </body>
