@@ -4,9 +4,11 @@
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>무료 법령진단 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   * { box-sizing: border-box; }
   body { margin: 0; font-family: 'Noto Sans KR', sans-serif; }
@@ -28,45 +30,20 @@
     color: #fff;
     position: sticky; top: 64px; height: calc(100vh - 64px);
   }
-  .diag-left .dl-tag {
-    font-size: .72rem; font-weight: 700; letter-spacing: .12em;
-    text-transform: uppercase; color: rgba(255,255,255,.5);
-    margin-bottom: 16px;
-  }
-  .diag-left h2 {
-    font-size: 2rem; font-weight: 900; line-height: 1.25;
-    margin-bottom: 20px; color: #fff;
-  }
-  .diag-left .dl-desc {
-    font-size: .88rem; color: rgba(255,255,255,.7);
-    line-height: 1.75; margin-bottom: 32px;
-  }
+  .diag-left .dl-tag { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 16px; }
+  .diag-left h2 { font-size: 2rem; font-weight: 900; line-height: 1.25; margin-bottom: 20px; color: #fff; }
+  .diag-left .dl-desc { font-size: .88rem; color: rgba(255,255,255,.7); line-height: 1.75; margin-bottom: 32px; }
   .diag-left .dl-list { list-style: none; padding: 0; margin: 0; }
-  .diag-left .dl-list li {
-    font-size: .85rem; color: rgba(255,255,255,.85);
-    padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08);
-    display: flex; align-items: flex-start; gap: 10px;
-  }
+  .diag-left .dl-list li { font-size: .85rem; color: rgba(255,255,255,.85); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: flex-start; gap: 10px; }
   .diag-left .dl-list li::before { content: '✓'; color: #4ade80; font-weight: 900; flex-shrink: 0; }
-  .diag-left .dl-badge {
-    display: inline-block; background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
-    padding: 6px 16px; font-size: .78rem; font-weight: 700;
-    color: rgba(255,255,255,.85); margin-top: 28px;
-  }
+  .diag-left .dl-badge { display: inline-block; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 999px; padding: 6px 16px; font-size: .78rem; font-weight: 700; color: rgba(255,255,255,.85); margin-top: 28px; }
 
   .diag-right { padding: 60px 52px; overflow-y: auto; background: #fff; }
   @media(max-width:600px) { .diag-right { padding: 36px 20px; } }
 
-  /* ── 진행 표시 ── */
   .progress-bar-wrap { display: flex; align-items: center; margin-bottom: 36px; }
   .pb-step { display: flex; flex-direction: column; align-items: center; gap: 5px; flex: 0 0 auto; }
-  .pb-dot {
-    width: 30px; height: 30px; border-radius: 50%;
-    background: #e8eaed; color: #94a3b8;
-    font-size: .8rem; font-weight: 800;
-    display: flex; align-items: center; justify-content: center; transition: all .2s;
-  }
+  .pb-dot { width: 30px; height: 30px; border-radius: 50%; background: #e8eaed; color: #94a3b8; font-size: .8rem; font-weight: 800; display: flex; align-items: center; justify-content: center; transition: all .2s; }
   .pb-dot.active { background: var(--red, #c62828); color: #fff; }
   .pb-dot.done   { background: #0f172a; color: #fff; }
   .pb-label { font-size: .68rem; color: #94a3b8; font-weight: 600; white-space: nowrap; }
@@ -83,11 +60,7 @@
   .choice-grid   { display: grid; gap: 12px; margin-bottom: 24px; }
   .choice-grid-3 { grid-template-columns: repeat(3,1fr); }
   @media(max-width:480px){ .choice-grid-3 { grid-template-columns: repeat(2,1fr); } }
-  .choice-card {
-    border: 2px solid #e8eaed; border-radius: 14px;
-    padding: 18px 14px; text-align: center;
-    cursor: pointer; transition: all .15s; background: #fff; user-select: none;
-  }
+  .choice-card { border: 2px solid #e8eaed; border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; transition: all .15s; background: #fff; user-select: none; }
   .choice-card:hover { border-color: var(--red, #c62828); background: #fff9f9; }
   .choice-card.selected { border-color: var(--red, #c62828); background: #fff2f2; }
   .choice-card .cc-icon { font-size: 2rem; margin-bottom: 8px; }
@@ -95,136 +68,74 @@
   .choice-card .cc-desc { font-size: .76rem; color: #6b7280; margin-top: 4px; line-height: 1.4; }
 
   .form-label-tai { font-size: .84rem; font-weight: 700; color: #0f172a; margin-bottom: 6px; display: block; }
-  .form-input-tai {
-    width: 100%; border: 1.5px solid #e8eaed; border-radius: 8px;
-    padding: 11px 14px; font-size: .9rem; color: #0f172a;
-    outline: none; transition: border-color .15s; background: #fff; font-family: inherit;
-  }
+  .form-input-tai { width: 100%; border: 1.5px solid #e8eaed; border-radius: 8px; padding: 11px 14px; font-size: .9rem; color: #0f172a; outline: none; transition: border-color .15s; background: #fff; font-family: inherit; }
   .form-input-tai:focus { border-color: var(--red, #c62828); }
   .form-row { margin-bottom: 20px; }
 
   .num-input-wrap { display: flex; align-items: center; gap: 8px; }
-  .num-input-wrap input[type=number] {
-    width: 140px; text-align: right;
-    border: 1.5px solid #e8eaed; border-radius: 8px;
-    padding: 11px 14px; font-size: .9rem; color: #0f172a;
-    outline: none; font-family: inherit; transition: border-color .15s;
-  }
+  .num-input-wrap input[type=number] { width: 140px; text-align: right; border: 1.5px solid #e8eaed; border-radius: 8px; padding: 11px 14px; font-size: .9rem; color: #0f172a; outline: none; font-family: inherit; transition: border-color .15s; }
   .num-input-wrap input[type=number]:focus { border-color: var(--red, #c62828); }
   .num-unit { color: #6b7280; font-weight: 600; font-size: .9rem; }
 
   .yn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 0; }
-  .yn-btn {
-    border: 2px solid #e8eaed; border-radius: 10px;
-    padding: 14px; text-align: center; cursor: pointer;
-    font-size: .9rem; font-weight: 700; color: #6b7280;
-    transition: all .15s; user-select: none;
-  }
+  .yn-btn { border: 2px solid #e8eaed; border-radius: 10px; padding: 14px; text-align: center; cursor: pointer; font-size: .9rem; font-weight: 700; color: #6b7280; transition: all .15s; user-select: none; }
   .yn-btn:hover { border-color: #0f172a; }
   .yn-btn.selected-yes { border-color: var(--red, #c62828); background: #fff2f2; color: var(--red, #c62828); }
   .yn-btn.selected-no  { border-color: #0f172a; background: #f0f4f8; color: #0f172a; }
 
   .amount-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0; }
-  .amount-btn {
-    border: 1.5px solid #e8eaed; border-radius: 8px;
-    padding: 9px 16px; font-size: .84rem; font-weight: 700;
-    cursor: pointer; transition: all .15s; color: #0f172a; background: #fff; user-select: none;
-  }
+  .amount-btn { border: 1.5px solid #e8eaed; border-radius: 8px; padding: 9px 16px; font-size: .84rem; font-weight: 700; cursor: pointer; transition: all .15s; color: #0f172a; background: #fff; user-select: none; }
   .amount-btn:hover { border-color: var(--red, #c62828); }
   .amount-btn.selected { border-color: var(--red, #c62828); background: #fff2f2; color: var(--red, #c62828); }
 
   .check-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 0; }
   @media(max-width:400px){ .check-grid { grid-template-columns: 1fr; } }
-  .check-card {
-    border: 1.5px solid #e8eaed; border-radius: 10px;
-    padding: 12px 14px; cursor: pointer; transition: all .15s;
-    display: flex; align-items: center; gap: 10px;
-    font-size: .85rem; font-weight: 600; color: #0f172a; user-select: none;
-  }
+  .check-card { border: 1.5px solid #e8eaed; border-radius: 10px; padding: 12px 14px; cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 10px; font-size: .85rem; font-weight: 600; color: #0f172a; user-select: none; }
   .check-card:hover { border-color: var(--red, #c62828); }
   .check-card.checked { border-color: var(--red, #c62828); background: #fff2f2; }
   .check-card .ck-icon { font-size: 1.2rem; flex-shrink: 0; }
-  .check-card .ck-chk {
-    width: 18px; height: 18px; border-radius: 4px;
-    border: 1.5px solid #cbd5e1; margin-left: auto;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: .75rem; color: #fff; transition: all .15s;
-  }
+  .check-card .ck-chk { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #cbd5e1; margin-left: auto; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: .75rem; color: #fff; transition: all .15s; }
   .check-card.checked .ck-chk { background: var(--red, #c62828); border-color: var(--red, #c62828); }
 
-  /* ── 주소 검색 ── */
   .addr-search-wrap { display: flex; gap: 8px; margin-bottom: 8px; }
   .addr-search-wrap .form-input-tai { flex: 1; }
-  .btn-addr-search {
-    background: #0f172a; color: #fff; font-size: .85rem;
-    font-weight: 700; padding: 0 18px; border: none;
-    border-radius: 8px; cursor: pointer; white-space: nowrap;
-  }
+  .btn-addr-search { background: #0f172a; color: #fff; font-size: .85rem; font-weight: 700; padding: 0 18px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; }
   .btn-addr-search:hover { background: #1e293b; }
   .btn-addr-search:disabled { background: #94a3b8; cursor: not-allowed; }
 
-  /* 주소 결과 목록 */
-  .addr-dropdown {
-    border: 1.5px solid #e8eaed; border-radius: 8px;
-    background: #fff; max-height: 200px; overflow-y: auto;
-    margin-bottom: 0; display: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,.08);
-  }
+  .addr-dropdown { border: 1.5px solid #e8eaed; border-radius: 8px; background: #fff; max-height: 200px; overflow-y: auto; margin-bottom: 0; display: none; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
   .addr-dropdown.show { display: block; }
-  .addr-dropdown-item {
-    padding: 11px 14px; font-size: .84rem; cursor: pointer;
-    border-bottom: 1px solid #f1f5f9; color: #0f172a;
-    transition: background .1s;
-  }
+  .addr-dropdown-item { padding: 11px 14px; font-size: .84rem; cursor: pointer; border-bottom: 1px solid #f1f5f9; color: #0f172a; transition: background .1s; }
   .addr-dropdown-item:last-child { border-bottom: none; }
   .addr-dropdown-item:hover { background: #f8fafc; }
   .addr-dropdown-item .road { font-weight: 700; }
   .addr-dropdown-item .jibun { font-size: .76rem; color: #6b7280; margin-top: 2px; }
 
-  .addr-selected {
-    background: #f0fdf4; border: 1.5px solid #86efac;
-    border-radius: 8px; padding: 10px 14px;
-    font-size: .84rem; color: #166534; font-weight: 600;
-    display: none; margin-top: 6px;
-  }
+  .addr-selected { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 10px 14px; font-size: .84rem; color: #166534; font-weight: 600; display: none; margin-top: 6px; }
   .addr-selected.show { display: block; }
   .addr-loading { font-size: .8rem; color: #6b7280; padding: 4px 0; display: none; }
   .addr-loading.show { display: block; }
 
-  .btn-next {
-    background: var(--red, #c62828); color: #fff; font-weight: 700;
-    font-size: 1rem; padding: 14px; border-radius: 10px;
-    border: none; cursor: pointer; width: 100%; margin-top: 8px; transition: background .2s;
-  }
+  .btn-next { background: var(--red, #c62828); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px; border-radius: 10px; border: none; cursor: pointer; width: 100%; margin-top: 8px; transition: background .2s; }
   .btn-next:hover { background: #a21010; }
   .btn-next:disabled { background: #ccc; cursor: not-allowed; }
-  .btn-back {
-    background: none; border: none; color: #6b7280;
-    font-size: .88rem; cursor: pointer; margin-top: 12px;
-    display: block; width: 100%; text-align: center;
-  }
+  .btn-back { background: none; border: none; color: #6b7280; font-size: .88rem; cursor: pointer; margin-top: 12px; display: block; width: 100%; text-align: center; }
 
   .industry-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 0; }
   @media(max-width:400px){ .industry-grid { grid-template-columns: repeat(2,1fr); } }
-  .industry-card {
-    border: 1.5px solid #e8eaed; border-radius: 10px;
-    padding: 12px 8px; text-align: center; cursor: pointer;
-    font-size: .78rem; font-weight: 800; color: #0f172a;
-    transition: all .15s; user-select: none;
-  }
+  .industry-card { border: 1.5px solid #e8eaed; border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; font-size: .78rem; font-weight: 800; color: #0f172a; transition: all .15s; user-select: none; }
   .industry-card:hover { border-color: var(--red, #c62828); background: #fff9f9; }
   .industry-card.selected { border-color: var(--red, #c62828); background: #fff2f2; }
 
   .form-note { font-size: .76rem; color: #6b7280; margin-top: 5px; line-height: 1.5; }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links"></div>
-  </div>
-</nav>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
 
 <div class="diag-layout">
   <div class="diag-left">
@@ -292,11 +203,14 @@
   </div>
 </div>
 
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script>
 const API = 'https://api.taieng.co.kr';
 
-/* ── 로그인 체크 ── */
 document.addEventListener('DOMContentLoaded', function () {
   if (!localStorage.getItem('access_token')) {
     window.location.replace('log-in.html?redirect=free-diagnosis.html');
@@ -337,15 +251,12 @@ function renderFormArea() {
   document.getElementById('formArea').innerHTML = renders[sector]();
 }
 
-/* ── 건물 폼 ── */
 function formBuilding() {
   return `
     <div class="form-row">
       <label class="form-label-tai">사업장 주소</label>
       <div class="addr-search-wrap">
-        <input type="text" class="form-input-tai" id="bAddrInput"
-          placeholder="도로명 또는 지번 주소 입력"
-          oninput="onAddrInput('bAddr')" autocomplete="off">
+        <input type="text" class="form-input-tai" id="bAddrInput" placeholder="도로명 또는 지번 주소 입력" oninput="onAddrInput('bAddr')" autocomplete="off">
         <button class="btn-addr-search" id="bAddrBtn" onclick="searchAddr('bAddr')">검색</button>
       </div>
       <div class="addr-loading" id="bAddrLoading">주소 검색 중...</div>
@@ -356,23 +267,20 @@ function formBuilding() {
     <div class="form-row">
       <label class="form-label-tai">상시근로자 수</label>
       <div class="num-input-wrap">
-        <input type="number" class="form-input-tai" id="bWorker" min="0" placeholder="0"
-          style="width:140px;text-align:right;" oninput="formData.bWorker=this.value">
+        <input type="number" class="form-input-tai" id="bWorker" min="0" placeholder="0" style="width:140px;text-align:right;" oninput="formData.bWorker=this.value">
         <span class="num-unit">명</span>
       </div>
     </div>
     <div class="form-row">
       <label class="form-label-tai">수용인원 수</label>
       <div class="num-input-wrap">
-        <input type="number" class="form-input-tai" id="bCapacity" min="0" placeholder="0"
-          style="width:140px;text-align:right;" oninput="formData.bCapacity=this.value">
+        <input type="number" class="form-input-tai" id="bCapacity" min="0" placeholder="0" style="width:140px;text-align:right;" oninput="formData.bCapacity=this.value">
         <span class="num-unit">명</span>
       </div>
       <div class="form-note">근로자 수 또는 수용인원 중 하나 이상 입력</div>
     </div>`;
 }
 
-/* ── 건설 폼 ── */
 function formConstruction() {
   const sidos = ['서울','부산','대구','인천','광주','대전','울산','세종','경기','강원','충북','충남','전북','전남','경북','경남','제주'];
   return `
@@ -386,9 +294,7 @@ function formConstruction() {
     <div class="form-row">
       <label class="form-label-tai">공사금액</label>
       <div class="amount-grid">
-        ${[{val:'under1',label:'1억 미만'},{val:'1to5',label:'1억~5억'},{val:'5to20',label:'5억~20억'},
-           {val:'20to50',label:'20억~50억'},{val:'50to120',label:'50억~120억'},{val:'over120',label:'120억 이상'}]
-          .map(o=>`<div class="amount-btn" onclick="selectAmount('cAmount',this)" data-val="${o.val}">${o.label}</div>`).join('')}
+        ${[{val:'under1',label:'1억 미만'},{val:'1to5',label:'1억~5억'},{val:'5to20',label:'5억~20억'},{val:'20to50',label:'20억~50억'},{val:'50to120',label:'50억~120억'},{val:'over120',label:'120억 이상'}].map(o=>`<div class="amount-btn" onclick="selectAmount('cAmount',this)" data-val="${o.val}">${o.label}</div>`).join('')}
       </div>
     </div>
     <div class="form-row">
@@ -401,52 +307,34 @@ function formConstruction() {
     <div class="form-row">
       <label class="form-label-tai">위험 요소 <span style="font-weight:400;color:#6b7280;">(복수 선택 가능)</span></label>
       <div class="check-grid">
-        ${[{val:'crane',icon:'🏗️',label:'타워크레인'},{val:'excavate',icon:'⛏️',label:'굴착·터파기'},
-           {val:'demolish',icon:'🔨',label:'해체 공사'},{val:'scaffold',icon:'🪜',label:'달비계·비계'},
-           {val:'tunnel',icon:'🚇',label:'터널 공사'},{val:'none',icon:'✅',label:'해당 없음'}]
-          .map(item=>`<div class="check-card" onclick="toggleCheck(this,'cDanger')" data-val="${item.val}">
-            <span class="ck-icon">${item.icon}</span><span>${item.label}</span><span class="ck-chk">✓</span></div>`).join('')}
+        ${[{val:'crane',icon:'🏗️',label:'타워크레인'},{val:'excavate',icon:'⛏️',label:'굴착·터파기'},{val:'demolish',icon:'🔨',label:'해체 공사'},{val:'scaffold',icon:'🪜',label:'달비계·비계'},{val:'tunnel',icon:'🚇',label:'터널 공사'},{val:'none',icon:'✅',label:'해당 없음'}].map(item=>`<div class="check-card" onclick="toggleCheck(this,'cDanger')" data-val="${item.val}"><span class="ck-icon">${item.icon}</span><span>${item.label}</span><span class="ck-chk">✓</span></div>`).join('')}
       </div>
     </div>`;
 }
 
-/* ── 산업 폼 ── */
 function formIndustry() {
-  const types = [
-    {val:'food',label:'식품·음료'},{val:'textile',label:'섬유·의류'},{val:'wood',label:'목재·가구'},
-    {val:'chemical',label:'화학·석유'},{val:'metal',label:'금속·기계'},{val:'elec',label:'전기·전자'},
-    {val:'auto',label:'자동차·조선'},{val:'warehouse',label:'물류·창고'},{val:'etc',label:'기타 제조'}
-  ];
+  const types = [{val:'food',label:'식품·음료'},{val:'textile',label:'섬유·의류'},{val:'wood',label:'목재·가구'},{val:'chemical',label:'화학·석유'},{val:'metal',label:'금속·기계'},{val:'elec',label:'전기·전자'},{val:'auto',label:'자동차·조선'},{val:'warehouse',label:'물류·창고'},{val:'etc',label:'기타 제조'}];
   return `
     <div class="form-row">
       <label class="form-label-tai">업종 분류</label>
-      <div class="industry-grid">
-        ${types.map(t=>`<div class="industry-card" onclick="selectIndustry(this,'${t.val}')">${t.label}</div>`).join('')}
-      </div>
+      <div class="industry-grid">${types.map(t=>`<div class="industry-card" onclick="selectIndustry(this,'${t.val}')">${t.label}</div>`).join('')}</div>
     </div>
     <div class="form-row" style="margin-top:20px;">
       <label class="form-label-tai">상시근로자 수</label>
       <div class="num-input-wrap">
-        <input type="number" class="form-input-tai" id="iWorker" min="0" placeholder="0"
-          style="width:140px;text-align:right;" oninput="formData.iWorker=this.value">
+        <input type="number" class="form-input-tai" id="iWorker" min="0" placeholder="0" style="width:140px;text-align:right;" oninput="formData.iWorker=this.value">
         <span class="num-unit">명</span>
       </div>
     </div>`;
 }
 
-/* ══════════════════════════════════
-   주소 검색 — 행정안전부 JUSO API
-   엔드포인트: GET /juso-search?keyword=...
-══════════════════════════════════ */
 let addrSearchTimer = null;
 
 function onAddrInput(prefix) {
-  /* 입력할 때마다 선택 초기화 */
   const sel = document.getElementById(prefix + 'Selected');
   if (sel) { sel.classList.remove('show'); sel.textContent = ''; }
   formData[prefix] = '';
   formData[prefix + '_bdmgtsn'] = '';
-
   clearTimeout(addrSearchTimer);
   const query = document.getElementById(prefix + 'Input').value.trim();
   if (query.length < 2) {
@@ -454,93 +342,60 @@ function onAddrInput(prefix) {
     if (dd) { dd.classList.remove('show'); dd.innerHTML = ''; }
     return;
   }
-  /* 500ms 디바운스 */
   addrSearchTimer = setTimeout(() => searchAddr(prefix), 500);
 }
 
 async function searchAddr(prefix) {
   const query = document.getElementById(prefix + 'Input').value.trim();
   if (!query) { alert('주소를 입력해주세요.'); return; }
-
-  const btn      = document.getElementById(prefix + 'Btn');
-  const loading  = document.getElementById(prefix + 'Loading');
+  const btn = document.getElementById(prefix + 'Btn');
+  const loading = document.getElementById(prefix + 'Loading');
   const dropdown = document.getElementById(prefix + 'Dropdown');
-
-  if (btn)     { btn.disabled = true; btn.textContent = '검색 중'; }
+  if (btn) { btn.disabled = true; btn.textContent = '검색 중'; }
   if (loading) loading.classList.add('show');
   if (dropdown) { dropdown.classList.remove('show'); dropdown.innerHTML = ''; }
-
   try {
-    /* 행정안전부 도로명주소 API — building_register.py의 /juso-search 엔드포인트 사용 */
-    const res  = await fetch(`${API}/juso-search?keyword=${encodeURIComponent(query)}&size=5`);
+    const res = await fetch(`${API}/juso-search?keyword=${encodeURIComponent(query)}&size=5`);
     const data = await res.json();
     const items = data.data?.items || [];
-
-    if (!items.length) {
-      dropdown.innerHTML = '<div class="addr-dropdown-item" style="color:#6b7280;">검색 결과가 없습니다</div>';
-      dropdown.classList.add('show');
-      return;
-    }
-
-    dropdown.innerHTML = items.map((item, idx) => `
-      <div class="addr-dropdown-item" onclick="selectAddrItem('${prefix}', ${idx})">
-        <div class="road">${item.roadAddr || ''}</div>
-        <div class="jibun">${item.jibunAddr || ''}</div>
-      </div>`).join('');
-
-    /* 결과를 window에 임시 저장 (클릭 시 접근) */
+    if (!items.length) { dropdown.innerHTML = '<div class="addr-dropdown-item" style="color:#6b7280;">검색 결과가 없습니다</div>'; dropdown.classList.add('show'); return; }
+    dropdown.innerHTML = items.map((item, idx) => `<div class="addr-dropdown-item" onclick="selectAddrItem('${prefix}', ${idx})"><div class="road">${item.roadAddr || ''}</div><div class="jibun">${item.jibunAddr || ''}</div></div>`).join('');
     window['_addrItems_' + prefix] = items;
     dropdown.classList.add('show');
-
   } catch(e) {
     dropdown.innerHTML = '<div class="addr-dropdown-item" style="color:#ef4444;">검색 중 오류가 발생했습니다</div>';
     dropdown.classList.add('show');
   } finally {
-    if (btn)     { btn.disabled = false; btn.textContent = '검색'; }
+    if (btn) { btn.disabled = false; btn.textContent = '검색'; }
     if (loading) loading.classList.remove('show');
   }
 }
 
 function selectAddrItem(prefix, idx) {
   const items = window['_addrItems_' + prefix] || [];
-  const item  = items[idx];
+  const item = items[idx];
   if (!item) return;
-
-  const roadAddr  = item.roadAddr  || item.roadAddrPart1 || '';
+  const roadAddr = item.roadAddr || item.roadAddrPart1 || '';
   const jibunAddr = item.jibunAddr || '';
-  const bdmgtsn   = item.bdMgtSn   || '';
-
-  /* 인풋에 선택된 도로명 표시 */
+  const bdmgtsn = item.bdMgtSn || '';
   const input = document.getElementById(prefix + 'Input');
   if (input) input.value = roadAddr;
-
-  /* 드롭다운 닫기 */
   const dropdown = document.getElementById(prefix + 'Dropdown');
   if (dropdown) { dropdown.classList.remove('show'); dropdown.innerHTML = ''; }
-
-  /* 선택 확인 표시 */
   const selected = document.getElementById(prefix + 'Selected');
-  if (selected) {
-    selected.textContent = '📍 ' + roadAddr + (jibunAddr ? '  (' + jibunAddr + ')' : '');
-    selected.classList.add('show');
-  }
-
-  /* formData 저장 */
-  formData[prefix]            = roadAddr;
+  if (selected) { selected.textContent = '📍 ' + roadAddr + (jibunAddr ? '  (' + jibunAddr + ')' : ''); selected.classList.add('show'); }
+  formData[prefix] = roadAddr;
   formData[prefix + '_jibun'] = jibunAddr;
   formData[prefix + '_bdmgtsn'] = bdmgtsn;
-  if (item.siNm)  formData[prefix + '_sido']    = item.siNm;
+  if (item.siNm) formData[prefix + '_sido'] = item.siNm;
   if (item.sggNm) formData[prefix + '_sigungu'] = item.sggNm;
-  if (item.zipNo) formData[prefix + '_zip']     = item.zipNo;
+  if (item.zipNo) formData[prefix + '_zip'] = item.zipNo;
 }
 
-/* ── 헬퍼 ── */
 function selectYN(id, val, el) {
   el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
   el.className = 'yn-btn ' + (val ? 'selected-yes' : 'selected-no');
   formData[id] = val;
-  const sub = document.getElementById(id + '_sub');
-  if (sub) sub.style.display = val ? 'block' : 'none';
 }
 function selectAmount(id, el) {
   el.parentNode.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
@@ -560,29 +415,13 @@ function selectIndustry(el, val) {
   formData.iType = val;
 }
 
-/* ── 제출 ── */
 async function submitDiag() {
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true; btn.textContent = '진단 중...';
-
-  const payload = {
-    sector, grade: 1,
-    user_id:    localStorage.getItem('user_id'),
-    user_name:  localStorage.getItem('user_name'),
-    user_email: localStorage.getItem('user_email'),
-    form_data:  formData
-  };
-
+  const payload = { sector, grade: 1, user_id: localStorage.getItem('user_id'), user_name: localStorage.getItem('user_name'), user_email: localStorage.getItem('user_email'), form_data: formData };
   try {
-    const res = await fetch(API + '/quotes/survey', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + (localStorage.getItem('access_token') || '')
-      },
-      body: JSON.stringify(payload)
-    });
-    const d   = await res.json();
+    const res = await fetch(API + '/quotes/survey', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (localStorage.getItem('access_token') || '') }, body: JSON.stringify(payload) });
+    const d = await res.json();
     const rid = d.data?.request_id || d.request_id || '';
     window.location.href = 'free-diagnosis-result.html' + (rid ? '?id=' + rid : '');
   } catch(e) {
@@ -592,14 +431,11 @@ async function submitDiag() {
   }
 }
 
-/* 드롭다운 외부 클릭 닫기 */
 document.addEventListener('click', function(e) {
   ['bAddr'].forEach(prefix => {
-    const dd    = document.getElementById(prefix + 'Dropdown');
+    const dd = document.getElementById(prefix + 'Dropdown');
     const input = document.getElementById(prefix + 'Input');
-    if (dd && input && !dd.contains(e.target) && e.target !== input) {
-      dd.classList.remove('show');
-    }
+    if (dd && input && !dd.contains(e.target) && e.target !== input) dd.classList.remove('show');
   });
 });
 </script>
