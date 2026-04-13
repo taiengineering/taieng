@@ -1,117 +1,260 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="제조공장·산업시설 안전관리. 산업안전보건법 의무를 TAI Safe로 자동 관리하세요.">
-  <title>공장 안전관리 | TAI 엔지니어링</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="제조공장 안전관리 — 산업안전보건법, 중대재해처벌법, 화학물질관리법. TAI Safe가 법령 의무를 자동 파악하고 작업자에게 배정합니다.">
+  <title>제조공장 안전관리 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/magnific.min.css">
+  <link rel="stylesheet" href="../assets/css/nice-select.min.css">
+  <link rel="stylesheet" href="../assets/css/owl.min.css">
+  <link rel="stylesheet" href="../assets/css/slick-slide.min.css">
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/tai-main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-  body{font-family:'Noto Sans KR',sans-serif;}
-  .target-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
-  .target-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(26,95,210,.12) 0%,transparent 65%);pointer-events:none;}
-  .target-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#60a5fa;background:rgba(26,95,210,.15);border:1px solid rgba(26,95,210,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
-  .target-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
-  .target-hero h1 em{color:#93c5fd;font-style:normal;}
-  .target-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
-  .law-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 4px 16px rgba(0,0,0,.07);height:100%;border-left:4px solid #1a5fd4;}
-  .law-card h5{font-weight:800;color:#0d1b2a;margin-bottom:8px;font-size:1rem;}
-  .law-card p{font-size:.87rem;color:#64748b;line-height:1.6;margin-bottom:10px;}
-  .law-card .cycle{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:6px;padding:2px 10px;font-size:.78rem;font-weight:700;}
-  .feature-section{background:#0d1b2a;padding:80px 0;}
-  .feature-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;height:100%;}
-  .feature-card h5{color:#60a5fa;font-weight:800;font-size:.95rem;margin-bottom:10px;}
-  .feature-card p{color:rgba(255,255,255,.6);font-size:.87rem;line-height:1.65;margin:0;}
-  .cta-section{background:linear-gradient(135deg,#1a5fd4,#1e40af);padding:72px 0;text-align:center;}
-  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
-  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+    .law-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      box-shadow: 0 3px 14px rgba(0,0,0,.07);
+      height: 100%;
+    }
+    .law-card .law-icon { font-size: 2rem; margin-bottom: 10px; }
+    .law-card h5 { font-size: .92rem; font-weight: 800; color: #1e293b; margin: 0; line-height: 1.4; }
+    .duty-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px 20px;
+      box-shadow: 0 3px 16px rgba(0,0,0,.07);
+      height: 100%;
+      border-left: 4px solid #059669;
+    }
+    .duty-card h5 { font-size: 1rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
+    .duty-card .duty-cycle { font-size: .82rem; font-weight: 700; color: #059669; margin-bottom: 6px; }
+    .duty-card .duty-fine { font-size: .8rem; color: #dc2626; font-weight: 700; }
+    .duty-card p { font-size: .88rem; color: #64748b; margin: 6px 0 0; line-height: 1.55; }
+    .auto-block {
+      background: #f0fdf4;
+      border-radius: 14px;
+      padding: 28px 24px;
+      height: 100%;
+    }
+    .auto-block .ab-icon { font-size: 2rem; margin-bottom: 12px; }
+    .auto-block h5 { font-size: 1rem; font-weight: 800; color: #14532d; margin-bottom: 8px; }
+    .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
   </style>
 </head>
 <body class="sc5">
-<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
-<div class="body-overlay" id="body-overlay"></div>
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+    </div>
+  </div>
+  <div class="body-overlay" id="body-overlay"></div>
+  <div id="tai-header"></div>
 
-<!-- HEADER -->
-<div id="tai-header"></div>
-
-<section class="target-hero">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="target-eyebrow">🏭 제조·산업</span>
-        <h1>제조공장 안전관리<br><em>이제 혼자가 아닙니다</em></h1>
-        <p>산업안전보건법 의무는 다양하고 복잡합니다. TAI Safe가 법령 의무를 자동 파악하고, 작업자에게 배정하고, 누락 없이 관리합니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료 진단 시작</a>
-          <a href="../contact.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">도입 문의</a>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">주요 적용 법령</p>
-          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
-            <div>📜 산업안전보건법</div>
-            <div>📜 중대재해처벌법</div>
-            <div>📜 화학물질관리법</div>
-            <div>📜 고압가스 안전관리법</div>
-            <div>📜 승강기 안전관리법</div>
+  <!-- 히어로 -->
+  <section class="breadcrumb-area text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 align-self-center">
+          <div class="breadcrumb-inner">
+            <h1 class="page-title">제조공장 안전관리,<br>이제 혼자가 아닙니다</h1>
+            <p class="mt-3 mb-4" style="color:rgba(255,255,255,.8);font-size:1.05rem;line-height:1.65;">
+              산업안전보건법 의무는 다양하고 복잡합니다.<br>
+              TAI Safe가 법령 의무를 자동 파악하고, 작업자에게 배정하고, 누락 없이 관리합니다.
+            </p>
+            <div class="btn-area mb-4">
+              <a class="btn btn-white me-3" href="../free-diagnosis.html">무료 법령진단 시작</a>
+              <a class="btn btn-border-white" href="../contact.html">도입 문의</a>
+            </div>
+            <ul class="page-list breadcrumb">
+              <li class="breadcrumb-item"><a href="../index.html">홈</a></li>
+              <li class="breadcrumb-item active" aria-current="page">제조공장</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section style="background:#f8fafc;padding:80px 0;">
-  <div class="container">
-    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">주요 점검 의무</h2><p style="color:#64748b;">제조공장에 적용되는 대표적인 점검 항목입니다</p></div>
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>작업시작 전 점검</h5><p>매 작업일 또는 작업 시작 전 프레스·크레인 등 설비 점검이 의무입니다.</p><span class="cycle">매 작업시작 전</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>정기 법정점검</h5><p>크레인·압력용기·리프트 등 유해위험기계 정기검사는 산안법에 따라 주기별 점검이 필수입니다.</p><span class="cycle">월·분기·연 단위</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>작업환경 측정</h5><p>소음·진동·화학물질 등 작업환경 측정은 법령에 따라 주기적으로 실시해야 합니다.</p><span class="cycle">반기마다</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>특수건강검진</h5><p>유해인자를 다루는 근로자는 연 1회 이상 특수건강검진이 의무입니다.</p><span class="cycle">연 1회</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>안전관리자 선임</h5><p>산업안전보건법에 따라 50인 이상 사업장은 안전관리자 선임이 의무입니다.</p><span class="cycle">상시</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>안전보건교육</h5><p>신규입사자·관리감독자·특별안전교육 등 종류별 교육 시간과 주기가 정해져 있습니다.</p><span class="cycle">항목별 다름</span></div></div>
+  <!-- 적용 법령 -->
+  <section class="service-area default-pd-top pd-bottom-90">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h4 class="sub-title">적용 법령</h4>
+            <h2 class="title">제조공장에 적용되는 주요 법령</h2>
+            <p>공장 규모와 업종에 따라 적용 법령이 달라집니다. TAI가 자동으로 파악합니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center g-4 mt-2">
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="law-card">
+            <div class="law-icon">🏭</div>
+            <h5>산업안전보건법</h5>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="law-card">
+            <div class="law-icon">⚖️</div>
+            <h5>중대재해처벌법</h5>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="law-card">
+            <div class="law-icon">🧪</div>
+            <h5>화학물질관리법</h5>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="law-card">
+            <div class="law-icon">💨</div>
+            <h5>고압가스 안전관리법</h5>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="feature-section">
-  <div class="container">
-    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">TAI Safe 공장 특화 기능</h2></div>
-    <div class="row g-4">
-      <div class="col-md-4"><div class="feature-card"><h5>설비별 점검 책임 배정</h5><p>설비마다 담당 작업자를 지정하면, 이후 자동으로 반복 배정됩니다.</p></div></div>
-      <div class="col-md-4"><div class="feature-card"><h5>TBM 자동 기록</h5><p>작업시작 전 TBM 체크리스트가 자동 발송되고 완료 시 기록일지에 저장됩니다.</p></div></div>
-      <div class="col-md-4"><div class="feature-card"><h5>이상 탐지 + 수선 연결</h5><p>작업자가 이상을 보고하면 관리자에게 실시간 알림, TAI 플랫폼에서 수선 업체 연결까지.</p></div></div>
+  <!-- 주요 점검 의무 -->
+  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h4 class="sub-title">점검 의무</h4>
+            <h2 class="title">주요 법정 점검 의무</h2>
+            <p>매일·매월·수시로 발생하는 점검 의무를 빠뜨리면 즉시 과태료 대상입니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center g-4 mt-2">
+        <div class="col-lg-4 col-md-6">
+          <div class="duty-card">
+            <h5>작업 시작 전 점검</h5>
+            <div class="duty-cycle">📅 매일 작업 전</div>
+            <div class="duty-fine">⚠️ 미이행 시 과태료</div>
+            <p>기계·설비·공구 등의 이상 유무를 작업 시작 전 반드시 확인해야 합니다. TAI 앱으로 1분 내 완료합니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="duty-card">
+            <h5>정기 안전점검</h5>
+            <div class="duty-cycle">📅 월 1회 이상</div>
+            <div class="duty-fine">⚠️ 점검 기록 보관 의무</div>
+            <p>사업장 전반의 안전 상태를 정기적으로 점검하고 결과를 기록해야 합니다. 과거 기록은 감사 때 중요한 증거가 됩니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="duty-card">
+            <h5>위험성평가</h5>
+            <div class="duty-cycle">📅 최초 + 정기 + 수시</div>
+            <div class="duty-fine">⚠️ 중대재해처벌법 핵심 의무</div>
+            <p>새로운 공정 도입, 설비 변경, 사고 발생 시 수시로 실시해야 합니다. 결과서 작성과 보존이 필수입니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="duty-card">
+            <h5>MSDS 비치·교육</h5>
+            <div class="duty-cycle">📅 상시 비치 + 연간 교육</div>
+            <div class="duty-fine">⚠️ 미비치 시 과태료 최대 500만 원</div>
+            <p>화학물질을 취급하는 작업장은 MSDS를 반드시 비치하고, 작업자에게 내용을 교육해야 합니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="duty-card">
+            <h5>안전관리자 선임</h5>
+            <div class="duty-cycle">📅 50인 이상 사업장 의무</div>
+            <div class="duty-fine">⚠️ 미선임 시 과태료 500만 원</div>
+            <p>상시 근로자 50인 이상 사업장은 안전관리자를 반드시 선임해야 합니다. 자격 기준과 선임 기한을 지켜야 합니다.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-section">
-  <div class="container">
-    <h2>공장 안전관리, 지금 시작하세요</h2>
-    <p>3분 무료 진단으로 우리 공장에 적용되는 의무 항목을 확인하세요.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="../free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">무료 진단 시작</a>
-      <a href="../contact.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">도입 문의</a>
+  <!-- TAI 자동화 -->
+  <section class="featured-area pd-top-110 pd-bottom-110">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h4 class="sub-title">TAI Safe</h4>
+            <h2 class="title">TAI가 자동화하는 것들</h2>
+            <p>안전관리자 혼자 다 하던 구조에서, 작업자가 함께 참여하는 구조로.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center g-4 mt-2">
+        <div class="col-lg-4 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">⚙️</div>
+            <h5>설비별 점검 일정 자동 관리</h5>
+            <p>설비 종류와 법령 주기를 입력하면 연간 점검 일정이 자동 생성됩니다. 담당자 배정과 D-3 알림까지 자동입니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">📱</div>
+            <h5>작업자 모바일 체크 + 이상 알림</h5>
+            <p>작업자가 현장에서 모바일로 직접 점검 결과를 입력합니다. 이상이 발생하면 안전관리자에게 즉시 알림이 발송됩니다.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">🧪</div>
+            <h5>화학물질 라벨·MSDS 자동 연동</h5>
+            <p>취급 화학물질 정보를 입력하면 경고 라벨과 MSDS가 자동 연동됩니다. 교육 이력도 함께 관리됩니다.</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div id="tai-footer"></div>
-<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
-<script src="../assets/js/jquery.3.6.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/wow.min.js"></script>
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/header.js"></script>
-<script src="../assets/js/nav-auth.js"></script>
-<script src="../assets/js/footer.js"></script>
-<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+  <!-- CTA -->
+  <section class="subscribe-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="subscribe-inner">
+            <div class="row align-items-center">
+              <div class="col-lg-5">
+                <h2>내 공장에 적용되는 법령을 확인하세요</h2>
+                <p class="pe-4">업종·규모·설비를 입력하면 적용 법령과 의무 항목을 3분 내에 확인할 수 있습니다.</p>
+              </div>
+              <div class="col-lg-6 offset-lg-1">
+                <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
+                  <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단 시작</a>
+                  <a href="../contact.html" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="tai-footer"></div>
+  <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+  <script src="../assets/js/jquery.3.6.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/imageloded.min.js"></script>
+  <script src="../assets/js/magnific.min.js"></script>
+  <script src="../assets/js/fontawesome.min.js"></script>
+  <script src="../assets/js/wow.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/header.js"></script>
+  <script src="../assets/js/footer.js"></script>
+  <script>if (typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
 </html>
