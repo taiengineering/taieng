@@ -1,115 +1,321 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 안전관리 컨설팅. 산업안전 전문가와 1:1 상담, 위험성평가 지원, 중대재해법 대응 컨설팅.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI 안전관리 컨설팅 — 중대재해처벌법 대응, 위험성평가, 안전보건관리체계 수립. 검증된 전문가가 직접 담당합니다.">
   <title>컨설팅 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/magnific.min.css">
+  <link rel="stylesheet" href="../assets/css/nice-select.min.css">
+  <link rel="stylesheet" href="../assets/css/owl.min.css">
+  <link rel="stylesheet" href="../assets/css/slick-slide.min.css">
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/tai-main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
   <style>
-  body{font-family:'Noto Sans KR',sans-serif;}
-  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
-  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(6,182,212,.1) 0%,transparent 65%);pointer-events:none;}
-  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#22d3ee;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
-  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
-  .svc-hero h1 em{color:#67e8f9;font-style:normal;}
-  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
-  .consult-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #0891b2;}
-  .consult-card .cc-icon{font-size:2.2rem;margin-bottom:16px;}
-  .consult-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
-  .consult-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
-  .expert-section{background:#0d1b2a;padding:80px 0;}
-  .expert-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:28px;height:100%;}
-  .expert-card h5{color:#22d3ee;font-weight:800;font-size:.95rem;margin-bottom:10px;}
-  .expert-card p{color:rgba(255,255,255,.6);font-size:.87rem;line-height:1.65;margin:0;}
-  .cta-section{background:linear-gradient(135deg,#0891b2,#0e7490);padding:72px 0;text-align:center;}
-  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
-  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+    /* 현실 문제 3단 블록 */
+    .reality-block {
+      background: #fff;
+      border-radius: 14px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      text-align: center;
+      height: 100%;
+    }
+    .reality-block .rb-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--main-color, #7B55EA);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.1rem;
+      line-height: 44px;
+      text-align: center;
+      margin: 0 auto 16px;
+    }
+    .reality-block p {
+      font-size: 1rem;
+      color: #374151;
+      line-height: 1.7;
+      margin: 0;
+    }
+    /* 차이점 체크리스트 */
+    .diff-list { list-style: none; padding: 0; margin: 0; }
+    .diff-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: .97rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .diff-list li:last-child { border-bottom: none; }
+    .diff-list .di { color: var(--main-color, #7B55EA); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    /* 전문가 모집 배너 */
+    .expert-banner {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border: 2px solid #86efac;
+      border-radius: 16px;
+      padding: 36px 32px;
+    }
+    .expert-banner h3 { font-size: 1.4rem; font-weight: 900; color: #166534; margin-bottom: 10px; }
+    .expert-banner p { color: #374151; line-height: 1.65; margin-bottom: 20px; }
   </style>
 </head>
 <body class="sc5">
-<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
-<div class="body-overlay" id="body-overlay"></div>
-<div id="tai-header"></div>
 
-<section class="svc-hero">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="svc-eyebrow">💼 컨설팅</span>
-        <h1>안전 전문가의<br><em>맞춤 컨설팅</em></h1>
-        <p>산업안전 전문가와 1:1로 사업장 상황에 맞는 맞춤 컨설팅을 진행합니다. 중대재해법 대응, 위험성평가, 안전보건관리체계 구축까지 지원합니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="../contact.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">컨설팅 문의하기</a>
-          <a href="../free-diagnosis.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">무료 진단 먼저</a>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">컨설팅 분야</p>
-          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
-            <div>🛡️ 중대재해처벌법 대응 체계 구축</div>
-            <div>📊 위험성평가 수행 지원</div>
-            <div>📋 안전보건관리체계 수립</div>
-            <div>🔍 현장 안전점검 컨설팅</div>
-            <div>📄 안전보건 문서화 지원</div>
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
+    </div>
+  </div>
+  <div class="body-overlay" id="body-overlay"></div>
+
+  <!-- HEADER -->
+  <div id="tai-header"></div>
+
+  <!-- ① 히어로 (breadcrumb-area) ──────────── -->
+  <section class="breadcrumb-area text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 align-self-center">
+          <div class="breadcrumb-inner">
+            <h1 class="page-title">아는 곳이 없으니,<br>소개소개로 맡기지만 시원하지 않습니다</h1>
+            <p class="mt-3 mb-4" style="color:rgba(255,255,255,.8); font-size:1.05rem; line-height:1.65;">
+              나라에서 정한 법에 따르면 전문가에게 의뢰해야 하는 것들이 많습니다.<br>
+              TAI가 확실히 연결합니다.
+            </p>
+            <div class="btn-area mb-4">
+              <a class="btn btn-white me-3" href="../contact.html">컨설팅 문의하기</a>
+              <a class="btn btn-border-white" href="../free-diagnosis.html">무료 진단 먼저</a>
+            </div>
+            <ul class="page-list breadcrumb">
+              <li class="breadcrumb-item"><a href="../index.html">홈</a></li>
+              <li class="breadcrumb-item active" aria-current="page">컨설팅</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section style="background:#f8fafc;padding:80px 0;">
-  <div class="container">
-    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">컨설팅 서비스 내용</h2></div>
-    <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">⚖️</div><h4>중대재해법 대응</h4><p>안전보건관리체계 구축, 안전보건목표 수립, 이행 점검 체계 설계. 감독 점검 대비 서류 정비 지원.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">🔍</div><h4>위험성평가</h4><p>작업장 전수 위험요인 파악, 위험성 수준 결정, 감소대책 수립. 법정 위험성평가 결과서 작성 지원.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">📋</div><h4>안전보건 문서화</h4><p>안전보건관리규정, 안전작업표준, 비상대응계획 등 법정 문서 작성 및 체계화 지원.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">🏭</div><h4>현장 안전진단</h4><p>전문가가 직접 현장을 방문하여 안전 실태를 진단하고 개선 방안을 제시합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">👥</div><h4>안전보건위원회 지원</h4><p>안전보건위원회 구성·운영·회의록 작성 등 법정 의무 이행을 위한 실무 지원.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="consult-card"><div class="cc-icon">📊</div><h4>성과 측정 체계</h4><p>안전보건 KPI 설정, 모니터링 지표 설계, 경영진 보고 체계 구축을 함께 진행합니다.</p></div></div>
+  <!-- ② 현실의 문제 (3단) ─────────────────── -->
+  <section class="service-area default-pd-top pd-bottom-90">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h4 class="sub-title">현실</h4>
+            <h2 class="title">안전 컨설팅, 이게 현실입니다</h2>
+            <p>법을 몰라서, 아는 곳이 없어서. 결국 요식행위로 끝납니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center g-4 mt-3">
+
+        <div class="col-lg-4 col-md-6">
+          <div class="reality-block">
+            <div class="rb-num">1</div>
+            <p>나라에서 정한 법에 따르면, 전문가들에게 의뢰를 해서 진행해야 하는 것들이 많습니다. 하지만 어떤 것을 의뢰해야 하는지도 모릅니다.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="reality-block">
+            <div class="rb-num">2</div>
+            <p>그러나 아는 곳은 없으니, 소개소개로 일을 맡기지만 시원하지가 않습니다. 결과물이 기대에 못 미치거나, 형식적으로 끝나는 경우가 많습니다.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="reality-block">
+            <div class="rb-num">3</div>
+            <p>TAI에서는 전문가들을 대거 보유하고 있어서, 해당 분야 전문가들이 의뢰를 확실히 해결합니다. 관리시스템으로 철저히 관리됩니다.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="expert-section">
-  <div class="container">
-    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">TAI 컨설팅 전문가</h2><p style="color:rgba(255,255,255,.55);">검증된 산업안전 전문가가 직접 담당합니다</p></div>
-    <div class="row g-4">
-      <div class="col-md-4"><div class="expert-card"><h5>산업안전기사 / 지도사</h5><p>산업안전보건법 의무 이행, 작업환경 개선, 위험성평가 전문 컨설팅.</p></div></div>
-      <div class="col-md-4"><div class="expert-card"><h5>건설안전기사 / 건설안전전문가</h5><p>건설현장 안전관리계획 수립, TBM 체계 구축, 건설기술진흥법 대응.</p></div></div>
-      <div class="col-md-4"><div class="expert-card"><h5>소방안전관리자 / 전기안전전문가</h5><p>소방·전기 법정 점검 체계 구축, 비상대응계획 수립 지원.</p></div></div>
+  <!-- ③ 컨설팅 분야 (5개 카드) ────────────── -->
+  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="section-title text-center">
+            <h4 class="sub-title">전문 분야</h4>
+            <h2 class="title">컨설팅 분야</h2>
+            <p>법정 의무 이행부터 현장 안전 체계 구축까지</p>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+
+        <div class="col-xl-4 col-md-6">
+          <div class="single-service-inner">
+            <div class="thumb text-center mb-3">
+              <i class="fas fa-gavel" style="font-size:3rem; color:var(--main-color,#7B55EA);"></i>
+            </div>
+            <h4>중대재해처벌법 대응 체계 구축</h4>
+            <p>안전보건관리체계 구축, 안전보건목표 수립, 이행 점검 체계 설계. 감독 점검 대비 서류 정비 지원. 중대재해처벌법 적용 여부 판단부터 시작합니다.</p>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="single-service-inner">
+            <div class="thumb text-center mb-3">
+              <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:var(--main-color,#7B55EA);"></i>
+            </div>
+            <h4>위험성평가 수행 지원</h4>
+            <p>작업장 전수 위험요인 파악, 위험성 수준 결정, 감소대책 수립. 법정 위험성평가 결과서 작성 지원. 컨설팅 비용과는 상대도 안 될 만큼 철저하게 진행합니다.</p>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="single-service-inner">
+            <div class="thumb text-center mb-3">
+              <i class="fas fa-sitemap" style="font-size:3rem; color:var(--main-color,#7B55EA);"></i>
+            </div>
+            <h4>안전보건관리체계 수립</h4>
+            <p>안전보건관리규정, 안전작업표준, 비상대응계획 등 법정 문서 작성 및 체계화 지원. 안전보건위원회 구성·운영·회의록 작성 등 실무 지원.</p>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="single-service-inner">
+            <div class="thumb text-center mb-3">
+              <i class="fas fa-hard-hat" style="font-size:3rem; color:var(--main-color,#7B55EA);"></i>
+            </div>
+            <h4>현장 안전점검 컨설팅</h4>
+            <p>전문가가 직접 현장을 방문하여 안전 실태를 진단하고 개선 방안을 제시합니다. 사람이 하는 컨설팅이지만, TAI 시스템으로 놓치는 것이 없습니다.</p>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <div class="single-service-inner">
+            <div class="thumb text-center mb-3">
+              <i class="fas fa-file-signature" style="font-size:3rem; color:var(--main-color,#7B55EA);"></i>
+            </div>
+            <h4>안전보건 문서화 지원</h4>
+            <p>안전관리계획서, 안전보건교육 자료, KPI 보고서 등 경영진 보고 체계까지 체계화 지원. 법정 문서가 항상 최신 상태로 유지됩니다.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-section">
-  <div class="container">
-    <h2>전문가 상담을 신청하세요</h2>
-    <p>사업장 규모와 업종에 맞는 맞춤 컨설팅 방안을 안내해 드립니다.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="../contact.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">컨설팅 문의하기</a>
-      <a href="../free-diagnosis.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">무료 진단 먼저</a>
+  <!-- ④ TAI 컨설팅 차이점 ─────────────────── -->
+  <section class="featured-area pd-top-110 pd-bottom-110">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 align-self-center">
+          <div class="section-title mb-lg-0">
+            <h4 class="sub-title">TAI의 차이</h4>
+            <h2 class="title">왜 TAI 컨설팅인가요?</h2>
+            <p>단순 연결이 아닙니다. 시작부터 완료까지 TAI가 함께합니다.</p>
+            <ul class="diff-list mt-4">
+              <li>
+                <span class="di"><i class="fas fa-check-circle"></i></span>
+                <span><strong>관리시스템으로 철저히 관리합니다.</strong> 의뢰한 컨설팅이 어떻게 진행되는지 TAI 플랫폼에서 실시간으로 확인할 수 있습니다.</span>
+              </li>
+              <li>
+                <span class="di"><i class="fas fa-check-circle"></i></span>
+                <span><strong>분쟁 소지나 손해볼 일이 없습니다.</strong> TAI가 계약관리시스템을 운영하므로 계약 내용·이행·완료가 모두 시스템에 기록됩니다.</span>
+              </li>
+              <li>
+                <span class="di"><i class="fas fa-check-circle"></i></span>
+                <span><strong>전자계약으로 도장 찾지 않아도 됩니다.</strong> 계약서는 항상 TAI 플랫폼에 보관되어 언제든지 확인할 수 있습니다.</span>
+              </li>
+              <li>
+                <span class="di"><i class="fas fa-check-circle"></i></span>
+                <span><strong>TAI Safe와 연동됩니다.</strong> 컨설팅으로 수립한 안전보건체계가 TAI Safe로 자동 연동되어 지속 관리됩니다.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1 align-self-center d-none d-lg-block">
+          <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe); border-radius:18px; padding:40px; text-align:center;">
+            <i class="fas fa-shield-alt" style="font-size:5rem; color:var(--main-color,#7B55EA); opacity:.3;"></i>
+            <div style="margin-top:20px;">
+              <p style="font-size:1.1rem; font-weight:800; color:#4c1d95; margin-bottom:6px;">TAI 전문가 네트워크</p>
+              <p style="color:#6d28d9; font-size:.92rem; margin:0;">산업안전기사·지도사 / 건설안전기사<br>소방안전관리자 / 전기안전전문가<br>위험성평가 전문가</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div id="tai-footer"></div>
-<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
-<script src="../assets/js/jquery.3.6.min.js"></script>
-<script src="../assets/js/bootstrap.min.js"></script>
-<script src="../assets/js/wow.min.js"></script>
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/header.js"></script>
-<script src="../assets/js/nav-auth.js"></script>
-<script src="../assets/js/footer.js"></script>
-<script>if(typeof WOW!=='undefined') new WOW().init();</script>
+  <!-- ⑤ 전문가 관점 (공급자 유치) ────────────── -->
+  <section class="pd-top-90 pd-bottom-110" style="background:#f9f9f9;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="expert-banner">
+            <h3>🧑‍💼 전문가로서 더 많은 의뢰를 받고 싶으십니까?</h3>
+            <p>일이 많은 업체도 있겠지만, 다른 데는 의뢰가 넘쳐나는데 나한테만 의뢰가 없는 상황이 있습니다.<br>TAI가 그 상황을 해결합니다. 실력 있는 전문가가 공평하게 일을 받을 수 있는 곳이 TAI입니다.</p>
+            <div class="d-flex gap-3 flex-wrap">
+              <a href="../mypage/expert-application/" class="btn btn-base">전문가 등록하기</a>
+              <a href="../contact.html" class="btn btn-border">문의하기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ CTA ────────────────────────────────── -->
+  <section class="subscribe-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="subscribe-inner">
+            <div class="row align-items-center">
+              <div class="col-lg-5">
+                <h2>전문가 상담을 신청하세요</h2>
+                <p class="pe-4">사업장 규모와 업종에 맞는 맞춤 컨설팅 방안을 안내해 드립니다. 무료 법령진단 후 연계하면 더욱 정확합니다.</p>
+              </div>
+              <div class="col-lg-6 offset-lg-1">
+                <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
+                  <a href="../contact.html" class="btn btn-base" style="padding:13px 28px; font-size:1rem;">
+                    <i class="fas fa-comments me-2"></i>컨설팅 문의하기
+                  </a>
+                  <a href="../mypage/expert-application/" class="btn btn-border-white" style="padding:13px 24px; font-size:1rem;">
+                    전문가 등록하기
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div id="tai-footer"></div>
+
+  <div class="back-to-top">
+    <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+  </div>
+
+  <script src="../assets/js/jquery.3.6.min.js"></script>
+  <script src="../assets/js/bootstrap.min.js"></script>
+  <script src="../assets/js/imageloded.min.js"></script>
+  <script src="../assets/js/magnific.min.js"></script>
+  <script src="../assets/js/fontawesome.min.js"></script>
+  <script src="../assets/js/wow.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/header.js"></script>
+  <script src="../assets/js/footer.js"></script>
+  <script>if (typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
 </html>
