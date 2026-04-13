@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 안전관리자 선임 연결. 검증된 안전관리자를 사업장에 연결합니다. 매칭 서비스료 방식.">
+  <meta name="description" content="안전관리자 선임 매칭 플랫폼 TAI. 사업장은 적합한 전문가를, 전문가는 공평한 일감을. TAI가 양쪽 모두 해결합니다.">
   <title>선임 연결 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
@@ -12,57 +12,270 @@
   <link rel="stylesheet" href="../assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  body{font-family:'Noto Sans KR',sans-serif;}
-  .svc-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:110px 0 80px;position:relative;overflow:hidden;}
-  .svc-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 10% 50%,rgba(217,119,6,.1) 0%,transparent 65%);pointer-events:none;}
-  .svc-eyebrow{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#fbbf24;background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.4);border-radius:4px;padding:5px 12px;margin-bottom:22px;}
-  .svc-hero h1{font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:18px;}
-  .svc-hero h1 em{color:#fde68a;font-style:normal;}
-  .svc-hero p{font-size:1.05rem;color:rgba(255,255,255,.72);margin-bottom:32px;line-height:1.65;}
-  .appt-card{background:#fff;border-radius:18px;padding:32px 28px;box-shadow:0 4px 20px rgba(0,0,0,.07);height:100%;border-top:4px solid #d97706;}
-  .appt-card .ac-icon{font-size:2.2rem;margin-bottom:16px;}
-  .appt-card h4{font-size:1.05rem;font-weight:800;color:#0d1b2a;margin-bottom:10px;}
-  .appt-card p{font-size:.88rem;color:#64748b;line-height:1.65;margin:0;}
-  .process-section{background:#0d1b2a;padding:80px 0;}
-  .process-step{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.06);border-radius:12px;padding:22px;margin-bottom:12px;}
-  .process-num{width:36px;height:36px;border-radius:50%;background:#d97706;color:#fff;font-weight:900;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .process-text h5{color:#fff;font-weight:700;margin-bottom:4px;font-size:.92rem;}
-  .process-text p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6;margin:0;}
-  .notice-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:20px 24px;margin-top:16px;}
-  .notice-box p{color:#92400e;font-size:.88rem;line-height:1.6;margin:0;}
-  .cta-section{background:linear-gradient(135deg,#d97706,#b45309);padding:72px 0;text-align:center;}
-  .cta-section h2{color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:900;margin-bottom:14px;}
-  .cta-section p{color:rgba(255,255,255,.8);margin-bottom:28px;}
+  body { font-family: 'Noto Sans KR', sans-serif; }
+
+  /* ── 히어로 ── */
+  .svc-hero {
+    background: linear-gradient(135deg, #050a14, #0d1b2e, #0a1628);
+    padding: 110px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .svc-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(6,182,212,.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .svc-eyebrow {
+    display: inline-block;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: #22d3ee;
+    background: rgba(6,182,212,.15);
+    border: 1px solid rgba(6,182,212,.4);
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin-bottom: 22px;
+  }
+  .svc-hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 18px;
+  }
+  .svc-hero h1 em { color: #67e8f9; font-style: normal; }
+  .svc-hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,.72);
+    margin-bottom: 32px;
+    line-height: 1.65;
+  }
+
+  /* 히어로 우측 양면 뱃지 */
+  .hero-badge-wrap {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+  .hero-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .hero-badge:last-child { margin-bottom: 0; }
+  .hero-badge.blue { background: rgba(6,182,212,.12); border: 1px solid rgba(6,182,212,.25); }
+  .hero-badge.purple { background: rgba(139,92,246,.12); border: 1px solid rgba(139,92,246,.25); }
+  .hero-badge .badge-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .hero-badge .badge-text strong { display: block; font-size: .9rem; font-weight: 800; color: #fff; margin-bottom: 2px; }
+  .hero-badge .badge-text span { font-size: .78rem; color: rgba(255,255,255,.55); }
+
+  /* ── 양면 섹션 공통 ── */
+  .section-label {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 14px;
+  }
+  .label-blue { background: rgba(6,182,212,.12); color: #22d3ee; border: 1px solid rgba(6,182,212,.3); }
+  .label-purple { background: rgba(139,92,246,.12); color: #a78bfa; border: 1px solid rgba(139,92,246,.3); }
+
+  /* ── 사업장 섹션 ── */
+  .employer-section {
+    background: #f8fafc;
+    padding: 88px 0;
+  }
+  .employer-section .sec-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 900;
+    color: #0d1b2a;
+    margin-bottom: 8px;
+  }
+  .employer-section .sec-sub {
+    color: #64748b;
+    font-size: .95rem;
+    margin-bottom: 48px;
+  }
+  .emp-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    height: 100%;
+    border-top: 4px solid #0891b2;
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  }
+  .emp-card .ec-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #e2f4f8;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .emp-card h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0d1b2a;
+    margin-bottom: 10px;
+  }
+  .emp-card p {
+    font-size: .87rem;
+    color: #64748b;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── 전문가 섹션 ── */
+  .expert-section {
+    background: #0d1b2a;
+    padding: 88px 0;
+  }
+  .expert-section .sec-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .expert-section .sec-sub {
+    color: rgba(255,255,255,.5);
+    font-size: .95rem;
+    margin-bottom: 48px;
+  }
+  .exp-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 28px 24px;
+    height: 100%;
+    border-top: 4px solid #7c3aed;
+  }
+  .exp-card .ec-num {
+    font-size: 2rem;
+    font-weight: 900;
+    color: rgba(139,92,246,.2);
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .exp-card h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #a78bfa;
+    margin-bottom: 10px;
+  }
+  .exp-card p {
+    font-size: .87rem;
+    color: rgba(255,255,255,.6);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── 자격 섹션 ── */
+  .qual-section {
+    background: #fff;
+    padding: 80px 0;
+  }
+  .qual-badge {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 18px 20px;
+    height: 100%;
+  }
+  .qual-badge .qi { font-size: 1.8rem; flex-shrink: 0; }
+  .qual-badge .qt strong { display: block; font-size: .95rem; font-weight: 800; color: #0d1b2a; }
+  .qual-badge .qt span { font-size: .8rem; color: #64748b; }
+
+  /* ── 공통 장점 띠 ── */
+  .common-strip {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    padding: 60px 0;
+  }
+  .strip-item {
+    text-align: center;
+    padding: 20px;
+  }
+  .strip-item .si-icon { font-size: 2rem; margin-bottom: 12px; }
+  .strip-item h5 { font-size: .95rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .strip-item p { font-size: .82rem; color: rgba(255,255,255,.5); margin: 0; line-height: 1.5; }
+
+  /* ── CTA ── */
+  .cta-dual {
+    padding: 88px 0;
+    background: #f8fafc;
+  }
+  .cta-box {
+    border-radius: 20px;
+    padding: 44px 36px;
+    height: 100%;
+  }
+  .cta-box.blue-box {
+    background: linear-gradient(135deg, #0891b2, #0e7490);
+    color: #fff;
+  }
+  .cta-box.purple-box {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: #fff;
+  }
+  .cta-box .cb-label {
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 14px;
+  }
+  .cta-box h3 { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; }
+  .cta-box p { font-size: .9rem; color: rgba(255,255,255,.75); margin-bottom: 28px; line-height: 1.6; }
   </style>
 </head>
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
-<!-- HEADER -->
 <div id="tai-header"></div>
 
+<!-- ───────────────────────── 히어로 ───────────────────────── -->
 <section class="svc-hero">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
-        <span class="svc-eyebrow">👷 선임 연결</span>
+        <span class="svc-eyebrow">🤝 선임 연결</span>
         <h1>안전관리자 선임,<br><em>TAI가 매칭합니다</em></h1>
-        <p>법정 의무 선임이 필요하신가요? TAI가 검증된 안전관리자를 사업장 규모·업종에 맞게 매칭합니다. 전임 또는 겸직 선임 모두 지원합니다.</p>
+        <p>구인도, 구직도 답답하셨죠?<br>TAI가 사업장과 전문가 양쪽 모두의 문제를 해결합니다.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="../contact.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">선임 매칭 신청</a>
-          <a href="../free-diagnosis.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">선임 의무 먼저 확인</a>
+          <a href="../mypage/expert-application/" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">전문가 등록</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">선임 가능 자격</p>
-          <div style="color:rgba(255,255,255,.8);font-size:.9rem;line-height:2;">
-            <div>✅ 산업안전기사 / 산업안전산업기사</div>
-            <div>✅ 건설안전기사 / 건설안전산업기사</div>
-            <div>✅ 산업안전지도사</div>
-            <div>✅ 소방안전관리자</div>
-            <div>✅ 전기안전관리자</div>
+        <div class="hero-badge-wrap">
+          <p style="color:rgba(255,255,255,.4);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;">TAI 매칭 플랫폼</p>
+          <div class="hero-badge blue">
+            <div class="badge-icon">🏭</div>
+            <div class="badge-text">
+              <strong>사업장 — 수요자</strong>
+              <span>적합한 전문가를 빠르게 찾아드립니다</span>
+            </div>
+          </div>
+          <div style="text-align:center;padding:8px 0;color:rgba(255,255,255,.3);font-size:.85rem;">⟷ TAI 매칭</div>
+          <div class="hero-badge purple">
+            <div class="badge-icon">👷</div>
+            <div class="badge-text">
+              <strong>전문가 — 공급자</strong>
+              <span>공평하게 일감이 연결됩니다</span>
+            </div>
           </div>
         </div>
       </div>
@@ -70,43 +283,222 @@
   </div>
 </section>
 
-<section style="background:#f8fafc;padding:80px 0;">
+<!-- ───────────────────────── 사업장 관점 ───────────────────────── -->
+<section class="employer-section">
   <div class="container">
-    <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">선임 연결 서비스 특징</h2></div>
+    <div class="text-center mb-5">
+      <span class="section-label label-blue">🏭 사업장 · 수요자</span>
+      <h2 class="sec-title">선임할 사람을 찾고 계십니까?</h2>
+      <p class="sec-sub">구인광고부터 계약까지, TAI가 처음부터 끝까지 도와드립니다.</p>
+    </div>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">🎯</div><h4>업종·규모별 정밀 매칭</h4><p>사업장 업종, 규모, 위험 수준에 따라 적합한 자격을 보유한 안전관리자를 매칭합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">✅</div><h4>자격 검증 완료</h4><p>모든 매칭 안전관리자는 자격증·경력을 TAI가 사전 검증합니다. 허위 자격 걱정이 없습니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">⚡</div><h4>빠른 매칭</h4><p>신청 후 영업일 기준 3일 이내 적합 후보를 제시합니다. 긴급 선임 수요도 우선 처리합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">📋</div><h4>선임 신고 지원</h4><p>고용노동부 안전관리자 선임 신고 서류 작성·제출 절차를 안내합니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">🔄</div><h4>TAI Safe 연동</h4><p>선임된 안전관리자가 TAI Safe를 통해 업무를 수행하면 모든 기록이 자동으로 관리됩니다.</p></div></div>
-      <div class="col-lg-4 col-md-6"><div class="appt-card"><div class="ac-icon">💰</div><h4>매칭 서비스료 방식</h4><p>성사된 매칭에 대해서만 매칭 서비스료가 발생합니다. 매칭 전까지 비용이 없습니다.</p></div></div>
+      <div class="col-lg-3 col-md-6">
+        <div class="emp-card">
+          <div class="ec-num">01</div>
+          <h4>맞는 사람 찾기가 어렵습니다</h4>
+          <p>구인광고를 내고 면접을 진행해도 알맞는 인재를 찾는 게 어렵습니다. TAI에서는 사업장에 적합한 전문가를 먼저 검증하고 연결합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="emp-card">
+          <div class="ec-num">02</div>
+          <h4>실상은 다른 경우가 많습니다</h4>
+          <p>구인 공고를 보고 지원해도 막상 실상은 맞지 않는 경우가 많습니다. TAI에서는 정확한 정보를 기반으로 매칭하여 미스매치를 최소화합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="emp-card">
+          <div class="ec-num">03</div>
+          <h4>선택의 폭이 넓습니다</h4>
+          <p>선임을 꼭 개인에게만 둘 필요가 없습니다. TAI는 개인 전문가부터 대행업체까지 두루 보유하여 사업장 상황에 맞는 최적의 선택이 가능합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="emp-card">
+          <div class="ec-num">04</div>
+          <h4>전자계약으로 간편하게</h4>
+          <p>TAI가 전자계약을 지원하여 도장을 찾지 않아도 됩니다. 계약서는 플랫폼에 항상 보관되어 있어 분쟁 시에도 즉시 확인할 수 있습니다.</p>
+        </div>
+      </div>
     </div>
-    <div class="notice-box">
-      <p>💡 <strong>선임 연결 안내:</strong> TAI는 사업장과 안전관리자를 연결하는 매칭 플랫폼 서비스를 제공합니다. 실제 선임 계약은 사업장과 안전관리자 간 직접 체결되며, TAI는 매칭 서비스료를 수취합니다.</p>
+    <div class="text-center mt-5">
+      <a href="../contact.html" class="btn btn-base" style="font-size:1rem;padding:14px 36px;font-weight:700;">선임 매칭 신청 →</a>
     </div>
   </div>
 </section>
 
-<section class="process-section">
+<!-- ───────────────────────── 전문가 관점 ───────────────────────── -->
+<section class="expert-section">
   <div class="container">
-    <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">선임 매칭 프로세스</h2></div>
-    <div class="row justify-content-center"><div class="col-lg-7">
-      <div class="process-step"><div class="process-num">1</div><div class="process-text"><h5>법령진단으로 선임 의무 확인</h5><p>무료 법령진단으로 우리 사업장의 선임 의무 여부와 필요 자격을 확인합니다.</p></div></div>
-      <div class="process-step"><div class="process-num">2</div><div class="process-text"><h5>매칭 신청</h5><p>업종·규모·지역·전임/겸직 여부 등 조건을 입력하고 매칭을 신청합니다.</p></div></div>
-      <div class="process-step"><div class="process-num">3</div><div class="process-text"><h5>후보 제시 (3일 이내)</h5><p>조건에 맞는 검증된 안전관리자 후보를 프로필과 함께 제시합니다.</p></div></div>
-      <div class="process-step"><div class="process-num">4</div><div class="process-text"><h5>인터뷰 후 선임 확정</h5><p>사업장이 후보를 선택하고 인터뷰 후 선임을 확정합니다.</p></div></div>
-      <div class="process-step" style="margin-bottom:0;"><div class="process-num">5</div><div class="process-text"><h5>선임 신고 + TAI Safe 연동</h5><p>고용노동부 신고 절차 안내 + TAI Safe에서 안전관리 업무 시작.</p></div></div>
-    </div></div>
+    <div class="text-center mb-5">
+      <span class="section-label label-purple">👷 전문가 · 공급자</span>
+      <h2 class="sec-title">일감이 필요하십니까?</h2>
+      <p class="sec-sub">기술이 있어도 일이 없는 상황, TAI가 해결합니다.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="exp-card">
+          <div class="ec-num">01</div>
+          <h4>기술은 있는데 일이 없습니다</h4>
+          <p>기술이 우수하고 일도 잘하는데 일감이 없습니다. 알려진 업체에만 일이 집중되고 하청을 받아야 하는 상황, TAI가 직접 연결합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="exp-card">
+          <div class="ec-num">02</div>
+          <h4>공평하게 일을 받을 수 있습니다</h4>
+          <p>좋은 기술을 가진 전문가와 업체가 공평하게 의뢰를 받을 수 있는 곳이 TAI입니다. 규모가 작아도, 알려지지 않아도 괜찮습니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="exp-card">
+          <div class="ec-num">03</div>
+          <h4>나한테만 의뢰가 없는 상황</h4>
+          <p>다른 곳은 의뢰가 넘쳐나는데 나한테만 의뢰가 없는 상황을 TAI가 해결합니다. 플랫폼에 등록하면 적합한 사업장과 자동으로 매칭됩니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="exp-card">
+          <div class="ec-num">04</div>
+          <h4>분쟁 걱정 없이 일합니다</h4>
+          <p>TAI가 계약관리시스템을 운영하므로 분쟁 소지가 없고 손해볼 일이 없습니다. 매칭 서비스료는 성사 후 정산되어 부담이 없습니다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="../mypage/expert-application/" class="btn btn-base" style="font-size:1rem;padding:14px 36px;font-weight:700;background:#7c3aed;border-color:#7c3aed;">전문가 등록 →</a>
+    </div>
   </div>
 </section>
 
-<section class="cta-section">
+<!-- ───────────────────────── 공통 장점 ───────────────────────── -->
+<section class="common-strip">
   <div class="container">
-    <h2>선임 의무, 지금 확인하세요</h2>
-    <p>무료 법령진단으로 선임 의무 여부를 먼저 파악한 후 매칭을 신청하세요.</p>
-    <div class="d-flex gap-3 justify-content-center flex-wrap">
-      <a href="../free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:13px 32px;font-weight:700;">선임 의무 무료 확인</a>
-      <a href="../contact.html" class="btn btn-border-white" style="font-size:1rem;padding:13px 24px;">선임 매칭 신청</a>
+    <div class="text-center mb-5">
+      <h3 style="color:#fff;font-size:1.5rem;font-weight:900;">TAI 매칭 플랫폼의 공통 장점</h3>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="strip-item">
+          <div class="si-icon">📋</div>
+          <h5>전자계약</h5>
+          <p>도장 없이 즉시 체결.<br>계약서 영구 보관.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="strip-item">
+          <div class="si-icon">🔒</div>
+          <h5>분쟁 방지</h5>
+          <p>계약관리시스템으로<br>손해볼 일 없습니다.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="strip-item">
+          <div class="si-icon">✅</div>
+          <h5>자격 검증</h5>
+          <p>등록 전 자격증·경력<br>사전 검증 완료.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="strip-item">
+          <div class="si-icon">💬</div>
+          <h5>매칭 서비스료</h5>
+          <p>성사 후 플랫폼 이용료.<br>사전 비용 없음.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── 자격 섹션 ───────────────────────── -->
+<section class="qual-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:#0d1b2a;">선임 가능 자격</h2>
+      <p style="color:#64748b;font-size:.95rem;">TAI에 등록된 전문가들이 보유한 주요 자격입니다</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge">
+          <div class="qi">🔧</div>
+          <div class="qt">
+            <strong>산업안전기사</strong>
+            <span>제조·건설 전 업종 안전관리자 선임</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge">
+          <div class="qi">🏗️</div>
+          <div class="qt">
+            <strong>건설안전기사</strong>
+            <span>건설현장 안전관리자 선임</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge">
+          <div class="qi">⚖️</div>
+          <div class="qt">
+            <strong>산업안전지도사</strong>
+            <span>고위험 사업장 안전관리 전문 지도</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge">
+          <div class="qi">🔥</div>
+          <div class="qt">
+            <strong>소방안전관리자</strong>
+            <span>건물·시설 소방안전관리자 선임</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge">
+          <div class="qi">⚡</div>
+          <div class="qt">
+            <strong>전기안전관리자</strong>
+            <span>전기설비 법정 안전관리자 선임</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="qual-badge" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px dashed #bae6fd;">
+          <div class="qi">➕</div>
+          <div class="qt">
+            <strong>기타 자격</strong>
+            <span>사업장 필요 자격 별도 문의 가능</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────── 이중 CTA ───────────────────────── -->
+<section class="cta-dual">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#0d1b2a;">지금 바로 시작하세요</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="cta-box blue-box">
+          <div class="cb-label">🏭 사업장 · 수요자</div>
+          <h3>선임할 전문가가<br>필요하십니까?</h3>
+          <p>사업장 규모, 업종, 필요 자격을 알려주시면 적합한 전문가를 매칭해 드립니다. 개인·대행업체 모두 가능합니다.</p>
+          <a href="../contact.html" class="btn btn-white" style="font-size:.95rem;padding:12px 28px;font-weight:700;">선임 매칭 신청</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="cta-box purple-box">
+          <div class="cb-label">👷 전문가 · 공급자</div>
+          <h3>일감이 필요하십니까?<br>TAI에 등록하세요</h3>
+          <p>자격증과 경력을 등록하면 적합한 사업장과 매칭됩니다. 성과 정산금은 계약 성사 후 정산되어 부담이 없습니다.</p>
+          <a href="../mypage/expert-application/" class="btn btn-white" style="font-size:.95rem;padding:12px 28px;font-weight:700;">전문가 등록</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
