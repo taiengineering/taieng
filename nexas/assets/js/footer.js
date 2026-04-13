@@ -35,7 +35,7 @@
           <p>TEL: 070-8080-1858 &nbsp;·&nbsp; FAX: 0504-845-8888</p>
           <p>EMAIL: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>
           <p>사업자등록번호: 723-39-01422</p>
-          <p>통신판매신고번호: 제2011-강원춘천-0039호</p>
+          <p>통신판매업 신고번호: 제2026-서울강남-02132호</p>
         </div>
       </div>
 
