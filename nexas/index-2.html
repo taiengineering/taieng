@@ -1,140 +1,439 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI MANAGER — 선임, 언제까지 미루세요?">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI Manager — 선임 의무 3분 확인 + 검증된 전문가 연결. 겸직 안전관리자의 업무 부담을 시스템이 분산합니다.">
   <title>TAI MANAGER | 선임, 언제까지 미루세요?</title>
   <link rel="icon" href="assets/img/fevicon.png">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/owl.min.css">
+  <link rel="stylesheet" href="assets/css/slick-slide.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  .hero2 { min-height:65vh; display:flex; align-items:center; background:linear-gradient(135deg,#1a0a0a 0%,#2d1010 40%,#0d1b2a 100%); padding:80px 0; }
-  .hero2 h1 { font-size:clamp(2.2rem,5vw,3.8rem); font-weight:900; color:#fff; line-height:1.1; letter-spacing:-.03em; margin-bottom:16px; }
-  .hero2 .sub { font-size:clamp(1.05rem,2vw,1.3rem); color:rgba(255,255,255,.7); margin-bottom:36px; }
-  .audience-tabs { display:flex; gap:0; border-bottom:2px solid var(--border); margin-bottom:40px; }
-  .audience-tab { padding:12px 24px; font-weight:700; font-size:.95rem; color:var(--sub); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; transition:all .2s; }
-  .audience-tab.active { color:var(--red); border-bottom-color:var(--red); }
-  .tab-panel { display:none; }
-  .tab-panel.active { display:block; }
-  .benefit-row { display:flex; gap:14px; align-items:flex-start; padding:18px 0; border-bottom:1px solid var(--border); }
-  .benefit-row:last-child { border-bottom:none; }
-  .b-icon { width:42px; height:42px; border-radius:10px; background:#fff0f0; color:var(--red); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
-  .benefit-row strong { font-size:.95rem; font-weight:800; color:var(--navy); display:block; margin-bottom:3px; }
-  .benefit-row span { font-size:.83rem; color:var(--sub); }
-  .process-step { text-align:center; }
-  .ps-num { width:52px; height:52px; border-radius:50%; background:var(--red); color:#fff; font-weight:900; font-size:1.1rem; display:flex; align-items:center; justify-content:center; margin:0 auto 14px; }
-  .ps-title { font-size:.95rem; font-weight:800; color:var(--navy); margin-bottom:6px; }
-  .ps-desc { font-size:.82rem; color:var(--sub); line-height:1.55; }
-  .ps-arrow { display:flex; align-items:center; justify-content:center; color:var(--border); font-size:1.5rem; padding-top:52px; }
+  body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
+
+  /* ── 히어로 (index-3 banner-area 구조, 중앙 타이틀 + 스크린샷 슬라이더) ── */
+  .manager-hero {
+    background: linear-gradient(135deg, #0a0f1e 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 110px 0 0; text-align: center; overflow: hidden;
+  }
+  .manager-hero h6 {
+    font-size: .75rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #e63946; margin-bottom: 18px;
+  }
+  .manager-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900; color: #fff; line-height: 1.08;
+    letter-spacing: -.04em; margin-bottom: 16px;
+  }
+  .manager-hero .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    color: rgba(255,255,255,.65); margin-bottom: 36px;
+  }
+  .manager-hero .btn-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+
+  /* 히어로 아래 스크린샷 슬라이더 자리 */
+  .hero-screen-area {
+    background: rgba(255,255,255,.04);
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding: 40px 0 0;
+  }
+  .screen-slider-placeholder {
+    display: flex; gap: 20px; justify-content: center; align-items: flex-end;
+    overflow: hidden; padding: 0 24px;
+  }
+  .ssp-item {
+    background: rgba(255,255,255,.07);
+    border: 1.5px dashed rgba(255,255,255,.2);
+    border-radius: 16px 16px 0 0;
+    flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: rgba(255,255,255,.3); font-size: .75rem; text-align: center; padding: 20px 12px; gap: 8px;
+  }
+  .ssp-item.main { width: 280px; height: 380px; }
+  .ssp-item.side { width: 200px; height: 300px; }
+  .ssp-item .si-ico { font-size: 2rem; opacity: .35; }
+  .ssp-item .si-lbl { font-weight: 700; color: rgba(255,255,255,.4); font-size: .8rem; }
+
+  /* ── 공감 섹션 "이런 상황이시죠?" ── */
+  .pain-section { background: #fff; padding: 80px 0; }
+  .pain-card {
+    background: #fff; border-radius: 16px; padding: 32px 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.08); height: 100%;
+    border-left: 4px solid #e63946; transition: transform .2s;
+  }
+  .pain-card:hover { transform: translateY(-4px); }
+  .pain-card .pc-emoji { font-size: 2rem; margin-bottom: 14px; }
+  .pain-card h4 { font-size: 1rem; font-weight: 800; color: #0d1b2a; margin-bottom: 10px; }
+  .pain-card p { font-size: .85rem; color: #64748b; line-height: 1.65; margin-bottom: 14px; }
+  .pain-card .pc-quote {
+    background: #f8fafc; border-radius: 8px; padding: 12px 14px;
+    font-size: .82rem; color: #64748b; line-height: 1.6; font-style: italic;
+    border-left: 3px solid #e63946;
+  }
+
+  /* ── 솔루션 "TAI Manager가 하는 일" ── */
+  .mgr-solution { background: #f8fafc; padding: 80px 0; }
+  .mgr-solution .solution-img-wrap {
+    background: #fff; border: 2px dashed #cbd5e1; border-radius: 16px;
+    min-height: 380px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #94a3b8; text-align: center; padding: 24px; gap: 10px;
+  }
+  .mgr-benefit { padding: 20px 0; border-bottom: 1px solid #e8eaed; display: flex; gap: 16px; align-items: flex-start; }
+  .mgr-benefit:last-child { border-bottom: none; }
+  .mgr-benefit .mb-ico { width: 44px; height: 44px; border-radius: 10px; background: #fff0f0; color: #e63946; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .mgr-benefit strong { font-size: .96rem; font-weight: 800; color: #0d1b2a; display: block; margin-bottom: 4px; }
+  .mgr-benefit span { font-size: .84rem; color: #64748b; line-height: 1.55; }
+
+  /* ── 비교표 ── */
+  .compare-section { background: #0d1b2a; padding: 80px 0; }
+  .compare-table { width: 100%; border-collapse: collapse; }
+  .compare-table th { background: #0d1b2a; color: rgba(255,255,255,.5); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.1); text-align: center; }
+  .compare-table th:first-child { text-align: left; }
+  .compare-table th.highlight { color: #e63946; }
+  .compare-table td { padding: 14px 20px; font-size: .88rem; color: rgba(255,255,255,.65); border-bottom: 1px solid rgba(255,255,255,.07); text-align: center; vertical-align: middle; }
+  .compare-table td:first-child { text-align: left; font-weight: 700; color: #fff; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .check-y { color: #4ade80; font-size: 1.1rem; }
+  .check-n { color: rgba(255,255,255,.2); font-size: 1.1rem; }
+  .compare-table .tai-col { background: rgba(230,57,70,.08); }
+
+  /* ── 진행 3단계 ── */
+  .process-section { background: #fff; padding: 80px 0; }
+  .step-card { text-align: center; padding: 32px 20px; }
+  .step-num { width: 56px; height: 56px; border-radius: 50%; background: #e63946; color: #fff; font-size: 1.2rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .step-card h4 { font-size: 1rem; font-weight: 800; color: #0d1b2a; margin-bottom: 8px; }
+  .step-card p { font-size: .84rem; color: #64748b; line-height: 1.6; margin: 0; }
+  .step-img-placeholder {
+    background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 12px;
+    min-height: 160px; margin-bottom: 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: #94a3b8; font-size: .78rem; text-align: center; padding: 16px; gap: 6px;
+  }
+
+  /* ── 전문가 관점 탭 ── */
+  .expert-section { background: #f8fafc; padding: 80px 0; }
+  .audience-tab-btns { display: flex; gap: 0; border: 2px solid #e8eaed; border-radius: 8px; overflow: hidden; max-width: 360px; }
+  .atb { flex: 1; padding: 12px; font-size: .92rem; font-weight: 700; color: #64748b; background: #fff; border: none; cursor: pointer; transition: all .2s; }
+  .atb.active { background: #0d1b2a; color: #fff; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── CTA ── */
+  .cta-manager { background: linear-gradient(135deg, #e63946 0%, #c1121f 100%); padding: 72px 0; text-align: center; }
+  .cta-manager h2 { font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .cta-manager p { color: rgba(255,255,255,.8); margin-bottom: 32px; font-size: 1rem; }
   </style>
 </head>
-<body>
-<nav class="tai-nav">
-  <div class="inner">
-    <a href="index.html" class="logo"><img src="assets/img/tai-logo.png" alt="TAI"></a>
-    <div class="nav-links">
-      <a href="index-1.html">TAI SAFE</a><a href="index-2.html" class="active">TAI MANAGER</a><a href="index-3.html">TAI FIX</a><a href="index-4.html">TAI CARE</a><a href="index-5.html">안전정보</a>
-      <span class="nav-sep">|</span>
-      <a href="log-in.html" class="nav-auth-guest">로그인</a><a href="sign-up.html" class="nav-auth-guest">회원가입</a>
-      <a href="mypage/" class="nav-auth-user d-none">마이페이지</a><a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>
-      <a href="free-diagnosis.html" class="nav-cta">무료 진단</a>
+<body class="sc5">
+
+<div class="preloader" id="preloader">
+  <div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div>
+</div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- ══ NAVBAR (index-3 구조 원본 유지) ══ -->
+<header class="navbar-area">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container nav-container">
+      <div class="responsive-mobile-menu">
+        <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu"
+          aria-expanded="false" aria-label="메뉴">
+          <span class="icon-left"></span><span class="icon-right"></span>
+        </button>
+      </div>
+      <div class="logo">
+        <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI 엔지니어링"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="themefie_main_menu">
+        <ul class="navbar-nav menu-open text-end">
+          <li><a href="index-1.html">TAI SAFE</a></li>
+          <li class="current-menu-item"><a href="index-2.html">TAI MANAGER</a></li>
+          <li><a href="index-3.html">TAI AGENT</a></li>
+          <li><a href="index-4.html">TAI CARE</a></li>
+          <li><a href="safety-news.html">안전정보</a></li>
+        </ul>
+      </div>
+      <div class="nav-right-part nav-right-part-desktop">
+        <ul>
+          <li class="nav-auth-guest"><a href="log-in.html">로그인</a></li>
+          <li class="nav-auth-user d-none"><a href="mypage/">마이페이지</a></li>
+          <li><a href="free-diagnosis.html" class="btn btn-base">무료 법령 진단</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ══ HERO (index-3 중앙 타이틀 + 스크린샷 슬라이더 구조) ══ -->
+<section class="manager-hero">
+  <div class="container">
+    <div class="hero-inner">
+      <h6>TAI Manager — 전문가 연결 플랫폼</h6>
+      <h1>선임, 언제까지<br>미루세요?</h1>
+      <p class="hero-sub">
+        선임 의무 3분 확인 → 검증된 전문가 연결 → 계약·정산 자동 처리<br>
+        TAI Manager가 사장님 대신 꼼꼼히 챙겨드립니다.
+      </p>
+      <div class="btn-row">
+        <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;">선임 의무 확인하기 — 무료</a>
+        <a href="#pain" class="btn btn-border" style="font-size:1rem;padding:14px 28px;color:#fff;border-color:rgba(255,255,255,.35);">내 상황 확인</a>
+      </div>
     </div>
   </div>
-</nav>
-
-<section class="hero2">
-  <div class="sec-inner">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="page-hero-tag">전문가 연결 — 선임</span>
-        <h1>선임, 언제까지<br>미루세요?</h1>
-        <p class="sub">저희가 꼼꼼히 안내드리겠습니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="contact.html" class="btn-red">선임 연결 신청</a>
-          <a href="#how" class="btn-outline-white">진행 방식 보기</a>
+  <!-- 스크린샷 슬라이더 영역 -->
+  <div class="hero-screen-area">
+    <div class="container">
+      <div class="screen-slider-placeholder">
+        <!-- [이미지 자리] TAI Manager 플랫폼 주화면 — 전문가 목록 슬라이더 -->
+        <div class="ssp-item side">
+          <span class="si-ico">👤</span>
+          <span class="si-lbl">전문가 프로필 카드</span>
+          <span>자격증·지역·실적 표시</span>
+        </div>
+        <div class="ssp-item main">
+          <span class="si-ico">🖥️</span>
+          <span class="si-lbl">TAI Manager 메인 화면</span>
+          <span>선임 의무 진단 결과<br>+ 전문가 매칭 목록<br>실제 스크린샷 교체 예정</span>
+        </div>
+        <div class="ssp-item side">
+          <span class="si-ico">📄</span>
+          <span class="si-lbl">계약서 자동 생성</span>
+          <span>플랫폼 전자계약 화면</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 공감 섹션 ══ -->
+<section id="pain" class="pain-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">공감</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;margin-bottom:10px;">이런 상황이시죠?</h2>
+      <p style="color:#64748b;">선임을 미루는 이유는 다 있습니다. TAI Manager가 그 이유를 없애드립니다.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="pain-card">
+          <div class="pc-emoji">😮</div>
+          <h4>선임 의무인지 몰랐습니다</h4>
+          <p>법령이 복잡해서 내 사업장에 선임 의무가 있는지 확인조차 못 했습니다.</p>
+          <!-- [이미지 자리] 법령집 앞에서 고민하는 사업장 담당자 이미지 -->
+          <p class="pc-quote">"뭘 해야 하는지 몰라서 계속 미뤄왔습니다"</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pain-card">
+          <div class="pc-emoji">🤔</div>
+          <h4>어디서 구하는지 모릅니다</h4>
+          <p>적합한 전문가를 어디서 구해야 하는지, 자격 요건은 무엇인지 몰랐습니다.</p>
+          <!-- [이미지 자리] 인터넷 검색하며 헷갈리는 표정의 담당자 이미지 -->
+          <p class="pc-quote">"인터넷에서 찾아봤는데 검증이 안 되더라고요"</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pain-card">
+          <div class="pc-emoji">😓</div>
+          <h4>서류·계약이 번거롭습니다</h4>
+          <p>선임 신고 서류, 계약서, 월별 보고 등 행정 처리가 복잡해서 포기했습니다.</p>
+          <!-- [이미지 자리] 서류 더미 앞 지친 담당자 이미지 -->
+          <p class="pc-quote">"행정 처리만 생각해도 머리가 아픕니다"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 솔루션 — TAI Manager가 하는 일 ══ -->
+<section class="mgr-solution">
+  <div class="container">
+    <div class="row g-5 align-items-center">
       <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:28px;">
-          <p style="color:rgba(255,255,255,.5); font-size:.75rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:16px;">선임 의무 대상</p>
-          <div style="color:#fff; font-size:.9rem; line-height:2;">
-            <div>✅ 상시 근로자 50인 이상 사업장</div>
-            <div>✅ 건설업 공사금액 120억 이상 현장</div>
-            <div>✅ 특정 위험 업종 (크레인·프레스 등)</div>
-            <div>✅ 건물 안전관리자 선임 대상</div>
-          </div>
-          <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,.1);">
-            <p style="color:rgba(255,255,255,.5); font-size:.75rem; margin-bottom:8px;">선임 의무 미이행 시</p>
-            <p style="color:var(--red); font-weight:700; font-size:.95rem; margin:0;">최대 1,500만원 과태료</p>
-          </div>
+        <!-- [이미지 자리] TAI Manager 전문가 선택 화면 — 카드형 전문가 목록 UI -->
+        <div class="solution-img-wrap">
+          <span style="font-size:2rem;opacity:.4;">👥</span>
+          <span style="font-weight:700;color:#64748b;font-size:.95rem;">전문가 목록 화면</span>
+          <span style="font-size:.8rem;color:#94a3b8;">자격·지역·경력 필터<br>실제 서비스 스크린샷으로 교체 예정</span>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:14px;">해결</h6>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;margin-bottom:10px;">TAI Manager가<br>대신 처리합니다</h2>
+        <p style="color:#64748b;margin-bottom:28px;line-height:1.7;">법령 진단부터 전문가 연결, 계약, 정산까지 — 한 플랫폼에서 끝납니다.</p>
+        <div class="mgr-benefit">
+          <div class="mb-ico"><i class="fas fa-balance-scale"></i></div>
+          <div><strong>선임 의무 3분 확인</strong><span>사업장 정보를 입력하면 선임 의무 여부와 필요 자격 요건이 자동 도출됩니다.</span></div>
+        </div>
+        <div class="mgr-benefit">
+          <div class="mb-ico"><i class="fas fa-user-check"></i></div>
+          <div><strong>검증된 전문가 목록 직접 확인</strong><span>자격증·경력·활동 지역이 확인된 전문가만 노출됩니다. 직접 비교하고 선택하세요.</span></div>
+        </div>
+        <div class="mgr-benefit">
+          <div class="mb-ico"><i class="fas fa-file-signature"></i></div>
+          <div><strong>전자계약 + 선임 신고 서류 자동 생성</strong><span>계약서 작성, 선임 신고 서류까지 플랫폼에서 자동으로 처리됩니다.</span></div>
+        </div>
+        <div class="mgr-benefit">
+          <div class="mb-ico"><i class="fas fa-sync-alt"></i></div>
+          <div><strong>법령 변경 시 자동 알림</strong><span>선임 기준이 변경되면 자동으로 알려드립니다. 위반 리스크를 사전에 차단합니다.</span></div>
+        </div>
+        <div class="mt-4"><a href="free-diagnosis.html" class="btn-red">선임 의무 지금 확인하기</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 비교표 ══ -->
+<section class="compare-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">비교</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#fff;margin-bottom:10px;">직접 vs TAI Manager</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div style="overflow-x:auto; border-radius:14px; box-shadow:0 4px 24px rgba(0,0,0,.3);">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th style="width:40%;">항목</th>
+                <th>직접 처리</th>
+                <th class="highlight tai-col">TAI Manager</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>선임 의무 파악</td><td>법령 직접 검토 (수일 소요)</td><td class="tai-col"><i class="fas fa-check check-y"></i> 3분 자동 진단</td></tr>
+              <tr><td>전문가 탐색</td><td>지인 소개, 인터넷 검색 (검증 불가)</td><td class="tai-col"><i class="fas fa-check check-y"></i> 자격·실적 검증 목록</td></tr>
+              <tr><td>계약서 작성</td><td>별도 법무 검토 필요</td><td class="tai-col"><i class="fas fa-check check-y"></i> 표준 전자계약 자동 생성</td></tr>
+              <tr><td>선임 신고 서류</td><td>직접 작성 (양식 찾기)</td><td class="tai-col"><i class="fas fa-check check-y"></i> 자동 생성·보관</td></tr>
+              <tr><td>법령 개정 모니터링</td><td><i class="fas fa-times check-n"></i> 직접 확인 필요</td><td class="tai-col"><i class="fas fa-check check-y"></i> 자동 알림</td></tr>
+              <tr><td>비용</td><td>인건비 + 외부 비용</td><td class="tai-col"><i class="fas fa-check check-y"></i> 성과 기반 플랫폼 이용료만</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec" style="background:#fff;">
-  <div class="sec-inner">
-    <div class="audience-tabs">
-      <div class="audience-tab active" onclick="switchTab('client',this)">기업 (수요자)</div>
-      <div class="audience-tab" onclick="switchTab('expert',this)">전문가 (공급자)</div>
+<!-- ══ 진행 3단계 ══ -->
+<section class="process-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:12px;">진행 방식</h6>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;color:#0d1b2a;margin-bottom:10px;">선임까지 이렇게 진행됩니다</h2>
     </div>
-    <div id="tab-client" class="tab-panel active">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <span class="sec-tag">기업 혜택</span>
-          <h2 class="sec-h2" style="color:var(--navy);">선임, 이제 어렵지 않습니다</h2>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-check"></i></div><div><strong>선임 요건 3분 확인</strong><span>내 사업장에 선임 의무가 있는지 법령 진단으로 확인</span></div></div>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-user-tie"></i></div><div><strong>검증된 전문가 연결</strong><span>자격·경력·활동지역이 확인된 전문가를 플랫폼에서 직접 선택</span></div></div>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-file-contract"></i></div><div><strong>법정 서류 관리</strong><span>선임 신고 서류부터 월별 보고까지 플랫폼에서 처리</span></div></div>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-shield-alt"></i></div><div><strong>법령 변경 자동 반영</strong><span>법령 개정 시 자동으로 알림. 위반 리스크를 사전 차단</span></div></div>
-          <div class="mt-4"><a href="contact.html" class="btn-red">선임 연결 신청하기</a></div>
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="step-card">
+          <!-- [이미지 자리] 법령 진단 입력 폼 화면 (160×120px) -->
+          <div class="step-img-placeholder"><span style="font-size:1.5rem;">⚖️</span><span>법령 진단 화면</span></div>
+          <div class="step-num">1</div>
+          <h4>선임 의무 확인</h4>
+          <p>사업장 정보 입력 3분 → 선임 의무·자격 요건 자동 도출</p>
         </div>
-        <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="선임" class="img-fluid" style="border-radius:14px;"></div>
       </div>
-    </div>
-    <div id="tab-expert" class="tab-panel">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="전문가" class="img-fluid" style="border-radius:14px;"></div>
-        <div class="col-lg-6">
-          <span class="sec-tag">전문가 혜택</span>
-          <h2 class="sec-h2" style="color:var(--navy);">활동 지역의 수요를 먼저 받으세요</h2>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-map-marker-alt"></i></div><div><strong>지역별 수요 우선 연결</strong><span>내 활동 지역에서 선임 의무가 발생한 기업에 먼저 연결</span></div></div>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-won-sign"></i></div><div><strong>계약·정산 플랫폼 처리</strong><span>계약서 작성, 월별 정산 모두 플랫폼에서 자동 처리</span></div></div>
-          <div class="benefit-row"><div class="b-icon"><i class="fas fa-star"></i></div><div><strong>포트폴리오 관리</strong><span>담당 사업장 이력, 실적 기록으로 신뢰도 자동 축적</span></div></div>
-          <div class="mt-4"><a href="contact.html" class="btn-red">전문가 등록하기</a></div>
+      <div class="col-md-3">
+        <div class="step-card">
+          <!-- [이미지 자리] 전문가 카드 목록 UI (160×120px) -->
+          <div class="step-img-placeholder"><span style="font-size:1.5rem;">👤</span><span>전문가 목록 화면</span></div>
+          <div class="step-num">2</div>
+          <h4>전문가 직접 선택</h4>
+          <p>자격·지역·경력 필터 → 조건 맞는 전문가 직접 확인</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step-card">
+          <!-- [이미지 자리] 전자계약서 화면 (160×120px) -->
+          <div class="step-img-placeholder"><span style="font-size:1.5rem;">📄</span><span>전자계약 화면</span></div>
+          <div class="step-num">3</div>
+          <h4>연결 신청 + 전자계약</h4>
+          <p>연결 신청 → 전자계약 체결 → 선임 신고 서류 자동 생성</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="step-card">
+          <!-- [이미지 자리] 선임 완료 대시보드 (160×120px) -->
+          <div class="step-img-placeholder"><span style="font-size:1.5rem;">✅</span><span>선임 완료 화면</span></div>
+          <div class="step-num">4</div>
+          <h4>선임 완료 + 지속 관리</h4>
+          <p>선임 완료 후 월별 보고·법령 변경 알림 자동 관리</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="how" class="sec" style="background:var(--gray-bg);">
-  <div class="sec-inner">
-    <div class="text-center mb-5"><span class="sec-tag">진행 방식</span><h2 class="sec-h2">선임까지 이렇게 진행됩니다</h2></div>
-    <div class="row g-3 align-items-start">
-      <div class="col"><div class="process-step"><div class="ps-num">1</div><div class="ps-title">법령 진단</div><div class="ps-desc">선임 의무 여부를 3분 안에 확인</div></div></div>
-      <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col"><div class="process-step"><div class="ps-num">2</div><div class="ps-title">전문가 확인</div><div class="ps-desc">조건에 맞는 전문가 목록을 직접 확인</div></div></div>
-      <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col"><div class="process-step"><div class="ps-num">3</div><div class="ps-title">연결 신청</div><div class="ps-desc">원하는 전문가에게 연결 신청</div></div></div>
-      <div class="col-auto"><div class="ps-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col"><div class="process-step"><div class="ps-num">4</div><div class="ps-title">계약·선임</div><div class="ps-desc">플랫폼에서 계약 체결 및 선임 신고까지</div></div></div>
+<!-- ══ 전문가 관점 탭 ══ -->
+<section class="expert-section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-5">
+        <h6 style="font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#e63946;margin-bottom:14px;">전문가 관점</h6>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;margin-bottom:20px;">안전 전문가이신가요?<br>TAI로 더 많은 고객을</h2>
+        <div class="audience-tab-btns mb-4">
+          <button class="atb active" onclick="switchTab('client',this)">수요 기업</button>
+          <button class="atb" onclick="switchTab('expert',this)">전문가</button>
+        </div>
+        <div id="tab-client" class="tab-panel active">
+          <p style="color:#64748b;line-height:1.7;margin-bottom:24px;">법령 진단 → 선임 의무 확인 → 검증된 전문가 연결까지. 사장님은 결정만 하시면 됩니다.</p>
+          <a href="free-diagnosis.html" class="btn-red">선임 의무 확인 — 무료</a>
+        </div>
+        <div id="tab-expert" class="tab-panel">
+          <p style="color:#64748b;line-height:1.7;margin-bottom:24px;">법령 진단이 완료된 기업과 직접 연결됩니다. 플랫폼을 통해 성사된 계약의 플랫폼 이용료만 납부하시면 됩니다.</p>
+          <a href="mypage/expert-intro.html?type=safety" class="btn-red">전문가 등록하기</a>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <!-- [이미지 자리] TAI Manager 전문가-기업 매칭 화면 또는 계약 체결 화면 -->
+        <div style="background:#f8fafc;border:2px dashed #cbd5e1;border-radius:16px;min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#94a3b8;text-align:center;padding:24px;gap:10px;">
+          <span style="font-size:2rem;opacity:.4;">🤝</span>
+          <span style="font-weight:700;color:#64748b;font-size:.95rem;">기업-전문가 매칭 화면</span>
+          <span style="font-size:.8rem;">연결 현황 + 계약 진행 상태<br>실제 서비스 스크린샷으로 교체 예정</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-manager">
+  <div class="container">
+    <h2>지금 선임 의무를 확인하세요</h2>
+    <p>과태료가 발생하기 전에 — 3분이면 충분합니다.</p>
+    <div class="d-flex gap-3 justify-content-center flex-wrap">
+      <a href="free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:14px 36px;font-weight:700;">선임 의무 무료 확인</a>
+      <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 연결 문의</a>
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/imageloded.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/main.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-function switchTab(t, btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.audience-tab').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+t).classList.add('active');
+if (typeof WOW !== 'undefined') new WOW().init();
+function switchTab(t, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.atb').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + t).classList.add('active');
   btn.classList.add('active');
 }
 </script>
-</body></html>
+</body>
+</html>
