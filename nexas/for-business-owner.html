@@ -105,64 +105,10 @@
 </div>
 <div class="body-overlay" id="body-overlay"></div>
 
-<!-- navbar -->
-<header class="navbar-area">
-  <nav class="navbar navbar-expand-lg">
-    <div class="container nav-container">
-      <div class="responsive-mobile-menu">
-        <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu"
-          aria-expanded="false" aria-label="메뉴">
-          <span class="icon-left"></span><span class="icon-right"></span>
-        </button>
-      </div>
-      <div class="logo">
-        <a class="main-logo" href="index.html"><img src="assets/img/tai-logo.png" alt="TAI 엔지니어링"></a>
-      </div>
-      <div class="collapse navbar-collapse" id="themefie_main_menu">
-        <ul class="navbar-nav menu-open text-end">
-          <li class="menu-item-has-children">
-            <a href="#">서비스</a>
-            <ul class="sub-menu">
-              <li><a href="service/education.html">교육사업</a></li>
-              <li><a href="service/inapp.html">인앱 서비스</a></li>
-              <li><a href="service/repair.html">수선 연결</a></li>
-              <li><a href="service/consulting.html">컨설팅</a></li>
-              <li><a href="service/appointment.html">선임 연결</a></li>
-              <li><a href="service/saas.html">SaaS 구독</a></li>
-              <li><a href="service/diagnosis.html">법령진단</a></li>
-            </ul>
-          </li>
-          <li class="menu-item-has-children">
-            <a href="#">대상별</a>
-            <ul class="sub-menu">
-              <li><a href="target/building.html">건물·시설</a></li>
-              <li><a href="target/factory.html">제조공장</a></li>
-              <li><a href="target/construction.html">건설현장</a></li>
-            </ul>
-          </li>
-          <li><a href="pricing.html">요금제</a></li>
-          <li class="menu-item-has-children">
-            <a href="#">회사소개</a>
-            <ul class="sub-menu">
-              <li><a href="about.html">회사소개</a></li>
-              <li><a href="patents.html">특허출원</a></li>
-              <li><a href="faq.html">FAQ</a></li>
-              <li><a href="safety-news.html">안전정보</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-right-part nav-right-part-desktop">
-        <ul>
-          <li class="nav-auth-guest"><a href="log-in.html">로그인</a></li>
-          <li><a href="free-diagnosis.html" class="btn btn-base">무료 진단</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
+<!-- HEADER -->
+<div id="tai-header"></div>
 
-<!-- ══ 히어로 (index-3 style-3 구조 기반) ══ -->
+<!-- ══ 히어로 ══ -->
 <section class="banner-area style-3">
   <div class="container">
     <div class="row justify-content-center">
@@ -181,7 +127,6 @@
         </div>
       </div>
       <div class="col-lg-8 mt-5">
-        <!-- [이미지: TAI Safe 관리자 대시보드 — 위험도 현황 + 점검 완료율 화면] -->
         <div class="img-placeholder" style="min-height:280px;">
           <span class="ph-icon">🖥️</span>
           <strong style="color:rgba(255,255,255,.6);">TAI Safe 사업주 대시보드</strong>
@@ -192,7 +137,7 @@
   </div>
 </section>
 
-<!-- ══ 법적 현실 숫자 3개 ══ -->
+<!-- ══ 법적 현실 숫자 4개 ══ -->
 <div class="risk-banner">
   <div class="container">
     <div class="row g-4 align-items-center">
@@ -227,7 +172,7 @@
   </div>
 </div>
 
-<!-- ══ TAI가 리스크를 줄이는 방법 — 6개 카드 (기획서 표 그대로) ══ -->
+<!-- ══ TAI가 리스크를 줄이는 방법 — 6개 카드 ══ -->
 <section class="risk-card-section">
   <div class="container">
     <div class="section-title text-center mb-5">
@@ -294,12 +239,11 @@
   </div>
 </section>
 
-<!-- ══ 워크플로우 — 법적 증거 자동 확보 (index-3 work-area 구조) ══ -->
+<!-- ══ 법적 증거 자동 확보 워크플로우 ══ -->
 <section class="evidence-section">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-xl-5 col-lg-6 order-lg-2">
-        <!-- [이미지: 점검 기록·타임스탬프·이상 신고 보고 화면 캡처] -->
         <div class="img-placeholder-light">
           <span class="ph-icon">🗂️</span>
           <strong style="color:#64748b;">점검 기록 자동 저장 화면</strong>
@@ -344,14 +288,13 @@
   </div>
 </section>
 
-<!-- ══ CTA (index-3 cta-area 구조 기반) ══ -->
+<!-- ══ CTA ══ -->
 <section class="cta-area bg-main pd-top-70" style="background: linear-gradient(135deg, #e63946 0%, #c1121f 60%, #9b1c1c 100%);">
   <div class="bg-main-gradient"></div>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-xl-5 col-lg-6 order-lg-2">
         <div class="thumb mb-lg-0 mb-5 text-center">
-          <!-- [이미지: 무료 법령진단 결과 리포트 화면] -->
           <div class="img-placeholder" style="min-height:260px;">
             <span class="ph-icon">📄</span>
             <strong style="color:rgba(255,255,255,.6);">무료 법령진단 결과 리포트</strong>
@@ -391,6 +334,7 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
