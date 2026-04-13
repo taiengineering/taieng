@@ -35,14 +35,9 @@
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-<header class="navbar-area">
-  <nav class="navbar navbar-expand-lg"><div class="container nav-container">
-    <div class="responsive-mobile-menu"><button class="menu toggle-btn d-block d-lg-none" data-target="#nav1" aria-expanded="false" aria-label="메뉴"><span class="icon-left"></span><span class="icon-right"></span></button></div>
-    <div class="logo"><a href="../index.html"><img src="../assets/img/tai-logo.png" alt="TAI"></a></div>
-    <div class="collapse navbar-collapse" id="nav1"><ul class="navbar-nav menu-open text-end"><li><a href="../index-1.html">TAI SAFE</a></li><li><a href="../index-2.html">TAI MANAGER</a></li><li><a href="../index-3.html">TAI AGENT</a></li><li><a href="../index-4.html">TAI CARE</a></li><li><a href="../safety-news.html">안전정보</a></li></ul></div>
-    <div class="nav-right-part nav-right-part-desktop"><ul><li class="nav-auth-guest"><a href="../log-in.html">로그인</a></li><li><a href="../free-diagnosis.html" class="btn btn-base">무료 진단</a></li></ul></div>
-  </div></nav>
-</header>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
 
 <section class="target-hero">
   <div class="container">
@@ -76,11 +71,11 @@
   <div class="container">
     <div class="text-center mb-5"><h2 style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;">주요 점검 의무</h2><p style="color:#64748b;">제조공장에 적용되는 대표적인 점검 항목입니다</p></div>
     <div class="row g-4">
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>작업시작 전 점검</h5><p>날름일 또는 작업 시작 전 프레스·크레인 등 설비 점검이 의무입니다.</p><span class="cycle">매 작업시작 전</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>작업시작 전 점검</h5><p>매 작업일 또는 작업 시작 전 프레스·크레인 등 설비 점검이 의무입니다.</p><span class="cycle">매 작업시작 전</span></div></div>
       <div class="col-lg-4 col-md-6"><div class="law-card"><h5>정기 법정점검</h5><p>크레인·압력용기·리프트 등 유해위험기계 정기검사는 산안법에 따라 주기별 점검이 필수입니다.</p><span class="cycle">월·분기·연 단위</span></div></div>
       <div class="col-lg-4 col-md-6"><div class="law-card"><h5>작업환경 측정</h5><p>소음·진동·화학물질 등 작업환경 측정은 법령에 따라 주기적으로 실시해야 합니다.</p><span class="cycle">반기마다</span></div></div>
       <div class="col-lg-4 col-md-6"><div class="law-card"><h5>특수건강검진</h5><p>유해인자를 다루는 근로자는 연 1회 이상 특수건강검진이 의무입니다.</p><span class="cycle">연 1회</span></div></div>
-      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>안전관리자 선임</h5><p>산업안전보건법에 따라 50인 이상 사업장은 안전관리자 선임이 의무입니다. (구역도에 따라 5인~으로 확대 예정)</p><span class="cycle">상시</span></div></div>
+      <div class="col-lg-4 col-md-6"><div class="law-card"><h5>안전관리자 선임</h5><p>산업안전보건법에 따라 50인 이상 사업장은 안전관리자 선임이 의무입니다.</p><span class="cycle">상시</span></div></div>
       <div class="col-lg-4 col-md-6"><div class="law-card"><h5>안전보건교육</h5><p>신규입사자·관리감독자·특별안전교육 등 종류별 교육 시간과 주기가 정해져 있습니다.</p><span class="cycle">항목별 다름</span></div></div>
     </div>
   </div>
@@ -90,9 +85,9 @@
   <div class="container">
     <div class="text-center mb-5"><h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;">TAI Safe 공장 특화 기능</h2></div>
     <div class="row g-4">
-      <div class="col-md-4"><div class="feature-card"><h5>설비별 점검 책임 배정</h5><p>설비마다 담당 작업자를 지정하면, 이후 사라지지 않는 한 자동으로 반복 배정됩니다.</p></div></div>
+      <div class="col-md-4"><div class="feature-card"><h5>설비별 점검 책임 배정</h5><p>설비마다 담당 작업자를 지정하면, 이후 자동으로 반복 배정됩니다.</p></div></div>
       <div class="col-md-4"><div class="feature-card"><h5>TBM 자동 기록</h5><p>작업시작 전 TBM 체크리스트가 자동 발송되고 완료 시 기록일지에 저장됩니다.</p></div></div>
-      <div class="col-md-4"><div class="feature-card"><h5>이상 탐지 + 수선 연결</h5><p>작업자가 이상을 보고하면 간리자에게 실시간 알림, TAI 플랫폼에서 수선 업체 연결까지.</p></div></div>
+      <div class="col-md-4"><div class="feature-card"><h5>이상 탐지 + 수선 연결</h5><p>작업자가 이상을 보고하면 관리자에게 실시간 알림, TAI 플랫폼에서 수선 업체 연결까지.</p></div></div>
     </div>
   </div>
 </section>
@@ -114,6 +109,8 @@
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/wow.min.js"></script>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/header.js"></script>
+<script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script>if(typeof WOW!=='undefined') new WOW().init();</script>
 </body>
