@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>업체 등록 | TAI Fix</title>
+  <meta name="description" content="TAI Fix에 업체를 등록하고, 자격검증된 전문 일감을 받으세요.">
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body{font-family:'Noto Sans KR',sans-serif}
+  .reg-hero{background:linear-gradient(135deg,#0d1b2a,#0f2744);padding:100px 0 60px;text-align:center}
+  .reg-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:12px}
+  .reg-hero p{color:rgba(255,255,255,.6);font-size:.95rem;max-width:480px;margin:0 auto}
+  .step-bar{display:flex;gap:0;margin:0 auto 40px;max-width:600px}
+  .step-item{flex:1;text-align:center;position:relative;padding-top:36px}
+  .step-item::before{content:'';position:absolute;top:12px;left:0;right:0;height:3px;background:#e2e8f0}
+  .step-item:first-child::before{left:50%}
+  .step-item:last-child::before{right:50%}
+  .step-dot{width:26px;height:26px;border-radius:50%;background:#e2e8f0;color:#94a3b8;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:1;transition:.2s}
+  .step-item.active .step-dot,.step-item.done .step-dot{background:#0d1b2a;color:#fff}
+  .step-item.done .step-dot{background:#16a34a}
+  .step-label{font-size:.78rem;color:#94a3b8;font-weight:600;margin-top:4px}
+  .step-item.active .step-label{color:#0d1b2a;font-weight:800}
+  .form-wrap{max-width:800px;margin:0 auto;padding:0 20px 60px}
+  .form-section{display:none}
+  .form-section.active{display:block}
+  .sec-title{font-size:1.3rem;font-weight:900;color:#0d1b2a;margin-bottom:6px}
+  .sec-desc{font-size:.88rem;color:#64748b;margin-bottom:24px}
+  .form-label{font-weight:700;font-size:.88rem;color:#334155}
+  .form-control,.form-select{border-radius:12px;padding:11px 14px;border:1.5px solid #e2e8f0;font-size:.9rem}
+  .form-control:focus{border-color:#0d1b2a;box-shadow:0 0 0 3px rgba(13,27,42,.08)}
+  .qual-search{position:relative}
+  .qual-search input{border-radius:12px;padding:11px 14px 11px 40px}
+  .qual-search .fa-search{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8}
+  .qual-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;max-height:240px;overflow-y:auto;z-index:10;display:none;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+  .qual-dropdown.show{display:block}
+  .qual-opt{padding:10px 14px;cursor:pointer;font-size:.88rem;display:flex;justify-content:space-between;align-items:center}
+  .qual-opt:hover{background:#f1f5f9}
+  .qual-opt .qt{font-size:.7rem;padding:2px 8px;border-radius:999px;font-weight:700}
+  .qt-LICENSE{background:#dbeafe;color:#1d4ed8}
+  .qt-REGISTRATION{background:#fef3c7;color:#92400e}
+  .qt-CERT{background:#dcfce7;color:#166534}
+  .qt-CAPABILITY{background:#f1f5f9;color:#64748b}
+  .selected-quals{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .sq-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:10px;font-size:.82rem;font-weight:700;background:#f8fafc;border:1.5px solid #e2e8f0}
+  .sq-chip .remove{cursor:pointer;color:#dc2626;font-size:.9rem}
+  .sq-chip input[type=number]{width:52px;border:1.5px solid #cbd5e1;border-radius:8px;padding:3px 6px;font-size:.82rem;text-align:center;font-weight:700}
+  .cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .cat-tab{padding:8px 16px;border-radius:999px;border:1.5px solid #e2e8f0;background:#fff;font-size:.85rem;font-weight:700;cursor:pointer;transition:.15s}
+  .cat-tab.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
+  .svc-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .svc-card{border:1.5px solid #e2e8f0;border-radius:14px;padding:16px;cursor:pointer;transition:.15s}
+  .svc-card:hover{border-color:#94a3b8}
+  .svc-card.checked{border-color:#0d1b2a;background:#f8fafc}
+  .svc-card .svc-top{display:flex;align-items:center;gap:10px}
+  .svc-card .svc-cb{width:20px;height:20px;border-radius:6px;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.15s}
+  .svc-card.checked .svc-cb{background:#0d1b2a;border-color:#0d1b2a;color:#fff}
+  .svc-card .svc-name{font-weight:800;font-size:.92rem}
+  .svc-card .svc-desc{font-size:.8rem;color:#64748b;margin:6px 0 0 30px}
+  .svc-card .grade-a{display:inline-block;font-size:.65rem;padding:2px 6px;border-radius:4px;background:#fee2e2;color:#dc2626;font-weight:800;margin-left:6px}
+  .region-grid{display:flex;flex-wrap:wrap;gap:8px}
+  .region-chip{padding:9px 18px;border-radius:999px;border:1.5px solid #e2e8f0;font-size:.88rem;font-weight:600;cursor:pointer;transition:.15s}
+  .region-chip.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
+  .btn-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
+  .btn-prev,.btn-next,.btn-submit{padding:13px 32px;border-radius:14px;font-size:.95rem;font-weight:800;border:none;cursor:pointer;transition:.15s}
+  .btn-prev{background:#f1f5f9;color:#334155}
+  .btn-next{background:#0d1b2a;color:#fff;margin-left:auto}
+  .btn-next:hover{opacity:.9}
+  .btn-submit{background:#dc2626;color:#fff;margin-left:auto}
+  .btn-submit:hover{background:#b91c1c}
+  .summary-box{background:#f8fafc;border-radius:14px;padding:20px;margin-bottom:16px}
+  .summary-box h6{font-size:.82rem;color:#64748b;margin-bottom:8px}
+  .summary-box p{font-size:.92rem;font-weight:700;color:#0d1b2a;margin:0}
+  @media(min-width:640px){.svc-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+<div id="tai-header"></div>
+
+<section class="reg-hero">
+  <div class="container">
+    <h1>업체 등록</h1>
+    <p>자격이 검증된 전문 업체로 등록하고,<br>TAI를 통해 일감을 받으세요.</p>
+  </div>
+</section>
+
+<section style="background:#fff;padding:40px 0 0">
+  <div class="step-bar">
+    <div class="step-item active" data-step="1"><span class="step-dot">1</span><div class="step-label">기본 정보</div></div>
+    <div class="step-item" data-step="2"><span class="step-dot">2</span><div class="step-label">보유 자격</div></div>
+    <div class="step-item" data-step="3"><span class="step-dot">3</span><div class="step-label">제공 서비스</div></div>
+    <div class="step-item" data-step="4"><span class="step-dot">4</span><div class="step-label">확인·등록</div></div>
+  </div>
+
+  <div class="form-wrap">
+    <div class="form-section active" id="step1">
+      <div class="sec-title">기본 정보</div>
+      <div class="sec-desc">업체 기본 정보를 입력해주세요.</div>
+      <div class="row g-3">
+        <div class="col-12"><label class="form-label">회사명 <span style="color:#dc2626">*</span></label><input type="text" class="form-control" id="f-company" placeholder="예: 대성전기종합안전"></div>
+        <div class="col-md-6"><label class="form-label">사업자등록번호</label><input type="text" class="form-control" id="f-bizno" placeholder="000-00-00000"></div>
+        <div class="col-md-6"><label class="form-label">대표자명</label><input type="text" class="form-control" id="f-rep" placeholder="홍길동"></div>
+        <div class="col-md-6"><label class="form-label">연락처 <span style="color:#dc2626">*</span></label><input type="tel" class="form-control" id="f-phone" placeholder="02-1234-5678"></div>
+        <div class="col-md-6"><label class="form-label">이메일 <span style="color:#dc2626">*</span></label><input type="email" class="form-control" id="f-email" placeholder="info@company.co.kr"></div>
+        <div class="col-12"><label class="form-label">주소</label><input type="text" class="form-control" id="f-addr" placeholder="서울시 강남구 ..."></div>
+        <div class="col-md-6"><label class="form-label">설립연도</label><input type="number" class="form-control" id="f-year" placeholder="2010" min="1950" max="2026"></div>
+        <div class="col-md-6"><label class="form-label">전체 직원 수</label><input type="number" class="form-control" id="f-emp" placeholder="15" min="1"></div>
+      </div>
+      <div class="btn-nav"><div></div><button class="btn-next" onclick="goStep(2)">다음: 보유 자격 →</button></div>
+    </div>
+
+    <div class="form-section" id="step2">
+      <div class="sec-title">보유 인허가 및 인력</div>
+      <div class="sec-desc">보유한 면허·등록·자격을 검색하여 추가하세요. 자격증은 보유 인원수를 입력합니다.</div>
+      <label class="form-label mb-2">인허가 / 자격 검색</label>
+      <div class="qual-search">
+        <i class="fas fa-search"></i>
+        <input type="text" class="form-control" id="qual-input" placeholder="예: 전기공사업, 전기기사, 소방..." autocomplete="off">
+        <div class="qual-dropdown" id="qual-dropdown"></div>
+      </div>
+      <div class="selected-quals" id="selected-quals"></div>
+      <div class="btn-nav"><button class="btn-prev" onclick="goStep(1)">← 이전</button><button class="btn-next" onclick="goStep(3)">다음: 제공 서비스 →</button></div>
+    </div>
+
+    <div class="form-section" id="step3">
+      <div class="sec-title">제공 서비스</div>
+      <div class="sec-desc">제공 가능한 서비스를 선택하세요.</div>
+      <div class="cat-tabs" id="cat-tabs"></div>
+      <div class="svc-grid" id="svc-grid"></div>
+      <div style="margin-top:32px">
+        <div class="sec-title">서비스 지역</div>
+        <div class="sec-desc">서비스 가능한 지역을 선택하세요.</div>
+        <div class="region-grid" id="region-grid"></div>
+      </div>
+      <div class="btn-nav"><button class="btn-prev" onclick="goStep(2)">← 이전</button><button class="btn-next" onclick="goStep(4)">다음: 확인 →</button></div>
+    </div>
+
+    <div class="form-section" id="step4">
+      <div class="sec-title">등록 정보 확인</div>
+      <div class="sec-desc">입력하신 정보를 확인하고 등록을 완료하세요.</div>
+      <div id="summary-area"></div>
+      <div class="btn-nav"><button class="btn-prev" onclick="goStep(3)">← 수정하기</button><button class="btn-submit" onclick="submitForm()">업체 등록 신청</button></div>
+    </div>
+  </div>
+</section>
+
+<div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+<script>
+const API='https://api.taieng.co.kr';
+const QUALS=[{"id":1,"code":"ELEC-001","name":"전기공사업","category":"전기","qual_type":"LICENSE"},{"id":2,"code":"ELEC-002","name":"전기안전관리대행사업","category":"전기","qual_type":"REGISTRATION"},{"id":3,"code":"ELEC-003","name":"전기전문진단업","category":"전기","qual_type":"LICENSE"},{"id":4,"code":"ELEC-004","name":"전기기사","category":"전기","qual_type":"CERT"},{"id":5,"code":"ELEC-005","name":"전기기술사","category":"전기","qual_type":"CERT"},{"id":6,"code":"ELEC-006","name":"전기기술자","category":"전기","qual_type":"CERT"},{"id":7,"code":"ELEC-007","name":"전기/기계 복합기술자","category":"전기","qual_type":"CERT"},{"id":8,"code":"FIRE-001","name":"소방공사업","category":"소방","qual_type":"LICENSE"},{"id":9,"code":"FIRE-002","name":"소방시설관리업","category":"소방","qual_type":"LICENSE"},{"id":10,"code":"FIRE-003","name":"소방관리사","category":"소방","qual_type":"CERT"},{"id":11,"code":"FIRE-004","name":"소방기술인","category":"소방","qual_type":"CERT"},{"id":12,"code":"MECH-001","name":"기계설비공사업","category":"기계설비","qual_type":"LICENSE"},{"id":13,"code":"MECH-002","name":"승강기 유지관리업","category":"기계설비","qual_type":"REGISTRATION"},{"id":14,"code":"MECH-003","name":"기계설비 유지관리업","category":"기계설비","qual_type":"CAPABILITY"},{"id":15,"code":"MECH-004","name":"냉동공조 전문업","category":"기계설비","qual_type":"CAPABILITY"},{"id":16,"code":"MECH-005","name":"보일러 시공정비업","category":"기계설비","qual_type":"CAPABILITY"},{"id":17,"code":"MECH-006","name":"수처리 전문업","category":"기계설비","qual_type":"CAPABILITY"},{"id":18,"code":"MECH-007","name":"기계설비 기술자","category":"기계설비","qual_type":"CERT"},{"id":19,"code":"MECH-008","name":"냉동공조 기술자","category":"기계설비","qual_type":"CERT"},{"id":20,"code":"MECH-009","name":"특수장비 정비업","category":"기계설비","qual_type":"CAPABILITY"},{"id":21,"code":"ARCH-001","name":"전문건설업","category":"건축토목","qual_type":"LICENSE"},{"id":22,"code":"ARCH-002","name":"건축물관리점검기관","category":"건축토목","qual_type":"REGISTRATION"},{"id":23,"code":"ARCH-003","name":"안전진단전문기관","category":"건축토목","qual_type":"REGISTRATION"},{"id":24,"code":"ARCH-004","name":"석면조사기관","category":"건축토목","qual_type":"REGISTRATION"},{"id":25,"code":"ARCH-005","name":"석면해체제거업","category":"건축토목","qual_type":"REGISTRATION"},{"id":26,"code":"ARCH-006","name":"석면감리 자격자","category":"건축토목","qual_type":"CERT"},{"id":27,"code":"ARCH-007","name":"해체공사업","category":"건축토목","qual_type":"LICENSE"},{"id":28,"code":"ARCH-008","name":"도장공사업","category":"건축토목","qual_type":"LICENSE"},{"id":29,"code":"ARCH-009","name":"실내건축공사업","category":"건축토목","qual_type":"LICENSE"},{"id":30,"code":"ARCH-010","name":"토목공사업","category":"건축토목","qual_type":"LICENSE"},{"id":31,"code":"ARCH-011","name":"측량업","category":"건축토목","qual_type":"REGISTRATION"},{"id":32,"code":"ARCH-012","name":"방수시공업","category":"건축토목","qual_type":"CAPABILITY"},{"id":33,"code":"ARCH-013","name":"가설업","category":"건축토목","qual_type":"CAPABILITY"},{"id":34,"code":"ARCH-014","name":"안전시설 시공업","category":"건축토목","qual_type":"CAPABILITY"},{"id":35,"code":"ARCH-015","name":"해체공사감리자","category":"건축토목","qual_type":"CERT"},{"id":36,"code":"ENV-001","name":"환경전문공사업","category":"환경","qual_type":"LICENSE"},{"id":37,"code":"ENV-002","name":"대기측정대행업","category":"환경","qual_type":"REGISTRATION"},{"id":38,"code":"ENV-003","name":"실내공기질 측정대행업","category":"환경","qual_type":"REGISTRATION"},{"id":39,"code":"ENV-004","name":"폐기물수집운반업","category":"환경","qual_type":"LICENSE"},{"id":40,"code":"ENV-005","name":"환경측정기관","category":"환경","qual_type":"REGISTRATION"},{"id":41,"code":"ENV-006","name":"수질관리업","category":"환경","qual_type":"CAPABILITY"},{"id":42,"code":"ENV-007","name":"환경컨설팅","category":"환경","qual_type":"CAPABILITY"},{"id":43,"code":"SAFE-001","name":"안전관리전문기관","category":"안전관리","qual_type":"REGISTRATION"},{"id":44,"code":"SAFE-002","name":"안전교육 지정기관","category":"안전관리","qual_type":"REGISTRATION"},{"id":45,"code":"SAFE-003","name":"산업안전지도사","category":"안전관리","qual_type":"CERT"},{"id":46,"code":"SAFE-004","name":"건설안전기술자","category":"안전관리","qual_type":"CERT"},{"id":47,"code":"SAFE-005","name":"지정측정기관","category":"안전관리","qual_type":"REGISTRATION"},{"id":48,"code":"SAFE-006","name":"특수건강진단기관","category":"안전관리","qual_type":"REGISTRATION"},{"id":49,"code":"SAFE-007","name":"공정안전 전문인력","category":"안전관리","qual_type":"CERT"},{"id":50,"code":"SAFE-008","name":"산업보건 전문기관","category":"안전관리","qual_type":"REGISTRATION"},{"id":51,"code":"SAFE-009","name":"안전컨설팅","category":"안전관리","qual_type":"CAPABILITY"},{"id":52,"code":"CLEAN-001","name":"소독업","category":"청소위생","qual_type":"REGISTRATION"},{"id":53,"code":"CLEAN-002","name":"저수조청소업","category":"청소위생","qual_type":"REGISTRATION"},{"id":54,"code":"CLEAN-003","name":"먹는물 수질검사기관","category":"청소위생","qual_type":"REGISTRATION"},{"id":55,"code":"CLEAN-004","name":"수질검사기관","category":"청소위생","qual_type":"REGISTRATION"},{"id":56,"code":"CLEAN-005","name":"건물종합관리업","category":"청소위생","qual_type":"CAPABILITY"},{"id":57,"code":"IT-001","name":"정보통신공사업","category":"IT보안","qual_type":"LICENSE"},{"id":58,"code":"IT-002","name":"간판업","category":"IT보안","qual_type":"CAPABILITY"}];
+const CATS=[{"id":1,"code":"ELEC","name":"전기","icon":"⚡"},{"id":2,"code":"FIRE","name":"소방","icon":"🔥"},{"id":3,"code":"MECH","name":"기계설비","icon":"⚙️"},{"id":4,"code":"ARCH","name":"건축토목","icon":"🏗️"},{"id":5,"code":"ENV","name":"환경","icon":"🌿"},{"id":6,"code":"SAFE","name":"안전관리","icon":"🛡️"},{"id":7,"code":"CLEAN","name":"청소위생","icon":"🧹"},{"id":8,"code":"IT","name":"IT보안","icon":"💻"}];
+const SUBCATS=[{"id":1,"code":"ELEC-INS","name":"전기점검/진단","description":"누전점검, 절연측정, 전력품질분석, 열화상진단 등","service_grade":"A","category_id":1},{"id":2,"code":"ELEC-REP","name":"전기수리/보수","description":"분전반 교체, 배선보수, 차단기 교체, 접지보수 등","service_grade":"B","category_id":1},{"id":3,"code":"ELEC-CON","name":"전기공사/설치","description":"수배전반 설치, 전기배관, 조명설치, 증설공사 등","service_grade":"B","category_id":1},{"id":4,"code":"ELEC-MGT","name":"전기안전관리/대행","description":"전기안전관리 대행, 사용전검사 대응, 정기검사 대응","service_grade":"A","category_id":1},{"id":5,"code":"ELEC-MNT","name":"전기설비 유지보수","description":"수배전반 유지보수, UPS점검, 발전기정비 등","service_grade":"B","category_id":1},{"id":6,"code":"FIRE-INS","name":"소방점검","description":"작동기능점검, 종합정밀점검, 소방시설 자체점검 등","service_grade":"A","category_id":2},{"id":7,"code":"FIRE-REP","name":"소방수리/보수","description":"소화기 교체, 스프링클러 수리, 감지기 교체 등","service_grade":"B","category_id":2},{"id":8,"code":"FIRE-CON","name":"소방공사/설치","description":"소방설비 신설, 제연설비, 방화문/셔터 설치 등","service_grade":"A","category_id":2},{"id":9,"code":"FIRE-MGT","name":"소방안전관리","description":"소방안전관리 대행, 소방교육, 소방계획서 작성","service_grade":"A","category_id":2},{"id":10,"code":"MECH-INS","name":"기계설비 점검/진단","description":"설비진동분석, 배관검사, 압력용기검사 등","service_grade":"B","category_id":3},{"id":11,"code":"MECH-REP","name":"기계설비 수리/보수","description":"펌프수리, 밸브교체, 배관보수, 컴프레서수리 등","service_grade":"B","category_id":3},{"id":12,"code":"MECH-CON","name":"기계설비 설치/교체","description":"설비 신설, 배관공사, 덕트공사 등","service_grade":"B","category_id":3},{"id":13,"code":"MECH-ELV","name":"승강기 관리","description":"승강기 유지관리, 정기검사 대응, 리모델링","service_grade":"A","category_id":3},{"id":14,"code":"MECH-HAC","name":"냉난방/공조","description":"냉동기, 보일러, 에어컨, 환기설비 정비","service_grade":"B","category_id":3},{"id":15,"code":"MECH-PLB","name":"급배수/위생설비","description":"급수펌프, 오배수, 위생기구, 수처리설비","service_grade":"B","category_id":3},{"id":16,"code":"ARCH-INS","name":"건축물 점검/진단","description":"건축물 정기점검, 안전진단, 내진성능평가 등","service_grade":"A","category_id":4},{"id":17,"code":"ARCH-REP","name":"건축 보수/수리","description":"방수공사, 도장, 타일보수, 균열보수, 외벽보수 등","service_grade":"B","category_id":4},{"id":18,"code":"ARCH-CON","name":"건축공사/시공","description":"실내건축, 리모델링, 원상복구, 증축 등","service_grade":"B","category_id":4},{"id":19,"code":"ARCH-ASB","name":"석면/유해물질","description":"석면조사, 석면해체제거, 석면감리 등","service_grade":"A","category_id":4},{"id":20,"code":"ARCH-DEM","name":"해체/철거","description":"건축물 해체, 내부철거, 해체감리 등","service_grade":"A","category_id":4},{"id":21,"code":"ARCH-SRV","name":"측량/계측","description":"측량, 지반조사, 구조물계측, 균열모니터링 등","service_grade":"B","category_id":4},{"id":22,"code":"ARCH-SAF","name":"안전시설/가설","description":"안전난간, 추락방지, 가설구조물 설치 등","service_grade":"B","category_id":4},{"id":23,"code":"ENV-MEA","name":"환경측정/분석","description":"대기측정, 수질측정, 소음진동측정, 실내공기질 등","service_grade":"A","category_id":5},{"id":24,"code":"ENV-WST","name":"폐기물 처리","description":"폐기물수집운반, 산업폐기물처리, 분루처리 등","service_grade":"A","category_id":5},{"id":25,"code":"ENV-WTR","name":"수질/배수 관리","description":"폐수처리, 수질관리, 오수처리시설 관리 등","service_grade":"B","category_id":5},{"id":26,"code":"ENV-AIR","name":"대기/악취 관리","description":"대기방지시설, 악취저감, 집진설비 관리 등","service_grade":"B","category_id":5},{"id":27,"code":"ENV-CST","name":"환경컨설팅/인허가","description":"환경영향평가, 배출허가, 환경신고 대행 등","service_grade":"A","category_id":5},{"id":28,"code":"SAFE-MGT","name":"안전관리자 선임/대행","description":"안전관리자 선임연결, 안전관리 위탁, 건설안전관리","service_grade":"A","category_id":6},{"id":29,"code":"SAFE-EDU","name":"안전교육/훈련","description":"법정안전교육, 특별안전교육, 비상대응훈련 등","service_grade":"A","category_id":6},{"id":30,"code":"SAFE-WEM","name":"작업환경측정","description":"작업환경측정, 유해인자 모니터링 등","service_grade":"A","category_id":6},{"id":31,"code":"SAFE-HLT","name":"건강진단","description":"특수건강진단, 일반건강진단, 배치전건강진단","service_grade":"A","category_id":6},{"id":32,"code":"SAFE-CST","name":"안전컨설팅","description":"안전보건관리체계 구축, 중대재해예방 컨설팅","service_grade":"A","category_id":6},{"id":33,"code":"SAFE-PSM","name":"공정안전관리(PSM)","description":"PSM 보고서 작성, 공정위험성평가, 변경관리","service_grade":"A","category_id":6},{"id":34,"code":"SAFE-RSK","name":"위험성평가","description":"사업장 위험성평가, 유해위험방지계획서 작성","service_grade":"A","category_id":6},{"id":36,"code":"CLEAN-DIS","name":"소독/방역","description":"정기소독, 해충방제, 감염병예방 소독","service_grade":"A","category_id":7},{"id":37,"code":"CLEAN-TNK","name":"저수조/수질관리","description":"저수조청소, 물탱크세척, 먹는물 수질검사","service_grade":"A","category_id":7},{"id":39,"code":"IT-COM","name":"통신설비/공사","description":"통신배선, LAN공사, 전화설비, 방송설비","service_grade":"B","category_id":8},{"id":40,"code":"IT-SEC","name":"CCTV/보안설비","description":"CCTV설치, 출입통제, 경보시스템","service_grade":"B","category_id":8}];
+const REGIONS=['서울','경기','인천','부산','대구','광주','대전','울산','세종','강원','충북','충남','전북','전남','경북','경남','제주','전국'];
+let currentStep=1,selectedQuals={},selectedSvcs={},selectedRegions={},activeCat=CATS[0].id;
+function goStep(n){if(n===4)buildSummary();document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));document.getElementById('step'+n).classList.add('active');document.querySelectorAll('.step-item').forEach(s=>{const sn=+s.dataset.step;s.classList.toggle('active',sn===n);s.classList.toggle('done',sn<n)});currentStep=n;window.scrollTo({top:300,behavior:'smooth'})}
+const qInput=document.getElementById('qual-input'),qDrop=document.getElementById('qual-dropdown');
+qInput.addEventListener('input',function(){const v=this.value.trim().toLowerCase();if(v.length<1){qDrop.classList.remove('show');return}const filtered=QUALS.filter(q=>!selectedQuals[q.id]&&(q.name.toLowerCase().includes(v)||q.category.includes(v)));if(!filtered.length){qDrop.classList.remove('show');return}const tl={'LICENSE':'면허','REGISTRATION':'등록','CERT':'자격증','CAPABILITY':'역량'};qDrop.innerHTML=filtered.slice(0,10).map(q=>`<div class="qual-opt" data-id="${q.id}"><span><strong>${q.name}</strong> <span style="color:#94a3b8;font-size:.78rem">${q.category}</span></span><span class="qt qt-${q.qual_type}">${tl[q.qual_type]}</span></div>`).join('');qDrop.classList.add('show');qDrop.querySelectorAll('.qual-opt').forEach(el=>el.addEventListener('click',function(){const qid=+this.dataset.id;const q=QUALS.find(x=>x.id===qid);selectedQuals[qid]={qual:q,headcount:1};renderQuals();qInput.value='';qDrop.classList.remove('show')}))});
+document.addEventListener('click',e=>{if(!e.target.closest('.qual-search'))qDrop.classList.remove('show')});
+function renderQuals(){const el=document.getElementById('selected-quals');const tl={'LICENSE':'면허','REGISTRATION':'등록','CERT':'자격증','CAPABILITY':'역량'};el.innerHTML=Object.values(selectedQuals).map(sq=>{const q=sq.qual;const isCert=q.qual_type==='CERT';return`<div class="sq-chip"><span class="qt qt-${q.qual_type}" style="font-size:.65rem;padding:2px 6px;border-radius:4px">${tl[q.qual_type]}</span><span>${q.name}</span>${isCert?`<input type="number" value="${sq.headcount}" min="1" max="999" onchange="selectedQuals[${q.id}].headcount=+this.value"><span style="font-size:.78rem;color:#64748b">명</span>`:''}<span class="remove" onclick="delete selectedQuals[${q.id}];renderQuals()"><i class="fas fa-times"></i></span></div>`}).join('')}
+function initServices(){document.getElementById('cat-tabs').innerHTML=CATS.map(c=>`<div class="cat-tab${c.id===activeCat?' active':''}" data-cat="${c.id}" onclick="switchCat(${c.id})">${c.icon} ${c.name}</div>`).join('');renderSvcGrid()}
+function switchCat(catId){activeCat=catId;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('active',+t.dataset.cat===catId));renderSvcGrid()}
+function renderSvcGrid(){const grid=document.getElementById('svc-grid');grid.innerHTML=SUBCATS.filter(s=>s.category_id===activeCat).map(s=>{const ck=selectedSvcs[s.id]?'checked':'';return`<div class="svc-card ${ck}" onclick="toggleSvc(${s.id})"><div class="svc-top"><div class="svc-cb">${selectedSvcs[s.id]?'<i class="fas fa-check" style="font-size:.7rem"></i>':''}</div><span class="svc-name">${s.name}${s.service_grade==='A'?'<span class="grade-a">법정·필수</span>':''}</span></div><div class="svc-desc">${s.description}</div></div>`}).join('')}
+function toggleSvc(sid){selectedSvcs[sid]?delete selectedSvcs[sid]:selectedSvcs[sid]=true;renderSvcGrid()}
+function initRegions(){document.getElementById('region-grid').innerHTML=REGIONS.map(r=>`<div class="region-chip" data-r="${r}" onclick="toggleRegion(this,'${r}')">${r}</div>`).join('')}
+function toggleRegion(el,r){if(r==='전국'){selectedRegions[r]?selectedRegions={}:selectedRegions={'전국':true}}else{delete selectedRegions['전국'];selectedRegions[r]?delete selectedRegions[r]:selectedRegions[r]=true}document.querySelectorAll('.region-chip').forEach(c=>c.classList.toggle('active',!!selectedRegions[c.dataset.r]))}
+function buildSummary(){const co=document.getElementById('f-company').value||'-';const ph=document.getElementById('f-phone').value||'-';const em=document.getElementById('f-email').value||'-';const qs=Object.values(selectedQuals);const sv=Object.keys(selectedSvcs).map(id=>SUBCATS.find(s=>s.id===+id)).filter(Boolean);const rg=Object.keys(selectedRegions);document.getElementById('summary-area').innerHTML=`<div class="summary-box"><h6>회사 정보</h6><p>${co} \u00b7 ${ph} \u00b7 ${em}</p></div><div class="summary-box"><h6>보유 자격 (${qs.length}건)</h6><p>${qs.map(sq=>sq.qual.name+(sq.qual.qual_type==='CERT'?' '+sq.headcount+'명':'')).join(', ')||'없음'}</p></div><div class="summary-box"><h6>제공 서비스 (${sv.length}개)</h6><p>${sv.map(s=>s.name).join(', ')||'없음'}</p></div><div class="summary-box"><h6>서비스 지역</h6><p>${rg.join(', ')||'없음'}</p></div>`}
+async function submitForm(){const d={company_name:document.getElementById('f-company').value,business_number:document.getElementById('f-bizno').value,representative:document.getElementById('f-rep').value,phone:document.getElementById('f-phone').value,email:document.getElementById('f-email').value,address:document.getElementById('f-addr').value,established_year:+document.getElementById('f-year').value||null,employee_count:+document.getElementById('f-emp').value||null,service_regions:Object.keys(selectedRegions),qualifications:Object.values(selectedQuals).map(sq=>({qualification_id:sq.qual.id,headcount:sq.headcount})),services:Object.keys(selectedSvcs).map(id=>({subcategory_id:+id}))};if(!d.company_name||!d.phone||!d.email){alert('회사명, 연락처, 이메일은 필수입니다.');return}try{console.log('Submit:',JSON.stringify(d,null,2));alert('업체 등록 신청이 완료되었습니다.\nTAI에서 확인 후 연락드리겠습니다.')}catch(e){alert('등록 중 오류가 발생했습니다.')}}
+initServices();initRegions();
+</script>
+</body>
+</html>
