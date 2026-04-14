@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>요금제 및 서비스 신청 | TAI 엔지니어링</title>
+<meta name="description" content="TAI 엔지니어링의 산업안전 SaaS 구독 및 법령진단 서비스 요금제를 확인하세요.">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Malgun Gothic','맑은 고딕',Arial,sans-serif;background:#f4f6f9;color:#1a2236}
+a{text-decoration:none;color:inherit}
+
+/* 헤더 */
+.header{background:#0d1b2e;padding:0 24px}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:32px;height:32px;background:#0891b2;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff}
+.logo-text{font-size:18px;font-weight:700;color:#fff}
+.header-nav{display:flex;gap:24px}
+.header-nav a{color:rgba(255,255,255,.7);font-size:14px;font-weight:500;transition:.2s}
+.header-nav a:hover{color:#fff}
+
+/* 히어로 */
+.hero{background:linear-gradient(135deg,#050a14,#0d1b2e);padding:56px 24px;text-align:center}
+.hero h1{font-size:clamp(22px,4vw,34px);font-weight:900;color:#fff;margin-bottom:12px}
+.hero h1 em{color:#22d3ee;font-style:normal}
+.hero p{color:rgba(255,255,255,.65);font-size:15px;line-height:1.7;max-width:540px;margin:0 auto}
+
+/* 탭 */
+.tab-wrap{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:10}
+.tab-inner{max-width:1100px;margin:0 auto;display:flex;padding:0 24px}
+.tab-btn{padding:16px 24px;font-size:15px;font-weight:700;color:#64748b;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:.2s}
+.tab-btn.active{color:#0891b2;border-bottom-color:#0891b2}
+
+/* 섹션 */
+.section{max-width:1100px;margin:0 auto;padding:48px 24px}
+.section-title{font-size:22px;font-weight:800;margin-bottom:6px}
+.section-desc{color:#64748b;font-size:14px;margin-bottom:32px;line-height:1.6}
+.badge-tag{display:inline-block;font-size:11px;font-weight:800;padding:3px 10px;border-radius:4px;margin-right:6px;margin-bottom:12px;letter-spacing:.04em}
+.badge-recurring{background:#dbeafe;color:#1d4ed8}
+.badge-onetime{background:#d1fae5;color:#065f46}
+
+/* 상품 카드 공통 */
+.card-grid{display:grid;gap:20px;margin-bottom:48px}
+.card-grid-4{grid-template-columns:repeat(4,1fr)}
+.card-grid-3{grid-template-columns:repeat(3,1fr)}
+.card-grid-2{grid-template-columns:repeat(2,1fr)}
+
+.product-card{background:#fff;border:2px solid #e2e8f0;border-radius:16px;padding:28px 24px;position:relative;transition:box-shadow .2s}
+.product-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.1)}
+.product-card.featured{border-color:#0891b2;box-shadow:0 4px 20px rgba(8,145,178,.15)}
+.featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#0891b2;color:#fff;font-size:11px;font-weight:800;padding:4px 14px;border-radius:99px;white-space:nowrap}
+
+.plan-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:10px}
+.plan-name{font-size:18px;font-weight:800;color:#0d1b2e;margin-bottom:4px}
+.plan-desc{font-size:13px;color:#64748b;margin-bottom:18px;line-height:1.5;min-height:36px}
+.plan-price-wrap{margin-bottom:6px}
+.plan-price{font-size:28px;font-weight:900;color:#0d1b2e;line-height:1}
+.plan-price span{font-size:15px;font-weight:600;color:#64748b}
+.plan-cycle{font-size:12px;color:#94a3b8;margin-bottom:20px}
+.plan-divider{border:none;border-top:1px solid #f1f5f9;margin:16px 0}
+.plan-features{list-style:none;margin-bottom:24px}
+.plan-features li{font-size:13px;color:#475569;padding:5px 0;display:flex;align-items:flex-start;gap:8px}
+.plan-features li::before{content:'✓';color:#0891b2;font-weight:900;flex-shrink:0}
+
+/* 버튼 */
+.btn-primary{display:block;width:100%;background:#0891b2;color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:background .2s}
+.btn-primary:hover{background:#0e7490}
+.btn-outline{display:block;width:100%;background:#fff;color:#0891b2;border:2px solid #0891b2;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:.2s}
+.btn-outline:hover{background:#eff6ff}
+.btn-sub{display:block;width:100%;background:#0d1b2e;color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;text-align:center;transition:background .2s}
+.btn-sub:hover{background:#1e293b}
+
+/* 취소·환불 박스 */
+.policy-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:24px 28px;margin-top:40px}
+.policy-box h3{font-size:15px;font-weight:800;margin-bottom:12px;color:#0d1b2e}
+.policy-box ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.policy-box li{font-size:13px;color:#475569;line-height:1.6;padding-left:14px;position:relative}
+.policy-box li::before{content:'·';position:absolute;left:0;color:#94a3b8}
+
+/* 탭 패널 */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* 공지 배너 */
+.notice-bar{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px 20px;margin-bottom:32px;font-size:13px;color:#92400e;line-height:1.6}
+.notice-bar strong{font-weight:800}
+
+/* 푸터 */
+.footer{background:#0d1b2e;padding:32px 24px;margin-top:64px}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-biz{font-size:12px;color:rgba(255,255,255,.5);line-height:2;margin-bottom:16px}
+.footer-biz strong{color:rgba(255,255,255,.8);font-weight:700}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.5);transition:.2s}
+.footer-links a:hover{color:#fff}
+
+/* 모달 */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;border-radius:16px;padding:36px 32px;max-width:420px;width:90%;text-align:center}
+.modal h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.modal p{font-size:14px;color:#64748b;line-height:1.7;margin-bottom:24px}
+.modal-btns{display:flex;gap:10px}
+.modal-close{flex:1;background:#f1f5f9;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;color:#475569}
+.modal-confirm{flex:2;background:#0891b2;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;color:#fff}
+
+@media(max-width:900px){.card-grid-4{grid-template-columns:repeat(2,1fr)}.card-grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.card-grid-4,.card-grid-3,.card-grid-2{grid-template-columns:1fr}.header-nav{display:none}}
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">T</div>
+      <span class="logo-text">TAI 엔지니어링</span>
+    </div>
+    <nav class="header-nav">
+      <a href="/">홈</a>
+      <a href="/pricing.html" style="color:#22d3ee">요금제</a>
+      <a href="/terms.html">이용약관</a>
+      <a href="/refund.html">환불정책</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 히어로 -->
+<section class="hero">
+  <h1>명확하고 <em>합리적인</em> 가격</h1>
+  <p>TAI Safe 산업안전 플랫폼을 월 구독 또는 단건으로 이용하세요.<br>모든 가격은 부가세(VAT) 별도입니다.</p>
+</section>
+
+<!-- 탭 -->
+<div class="tab-wrap">
+  <div class="tab-inner">
+    <button class="tab-btn active" onclick="switchTab('subscription',this)">🔄 정기구독 (SaaS)</button>
+    <button class="tab-btn" onclick="switchTab('onetime',this)">📋 단건 서비스 (법령진단)</button>
+  </div>
+</div>
+
+<!-- ════ 정기구독 탭 ════ -->
+<div id="tab-subscription" class="tab-panel active">
+<div class="section">
+
+  <span class="badge-tag badge-recurring">● 정기결제</span>
+  <h2 class="section-title">SaaS 구독 요금제</h2>
+  <p class="section-desc">
+    매월 자동 결제되는 구독형 서비스입니다. 산업안전 법령을 자동으로 관리하고 점검 일정과 알림을 제공합니다.<br>
+    <strong>구독은 언제든지 취소 가능하며, 취소 후 해당 월 말일까지 서비스가 유지됩니다.</strong>
+  </p>
+
+  <div class="notice-bar">
+    <strong>📌 정기결제 안내:</strong> 매월 결제일에 등록된 카드로 자동 청구됩니다. 결제 전 취소 시 청구되지 않으며, 이미 결제된 월은 환불 규정에 따라 처리됩니다.
+  </div>
+
+  <!-- 산업 플랜 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏭 제조·산업 — 시설당 월정액</p>
+  <div class="card-grid card-grid-3" style="margin-bottom:40px">
+
+    <div class="product-card">
+      <div class="plan-label">STARTER</div>
+      <div class="plan-name">산업 스타터</div>
+      <div class="plan-desc">5~30인 소규모 제조업·겸직 안전관리자 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">79,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 시설 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>법령엔진 자동 작동</li>
+        <li>점검 일정 자동 생성</li>
+        <li>작업자 배정</li>
+        <li>D-3 사전 알림</li>
+        <li>TBM 전자서명</li>
+        <li>기록 보관 6개월</li>
+      </ul>
+      <button class="btn-sub" onclick="openModal('산업 스타터','79,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+    <div class="product-card featured">
+      <div class="featured-badge">✨ 추천</div>
+      <div class="plan-label">BUSINESS</div>
+      <div class="plan-name">산업 비즈니스</div>
+      <div class="plan-desc">30~100인 제조업 전용. 대시보드·신고서식 포함</div>
+      <div class="plan-price-wrap"><div class="plan-price">149,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 시설 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>STARTER 전체 포함</li>
+        <li>신고서식 자동화</li>
+        <li>법령 변경 알림</li>
+        <li>QR 설비 점검</li>
+        <li>경영진 대시보드</li>
+        <li>기록 보관 무제한</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('산업 비즈니스','149,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">PRO</div>
+      <div class="plan-name">산업 프로</div>
+      <div class="plan-desc">100인 이상 제조업 전담 안전관리자 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">249,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 시설 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>BUSINESS 전체 포함</li>
+        <li>경영진 리포트</li>
+        <li>API 연동 지원</li>
+      </ul>
+      <button class="btn-sub" onclick="openModal('산업 프로','249,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+  </div>
+
+  <!-- 건물 플랜 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏢 건물·시설 — 시설당 월정액</p>
+  <div class="card-grid card-grid-2" style="max-width:680px;margin-bottom:40px">
+
+    <div class="product-card">
+      <div class="plan-label">BASIC</div>
+      <div class="plan-name">건물 베이직</div>
+      <div class="plan-desc">소규모 건물·상가·아파트 관리 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">59,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 시설 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>법령엔진 자동 작동</li>
+        <li>점검 일정 자동 생성</li>
+        <li>D-3 알림</li>
+        <li>기록 보관 6개월</li>
+      </ul>
+      <button class="btn-sub" onclick="openModal('건물 베이직','59,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+    <div class="product-card featured">
+      <div class="featured-badge">✨ 추천</div>
+      <div class="plan-label">STANDARD</div>
+      <div class="plan-name">건물 스탠다드</div>
+      <div class="plan-desc">오피스·복합시설·중규모 건물 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">99,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 시설 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>BASIC 전체 포함</li>
+        <li>신고서식 자동화</li>
+        <li>법령 변경 알림</li>
+        <li>기록 보관 무제한</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('건물 스탠다드','99,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+  </div>
+
+  <!-- 건설 플랜 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏗️ 건설현장 — 현장당 월정액</p>
+  <div class="card-grid card-grid-2" style="max-width:680px;margin-bottom:16px">
+
+    <div class="product-card featured">
+      <div class="featured-badge">✨ 추천</div>
+      <div class="plan-label">STANDARD</div>
+      <div class="plan-name">건설 스탠다드</div>
+      <div class="plan-desc">50억 미만 건설현장 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">199,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 현장 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>법령엔진 자동 작동</li>
+        <li>공정별 점검 일정</li>
+        <li>TBM 전자서명</li>
+        <li>기록 보관 무제한</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('건설 스탠다드','199,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">PREMIUM</div>
+      <div class="plan-name">건설 프리미엄</div>
+      <div class="plan-desc">50억 이상 건설현장 대상</div>
+      <div class="plan-price-wrap"><div class="plan-price">399,000<span>원</span></div></div>
+      <div class="plan-cycle">/ 현장 · 월 · VAT 별도 · 정기결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>스탠다드 전체 포함</li>
+        <li>위험성평가 자동화</li>
+        <li>기상청 작업중지 연동</li>
+        <li>경영진 리포트</li>
+      </ul>
+      <button class="btn-sub" onclick="openModal('건설 프리미엄','399,000원/월','정기결제')">[정기] 구독 신청</button>
+    </div>
+
+  </div>
+
+  <!-- 구독 취소·환불 정책 -->
+  <div class="policy-box">
+    <h3>📌 구독 취소 및 환불 규정</h3>
+    <ul>
+      <li>구독은 마이페이지에서 언제든지 취소할 수 있습니다.</li>
+      <li>취소 신청 즉시 다음 결제일의 자동 청구가 중단됩니다.</li>
+      <li>취소 후에는 해당 결제 기간(월) 말일까지 서비스를 이용할 수 있습니다.</li>
+      <li>이미 청구된 당월 이용료는 환불되지 않습니다. (서비스 이용 가능 기간이 남아 있는 경우 포함)</li>
+      <li>단, 서비스 장애·오류로 인해 이용이 불가능한 경우에는 고객센터로 문의하시면 별도 검토 후 환불 처리됩니다.</li>
+      <li>문의: support@taieng.co.kr / 02-000-0000</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<!-- ════ 단건 서비스 탭 ════ -->
+<div id="tab-onetime" class="tab-panel">
+<div class="section">
+
+  <span class="badge-tag badge-onetime">● 일반결제</span>
+  <h2 class="section-title">법령진단 리포트 (단건)</h2>
+  <p class="section-desc">
+    1회성 단건 결제 서비스입니다. 사업장 정보를 입력하면 적용 법령·의무를 자동 도출하고 PDF 리포트를 제공합니다.<br>
+    구독 없이 필요할 때 바로 이용하실 수 있습니다.
+  </p>
+
+  <div class="notice-bar">
+    <strong>📌 단건 결제 안내:</strong> 결제 완료 후 리포트가 즉시 발행됩니다. 디지털 콘텐츠 특성상 리포트 발행 후에는 환불이 제한됩니다.
+  </div>
+
+  <!-- 건물 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏢 건물·시설</p>
+  <div class="card-grid card-grid-2" style="max-width:680px;margin-bottom:40px">
+
+    <div class="product-card">
+      <div class="plan-label">STEP 1</div>
+      <div class="plan-name">건물 무료진단</div>
+      <div class="plan-desc">적용 법령 수 확인 + 선임의무 O/X 판정</div>
+      <div class="plan-price-wrap"><div class="plan-price">0<span>원</span></div></div>
+      <div class="plan-cycle">무료 · 회원가입 후 이용</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>적용 법령 수 확인</li>
+        <li>선임의무 O/X 판정</li>
+      </ul>
+      <a href="/free-diagnosis.html" class="btn-outline">무료 진단 시작</a>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">STEP 2</div>
+      <div class="plan-name">건물 종합진단 리포트</div>
+      <div class="plan-desc">적용 법령 전체 + 설비별 점검주기 + PDF</div>
+      <div class="plan-price-wrap"><div class="plan-price">299,000<span>원</span></div></div>
+      <div class="plan-cycle">단건 · 1회성 · VAT 별도 · 일반결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>PDF 법령진단 리포트</li>
+        <li>적용 법령·의무 전체 도출</li>
+        <li>과태료·벌칙 정보</li>
+        <li>감사 대응 서류 활용</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal('건물 종합진단 리포트','299,000원','일반결제')">바로 구매 299,000원</button>
+    </div>
+
+  </div>
+
+  <!-- 산업 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏭 제조·산업</p>
+  <div class="card-grid card-grid-4" style="margin-bottom:40px">
+
+    <div class="product-card">
+      <div class="plan-label">STEP 1</div>
+      <div class="plan-name">산업 무료진단</div>
+      <div class="plan-desc">선임의무 판정 제공</div>
+      <div class="plan-price-wrap"><div class="plan-price">0<span>원</span></div></div>
+      <div class="plan-cycle">무료</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>적용 법령 수</li><li>선임의무 O/X</li></ul>
+      <a href="/free-diagnosis.html" class="btn-outline">무료 시작</a>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">STEP 2</div>
+      <div class="plan-name">산업 표준진단</div>
+      <div class="plan-desc">법령·조문·과태료 전체 리포트</div>
+      <div class="plan-price-wrap"><div class="plan-price">99,000<span>원</span></div></div>
+      <div class="plan-cycle">단건 · VAT 별도 · 일반결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>PDF 법령진단 리포트</li><li>법령·조문·과태료</li><li>감사 대응 서류</li></ul>
+      <button class="btn-primary" onclick="openModal('산업 표준진단 리포트','99,000원','일반결제')">구매 99,000원</button>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">STEP 3</div>
+      <div class="plan-name">산업 설비진단</div>
+      <div class="plan-desc">설비별 점검항목·주기 포함</div>
+      <div class="plan-price-wrap"><div class="plan-price">199,000<span>원</span></div></div>
+      <div class="plan-cycle">단건 · VAT 별도 · 일반결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>PDF 법령진단 리포트</li><li>설비별 점검항목·주기</li><li>감사 대응 서류</li></ul>
+      <button class="btn-primary" onclick="openModal('산업 설비진단 리포트','199,000원','일반결제')">구매 199,000원</button>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">STEP 4</div>
+      <div class="plan-name">산업 종합진단</div>
+      <div class="plan-desc">전체 통합 리포트 (최고 단계)</div>
+      <div class="plan-price-wrap"><div class="plan-price">249,000<span>원</span></div></div>
+      <div class="plan-cycle">단건 · VAT 별도 · 일반결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>PDF 법령진단 리포트</li><li>전체 통합 분석</li><li>설비+법령+과태료</li><li>감사 대응 서류</li></ul>
+      <button class="btn-primary" onclick="openModal('산업 종합진단 리포트','249,000원','일반결제')">구매 249,000원</button>
+    </div>
+
+  </div>
+
+  <!-- 건설 -->
+  <p style="font-size:13px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px">🏗️ 건설현장</p>
+  <div class="card-grid card-grid-2" style="max-width:680px;margin-bottom:16px">
+
+    <div class="product-card">
+      <div class="plan-label">STEP 1</div>
+      <div class="plan-name">건설 무료진단</div>
+      <div class="plan-desc">선임의무 + 안전관리비 기준 제공</div>
+      <div class="plan-price-wrap"><div class="plan-price">0<span>원</span></div></div>
+      <div class="plan-cycle">무료</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>선임의무 O/X</li><li>안전관리비 기준</li></ul>
+      <a href="/free-diagnosis.html" class="btn-outline">무료 시작</a>
+    </div>
+
+    <div class="product-card">
+      <div class="plan-label">STEP 2</div>
+      <div class="plan-name">건설 종합진단 리포트</div>
+      <div class="plan-desc">전체 의무·공정별 리포트 + PDF</div>
+      <div class="plan-price-wrap"><div class="plan-price">299,000<span>원</span></div></div>
+      <div class="plan-cycle">단건 · VAT 별도 · 일반결제</div>
+      <hr class="plan-divider">
+      <ul class="plan-features"><li>PDF 법령진단 리포트</li><li>전체 의무·법령 도출</li><li>공정별 리포트</li><li>감사 대응 서류</li></ul>
+      <button class="btn-primary" onclick="openModal('건설 종합진단 리포트','299,000원','일반결제')">구매 299,000원</button>
+    </div>
+
+  </div>
+
+  <!-- 단건 환불 정책 -->
+  <div class="policy-box">
+    <h3>📌 단건 구매 취소 및 환불 규정</h3>
+    <ul>
+      <li>결제 완료 후 리포트가 즉시 발행되는 디지털 콘텐츠 서비스입니다.</li>
+      <li>리포트 발행 전 취소 요청 시 전액 환불됩니다.</li>
+      <li>리포트 발행 후에는 「전자상거래 등에서의 소비자보호에 관한 법률」 제17조 제2항에 따라 청약철회가 제한될 수 있습니다.</li>
+      <li>단, 발행된 리포트에 오류가 있는 경우 재발행 또는 전액 환불 처리됩니다.</li>
+      <li>환불 요청: support@taieng.co.kr / 02-000-0000 (영업일 기준 2일 이내 처리)</li>
+    </ul>
+  </div>
+
+</div>
+</div>
+
+<!-- 결제 확인 모달 -->
+<div class="modal-backdrop" id="payModal">
+  <div class="modal">
+    <h3>🛒 서비스 신청</h3>
+    <p id="modal-text">선택하신 상품으로 신청을 진행합니다.<br>서비스 이용을 위해 로그인 후 결제를 완료해 주세요.</p>
+    <div class="modal-btns">
+      <button class="modal-close" onclick="closeModal()">취소</button>
+      <button class="modal-confirm" onclick="goToLogin()">로그인 후 결제</button>
+    </div>
+  </div>
+</div>
+
+<!-- 푸터 -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-biz">
+      <strong>TAI 엔지니어링</strong> &nbsp;|&nbsp;
+      대표자: 심태왕 &nbsp;|&nbsp;
+      사업자등록번호: 000-00-00000 &nbsp;|&nbsp;
+      통신판매업신고번호: 제 0000-서울강남-0000 호<br>
+      주소: 서울특별시 강남구 테헤란로79길 6 JS타워 3층 V1314 &nbsp;|&nbsp;
+      이메일: support@taieng.co.kr &nbsp;|&nbsp;
+      전화: 02-000-0000
+    </div>
+    <div class="footer-links">
+      <a href="/terms.html">이용약관</a>
+      <a href="/privacy.html">개인정보처리방침</a>
+      <a href="/refund.html">환불정책</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+function openModal(name, price, type) {
+  document.getElementById('modal-text').innerHTML =
+    `<strong>${name}</strong><br>${price} (VAT 별도) · ${type}<br><br>서비스 이용을 위해 로그인 후 결제를 완료해 주세요.`;
+  document.getElementById('payModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('payModal').classList.remove('open');
+}
+function goToLogin() {
+  window.location.href = '/login.html';
+}
+document.getElementById('payModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>
