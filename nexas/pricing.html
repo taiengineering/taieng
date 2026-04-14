@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 요금제. 법령진단과 SaaS 구독 가격을 확인하세요. 컨설팅 비용 대비 훨씬 저렴합니다.">
+  <meta name="description" content="TAI 요금제. SaaS 구독과 법령진단 단건 가격을 확인하세요. 컨설팅 비용과는 상대도 안 될 만큼 저렴합니다.">
   <title>요금제 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -13,8 +13,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-
-  /* ── 히어로 ── */
   .price-hero {
     background: linear-gradient(135deg, #050a14, #0d1b2e, #0a1628);
     padding: 100px 0 70px;
@@ -24,216 +22,102 @@
   }
   .price-hero::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: radial-gradient(ellipse 60% 80% at 50% 30%, rgba(6,182,212,.1) 0%, transparent 65%);
     pointer-events: none;
   }
   .price-eyebrow {
-    display: inline-block;
-    font-size: .72rem;
-    font-weight: 700;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    color: #22d3ee;
-    background: rgba(6,182,212,.15);
-    border: 1px solid rgba(6,182,212,.4);
-    border-radius: 4px;
-    padding: 5px 12px;
-    margin-bottom: 20px;
+    display: inline-block; font-size: .72rem; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: #22d3ee; background: rgba(6,182,212,.15);
+    border: 1px solid rgba(6,182,212,.4); border-radius: 4px;
+    padding: 5px 12px; margin-bottom: 20px;
   }
-  .price-hero h1 {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 900;
-    color: #fff;
-    margin-bottom: 14px;
-  }
+  .price-hero h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; color: #fff; margin-bottom: 14px; }
   .price-hero h1 em { color: #67e8f9; font-style: normal; }
-  .price-hero p {
-    color: rgba(255,255,255,.65);
-    font-size: 1rem;
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.65;
-  }
-
-  /* ── 탭 ── */
-  .price-tab-wrap {
-    background: #f8fafc;
-    padding: 80px 0 100px;
-  }
-  .price-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 52px;
-  }
+  .price-hero p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 520px; margin: 0 auto; line-height: 1.65; }
+  .price-tab-wrap { background: #f8fafc; padding: 80px 0 100px; }
+  .price-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 52px; }
   .price-tab-btn {
-    padding: 10px 28px;
-    border-radius: 999px;
-    font-size: .92rem;
-    font-weight: 700;
-    border: 2px solid #e2e8f0;
-    background: #fff;
-    color: #64748b;
-    cursor: pointer;
-    transition: all .2s;
+    padding: 10px 28px; border-radius: 999px; font-size: .92rem; font-weight: 700;
+    border: 2px solid #e2e8f0; background: #fff; color: #64748b; cursor: pointer; transition: all .2s;
   }
-  .price-tab-btn.active {
-    background: #0891b2;
-    border-color: #0891b2;
-    color: #fff;
-  }
-
-  /* ── 섹터 서브탭 ── */
-  .sector-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    margin-bottom: 36px;
-  }
+  .price-tab-btn.active { background: #0891b2; border-color: #0891b2; color: #fff; }
+  .sector-tabs { display: flex; justify-content: center; gap: 6px; margin-bottom: 36px; flex-wrap: wrap; }
   .sector-btn {
-    padding: 7px 18px;
-    border-radius: 999px;
-    font-size: .82rem;
-    font-weight: 700;
-    border: 1.5px solid #e2e8f0;
-    background: #fff;
-    color: #94a3b8;
-    cursor: pointer;
-    transition: all .2s;
+    padding: 7px 18px; border-radius: 999px; font-size: .82rem; font-weight: 700;
+    border: 1.5px solid #e2e8f0; background: #fff; color: #94a3b8; cursor: pointer; transition: all .2s;
   }
-  .sector-btn.active {
-    background: #0f172a;
-    border-color: #0f172a;
-    color: #fff;
-  }
-
-  /* ── 요금 카드 ── */
+  .sector-btn.active { background: #0f172a; border-color: #0f172a; color: #fff; }
   .plan-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 36px 28px 32px;
-    height: 100%;
-    border: 2px solid #e2e8f0;
-    position: relative;
-    transition: box-shadow .2s;
+    background: #fff; border-radius: 20px; padding: 36px 28px 32px;
+    height: 100%; border: 2px solid #e2e8f0; position: relative; transition: box-shadow .2s;
   }
   .plan-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); }
-  .plan-card.featured {
-    border-color: #0891b2;
-    box-shadow: 0 4px 24px rgba(8,145,178,.15);
-  }
+  .plan-card.featured { border-color: #0891b2; box-shadow: 0 4px 24px rgba(8,145,178,.15); }
   .plan-badge {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #0891b2;
-    color: #fff;
-    font-size: .72rem;
-    font-weight: 800;
-    letter-spacing: .08em;
-    padding: 4px 14px;
-    border-radius: 999px;
-    white-space: nowrap;
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: #0891b2; color: #fff; font-size: .72rem; font-weight: 800;
+    letter-spacing: .08em; padding: 4px 14px; border-radius: 999px; white-space: nowrap;
   }
-  .plan-name {
-    font-size: .8rem;
-    font-weight: 800;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: #94a3b8;
-    margin-bottom: 12px;
+  .plan-name { font-size: .8rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #94a3b8; margin-bottom: 12px; }
+  .plan-price { font-size: 2.2rem; font-weight: 900; color: #0d1b2a; line-height: 1; margin-bottom: 4px; }
+  .plan-price .unit { font-size: 1rem; font-weight: 700; color: #64748b; }
+  .plan-note { font-size: .78rem; color: #94a3b8; margin-bottom: 16px; }
+  .plan-includes {
+    background: #f8fafc; border-radius: 10px; padding: 14px 16px; margin-bottom: 18px;
+    font-size: .82rem; color: #475569; line-height: 1.8;
   }
-  .plan-price {
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: #0d1b2a;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .plan-price span { font-size: 1.1rem; font-weight: 700; color: #64748b; }
-  .plan-note { font-size: .78rem; color: #94a3b8; margin-bottom: 24px; }
-  .plan-divider { border: none; border-top: 1px solid #f1f5f9; margin: 20px 0; }
-  .plan-features { list-style: none; padding: 0; margin: 0 0 28px; }
+  .plan-includes strong { color: #0d1b2a; }
+  .plan-divider { border: none; border-top: 1px solid #f1f5f9; margin: 16px 0; }
+  .plan-features { list-style: none; padding: 0; margin: 0 0 24px; }
   .plan-features li {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: .87rem;
-    color: #475569;
-    margin-bottom: 10px;
-    line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: .87rem; color: #475569; margin-bottom: 8px; line-height: 1.5;
   }
-  .plan-features li::before {
-    content: '✓';
-    color: #0891b2;
-    font-weight: 900;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .plan-features.enterprise li::before { color: #7c3aed; }
-
+  .plan-features li::before { content: '✓'; color: #0891b2; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
   /* 법령진단 카드 */
-  .diagnosis-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 28px;
-    height: 100%;
-    border: 2px solid #e2e8f0;
+  .diag-card {
+    background: #fff; border-radius: 16px; padding: 28px 24px;
+    height: 100%; border: 2px solid #e2e8f0; transition: box-shadow .2s;
   }
-  .diagnosis-card .dc-sector {
-    font-size: .72rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: #22d3ee;
-    background: rgba(6,182,212,.1);
-    border: 1px solid rgba(6,182,212,.25);
-    border-radius: 4px;
-    padding: 3px 10px;
-    display: inline-block;
-    margin-bottom: 14px;
+  .diag-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+  .diag-scale-badge {
+    display: inline-block; font-size: .72rem; font-weight: 800;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 999px; margin-bottom: 14px;
   }
-  .diagnosis-card h4 { font-size: 1.1rem; font-weight: 900; color: #0d1b2a; margin-bottom: 20px; }
-  .dc-tier {
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+  .scale-small  { background: #f0fdf4; color: #15803d; }
+  .scale-medium { background: #eff6ff; color: #1d4ed8; }
+  .scale-large  { background: #faf5ff; color: #7c3aed; }
+  .scale-xlarge { background: #fff7ed; color: #c2410c; }
+  .diag-price { font-size: 1.8rem; font-weight: 900; color: #0d1b2a; margin-bottom: 6px; }
+  .diag-price .unit { font-size: .95rem; font-weight: 700; color: #64748b; }
+  .diag-note { font-size: .78rem; color: #94a3b8; margin-bottom: 18px; }
+  .diag-scale-guide {
+    background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px;
+    padding: 16px 20px; margin-bottom: 28px; font-size: .83rem; color: #475569;
   }
-  .dc-tier:last-child { margin-bottom: 0; }
-  .dc-tier.free { background: #f0fdf4; border: 1px solid #bbf7d0; }
-  .dc-tier.basic { background: #eff6ff; border: 1px solid #bfdbfe; }
-  .dc-tier.deep { background: #faf5ff; border: 1px solid #e9d5ff; }
-  .dc-tier .dt-name { font-size: .82rem; font-weight: 800; color: #0d1b2a; margin-bottom: 4px; }
-  .dc-tier .dt-desc { font-size: .78rem; color: #64748b; line-height: 1.5; margin-bottom: 6px; }
-  .dc-tier .dt-price { font-size: .9rem; font-weight: 900; }
-  .dc-tier.free .dt-price { color: #16a34a; }
-  .dc-tier.basic .dt-price { color: #2563eb; }
-  .dc-tier.deep .dt-price { color: #7c3aed; }
-
-  /* ── 안내 박스 ── */
+  .diag-scale-guide table { width: 100%; }
+  .diag-scale-guide td { padding: 3px 8px; }
+  .diag-scale-guide td:first-child { font-weight: 700; color: #0d1b2a; white-space: nowrap; }
   .price-notice {
     background: linear-gradient(135deg, #0f172a, #1e293b);
-    border-radius: 16px;
-    padding: 36px;
-    margin-top: 48px;
+    border-radius: 16px; padding: 36px; margin-top: 48px;
   }
   .price-notice h5 { color: #22d3ee; font-weight: 800; margin-bottom: 10px; }
   .price-notice p { color: rgba(255,255,255,.65); font-size: .9rem; line-height: 1.7; margin: 0; }
-
-  /* ── CTA ── */
-  .price-cta {
-    background: linear-gradient(135deg, #0891b2, #0e7490);
-    padding: 72px 0;
-    text-align: center;
-  }
+  .price-cta { background: linear-gradient(135deg, #0891b2, #0e7490); padding: 72px 0; text-align: center; }
   .price-cta h2 { color: #fff; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
   .price-cta p { color: rgba(255,255,255,.75); margin-bottom: 28px; }
-
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
+  .diag-sector-panel { display: none; }
+  .diag-sector-panel.active { display: block; }
+  /* 결제 준비 중 모달 */
+  .payment-preparing-note {
+    font-size: .82rem; color: #94a3b8; text-align: center; margin-top: 8px;
+  }
   </style>
 </head>
 <body class="sc5">
@@ -241,116 +125,65 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ── 히어로 ── -->
+<!-- 결제 준비 중 모달 -->
+<div class="modal fade" id="paymentPrepModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">🔧 온라인 결제 준비 중</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>현재 온라인 결제 시스템을 준비 중입니다.</p>
+        <p class="text-muted" style="font-size:.88rem;">도입 문의로 신청해 주시면 즉시 안내해 드립니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <a href="contact.html" class="btn btn-base">도입 문의하기</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 히어로 -->
 <section class="price-hero">
   <div class="container">
     <span class="price-eyebrow">💰 요금제</span>
     <h1>명확하고 <em>합리적인</em> 가격</h1>
-    <p>컨설팅 비용과는 상대도 안 될 만큼 저렴합니다.<br>그리고 TAI 법령진단은 사람이 하는 것과 달리 절대 놓치지 않습니다.</p>
+    <p>컨설팅 비용과는 상대도 안 될 만큼 저렴합니다.<br>TAI 법령진단은 사람이 하는 것과 달리 절대 놓치지 않습니다.</p>
   </div>
 </section>
 
-<!-- ── 탭 섹션 ── -->
+<!-- 탭 섹션 -->
 <section class="price-tab-wrap">
   <div class="container">
 
     <!-- 메인 탭 -->
     <div class="price-tabs">
-      <button class="price-tab-btn active" onclick="switchTab('diagnosis', this)">📋 법령진단</button>
-      <button class="price-tab-btn" onclick="switchTab('saas', this)">🖥️ SaaS 구독</button>
-    </div>
-
-    <!-- ══ 법령진단 탭 ══ -->
-    <div id="tab-diagnosis" class="tab-panel active">
-      <div class="text-center mb-4">
-        <p style="color:#64748b;font-size:.92rem;">사업장 유형을 선택하세요. 건설이 가장 복잡하여 가격이 높습니다.</p>
-      </div>
-      <div class="row g-4 justify-content-center">
-        <!-- 건설 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="diagnosis-card">
-            <span class="dc-sector">🏗️ 건설</span>
-            <h4>건설현장 법령진단</h4>
-            <div class="dc-tier free">
-              <div class="dt-name">무료 진단</div>
-              <div class="dt-desc">기초 법령 항목 확인 (공종·규모 기반)</div>
-              <div class="dt-price">무료</div>
-            </div>
-            <div class="dc-tier basic">
-              <div class="dt-name">기본 진단</div>
-              <div class="dt-desc">PDF 리포트 + 점검항목 자동 생성</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-            <div class="dc-tier deep">
-              <div class="dt-name">심화 진단</div>
-              <div class="dt-desc">공정·작업별 상세 분석 포함</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-          </div>
-        </div>
-        <!-- 건물 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="diagnosis-card">
-            <span class="dc-sector">🏢 건물</span>
-            <h4>건물·시설 법령진단</h4>
-            <div class="dc-tier free">
-              <div class="dt-name">무료 진단</div>
-              <div class="dt-desc">기초 법령 항목 확인 (용도·면적 기반)</div>
-              <div class="dt-price">무료</div>
-            </div>
-            <div class="dc-tier basic">
-              <div class="dt-name">기본 진단</div>
-              <div class="dt-desc">PDF 리포트 + 점검항목 자동 생성</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-            <div class="dc-tier deep">
-              <div class="dt-name">심화 진단</div>
-              <div class="dt-desc">시설·설비별 상세 분석 포함</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-          </div>
-        </div>
-        <!-- 산업 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="diagnosis-card">
-            <span class="dc-sector">🏭 산업</span>
-            <h4>제조·산업 법령진단</h4>
-            <div class="dc-tier free">
-              <div class="dt-name">무료 진단</div>
-              <div class="dt-desc">기초 법령 항목 확인 (업종·인원 기반)</div>
-              <div class="dt-price">무료</div>
-            </div>
-            <div class="dc-tier basic">
-              <div class="dt-name">기본 진단</div>
-              <div class="dt-desc">PDF 리포트 + 점검항목 자동 생성</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-            <div class="dc-tier deep">
-              <div class="dt-name">심화 진단</div>
-              <div class="dt-desc">공정·설비별 상세 분석 포함</div>
-              <div class="dt-price">별도 문의</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="price-notice">
-        <h5>📌 법령진단이란?</h5>
-        <p>사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 점검 주기를 자동으로 도출합니다. 법령진단 리포트는 안전점검 시 "계획하고 관리하고 있다"고 어필할 수 있는 법적 근거 문서가 됩니다.</p>
-        <p class="mt-3" style="color:rgba(255,255,255,.5);font-size:.85rem;">모든 플랜은 무료 법령진단 후 구독을 시작할 수 있습니다.</p>
-      </div>
+      <button class="price-tab-btn active" onclick="switchPriceTab('saas', this)">🖥️ SaaS 구독</button>
+      <button class="price-tab-btn" onclick="switchPriceTab('diagnosis', this)">📋 법령진단 (단건)</button>
     </div>
 
     <!-- ══ SaaS 탭 ══ -->
-    <div id="tab-saas" class="tab-panel">
+    <div id="tab-saas" class="tab-panel active">
+
       <div class="row g-4 justify-content-center">
 
-        <!-- 기본 플랜 -->
+        <!-- STARTER -->
         <div class="col-lg-4 col-md-6">
           <div class="plan-card">
-            <div class="plan-name">기본 플랜</div>
-            <div class="plan-price">79,000<span>원/월</span></div>
+            <div class="plan-name">STARTER</div>
+            <div class="plan-price">
+              <span data-pricing-key="saas_starter_monthly">79,000</span><span class="unit">원/월</span>
+            </div>
             <div class="plan-note">VAT 별도</div>
+            <!-- 포함 수량 -->
+            <div class="plan-includes">
+              <strong>포함 인원:</strong> <span data-pricing-key="saas_starter_users">10</span>명<br>
+              <strong>SMS 포함:</strong> <span data-pricing-key="saas_starter_sms_included">100</span>건/월<br>
+              <strong>카카오 포함:</strong> <span data-pricing-key="saas_starter_kakao_included">50</span>건/월<br>
+              <strong>서류출력 포함:</strong> <span data-pricing-key="saas_starter_doc_included">30</span>건/월
+            </div>
             <hr class="plan-divider">
             <ul class="plan-features">
               <li>법령 의무 자동 도출</li>
@@ -360,39 +193,50 @@
               <li>완료 기록 자동화</li>
               <li>TBM 전자서명</li>
             </ul>
-            <a href="free-diagnosis.html" class="btn btn-border" style="width:100%;font-weight:700;">무료로 시작</a>
+            <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('saas_starter', <span data-pricing-key=\"saas_starter_monthly\">79000</span>)">시작하기</button>
+            <p class="payment-preparing-note">* 온라인 결제 시스템 준비 중</p>
           </div>
         </div>
 
-        <!-- 프리미엄 -->
+        <!-- BUSINESS -->
         <div class="col-lg-4 col-md-6">
           <div class="plan-card featured">
-            <div class="plan-badge">✨ 추천 플랜</div>
-            <div class="plan-name">프리미엄</div>
-            <div class="plan-price">149,000<span>원/월</span></div>
+            <div class="plan-badge">✨ 추천</div>
+            <div class="plan-name">BUSINESS</div>
+            <div class="plan-price">
+              <span data-pricing-key="saas_business_monthly">149,000</span><span class="unit">원/월</span>
+            </div>
             <div class="plan-note">VAT 별도</div>
+            <div class="plan-includes">
+              <strong>포함 인원:</strong> <span data-pricing-key="saas_business_users">30</span>명<br>
+              <strong>SMS 포함:</strong> <span data-pricing-key="saas_business_sms_included">300</span>건/월<br>
+              <strong>카카오 포함:</strong> <span data-pricing-key="saas_business_kakao_included">150</span>건/월<br>
+              <strong>서류출력 포함:</strong> <span data-pricing-key="saas_business_doc_included">100</span>건/월
+            </div>
             <hr class="plan-divider">
             <ul class="plan-features">
-              <li>기본 플랜 전체 포함</li>
+              <li>STARTER 전체 포함</li>
               <li>신고서식 자동화</li>
               <li>AI 법령 업데이트 알림</li>
-              <li>QR 설비 점검</li>
+              <li>QR·RFID 설비 점검</li>
               <li>위험성평가 자동화</li>
+              <li>경영진 대시보드</li>
               <li>우선 고객지원</li>
             </ul>
-            <a href="free-diagnosis.html" class="btn btn-base" style="width:100%;font-weight:700;">무료로 시작</a>
+            <button class="btn btn-base" style="width:100%;font-weight:700;" onclick="startPayment('saas_business', 149000)">시작하기</button>
+            <p class="payment-preparing-note">* 온라인 결제 시스템 준비 중</p>
           </div>
         </div>
 
-        <!-- 엔터프라이즈 -->
+        <!-- ENTERPRISE -->
         <div class="col-lg-4 col-md-6">
           <div class="plan-card">
-            <div class="plan-name">엔터프라이즈</div>
-            <div class="plan-price" style="font-size:1.8rem;color:#7c3aed;">별도 협의</div>
+            <div class="plan-name">ENTERPRISE</div>
+            <div class="plan-price" style="font-size:1.6rem;color:#7c3aed;">별도 협의</div>
             <div class="plan-note">사업장 규모·수량에 따라 결정</div>
             <hr class="plan-divider">
-            <ul class="plan-features enterprise">
-              <li>프리미엄 전체 포함</li>
+            <ul class="plan-features enterprise" style="--color:#7c3aed;">
+              <li>BUSINESS 전체 포함</li>
               <li>다수 사업장 통합 관리</li>
               <li>전담 매니저 배정</li>
               <li>커스텀 리포트</li>
@@ -402,18 +246,254 @@
             <a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;">도입 문의하기</a>
           </div>
         </div>
+
+      </div><!-- /row -->
+
+      <!-- 초과 단가 안내 -->
+      <div class="price-notice mt-4">
+        <h5>📌 포함 수량 초과 안내</h5>
+        <p>
+          포함 수량을 초과한 경우 건당 추가 과금됩니다.
+          SMS 초과 <strong style="color:#22d3ee;"><span data-pricing-key="saas_sms_overage">30</span>원/건</strong> ·
+          카카오 초과 <strong style="color:#22d3ee;"><span data-pricing-key="saas_kakao_overage">20</span>원/건</strong> ·
+          서류출력 초과 <strong style="color:#22d3ee;"><span data-pricing-key="saas_doc_overage">500</span>원/건</strong> ·
+          초과 인원 <strong style="color:#22d3ee;"><span data-pricing-key="saas_user_overage">5,000</span>원/명/월</strong>
+        </p>
+        <p class="mt-2" style="color:rgba(255,255,255,.5);font-size:.85rem;">"크레딧"이 아닌 실제 포함 수량 기준으로 운영됩니다. 모든 플랜은 무료 법령진단 후 구독을 시작할 수 있습니다.</p>
+      </div>
+    </div><!-- /tab-saas -->
+
+    <!-- ══ 법령진단 탭 (단건) ══ -->
+    <div id="tab-diagnosis" class="tab-panel">
+
+      <div class="text-center mb-3">
+        <p style="color:#64748b;font-size:.92rem;">
+          법령진단은 <strong>1회성 리포트 서비스</strong>입니다. 사업장 정보를 입력하면 적용 법령·의무를 자동 도출하고 PDF 리포트를 제공합니다.
+        </p>
       </div>
 
-      <div class="price-notice">
-        <h5>📌 플랜 안내</h5>
-        <p>모든 플랜은 첫 달 무료 법령진단 후 구독을 시작할 수 있습니다. SMS·카카오 알림은 월 포함 수량 내 사용이며, 초과 건수는 건당 추가 과금됩니다. 연간 구독 시 할인이 적용됩니다.</p>
+      <!-- 시설유형 선택 -->
+      <div class="sector-tabs">
+        <button class="sector-btn active" onclick="switchDiagSector('building', this)">🏢 건물·시설</button>
+        <button class="sector-btn" onclick="switchDiagSector('industry', this)">🏭 제조·산업</button>
+        <button class="sector-btn" onclick="switchDiagSector('construction', this)">🏗️ 건설현장</button>
       </div>
-    </div>
+
+      <!-- 규모 기준 안내 -->
+      <div class="diag-scale-guide">
+        <p class="mb-2" style="font-size:.78rem;font-weight:800;color:#0d1b2a;">📐 규모 기준 (종사자 수 기준)</p>
+        <table>
+          <tr>
+            <td>소규모</td><td>~9인 이하 / 연면적 1,000㎡ 미만</td>
+          </tr>
+          <tr>
+            <td>중소</td><td>10~49인 / 연면적 1,000~3,000㎡</td>
+          </tr>
+          <tr>
+            <td>중대</td><td>50~299인 / 연면적 3,000~10,000㎡</td>
+          </tr>
+          <tr>
+            <td>대형</td><td>300인 이상 / 연면적 10,000㎡ 이상</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 건물·시설 -->
+      <div id="diag-building" class="diag-sector-panel active">
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-small">소규모</span>
+              <div class="diag-price"><span data-pricing-key="diag_building_small">99,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>소방·전기·승강기 의무 도출</li>
+                <li>점검항목 자동 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_building_small', 99000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-medium">중소</span>
+              <div class="diag-price"><span data-pricing-key="diag_building_medium">199,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>다중이용업소 의무 포함</li>
+                <li>점검항목 자동 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_building_medium', 199000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-large">중대</span>
+              <div class="diag-price"><span data-pricing-key="diag_building_large">299,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>전기·가스·소방 통합 분석</li>
+                <li>점검항목 자동 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_building_large', 299000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-xlarge">대형</span>
+              <div class="diag-price"><span data-pricing-key="diag_building_xlarge">499,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>복합 시설 통합 분석</li>
+                <li>점검항목 자동 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_building_xlarge', 499000)">지금 구매하기</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /diag-building -->
+
+      <!-- 제조·산업 -->
+      <div id="diag-industry" class="diag-sector-panel">
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-small">소규모</span>
+              <div class="diag-price"><span data-pricing-key="diag_industry_small">249,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>산안법 의무 도출</li>
+                <li>설비별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_industry_small', 249000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-medium">중소</span>
+              <div class="diag-price"><span data-pricing-key="diag_industry_medium">399,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>화관법·MSDS 의무 포함</li>
+                <li>설비별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_industry_medium', 399000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-large">중대</span>
+              <div class="diag-price"><span data-pricing-key="diag_industry_large">599,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>중대재해법 의무 포함</li>
+                <li>공정·설비 통합 분석</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_industry_large', 599000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-xlarge">대형</span>
+              <div class="diag-price"><span data-pricing-key="diag_industry_xlarge">999,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>전 법령 통합 분석</li>
+                <li>공정·설비 통합 분석</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_industry_xlarge', 999000)">지금 구매하기</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /diag-industry -->
+
+      <!-- 건설현장 -->
+      <div id="diag-construction" class="diag-sector-panel">
+        <div class="row g-4 justify-content-center">
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-small">소규모</span>
+              <div class="diag-price"><span data-pricing-key="diag_construction_small">399,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>건설기술진흥법 의무 도출</li>
+                <li>공종별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_construction_small', 399000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-medium">중소</span>
+              <div class="diag-price"><span data-pricing-key="diag_construction_medium">599,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>산안법·중대재해법 포함</li>
+                <li>공종별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_construction_medium', 599000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-large">중대</span>
+              <div class="diag-price"><span data-pricing-key="diag_construction_large">899,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>안전관리계획서 기준 포함</li>
+                <li>공종별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_construction_large', 899000)">지금 구매하기</button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="diag-card">
+              <span class="diag-scale-badge scale-xlarge">대형</span>
+              <div class="diag-price"><span data-pricing-key="diag_construction_xlarge">1,499,000</span><span class="unit">원</span></div>
+              <div class="diag-note">단건 · 1회성 리포트</div>
+              <ul class="plan-features">
+                <li>PDF 법령진단 리포트</li>
+                <li>전 건설 법령 통합 분석</li>
+                <li>공종별 점검항목 생성</li>
+                <li>감사 대응 서류로 활용</li>
+              </ul>
+              <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startPayment('diag_construction_xlarge', 1499000)">지금 구매하기</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /diag-construction -->
+
+      <div class="price-notice">
+        <h5>📌 법령진단이란?</h5>
+        <p>법령진단은 <strong style="color:#22d3ee;">1회성 리포트 서비스</strong>입니다. 사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 점검 주기를 자동으로 도출하고 PDF 리포트를 제공합니다. 무료 법령진단과 달리 유료 진단은 PDF 리포트 + 점검항목 자동 생성 + 감사 대응 서류로 활용할 수 있습니다.</p>
+      </div>
+    </div><!-- /tab-diagnosis -->
 
   </div>
 </section>
 
-<!-- ── CTA ── -->
+<!-- CTA -->
 <section class="price-cta">
   <div class="container">
     <h2>지금 무료로 시작하세요</h2>
@@ -434,14 +514,32 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+<script src="assets/js/pricing.js"></script>
 <script>
 if(typeof WOW!=='undefined') new WOW().init();
 
-function switchTab(tab, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.price-tab-btn').forEach(b => b.classList.remove('active'));
+/** 메인 탭 전환 */
+function switchPriceTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.price-tab-btn').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('tab-' + tab).classList.add('active');
   btn.classList.add('active');
+}
+
+/** 법령진단 시설유형 전환 */
+function switchDiagSector(sector, btn) {
+  document.querySelectorAll('.diag-sector-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.sector-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('diag-' + sector).classList.add('active');
+  btn.classList.add('active');
+}
+
+/** 결제 시작 — KG이니시스 미승인 기간: 준비 중 모달 표시 */
+function startPayment(planKey, amount) {
+  // KG이니시스 승인 후 실제 결제 플로우로 교체
+  // 현재는 준비 중 모달 표시
+  var modal = new bootstrap.Modal(document.getElementById('paymentPrepModal'));
+  modal.show();
 }
 </script>
 </body>

@@ -1,7 +1,7 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.0.0 (2026-04-13): Nexas 원본 navbar-area 구조 적용 + btn-white 버튼
+ * v2.1.0 (2026-04-14): 서비스 드롭다운에 "연결 서비스 사전등록" 추가
  *
  * 경로 자동 감지:
  *   루트 페이지 (nexas/*.html)       → base = ''
@@ -50,6 +50,8 @@
     '              <li><a href="' + base + 'service/appointment.html">선임 연결</a></li>',
     '              <li><a href="' + base + 'service/saas.html">SaaS 구독</a></li>',
     '              <li><a href="' + base + 'service/diagnosis.html">법령진단</a></li>',
+    '              <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>',
+    '              <li><a href="' + base + 'connect.html" style="color:#fbbf24;font-weight:700;">🔗 연결서비스 사전등록</a></li>',
     '            </ul>',
     '          </li>',
 
