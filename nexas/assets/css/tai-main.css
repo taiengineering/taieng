@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.2 */
+/* TAI 공통 스타일 v1.1 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -12,87 +12,7 @@
 body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; }
 a { text-decoration: none; }
 
-/* ================================================
-   NAVBAR AREA — Nexas 기본값 완전 오버라이드
-   진입시 투명·보라색 제거 → 항상 다크 네이비 고정
-================================================ */
-.navbar-area,
-.navbar-area.sticky-active,
-.navbar-area.nav-fixed,
-.navbar-area.header-fixed,
-.navbar-area[class] {
-  background: rgba(13, 27, 42, 0.97) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border-bottom: 1px solid rgba(255,255,255,.07) !important;
-  box-shadow: none !important;
-  transition: box-shadow .3s !important;
-}
-/* 스크롤 후 살짝 그림자 */
-.navbar-area.sticky-active,
-.navbar-area.nav-fixed,
-.navbar-area.header-fixed {
-  box-shadow: 0 2px 24px rgba(0,0,0,.35) !important;
-}
-/* nav-container 배경 초기화 */
-.navbar-area .nav-container {
-  background: transparent !important;
-}
-/* 메뉴 링크 색상 — 흰색 계열로 통일 */
-.navbar-area .navbar-nav li a {
-  color: rgba(255,255,255,.82) !important;
-  font-weight: 500 !important;
-}
-.navbar-area .navbar-nav li a:hover {
-  color: #fff !important;
-}
-/* 드롭다운 서브메뉴 배경 */
-.navbar-area .navbar-nav li .sub-menu {
-  background: #0d1b2a !important;
-  border: 1px solid rgba(255,255,255,.08) !important;
-}
-.navbar-area .navbar-nav li .sub-menu li a {
-  color: rgba(255,255,255,.72) !important;
-}
-.navbar-area .navbar-nav li .sub-menu li a:hover {
-  color: #fff !important;
-  background: rgba(255,255,255,.06) !important;
-}
-/* 로고 영역 */
-.navbar-area .logo img,
-.navbar-area .main-logo img {
-  height: 38px;
-}
-/* 우측 버튼 */
-.navbar-area .nav-right-part ul li a.btn {
-  background: #e63946 !important;
-  color: #fff !important;
-  border: none !important;
-  font-weight: 700 !important;
-  border-radius: 6px !important;
-  padding: 8px 18px !important;
-}
-.navbar-area .nav-right-part ul li a.btn:hover {
-  background: #c1121f !important;
-}
-/* 로그인 링크 */
-.navbar-area .nav-right-part ul li a:not(.btn) {
-  color: rgba(255,255,255,.72) !important;
-}
-.navbar-area .nav-right-part ul li a:not(.btn):hover {
-  color: #fff !important;
-}
-/* 모바일 토글 버튼 */
-.navbar-area .toggle-btn .icon-left,
-.navbar-area .toggle-btn .icon-right {
-  background: #fff !important;
-}
-/* Nexas --color-primary 보라색 변수 override */
-.navbar-area { --color-primary: #e63946 !important; }
-
-/* ================================================
-   GNB (tai-nav 클래스 방식 — 구형 페이지용)
-================================================ */
+/* GNB */
 .tai-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(13,27,42,.97);
@@ -252,7 +172,10 @@ a { text-decoration: none; }
   .page-hero { padding:60px 0 50px; }
 }
 
-/* Placeholder 가독성 */
-::placeholder { color: #b0b8c4 !important; opacity: 1 !important; }
-:-ms-input-placeholder { color: #b0b8c4; }
-::-ms-input-placeholder { color: #b0b8c4; }
+/* Placeholder 가독성 개선 — 실제 입력값과 명확히 구분 */
+::placeholder {
+  color: #b0b8c4 !important;
+  opacity: 1 !important;   /* Firefox 기본값 override */
+}
+:-ms-input-placeholder { color: #b0b8c4; }   /* IE 대응 */
+::-ms-input-placeholder { color: #b0b8c4; }  /* Edge 레거시 대응 */
