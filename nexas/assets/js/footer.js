@@ -1,7 +1,7 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
  * 모든 페이지에서 <div id="tai-footer"></div> + <script src="...assets/js/footer.js"> 로 사용
- * v2.1.0 (2026-04-13): Nexas 원본 footer-area style-1 구조 적용
+ * v2.2.0 (2026-04-14): 특허 카운터 6→7건 (외 6건)
  */
 (function () {
   'use strict';
@@ -18,7 +18,7 @@
     '<div class="footer-patent-bar" style="background:rgba(255,255,255,.05);padding:10px 0;text-align:center;">' +
     '  <div class="container">' +
     '    <p style="margin:0;font-size:.8rem;color:rgba(255,255,255,.55);">' +
-    '      특허 출원 중 (Patent Pending) &nbsp;·&nbsp; 제10-2026-0056330 외 5건 &nbsp;·&nbsp; 상표출원 증' +
+    '      특허 출원 중 (Patent Pending) &nbsp;·&nbsp; 제10-2026-0056330 외 6건 &nbsp;·&nbsp; 상표출원 중' +
     '      <a href="' + b + 'patents.html" style="color:rgba(255,255,255,.45);margin-left:10px;">\uae30\uc220 \ud601\uc2e0 \ubcf4\uae30 \u2192</a>' +
     '    </p>' +
     '  </div>' +
