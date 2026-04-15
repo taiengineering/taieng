@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.3 — overflow-x 강제 수정 */
+/* TAI 공통 스타일 v1.4 — 스크롤바 보라색 수정 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -14,6 +14,14 @@ body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; p
 section, footer, header, main, .footer-area { overflow-x: hidden; }
 .row { --bs-gutter-x: 1.5rem; }
 a { text-decoration: none; }
+
+/* 스크롤바 — 템플릿 보라색 오버라이드 */
+.sc5::-webkit-scrollbar { width: 8px; height: 8px; }
+.sc5::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 0; }
+.sc5::-webkit-scrollbar-thumb { background: #3d4555; border-radius: 4px; box-shadow: none; }
+.sc5::-webkit-scrollbar-thumb:hover { background: #555d6e; }
+/* Firefox */
+html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
 
 /* GNB */
 .tai-nav {
