@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.4 — 스크롤바 보라색 수정 */
+/* TAI 공통 스타일 v1.5 — 네비바 잘림 수정 + 스크롤바 색상 수정 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -9,10 +9,7 @@
   --sub: #5a6476;
   --border: #e8eaed;
 }
-html { overflow-x: hidden; max-width: 100vw; }
-body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; overflow-x: hidden; max-width: 100%; }
-section, footer, header, main, .footer-area { overflow-x: hidden; }
-.row { --bs-gutter-x: 1.5rem; }
+body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; }
 a { text-decoration: none; }
 
 /* 스크롤바 — 템플릿 보라색 오버라이드 */
@@ -20,7 +17,6 @@ a { text-decoration: none; }
 .sc5::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 0; }
 .sc5::-webkit-scrollbar-thumb { background: #3d4555; border-radius: 4px; box-shadow: none; }
 .sc5::-webkit-scrollbar-thumb:hover { background: #555d6e; }
-/* Firefox */
 html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
 
 /* GNB */
