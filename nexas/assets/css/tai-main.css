@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.1 */
+/* TAI 공통 스타일 v1.2 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -9,7 +9,8 @@
   --sub: #5a6476;
   --border: #e8eaed;
 }
-body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; }
+html { overflow-x: hidden; }
+body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; overflow-x: hidden; }
 a { text-decoration: none; }
 
 /* GNB */
@@ -172,10 +173,10 @@ a { text-decoration: none; }
   .page-hero { padding:60px 0 50px; }
 }
 
-/* Placeholder 가독성 개선 — 실제 입력값과 명확히 구분 */
+/* Placeholder 가독성 개선 */
 ::placeholder {
   color: #b0b8c4 !important;
-  opacity: 1 !important;   /* Firefox 기본값 override */
+  opacity: 1 !important;
 }
-:-ms-input-placeholder { color: #b0b8c4; }   /* IE 대응 */
-::-ms-input-placeholder { color: #b0b8c4; }  /* Edge 레거시 대응 */
+:-ms-input-placeholder { color: #b0b8c4; }
+::-ms-input-placeholder { color: #b0b8c4; }
