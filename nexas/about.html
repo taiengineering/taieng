@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 엔지니어링 회사소개. 22년 경영 경험의 대표가 만든 법령 기반 산업안전 자동화 플랫폼.">
+  <meta name="description" content="TAI 엔지니어링 회사소개. 22년 기술경영 베테랑 CEO가 만든 법령 기반 산업안전 자동화 플랫폼.">
   <title>회사소개 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -29,13 +29,10 @@
   .credential-item { background: #f8fafc; border-radius: 12px; padding: 14px 16px; }
   .credential-item .ci-label { font-size: .7rem; font-weight: 700; color: #94a3b8; margin-bottom: 4px; }
   .credential-item .ci-value { font-size: .88rem; font-weight: 700; color: #0d1b2a; }
-  .story-quote { background: #f8fafc; border-left: 5px solid #0891b2; border-radius: 0 14px 14px 0; padding: 28px 32px; margin: 28px 0; }
-  .story-quote p { font-size: .95rem; color: #334155; line-height: 1.85; margin: 0; }
-  .career-highlights { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-  .career-hl { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; background: #f0fdfa; border-radius: 10px; border-left: 3px solid #0891b2; }
-  .career-hl .ch-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-  .career-hl p { font-size: .85rem; color: #334155; line-height: 1.6; margin: 0; }
-  .career-hl strong { color: #0d1b2a; }
+  .story-section { background: #fff; }
+  .story-text { font-size: .95rem; color: #334155; line-height: 2; }
+  .story-text .highlight { color: #0891b2; font-weight: 700; }
+  .story-divider { width: 48px; height: 4px; background: #0891b2; border-radius: 2px; margin: 32px 0; }
   .philosophy-section { background: #0d1b2a; padding: 88px 0; }
   .phil-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 16px; padding: 32px 28px; height: 100%; text-align: center; transition: transform .2s, border-color .2s; }
   .phil-card:hover { transform: translateY(-4px); border-color: rgba(6,182,212,.4); }
@@ -90,49 +87,68 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
+<!-- Hero -->
 <section class="about-hero"><div class="container">
   <span class="about-eyebrow">ABOUT TAI ENGINEERING</span>
   <h1>법령 준수의 <em>자동화</em>로<br>현장의 안전을 지킵니다</h1>
   <p>산업안전보건법 · 중대재해처벌법 대응을 위한<br>법령 기반 안전관리 자동화 플랫폼</p>
 </div></section>
 
-<section class="founder-section"><div class="container"><div class="row align-items-center g-5">
-  <div class="col-lg-5">
+<!-- Founder + Story -->
+<section class="founder-section"><div class="container"><div class="row align-items-start g-5">
+  <div class="col-lg-4">
     <div class="founder-photo">
       <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/about/ceo-profile.jpg" alt="심태왕 대표" loading="lazy">
       <div class="founder-badge">
-        <div><div class="fb-name">심태왕</div><div class="fb-title">TAI 엔지니어링 대표 · 22년 경영 경험</div></div>
+        <div><div class="fb-name">심태왕</div><div class="fb-title">TAI 엔지니어링 대표</div></div>
       </div>
     </div>
     <div class="credential-grid">
-      <div class="credential-item"><div class="ci-label">학력</div><div class="ci-value">고려대 경영전문대학원 EMBA</div></div>
-      <div class="credential-item"><div class="ci-label">자격</div><div class="ci-value">전기기능사 · 지게차운전기능사</div></div>
-      <div class="credential-item"><div class="ci-label">경영 실적</div><div class="ci-value">연매출 320억 · 직원 90명</div></div>
-      <div class="credential-item"><div class="ci-label">해외 경험</div><div class="ci-value">미국 · 일본 · 베트남 · 중국</div></div>
+      <div class="credential-item"><div class="ci-label">학력</div><div class="ci-value">고려대 경영전문대학원 석사</div></div>
+      <div class="credential-item"><div class="ci-label">경영</div><div class="ci-value">국내외 다수의 법인 운영</div></div>
     </div>
   </div>
-  <div class="col-lg-7">
+  <div class="col-lg-8">
     <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;color:#0d1b2a;margin-bottom:8px;">TAI가 만들어진 이유</h2>
-    <p style="font-size:.88rem;color:#64748b;margin-bottom:20px;">22년간 5개 법인을 설립하고 경영한 대표가, 산업안전의 구조적 문제를 기술로 해결합니다.</p>
+    <p style="font-size:.88rem;color:#64748b;margin-bottom:24px;">22년간 기술경영을 해온 베테랑 CEO가 산업안전의 구조적 문제를 기술로 해결합니다.</p>
 
-    <div class="story-quote"><p>
-      전기기사를 준비하면서 안전관리자 선임을 생각했을 때,<br>
-      한 사람이 감당할 수 없는 구조라는 것을 깨달았습니다.<br><br>
-      <strong>법령을 몰라서, 뭘 해야 하는지 몰라서, 혼자 다 해야 하는 구조.</strong><br>
-      현실은 요식행위 — 안 걸리면 그만이라는 체념.<br><br>
-      하지만 기존의 수동적 안전관리가 가진 구조적 한계는<br>
-      데이터와 시스템으로 해결할 수 있습니다.<br>
-      그래서 TAI Safe를 만들었습니다.
-    </p></div>
+    <div class="story-text">
+      <p>안전관리에 관심을 가지고 공부를 하고 있을 때,<br>
+      실제 현장의 상황을 보고 생각했습니다.</p>
 
-    <div class="career-highlights">
-      <div class="career-hl"><div class="ch-icon">🏢</div><p><strong>5개 법인 설립 · 22년 경영</strong> — 무자본 1인 창업에서 연매출 320억, 직원 90명 규모까지 성장시킨 실전형 경영자</p></div>
-      <div class="career-hl"><div class="ch-icon">🌏</div><p><strong>글로벌 사업 경험</strong> — 베트남 R&D센터 구축, 미국·일본 법인 설립, 중국 도매유통 1위 달성. UCLA · ESADE 비즈니스 프로그램 수료</p></div>
-      <div class="career-hl"><div class="ch-icon">⚙️</div><p><strong>기술 기반 경영</strong> — E-Commerce 플랫폼, WMS, CRM, 검색엔진, AI 콜센터 등 핵심 시스템을 직접 기획하고 PM한 기술 경영자</p></div>
+      <p><span class="highlight">"이건 안전관리자 한 사람이 감당할 수 없겠구나."</span></p>
+
+      <p>법령은 매번 바뀌고, 정해진 양식도 없고, 혼자 다 해야 하는 구조.<br>
+      현실은 안전관리가 우선이 아닌, 요식행위에 가까웠습니다.<br>
+      안 걸리면 그만이라는 인식이 팽배했습니다.</p>
+
+      <div class="story-divider"></div>
+
+      <p>그래서 생각했습니다. <strong>"내가 안전관리자라면?"</strong></p>
+
+      <p>그동안 플랫폼과 IT 업계에서 쌓아온 경험으로<br>
+      이 문제를 구조화해 볼 수 있겠다고 판단했습니다.</p>
+
+      <p>하지만 쉽지 않았습니다.<br>
+      만만치 않은 법령, 산업마다 다른 현장, 조직, 인원.<br>
+      수많은 고민 끝에 하나의 확신이 생겼습니다.</p>
+
+      <p><span class="highlight">"이거면 안전관리가 된다."</span></p>
+
+      <div class="story-divider"></div>
+
+      <p>기존의 수동적 안전관리가 가진 가장 큰 한계는<br>
+      <strong>담당 인력의 부재</strong>와 <strong>시스템의 부재</strong>였습니다.</p>
+
+      <p>담당 인력의 문제는 안전 점검을 <strong>전체 작업자에게 분산</strong>하면 되고,<br>
+      시스템의 문제는 <strong>데이터와 AI</strong>로 해결할 수 있습니다.</p>
+
+      <p>그래서 <span class="highlight">TAI Safe</span>를 만들었습니다.</p>
     </div>
   </div>
 </div></div></section>
 
+<!-- Philosophy -->
 <section class="philosophy-section"><div class="container">
   <div class="text-center mb-5">
     <h2 style="color:#fff;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;margin-bottom:10px;">TAI의 철학</h2>
@@ -145,12 +161,14 @@
   </div>
 </div></section>
 
+<!-- Mid CTA -->
 <section class="mid-cta"><div class="container">
   <h3>우리 사업장에 적용되는 안전 법령, 알고 계신가요?</h3>
   <p>산업안전보건법 · 중대재해처벌법 · 건설기술진흥법 기반 무료 법령진단</p>
   <a href="free-diagnosis.html" class="btn-mid">무료 법령진단 시작하기 →</a>
 </div></section>
 
+<!-- Rule Engine -->
 <section class="engine-section"><div class="container">
   <div class="text-center mb-2">
     <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#0d1b2a;margin-bottom:10px;">TAI Safe는 이렇게 작동합니다</h2>
@@ -167,22 +185,24 @@
   </div>
 </div></section>
 
+<!-- Belief -->
 <section class="belief-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-8">
   <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:900;color:#0d1b2a;margin-bottom:32px;text-align:center;">TAI의 핵심 신념</h2>
   <div class="belief-item"><div class="bi-icon">💡</div><div><h5>당위가 아닌 효율</h5><p>"안전관리는 이렇게 해야 돼"가 아니라 "이렇게 하면 안전관리가 잘 된다"를 만듭니다. 업무 시간을 줄이고, 법적 리스크를 방어하는 것이 핵심입니다.</p></div></div>
   <div class="belief-item"><div class="bi-icon">🛡️</div><div><h5>경영책임자 리스크 해소</h5><p>중대재해처벌법 시대, 안전관리 의무의 이행 증적을 시스템이 자동으로 남깁니다. "몰라서 못 했다"를 "시스템이 알려줘서 했다"로 바꿉니다.</p></div></div>
-  <div class="belief-item"><div class="bi-icon">🧠</div><div><h5>현장 경험 기반 설계</h5><p>22년간 시스템을 직접 기획하고 경영한 경험이 제품 곳곳에 녹아 있습니다. 안전관리자와 현장 작업자의 실제 업무 흐름에 맞춰 설계했습니다.</p></div></div>
+  <div class="belief-item"><div class="bi-icon">🧠</div><div><h5>현장 중심 설계</h5><p>22년간 다양한 플랫폼과 시스템을 직접 기획하고 경영한 경험이 제품 곳곳에 녹아 있습니다. 안전관리자와 현장 작업자의 실제 업무 흐름에 맞춰 설계했습니다.</p></div></div>
   <div class="belief-item"><div class="bi-icon">🔬</div><div><h5>지속적 기술 혁신</h5><p>8건의 특허 출원이 증명하는 기술력. 법령 자동 판정, 분산형 안전관리, 위험 예측, 환경 기반 판단 등 산업안전 AI 분야를 선도합니다.</p></div></div>
 </div></div></div></section>
 
-<section class="numbers-section"><div class="container"><div class="row g-3">
+<!-- Numbers -->
+<section class="numbers-section"><div class="container"><div class="row g-3 justify-content-center">
   <div class="col-6 col-md"><div class="num-item"><div class="ni-num">2,080<span style="font-size:1.2rem;">+</span></div><div class="ni-label">법령 규칙 엔진</div><div class="ni-detail">산안법 · 중대재해법 · 건기법</div></div></div>
   <div class="col-6 col-md"><div class="num-item"><div class="ni-num">8</div><div class="ni-label">특허 출원</div><div class="ni-detail">법령판정 · 분산관리 · 위험예측</div></div></div>
   <div class="col-6 col-md"><div class="num-item"><div class="ni-num">3</div><div class="ni-label">지원 섹터</div><div class="ni-detail">제조 · 건설 · 건물</div></div></div>
   <div class="col-6 col-md"><div class="num-item"><div class="ni-num">0<span style="font-size:1.2rem;">원</span></div><div class="ni-label">1차 법령진단</div><div class="ni-detail">가입 즉시 무료 진단</div></div></div>
-  <div class="col-6 col-md"><div class="num-item"><div class="ni-num">22<span style="font-size:1.2rem;">년</span></div><div class="ni-label">대표 경영 경력</div><div class="ni-detail">5개 법인 · 글로벌 4개국</div></div></div>
 </div></div></section>
 
+<!-- Patent -->
 <section class="patent-section"><div class="container"><div class="row align-items-center g-5">
   <div class="col-lg-6">
     <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:#0d1b2a;margin-bottom:16px;">시스템 곳곳에<br>특허를 낼 만큼 혁신적입니다</h2>
@@ -203,6 +223,7 @@
   </div>
 </div></div></section>
 
+<!-- Contact -->
 <section class="contact-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-6">
   <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;color:#0d1b2a;margin-bottom:28px;text-align:center;">연락처</h2>
   <div class="contact-item"><div class="ci-icon">📞</div><div class="ci-text"><strong>전화</strong><span>070-8080-1858</span></div></div>
@@ -210,6 +231,7 @@
   <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-text"><strong>주소</strong><span>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</span></div></div>
 </div></div></div></section>
 
+<!-- Bottom CTA -->
 <section class="about-cta"><div class="container">
   <h2>법령 준수, 시스템이 대신합니다</h2>
   <p>무료 법령진단으로 우리 사업장의 안전 의무를 확인하세요.</p>
