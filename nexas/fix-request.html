@@ -33,7 +33,6 @@
   .form-label{font-weight:700;font-size:.88rem;color:#334155}
   .form-control,.form-select{border-radius:12px;padding:11px 14px;border:1.5px solid #e2e8f0;font-size:.9rem}
   .form-control:focus,.form-select:focus{border-color:#0d1b2a;box-shadow:0 0 0 3px rgba(13,27,42,.08)}
-  /* 주소 검색 */
   .addr-search-wrap{position:relative}
   .addr-search-wrap input{padding-left:40px}
   .addr-search-wrap .fa-map-marker-alt{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;z-index:1}
@@ -45,11 +44,9 @@
   .addr-opt .addr-main{font-weight:700;color:#0d1b2a}
   .addr-opt .addr-zip{font-size:.75rem;color:#94a3b8;margin-top:2px}
   .addr-loading{padding:12px 14px;color:#94a3b8;font-size:.85rem;text-align:center}
-  /* 대분류 탭 */
   .cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
   .cat-tab{padding:8px 16px;border-radius:999px;border:1.5px solid #e2e8f0;background:#fff;font-size:.85rem;font-weight:700;cursor:pointer;transition:.15s}
   .cat-tab.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
-  /* 긴급도 */
   .urgency-grid{display:flex;gap:12px;flex-wrap:wrap}
   .urgency-card{flex:1;min-width:120px;padding:16px 12px;border-radius:14px;border:2px solid #e2e8f0;cursor:pointer;text-align:center;transition:.15s}
   .urgency-card:hover{border-color:#94a3b8}
@@ -57,26 +54,21 @@
   .urgency-card .ug-icon{font-size:1.6rem;margin-bottom:6px}
   .urgency-card .ug-name{font-weight:800;font-size:.9rem;color:#0d1b2a}
   .urgency-card .ug-desc{font-size:.75rem;color:#94a3b8;margin-top:2px}
-  /* 예산 */
   .budget-opts{display:flex;flex-wrap:wrap;gap:8px}
   .budget-chip{padding:9px 18px;border-radius:999px;border:1.5px solid #e2e8f0;font-size:.88rem;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
   .budget-chip.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
-  /* 사진 첨부 */
   .photo-upload-area{border:2px dashed #e2e8f0;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s}
   .photo-upload-area:hover{border-color:#94a3b8;background:#f8fafc}
   .photo-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
   .photo-thumb{width:70px;height:70px;border-radius:10px;object-fit:cover;border:1.5px solid #e2e8f0}
-  /* 요약 */
   .summary-box{background:#f8fafc;border-radius:14px;padding:20px;margin-bottom:14px}
   .summary-box h6{font-size:.82rem;color:#64748b;margin-bottom:6px}
   .summary-box p{font-size:.92rem;font-weight:700;color:#0d1b2a;margin:0}
-  /* 버튼 */
   .btn-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
   .btn-prev,.btn-next,.btn-submit{padding:13px 32px;border-radius:14px;font-size:.95rem;font-weight:800;border:none;cursor:pointer;transition:.15s}
   .btn-prev{background:#f1f5f9;color:#334155}
   .btn-next{background:#0d1b2a;color:#fff;margin-left:auto}
   .btn-submit{background:#dc2626;color:#fff;margin-left:auto}
-  /* 완료 */
   .complete-page{display:none;text-align:center;padding:60px 20px}
   .complete-page .check-icon{font-size:5rem;margin-bottom:24px}
   .complete-page h2{font-size:1.8rem;font-weight:900;color:#0d1b2a;margin-bottom:12px}
@@ -106,8 +98,6 @@
   </div>
 
   <div class="form-wrap">
-
-    <!-- Step 1: 현장 정보 -->
     <div class="form-section active" id="step1">
       <div class="sec-title">현장 정보</div>
       <div class="sec-desc">서비스를 요청할 현장의 기본 정보를 입력해주세요.</div>
@@ -156,45 +146,30 @@
       <div class="btn-nav"><div></div><button class="btn-next" onclick="goStep(2)">다음: 상황 입력 →</button></div>
     </div>
 
-    <!-- Step 2: 상황 입력 -->
     <div class="form-section" id="step2">
       <div class="sec-title">상황 입력</div>
       <div class="sec-desc">발생한 문제 또는 필요한 서비스를 선택하고 설명해주세요.</div>
-
-      <!-- 대분류 탭 (8개) -->
       <label class="form-label mb-2">분야 선택 <span style="color:#dc2626">*</span></label>
       <div class="cat-tabs" id="req-cat-tabs"></div>
-
-      <!-- 증상 설명 -->
       <div class="mb-3">
         <label class="form-label">증상 / 상황 설명 <span style="color:#dc2626">*</span></label>
         <textarea class="form-control" id="r-desc" rows="4" placeholder="예: 분전반에서 타는 냄새가 나고 차단기가 자꾸 내려갑니다. 3층 주방 인근입니다."></textarea>
         <div style="text-align:right;font-size:.75rem;color:#94a3b8;margin-top:4px" id="r-desc-count">0 / 1000</div>
       </div>
-
-      <!-- 긴급도 -->
       <div class="mb-3">
         <label class="form-label">긴급도 <span style="color:#dc2626">*</span></label>
         <div class="urgency-grid">
           <div class="urgency-card" data-urgency="urgent" onclick="selectUrgency('urgent',this)">
-            <div class="ug-icon">🚨</div>
-            <div class="ug-name">긴급</div>
-            <div class="ug-desc">즉시 처리 필요</div>
+            <div class="ug-icon">🚨</div><div class="ug-name">긴급</div><div class="ug-desc">즉시 처리 필요</div>
           </div>
           <div class="urgency-card" data-urgency="normal" onclick="selectUrgency('normal',this)">
-            <div class="ug-icon">⏰</div>
-            <div class="ug-name">보통</div>
-            <div class="ug-desc">며칠 내 처리</div>
+            <div class="ug-icon">⏰</div><div class="ug-name">보통</div><div class="ug-desc">며칠 내 처리</div>
           </div>
           <div class="urgency-card" data-urgency="flexible" onclick="selectUrgency('flexible',this)">
-            <div class="ug-icon">📅</div>
-            <div class="ug-name">여유있음</div>
-            <div class="ug-desc">일정 조율 가능</div>
+            <div class="ug-icon">📅</div><div class="ug-name">여유있음</div><div class="ug-desc">일정 조율 가능</div>
           </div>
         </div>
       </div>
-
-      <!-- 사진 첨부 -->
       <div class="mb-3">
         <label class="form-label">사진 첨부 <small class="text-muted">(선택, 최대 5장)</small></label>
         <div class="photo-upload-area" onclick="document.getElementById('r-photos').click()">
@@ -204,8 +179,6 @@
         <input type="file" id="r-photos" accept="image/*" multiple style="display:none" onchange="previewPhotos(this)">
         <div class="photo-preview" id="r-photo-preview"></div>
       </div>
-
-      <!-- 예상 예산 -->
       <div class="mb-3">
         <label class="form-label">예상 예산 <small class="text-muted">(선택)</small></label>
         <div class="budget-opts" id="budget-opts">
@@ -216,11 +189,9 @@
           <div class="budget-chip" data-budget="over1000" onclick="selectBudget('over1000',this)">1천만원 이상</div>
         </div>
       </div>
-
       <div class="btn-nav"><button class="btn-prev" onclick="goStep(1)">← 이전</button><button class="btn-next" onclick="goStep(3)">다음: 확인 →</button></div>
     </div>
 
-    <!-- Step 3: 확인·접수 -->
     <div class="form-section" id="step3">
       <div class="sec-title">요청 확인</div>
       <div class="sec-desc">입력하신 내용을 확인하고 요청을 접수하세요.</div>
@@ -231,11 +202,9 @@
         <button class="btn-submit" id="btn-req-submit" onclick="submitRequest()">요청 접수하기</button>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- 완료 페이지 -->
 <section id="req-complete-section" style="background:#fff;padding:40px 0;display:none">
   <div class="complete-page" style="display:block">
     <div class="check-icon">📋</div>
@@ -261,128 +230,51 @@
 <script src="assets/js/footer.js"></script>
 <script>
 const API='https://api.taieng.co.kr';
-
-// 상태
 let rLat=null,rLng=null,rUrgency=null,rBudget=null,rCat=null;
 
 const CATS=[
-  {code:'ELEC',name:'전기',icon:'⚡'},
-  {code:'FIRE',name:'소방',icon:'🔥'},
-  {code:'MECH',name:'기계설비',icon:'⚙️'},
-  {code:'ARCH',name:'건축토목',icon:'🏗️'},
-  {code:'ENV',name:'환경',icon:'🌿'},
-  {code:'SAFE',name:'안전관리',icon:'🛡️'},
-  {code:'CLEAN',name:'청소위생',icon:'🧹'},
-  {code:'IT',name:'IT보안',icon:'💻'}
+  {code:'ELEC',name:'전기',icon:'⚡'},{code:'FIRE',name:'소방',icon:'🔥'},
+  {code:'MECH',name:'기계설비',icon:'⚙️'},{code:'ARCH',name:'건축토목',icon:'🏗️'},
+  {code:'ENV',name:'환경',icon:'🌿'},{code:'SAFE',name:'안전관리',icon:'🛡️'},
+  {code:'CLEAN',name:'청소위생',icon:'🧹'},{code:'IT',name:'IT보안',icon:'💻'}
 ];
 const BUDGET_LABELS={
-  unknown:'모르겠음',
-  under100:'100만원 미만',
-  '100to500':'100~500만원',
-  '500to1000':'500만~1천만원',
-  over1000:'1천만원 이상'
+  unknown:'모르겠음',under100:'100만원 미만',
+  '100to500':'100~500만원','500to1000':'500만~1천만원',over1000:'1천만원 이상'
 };
 
-// 대분류 탭 초기화
 function initCatTabs(){
   document.getElementById('req-cat-tabs').innerHTML=
     CATS.map(c=>`<div class="cat-tab" data-cat="${c.code}" onclick="selectCat('${c.code}',this)">${c.icon} ${c.name}</div>`).join('');
 }
 initCatTabs();
 
-function selectCat(code,el){
-  rCat=code;
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===code));
-}
-function selectUrgency(v,el){
-  rUrgency=v;
-  document.querySelectorAll('.urgency-card').forEach(c=>c.classList.remove('selected'));
-  el.classList.add('selected');
-}
-function selectBudget(v,el){
-  rBudget=v;
-  document.querySelectorAll('.budget-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-}
+function selectCat(code,el){rCat=code;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===code));}
+function selectUrgency(v,el){rUrgency=v;document.querySelectorAll('.urgency-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');}
+function selectBudget(v,el){rBudget=v;document.querySelectorAll('.budget-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
 
-// 사진 미리보기
 function previewPhotos(input){
-  const prev=document.getElementById('r-photo-preview');
-  prev.innerHTML='';
-  const files=Array.from(input.files).slice(0,5);
-  files.forEach(f=>{
-    const url=URL.createObjectURL(f);
-    prev.innerHTML+=`<img class="photo-thumb" src="${url}" alt="preview">`;
+  const prev=document.getElementById('r-photo-preview');prev.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(f=>{
+    prev.innerHTML+=`<img class="photo-thumb" src="${URL.createObjectURL(f)}" alt="preview">`;
   });
 }
 
-// 글자수
 document.getElementById('r-desc').addEventListener('input',function(){
   document.getElementById('r-desc-count').textContent=`${this.value.length} / 1000`;
   if(this.value.length>1000)this.value=this.value.slice(0,1000);
 });
 
-// 주소 검색 (provider-register와 동일 방식)
-let addrTimer=null;
-const rAddrInput=document.getElementById('r-addr');
-const rAddrDrop=document.getElementById('r-addr-dropdown');
-
-rAddrInput.addEventListener('input',function(){
-  clearTimeout(addrTimer);
-  const v=this.value.trim();
-  if(v.length<2){rAddrDrop.classList.remove('show');return;}
-  addrTimer=setTimeout(()=>fetchRAddr(v),300);
-});
-async function fetchRAddr(q){
-  rAddrDrop.innerHTML='<div class="addr-loading">검색 중...</div>';
-  rAddrDrop.classList.add('show');
-  try{
-    const res=await fetch(`${API}/juso/search?query=${encodeURIComponent(q)}`);
-    const json=await res.json();
-    const items=(json.data||[]).slice(0,8);
-    if(!items.length){rAddrDrop.innerHTML='<div class="addr-loading">검색 결과가 없습니다.</div>';return;}
-    rAddrDrop.innerHTML=items.map((item,i)=>`<div class="addr-opt" data-idx="${i}">
-      <div class="addr-main">${item.road_address}${item.building_name?` (${item.building_name})`:''}</div>
-      <div class="addr-zip">우편번호 ${item.zip_code||''}</div>
-    </div>`).join('');
-    rAddrDrop.querySelectorAll('.addr-opt').forEach((el,i)=>{
-      el.addEventListener('click',()=>selectRAddress(items[i]));
-    });
-  }catch(e){
-    rAddrDrop.innerHTML='<div class="addr-loading">주소 검색 중 오류가 발생했습니다.</div>';
-  }
-}
-async function selectRAddress(item){
-  rAddrInput.value=item.road_address;
-  rAddrDrop.classList.remove('show');
-  document.getElementById('r-addr-adm-cd').value=item.adm_cd||'';
-  document.getElementById('r-addr-rn-mgt-sn').value=item.rn_mgt_sn||'';
-  document.getElementById('r-addr-udrt-yn').value=item.udrt_yn||'';
-  document.getElementById('r-addr-buld-mnnm').value=item.buld_mnnm||'';
-  document.getElementById('r-addr-buld-slno').value=item.buld_slno||'';
-  try{
-    const qs=new URLSearchParams({admCd:item.adm_cd,rnMgtSn:item.rn_mgt_sn,udrtYn:item.udrt_yn,buldMnnm:item.buld_mnnm,buldSlno:item.buld_slno});
-    const res=await fetch(`${API}/juso/coord?${qs}`);
-    const json=await res.json();
-    if(json.data&&json.data.lat){rLat=json.data.lat;rLng=json.data.lng;}
-  }catch(e){console.warn('좌표 조회 실패',e);}
-}
-document.addEventListener('click',e=>{if(!e.target.closest('.addr-search-wrap'))rAddrDrop.classList.remove('show');});
-
-// 스텝 이동
 function goStep(n){
   if(n===3)buildReqSummary();
   document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');
   document.querySelectorAll('.step-item').forEach(s=>{
-    const sn=+s.dataset.step;
-    s.classList.toggle('active',sn===n);
-    s.classList.toggle('done',sn<n);
+    const sn=+s.dataset.step;s.classList.toggle('active',sn===n);s.classList.toggle('done',sn<n);
   });
   window.scrollTo({top:300,behavior:'smooth'});
 }
 
-// 요약
 const FACILITY_LABELS={building:'건물·시설',factory:'공장·산업시설',construction:'건설현장',apartment:'아파트·공동주택',other:'기타'};
 const URGENCY_LABELS={urgent:'긴급 (즉시 처리)',normal:'보통 (며칠 내)',flexible:'여유있음 (일정 조율)'};
 function buildReqSummary(){
@@ -393,19 +285,16 @@ function buildReqSummary(){
   const facility=FACILITY_LABELS[document.getElementById('r-facility').value]||'-';
   const catName=CATS.find(c=>c.code===rCat)?.name||'-';
   const desc=document.getElementById('r-desc').value||'-';
-  const urgencyLabel=URGENCY_LABELS[rUrgency]||'-';
-  const budgetLabel=BUDGET_LABELS[rBudget]||'-';
   document.getElementById('req-summary-area').innerHTML=`
     <div class="summary-box"><h6>업체 / 현장</h6><p>${co} · ${facility}</p></div>
     <div class="summary-box"><h6>현장 주소</h6><p>${addr}</p></div>
     <div class="summary-box"><h6>담당자</h6><p>${name} · ${phone}</p></div>
     <div class="summary-box"><h6>분야</h6><p>${catName}</p></div>
     <div class="summary-box"><h6>증상 / 상황</h6><p style="white-space:pre-wrap;font-weight:400;font-size:.88rem;">${desc}</p></div>
-    <div class="summary-box"><h6>긴급도</h6><p>${urgencyLabel}</p></div>
-    <div class="summary-box"><h6>예산</h6><p>${budgetLabel}</p></div>`;
+    <div class="summary-box"><h6>긴급도</h6><p>${URGENCY_LABELS[rUrgency]||'-'}</p></div>
+    <div class="summary-box"><h6>예산</h6><p>${BUDGET_LABELS[rBudget]||'-'}</p></div>`;
 }
 
-// 요청 접수
 async function submitRequest(){
   const company=document.getElementById('r-company').value.trim();
   const addr=document.getElementById('r-addr').value.trim();
@@ -418,48 +307,27 @@ async function submitRequest(){
   if(!rCat){showReqError('분야를 선택해주세요.');return;}
   if(!desc){showReqError('증상/상황 설명을 입력해주세요.');return;}
   if(!rUrgency){showReqError('긴급도를 선택해주세요.');return;}
-
   const body={
-    company_name:company,
-    address:addr,
-    latitude:rLat,
-    longitude:rLng,
-    contact_name:name,
-    contact_phone:phone,
+    company_name:company,address:addr,latitude:rLat,longitude:rLng,
+    contact_name:name,contact_phone:phone,
     contact_email:document.getElementById('r-email').value.trim(),
-    facility_type:facility,
-    category_code:rCat,
-    description:desc,
-    urgency:rUrgency,
-    budget:rBudget
+    facility_type:facility,category_code:rCat,description:desc,urgency:rUrgency,budget:rBudget
   };
-
   const btn=document.getElementById('btn-req-submit');
-  btn.disabled=true;
-  btn.textContent='접수 중...';
-
+  btn.disabled=true;btn.textContent='접수 중...';
   try{
-    const res=await fetch(`${API}/matching/requests`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    // TODO: API 미구현 시 console.log 처리
+    const res=await fetch(`${API}/matching/requests`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
     if(!res.ok){
       const errJson=await res.json().catch(()=>({}));
-      // 404 등 아직 API 없을 경우 graceful 처리
       if(res.status===404||res.status===405||res.status===501){
-        console.log('TODO: /matching/requests API 미구현. 요청 데이터:', JSON.stringify(body,null,2));
-        // 미구현이어도 완료 페이지 보여줌
-        showComplete();
-        return;
+        console.log('TODO: /matching/requests API 미구현.',JSON.stringify(body,null,2));
+        showComplete();return;
       }
       throw new Error(errJson.message||`HTTP ${res.status}`);
     }
     showComplete();
   }catch(e){
-    // 네트워크 오류 등 — 미구현 API일 가능성, console 로그 후 완료
-    console.log('TODO: /matching/requests API 오류. 로컬 처리:', e.message, JSON.stringify(body,null,2));
+    console.log('TODO: /matching/requests 오류 처리:',e.message,JSON.stringify(body,null,2));
     showComplete();
   }
 }
@@ -470,10 +338,51 @@ function showComplete(){
 }
 function showReqError(msg){
   const el=document.getElementById('req-error');
-  el.textContent=msg;
-  el.style.display='block';
+  el.textContent=msg;el.style.display='block';
   setTimeout(()=>el.style.display='none',5000);
 }
+
+// ── juso API fix: /juso/search 단일 객체 반환 구조 대응 ──
+// API 실제 응답: { data: { road_address, zip_code, raw: { admCd, rnMgtSn, ... } } }
+(function(){
+  var inp=document.getElementById('r-addr'),drp=document.getElementById('r-addr-dropdown');
+  if(!inp||!drp)return;
+  var ni=inp.cloneNode(true);inp.parentNode.replaceChild(ni,inp);
+  var _t=null;
+  ni.addEventListener('input',function(){
+    clearTimeout(_t);var v=this.value.trim();
+    if(v.length<2){drp.classList.remove('show');return;}
+    _t=setTimeout(function(){_fs(v);},300);
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.addr-search-wrap'))drp.classList.remove('show');});
+  async function _fs(q){
+    drp.innerHTML='<div class="addr-loading">검색 중...</div>';drp.classList.add('show');
+    try{
+      var r=await fetch(API+'/juso/search?query='+encodeURIComponent(q));
+      var j=await r.json();var d=j.data;
+      if(!d||!d.road_address){drp.innerHTML='<div class="addr-loading">검색 결과가 없습니다.</div>';return;}
+      var bNm=d.raw&&d.raw.bdNm?' ('+d.raw.bdNm+')':'';
+      drp.innerHTML='<div class="addr-opt"><div class="addr-main">'+d.road_address+bNm+'</div><div class="addr-zip">우편번호 '+(d.zip_code||'')+'</div></div>';
+      drp.querySelector('.addr-opt').addEventListener('click',function(){_fp(d);});
+    }catch(e){drp.innerHTML='<div class="addr-loading">오류가 발생했습니다.</div>';}
+  }
+  async function _fp(d){
+    ni.value=d.road_address;drp.classList.remove('show');
+    var r=d.raw||{};
+    document.getElementById('r-addr-adm-cd').value=r.admCd||'';
+    document.getElementById('r-addr-rn-mgt-sn').value=r.rnMgtSn||'';
+    document.getElementById('r-addr-udrt-yn').value=r.udrtYn||'0';
+    document.getElementById('r-addr-buld-mnnm').value=r.lnbrMnnm||r.buldMnnm||'';
+    document.getElementById('r-addr-buld-slno').value=r.buldSlno||'0';
+    if(d.lat&&d.lat!==0){window.rLat=d.lat;window.rLng=d.lng;return;}
+    try{
+      var qs=new URLSearchParams({admCd:r.admCd,rnMgtSn:r.rnMgtSn,udrtYn:r.udrtYn||'0',buldMnnm:r.lnbrMnnm||'',buldSlno:r.buldSlno||'0'});
+      var r2=await fetch(API+'/juso/coord?'+qs);
+      var j2=await r2.json();
+      if(j2.data&&j2.data.lat&&j2.data.lat!==0){window.rLat=j2.data.lat;window.rLng=j2.data.lng;}
+    }catch(e){}
+  }
+})();
 </script>
 </body>
 </html>
