@@ -1,7 +1,7 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.1.0 (2026-04-14): 서비스 드롭다운에 "연결 서비스 사전등록" 추가
+ * v2.1.1 (2026-04-15): 회사소개 하위 메뉴 '특허출원' → 'TAI 기술력' 명칭 변경
  *
  * 경로 자동 감지:
  *   루트 페이지 (nexas/*.html)       → base = ''
@@ -23,7 +23,7 @@
 
     /* 모바일 토글 버튼 */
     '      <div class="responsive-mobile-menu">',
-    '        <button class="menu toggle-btn d-block d-lg-none" data-target="#tai_main_menu" aria-expanded="false" aria-label="\uba54\ub274">',
+    '        <button class="menu toggle-btn d-block d-lg-none" data-target="#tai_main_menu" aria-expanded="false" aria-label="메뉴">',
     '          <span class="icon-left"></span><span class="icon-right"></span>',
     '        </button>',
     '      </div>',
@@ -73,7 +73,7 @@
     '            <a href="#">회사소개</a>',
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'about.html">회사소개</a></li>',
-    '              <li><a href="' + base + 'patents.html">특허출원</a></li>',
+    '              <li><a href="' + base + 'patents.html">TAI 기술력</a></li>',
     '              <li><a href="' + base + 'faq.html">FAQ</a></li>',
     '              <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
     '            </ul>',
