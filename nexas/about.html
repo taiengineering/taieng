@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
+  *{box-sizing:border-box}
+  html,body{overflow-x:hidden;margin:0;padding:0}
   body{font-family:'Noto Sans KR',sans-serif}
   .about-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:120px 0 90px;text-align:center;position:relative;overflow:hidden}
   .about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 30%,rgba(6,182,212,.1) 0%,transparent 65%);pointer-events:none}
@@ -50,7 +52,7 @@
   .mid-cta p{color:rgba(255,255,255,.75);font-size:.92rem;margin-bottom:24px}
   .mid-cta .btn-mid{background:#fff;color:#0e7490;font-weight:800;font-size:.95rem;padding:13px 32px;border-radius:10px;border:none;text-decoration:none;display:inline-block;transition:transform .15s}
   .mid-cta .btn-mid:hover{transform:translateY(-2px);color:#0e7490}
-  .engine-section{background:#f8fafc;padding:80px 0}
+  .engine-section{background:#f8fafc;padding:80px 0;overflow:hidden}
   .engine-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-top:36px}
   .engine-step{background:#fff;border:2px solid #e2e8f0;border-radius:16px;padding:24px 20px;text-align:center;width:200px;transition:border-color .2s}
   .engine-step:hover{border-color:#0891b2}
@@ -70,13 +72,7 @@
   .num-item .ni-num{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:900;color:#22d3ee;line-height:1;margin-bottom:8px}
   .num-item .ni-label{font-size:.85rem;color:rgba(255,255,255,.6);font-weight:500}
   .num-item .ni-detail{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:4px}
-  .patent-section{background:#f8fafc;padding:80px 0}
-  .patent-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .patent-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;text-align:center;transition:border-color .15s}
-  .patent-card:hover{border-color:#0891b2}
-  .patent-card .pk-icon{font-size:1.8rem;margin-bottom:8px}
-  .patent-card .pk-label{font-size:.78rem;font-weight:700;color:#475569}
-  .patent-card .pk-desc{font-size:.68rem;color:#94a3b8;margin-top:4px}
+  .patent-section{background:#f8fafc;padding:72px 0;text-align:center}
   .contact-section{background:#fff;padding:80px 0}
   .contact-item{display:flex;align-items:center;gap:14px;padding:18px 20px;background:#f8fafc;border-radius:12px;margin-bottom:12px}
   .contact-item .ci-icon{font-size:1.4rem;flex-shrink:0;width:36px;text-align:center}
@@ -85,7 +81,6 @@
   .about-cta{background:linear-gradient(135deg,#0f172a,#1e293b);padding:72px 0;text-align:center}
   .about-cta h2{color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:12px}
   .about-cta p{color:rgba(255,255,255,.65);margin-bottom:28px}
-  @media(max-width:768px){.patent-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body class="sc5">
@@ -184,23 +179,12 @@
   <div class="col-6 col-md-3"><div class="num-item"><div class="ni-num">290<span style="font-size:1.2rem;">+</span></div><div class="ni-label">파생 점검</div><div class="ni-detail">시설 조건별 의무 자동 도출</div></div></div>
 </div></div></section>
 
-<section class="patent-section"><div class="container"><div class="row align-items-center g-5">
-  <div class="col-lg-6">
-    <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:#0d1b2a;margin-bottom:16px;">시스템 곳곳에<br>특허를 낼 만큼 혁신적입니다</h2>
-    <p style="color:#64748b;font-size:.92rem;line-height:1.7;margin-bottom:28px;">중대재해처벌법 대응 최적화 기술부터, 현장 위험 예측 시스템까지.<br>산업안전 분야에서 유례없는 혁신적 프로세스를 특허로 보호하고 있습니다.</p>
-    <a href="patents.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">TAI 기술력 상세 보기 →</a>
-  </div>
-  <div class="col-lg-6"><div class="patent-grid">
-    <div class="patent-card"><div class="pk-icon">⚖️</div><div class="pk-label">법령 자동 판정</div><div class="pk-desc">조건코드 기반 의무 도출</div></div>
-    <div class="patent-card"><div class="pk-icon">👥</div><div class="pk-label">분산형 안전관리</div><div class="pk-desc">전 작업자 참여 구조</div></div>
-    <div class="patent-card"><div class="pk-icon">📊</div><div class="pk-label">위험 예측</div><div class="pk-desc">누적 데이터 기반 분석</div></div>
-    <div class="patent-card"><div class="pk-icon">🌤️</div><div class="pk-label">환경 기반 판단</div><div class="pk-desc">기상·현장 조건 연동</div></div>
-    <div class="patent-card"><div class="pk-icon">📋</div><div class="pk-label">문서 자동 생성</div><div class="pk-desc">안전문서·자동신고</div></div>
-    <div class="patent-card"><div class="pk-icon">🔗</div><div class="pk-label">전문가 매칭</div><div class="pk-desc">증상 기반 업체 연결</div></div>
-    <div class="patent-card"><div class="pk-icon">🔍</div><div class="pk-label">분산입력 위험판단</div><div class="pk-desc">현장 데이터 종합 분석</div></div>
-    <div class="patent-card"><div class="pk-icon">🏷️</div><div class="pk-label">TAI 상표</div><div class="pk-desc">브랜드 보호</div></div>
-  </div></div>
-</div></div></section>
+<!-- Patent: 가운데 정렬 텍스트 + 버튼만 -->
+<section class="patent-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-8 text-center">
+  <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:#0d1b2a;margin-bottom:16px;">시스템 곳곳에<br>특허를 낼 만큼 혁신적입니다</h2>
+  <p style="color:#64748b;font-size:.92rem;line-height:1.7;margin-bottom:32px;">중대재해처벌법 대응 최적화 기술부터, 현장 위험 예측 시스템까지.<br>산업안전 분야에서 유례없는 혁신적 프로세스를 특허로 보호하고 있습니다.</p>
+  <a href="patents.html" class="btn btn-base" style="font-size:.95rem;padding:13px 32px;">TAI 기술력 보러가기 →</a>
+</div></div></div></section>
 
 <section class="contact-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-6">
   <h2 style="font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;color:#0d1b2a;margin-bottom:28px;text-align:center;">연락처</h2>
