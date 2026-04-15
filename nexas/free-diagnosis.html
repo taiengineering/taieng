@@ -55,8 +55,7 @@
   .sector-card .sc-icon{font-size:2.4rem;margin-bottom:10px;}
   .sector-card .sc-name{font-size:.96rem;font-weight:900;color:#0f172a;margin-bottom:4px;}
   .sector-card .sc-desc{font-size:.76rem;color:#6b7280;line-height:1.4;margin-bottom:10px;}
-  .sector-card .sc-price{font-size:.76rem;font-weight:700;color:#c62828;}
-  .sector-card .sc-free{display:inline-block;background:#dcfce7;color:#166534;border-radius:4px;font-size:.65rem;font-weight:800;padding:2px 6px;margin-right:4px;}
+  .sector-card .sc-free{display:inline-block;background:#dcfce7;color:#166534;border-radius:4px;font-size:.65rem;font-weight:800;padding:2px 6px;}
 
   /* ── 동적 폼 ── */
   .form-group-section{margin-bottom:28px;}
@@ -192,25 +191,25 @@
           <div class="sc-icon">🏠</div>
           <div class="sc-name">소형건물</div>
           <div class="sc-desc">5,000㎡ 미만 건물<br>사무실, 상가, 소규모 시설</div>
-          <div class="sc-price"><span class="sc-free">무료</span>유료 99,000원</div>
+          <div><span class="sc-free">무료</span></div>
         </div>
         <div class="sector-card" onclick="selectSector('BUILDING_LARGE',this)">
           <div class="sc-icon">🏢</div>
           <div class="sc-name">대형건물</div>
           <div class="sc-desc">5,000㎡ 이상 건물<br>복합건물, 대형 시설</div>
-          <div class="sc-price"><span class="sc-free">무료</span>유료 249,000원</div>
+          <div><span class="sc-free">무료</span></div>
         </div>
         <div class="sector-card" onclick="selectSector('INDUSTRY',this)">
           <div class="sc-icon">🏭</div>
           <div class="sc-name">제조·산업</div>
           <div class="sc-desc">공장, 창고, 제조시설<br>산업안전법 적용</div>
-          <div class="sc-price"><span class="sc-free">무료</span>유료 79,000원~</div>
+          <div><span class="sc-free">무료</span></div>
         </div>
         <div class="sector-card" onclick="selectSector('CONSTRUCTION',this)">
           <div class="sc-icon">🏗️</div>
           <div class="sc-name">건설현장</div>
           <div class="sc-desc">신축·리모델링·토목<br>건설 공사 현장</div>
-          <div class="sc-price"><span class="sc-free">무료</span>유료 199,000원</div>
+          <div><span class="sc-free">무료</span></div>
         </div>
       </div>
       <button class="btn-primary-tai" onclick="goStep(2)">무료 진단 시작 →</button>
