@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서비스 요청 | TAI Fix</title>
-  <meta name="description" content="TAI Fix에 전문 업체를 요청하세요. 증상을 입력하면 적합한 업체를 매칭해드립니다.">
+  <title>전문가 매칭 | TAI Fix</title>
+  <meta name="description" content="증상을 말씀해주세요. TAI 전문가가 적합한 업체를 매칭해드립니다.">
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
@@ -11,71 +11,192 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  body{font-family:'Noto Sans KR',sans-serif}
-  .req-hero{background:linear-gradient(135deg,#0d1b2a,#1a3a5c);padding:100px 0 60px;text-align:center}
-  .req-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;margin-bottom:12px}
-  .req-hero p{color:rgba(255,255,255,.65);font-size:.95rem;max-width:480px;margin:0 auto}
-  .step-bar{display:flex;gap:0;margin:0 auto 40px;max-width:500px}
-  .step-item{flex:1;text-align:center;position:relative;padding-top:36px}
-  .step-item::before{content:'';position:absolute;top:12px;left:0;right:0;height:3px;background:#e2e8f0}
-  .step-item:first-child::before{left:50%}
-  .step-item:last-child::before{right:50%}
-  .step-dot{width:26px;height:26px;border-radius:50%;background:#e2e8f0;color:#94a3b8;display:inline-flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:1;transition:.2s}
-  .step-item.active .step-dot{background:#0d1b2a;color:#fff}
-  .step-item.done .step-dot{background:#16a34a;color:#fff}
-  .step-label{font-size:.78rem;color:#94a3b8;font-weight:600;margin-top:4px}
-  .step-item.active .step-label{color:#0d1b2a;font-weight:800}
-  .form-wrap{max-width:760px;margin:0 auto;padding:0 20px 60px}
-  .form-section{display:none}
-  .form-section.active{display:block}
-  .sec-title{font-size:1.3rem;font-weight:900;color:#0d1b2a;margin-bottom:6px}
-  .sec-desc{font-size:.88rem;color:#64748b;margin-bottom:24px}
-  .form-label{font-weight:700;font-size:.88rem;color:#334155}
-  .form-control,.form-select{border-radius:12px;padding:11px 14px;border:1.5px solid #e2e8f0;font-size:.9rem}
-  .form-control:focus,.form-select:focus{border-color:#0d1b2a;box-shadow:0 0 0 3px rgba(13,27,42,.08)}
-  .addr-search-wrap{position:relative}
-  .addr-search-wrap input{padding-left:40px}
-  .addr-search-wrap .fa-map-marker-alt{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;z-index:1}
-  .addr-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;max-height:240px;overflow-y:auto;z-index:20;display:none;box-shadow:0 8px 24px rgba(0,0,0,.1);margin-top:4px}
-  .addr-dropdown.show{display:block}
-  .addr-opt{padding:10px 14px;cursor:pointer;font-size:.88rem;border-bottom:1px solid #f1f5f9}
-  .addr-opt:last-child{border-bottom:none}
-  .addr-opt:hover{background:#f1f5f9}
-  .addr-opt .addr-main{font-weight:700;color:#0d1b2a}
-  .addr-opt .addr-zip{font-size:.75rem;color:#94a3b8;margin-top:2px}
-  .addr-loading{padding:12px 14px;color:#94a3b8;font-size:.85rem;text-align:center}
-  .cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-  .cat-tab{padding:8px 16px;border-radius:999px;border:1.5px solid #e2e8f0;background:#fff;font-size:.85rem;font-weight:700;cursor:pointer;transition:.15s}
-  .cat-tab.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
-  .urgency-grid{display:flex;gap:12px;flex-wrap:wrap}
-  .urgency-card{flex:1;min-width:120px;padding:16px 12px;border-radius:14px;border:2px solid #e2e8f0;cursor:pointer;text-align:center;transition:.15s}
-  .urgency-card:hover{border-color:#94a3b8}
-  .urgency-card.selected{border-color:#0d1b2a;background:#f8fafc}
-  .urgency-card .ug-icon{font-size:1.6rem;margin-bottom:6px}
-  .urgency-card .ug-name{font-weight:800;font-size:.9rem;color:#0d1b2a}
-  .urgency-card .ug-desc{font-size:.75rem;color:#94a3b8;margin-top:2px}
-  .budget-opts{display:flex;flex-wrap:wrap;gap:8px}
-  .budget-chip{padding:9px 18px;border-radius:999px;border:1.5px solid #e2e8f0;font-size:.88rem;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
-  .budget-chip.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a}
-  .photo-upload-area{border:2px dashed #e2e8f0;border-radius:14px;padding:24px;text-align:center;cursor:pointer;transition:.15s}
-  .photo-upload-area:hover{border-color:#94a3b8;background:#f8fafc}
-  .photo-preview{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .photo-thumb{width:70px;height:70px;border-radius:10px;object-fit:cover;border:1.5px solid #e2e8f0}
-  .summary-box{background:#f8fafc;border-radius:14px;padding:20px;margin-bottom:14px}
-  .summary-box h6{font-size:.82rem;color:#64748b;margin-bottom:6px}
-  .summary-box p{font-size:.92rem;font-weight:700;color:#0d1b2a;margin:0}
-  .btn-nav{display:flex;justify-content:space-between;margin-top:32px;gap:12px}
-  .btn-prev,.btn-next,.btn-submit{padding:13px 32px;border-radius:14px;font-size:.95rem;font-weight:800;border:none;cursor:pointer;transition:.15s}
-  .btn-prev{background:#f1f5f9;color:#334155}
-  .btn-next{background:#0d1b2a;color:#fff;margin-left:auto}
-  .btn-submit{background:#dc2626;color:#fff;margin-left:auto}
-  .complete-page{display:none;text-align:center;padding:60px 20px}
-  .complete-page .check-icon{font-size:5rem;margin-bottom:24px}
-  .complete-page h2{font-size:1.8rem;font-weight:900;color:#0d1b2a;margin-bottom:12px}
-  .complete-page .sub{color:#64748b;font-size:.95rem;line-height:1.7;margin-bottom:20px}
-  .complete-page .info-box{background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:14px;padding:20px;max-width:420px;margin:0 auto 28px;text-align:left;font-size:.9rem;color:#1d4ed8;line-height:1.7}
-  .complete-page .eta{font-size:.85rem;color:#94a3b8;margin-bottom:28px}
-  .error-msg{background:#fef2f2;border:1.5px solid #fecaca;border-radius:10px;padding:12px 16px;color:#dc2626;font-size:.88rem;margin-top:12px;display:none}
+  body { font-family: 'Noto Sans KR', sans-serif; background: #f0f4f8; }
+
+  /* ── 채팅 래퍼 ── */
+  .chat-page { max-width: 800px; margin: 0 auto; padding: 32px 16px 80px; }
+
+  .chat-header {
+    background: linear-gradient(135deg, #0d1b2a, #1a3a5c);
+    border-radius: 20px 20px 0 0;
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .chat-header .avatar {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: #378add; display: flex; align-items: center;
+    justify-content: center; font-size: 1.3rem; font-weight: 900;
+    color: #fff; flex-shrink: 0;
+  }
+  .chat-header .info h5 { color: #fff; font-weight: 900; font-size: 1rem; margin: 0; }
+  .chat-header .info p  { color: rgba(255,255,255,.6); font-size: .78rem; margin: 2px 0 0; }
+  .chat-header .badge-turn {
+    margin-left: auto; background: rgba(255,255,255,.15);
+    border-radius: 999px; padding: 4px 12px;
+    font-size: .75rem; color: rgba(255,255,255,.85); font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ── 메시지 영역 ── */
+  .chat-body {
+    background: #fff;
+    min-height: 400px;
+    max-height: 520px;
+    overflow-y: auto;
+    padding: 24px 20px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+
+  .msg-row { display: flex; gap: 10px; align-items: flex-end; }
+  .msg-row.user { flex-direction: row-reverse; }
+
+  .msg-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #378add; display: flex; align-items: center;
+    justify-content: center; font-size: .9rem; font-weight: 900;
+    color: #fff; flex-shrink: 0;
+  }
+
+  .bubble {
+    max-width: 72%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: .9rem; line-height: 1.6;
+  }
+  .bubble.expert {
+    background: #f1f5f9; color: #0f172a;
+    border-bottom-left-radius: 4px;
+  }
+  .bubble.user {
+    background: #378add; color: #fff;
+    border-bottom-right-radius: 4px;
+  }
+  .bubble.user .msg-time { color: rgba(255,255,255,.65); }
+  .msg-time { font-size: .68rem; color: #94a3b8; margin-top: 4px; text-align: right; }
+
+  /* 타이핑 인디케이터 */
+  .typing-indicator {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px;
+    background: #f1f5f9; border-radius: 18px; border-bottom-left-radius: 4px;
+    font-size: .82rem; color: #64748b; width: fit-content;
+  }
+  .typing-dots { display: flex; gap: 3px; }
+  .typing-dots span {
+    width: 6px; height: 6px; border-radius: 50%; background: #94a3b8;
+    animation: bounce 1.2s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: .2s; }
+  .typing-dots span:nth-child(3) { animation-delay: .4s; }
+  @keyframes bounce {
+    0%,80%,100% { transform: translateY(0); }
+    40%          { transform: translateY(-6px); }
+  }
+
+  /* ── 입력창 ── */
+  .chat-input-bar {
+    background: #fff;
+    border-top: 1px solid #e8eaed;
+    border-radius: 0 0 20px 20px;
+    padding: 14px 16px;
+    display: flex; gap: 10px; align-items: flex-end;
+  }
+  .chat-input-bar textarea {
+    flex: 1; border: 1.5px solid #e8eaed; border-radius: 14px;
+    padding: 11px 14px; font-size: .9rem; resize: none;
+    font-family: inherit; line-height: 1.5; max-height: 120px;
+    outline: none; transition: border-color .15s;
+  }
+  .chat-input-bar textarea:focus { border-color: #378add; }
+  .chat-input-bar textarea::placeholder { color: #94a3b8; }
+  .btn-send {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #378add; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: background .15s;
+  }
+  .btn-send:hover { background: #2563aa; }
+  .btn-send:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .btn-send svg { width: 20px; height: 20px; fill: #fff; }
+
+  /* ── 결과 카드 (3턴 후) ── */
+  .result-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-top: 20px;
+    border: 1px solid #e8eaed;
+    display: none;
+  }
+  .result-section.show { display: block; }
+  .result-title {
+    font-size: 1rem; font-weight: 900; color: #0d1b2a;
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+  .result-item {
+    border: 1px solid #e8eaed; border-radius: 12px; padding: 14px 16px;
+    margin-bottom: 10px; position: relative;
+  }
+  .result-item .ri-label {
+    font-size: .72rem; font-weight: 700; color: #64748b;
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;
+  }
+  .result-item .ri-value {
+    font-size: .9rem; font-weight: 700; color: #0d1b2a;
+  }
+  /* 블러 */
+  .result-item.blurred .ri-value {
+    filter: blur(5px);
+    user-select: none;
+    pointer-events: none;
+  }
+  .result-item.blurred::after {
+    content: '🔒';
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    font-size: 1rem;
+  }
+  .result-item.blurred .ri-label { color: #94a3b8; }
+
+  /* CTA 카드 */
+  .cta-card {
+    background: linear-gradient(135deg, #0d1b2a, #1a3a5c);
+    border-radius: 16px; padding: 24px; margin-top: 16px;
+    text-align: center;
+  }
+  .cta-card h5 { color: #fff; font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+  .cta-card p  { color: rgba(255,255,255,.7); font-size: .85rem; margin-bottom: 20px; line-height: 1.6; }
+  .cta-card .btn-cta {
+    background: #378add; color: #fff; font-weight: 800;
+    font-size: .95rem; padding: 13px 28px; border: none;
+    border-radius: 12px; cursor: pointer; transition: background .15s;
+    display: inline-block; text-decoration: none;
+  }
+  .cta-card .btn-cta:hover { background: #2563aa; color: #fff; }
+
+  /* 채팅 비활성 overlay */
+  .chat-disabled {
+    position: relative;
+  }
+  .chat-disabled::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,.6);
+    border-radius: 0 0 0 0;
+    pointer-events: all;
+  }
+
+  /* 오류 메시지 */
+  .chat-error {
+    background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: 10px; padding: 10px 14px;
+    font-size: .82rem; color: #dc2626; margin-top: 8px; display: none;
+  }
+  .chat-error.show { display: block; }
+
+  @media(max-width:600px) {
+    .chat-page { padding: 16px 8px 60px; }
+    .bubble { max-width: 85%; }
+  }
   </style>
 </head>
 <body class="sc5">
@@ -83,140 +204,48 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<section class="req-hero">
-  <div class="container">
-    <h1>서비스 요청</h1>
-    <p>증상을 입력하면 TAI가 적합한 전문 업체를 매칭해드립니다.</p>
-  </div>
-</section>
+<section style="background:#f0f4f8; padding:60px 0 0;">
+  <div class="chat-page">
 
-<section id="main-form-section" style="background:#fff;padding:40px 0 0">
-  <div class="step-bar">
-    <div class="step-item active" data-step="1"><span class="step-dot">1</span><div class="step-label">현장 정보</div></div>
-    <div class="step-item" data-step="2"><span class="step-dot">2</span><div class="step-label">상황 입력</div></div>
-    <div class="step-item" data-step="3"><span class="step-dot">3</span><div class="step-label">확인·접수</div></div>
-  </div>
-
-  <div class="form-wrap">
-    <div class="form-section active" id="step1">
-      <div class="sec-title">현장 정보</div>
-      <div class="sec-desc">서비스를 요청할 현장의 기본 정보를 입력해주세요.</div>
-      <div class="row g-3">
-        <div class="col-12">
-          <label class="form-label">업체명 / 회사명 <span style="color:#dc2626">*</span></label>
-          <input type="text" class="form-control" id="r-company" placeholder="예: 대성빌딩관리">
-        </div>
-        <div class="col-12">
-          <label class="form-label">현장 주소 <span style="color:#dc2626">*</span></label>
-          <div class="addr-search-wrap">
-            <i class="fas fa-map-marker-alt"></i>
-            <input type="text" class="form-control" id="r-addr" placeholder="도로명주소 검색 (2글자 이상 입력)" autocomplete="off">
-            <div class="addr-dropdown" id="r-addr-dropdown"></div>
-          </div>
-          <input type="hidden" id="r-addr-adm-cd">
-          <input type="hidden" id="r-addr-rn-mgt-sn">
-          <input type="hidden" id="r-addr-udrt-yn">
-          <input type="hidden" id="r-addr-buld-mnnm">
-          <input type="hidden" id="r-addr-buld-slno">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">담당자 이름 <span style="color:#dc2626">*</span></label>
-          <input type="text" class="form-control" id="r-name" placeholder="홍길동">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">연락처 <span style="color:#dc2626">*</span></label>
-          <input type="tel" class="form-control" id="r-phone" placeholder="010-1234-5678">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">이메일</label>
-          <input type="email" class="form-control" id="r-email" placeholder="contact@company.com (선택)">
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">시설 유형 <span style="color:#dc2626">*</span></label>
-          <select class="form-select" id="r-facility">
-            <option value="">선택해주세요</option>
-            <option value="building">건물·시설 (사무용, 상업용)</option>
-            <option value="factory">공장·산업시설</option>
-            <option value="construction">건설현장</option>
-            <option value="apartment">아파트·공동주택</option>
-            <option value="other">기타</option>
-          </select>
-        </div>
+    <!-- 채팅 헤더 -->
+    <div class="chat-header">
+      <div class="avatar">T</div>
+      <div class="info">
+        <h5>TAI 전문가</h5>
+        <p>산업안전 전문 업체 매칭 · 비회원 무료 체험</p>
       </div>
-      <div class="btn-nav"><div></div><button class="btn-next" onclick="goStep(2)">다음: 상황 입력 →</button></div>
+      <div class="badge-turn" id="turnBadge">0 / 3 턴</div>
     </div>
 
-    <div class="form-section" id="step2">
-      <div class="sec-title">상황 입력</div>
-      <div class="sec-desc">발생한 문제 또는 필요한 서비스를 선택하고 설명해주세요.</div>
-      <label class="form-label mb-2">분야 선택 <span style="color:#dc2626">*</span></label>
-      <div class="cat-tabs" id="req-cat-tabs"></div>
-      <div class="mb-3">
-        <label class="form-label">증상 / 상황 설명 <span style="color:#dc2626">*</span></label>
-        <textarea class="form-control" id="r-desc" rows="4" placeholder="예: 분전반에서 타는 냄새가 나고 차단기가 자꾸 내려갑니다. 3층 주방 인근입니다."></textarea>
-        <div style="text-align:right;font-size:.75rem;color:#94a3b8;margin-top:4px" id="r-desc-count">0 / 1000</div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">긴급도 <span style="color:#dc2626">*</span></label>
-        <div class="urgency-grid">
-          <div class="urgency-card" data-urgency="urgent" onclick="selectUrgency('urgent',this)">
-            <div class="ug-icon">🚨</div><div class="ug-name">긴급</div><div class="ug-desc">즉시 처리 필요</div>
-          </div>
-          <div class="urgency-card" data-urgency="normal" onclick="selectUrgency('normal',this)">
-            <div class="ug-icon">⏰</div><div class="ug-name">보통</div><div class="ug-desc">며칠 내 처리</div>
-          </div>
-          <div class="urgency-card" data-urgency="flexible" onclick="selectUrgency('flexible',this)">
-            <div class="ug-icon">📅</div><div class="ug-name">여유있음</div><div class="ug-desc">일정 조율 가능</div>
-          </div>
-        </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">사진 첨부 <small class="text-muted">(선택, 최대 5장)</small></label>
-        <div class="photo-upload-area" onclick="document.getElementById('r-photos').click()">
-          <i class="fas fa-camera" style="font-size:1.8rem;color:#94a3b8;margin-bottom:8px;"></i>
-          <p style="font-size:.88rem;color:#64748b;margin:0">사진을 추가하면 정확한 매칭에 도움이 됩니다</p>
-        </div>
-        <input type="file" id="r-photos" accept="image/*" multiple style="display:none" onchange="previewPhotos(this)">
-        <div class="photo-preview" id="r-photo-preview"></div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">예상 예산 <small class="text-muted">(선택)</small></label>
-        <div class="budget-opts" id="budget-opts">
-          <div class="budget-chip" data-budget="unknown" onclick="selectBudget('unknown',this)">모르겠음</div>
-          <div class="budget-chip" data-budget="under100" onclick="selectBudget('under100',this)">100만원 미만</div>
-          <div class="budget-chip" data-budget="100to500" onclick="selectBudget('100to500',this)">100~500만원</div>
-          <div class="budget-chip" data-budget="500to1000" onclick="selectBudget('500to1000',this)">500만~1천만원</div>
-          <div class="budget-chip" data-budget="over1000" onclick="selectBudget('over1000',this)">1천만원 이상</div>
-        </div>
-      </div>
-      <div class="btn-nav"><button class="btn-prev" onclick="goStep(1)">← 이전</button><button class="btn-next" onclick="goStep(3)">다음: 확인 →</button></div>
+    <!-- 메시지 목록 -->
+    <div class="chat-body" id="chatBody">
+      <!-- 메시지는 JS로 추가 -->
     </div>
 
-    <div class="form-section" id="step3">
-      <div class="sec-title">요청 확인</div>
-      <div class="sec-desc">입력하신 내용을 확인하고 요청을 접수하세요.</div>
-      <div id="req-summary-area"></div>
-      <div id="req-error" class="error-msg"></div>
-      <div class="btn-nav">
-        <button class="btn-prev" onclick="goStep(2)">← 수정하기</button>
-        <button class="btn-submit" id="btn-req-submit" onclick="submitRequest()">요청 접수하기</button>
+    <!-- 오류 -->
+    <div class="chat-error" id="chatError"></div>
+
+    <!-- 입력창 -->
+    <div class="chat-input-bar" id="inputBar">
+      <textarea id="msgInput" rows="1"
+        placeholder="상황을 편하게 말씀해주세요 (예: 분전반에서 타는 냄새가 나요)"
+        onInput="autoResize(this)" onkeydown="onEnterKey(event)"></textarea>
+      <button class="btn-send" id="btnSend" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+
+    <!-- 결과 카드 (3턴 후) -->
+    <div class="result-section" id="resultSection">
+      <div class="result-title">📋 대화 분석 결과</div>
+      <div id="resultItems"></div>
+      <div class="cta-card">
+        <h5>💡 대화 내용이 저장되어 있습니다.</h5>
+        <p>회원가입 후 바로 전문 업체 매칭이 시작됩니다.<br>블러 처리된 법령·과태료·업체 정보도 확인할 수 있습니다.</p>
+        <a href="log-in.html" class="btn-cta">무료 회원가입 후 전체 결과 보기 →</a>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="req-complete-section" style="background:#fff;padding:40px 0;display:none">
-  <div class="complete-page" style="display:block">
-    <div class="check-icon">📋</div>
-    <h2>요청이 접수되었습니다!</h2>
-    <p class="sub">TAI가 적합한 전문 업체를 매칭하고 있습니다.</p>
-    <div class="info-box">
-      ✅ 매칭된 업체의 견적서가 도착하면 알림을 보내드립니다.<br>
-      ✅ 예상 소요시간: 1~2영업일<br>
-      ✅ 등록하신 연락처로 업체 정보를 안내해 드립니다.
-    </div>
-    <p class="eta">문의사항이 있으시면 TAI 고객센터로 연락주세요.</p>
-    <a href="index.html" class="btn btn-base" style="padding:13px 36px;font-size:1rem;font-weight:800;">홈으로 돌아가기</a>
   </div>
 </section>
 
@@ -229,160 +258,219 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-const API='https://api.taieng.co.kr';
-let rLat=null,rLng=null,rUrgency=null,rBudget=null,rCat=null;
+const API = 'https://api.taieng.co.kr';
+const MAX_TURNS = 3;
 
-const CATS=[
-  {code:'ELEC',name:'전기',icon:'⚡'},{code:'FIRE',name:'소방',icon:'🔥'},
-  {code:'MECH',name:'기계설비',icon:'⚙️'},{code:'ARCH',name:'건축토목',icon:'🏗️'},
-  {code:'ENV',name:'환경',icon:'🌿'},{code:'SAFE',name:'안전관리',icon:'🛡️'},
-  {code:'CLEAN',name:'청소위생',icon:'🧹'},{code:'IT',name:'IT보안',icon:'💻'}
-];
-const BUDGET_LABELS={
-  unknown:'모르겠음',under100:'100만원 미만',
-  '100to500':'100~500만원','500to1000':'500만~1천만원',over1000:'1천만원 이상'
-};
+let sessionId = null;
+let turnCount  = 0;
+let isEnded    = false;
+let isSending  = false;
 
-function initCatTabs(){
-  document.getElementById('req-cat-tabs').innerHTML=
-    CATS.map(c=>`<div class="cat-tab" data-cat="${c.code}" onclick="selectCat('${c.code}',this)">${c.icon} ${c.name}</div>`).join('');
-}
-initCatTabs();
-
-function selectCat(code,el){rCat=code;document.querySelectorAll('.cat-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===code));}
-function selectUrgency(v,el){rUrgency=v;document.querySelectorAll('.urgency-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');}
-function selectBudget(v,el){rBudget=v;document.querySelectorAll('.budget-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');}
-
-function previewPhotos(input){
-  const prev=document.getElementById('r-photo-preview');prev.innerHTML='';
-  Array.from(input.files).slice(0,5).forEach(f=>{
-    prev.innerHTML+=`<img class="photo-thumb" src="${URL.createObjectURL(f)}" alt="preview">`;
-  });
-}
-
-document.getElementById('r-desc').addEventListener('input',function(){
-  document.getElementById('r-desc-count').textContent=`${this.value.length} / 1000`;
-  if(this.value.length>1000)this.value=this.value.slice(0,1000);
+// ── 초기화 ──
+window.addEventListener('DOMContentLoaded', () => {
+  startChat();
 });
 
-function goStep(n){
-  if(n===3)buildReqSummary();
-  document.querySelectorAll('.form-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('step'+n).classList.add('active');
-  document.querySelectorAll('.step-item').forEach(s=>{
-    const sn=+s.dataset.step;s.classList.toggle('active',sn===n);s.classList.toggle('done',sn<n);
-  });
-  window.scrollTo({top:300,behavior:'smooth'});
-}
+async function startChat() {
+  // 기존 세션 확인
+  const savedSession = sessionStorage.getItem('fix_session_id');
+  if (savedSession) {
+    sessionId = savedSession;
+    appendExpertMsg('안녕하세요! 이전 대화를 이어서 진행하겠습니다. 추가로 말씀하실 내용이 있으신가요?');
+    return;
+  }
 
-const FACILITY_LABELS={building:'건물·시설',factory:'공장·산업시설',construction:'건설현장',apartment:'아파트·공동주택',other:'기타'};
-const URGENCY_LABELS={urgent:'긴급 (즉시 처리)',normal:'보통 (며칠 내)',flexible:'여유있음 (일정 조율)'};
-function buildReqSummary(){
-  const co=document.getElementById('r-company').value||'-';
-  const addr=document.getElementById('r-addr').value||'-';
-  const name=document.getElementById('r-name').value||'-';
-  const phone=document.getElementById('r-phone').value||'-';
-  const facility=FACILITY_LABELS[document.getElementById('r-facility').value]||'-';
-  const catName=CATS.find(c=>c.code===rCat)?.name||'-';
-  const desc=document.getElementById('r-desc').value||'-';
-  document.getElementById('req-summary-area').innerHTML=`
-    <div class="summary-box"><h6>업체 / 현장</h6><p>${co} · ${facility}</p></div>
-    <div class="summary-box"><h6>현장 주소</h6><p>${addr}</p></div>
-    <div class="summary-box"><h6>담당자</h6><p>${name} · ${phone}</p></div>
-    <div class="summary-box"><h6>분야</h6><p>${catName}</p></div>
-    <div class="summary-box"><h6>증상 / 상황</h6><p style="white-space:pre-wrap;font-weight:400;font-size:.88rem;">${desc}</p></div>
-    <div class="summary-box"><h6>긴급도</h6><p>${URGENCY_LABELS[rUrgency]||'-'}</p></div>
-    <div class="summary-box"><h6>예산</h6><p>${BUDGET_LABELS[rBudget]||'-'}</p></div>`;
-}
-
-async function submitRequest(){
-  const company=document.getElementById('r-company').value.trim();
-  const addr=document.getElementById('r-addr').value.trim();
-  const name=document.getElementById('r-name').value.trim();
-  const phone=document.getElementById('r-phone').value.trim();
-  const facility=document.getElementById('r-facility').value;
-  const desc=document.getElementById('r-desc').value.trim();
-  if(!company||!addr||!name||!phone){showReqError('업체명, 주소, 담당자 이름, 연락처는 필수입니다.');return;}
-  if(!facility){showReqError('시설 유형을 선택해주세요.');return;}
-  if(!rCat){showReqError('분야를 선택해주세요.');return;}
-  if(!desc){showReqError('증상/상황 설명을 입력해주세요.');return;}
-  if(!rUrgency){showReqError('긴급도를 선택해주세요.');return;}
-  const body={
-    company_name:company,address:addr,latitude:rLat,longitude:rLng,
-    contact_name:name,contact_phone:phone,
-    contact_email:document.getElementById('r-email').value.trim(),
-    facility_type:facility,category_code:rCat,description:desc,urgency:rUrgency,budget:rBudget
-  };
-  const btn=document.getElementById('btn-req-submit');
-  btn.disabled=true;btn.textContent='접수 중...';
-  try{
-    const res=await fetch(`${API}/matching/requests`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!res.ok){
-      const errJson=await res.json().catch(()=>({}));
-      if(res.status===404||res.status===405||res.status===501){
-        console.log('TODO: /matching/requests API 미구현.',JSON.stringify(body,null,2));
-        showComplete();return;
-      }
-      throw new Error(errJson.message||`HTTP ${res.status}`);
+  try {
+    const res = await fetch(`${API}/fix/chat/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_type: 'GUEST' })
+    });
+    const json = await res.json();
+    if (json.session_id) {
+      sessionId = json.session_id;
+      sessionStorage.setItem('fix_session_id', sessionId);
+      appendExpertMsg(json.greeting_message || '안녕하세요! 저는 TAI 전문가입니다. 어떤 문제가 발생하셨나요? 편하게 말씀해주세요.');
+    } else {
+      throw new Error('session_id 없음');
     }
-    showComplete();
-  }catch(e){
-    console.log('TODO: /matching/requests 오류 처리:',e.message,JSON.stringify(body,null,2));
-    showComplete();
+  } catch(e) {
+    // API 미구현 — 기본 인사 메시지
+    sessionId = 'guest_' + Date.now();
+    sessionStorage.setItem('fix_session_id', sessionId);
+    appendExpertMsg('안녕하세요! 저는 TAI 전문가입니다. 어떤 문제가 발생하셨나요? 편하게 말씀해주세요. 😊');
   }
-}
-function showComplete(){
-  document.getElementById('main-form-section').style.display='none';
-  document.getElementById('req-complete-section').style.display='block';
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function showReqError(msg){
-  const el=document.getElementById('req-error');
-  el.textContent=msg;el.style.display='block';
-  setTimeout(()=>el.style.display='none',5000);
+  updateTurnBadge();
 }
 
-// ── juso API fix: /juso/search 단일 객체 반환 구조 대응 ──
-// API 실제 응답: { data: { road_address, zip_code, raw: { admCd, rnMgtSn, ... } } }
-(function(){
-  var inp=document.getElementById('r-addr'),drp=document.getElementById('r-addr-dropdown');
-  if(!inp||!drp)return;
-  var ni=inp.cloneNode(true);inp.parentNode.replaceChild(ni,inp);
-  var _t=null;
-  ni.addEventListener('input',function(){
-    clearTimeout(_t);var v=this.value.trim();
-    if(v.length<2){drp.classList.remove('show');return;}
-    _t=setTimeout(function(){_fs(v);},300);
-  });
-  document.addEventListener('click',function(e){if(!e.target.closest('.addr-search-wrap'))drp.classList.remove('show');});
-  async function _fs(q){
-    drp.innerHTML='<div class="addr-loading">검색 중...</div>';drp.classList.add('show');
-    try{
-      var r=await fetch(API+'/juso/search?query='+encodeURIComponent(q));
-      var j=await r.json();var d=j.data;
-      if(!d||!d.road_address){drp.innerHTML='<div class="addr-loading">검색 결과가 없습니다.</div>';return;}
-      var bNm=d.raw&&d.raw.bdNm?' ('+d.raw.bdNm+')':'';
-      drp.innerHTML='<div class="addr-opt"><div class="addr-main">'+d.road_address+bNm+'</div><div class="addr-zip">우편번호 '+(d.zip_code||'')+'</div></div>';
-      drp.querySelector('.addr-opt').addEventListener('click',function(){_fp(d);});
-    }catch(e){drp.innerHTML='<div class="addr-loading">오류가 발생했습니다.</div>';}
+// ── 메시지 전송 ──
+async function sendMessage() {
+  if (isEnded || isSending) return;
+  const input = document.getElementById('msgInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  input.value = '';
+  autoResize(input);
+  appendUserMsg(msg);
+  turnCount++;
+  updateTurnBadge();
+
+  // 3턴 도달
+  if (turnCount >= MAX_TURNS) {
+    isEnded = true;
+    disableInput();
   }
-  async function _fp(d){
-    ni.value=d.road_address;drp.classList.remove('show');
-    var r=d.raw||{};
-    document.getElementById('r-addr-adm-cd').value=r.admCd||'';
-    document.getElementById('r-addr-rn-mgt-sn').value=r.rnMgtSn||'';
-    document.getElementById('r-addr-udrt-yn').value=r.udrtYn||'0';
-    document.getElementById('r-addr-buld-mnnm').value=r.lnbrMnnm||r.buldMnnm||'';
-    document.getElementById('r-addr-buld-slno').value=r.buldSlno||'0';
-    if(d.lat&&d.lat!==0){window.rLat=d.lat;window.rLng=d.lng;return;}
-    try{
-      var qs=new URLSearchParams({admCd:r.admCd,rnMgtSn:r.rnMgtSn,udrtYn:r.udrtYn||'0',buldMnnm:r.lnbrMnnm||'',buldSlno:r.buldSlno||'0'});
-      var r2=await fetch(API+'/juso/coord?'+qs);
-      var j2=await r2.json();
-      if(j2.data&&j2.data.lat&&j2.data.lat!==0){window.rLat=j2.data.lat;window.rLng=j2.data.lng;}
-    }catch(e){}
+
+  isSending = true;
+  document.getElementById('btnSend').disabled = true;
+  showTyping();
+
+  try {
+    const res = await fetch(`${API}/fix/chat/message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sessionId, message: msg })
+    });
+    const json = await res.json();
+    hideTyping();
+
+    const reply = json.reply || json.data?.reply;
+    if (reply) {
+      appendExpertMsg(reply);
+    }
+
+    // API가 is_last_turn 반환하거나 로컬 카운트 초과 시 결과 표시
+    if (json.is_last_turn || json.data?.is_last_turn || isEnded) {
+      setTimeout(showResult, 600);
+    }
+  } catch(e) {
+    hideTyping();
+    // API 미구현 — 더미 응답
+    const dummies = [
+      '말씀해주신 상황을 분석하고 있습니다. 조금 더 자세히 설명해 주실 수 있으신가요? 어느 위치에서 발생했나요?',
+      '네, 파악했습니다. 마지막으로 언제부터 이 문제가 발생했는지 알려주시면 더 정확한 업체를 연결해드릴 수 있습니다.',
+      '감사합니다. 입력하신 내용을 바탕으로 적합한 전문 업체를 분석하겠습니다.'
+    ];
+    const dummyReply = dummies[Math.min(turnCount - 1, dummies.length - 1)];
+    appendExpertMsg(dummyReply);
+    if (isEnded) {
+      setTimeout(showResult, 600);
+    }
   }
-})();
+
+  isSending = false;
+  if (!isEnded) {
+    document.getElementById('btnSend').disabled = false;
+    document.getElementById('msgInput').focus();
+  }
+}
+
+// ── 결과 카드 표시 ──
+function showResult() {
+  const items = [
+    { label: '접수 의도',  value: '전문 업체 수선·보수 요청', blurred: false },
+    { label: '증상 요약',  value: '설비/시설 이상 증상 감지, 전문가 점검 필요', blurred: false },
+    { label: '관련 법령',  value: '산업안전보건법 제36조 위험성평가 의무, 안전관리규정 준수', blurred: true },
+    { label: '과태료 정보', value: '위반 시 500만원 이하 과태료 부과 가능', blurred: true },
+    { label: '매칭 가능 업체', value: '해당 지역 전문업체 3곳 매칭 가능', blurred: true },
+  ];
+  const el = document.getElementById('resultItems');
+  el.innerHTML = items.map(it => `
+    <div class="result-item${it.blurred ? ' blurred' : ''}">
+      <div class="ri-label">${it.label}</div>
+      <div class="ri-value">${it.value}</div>
+    </div>`).join('');
+  document.getElementById('resultSection').classList.add('show');
+  document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── DOM 헬퍼 ──
+function appendExpertMsg(text) {
+  const body = document.getElementById('chatBody');
+  const row = document.createElement('div');
+  row.className = 'msg-row';
+  row.innerHTML = `
+    <div class="msg-avatar">T</div>
+    <div>
+      <div class="bubble expert">${escHtml(text)}</div>
+      <div class="msg-time">${nowTime()}</div>
+    </div>`;
+  body.appendChild(row);
+  scrollBottom();
+}
+
+function appendUserMsg(text) {
+  const body = document.getElementById('chatBody');
+  const row = document.createElement('div');
+  row.className = 'msg-row user';
+  row.innerHTML = `
+    <div>
+      <div class="bubble user">${escHtml(text)}</div>
+      <div class="msg-time">${nowTime()}</div>
+    </div>`;
+  body.appendChild(row);
+  scrollBottom();
+}
+
+let typingEl = null;
+function showTyping() {
+  const body = document.getElementById('chatBody');
+  typingEl = document.createElement('div');
+  typingEl.className = 'msg-row';
+  typingEl.id = 'typingRow';
+  typingEl.innerHTML = `
+    <div class="msg-avatar">T</div>
+    <div class="typing-indicator">
+      TAI 전문가가 입력 중
+      <div class="typing-dots"><span></span><span></span><span></span></div>
+    </div>`;
+  body.appendChild(typingEl);
+  scrollBottom();
+}
+function hideTyping() {
+  const el = document.getElementById('typingRow');
+  if (el) el.remove();
+}
+
+function disableInput() {
+  const bar = document.getElementById('inputBar');
+  const inp = document.getElementById('msgInput');
+  const btn = document.getElementById('btnSend');
+  inp.disabled = true;
+  btn.disabled = true;
+  inp.placeholder = '대화가 완료되었습니다. 회원가입 후 매칭을 진행하세요.';
+}
+
+function updateTurnBadge() {
+  document.getElementById('turnBadge').textContent = `${turnCount} / ${MAX_TURNS} 턴`;
+}
+
+function scrollBottom() {
+  const body = document.getElementById('chatBody');
+  body.scrollTop = body.scrollHeight;
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function onEnterKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function nowTime() {
+  return new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+           .replace(/"/g,'&quot;').replace(/\n/g,'<br>');
+}
 </script>
 </body>
 </html>
