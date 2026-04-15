@@ -1,7 +1,7 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.1.1 (2026-04-15): 회사소개 하위 메뉴 '특허출원' → 'TAI 기술력' 명칭 변경
+ * v2.1.2 (2026-04-15): 탑메뉴 '회사소개' 드롭다운 제거 → '안전정보' 단일 링크
  *
  * 경로 자동 감지:
  *   루트 페이지 (nexas/*.html)       → base = ''
@@ -68,16 +68,8 @@
     /* 요금제 */
     '          <li><a href="' + base + 'pricing.html">요금제</a></li>',
 
-    /* 회사소개 ▼ */
-    '          <li class="menu-item-has-children">',
-    '            <a href="#">회사소개</a>',
-    '            <ul class="sub-menu">',
-    '              <li><a href="' + base + 'about.html">회사소개</a></li>',
-    '              <li><a href="' + base + 'patents.html">TAI 기술력</a></li>',
-    '              <li><a href="' + base + 'faq.html">FAQ</a></li>',
-    '              <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
-    '            </ul>',
-    '          </li>',
+    /* 안전정보 (단일 링크 — 드롭다운 없음) */
+    '          <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
 
     '        </ul>',
     '      </div>',
