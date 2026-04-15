@@ -12,8 +12,6 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  *{box-sizing:border-box}
-  html,body{overflow-x:hidden;margin:0;padding:0}
   body{font-family:'Noto Sans KR',sans-serif}
   .about-hero{background:linear-gradient(135deg,#050a14,#0d1b2e,#0a1628);padding:120px 0 90px;text-align:center;position:relative;overflow:hidden}
   .about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 30%,rgba(6,182,212,.1) 0%,transparent 65%);pointer-events:none}
@@ -73,14 +71,13 @@
   .num-item .ni-label{font-size:.85rem;color:rgba(255,255,255,.6);font-weight:500}
   .num-item .ni-detail{font-size:.72rem;color:rgba(255,255,255,.35);margin-top:4px}
   .patent-section{background:#f8fafc;padding:72px 0;text-align:center}
+  .btn-tech{display:inline-flex;align-items:center;justify-content:center;background:#0d1b2a;color:#fff;font-weight:700;font-size:.95rem;padding:14px 32px;border-radius:8px;border:none;text-decoration:none;line-height:1;transition:background .2s}
+  .btn-tech:hover{background:#162535;color:#fff}
   .contact-section{background:#fff;padding:80px 0}
   .contact-item{display:flex;align-items:center;gap:14px;padding:18px 20px;background:#f8fafc;border-radius:12px;margin-bottom:12px}
   .contact-item .ci-icon{font-size:1.4rem;flex-shrink:0;width:36px;text-align:center}
   .contact-item .ci-text strong{display:block;font-size:.78rem;color:#94a3b8;font-weight:700;margin-bottom:2px}
   .contact-item .ci-text span{font-size:.92rem;color:#0d1b2a;font-weight:700}
-  .about-cta{background:linear-gradient(135deg,#0f172a,#1e293b);padding:72px 0;text-align:center}
-  .about-cta h2{color:#fff;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;margin-bottom:12px}
-  .about-cta p{color:rgba(255,255,255,.65);margin-bottom:28px}
   </style>
 </head>
 <body class="sc5">
@@ -179,11 +176,10 @@
   <div class="col-6 col-md-3"><div class="num-item"><div class="ni-num">290<span style="font-size:1.2rem;">+</span></div><div class="ni-label">파생 점검</div><div class="ni-detail">시설 조건별 의무 자동 도출</div></div></div>
 </div></div></section>
 
-<!-- Patent: 가운데 정렬 텍스트 + 버튼만 -->
 <section class="patent-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-8 text-center">
   <h2 style="font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;color:#0d1b2a;margin-bottom:16px;">시스템 곳곳에<br>특허를 낼 만큼 혁신적입니다</h2>
   <p style="color:#64748b;font-size:.92rem;line-height:1.7;margin-bottom:32px;">중대재해처벌법 대응 최적화 기술부터, 현장 위험 예측 시스템까지.<br>산업안전 분야에서 유례없는 혁신적 프로세스를 특허로 보호하고 있습니다.</p>
-  <a href="patents.html" class="btn btn-base" style="font-size:.95rem;padding:13px 32px;">TAI 기술력 보러가기 →</a>
+  <a href="patents.html" class="btn-tech">TAI 기술력 보러가기 →</a>
 </div></div></div></section>
 
 <section class="contact-section"><div class="container"><div class="row justify-content-center"><div class="col-lg-6">
@@ -192,15 +188,6 @@
   <div class="contact-item"><div class="ci-icon">✉️</div><div class="ci-text"><strong>이메일</strong><span>tai@taieng.co.kr</span></div></div>
   <div class="contact-item"><div class="ci-icon">📍</div><div class="ci-text"><strong>주소</strong><span>서울특별시 강남구 테헤란로79길 6 JS타워 3층 브이1314</span></div></div>
 </div></div></div></section>
-
-<section class="about-cta"><div class="container">
-  <h2>법령 준수, 시스템이 대신합니다</h2>
-  <p>무료 법령진단으로 우리 사업장의 안전 의무를 확인하세요.</p>
-  <div class="d-flex gap-3 justify-content-center flex-wrap">
-    <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:13px 32px;font-weight:700;">무료 진단 시작</a>
-    <a href="contact.html" class="btn btn-border" style="font-size:1rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">도입 문의하기</a>
-  </div>
-</div></section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
