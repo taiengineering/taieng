@@ -57,6 +57,12 @@
     }
     .diff-list li:last-child { border-bottom: none; }
     .diff-list .di { color: var(--main-color, #7B55EA); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    /* 전문가 네트워크 이미지 */
+    .expert-network-img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(123, 85, 234, 0.15);
+    }
     /* 전문가 모집 배너 */
     .expert-banner {
       background: linear-gradient(135deg, #f0fdf4, #dcfce7);
@@ -242,13 +248,10 @@
           </div>
         </div>
         <div class="col-lg-5 offset-lg-1 align-self-center d-none d-lg-block">
-          <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe); border-radius:18px; padding:40px; text-align:center;">
-            <i class="fas fa-shield-alt" style="font-size:5rem; color:var(--main-color,#7B55EA); opacity:.3;"></i>
-            <div style="margin-top:20px;">
-              <p style="font-size:1.1rem; font-weight:800; color:#4c1d95; margin-bottom:6px;">TAI 전문가 네트워크</p>
-              <p style="color:#6d28d9; font-size:.92rem; margin:0;">산업안전기사·지도사 / 건설안전기사<br>소방안전관리자 / 전기안전전문가<br>위험성평가 전문가</p>
-            </div>
-          </div>
+          <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/consulting-expert-network.png"
+               alt="TAI 전문가 네트워크 — 산업안전기사, 건설안전기사, 소방안전관리자, 전기안전전문가, 위험성평가 전문가"
+               class="expert-network-img"
+               loading="lazy">
         </div>
       </div>
     </div>
