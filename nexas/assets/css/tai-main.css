@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.5 — 네비바 잘림 수정 + 스크롤바 색상 수정 */
+/* TAI 공통 스타일 v1.6 — 스크롤바 !important 강제 오버라이드 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -8,15 +8,17 @@
   --text: #1a1a2e;
   --sub: #5a6476;
   --border: #e8eaed;
+  --main-color: #0d1b2a !important;
+  --main-color-opacity: 13, 27, 42 !important;
 }
 body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; }
 a { text-decoration: none; }
 
-/* 스크롤바 — 템플릿 보라색 오버라이드 */
-.sc5::-webkit-scrollbar { width: 8px; height: 8px; }
-.sc5::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 0; }
-.sc5::-webkit-scrollbar-thumb { background: #3d4555; border-radius: 4px; box-shadow: none; }
-.sc5::-webkit-scrollbar-thumb:hover { background: #555d6e; }
+/* 스크롤바 — 보라색(#7e56ff) 강제 오버라이드 */
+.sc5::-webkit-scrollbar { width: 8px !important; height: 8px !important; }
+.sc5::-webkit-scrollbar-track { background: #1a1a2e !important; border-radius: 0 !important; }
+.sc5::-webkit-scrollbar-thumb { background: #3d4555 !important; border-radius: 4px !important; box-shadow: none !important; }
+.sc5::-webkit-scrollbar-thumb:hover { background: #555d6e !important; }
 html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
 
 /* GNB */
