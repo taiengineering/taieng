@@ -49,7 +49,7 @@
   .compare-banner span { color: #059669; }
 
   /* ── 탭 래퍼 ── */
-  .price-tab-wrap { background: #f8fafc; padding: 72px 0 100px; }
+  .price-tab-wrap { background: #f8fafc; padding: 72px 0 80px; }
 
   /* ── 메인 탭 ── */
   .price-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 52px; }
@@ -58,50 +58,19 @@
     border: 2px solid #e2e8f0; background: #fff; color: #64748b; cursor: pointer; transition: all .2s;
   }
   .price-tab-btn.active { background: #0891b2; border-color: #0891b2; color: #fff; }
-
-  /* ── 탭 패널 ── */
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  /* ── 섹터 서브탭 ── */
-  .sector-tabs { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; margin-bottom: 36px; }
-  .sector-btn {
-    padding: 7px 20px; border-radius: 999px; font-size: .85rem; font-weight: 700;
-    border: 1.5px solid #e2e8f0; background: #fff; color: #94a3b8; cursor: pointer; transition: all .2s;
-  }
-  .sector-btn.active { background: #0f172a; border-color: #0f172a; color: #fff; }
-  .diag-sector-panel { display: none; }
-  .diag-sector-panel.active { display: block; }
-
   /* ── 연간/월간 토글 ── */
-  .billing-toggle-wrap {
-    display: flex; justify-content: center; align-items: center;
-    gap: 12px; margin: 0 0 10px;
-  }
+  .billing-toggle-wrap { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 0 0 10px; }
   .billing-label { font-size: .9rem; font-weight: 700; color: #94a3b8; }
   .billing-label.active-label { color: #0d1b2a; }
-  .annual-badge {
-    display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .04em;
-    background: #0891b2; color: #fff; border-radius: 4px; padding: 2px 7px;
-    margin-left: 6px; vertical-align: middle;
-  }
-  .toggle-switch {
-    position: relative; width: 50px; height: 28px; border-radius: 999px;
-    background: #e2e8f0; border: none; cursor: pointer;
-    transition: background .2s; flex-shrink: 0;
-  }
+  .annual-badge { display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .04em; background: #0891b2; color: #fff; border-radius: 4px; padding: 2px 7px; margin-left: 6px; vertical-align: middle; }
+  .toggle-switch { position: relative; width: 50px; height: 28px; border-radius: 999px; background: #e2e8f0; border: none; cursor: pointer; transition: background .2s; flex-shrink: 0; }
   .toggle-switch.on { background: #0891b2; }
-  .toggle-switch::after {
-    content: ''; position: absolute; top: 4px; left: 4px;
-    width: 20px; height: 20px; border-radius: 50%;
-    background: #fff; transition: transform .2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,.15);
-  }
+  .toggle-switch::after { content: ''; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   .toggle-switch.on::after { transform: translateX(22px); }
-  .billing-note {
-    text-align: center; font-size: .78rem; font-weight: 700;
-    color: #94a3b8; margin-bottom: 36px;
-  }
+  .billing-note { text-align: center; font-size: .78rem; font-weight: 700; color: #94a3b8; margin-bottom: 36px; }
 
   /* ── SaaS 플랜 카드 ── */
   .plan-card {
@@ -121,29 +90,33 @@
   .plan-price-sub { font-size: .88rem; color: #64748b; margin-bottom: 4px; }
   .plan-vat { font-size: .75rem; color: #94a3b8; margin-bottom: 12px; min-height: 18px; }
   .plan-divider { border: none; border-top: 1px solid #f1f5f9; margin: 14px 0; }
-
-  /* 포함 인원/건수 요약 박스 */
-  .plan-quota-box {
-    background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px;
-    padding: 12px 14px; margin-bottom: 16px;
-  }
-  .plan-quota-box .q-row {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: .82rem; margin-bottom: 5px;
-  }
+  .plan-quota-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; }
+  .plan-quota-box .q-row { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; margin-bottom: 5px; }
   .plan-quota-box .q-row:last-child { margin-bottom: 0; }
   .plan-quota-box .q-label { color: #475569; }
   .plan-quota-box .q-val { font-weight: 700; color: #0369a1; }
   .plan-quota-box .q-over { font-size: .72rem; color: #64748b; margin-top: 1px; text-align: right; }
-
   .plan-features { list-style: none; padding: 0; margin: 0 0 22px; }
-  .plan-features li {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: .85rem; color: #475569; margin-bottom: 8px; line-height: 1.5;
-  }
+  .plan-features li { display: flex; align-items: flex-start; gap: 8px; font-size: .85rem; color: #475569; margin-bottom: 8px; line-height: 1.5; }
   .plan-features li::before { content: '✓'; color: #0891b2; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
   .plan-features.ent-feat li::before { color: #7c3aed; }
   .plan-enterprise-price { font-size: 1.6rem; font-weight: 900; color: #7c3aed; margin-bottom: 8px; }
+
+  /* ── 법령진단 드롭다운 ── */
+  .diag-type-select-wrap {
+    display: flex; justify-content: center; margin-bottom: 36px;
+  }
+  .diag-type-select {
+    padding: 10px 20px; border-radius: 12px; font-size: .95rem; font-weight: 700;
+    border: 2px solid #e2e8f0; background: #fff; color: #0f172a;
+    cursor: pointer; min-width: 240px; text-align: center;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 14px center;
+    padding-right: 40px;
+    transition: border-color .2s;
+  }
+  .diag-type-select:focus { outline: none; border-color: #0891b2; }
 
   /* ── 법령진단 카드 ── */
   .diag-card {
@@ -173,11 +146,38 @@
   .diag-period { font-size: .78rem; color: #0891b2; font-weight: 700; margin-bottom: 14px; }
   .diag-divider { border: none; border-top: 1px solid #e2e8f0; margin: 14px 0; }
   .diag-features { list-style: none; padding: 0; margin: 0 0 20px; }
-  .diag-features li {
-    display: flex; align-items: flex-start; gap: 8px;
-    font-size: .84rem; color: #475569; margin-bottom: 7px; line-height: 1.5;
-  }
+  .diag-features li { display: flex; align-items: flex-start; gap: 8px; font-size: .84rem; color: #475569; margin-bottom: 7px; line-height: 1.5; }
   .diag-features li::before { content: '·'; color: #94a3b8; font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
+
+  /* ── 로딩 스켈레톤 ── */
+  .skeleton { background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  .skel-card { background: #fff; border-radius: 24px; padding: 32px 24px; border: 2px solid #e2e8f0; }
+  .skel-line { height: 16px; margin-bottom: 10px; }
+  .skel-line.tall { height: 40px; }
+  .skel-line.short { width: 60%; }
+
+  /* ── 결제 특전 섹션 ── */
+  .price-benefit {
+    background: linear-gradient(135deg, #0c1a35, #0e2449);
+    padding: 72px 0;
+  }
+  .benefit-eyebrow {
+    display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .12em;
+    color: #fbbf24; background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.3);
+    border-radius: 4px; padding: 4px 12px; margin-bottom: 20px;
+  }
+  .price-benefit h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 12px; }
+  .price-benefit .lead { color: rgba(255,255,255,.65); font-size: 1rem; line-height: 1.7; margin-bottom: 48px; }
+  .benefit-card {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px; padding: 28px 24px; height: 100%; transition: background .2s;
+  }
+  .benefit-card:hover { background: rgba(255,255,255,.08); }
+  .benefit-icon { font-size: 2rem; margin-bottom: 14px; }
+  .benefit-card h5 { color: #fff; font-weight: 800; margin-bottom: 8px; font-size: 1rem; }
+  .benefit-card p { color: rgba(255,255,255,.6); font-size: .88rem; line-height: 1.65; margin: 0; }
+  .benefit-tag { display: inline-block; font-size: .7rem; font-weight: 800; background: rgba(251,191,36,.2); color: #fbbf24; border-radius: 4px; padding: 2px 8px; margin-bottom: 10px; }
 
   /* ── 안내 박스 ── */
   .price-notice {
@@ -191,11 +191,7 @@
   .price-faq { background: #fff; padding: 72px 0; }
   .price-faq h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 900; margin-bottom: 40px; text-align: center; }
   .faq-item { border-bottom: 1px solid #f1f5f9; }
-  .faq-q {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 4px; cursor: pointer; font-weight: 700; font-size: .95rem; color: #0f172a;
-    gap: 12px;
-  }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 18px 4px; cursor: pointer; font-weight: 700; font-size: .95rem; color: #0f172a; gap: 12px; }
   .faq-q:hover { color: #0891b2; }
   .faq-q .faq-icon { font-size: 1.2rem; flex-shrink: 0; transition: transform .2s; color: #94a3b8; }
   .faq-q.open .faq-icon { transform: rotate(45deg); color: #0891b2; }
@@ -207,11 +203,8 @@
   .price-cta h2 { color: #fff; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
   .price-cta p { color: rgba(255,255,255,.75); margin-bottom: 28px; }
 
-  /* ── 결제 모달 강조 ── */
-  .payment-detail-box {
-    background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
-    padding: 16px 18px; margin: 12px 0;
-  }
+  /* ── 결제 모달 ── */
+  .payment-detail-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; margin: 12px 0; }
   .payment-detail-box .p-row { display: flex; justify-content: space-between; font-size: .88rem; margin-bottom: 6px; }
   .payment-detail-box .p-row:last-child { margin-bottom: 0; }
   .payment-detail-box .p-label { color: #64748b; }
@@ -224,12 +217,11 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ KG이니시스 결제 폼 (법령진단 일반결제) ══ -->
-<!-- TODO: ini_mid 값을 실제 MID로 교체 필요 -->
+<!-- KG이니시스 결제 폼 (법령진단 일반결제 MID 활성) -->
 <form id="payForm" method="post" accept-charset="EUC-KR" style="display:none;">
   <input type="hidden" name="version"      value="1.0">
   <input type="hidden" name="gopaymethod"  value="Card">
-  <input type="hidden" name="ini_mid"      id="ini_mid"      value="INI_MID_PLACEHOLDER">
+  <input type="hidden" name="ini_mid"      id="ini_mid"      value="TAI_MID_DIAG"> <!-- TODO: 실제 MID로 교체 -->
   <input type="hidden" name="orderid"      id="orderid"      value="">
   <input type="hidden" name="price"        id="price"        value="">
   <input type="hidden" name="goodsname"    id="goodsname"    value="">
@@ -239,10 +231,10 @@
   <input type="hidden" name="buyeremail"   id="buyeremail"   value="">
   <input type="hidden" name="returnurl"    value="https://new.taieng.co.kr/nexas/payment-result.html">
   <input type="hidden" name="closeurl"     value="https://new.taieng.co.kr/nexas/payment-cancel.html">
-  <input type="hidden" name="acceptmethod" value="CARDSEL(1):SKIN(#3D7ABF)">
+  <input type="hidden" name="acceptmethod" value="CARDSEL(1):SKIN(#0891b2)">
 </form>
 
-<!-- ══ SaaS 정기결제 준비 중 모달 ══ -->
+<!-- SaaS 정기결제 준비 중 모달 -->
 <div class="modal fade" id="saasReadyModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -251,8 +243,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body pt-2">
-        <p style="color:#374151;">SaaS 구독 자동결제 시스템을 최종 테스트 중입니다.</p>
-        <p style="font-size:.88rem;color:#64748b;">도입 문의로 신청해 주시면 담당자가 즉시 안내드립니다. (영업일 1일 이내 응답)</p>
+        <p style="color:#374151;">SaaS 구독 정기결제 시스템을 최종 테스트 중입니다.</p>
+        <p style="font-size:.88rem;color:#64748b;">도입 문의로 신청해 주시면 담당자가 즉시 안내드립니다. <strong>(영업일 1일 이내 응답)</strong></p>
       </div>
       <div class="modal-footer border-0">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
@@ -262,7 +254,7 @@
   </div>
 </div>
 
-<!-- ══ 법령진단 결제 확인 모달 ══ -->
+<!-- 법령진단 결제 확인 모달 -->
 <div class="modal fade" id="diagPayModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -273,20 +265,21 @@
       <div class="modal-body">
         <div class="payment-detail-box">
           <div class="p-row"><span class="p-label">상품명</span><span class="p-val" id="modal-goods-name">—</span></div>
-          <div class="p-row"><span class="p-label">서비스 제공기간</span><span class="p-val" style="color:#059669;">12개월</span></div>
+          <div class="p-row"><span class="p-label">서비스 제공기간</span><span class="p-val" style="color:#059669;">결제일로부터 12개월</span></div>
+          <div class="p-row"><span class="p-label">리포트 재발행·조회</span><span class="p-val" style="color:#059669;">12개월 포함</span></div>
           <div class="p-row"><span class="p-label">결제 금액 (VAT 별도)</span><span class="p-val p-total" id="modal-amount">—</span></div>
         </div>
         <div class="alert alert-light border mb-0 py-2" style="font-size:.82rem;color:#475569;">
           <i class="fas fa-info-circle me-1 text-primary"></i>
           결제 완료 후 PDF 법령진단 리포트가 이메일로 발송됩니다.<br>
-          리포트 재발행·조회는 서비스 제공기간(12개월) 이내 가능합니다.
+          단일 결제로 서비스 제공기간(12개월) 동안 이용 가능합니다.
         </div>
         <div class="mt-3">
           <label class="form-label fw-semibold" style="font-size:.85rem;">구매자 이름 <span class="text-danger">*</span></label>
           <input type="text" class="form-control form-control-sm" id="buyer-name" placeholder="홍길동">
           <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">연락처 <span class="text-danger">*</span></label>
           <input type="tel" class="form-control form-control-sm" id="buyer-tel" placeholder="010-0000-0000">
-          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 <span class="text-danger">*</span></label>
+          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 (리포트 수신) <span class="text-danger">*</span></label>
           <input type="email" class="form-control form-control-sm" id="buyer-email" placeholder="email@example.com">
         </div>
       </div>
@@ -305,10 +298,10 @@
   <div class="container">
     <span class="price-eyebrow">💰 요금제</span>
     <h1>명확하고 <em>합리적인</em> 가격</h1>
-    <p>TAI Safe는 안전관리를 직접 하게 해주는 도구입니다.<br>컨설팅 대행에 수백만 원 쓰기 전에, 먼저 구조를 바꾸세요.</p>
+    <p>TAI Safe는 안전관리를 <strong style="color:#67e8f9;">직접 하게 해주는 도구</strong>입니다.<br>과태료 리스크를 엑셀·종이 없이 자동으로 관리하세요.</p>
     <div class="price-hero-chips">
       <span class="price-hero-chip">✓ 법령 자동 적용</span>
-      <span class="price-hero-chip">✓ 과태료 리스크 제로</span>
+      <span class="price-hero-chip">✓ 과태료 리스크 해소</span>
       <span class="price-hero-chip">✓ 언제든지 취소 가능</span>
       <span class="price-hero-chip">✓ 세금계산서 발행</span>
     </div>
@@ -322,362 +315,114 @@
   </div>
 </div>
 
-<!-- ══ 메인 탭 섹션 ══ -->
+<!-- ══ 메인 탭 ══ -->
 <section class="price-tab-wrap">
   <div class="container">
 
     <div class="price-tabs">
-      <button class="price-tab-btn active" onclick="switchPriceTab('saas', this)">🖥️ SaaS 구독</button>
-      <button class="price-tab-btn" onclick="switchPriceTab('diagnosis', this)">📋 법령진단 (단건)</button>
+      <button class="price-tab-btn active" onclick="switchTab('saas', this)">🖥️ SaaS 구독</button>
+      <button class="price-tab-btn" onclick="switchTab('diagnosis', this)">📋 법령진단 (단건)</button>
     </div>
 
-    <!-- ════════════════════════
-         SaaS 구독 탭
-    ════════════════════════ -->
+    <!-- ════ SaaS 구독 탭 ════ -->
     <div id="tab-saas" class="tab-panel active">
-
-      <!-- 연간/월간 토글 -->
       <div class="billing-toggle-wrap" style="margin-bottom:12px;">
         <span class="billing-label active-label" id="label-monthly">월간</span>
         <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
         <span class="billing-label" id="label-annual">연간 <span class="annual-badge">2개월 무료</span></span>
       </div>
-      <div class="billing-note">사업장당 월정액 · VAT 별도 · 모든 섹터(건물·제조·건설) 동일 요금</div>
+      <div class="billing-note">사업장당 월정액 · VAT 별도 · 건물·제조·건설 모든 섹터 동일 요금</div>
 
-      <div class="row g-4 justify-content-center">
+      <!-- 로딩 스켈레톤 -->
+      <div id="saas-loading" class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
+      </div>
 
-        <!-- STARTER -->
-        <div class="col-lg-4 col-md-6">
-          <div class="plan-card">
-            <div class="plan-name">STARTER</div>
-            <div class="plan-price">
-              <span class="price-display" data-monthly="79000">79,000</span>원
-            </div>
-            <div class="plan-price-sub">/ 사업장 · <span data-period-unit>월</span></div>
-            <div class="plan-vat">VAT 별도</div>
-
-            <div class="plan-quota-box">
-              <div class="q-row">
-                <span class="q-label">👥 포함 인원</span>
-                <span class="q-val">20명</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 인원당 2,000원/월</div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label">📩 문자(SMS)</span>
-                <span class="q-val">월 100건</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 건당 50원</div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label">📄 서류 자동화</span>
-                <span class="q-val">월 5건</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 건당 500원</div>
-            </div>
-
-            <hr class="plan-divider">
-            <ul class="plan-features">
-              <li>법령엔진 자동 작동</li>
-              <li>점검 일정 자동 생성</li>
-              <li>작업자 배정 · D-3 알림</li>
-              <li>완료 기록 자동화</li>
-              <li>TBM 전자서명</li>
-              <li>기록 보관 6개월</li>
-            </ul>
-            <button class="btn btn-border" style="width:100%;font-weight:700;" onclick="startSaasPayment('STARTER', 79000)">
-              바로 결제 <span class="price-display" data-monthly="79000">79,000</span>원
-            </button>
-          </div>
-        </div>
-
-        <!-- BUSINESS (추천) -->
-        <div class="col-lg-4 col-md-6">
-          <div class="plan-card featured">
-            <div class="plan-badge">✨ 가장 많이 선택</div>
-            <div class="plan-name">BUSINESS</div>
-            <div class="plan-price">
-              <span class="price-display" data-monthly="149000">149,000</span>원
-            </div>
-            <div class="plan-price-sub">/ 사업장 · <span data-period-unit>월</span></div>
-            <div class="plan-vat">VAT 별도</div>
-
-            <div class="plan-quota-box">
-              <div class="q-row">
-                <span class="q-label">👥 포함 인원</span>
-                <span class="q-val">50명</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 인원당 1,500원/월</div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label">📩 문자(SMS)</span>
-                <span class="q-val">월 300건</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 건당 40원</div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label">📄 서류 자동화</span>
-                <span class="q-val">월 30건</span>
-              </div>
-              <div class="q-over text-end" style="margin-top:-2px;">초과 건당 400원</div>
-            </div>
-
-            <hr class="plan-divider">
-            <ul class="plan-features">
-              <li>STARTER 전체 포함</li>
-              <li>신고서식 자동화</li>
-              <li>법령 변경 알림</li>
-              <li>QR·RFID 점검</li>
-              <li>경영진 대시보드</li>
-              <li>기록 보관 무제한</li>
-            </ul>
-            <button class="btn btn-base" style="width:100%;font-weight:700;" onclick="startSaasPayment('BUSINESS', 149000)">
-              바로 결제 <span class="price-display" data-monthly="149000">149,000</span>원
-            </button>
-          </div>
-        </div>
-
-        <!-- ENTERPRISE -->
-        <div class="col-lg-4 col-md-6">
-          <div class="plan-card enterprise-card">
-            <div class="plan-name" style="color:#7c3aed;">ENTERPRISE</div>
-            <div class="plan-enterprise-price">별도 협의</div>
-            <div class="plan-price-sub" style="color:#94a3b8;">사업장 수·규모에 따라 결정</div>
-            <div class="plan-vat">&nbsp;</div>
-
-            <div class="plan-quota-box" style="background:#faf5ff;border-color:#e9d5ff;">
-              <div class="q-row">
-                <span class="q-label" style="color:#7c3aed;">👥 포함 인원</span>
-                <span class="q-val" style="color:#7c3aed;">무제한</span>
-              </div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label" style="color:#7c3aed;">📩 문자(SMS)</span>
-                <span class="q-val" style="color:#7c3aed;">무제한</span>
-              </div>
-              <div class="q-row" style="margin-top:6px;">
-                <span class="q-label" style="color:#7c3aed;">📄 서류 자동화</span>
-                <span class="q-val" style="color:#7c3aed;">무제한</span>
-              </div>
-            </div>
-
-            <hr class="plan-divider">
-            <ul class="plan-features ent-feat">
-              <li>BUSINESS 전체 포함</li>
-              <li>다수 사업장 통합 관리</li>
-              <li>전담 매니저 배정</li>
-              <li>API 연동</li>
-              <li>경영진 맞춤 리포트</li>
-            </ul>
-            <a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;">도입 문의하기</a>
-          </div>
-        </div>
-
-      </div><!-- /row -->
+      <!-- 플랜 카드 컨테이너 (API 렌더) -->
+      <div id="saas-cards" class="row g-4 justify-content-center" style="display:none!important;"></div>
 
       <div class="price-notice mt-5">
         <h5>📌 SaaS 구독 안내</h5>
         <p>월 구독 기준이며, 연간 구독 시 2개월 무료 혜택이 제공됩니다. 구독은 언제든지 취소 가능하며 위약금이 없습니다. 포함 인원·건수 초과분은 당월 사용량 기준으로 익월 자동 정산됩니다. 세금계산서 발행이 가능합니다.</p>
       </div>
-
     </div><!-- /tab-saas -->
 
-    <!-- ════════════════════════
-         법령진단 탭 (단건)
-    ════════════════════════ -->
+    <!-- ════ 법령진단 탭 ════ -->
     <div id="tab-diagnosis" class="tab-panel">
-
-      <div class="text-center mb-4">
-        <p style="color:#64748b;font-size:.92rem;max-width:600px;margin:0 auto;line-height:1.7;">
-          법령진단은 <strong>1회성 단건 결제 서비스</strong>입니다. 시설 유형을 선택하고 필요한 진단 수준을 선택하세요.<br>
-          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 12개월</span> (리포트 재발행·조회 포함)
+      <div class="text-center mb-2">
+        <p style="color:#64748b;font-size:.92rem;max-width:620px;margin:0 auto;line-height:1.7;">
+          <strong>단일 결제 서비스</strong>입니다. 시설 유형을 선택하고 필요한 진단 등급을 선택하세요.<br>
+          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 12개월</span> · 리포트 재발행·조회 포함
         </p>
       </div>
 
-      <!-- 시설유형 서브탭 -->
-      <div class="sector-tabs" id="diag-sector-tabs">
-        <button class="sector-btn active" onclick="switchDiagSector('building', this)">🏢 건물·시설</button>
-        <button class="sector-btn" onclick="switchDiagSector('industry', this)">🏭 제조·산업</button>
-        <button class="sector-btn" onclick="switchDiagSector('construction', this)">🏗️ 건설현장</button>
+      <!-- 시설 유형 드롭다운 -->
+      <div class="diag-type-select-wrap">
+        <select class="diag-type-select" id="facilityTypeSelect" onchange="renderDiagCards()">
+          <option value="">시설 유형을 선택하세요</option>
+        </select>
       </div>
 
-      <!-- ─── 건물·시설 법령진단 (2단계) ─── -->
-      <div id="diag-building" class="diag-sector-panel active">
-        <div class="row g-4 justify-content-center">
+      <!-- 로딩 스켈레톤 -->
+      <div id="diag-loading" class="row g-4 justify-content-center" style="display:none;">
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+      </div>
 
-          <!-- STEP 1: 무료 -->
-          <div class="col-lg-5 col-md-6">
-            <div class="diag-card free-card">
-              <span class="diag-step-badge step-free">STEP 1 · 무료</span>
-              <div class="diag-free-price">0원</div>
-              <div class="diag-vat">&nbsp;</div>
-              <div class="diag-period">&nbsp;</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>적용 법령·의무 기초 확인</li>
-                <li>선임 의무 여부 안내</li>
-                <li>주요 과태료·벌칙 정보</li>
-              </ul>
-              <a href="free-diagnosis.html" class="btn btn-border" style="width:100%;font-weight:700;">무료 진단 시작</a>
-            </div>
-          </div>
-
-          <!-- STEP 2: 종합 -->
-          <div class="col-lg-5 col-md-6">
-            <div class="diag-card recommended">
-              <div class="diag-rec-badge">📋 건물 종합 진단</div>
-              <span class="diag-step-badge step-total" style="margin-top:10px;">STEP 2 · 종합 진단</span>
-              <div class="diag-price">99,000<span class="unit">원</span></div>
-              <div class="diag-vat">VAT 별도 · 단건 1회성</div>
-              <div class="diag-period">🕐 서비스 제공기간 12개월</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>PDF 법령진단 리포트</li>
-                <li>적용 법령·의무 전체 도출</li>
-                <li>선임·신고·점검 의무 상세</li>
-                <li>과태료·벌칙 정보 상세</li>
-                <li>감사 대응 서류로 활용 가능</li>
-                <li>12개월 리포트 재발행·조회</li>
-              </ul>
-              <button class="btn btn-base" style="width:100%;font-weight:700;"
-                onclick="startDiagPayment('건물·시설 종합 법령진단', 99000)">바로 결제 99,000원</button>
-            </div>
-          </div>
-
-        </div>
-      </div><!-- /diag-building -->
-
-      <!-- ─── 제조·산업 법령진단 (4단계) ─── -->
-      <div id="diag-industry" class="diag-sector-panel">
-        <div class="row g-4 justify-content-center">
-
-          <!-- STEP 1: 무료 -->
-          <div class="col-lg-3 col-md-6">
-            <div class="diag-card free-card">
-              <span class="diag-step-badge step-free">STEP 1 · 무료</span>
-              <div class="diag-free-price">0원</div>
-              <div class="diag-vat">&nbsp;</div>
-              <div class="diag-period">&nbsp;</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>적용 법령·의무 기초 확인</li>
-                <li>선임 의무 여부 안내</li>
-                <li>주요 과태료·벌칙 정보</li>
-              </ul>
-              <a href="free-diagnosis.html" class="btn btn-border" style="width:100%;font-weight:700;">무료 진단 시작</a>
-            </div>
-          </div>
-
-          <!-- STEP 2: 표준 -->
-          <div class="col-lg-3 col-md-6">
-            <div class="diag-card">
-              <span class="diag-step-badge step-standard">STEP 2 · 표준 진단</span>
-              <div class="diag-price">99,000<span class="unit">원</span></div>
-              <div class="diag-vat">VAT 별도 · 단건 1회성</div>
-              <div class="diag-period">🕐 서비스 제공기간 12개월</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>PDF 법령진단 리포트</li>
-                <li>적용 법령·의무 도출</li>
-                <li>과태료·벌칙 정보</li>
-                <li>감사 대응 서류 활용 가능</li>
-              </ul>
-              <button class="btn btn-border" style="width:100%;font-weight:700;"
-                onclick="startDiagPayment('제조·산업 표준 법령진단', 99000)">바로 결제 99,000원</button>
-            </div>
-          </div>
-
-          <!-- STEP 3: 설비 -->
-          <div class="col-lg-3 col-md-6">
-            <div class="diag-card">
-              <span class="diag-step-badge step-equipment">STEP 3 · 설비 진단</span>
-              <div class="diag-price">199,000<span class="unit">원</span></div>
-              <div class="diag-vat">VAT 별도 · 단건 1회성</div>
-              <div class="diag-period">🕐 서비스 제공기간 12개월</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>PDF 법령진단 리포트</li>
-                <li>설비별 적용 법령 분석</li>
-                <li>과태료·벌칙 정보</li>
-                <li>감사 대응 서류 활용 가능</li>
-              </ul>
-              <button class="btn btn-border" style="width:100%;font-weight:700;"
-                onclick="startDiagPayment('제조·산업 설비 법령진단', 199000)">바로 결제 199,000원</button>
-            </div>
-          </div>
-
-          <!-- STEP 4: 종합 -->
-          <div class="col-lg-3 col-md-6">
-            <div class="diag-card recommended">
-              <div class="diag-rec-badge">📋 제조 종합 진단</div>
-              <span class="diag-step-badge step-total" style="margin-top:10px;">STEP 4 · 종합 진단</span>
-              <div class="diag-price">249,000<span class="unit">원</span></div>
-              <div class="diag-vat">VAT 별도 · 단건 1회성</div>
-              <div class="diag-period">🕐 서비스 제공기간 12개월</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>PDF 법령진단 리포트</li>
-                <li>법령·설비·공정 통합 분석</li>
-                <li>과태료·벌칙 정보 상세</li>
-                <li>감사 대응 서류 활용 가능</li>
-                <li>12개월 리포트 재발행·조회</li>
-              </ul>
-              <button class="btn btn-base" style="width:100%;font-weight:700;"
-                onclick="startDiagPayment('제조·산업 종합 법령진단', 249000)">바로 결제 249,000원</button>
-            </div>
-          </div>
-
-        </div>
-      </div><!-- /diag-industry -->
-
-      <!-- ─── 건설현장 법령진단 (2단계) ─── -->
-      <div id="diag-construction" class="diag-sector-panel">
-        <div class="row g-4 justify-content-center">
-
-          <!-- STEP 1: 무료 -->
-          <div class="col-lg-5 col-md-6">
-            <div class="diag-card free-card">
-              <span class="diag-step-badge step-free">STEP 1 · 무료</span>
-              <div class="diag-free-price">0원</div>
-              <div class="diag-vat">&nbsp;</div>
-              <div class="diag-period">&nbsp;</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>적용 법령·의무 기초 확인</li>
-                <li>선임 의무 여부 안내</li>
-                <li>주요 과태료·벌칙 정보</li>
-              </ul>
-              <a href="free-diagnosis.html" class="btn btn-border" style="width:100%;font-weight:700;">무료 진단 시작</a>
-            </div>
-          </div>
-
-          <!-- STEP 2: 종합 -->
-          <div class="col-lg-5 col-md-6">
-            <div class="diag-card recommended">
-              <div class="diag-rec-badge">📋 건설 종합 진단</div>
-              <span class="diag-step-badge step-total" style="margin-top:10px;">STEP 2 · 종합 진단</span>
-              <div class="diag-price">399,000<span class="unit">원</span></div>
-              <div class="diag-vat">VAT 별도 · 단건 1회성</div>
-              <div class="diag-period">🕐 서비스 제공기간 12개월</div>
-              <hr class="diag-divider">
-              <ul class="diag-features">
-                <li>PDF 법령진단 리포트</li>
-                <li>공종별 법령·의무 전체 도출</li>
-                <li>선임·신고·점검·작업 의무 분석</li>
-                <li>과태료·벌칙 정보 상세</li>
-                <li>감사 대응 서류로 활용 가능</li>
-                <li>12개월 리포트 재발행·조회</li>
-              </ul>
-              <button class="btn btn-base" style="width:100%;font-weight:700;"
-                onclick="startDiagPayment('건설현장 종합 법령진단', 399000)">바로 결제 399,000원</button>
-            </div>
-          </div>
-
-        </div>
-      </div><!-- /diag-construction -->
+      <!-- 진단 카드 컨테이너 -->
+      <div id="diag-cards" class="row g-4 justify-content-center"></div>
 
       <div class="price-notice">
         <h5>📌 법령진단이란?</h5>
         <p>법령진단은 <strong style="color:#22d3ee;">1회성 단건 결제 서비스</strong>입니다. 사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 과태료·벌칙 정보를 자동으로 도출하고 PDF 리포트를 제공합니다. 결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 리포트 재발행·조회가 가능합니다. 감사 대응 서류로 활용할 수 있습니다.</p>
       </div>
-
     </div><!-- /tab-diagnosis -->
 
+  </div>
+</section>
+
+<!-- ══ 결제 특전 섹션 ══ -->
+<section class="price-benefit">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="benefit-eyebrow">🎁 도입 특전</span>
+      <h2>지금 시작하면 이런 혜택이 있습니다</h2>
+      <p class="lead">TAI Safe를 처음 도입하는 사업장을 위한 특전입니다.<br>상세 혜택은 도입 문의 시 개별 안내드립니다.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-tag">SaaS 구독</div>
+          <div class="benefit-icon">🗓️</div>
+          <h5>첫 달 무료 체험</h5>
+          <p>도입 첫 달은 무료로 전체 기능을 사용할 수 있습니다. 위약금 없이 언제든지 취소 가능합니다.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-tag">법령진단 + SaaS</div>
+          <div class="benefit-icon">⚡</div>
+          <h5>법령진단 → 구독 전환 할인</h5>
+          <p>법령진단 리포트 수령 후 SaaS 구독으로 연결 시 첫 3개월 특별 요금을 협의해 드립니다.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="benefit-card">
+          <div class="benefit-tag">모든 플랜</div>
+          <div class="benefit-icon">🤝</div>
+          <h5>전담 온보딩 지원</h5>
+          <p>도입 초기 세팅부터 법령 적용 확인까지 담당자가 직접 안내드립니다. (영업일 1일 이내 응답)</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <p style="color:rgba(255,255,255,.55);font-size:.88rem;">* 혜택은 사전 협의 및 운영 정책에 따라 변경될 수 있습니다.</p>
+      <a href="contact.html" class="btn btn-base mt-2" style="font-size:1rem;padding:12px 32px;font-weight:700;">도입 문의 · 특전 상담</a>
+    </div>
   </div>
 </section>
 
@@ -688,10 +433,10 @@
 
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">결제는 언제 이루어지나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">SaaS 구독은 매월 결제일 자동 청구됩니다 (정기결제 시스템 준비 중). 법령진단 단건은 결제 즉시 처리되며 영업일 1~2일 이내 리포트가 발송됩니다.</div>
+      <div class="faq-a">SaaS 구독은 매월 결제일 자동 청구됩니다 (정기결제 시스템 최종 준비 중). 법령진단 단건은 결제 즉시 처리되며 영업일 1~2일 이내 PDF 리포트가 이메일로 발송됩니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">환불은 가능한가요? <span class="faq-icon">+</span></div>
+      <div class="faq-q" onclick="toggleFaq(this)">환불 정책은 어떻게 되나요? <span class="faq-icon">+</span></div>
       <div class="faq-a">SaaS 구독은 결제 후 7일 이내 이용 내역이 없을 경우 전액 환불됩니다. 법령진단 단건은 리포트 발송 전 취소 시 전액 환불, 발송 후에는 환불이 불가합니다.</div>
     </div>
     <div class="faq-item">
@@ -703,14 +448,17 @@
       <div class="faq-a">포함 인원·SMS·서류 건수를 초과하더라도 서비스는 중단 없이 계속됩니다. 당월 초과 사용량은 익월 청구서에 합산되어 자동 정산됩니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">법령진단 후 TAI Safe를 구독하면 중복인가요? <span class="faq-icon">+</span></div>
+      <div class="faq-q" onclick="toggleFaq(this)">법령진단 후 SaaS를 구독하면 중복인가요? <span class="faq-icon">+</span></div>
       <div class="faq-a">중복이 아닙니다. 법령진단은 "내 사업장에 어떤 법령이 적용되는지" 파악하는 1회성 서비스이고, SaaS 구독은 그 법령을 매일 자동으로 관리하게 해주는 도구입니다. 법령진단 먼저 받고 SaaS로 연결하시면 가장 효율적입니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">법령진단 리포트는 얼마나 오래 쓸 수 있나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">결제일로부터 12개월간 리포트 재발행·조회가 가능합니다. 법령은 수시로 개정되므로, 중대재해처벌법 등 주요 법령 개정 시 재진단을 권장합니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">법령진단 리포트는 얼마나 오래 활용할 수 있나요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">결제일로부터 12개월간 리포트 재발행·조회가 가능합니다. 단일 결제로 서비스 제공기간 전체 동안 이용할 수 있습니다. 법령은 수시로 개정되므로 중대재해처벌법 등 주요 개정 시 재진단을 권장합니다.</div>
     </div>
-
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">TAI Safe는 대행서비스인가요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">아닙니다. TAI Safe는 안전관리를 <strong>직접 하게 해주는 도구</strong>입니다. 법령 적용·점검 일정·서류 작성을 자동화해서 안전관리자가 혼자 모든 걸 처리하지 않아도 되는 구조를 만들어 드립니다. 대행기관과 달리 구조 자체를 바꿉니다.</div>
+    </div>
   </div>
 </section>
 
@@ -729,8 +477,7 @@
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
-<!-- KG이니시스 결제 스크립트 (법령진단 일반결제 활성) -->
-<!-- TODO: https://stdpay.inicis.com/stdjs/INIStdPay.js 로 교체 시 실결제 활성화 -->
+<!-- TODO: 실결제 활성화 시 https://stdpay.inicis.com/stdjs/INIStdPay.js 로드 -->
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
@@ -741,111 +488,390 @@
 <script>
 if (typeof WOW !== 'undefined') new WOW().init();
 
+/* ════════════════════════════════════
+   pricing.js v2 — API 동적 렌더
+   GET /public/pricing/saas-plans
+   GET /public/pricing/diagnosis-reports
+════════════════════════════════════ */
+(function(){
+'use strict';
+const API = 'https://api.taieng.co.kr';
+
 var isAnnual = false;
-var _pendingPlanKey = '';
-var _pendingAmount  = 0;
-var _pendingGoods   = '';
+var _saasPlans = [];      // API 결과
+var _diagReports = [];    // API 결과
+var _pendingGoods = '';
+var _pendingAmount = 0;
 
-/* ── 탭 전환 ── */
-function switchPriceTab(tab, btn) {
-  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.price-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('tab-' + tab).classList.add('active');
-  btn.classList.add('active');
+/* ── SaaS 폴백 (API 실패 시) ── */
+var SAAS_FALLBACK = [
+  {
+    plan_name:'STARTER', plan_key:'starter', price_monthly:79000, is_recommended:false,
+    included_members:20, over_member_price:2000,
+    included_sms:100, over_sms_price:50,
+    included_docs:5, over_doc_price:500,
+    features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정 · D-3 알림','완료 기록 자동화','TBM 전자서명','기록 보관 6개월']
+  },
+  {
+    plan_name:'BUSINESS', plan_key:'business', price_monthly:149000, is_recommended:true,
+    included_members:50, over_member_price:1500,
+    included_sms:300, over_sms_price:40,
+    included_docs:30, over_doc_price:400,
+    features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','기록 보관 무제한']
+  },
+  {
+    plan_name:'ENTERPRISE', plan_key:'enterprise', price_monthly:0, is_enterprise:true,
+    features:['BUSINESS 전체 포함','다수 사업장 통합 관리','전담 매니저 배정','API 연동','경영진 맞춤 리포트']
+  }
+];
+
+/* ── 법령진단 폴백 ── */
+var DIAG_FALLBACK = [
+  {
+    facility_type:'building', facility_label:'🏢 건물·시설',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 종합 진단', tier_key:'total', price:99000, is_recommended:true, badge_class:'step-total', rec_label:'📋 건물 종합', features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  },
+  {
+    facility_type:'manufacturing', facility_label:'🏭 제조·산업',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 표준 진단', tier_key:'standard', price:99000, badge_class:'step-standard', features:['PDF 법령진단 리포트','적용 법령·의무 도출','과태료·벌칙 정보','감사 대응 서류 활용 가능']},
+      {tier_name:'STEP 3 · 설비 진단', tier_key:'equipment', price:199000, badge_class:'step-equipment', features:['PDF 법령진단 리포트','설비별 적용 법령 분석','과태료·벌칙 정보','감사 대응 서류 활용 가능']},
+      {tier_name:'STEP 4 · 종합 진단', tier_key:'total', price:249000, is_recommended:true, badge_class:'step-total', rec_label:'📋 제조 종합', features:['PDF 법령진단 리포트','법령·설비·공정 통합 분석','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  },
+  {
+    facility_type:'construction', facility_label:'🏗️ 건설현장',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 종합 진단', tier_key:'total', price:399000, is_recommended:true, badge_class:'step-total', rec_label:'📋 건설 종합', features:['PDF 법령진단 리포트','공종별 법령·의무 전체 도출','선임·신고·점검·작업 의무 분석','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  },
+  {
+    facility_type:'retail', facility_label:'🏪 판매·서비스',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 종합 진단', tier_key:'total', price:99000, is_recommended:true, badge_class:'step-total', rec_label:'📋 판매·서비스 종합', features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  },
+  {
+    facility_type:'medical', facility_label:'🏥 의료·복지',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 종합 진단', tier_key:'total', price:99000, is_recommended:true, badge_class:'step-total', rec_label:'📋 의료·복지 종합', features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  },
+  {
+    facility_type:'education', facility_label:'🏫 교육·연구',
+    tiers:[
+      {tier_name:'STEP 1 · 무료', tier_key:'free', price:0, is_free:true, badge_class:'step-free', features:['적용 법령·의무 기초 확인','선임 의무 여부 안내','주요 과태료·벌칙 정보'], action_url:'free-diagnosis.html'},
+      {tier_name:'STEP 2 · 종합 진단', tier_key:'total', price:99000, is_recommended:true, badge_class:'step-total', rec_label:'📋 교육·연구 종합', features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','과태료·벌칙 정보 상세','감사 대응 서류 활용 가능','12개월 리포트 재발행·조회']}
+    ]
+  }
+];
+
+/* ════ 1. 데이터 로드 ════ */
+async function loadPricingData(){
+  try {
+    var [saasRes, diagRes] = await Promise.all([
+      fetch(API+'/public/pricing/saas-plans'),
+      fetch(API+'/public/pricing/diagnosis-reports')
+    ]);
+    if(saasRes.ok){ var sj=await saasRes.json(); _saasPlans=sj.data||sj.plans||sj||[]; }
+    if(diagRes.ok){ var dj=await diagRes.json(); _diagReports=dj.data||dj.reports||dj||[]; }
+  } catch(e){ console.warn('pricing API error:',e); }
+
+  // API 실패 또는 빈 응답 → 폴백
+  if(!_saasPlans||!_saasPlans.length) _saasPlans=null; // null → use fallback in render
+  if(!_diagReports||!_diagReports.length) _diagReports=null;
+
+  renderSaasCards();
+  buildFacilityDropdown();
 }
 
-/* ── 법령진단 섹터 서브탭 ── */
-function switchDiagSector(sector, btn) {
-  document.querySelectorAll('.diag-sector-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('#diag-sector-tabs .sector-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('diag-' + sector).classList.add('active');
-  btn.classList.add('active');
+/* ════ 2. SaaS 카드 렌더 ════ */
+function renderSaasCards(){
+  var plans = normalizeSaasPlans(_saasPlans || SAAS_FALLBACK);
+  var container = document.getElementById('saas-cards');
+  var loading   = document.getElementById('saas-loading');
+
+  container.innerHTML = plans.map(function(p){ return renderSaasCard(p); }).join('');
+
+  loading.style.display='none';
+  container.style.display='';
+  container.style.removeProperty('display'); // remove !important override
+  container.className='row g-4 justify-content-center';
 }
 
-/* ── 연간/월간 토글 ── */
-function toggleBilling() {
-  isAnnual = !isAnnual;
-  var toggle = document.getElementById('billing-toggle');
-  toggle.classList.toggle('on', isAnnual);
-  document.getElementById('label-monthly').classList.toggle('active-label', !isAnnual);
-  document.getElementById('label-annual').classList.toggle('active-label', isAnnual);
-
-  document.querySelectorAll('.price-display[data-monthly]').forEach(function(el) {
-    var monthly = parseInt(el.dataset.monthly);
-    var val = isAnnual ? Math.round(monthly * 10) : monthly;
-    el.textContent = val.toLocaleString('ko-KR');
+function normalizeSaasPlans(raw){
+  if(!raw||!raw.length) return SAAS_FALLBACK;
+  /* API 응답이 10개인 경우: plan_name으로 그룹핑해 대표 3개만 노출
+     API 응답이 이미 3개면 그대로 사용 */
+  var nameOrder=['STARTER','BUSINESS','ENTERPRISE'];
+  var map={};
+  raw.forEach(function(p){
+    var nm=(p.plan_name||'').toUpperCase();
+    if(!map[nm]) map[nm]=p;
   });
-  document.querySelectorAll('[data-period-unit]').forEach(function(el){
-    el.textContent = isAnnual ? '연' : '월';
+  var result=[];
+  nameOrder.forEach(function(nm){
+    if(map[nm]) result.push(map[nm]);
+  });
+  return result.length>=2 ? result : SAAS_FALLBACK;
+}
+
+function renderSaasCard(p){
+  var isEnterprise = !!(p.is_enterprise||(p.plan_name||'').toUpperCase()==='ENTERPRISE'||!p.price_monthly);
+  var isFeatured   = !!(p.is_recommended||p.featured);
+  var monthly      = parseInt(p.price_monthly||0);
+
+  /* 포함 인원/건수 */
+  var quotaHtml='';
+  if(!isEnterprise){
+    var iM=p.included_members||p.member_include||0;
+    var oM=p.over_member_price||p.member_over_price||0;
+    var iS=p.included_sms||p.sms_include||0;
+    var oS=p.over_sms_price||p.sms_over_price||0;
+    var iD=p.included_docs||p.doc_include||0;
+    var oD=p.over_doc_price||p.doc_over_price||0;
+    quotaHtml='<div class="plan-quota-box">'
+      +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+iM+'명</span></div>'
+      +(oM?'<div class="q-over">초과 인원당 '+oM.toLocaleString('ko-KR')+'원/월</div>':'')
+      +'<div class="q-row" style="margin-top:6px;"><span class="q-label">📩 문자(SMS)</span><span class="q-val">월 '+iS+'건</span></div>'
+      +(oS?'<div class="q-over">초과 건당 '+oS.toLocaleString('ko-KR')+'원</div>':'')
+      +'<div class="q-row" style="margin-top:6px;"><span class="q-label">📄 서류 자동화</span><span class="q-val">월 '+iD+'건</span></div>'
+      +(oD?'<div class="q-over">초과 건당 '+oD.toLocaleString('ko-KR')+'원</div>':'')
+      +'</div>';
+  } else {
+    quotaHtml='<div class="plan-quota-box" style="background:#faf5ff;border-color:#e9d5ff;">'
+      +'<div class="q-row"><span class="q-label" style="color:#7c3aed;">👥 포함 인원</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
+      +'<div class="q-row" style="margin-top:6px;"><span class="q-label" style="color:#7c3aed;">📩 문자(SMS)</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
+      +'<div class="q-row" style="margin-top:6px;"><span class="q-label" style="color:#7c3aed;">📄 서류 자동화</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
+      +'</div>';
+  }
+
+  /* 기능 목록 */
+  var feats=p.features||[];
+  var featHtml=feats.length
+    ?'<ul class="plan-features'+(isEnterprise?' ent-feat':'')+'">'+feats.map(function(f){return'<li>'+f+'</li>';}).join('')+'</ul>'
+    :'';
+
+  /* 가격 표시 */
+  var priceHtml='';
+  if(isEnterprise){
+    priceHtml='<div class="plan-enterprise-price">별도 협의</div>'
+      +'<div class="plan-price-sub" style="color:#94a3b8;">사업장 수·규모에 따라 결정</div><div class="plan-vat">&nbsp;</div>';
+  } else {
+    priceHtml='<div class="plan-price"><span class="price-display" data-monthly="'+monthly+'">'+monthly.toLocaleString('ko-KR')+'</span>원</div>'
+      +'<div class="plan-price-sub">/ 사업장 · <span data-period-unit>월</span></div>'
+      +'<div class="plan-vat">VAT 별도</div>';
+  }
+
+  /* 버튼 */
+  var btnHtml='';
+  if(isEnterprise){
+    btnHtml='<a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;">도입 문의하기</a>';
+  } else {
+    btnHtml='<button class="btn '+(isFeatured?'btn-base':'btn-border')+'" style="width:100%;font-weight:700;" onclick="startSaasPayment(\''+p.plan_name+'\','+monthly+')">'
+      +'바로 결제 <span class="price-display" data-monthly="'+monthly+'">'+monthly.toLocaleString('ko-KR')+'</span>원</button>';
+  }
+
+  var cardClass='plan-card'+(isFeatured?' featured':'')+(isEnterprise?' enterprise-card':'');
+  var badgeHtml=isFeatured?'<div class="plan-badge">✨ 가장 많이 선택</div>':'';
+  var nameStyle=isEnterprise?' style="color:#7c3aed;"':'';
+
+  return'<div class="col-lg-4 col-md-6"><div class="'+cardClass+'">'
+    +badgeHtml
+    +'<div class="plan-name"'+nameStyle+'>'+p.plan_name+'</div>'
+    +priceHtml
+    +'<div class="plan-divider"></div>'
+    +quotaHtml
+    +featHtml
+    +btnHtml
+    +'</div></div>';
+}
+
+/* ════ 3. 법령진단 드롭다운 ════ */
+function buildFacilityDropdown(){
+  var facilities=normalizeDiagFacilities(_diagReports||DIAG_FALLBACK);
+  var sel=document.getElementById('facilityTypeSelect');
+  sel.innerHTML='<option value="">시설 유형을 선택하세요</option>';
+  facilities.forEach(function(f){
+    var o=document.createElement('option');
+    o.value=f.facility_type||f.type||f.id;
+    o.textContent=f.facility_label||f.label||f.name||o.value;
+    sel.appendChild(o);
   });
 }
 
-/* ── SaaS 결제 — 정기결제 MID 준비 중 ── */
-function startSaasPayment(planName, amount) {
-  new bootstrap.Modal(document.getElementById('saasReadyModal')).show();
+function normalizeDiagFacilities(raw){
+  if(!raw||!raw.length) return DIAG_FALLBACK;
+  /* API가 flat 배열 (각 항목이 개별 상품)인 경우 facility_type 기준으로 그룹핑 */
+  if(raw[0]&&raw[0].tiers) return raw; /* 이미 그룹 구조 */
+  /* flat → group */
+  var map={};
+  var order=[];
+  raw.forEach(function(r){
+    var ft=r.facility_type||r.sector||r.type||'unknown';
+    if(!map[ft]){
+      map[ft]={
+        facility_type:ft,
+        facility_label:r.facility_label||r.sector_label||'',
+        tiers:[]
+      };
+      order.push(ft);
+    }
+    map[ft].tiers.push(r);
+  });
+  return order.map(function(k){return map[k];}).filter(function(g){return g.tiers.length;});
 }
 
-/* ── 법령진단 결제 — 일반결제 MID 활성 ── */
-function startDiagPayment(goodsName, amount) {
-  _pendingGoods  = goodsName;
-  _pendingAmount = amount;
+/* ════ 4. 법령진단 카드 렌더 ════ */
+window.renderDiagCards=function(){
+  var selVal=document.getElementById('facilityTypeSelect').value;
+  var container=document.getElementById('diag-cards');
+  var loading=document.getElementById('diag-loading');
 
-  document.getElementById('diagModalTitle').textContent = goodsName;
-  document.getElementById('modal-goods-name').textContent = goodsName;
-  document.getElementById('modal-amount').textContent = amount.toLocaleString('ko-KR') + '원';
-  document.getElementById('buyer-name').value  = '';
-  document.getElementById('buyer-tel').value   = '';
-  document.getElementById('buyer-email').value = '';
+  if(!selVal){container.innerHTML='';return;}
 
-  new bootstrap.Modal(document.getElementById('diagPayModal')).show();
-}
+  loading.style.display='';
+  container.innerHTML='';
 
-/* ── 실결제 진행 ── */
-function proceedPayment() {
-  var name  = (document.getElementById('buyer-name').value  || '').trim();
-  var tel   = (document.getElementById('buyer-tel').value   || '').trim();
-  var email = (document.getElementById('buyer-email').value || '').trim();
+  var facilities=normalizeDiagFacilities(_diagReports||DIAG_FALLBACK);
+  var group=facilities.find(function(f){ return(f.facility_type||f.type||f.id)===selVal; });
 
-  if (!name || !tel || !email) {
-    alert('구매자 정보를 모두 입력해 주세요.');
+  loading.style.display='none';
+  if(!group||!group.tiers.length){
+    container.innerHTML='<div class="col-12 text-center py-4 text-body-secondary">해당 시설 유형의 진단 상품이 없습니다.</div>';
     return;
   }
 
-  /* 주문번호 생성 (TAI + 타임스탬프) */
-  var orderId = 'TAI' + Date.now();
+  var tiers=group.tiers;
+  var colClass=tiers.length>=4?'col-lg-3 col-md-6':tiers.length===3?'col-lg-4 col-md-6':'col-lg-5 col-md-6';
 
-  document.getElementById('orderid').value   = orderId;
-  document.getElementById('price').value     = _pendingAmount;
-  document.getElementById('goodsname').value = _pendingGoods;
-  document.getElementById('buyername').value = name;
-  document.getElementById('buyertel').value  = tel.replace(/-/g, '');
-  document.getElementById('buyeremail').value = email;
+  container.innerHTML=tiers.map(function(t){
+    return renderDiagCard(t,colClass);
+  }).join('');
+};
 
-  /* KG이니시스 팝업 결제 호출 */
-  /* TODO: INIStdPay.js 로드 후 아래 주석 해제 */
-  // if (typeof INIStdPay !== 'undefined') {
-  //   INIStdPay.pay('payForm');
-  // } else {
-  //   alert('결제 모듈 로드 중입니다. 잠시 후 다시 시도해 주세요.');
-  // }
+function renderDiagCard(t, colClass){
+  var price=parseInt(t.price||0);
+  var isFree=!!(t.is_free||price===0);
+  var isRec=!!(t.is_recommended||t.recommended);
+  var badgeClass=t.badge_class||t.tier_badge||'step-total';
+  var tierName=t.tier_name||t.name||'진단 상품';
+  var recLabel=t.rec_label||t.recommended_label||'';
+  var feats=t.features||t.feature_list||[];
+  var actionUrl=t.action_url||'free-diagnosis.html';
+  var goodsName=t.goods_name||tierName;
+  var period=t.service_period_months||12;
 
-  /* 임시: MID 설정 전 안내 */
+  var cardClass='diag-card'+(isFree?' free-card':'')+(isRec?' recommended':'');
+  var recBadge=isRec&&recLabel?'<div class="diag-rec-badge">'+recLabel+'</div>':'';
+  var topStyle=isRec?'style="margin-top:10px;"':'';
+
+  var priceHtml=isFree
+    ?'<div class="diag-free-price">0원</div><div class="diag-vat">&nbsp;</div><div class="diag-period">&nbsp;</div>'
+    :'<div class="diag-price">'+price.toLocaleString('ko-KR')+'<span class="unit">원</span></div>'
+      +'<div class="diag-vat">VAT 별도 · 단건 1회성</div>'
+      +'<div class="diag-period">🕐 서비스 제공기간 '+period+'개월</div>';
+
+  var featHtml=feats.length
+    ?'<ul class="diag-features">'+feats.map(function(f){return'<li>'+f+'</li>';}).join('')+'</ul>'
+    :'';
+
+  var btnHtml=isFree
+    ?'<a href="'+actionUrl+'" class="btn btn-border" style="width:100%;font-weight:700;">무료 진단 시작</a>'
+    :'<button class="btn '+(isRec?'btn-base':'btn-border')+'" style="width:100%;font-weight:700;" onclick="startDiagPayment(\''+goodsName+'\','+price+')">'
+      +'바로 결제 '+price.toLocaleString('ko-KR')+'원</button>';
+
+  return'<div class="'+colClass+'"><div class="'+cardClass+'">'
+    +recBadge
+    +'<span class="diag-step-badge '+badgeClass+'" '+topStyle+'>'+tierName+'</span>'
+    +priceHtml
+    +'<hr class="diag-divider">'
+    +featHtml
+    +btnHtml
+    +'</div></div>';
+}
+
+/* ════ 5. 탭 전환 ════ */
+window.switchTab=function(tab,btn){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.price-tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('tab-'+tab).classList.add('active');
+  btn.classList.add('active');
+};
+
+/* ════ 6. 연간/월간 토글 ════ */
+window.toggleBilling=function(){
+  isAnnual=!isAnnual;
+  var tog=document.getElementById('billing-toggle');
+  tog.classList.toggle('on',isAnnual);
+  document.getElementById('label-monthly').classList.toggle('active-label',!isAnnual);
+  document.getElementById('label-annual').classList.toggle('active-label',isAnnual);
+  document.querySelectorAll('.price-display[data-monthly]').forEach(function(el){
+    var m=parseInt(el.dataset.monthly);
+    el.textContent=(isAnnual?Math.round(m*10):m).toLocaleString('ko-KR');
+  });
+  document.querySelectorAll('[data-period-unit]').forEach(function(el){
+    el.textContent=isAnnual?'연':'월';
+  });
+};
+
+/* ════ 7. 결제 ════ */
+window.startSaasPayment=function(planName,amount){
+  new bootstrap.Modal(document.getElementById('saasReadyModal')).show();
+};
+
+window.startDiagPayment=function(goodsName,amount){
+  _pendingGoods=goodsName;
+  _pendingAmount=amount;
+  document.getElementById('diagModalTitle').textContent=goodsName;
+  document.getElementById('modal-goods-name').textContent=goodsName;
+  document.getElementById('modal-amount').textContent=amount.toLocaleString('ko-KR')+'원';
+  document.getElementById('buyer-name').value='';
+  document.getElementById('buyer-tel').value='';
+  document.getElementById('buyer-email').value='';
+  new bootstrap.Modal(document.getElementById('diagPayModal')).show();
+};
+
+window.proceedPayment=function(){
+  var name=(document.getElementById('buyer-name').value||'').trim();
+  var tel=(document.getElementById('buyer-tel').value||'').trim();
+  var email=(document.getElementById('buyer-email').value||'').trim();
+  if(!name||!tel||!email){alert('구매자 정보를 모두 입력해 주세요.');return;}
+  var orderId='TAI'+Date.now();
+  document.getElementById('orderid').value=orderId;
+  document.getElementById('price').value=_pendingAmount;
+  document.getElementById('goodsname').value=_pendingGoods;
+  document.getElementById('buyername').value=name;
+  document.getElementById('buyertel').value=tel.replace(/-/g,'');
+  document.getElementById('buyeremail').value=email;
+  /* TODO: INIStdPay.js 로드 완료 후 INIStdPay.pay('payForm') 호출 */
+  /* 임시: MID 설정 완료 전 문의 페이지로 이동 */
   bootstrap.Modal.getInstance(document.getElementById('diagPayModal')).hide();
   setTimeout(function(){
-    alert('결제 시스템을 최종 연동 중입니다.\n도입 문의(contact.html)로 신청 주시면 즉시 처리해 드립니다.');
-    location.href = 'contact.html?from=pricing&goods=' + encodeURIComponent(_pendingGoods) + '&amount=' + _pendingAmount;
-  }, 300);
-}
+    location.href='contact.html?from=pricing&goods='+encodeURIComponent(_pendingGoods)+'&amount='+_pendingAmount;
+  },300);
+};
 
-/* ── FAQ 토글 ── */
-function toggleFaq(qEl) {
-  var aEl = qEl.nextElementSibling;
-  var isOpen = qEl.classList.contains('open');
-  /* 모두 닫기 */
-  document.querySelectorAll('.faq-q').forEach(function(q){ q.classList.remove('open'); });
-  document.querySelectorAll('.faq-a').forEach(function(a){ a.classList.remove('open'); });
-  if (!isOpen) { qEl.classList.add('open'); aEl.classList.add('open'); }
-}
+/* ════ 8. FAQ ════ */
+window.toggleFaq=function(qEl){
+  var aEl=qEl.nextElementSibling;
+  var isOpen=qEl.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(function(q){q.classList.remove('open');});
+  document.querySelectorAll('.faq-a').forEach(function(a){a.classList.remove('open');});
+  if(!isOpen){qEl.classList.add('open');aEl.classList.add('open');}
+};
+
+/* ════ 9. 초기화 ════ */
+document.addEventListener('DOMContentLoaded',function(){loadPricingData();});
+
+})();
 </script>
 </body>
 </html>
