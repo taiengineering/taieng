@@ -7,42 +7,20 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:'Noto Sans KR','Segoe UI',sans-serif;}
-
-/* ── 레이아웃 ── */
 .shell{display:flex;height:100vh;width:100vw;}
 
 /* ── 사이드바 ── */
-.sidebar{
-  width:220px;flex-shrink:0;
-  background:#0d1120;
-  border-right:1px solid rgba(255,255,255,.07);
-  display:flex;flex-direction:column;
-  overflow:hidden;
-}
-.sb-logo{
-  padding:16px 18px 12px;
-  font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;
-  border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;
-}
+.sidebar{width:220px;flex-shrink:0;background:#0d1120;border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;overflow:hidden;}
+.sb-logo{padding:16px 18px 12px;font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0;}
 .sb-logo span{color:#22d3ee;}
-.sb-search{
-  padding:10px 12px;flex-shrink:0;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
-.sb-search input{
-  width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  border-radius:6px;padding:6px 10px;color:#fff;font-size:12px;outline:none;
-}
+.sb-search{padding:10px 12px;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,.06);}
+.sb-search input{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 10px;color:#fff;font-size:12px;outline:none;}
 .sb-search input::placeholder{color:rgba(255,255,255,.3);}
 .sb-list{flex:1;overflow-y:auto;padding:8px 0;}
 .sb-list::-webkit-scrollbar{width:3px;}
 .sb-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:2px;}
 .sb-group{padding:10px 14px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.3);text-transform:uppercase;}
-.sb-item{
-  display:flex;align-items:center;gap:8px;
-  padding:7px 14px;cursor:pointer;transition:background .12s;
-  font-size:12px;color:rgba(255,255,255,.65);
-}
+.sb-item{display:flex;align-items:center;gap:8px;padding:7px 14px;cursor:pointer;transition:background .12s;font-size:12px;color:rgba(255,255,255,.65);}
 .sb-item:hover{background:rgba(255,255,255,.06);color:#fff;}
 .sb-item.active{background:rgba(34,211,238,.12);color:#22d3ee;}
 .sb-item .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.2);}
@@ -53,41 +31,24 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
 
 /* ── 툴바 ── */
-.toolbar{
-  height:48px;flex-shrink:0;
-  background:#0d1120;border-bottom:1px solid rgba(255,255,255,.07);
-  display:flex;align-items:center;gap:10px;padding:0 16px;
-}
+.toolbar{height:48px;flex-shrink:0;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;padding:0 16px;}
 .tb-title{font-size:13px;font-weight:500;color:#fff;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .tb-url{font-size:11px;color:rgba(255,255,255,.35);font-family:monospace;margin-right:8px;}
 .layout-btns{display:flex;gap:4px;}
-.lbtn{
-  width:32px;height:28px;border:1px solid rgba(255,255,255,.15);border-radius:5px;
-  background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .12s;
-}
+.lbtn{width:32px;height:28px;border:1px solid rgba(255,255,255,.15);border-radius:5px;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;}
 .lbtn:hover{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);}
 .lbtn.active{border-color:#22d3ee;background:rgba(34,211,238,.12);}
 .lbtn svg{width:14px;height:14px;stroke:rgba(255,255,255,.5);fill:none;stroke-width:1.5;}
 .lbtn.active svg{stroke:#22d3ee;}
-.tb-reload{
-  padding:4px 12px;border:1px solid rgba(255,255,255,.15);border-radius:5px;
-  background:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:11px;
-}
+.tb-reload{padding:4px 12px;border:1px solid rgba(255,255,255,.15);border-radius:5px;background:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:11px;}
 .tb-reload:hover{border-color:rgba(255,255,255,.35);color:#fff;}
-.tb-open{
-  padding:4px 12px;border-radius:5px;
-  background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.3);
-  color:#22d3ee;cursor:pointer;font-size:11px;
-}
+.tb-open{padding:4px 12px;border-radius:5px;background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.3);color:#22d3ee;cursor:pointer;font-size:11px;}
 .tb-open:hover{background:rgba(34,211,238,.25);}
 
-/* ── 그리드 컨테이너 ── */
+/* ── 그리드 ── */
 .grid-wrap{flex:1;overflow:auto;padding:12px;}
 .grid-wrap::-webkit-scrollbar{width:5px;height:5px;}
 .grid-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:3px;}
-
-/* ── 그리드 레이아웃 ── */
 .grid{display:grid;gap:10px;width:100%;}
 .grid.l1{grid-template-columns:1fr;}
 .grid.l4{grid-template-columns:repeat(2,1fr);}
@@ -95,18 +56,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .grid.l20{grid-template-columns:repeat(5,1fr);}
 
 /* ── 타일 ── */
-.tile{
-  background:#111827;border-radius:8px;overflow:hidden;
-  border:1px solid rgba(255,255,255,.08);transition:border-color .15s;
-  cursor:pointer;position:relative;
-}
+.tile{background:#111827;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:border-color .15s;cursor:pointer;position:relative;}
 .tile:hover{border-color:rgba(34,211,238,.4);}
 .tile.selected{border-color:#22d3ee;box-shadow:0 0 0 1px #22d3ee;}
-.tile-header{
-  padding:6px 10px;background:#0d1120;
-  display:flex;align-items:center;gap:6px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-}
+.tile-header{padding:6px 10px;background:#0d1120;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(255,255,255,.06);}
 .tile-dots{display:flex;gap:4px;}
 .tile-dots span{width:8px;height:8px;border-radius:50%;}
 .tile-dots .d1{background:#ff5f57;}
@@ -115,60 +68,40 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .tile-name{font-size:11px;color:rgba(255,255,255,.55);margin-left:4px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .tile-new{font-size:9px;background:rgba(34,211,238,.2);color:#22d3ee;padding:1px 5px;border-radius:3px;}
 
-/* ── iframe 스케일 래퍼 ── */
+/* ── iframe ── */
 .iframe-wrap{position:relative;overflow:hidden;width:100%;}
-.iframe-wrap iframe{
-  border:none;display:block;
-  transform-origin:top left;
-  pointer-events:auto;
-}
-.tile-overlay{
-  position:absolute;inset:0;z-index:10;
-  display:none;align-items:center;justify-content:center;
-  background:rgba(0,0,0,.4);backdrop-filter:blur(2px);
-}
+.iframe-wrap iframe{border:none;display:block;transform-origin:top left;pointer-events:auto;}
+
+/* ── 오버레이 ── */
+.tile-overlay{position:absolute;inset:0;z-index:10;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);}
 .tile:hover .tile-overlay{display:flex;}
-.overlay-btn{
-  padding:8px 18px;background:#22d3ee;color:#000;
-  border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;
-}
+.overlay-btn{padding:8px 18px;background:#22d3ee;color:#000;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;}
 
 /* ── 로딩 ── */
-.tile-loading{
-  position:absolute;inset:0;z-index:5;
-  background:#111827;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:8px;
-}
+.tile-loading{position:absolute;inset:0;z-index:5;background:#111827;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
 .spinner{width:24px;height:24px;border:2px solid rgba(255,255,255,.1);border-top-color:#22d3ee;border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-txt{font-size:11px;color:rgba(255,255,255,.3);}
-
-/* ── 검색 하이라이트 ── */
 .tile.hidden{display:none;}
 </style>
 </head>
 <body>
-
 <div class="shell">
 
-  <!-- 사이드바 -->
   <aside class="sidebar">
     <div class="sb-logo">TAI<span>Safe</span></div>
     <div class="sb-search">
-      <input id="sbSearch" placeholder="화면 검색..." oninput="filterSidebar(this.value)">
+      <input id="sbSearch" placeholder="화면 검색..." oninput="filterCards(this.value)">
     </div>
     <div class="sb-list" id="sbList"></div>
   </aside>
 
-  <!-- 메인 -->
   <div class="main">
-
-    <!-- 툴바 -->
     <div class="toolbar">
       <div class="tb-title" id="tbTitle">TAI 마케팅 사이트 — 전체 화면 보기</div>
       <div class="tb-url" id="tbUrl">new.taieng.co.kr</div>
       <div class="layout-btns">
-        <button class="lbtn" id="lb1" onclick="setLayout(1)" title="단일 화면">
+        <button class="lbtn" id="lb1" onclick="setLayout(1)" title="단일">
           <svg viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="12" rx="1"/></svg>
         </button>
         <button class="lbtn" id="lb4" onclick="setLayout(4)" title="4분할">
@@ -177,67 +110,59 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
         <button class="lbtn" id="lb9" onclick="setLayout(9)" title="9분할">
           <svg viewBox="0 0 14 14"><rect x="1" y="1" width="3.3" height="3.3" rx=".4"/><rect x="5.35" y="1" width="3.3" height="3.3" rx=".4"/><rect x="9.7" y="1" width="3.3" height="3.3" rx=".4"/><rect x="1" y="5.35" width="3.3" height="3.3" rx=".4"/><rect x="5.35" y="5.35" width="3.3" height="3.3" rx=".4"/><rect x="9.7" y="5.35" width="3.3" height="3.3" rx=".4"/><rect x="1" y="9.7" width="3.3" height="3.3" rx=".4"/><rect x="5.35" y="9.7" width="3.3" height="3.3" rx=".4"/><rect x="9.7" y="9.7" width="3.3" height="3.3" rx=".4"/></svg>
         </button>
-        <button class="lbtn active" id="lb20" onclick="setLayout(20)" title="전체 보기">
+        <button class="lbtn active" id="lb20" onclick="setLayout(20)" title="전체">
           <svg viewBox="0 0 14 14"><rect x="1" y="1" width="2.2" height="3" rx=".3"/><rect x="3.9" y="1" width="2.2" height="3" rx=".3"/><rect x="6.8" y="1" width="2.2" height="3" rx=".3"/><rect x="9.7" y="1" width="2.2" height="3" rx=".3"/><rect x="1" y="5.5" width="2.2" height="3" rx=".3"/><rect x="3.9" y="5.5" width="2.2" height="3" rx=".3"/><rect x="6.8" y="5.5" width="2.2" height="3" rx=".3"/><rect x="9.7" y="5.5" width="2.2" height="3" rx=".3"/><rect x="1" y="10" width="2.2" height="3" rx=".3"/><rect x="3.9" y="10" width="2.2" height="3" rx=".3"/><rect x="6.8" y="10" width="2.2" height="3" rx=".3"/><rect x="9.7" y="10" width="2.2" height="3" rx=".3"/></svg>
         </button>
       </div>
       <button class="tb-reload" onclick="reloadAll()">⟳ 새로고침</button>
       <button class="tb-open" onclick="openCurrent()">↗ 새 탭</button>
     </div>
-
-    <!-- 그리드 -->
     <div class="grid-wrap">
       <div class="grid l20" id="grid"></div>
     </div>
-
   </div>
 </div>
 
 <script>
-/* ── 페이지 정의 ── */
-const BASE = 'https://new.taieng.co.kr/nexas/';
+/* ── Cloudflare Pages: nexas/ 가 루트 → URL prefix 없음 ── */
+const BASE = 'https://new.taieng.co.kr/';
 
 const PAGES = [
-  { id:'home',            name:'홈',             url: BASE+'index.html',              group:'메인', isNew:false },
-  { id:'about',           name:'회사소개',         url: BASE+'about.html',              group:'메인', isNew:false },
-  { id:'pricing',         name:'요금제',           url: BASE+'pricing.html',            group:'메인', isNew:true  },
-  { id:'contact',         name:'문의하기',          url: BASE+'contact.html',            group:'메인', isNew:false },
-  { id:'faq',             name:'FAQ',             url: BASE+'faq.html',                group:'메인', isNew:false },
-  { id:'safety-mgr',      name:'안전관리자 대상',     url: BASE+'for-safety-manager.html', group:'대상별', isNew:false },
-  { id:'biz-owner',       name:'사업주 대상',        url: BASE+'for-business-owner.html', group:'대상별', isNew:false },
-  { id:'tgt-building',    name:'건물·시설',          url: BASE+'target/building.html',    group:'대상별', isNew:false },
-  { id:'tgt-factory',     name:'공장·산업',          url: BASE+'target/factory.html',     group:'대상별', isNew:false },
-  { id:'tgt-constr',      name:'건설현장',           url: BASE+'target/construction.html',group:'대상별', isNew:false },
-  { id:'svc-saas',        name:'SaaS 구독',         url: BASE+'service/saas.html',       group:'서비스', isNew:false },
-  { id:'svc-diag',        name:'법령진단',           url: BASE+'service/diagnosis.html',  group:'서비스', isNew:false },
-  { id:'svc-cons',        name:'컨설팅',            url: BASE+'service/consulting.html', group:'서비스', isNew:false },
-  { id:'svc-appt',        name:'선임 연결',          url: BASE+'service/appointment.html',group:'서비스', isNew:false },
-  { id:'svc-edu',         name:'교육',              url: BASE+'service/education.html',  group:'서비스', isNew:false },
-  { id:'svc-inapp',       name:'인앱 서비스',         url: BASE+'service/inapp.html',      group:'서비스', isNew:false },
-  { id:'svc-repair',      name:'수선 연결',          url: BASE+'service/repair.html',     group:'서비스', isNew:false },
-  { id:'free-diag',       name:'무료 법령진단',        url: BASE+'free-diagnosis.html',     group:'진단', isNew:false },
-  { id:'connect',         name:'전문가 연결',         url: BASE+'connect.html',            group:'연결', isNew:false },
-  { id:'patents',         name:'특허',              url: BASE+'patents.html',            group:'회사', isNew:false },
+  {id:'home',       name:'홈',          url:BASE+'index.html',               group:'메인',   isNew:false},
+  {id:'about',      name:'회사소개',     url:BASE+'about.html',               group:'메인',   isNew:false},
+  {id:'pricing',    name:'요금제',       url:BASE+'pricing.html',             group:'메인',   isNew:true },
+  {id:'contact',    name:'문의하기',     url:BASE+'contact.html',             group:'메인',   isNew:false},
+  {id:'faq',        name:'FAQ',         url:BASE+'faq.html',                 group:'메인',   isNew:false},
+  {id:'sm',         name:'안전관리자',   url:BASE+'for-safety-manager.html',  group:'대상별', isNew:false},
+  {id:'bo',         name:'사업주',       url:BASE+'for-business-owner.html',  group:'대상별', isNew:false},
+  {id:'tgt-bld',    name:'건물·시설',    url:BASE+'target/building.html',     group:'대상별', isNew:false},
+  {id:'tgt-fac',    name:'공장·산업',    url:BASE+'target/factory.html',      group:'대상별', isNew:false},
+  {id:'tgt-con',    name:'건설현장',     url:BASE+'target/construction.html', group:'대상별', isNew:false},
+  {id:'svc-saas',   name:'SaaS 구독',   url:BASE+'service/saas.html',        group:'서비스', isNew:false},
+  {id:'svc-diag',   name:'법령진단',     url:BASE+'service/diagnosis.html',   group:'서비스', isNew:false},
+  {id:'svc-cons',   name:'컨설팅',       url:BASE+'service/consulting.html',  group:'서비스', isNew:false},
+  {id:'svc-appt',   name:'선임 연결',    url:BASE+'service/appointment.html', group:'서비스', isNew:false},
+  {id:'svc-edu',    name:'교육',         url:BASE+'service/education.html',   group:'서비스', isNew:false},
+  {id:'svc-inapp',  name:'인앱 서비스',  url:BASE+'service/inapp.html',       group:'서비스', isNew:false},
+  {id:'svc-repair', name:'수선 연결',    url:BASE+'service/repair.html',      group:'서비스', isNew:false},
+  {id:'free-diag',  name:'무료 법령진단', url:BASE+'free-diagnosis.html',     group:'진단',   isNew:false},
+  {id:'connect',    name:'전문가 연결',  url:BASE+'connect.html',             group:'연결',   isNew:false},
+  {id:'patents',    name:'특허',         url:BASE+'patents.html',             group:'회사',   isNew:false},
 ];
 
-/* ── 상태 ── */
 let currentLayout = 20;
 let currentPage   = null;
 const iframeMap   = {};
+const VPORT_W = 1440, VPORT_H = 900;
 
-/* ── 가상 뷰포트 (1440px 기준 렌더링) ── */
-const VPORT_W = 1440;
-const VPORT_H = 900;
-
-/* ── 사이드바 렌더 ── */
-function renderSidebar() {
+/* ── 사이드바 ── */
+function renderSidebar(){
   const el = document.getElementById('sbList');
   const groups = [...new Set(PAGES.map(p=>p.group))];
   el.innerHTML = groups.map(g => {
     const items = PAGES.filter(p=>p.group===g).map(p=>
       `<div class="sb-item" id="sb-${p.id}" onclick="focusPage('${p.id}')">
-        <span class="dot"></span>
-        <span>${p.name}</span>
+        <span class="dot"></span><span>${p.name}</span>
         ${p.isNew?'<span class="new-tag">NEW</span>':''}
       </div>`
     ).join('');
@@ -245,10 +170,10 @@ function renderSidebar() {
   }).join('');
 }
 
-/* ── 그리드 렌더 ── */
-function renderGrid() {
+/* ── 그리드 ── */
+function renderGrid(){
   const grid = document.getElementById('grid');
-  grid.innerHTML = PAGES.map(p =>
+  grid.innerHTML = PAGES.map(p=>
     `<div class="tile" id="tile-${p.id}" onclick="focusPage('${p.id}')">
       <div class="tile-header">
         <div class="tile-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
@@ -267,157 +192,110 @@ function renderGrid() {
       </div>
     </div>`
   ).join('');
-
-  // iframe 참조 저장
-  PAGES.forEach(p => {
-    iframeMap[p.id] = document.getElementById('iframe-'+p.id);
-  });
+  PAGES.forEach(p=>{ iframeMap[p.id] = document.getElementById('iframe-'+p.id); });
 }
 
-/* ── 타일 크기 계산 & iframe 스케일 ── */
-function applyTileSizes() {
+/* ── 타일 사이즈 & 스케일 ── */
+function applyTileSizes(){
   const gw = document.querySelector('.grid-wrap');
-  const availW = gw.clientWidth - 24; // padding
+  const availW = gw.clientWidth - 24;
   const availH = gw.clientHeight - 24;
-
-  const cols = { 1:1, 4:2, 9:3, 20:5 }[currentLayout];
-  const rows = { 1:1, 4:2, 9:3, 20:4 }[currentLayout];
+  const cols = {1:1,4:2,9:3,20:5}[currentLayout];
+  const rows = {1:1,4:2,9:3,20:4}[currentLayout];
   const gap  = 10;
-
   const tileW = Math.floor((availW - gap*(cols-1)) / cols);
-  const tileH = currentLayout === 1
-    ? availH - 30   // 단일: 거의 전체 높이
-    : Math.floor((availH - gap*(rows-1)) / rows) - 30; // 30 = tile-header
+  const tileH = currentLayout===1 ? availH-30 : Math.floor((availH - gap*(rows-1)) / rows) - 30;
+  const scale = Math.min(tileW/VPORT_W, tileH/VPORT_H);
 
-  const scaleX = tileW / VPORT_W;
-  const scaleY = tileH / VPORT_H;
-  const scale  = Math.min(scaleX, scaleY);
-
-  PAGES.forEach(p => {
+  PAGES.forEach(p=>{
     const wrap  = document.getElementById('wrap-'+p.id);
     const frame = iframeMap[p.id];
-    if (!wrap || !frame) return;
-
-    wrap.style.height  = tileH + 'px';
-    frame.style.width  = VPORT_W + 'px';
-    frame.style.height = VPORT_H + 'px';
+    if(!wrap||!frame) return;
+    wrap.style.height   = tileH+'px';
+    frame.style.width   = VPORT_W+'px';
+    frame.style.height  = VPORT_H+'px';
     frame.style.transform = `scale(${scale})`;
-    frame.style.marginBottom = ((VPORT_H * scale) - VPORT_H) + 'px';
   });
 }
 
-/* ── iframe 지연 로드 ── */
-let loadIndex = 0;
-function lazyLoad() {
-  if (loadIndex >= PAGES.length) return;
-  const p = PAGES[loadIndex++];
+/* ── 지연 로드 (400ms 간격) ── */
+let loadIdx = 0;
+function lazyLoad(){
+  if(loadIdx >= PAGES.length) return;
+  const p     = PAGES[loadIdx++];
   const frame = iframeMap[p.id];
-  if (!frame) { lazyLoad(); return; }
-
-  frame.onload = () => {
+  if(!frame){ lazyLoad(); return; }
+  frame.onload = ()=>{
     const ld = document.getElementById('load-'+p.id);
-    if (ld) ld.style.display = 'none';
+    if(ld) ld.style.display='none';
     setTimeout(lazyLoad, 100);
   };
-  frame.onerror = () => {
+  frame.onerror = ()=>{
     const ld = document.getElementById('load-'+p.id);
-    if (ld) { ld.innerHTML = `<div class="loading-txt" style="color:rgba(255,100,100,.6)">로드 실패</div>`; }
+    if(ld) ld.innerHTML='<div class="loading-txt" style="color:rgba(255,120,120,.7)">로드 실패</div>';
     setTimeout(lazyLoad, 100);
   };
   frame.src = p.url;
-  setTimeout(lazyLoad, 400); // 동시 로드 제한
+  setTimeout(lazyLoad, 400);
 }
 
 /* ── 레이아웃 전환 ── */
-function setLayout(n) {
+function setLayout(n){
   currentLayout = n;
-  const grid = document.getElementById('grid');
-  grid.className = 'grid l'+n;
-
-  // 단일 모드: 현재 선택된 페이지만 보이게
-  if (n === 1) {
-    PAGES.forEach(p => {
-      const tile = document.getElementById('tile-'+p.id);
-      if (tile) tile.classList.toggle('hidden', p.id !== (currentPage || PAGES[0].id));
+  document.getElementById('grid').className = 'grid l'+n;
+  if(n===1){
+    const target = currentPage || PAGES[0].id;
+    PAGES.forEach(p=>{
+      document.getElementById('tile-'+p.id)?.classList.toggle('hidden', p.id!==target);
     });
   } else {
-    PAGES.forEach(p => {
-      const tile = document.getElementById('tile-'+p.id);
-      if (tile) tile.classList.remove('hidden');
-    });
+    PAGES.forEach(p=>{ document.getElementById('tile-'+p.id)?.classList.remove('hidden'); });
   }
-
-  // 툴바 버튼 상태
-  [1,4,9,20].forEach(x => {
-    document.getElementById('lb'+x)?.classList.toggle('active', x===n);
-  });
-
+  [1,4,9,20].forEach(x=>{ document.getElementById('lb'+x)?.classList.toggle('active', x===n); });
   setTimeout(applyTileSizes, 50);
 }
 
 /* ── 페이지 포커스 ── */
-function focusPage(id) {
+function focusPage(id){
   currentPage = id;
-  const p = PAGES.find(x=>x.id===id);
-  if (!p) return;
-
-  // 사이드바 활성
+  const p = PAGES.find(x=>x.id===id); if(!p) return;
   document.querySelectorAll('.sb-item').forEach(el=>el.classList.remove('active'));
   document.getElementById('sb-'+id)?.classList.add('active');
-
-  // 타일 선택 표시
   document.querySelectorAll('.tile').forEach(el=>el.classList.remove('selected'));
   document.getElementById('tile-'+id)?.classList.add('selected');
-
-  // 툴바 업데이트
   document.getElementById('tbTitle').textContent = p.name;
-  document.getElementById('tbUrl').textContent = p.url.replace('https://', '');
-
-  // 단일 레이아웃이면 해당 페이지만 표시
-  if (currentLayout === 1) {
-    PAGES.forEach(x => {
-      const tile = document.getElementById('tile-'+x.id);
-      if (tile) tile.classList.toggle('hidden', x.id !== id);
-    });
+  document.getElementById('tbUrl').textContent = p.url.replace('https://','');
+  if(currentLayout===1){
+    PAGES.forEach(x=>{ document.getElementById('tile-'+x.id)?.classList.toggle('hidden', x.id!==id); });
   }
-
-  // 스크롤해서 해당 사이드바 항목 보이기
   document.getElementById('sb-'+id)?.scrollIntoView({block:'nearest'});
 }
 
-/* ── 사이드바 검색 ── */
-function filterSidebar(q) {
+/* ── 검색 ── */
+function filterCards(q){
   q = q.toLowerCase();
-  const tiles = document.querySelectorAll('.tile');
-  tiles.forEach(tile => {
-    const id = tile.id.replace('tile-','');
-    const p  = PAGES.find(x=>x.id===id);
+  PAGES.forEach(p=>{
     const match = !q || p.name.toLowerCase().includes(q) || p.group.toLowerCase().includes(q);
-    tile.classList.toggle('hidden', !match);
-  });
-  document.querySelectorAll('.sb-item').forEach(el => {
-    const id = el.id.replace('sb-','');
-    const p  = PAGES.find(x=>x.id===id);
-    const match = !q || p.name.toLowerCase().includes(q) || p.group.toLowerCase().includes(q);
-    el.style.display = match ? '' : 'none';
+    document.getElementById('tile-'+p.id)?.classList.toggle('hidden', !match);
+    const sb = document.getElementById('sb-'+p.id);
+    if(sb) sb.style.display = match?'':'none';
   });
 }
 
 /* ── 유틸 ── */
-function reloadAll() {
-  PAGES.forEach(p => {
+function reloadAll(){
+  PAGES.forEach(p=>{
     const frame = iframeMap[p.id];
     const ld    = document.getElementById('load-'+p.id);
-    if (frame && frame.src) {
-      if (ld) { ld.style.display='flex'; ld.innerHTML='<div class="spinner"></div><div class="loading-txt">다시 로딩...</div>'; }
+    if(frame&&frame.src){
+      if(ld){ld.style.display='flex';ld.innerHTML='<div class="spinner"></div><div class="loading-txt">재로딩...</div>';}
       frame.src = frame.src;
     }
   });
 }
-
-function openCurrent() {
-  const p = PAGES.find(x=>x.id===currentPage) || PAGES[0];
-  window.open(p.url, '_blank');
+function openCurrent(){
+  const p = PAGES.find(x=>x.id===currentPage)||PAGES[0];
+  window.open(p.url,'_blank');
 }
 
 /* ── 초기화 ── */
@@ -426,9 +304,7 @@ renderGrid();
 applyTileSizes();
 lazyLoad();
 setLayout(20);
-
-// 리사이즈 대응
-window.addEventListener('resize', () => setTimeout(applyTileSizes, 100));
+window.addEventListener('resize', ()=>setTimeout(applyTileSizes,100));
 </script>
 </body>
 </html>
