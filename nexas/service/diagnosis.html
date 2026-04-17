@@ -46,8 +46,8 @@
   .diag-hero h1 em { color: #fde68a; font-style: normal; }
   .diag-hero p { font-size: 1.05rem; color: rgba(255,255,255,.85); margin-bottom: 32px; line-height: 1.65; }
 
-  /* 히어로 비디오 (768x512, 3:2 비율) */
-  .diag-hero-video {
+  /* 히어로 이미지 (3:2 비율) */
+  .diag-hero-image {
     position: relative;
     border-radius: 18px;
     overflow: hidden;
@@ -55,20 +55,11 @@
     aspect-ratio: 3 / 2;
     background: #000;
   }
-  .diag-hero-video video {
+  .diag-hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-  /* 접근성: 모션 축소 시 비디오 정지, 포스터만 표시 */
-  @media (prefers-reduced-motion: reduce) {
-    .diag-hero-video video { display: none; }
-    .diag-hero-video {
-      background-image: url('https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg');
-      background-size: cover;
-      background-position: center;
-    }
   }
 
   /* 비교 테이블 */
@@ -158,13 +149,10 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="diag-hero-video">
-          <video
-            autoplay muted loop playsinline preload="metadata"
-            poster="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg">
-            <source src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law.webm" type="video/webm">
-            <source src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law.mp4" type="video/mp4">
-          </video>
+        <div class="diag-hero-image">
+          <img
+            src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg"
+            alt="과태료 통지서를 확인하는 손 - 몰라서 내는 벌금" />
         </div>
       </div>
     </div>
