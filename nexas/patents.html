@@ -25,7 +25,7 @@
   .pat-hero-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; color: rgba(255,255,255,.7); border: 1.5px solid rgba(255,255,255,.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 20px; }
   .pat-hero h1 { font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 16px; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
   .pat-hero .sub { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 28px; }
-  .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(139,92,246,.15); border: 1.5px solid rgba(139,92,246,.5); color: rgba(255,255,255,.85); border-radius: 999px; padding: 9px 22px; font-size: .82rem; font-weight: 700; letter-spacing: .03em; backdrop-filter: blur(8px); }
+  .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(139,92,246,.15); border: 1.5px solid rgba(139,92,246,.5); color: rgba(255,255,255,.85); border-radius: 999px; padding: 9px 22px; font-size: .82rem; font-weight: 700; backdrop-filter: blur(8px); }
   .pending-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #d946ef; animation: blink 1.4s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
   @media (max-width: 991px) { .pat-hero { min-height: 440px; } .pat-hero-content { padding: 120px 24px 48px; } .pat-hero-bg::after { background: linear-gradient(to bottom, rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%); } }
@@ -43,18 +43,28 @@
   .patent-desc { font-size: .84rem; color: #4b5563; line-height: 1.65; text-align: center; margin: 0; }
   .pat-svc { display: inline-block; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: #0f172a; color: #fff; margin-top: 14px; }
 
-  /* ═══ 프로세스 섹션 (다크) ═══ */
-  .process-sec { background: #0d1117; padding: 80px 0 64px; }
-  .process-sec .sec-tag-light { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; padding: 5px 14px; margin-bottom: 18px; }
+  /* ═══ 프로세스 섹션 (소프트 다크) ═══ */
+  .process-sec { background: #1e293b; padding: 80px 0 64px; }
   .process-sec h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -.02em; margin-bottom: 48px; }
   .process-svg-wrap { max-width: 1100px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .process-svg-wrap img { width: 100%; min-width: 700px; height: auto; display: block; }
   @media (max-width: 767px) { .process-sec { padding: 56px 0 40px; } .process-sec h2 { margin-bottom: 32px; } }
 
-  /* ═══ 나머지 ═══ */
-  .legal-notice { background: #f8f9fa; border-left: 4px solid #dc2626; border-radius: 0 10px 10px 0; padding: 24px 24px 20px; }
-  .legal-notice h5 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
-  .legal-notice p  { font-size: .86rem; color: #374151; line-height: 1.75; margin: 0; }
+  /* ═══ 법적 보호 카드 ═══ */
+  .legal-card {
+    background: #fff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 32px 36px 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  }
+  .legal-card h5 { font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 12px; }
+  .legal-card p  { font-size: .86rem; color: #374151; line-height: 1.75; margin: 0; }
+
+  /* ═══ CTA ═══ */
+  .cta-sec { text-align: center; }
+  .cta-sec h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; color: #0f172a; margin-bottom: 12px; }
+  .cta-sec p { color: #64748b; margin-bottom: 32px; }
   </style>
 </head>
 <body class="sc5">
@@ -98,7 +108,6 @@
 
 <section class="process-sec">
   <div class="sec-inner text-center">
-    <span class="sec-tag-light">작동 방식</span>
     <h2>새로운 방식으로 접근했습니다.<br>그리고 하나의 시스템이 되었습니다.</h2>
     <div class="process-svg-wrap">
       <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/tai-process.svg" alt="TAI Safe 프로세스 — 법령판정부터 문서자동생성까지 7단계 연쇄 작동" loading="lazy">
@@ -106,11 +115,11 @@
   </div>
 </section>
 
-<section class="sec" style="background:#fff;">
+<section class="sec" style="background:#f8fafc;">
   <div class="sec-inner">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="legal-notice">
+      <div class="col-lg-12">
+        <div class="legal-card">
           <h5>⚖️ 법적 보호 안내</h5>
           <p>본 서비스에 적용된 핵심 기술은 특허 출원 중이며 (출원번호: 제10-2026-0056330 외 7건), 출원일로부터 제3자의 동일·유사 기술 실시에 대해 법적 대응이 가능합니다.<br>무단 복제·모방·역설계 시 특허법에 따른 <strong>민·형사상 조치</strong>를 취할 수 있습니다.</p>
         </div>
@@ -119,10 +128,10 @@
   </div>
 </section>
 
-<section class="sec" style="background:var(--gray-bg); text-align:center;">
+<section class="sec cta-sec" style="background:#fff;">
   <div class="sec-inner">
-    <h2 class="sec-h2">특허 출원 기술을 직접 경험하세요</h2>
-    <p style="color:var(--sub); margin-bottom:32px;">법령 자동 판정 기술이 적용된 무료 법령진단을 지금 바로 체험할 수 있습니다</p>
+    <h2>TAI만의 특별한 기술을 직접 경험하세요</h2>
+    <p>법령 자동 판정 기술이 적용된 무료 법령진단을 지금 바로 체험할 수 있습니다</p>
     <div class="d-flex gap-3 justify-content-center flex-wrap">
       <a href="free-diagnosis.html" class="btn-red">무료 법령진단 시작</a>
       <a href="service/saas.html" class="btn-outline">TAI Safe 서비스 소개</a>
@@ -139,71 +148,103 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 
-<!-- patents 전용: setProperty('important')로 style.css !important 완전 무력화 -->
+<!-- navbar 투명화: body 끝 style 태그(최후 cascade) + JS setProperty(important) 이중 공격 -->
+<style>
+html body header.navbar-area,
+html body.sc5 header.navbar-area,
+html body .navbar-area,
+html body.sc5 .navbar-area,
+header.navbar-area,
+.navbar-area {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 999 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+html body header.navbar-area .navbar,
+html body.sc5 header.navbar-area .navbar,
+.navbar-area .navbar,
+.navbar-area .nav-container,
+.navbar-area .container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+html body header.navbar-area.navbar-area-fixed,
+html body.sc5 header.navbar-area.navbar-area-fixed,
+.navbar-area.navbar-area-fixed {
+  position: fixed !important;
+  background: rgba(10,10,26,0.95) !important;
+  background-color: rgba(10,10,26,0.95) !important;
+  box-shadow: 0 2px 20px rgba(0,0,0,.3) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.navbar-area.navbar-area-fixed .navbar,
+.navbar-area.navbar-area-fixed .nav-container,
+.navbar-area.navbar-area-fixed .container {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+.navbar-area .navbar-nav > li > a,
+.navbar-area .nav-right-part a:not(.btn) {
+  color: rgba(255,255,255,.85) !important;
+}
+.navbar-area .navbar-nav > li > a:hover,
+.navbar-area .nav-right-part a:not(.btn):hover {
+  color: #fff !important;
+}
+.navbar-area .logo img {
+  filter: brightness(0) invert(1) !important;
+}
+</style>
+
 <script>
 (function(){
   var I = 'important';
-
-  function forceNav(scrolled){
+  function forceNav(){
     var nav = document.querySelector('.navbar-area');
     if(!nav) return;
-    var s = nav.style;
-    var inner = nav.querySelector('.navbar');
-
-    // position + layout
-    s.setProperty('position', scrolled ? 'fixed' : 'absolute', I);
-    s.setProperty('top', '0', I);
-    s.setProperty('left', '0', I);
-    s.setProperty('right', '0', I);
-    s.setProperty('z-index', '999', I);
-    s.setProperty('transition', 'background .3s, box-shadow .3s', I);
-
-    // background
-    s.setProperty('background', scrolled ? 'rgba(10,10,26,0.95)' : 'transparent', I);
-    s.setProperty('background-color', scrolled ? 'rgba(10,10,26,0.95)' : 'transparent', I);
-    s.setProperty('box-shadow', scrolled ? '0 2px 20px rgba(0,0,0,.3)' : 'none', I);
-    s.setProperty('backdrop-filter', scrolled ? 'blur(10px)' : 'none', I);
-    s.setProperty('-webkit-backdrop-filter', scrolled ? 'blur(10px)' : 'none', I);
-
-    // inner .navbar도 투명 강제
-    if(inner){
-      inner.style.setProperty('background', 'transparent', I);
-      inner.style.setProperty('background-color', 'transparent', I);
-    }
-
-    // 메뉴 텍스트 흰색
-    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){
+    var scrolled = window.scrollY > 80;
+    var bg = scrolled ? 'rgba(10,10,26,0.95)' : 'transparent';
+    var pos = scrolled ? 'fixed' : 'absolute';
+    var shadow = scrolled ? '0 2px 20px rgba(0,0,0,.3)' : 'none';
+    // navbar-area
+    nav.style.setProperty('position', pos, I);
+    nav.style.setProperty('top', '0', I);
+    nav.style.setProperty('left', '0', I);
+    nav.style.setProperty('right', '0', I);
+    nav.style.setProperty('z-index', '999', I);
+    nav.style.setProperty('background', bg, I);
+    nav.style.setProperty('background-color', bg, I);
+    nav.style.setProperty('box-shadow', shadow, I);
+    nav.style.setProperty('border', 'none', I);
+    // 모든 내부 컨테이너
+    nav.querySelectorAll('.navbar, .nav-container, .container').forEach(function(el){
+      el.style.setProperty('background', 'transparent', I);
+      el.style.setProperty('background-color', 'transparent', I);
+    });
+    // 텍스트 흰색
+    nav.querySelectorAll('.navbar-nav > li > a, .nav-right-part a:not(.btn)').forEach(function(a){
       a.style.setProperty('color', 'rgba(255,255,255,.85)', I);
     });
-    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){
-      a.style.setProperty('color', 'rgba(255,255,255,.85)', I);
-    });
-    // 로고 반전
     nav.querySelectorAll('.logo img').forEach(function(img){
       img.style.setProperty('filter', 'brightness(0) invert(1)', I);
     });
   }
-
-  function onScroll(){ forceNav(window.scrollY > 80); }
-
-  // MutationObserver — header.js가 navbar 주입하는 순간 잡기
-  var obs = new MutationObserver(function(){
-    if(document.querySelector('.navbar-area')){
-      forceNav(window.scrollY > 80);
-    }
-  });
-  obs.observe(document.body, {childList:true, subtree:true});
-
-  // 백업 타이머
-  setTimeout(function(){ forceNav(window.scrollY > 80); }, 100);
-  setTimeout(function(){ forceNav(window.scrollY > 80); }, 300);
-  setTimeout(function(){ forceNav(window.scrollY > 80); }, 600);
-
-  // 스크롤 핸들러
-  window.addEventListener('scroll', onScroll, {passive:true});
-
-  // 2초 후 옵저버 해제 (성능)
-  setTimeout(function(){ obs.disconnect(); }, 2000);
+  // MutationObserver
+  var obs = new MutationObserver(function(){ forceNav(); });
+  obs.observe(document.body, {childList:true, subtree:true, attributes:true, attributeFilter:['class','style']});
+  // 타이머
+  [0,50,100,200,400,800,1500].forEach(function(ms){ setTimeout(forceNav, ms); });
+  // 스크롤
+  window.addEventListener('scroll', forceNav, {passive:true});
+  // 3초 후 옵저버 해제
+  setTimeout(function(){ obs.disconnect(); }, 3000);
 })();
 </script>
 </body></html>
