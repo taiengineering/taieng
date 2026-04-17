@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 요금제. SaaS 구독(79,000원~)과 법령진단 단건(소형건물 99,000원~)을 확인하세요. 과태료·벌칙 리스크를 가장 저렴하게 해결합니다.">
+  <meta name="description" content="TAI Safe 요금제. 건물·산업·건설 SaaS 구독(59,000원~)과 법령진단 단건(99,000원~). 과태료 리스크를 가장 저렴하게 해결합니다.">
   <title>요금제 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -51,8 +51,8 @@
   /* ── 탭 래퍼 ── */
   .price-tab-wrap { background: #f8fafc; padding: 72px 0 80px; }
 
-  /* ── 메인 탭 ── */
-  .price-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 52px; }
+  /* ── 메인 탭 (SaaS / 법령진단) ── */
+  .price-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; }
   .price-tab-btn {
     padding: 12px 32px; border-radius: 999px; font-size: .95rem; font-weight: 700;
     border: 2px solid #e2e8f0; background: #fff; color: #64748b; cursor: pointer; transition: all .2s;
@@ -60,6 +60,19 @@
   .price-tab-btn.active { background: #0891b2; border-color: #0891b2; color: #fff; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
+
+  /* ── 섹터 서브탭 (건물/산업/건설) ── */
+  .sector-tabs {
+    display: flex; justify-content: center; gap: 6px; margin-bottom: 28px; flex-wrap: wrap;
+  }
+  .sector-tab-btn {
+    padding: 8px 24px; border-radius: 8px; font-size: .88rem; font-weight: 700;
+    border: 1.5px solid #e2e8f0; background: #fff; color: #64748b; cursor: pointer; transition: all .18s;
+  }
+  .sector-tab-btn.active { background: #0f172a; border-color: #0f172a; color: #fff; }
+  .sector-tab-btn .sector-icon { margin-right: 5px; }
+  .sector-panel { display: none; }
+  .sector-panel.active { display: block; }
 
   /* ── 연간/월간 토글 ── */
   .billing-toggle-wrap { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 0 0 10px; }
@@ -70,7 +83,7 @@
   .toggle-switch.on { background: #0891b2; }
   .toggle-switch::after { content: ''; position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   .toggle-switch.on::after { transform: translateX(22px); }
-  .billing-note { text-align: center; font-size: .78rem; font-weight: 700; color: #94a3b8; margin-bottom: 36px; }
+  .billing-note { text-align: center; font-size: .78rem; font-weight: 700; color: #94a3b8; margin-bottom: 32px; }
 
   /* ── SaaS 플랜 카드 ── */
   .plan-card {
@@ -79,7 +92,7 @@
   }
   .plan-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); }
   .plan-card.featured { border-color: #0891b2; box-shadow: 0 4px 24px rgba(8,145,178,.15); }
-  .plan-card.enterprise-card { border-color: #7c3aed; }
+  .plan-card.custom-card { border-color: #7c3aed; }
   .plan-badge {
     position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
     background: #0891b2; color: #fff; font-size: .72rem; font-weight: 800;
@@ -90,6 +103,7 @@
   .plan-price-sub { font-size: .88rem; color: #64748b; margin-bottom: 4px; }
   .plan-vat { font-size: .75rem; color: #94a3b8; margin-bottom: 12px; min-height: 18px; }
   .plan-divider { border: none; border-top: 1px solid #f1f5f9; margin: 14px 0; }
+  /* 포함건수/초과건수 박스 (크레딧 미노출) */
   .plan-quota-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; }
   .plan-quota-box .q-row { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; margin-bottom: 5px; }
   .plan-quota-box .q-row:last-child { margin-bottom: 0; }
@@ -99,10 +113,10 @@
   .plan-features { list-style: none; padding: 0; margin: 0 0 22px; }
   .plan-features li { display: flex; align-items: flex-start; gap: 8px; font-size: .85rem; color: #475569; margin-bottom: 8px; line-height: 1.5; }
   .plan-features li::before { content: '✓'; color: #0891b2; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
-  .plan-features.ent-feat li::before { color: #7c3aed; }
-  .plan-enterprise-price { font-size: 1.6rem; font-weight: 900; color: #7c3aed; margin-bottom: 8px; }
+  .plan-features.custom-feat li::before { color: #7c3aed; }
+  .plan-custom-price { font-size: 1.6rem; font-weight: 900; color: #7c3aed; margin-bottom: 8px; }
 
-  /* ── 법령진단 카드 (FN-02 개편) ── */
+  /* ── 법령진단 카드 ── */
   .diag-card {
     background: #fff; border-radius: 20px; padding: 28px 22px 24px;
     height: 100%; border: 2px solid #e2e8f0; transition: box-shadow .2s, border-color .2s;
@@ -142,7 +156,7 @@
   .special-section.open { max-height: 700px; opacity: 1; }
   .special-label { text-align: center; font-size: .72rem; font-weight: 800; letter-spacing: .1em; color: #7c3aed; text-transform: uppercase; margin: 28px 0 20px; }
 
-  /* ── 로딩 스켈레톤 ── */
+  /* ── 스켈레톤 ── */
   .skeleton { background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
   @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
   .skel-card { background: #fff; border-radius: 20px; padding: 28px 22px; border: 2px solid #e2e8f0; }
@@ -150,7 +164,7 @@
   .skel-line.tall { height: 36px; }
   .skel-line.short { width: 60%; }
 
-  /* ── 결제 특전 섹션 ── */
+  /* ── 혜택 섹션 ── */
   .price-benefit { background: linear-gradient(135deg, #0c1a35, #0e2449); padding: 72px 0; }
   .benefit-eyebrow { display: inline-block; font-size: .7rem; font-weight: 800; letter-spacing: .12em; color: #fbbf24; background: rgba(251,191,36,.1); border: 1px solid rgba(251,191,36,.3); border-radius: 4px; padding: 4px 12px; margin-bottom: 20px; }
   .price-benefit h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 12px; }
@@ -201,7 +215,7 @@
 <form id="payForm" method="post" accept-charset="EUC-KR" style="display:none;">
   <input type="hidden" name="version"      value="1.0">
   <input type="hidden" name="gopaymethod"  value="Card">
-  <input type="hidden" name="ini_mid"      id="ini_mid"      value="TAI_MID_DIAG"><!-- TODO: 실제 MID 교체 -->
+  <input type="hidden" name="ini_mid"      id="ini_mid"      value="TAI_MID_PLACEHOLDER"><!-- TODO: 실제 MID 교체 -->
   <input type="hidden" name="orderid"      id="orderid"      value="">
   <input type="hidden" name="price"        id="price"        value="">
   <input type="hidden" name="goodsname"    id="goodsname"    value="">
@@ -214,21 +228,38 @@
   <input type="hidden" name="acceptmethod" value="CARDSEL(1):SKIN(#0891b2)">
 </form>
 
-<!-- SaaS 정기결제 준비 중 모달 -->
-<div class="modal fade" id="saasReadyModal" tabindex="-1">
+<!-- SaaS 도입 문의 모달 -->
+<div class="modal fade" id="saasModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold">🔧 정기결제 시스템 준비 중</h5>
+        <h5 class="modal-title fw-bold" id="saasModalTitle">SaaS 구독</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body pt-2">
-        <p style="color:#374151;">SaaS 구독 정기결제 시스템을 최종 테스트 중입니다.</p>
-        <p style="font-size:.88rem;color:#64748b;">도입 문의로 신청해 주시면 담당자가 즉시 안내드립니다. <strong>(영업일 1일 이내 응답)</strong></p>
+      <div class="modal-body">
+        <div class="payment-detail-box">
+          <div class="p-row"><span class="p-label">플랜</span><span class="p-val" id="saas-modal-plan">—</span></div>
+          <div class="p-row"><span class="p-label">섹터</span><span class="p-val" id="saas-modal-sector">—</span></div>
+          <div class="p-row"><span class="p-label">월 요금 (VAT 별도)</span><span class="p-val p-total" id="saas-modal-price">—</span></div>
+          <div class="p-row"><span class="p-label">포함 인원</span><span class="p-val" id="saas-modal-members">10명</span></div>
+          <div class="p-row"><span class="p-label">초과 단가</span><span class="p-val">3,000원/명/월</span></div>
+        </div>
+        <div class="alert alert-info py-2 mb-3" style="font-size:.82rem;">
+          <i class="fas fa-info-circle me-1"></i>
+          정기결제 시스템 최종 테스트 중입니다. 도입 문의로 신청 시 담당자가 즉시 안내드립니다.
+        </div>
+        <div class="mt-2">
+          <label class="form-label fw-semibold" style="font-size:.85rem;">담당자 이름 <span class="text-danger">*</span></label>
+          <input type="text" class="form-control form-control-sm" id="saas-buyer-name" placeholder="홍길동">
+          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">연락처 <span class="text-danger">*</span></label>
+          <input type="tel" class="form-control form-control-sm" id="saas-buyer-tel" placeholder="010-0000-0000">
+          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 <span class="text-danger">*</span></label>
+          <input type="email" class="form-control form-control-sm" id="saas-buyer-email" placeholder="email@example.com">
+        </div>
       </div>
-      <div class="modal-footer border-0">
+      <div class="modal-footer border-0 gap-2">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <a href="contact.html" class="btn btn-base">도입 문의하기</a>
+        <a href="contact.html" class="btn btn-base px-4 fw-bold">도입 문의하기</a>
       </div>
     </div>
   </div>
@@ -251,8 +282,7 @@
         </div>
         <div class="alert alert-light border mb-0 py-2" style="font-size:.82rem;color:#475569;">
           <i class="fas fa-info-circle me-1 text-primary"></i>
-          결제 완료 후 PDF 법령진단 리포트가 이메일로 발송됩니다.<br>
-          단일 결제로 서비스 제공기간(12개월) 동안 이용 가능합니다.
+          결제 완료 후 PDF 법령진단 리포트가 이메일로 발송됩니다.
         </div>
         <div class="mt-3">
           <label class="form-label fw-semibold" style="font-size:.85rem;">구매자 이름 <span class="text-danger">*</span></label>
@@ -265,7 +295,7 @@
       </div>
       <div class="modal-footer border-0 gap-2">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-base px-4 fw-bold" onclick="proceedPayment()">
+        <button type="button" class="btn btn-base px-4 fw-bold" onclick="proceedDiagPayment()">
           <i class="fas fa-lock me-1"></i> 결제하기
         </button>
       </div>
@@ -278,7 +308,7 @@
   <div class="container">
     <span class="price-eyebrow">💰 요금제</span>
     <h1>명확하고 <em>합리적인</em> 가격</h1>
-    <p>TAI Safe는 안전관리를 <strong style="color:#67e8f9;">직접 하게 해주는 도구</strong>입니다.<br>과태료 리스크를 엑셀·종이 없이 자동으로 관리하세요.</p>
+    <p>TAI Safe는 안전관리를 <strong style="color:#67e8f9;">직접 하게 해주는 도구</strong>입니다.<br>건물·산업·건설 전 섹터 맞춤 요금제를 확인하세요.</p>
     <div class="price-hero-chips">
       <span class="price-hero-chip">✓ 법령 자동 적용</span>
       <span class="price-hero-chip">✓ 과태료 리스크 해소</span>
@@ -300,31 +330,70 @@
   <div class="container">
 
     <div class="price-tabs">
-      <button class="price-tab-btn active" onclick="switchTab('saas', this)">🖥️ SaaS 구독</button>
-      <button class="price-tab-btn" onclick="switchTab('diagnosis', this)">📋 법령진단 (단건)</button>
+      <button class="price-tab-btn active" onclick="switchMainTab('saas', this)">🖥️ SaaS 구독</button>
+      <button class="price-tab-btn" onclick="switchMainTab('diagnosis', this)">📋 법령진단 (단건)</button>
     </div>
 
-    <!-- SaaS 탭 -->
+    <!-- ══ SaaS 탭 ══ -->
     <div id="tab-saas" class="tab-panel active">
-      <div class="billing-toggle-wrap" style="margin-bottom:12px;">
+
+      <!-- 연간/월간 토글 -->
+      <div class="billing-toggle-wrap">
         <span class="billing-label active-label" id="label-monthly">월간</span>
         <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
         <span class="billing-label" id="label-annual">연간 <span class="annual-badge">2개월 무료</span></span>
       </div>
-      <div class="billing-note">사업장당 월정액 · VAT 별도 · 건물·제조·건설 모든 섹터 동일 요금</div>
-      <div id="saas-loading" class="row g-4 justify-content-center">
-        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
-        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
-        <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line short"></div></div></div>
+      <div class="billing-note">사업장(시설/현장)당 월정액 · VAT 별도 · 포함 10명 초과 시 3,000원/명</div>
+
+      <!-- 섹터 서브탭 -->
+      <div class="sector-tabs">
+        <button class="sector-tab-btn active" onclick="switchSectorTab('building', this)">
+          <span class="sector-icon">🏢</span>건물·시설
+        </button>
+        <button class="sector-tab-btn" onclick="switchSectorTab('industry', this)">
+          <span class="sector-icon">🏭</span>제조·산업
+        </button>
+        <button class="sector-tab-btn" onclick="switchSectorTab('construction', this)">
+          <span class="sector-icon">🏗️</span>건설현장
+        </button>
       </div>
-      <div id="saas-cards" class="row g-4 justify-content-center" style="display:none!important;"></div>
-      <div class="price-notice mt-5">
+
+      <!-- 건물 패널 -->
+      <div id="sector-building" class="sector-panel active">
+        <div id="building-loading" class="row g-4 justify-content-center">
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        </div>
+        <div id="building-cards" class="row g-4 justify-content-center" style="display:none;"></div>
+      </div>
+
+      <!-- 산업 패널 -->
+      <div id="sector-industry" class="sector-panel">
+        <div id="industry-loading" class="row g-4 justify-content-center">
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        </div>
+        <div id="industry-cards" class="row g-4 justify-content-center" style="display:none;"></div>
+      </div>
+
+      <!-- 건설 패널 -->
+      <div id="sector-construction" class="sector-panel">
+        <div id="construction-loading" class="row g-4 justify-content-center">
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+          <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        </div>
+        <div id="construction-cards" class="row g-4 justify-content-center" style="display:none;"></div>
+      </div>
+
+      <div class="price-notice mt-4">
         <h5>📌 SaaS 구독 안내</h5>
-        <p>월 구독 기준이며, 연간 구독 시 2개월 무료 혜택이 제공됩니다. 구독은 언제든지 취소 가능하며 위약금이 없습니다. 포함 인원·건수 초과분은 당월 사용량 기준으로 익월 자동 정산됩니다. 세금계산서 발행이 가능합니다.</p>
+        <p>월 구독 기준이며, 연간 구독 시 2개월 무료 혜택이 제공됩니다. 구독은 언제든지 취소 가능하며 위약금이 없습니다.
+        포함 인원(10명) 초과 시 3,000원/명/월이 익월 자동 정산됩니다. 세금계산서 발행이 가능합니다.</p>
       </div>
     </div>
 
-    <!-- 법령진단 탭 (FN-02 개편) -->
+    <!-- ══ 법령진단 탭 ══ -->
     <div id="tab-diagnosis" class="tab-panel">
       <div class="text-center mb-5">
         <p style="color:#64748b;font-size:.92rem;max-width:640px;margin:0 auto;line-height:1.7;">
@@ -333,18 +402,18 @@
         </p>
       </div>
 
-      <!-- 로딩 스켈레톤 -->
+      <!-- 로딩 -->
       <div id="diag-loading" class="row g-4 justify-content-center">
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
       </div>
 
       <!-- 4종 메인 카드 -->
       <div id="diag-main-cards" class="row g-4 justify-content-center" style="display:none;"></div>
 
-      <!-- 특수시설 확장 섹션 -->
+      <!-- 특수시설 확장 -->
       <div id="special-wrap" style="display:none;">
         <div class="special-toggle-wrap">
           <button class="special-toggle-btn" id="specialToggleBtn" onclick="toggleSpecial()">
@@ -359,14 +428,16 @@
 
       <div class="price-notice">
         <h5>📌 법령진단이란?</h5>
-        <p>법령진단은 <strong style="color:#22d3ee;">1회성 단건 결제 서비스</strong>입니다. 사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 과태료·벌칙 정보를 자동으로 도출하고 PDF 리포트를 제공합니다. 결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 리포트 재발행·조회가 가능합니다. 감사 대응 서류로 활용할 수 있습니다.</p>
+        <p>법령진단은 <strong style="color:#22d3ee;">1회성 단건 결제 서비스</strong>입니다.
+        사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 과태료·벌칙 정보를 자동 도출합니다.
+        결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 리포트 재발행·조회가 가능합니다.</p>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- 결제 특전 섹션 -->
+<!-- 혜택 섹션 -->
 <section class="price-benefit">
   <div class="container">
     <div class="text-center mb-5">
@@ -420,20 +491,20 @@
       <div class="faq-a">SaaS 구독은 결제 후 7일 이내 이용 내역이 없을 경우 전액 환불됩니다. 법령진단 단건은 리포트 발송 전 취소 시 전액 환불, 발송 후에는 환불이 불가합니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">세금계산서 발행이 가능한가요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">가능합니다. 결제 완료 후 이메일로 발행 요청을 해주시면 영업일 1일 이내 발행됩니다. 법인·개인사업자 모두 가능합니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">포함 인원 초과 시 어떻게 되나요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">포함 인원(10명)을 초과하더라도 서비스는 중단 없이 계속됩니다. 초과 인원 1명당 3,000원/월이 익월 청구서에 합산되어 자동 정산됩니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">포함 건수 초과 시 어떻게 되나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">포함 인원·알림·서류 건수를 초과하더라도 서비스는 중단 없이 계속됩니다. 당월 초과 사용량은 익월 청구서에 합산되어 자동 정산됩니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">건물·산업·건설 섹터가 다른가요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">네, 섹터별로 적용 법령과 관리 항목이 다르기 때문에 요금제도 구분됩니다. 건물은 소방·전기·환경, 산업은 안전보건법·설비관리, 건설은 건설안전법·위험작업 관리에 최적화되어 있습니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">법령진단 후 SaaS를 구독하면 중복인가요? <span class="faq-icon">+</span></div>
       <div class="faq-a">중복이 아닙니다. 법령진단은 "내 사업장에 어떤 법령이 적용되는지" 파악하는 1회성 서비스이고, SaaS 구독은 그 법령을 매일 자동으로 관리하게 해주는 도구입니다. 법령진단 먼저 받고 SaaS로 연결하시면 가장 효율적입니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">법령진단 리포트는 얼마나 오래 활용할 수 있나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">결제일로부터 12개월간 리포트 재발행·조회가 가능합니다. 단일 결제로 서비스 제공기간 전체 동안 이용할 수 있습니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">세금계산서 발행이 가능한가요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">가능합니다. 결제 완료 후 이메일로 발행 요청을 해주시면 영업일 1일 이내 발행됩니다. 법인·개인사업자 모두 가능합니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">TAI Safe는 대행서비스인가요? <span class="faq-icon">+</span></div>
@@ -468,12 +539,13 @@
 <script>
 if (typeof WOW !== 'undefined') new WOW().init();
 
-/* ════════════════════════════════════════════
-   pricing.js v3 (FN-02)
-   법령진단: 드롭다운 제거 → 4종 카드 직노출
-   DB 컬럼: facility_type_code / total_report_fee / is_active
-   특수시설 3종: 별도 확장 섹션
-════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════
+   pricing.js v4 (FN-01)
+   3섹터 탭 구조 + API 기반 가격 (하드코딩 금지)
+   GET /public/pricing/saas-plans
+   GET /public/pricing/diagnosis-reports
+   PRICING_FINAL.md 폴백 기준
+════════════════════════════════════════════════════ */
 (function(){
 'use strict';
 var API = 'https://api.taieng.co.kr';
@@ -482,100 +554,229 @@ var _saasPlans = [];
 var _diagReports = [];
 var _pendingGoods = '';
 var _pendingAmount = 0;
+var _pendingSaasPlan = {};
 
-/* ── SaaS 폴백 ── */
-var SAAS_FALLBACK = [
-  { plan_name:'STARTER',    price_monthly:79000,  is_recommended:false, is_enterprise:false,
-    included_members:20, over_member_price:2000, included_sms:100, over_sms_price:50, included_docs:5, over_doc_price:500,
-    features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정 · D-3 알림','완료 기록 자동화','TBM 전자서명','기록 보관 6개월'] },
-  { plan_name:'BUSINESS',   price_monthly:149000, is_recommended:true,  is_enterprise:false,
-    included_members:50, over_member_price:1500, included_sms:300, over_sms_price:40, included_docs:30, over_doc_price:400,
-    features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','기록 보관 무제한'] },
-  { plan_name:'ENTERPRISE',  price_monthly:0,      is_recommended:false, is_enterprise:true,
-    features:['BUSINESS 전체 포함','다수 사업장 통합 관리','전담 매니저 배정','API 연동','경영진 맞춤 리포트'] }
-];
-
-/* ════════════════════════
-   법령진단 메타 정의
-   DB: facility_type_code + total_report_fee 기준
-   4 MAIN + 3 SPECIAL
-════════════════════════ */
-var MAIN_CODES    = ['BUILDING_V2','BUILDING_LARGE_V2','INDUSTRY_V2','CONSTRUCTION'];
-var SPECIAL_CODES = ['HAZARD_LOW','HAZARD_MID','HAZARD_HIGH'];
-
-var DIAG_META = {
-  'BUILDING_V2':      { icon:'🏢', name:'소형건물',       sub:'5,000㎡ 미만',      price:99000,  isRec:false, goodsName:'소형건물 법령진단',      features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보 상세','12개월 리포트 재발행·조회','감사 대응 서류 활용 가능'] },
-  'BUILDING_LARGE_V2':{ icon:'🏛️', name:'대형건물',       sub:'5,000㎡ 이상',      price:249000, isRec:false, goodsName:'대형건물 법령진단',      features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보 상세','12개월 리포트 재발행·조회','감사 대응 서류 활용 가능'] },
-  'INDUSTRY_V2':      { icon:'🏭', name:'제조·산업',      sub:'공장·산업시설',      price:249000, isRec:true,  recLabel:'⭐ 가장 많이 선택', goodsName:'제조·산업 법령진단', features:['PDF 법령진단 리포트','법령·설비·공정 통합 분석','과태료·벌칙 정보 상세','12개월 리포트 재발행·조회','감사 대응 서류 활용 가능'] },
-  'CONSTRUCTION':     { icon:'🏗️', name:'건설현장',       sub:'공사 현장',          price:399000, isRec:false, goodsName:'건설현장 법령진단',      features:['PDF 법령진단 리포트','공종별 법령·의무 전체 도출','선임·신고·점검·작업 의무 분석','과태료·벌칙 정보 상세','12개월 리포트 재발행·조회','감사 대응 서류 활용 가능'] },
-  'HAZARD_LOW':       { icon:'⚠️',  name:'특수시설 일반형', sub:'1~2종 위험시설',    price:199000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (일반형)', features:['PDF 법령진단 리포트','위험물·유해화학물질 법령 분석','선임·점검·신고 의무 도출','12개월 리포트 재발행·조회'] },
-  'HAZARD_MID':       { icon:'⚠️',  name:'특수시설 중급형', sub:'3~5종 위험시설',    price:399000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (중급형)', features:['PDF 법령진단 리포트','복합 위험시설 법령 통합 분석','선임·점검·신고 의무 도출','12개월 리포트 재발행·조회'] },
-  'HAZARD_HIGH':      { icon:'🔴',  name:'특수시설 고급형', sub:'6종 이상 위험시설', price:699000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (고급형)', features:['PDF 법령진단 리포트','고위험 복합시설 법령 정밀 분석','선임·점검·신고 의무 도출','12개월 리포트 재발행·조회','별도 온보딩 지원'] },
+/* ══ 폴백 데이터 (PRICING_FINAL.md 기준) ══ */
+/* 가격 하드코딩이 아닌 폴백 — API 우선 사용 */
+var SAAS_FALLBACK = {
+  BUILDING: [
+    { plan_code:'BUILDING_BASIC',    plan_name:'BASIC',    sector:'BUILDING', price_monthly:59000,  is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'소규모 건물 (아파트, 상가)',
+      features:['법령 자동 판정','점검 일정 자동 생성','소방·전기·환경 법령','기록 자동화','D-3 알림'] },
+    { plan_code:'BUILDING_STANDARD', plan_name:'STANDARD', sector:'BUILDING', price_monthly:99000,  is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'중규모 건물 (오피스, 복합)',
+      features:['BASIC 전체 포함','서류 자동화','법령 변경 알림','경영진 대시보드','기록 무제한'] },
+    { plan_code:'BUILDING_CUSTOM',   plan_name:'CUSTOM',   sector:'BUILDING', price_monthly:0,      is_recommended:false, is_custom:true,
+      included_members:10, over_member_price:3000,
+      target:'대형 관리업체',
+      features:['STANDARD 전체 포함','다수 건물 통합 관리','전담 매니저','API 연동','맞춤 리포트'] },
+  ],
+  INDUSTRY: [
+    { plan_code:'INDUSTRY_STARTER_V2',  plan_name:'STARTER',  sector:'INDUSTRY', price_monthly:79000,  is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'5~30인 겸직 안전관리자',
+      features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정·D-3 알림','TBM 전자서명','기록 보관 6개월'] },
+    { plan_code:'INDUSTRY_BUSINESS_V2', plan_name:'BUSINESS', sector:'INDUSTRY', price_monthly:149000, is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'30~100인 사업장',
+      features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','기록 무제한'] },
+    { plan_code:'INDUSTRY_PRO',         plan_name:'PRO',      sector:'INDUSTRY', price_monthly:249000, is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'100인+ 전담 안전관리자',
+      features:['BUSINESS 전체 포함','위험성평가 자동화','설비 수명주기 관리','멀티사이트 지원','전담 온보딩'] },
+    { plan_code:'INDUSTRY_CUSTOM_V2',   plan_name:'CUSTOM',   sector:'INDUSTRY', price_monthly:0,      is_recommended:false, is_custom:true,
+      included_members:10, over_member_price:3000,
+      target:'대기업·다사업장',
+      features:['PRO 전체 포함','무제한 사업장','전담 매니저','ERP 연동','맞춤 계약'] },
+  ],
+  CONSTRUCTION: [
+    { plan_code:'CONSTRUCTION_STANDARD_V2', plan_name:'STANDARD', sector:'CONSTRUCTION', price_monthly:199000, is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'50억 미만 현장',
+      features:['건설안전법 자동 판정','TBM 일지 자동화','위험작업 허가서','D-3 알림','기록 보관'] },
+    { plan_code:'CONSTRUCTION_PREMIUM_V2', plan_name:'PREMIUM',  sector:'CONSTRUCTION', price_monthly:399000, is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'50억+ 현장',
+      features:['STANDARD 전체 포함','하도급 업체 관리','위험성평가 자동화','경영진 대시보드','서류 자동화'] },
+    { plan_code:'CONSTRUCTION_CUSTOM_V2',  plan_name:'CUSTOM',   sector:'CONSTRUCTION', price_monthly:0,      is_recommended:false, is_custom:true,
+      included_members:10, over_member_price:3000,
+      target:'대형건설사',
+      features:['PREMIUM 전체 포함','다현장 통합 관리','전담 매니저','API 연동','맞춤 계약'] },
+  ],
 };
 
-/* ═══ 1. 데이터 로드 ═══ */
+/* ── 법령진단 메타 (폴백 가격 포함 — API 우선) ── */
+var MAIN_CODES    = ['BUILDING_V2','BUILDING_LARGE_V2','INDUSTRY_V2','CONSTRUCTION'];
+var SPECIAL_CODES = ['HAZARD_LOW','HAZARD_MID','HAZARD_HIGH'];
+var DIAG_META = {
+  'BUILDING_V2':       { icon:'🏢', name:'소형건물',        sub:'5,000㎡ 미만',       fallbackPrice:99000,  isRec:false, goodsName:'소형건물 법령진단',
+    features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
+  'BUILDING_LARGE_V2': { icon:'🏛️', name:'대형건물',        sub:'5,000㎡ 이상',       fallbackPrice:249000, isRec:false, goodsName:'대형건물 법령진단',
+    features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
+  'INDUSTRY_V2':       { icon:'🏭', name:'제조·산업',       sub:'공장·산업시설',       fallbackPrice:249000, isRec:true,  recLabel:'⭐ 가장 많이 선택', goodsName:'제조·산업 법령진단',
+    features:['PDF 법령진단 리포트','법령·설비·공정 통합 분석','과태료·벌칙 정보','12개월 재발행·조회','감사 대응 서류'] },
+  'CONSTRUCTION':      { icon:'🏗️', name:'건설현장',        sub:'공사 현장',           fallbackPrice:399000, isRec:false, goodsName:'건설현장 법령진단',
+    features:['PDF 법령진단 리포트','공종별 법령·의무 도출','선임·신고·점검·작업 분석','과태료·벌칙 정보','12개월 재발행·조회'] },
+  'HAZARD_LOW':        { icon:'⚠️',  name:'특수시설 일반형', sub:'1~2종 위험시설',      fallbackPrice:199000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (일반형)',
+    features:['PDF 법령진단 리포트','위험물·유해화학물질 분석','선임·점검·신고 도출','12개월 재발행·조회'] },
+  'HAZARD_MID':        { icon:'⚠️',  name:'특수시설 중급형', sub:'3~5종 위험시설',      fallbackPrice:399000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (중급형)',
+    features:['PDF 법령진단 리포트','복합 위험시설 법령 통합','선임·점검·신고 도출','12개월 재발행·조회'] },
+  'HAZARD_HIGH':       { icon:'🔴',  name:'특수시설 고급형', sub:'6종 이상 위험시설',   fallbackPrice:699000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (고급형)',
+    features:['PDF 법령진단 리포트','고위험 복합시설 정밀 분석','선임·점검·신고 도출','12개월 재발행·조회','별도 온보딩 지원'] },
+};
+
+/* ══ 1. 데이터 로드 ══ */
 async function loadPricingData(){
   try {
-    var r = await Promise.all([
+    var results = await Promise.allSettled([
       fetch(API+'/public/pricing/saas-plans'),
       fetch(API+'/public/pricing/diagnosis-reports')
     ]);
-    if(r[0].ok){ var sj=await r[0].json(); _saasPlans=sj.data||sj.plans||sj||[]; }
-    if(r[1].ok){ var dj=await r[1].json(); _diagReports=dj.data||dj.reports||dj||[]; }
-  } catch(e){ console.warn('[pricing] API error:',e); }
-  if(!_saasPlans||!_saasPlans.length) _saasPlans=null;
-  if(!_diagReports||!_diagReports.length) _diagReports=null;
-  renderSaasCards();
+    if(results[0].status==='fulfilled' && results[0].value.ok){
+      var sj = await results[0].value.json();
+      _saasPlans = sj.data || sj.plans || sj || [];
+    }
+    if(results[1].status==='fulfilled' && results[1].value.ok){
+      var dj = await results[1].value.json();
+      _diagReports = dj.data || dj.reports || dj || [];
+    }
+  } catch(e){ console.warn('[pricing v4] API error:', e); }
+
+  renderSaasSector('BUILDING', 'building');
+  renderSaasSector('INDUSTRY', 'industry');
+  renderSaasSector('CONSTRUCTION', 'construction');
   renderDiagSection();
 }
 
-/* ═══ 2. DB API 가격 추출 (is_active 필터) ═══ */
-function getApiPrice(code){
-  if(!_diagReports||!_diagReports.length) return null;
-  var row=_diagReports.find(function(r){
-    return (r.facility_type_code||r.facility_type||r.code||r.type||'')===code && r.is_active!==false;
+/* ══ 2. API에서 섹터별 플랜 추출 ══ */
+function getPlansBySector(sector){
+  if(!_saasPlans || !_saasPlans.length) return null;
+  var filtered = _saasPlans.filter(function(p){
+    var s = (p.sector || p.plan_sector || '').toUpperCase();
+    return s === sector.toUpperCase();
+  });
+  return filtered.length ? filtered : null;
+}
+
+/* ══ 3. SaaS 섹터 렌더 ══ */
+function renderSaasSector(sector, domKey){
+  var loading = document.getElementById(domKey+'-loading');
+  var cards   = document.getElementById(domKey+'-cards');
+  var apiPlans = getPlansBySector(sector);
+  var plans    = apiPlans ? normalizeSaasPlans(apiPlans) : SAAS_FALLBACK[sector];
+
+  cards.innerHTML = plans.map(function(p){ return renderSaasCard(p); }).join('');
+  loading.style.display = 'none';
+  cards.style.display = '';
+  cards.className = 'row g-4 justify-content-center';
+}
+
+function normalizeSaasPlans(raw){
+  return raw.map(function(p){
+    return {
+      plan_code:         p.plan_code || p.code || '',
+      plan_name:         p.plan_name || p.name || '',
+      sector:            (p.sector || p.plan_sector || '').toUpperCase(),
+      price_monthly:     parseInt(p.price_monthly || p.monthly_price || 0),
+      is_recommended:    !!(p.is_recommended || p.featured),
+      is_custom:         !!(p.is_custom || p.is_enterprise || (p.plan_name||'').toUpperCase()==='CUSTOM'),
+      included_members:  parseInt(p.included_members || 10),
+      over_member_price: parseInt(p.over_member_price || 3000),
+      target:            p.target || p.description || '',
+      features:          p.features || [],
+    };
+  });
+}
+
+function renderSaasCard(p){
+  var isCustom = p.is_custom;
+  var isFeat   = p.is_recommended;
+  var mon      = p.price_monthly || 0;
+  var cls      = 'plan-card' + (isFeat ? ' featured' : '') + (isCustom ? ' custom-card' : '');
+
+  var priceHtml = isCustom
+    ? '<div class="plan-custom-price">별도 협의</div><div class="plan-price-sub" style="color:#94a3b8;">사업장·규모에 따라 결정</div><div class="plan-vat">&nbsp;</div>'
+    : '<div class="plan-price"><span class="price-display" data-monthly="'+mon+'">'+mon.toLocaleString('ko-KR')+'</span>원</div>'
+      +'<div class="plan-price-sub">/ 사업장 · <span class="period-unit">월</span></div>'
+      +'<div class="plan-vat">VAT 별도</div>';
+
+  /* 포함건수/초과건수 박스 (크레딧 미노출) */
+  var quotaHtml = '<div class="plan-quota-box">'
+    +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+(p.included_members||10)+'명</span></div>'
+    +'<div class="q-over">초과 인원당 '+(p.over_member_price||3000).toLocaleString('ko-KR')+'원/명/월</div>'
+    +'</div>';
+
+  var featsHtml = (p.features||[]).map(function(f){ return '<li>'+f+'</li>'; }).join('');
+  var targetHtml = p.target ? '<div class="mb-2" style="font-size:.78rem;color:#64748b;">'+p.target+'</div>' : '';
+
+  var btnHtml = isCustom
+    ? '<a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;">도입 문의하기</a>'
+    : '<button class="btn '+(isFeat?'btn-base':'btn-border')+'" style="width:100%;font-weight:700;"'
+      +' onclick="startSaasPayment(\''+p.plan_name+'\',\''+p.sector+'\','+mon+')">구독 문의 / 결제</button>';
+
+  return '<div class="col-lg-4 col-md-6"><div class="'+cls+'">'
+    +(isFeat ? '<div class="plan-badge">✨ 가장 많이 선택</div>' : '')
+    +'<div class="plan-name" style="'+(isCustom?'color:#7c3aed;':'')+'">'+p.plan_name+'</div>'
+    +priceHtml
+    +'<div class="plan-divider"></div>'
+    +targetHtml
+    +quotaHtml
+    +'<ul class="plan-features'+(isCustom?' custom-feat':'')+'">'+featsHtml+'</ul>'
+    +btnHtml
+    +'</div></div>';
+}
+
+/* ══ 4. 법령진단 가격 API 추출 ══ */
+function getDiagPrice(code){
+  if(!_diagReports || !_diagReports.length) return null;
+  var row = _diagReports.find(function(r){
+    return (r.facility_type_code||r.plan_code||r.code||'') === code && r.is_active !== false;
   });
   if(!row) return null;
-  var p=row.total_report_fee||row.price||row.total_fee||row.amount;
-  return p!=null?parseInt(p):null;
+  var p = row.total_report_fee || row.price || row.amount;
+  return p != null ? parseInt(p) : null;
 }
 
-/* ═══ 3. 법령진단 섹션 렌더 ═══ */
+/* ══ 5. 법령진단 렌더 ══ */
 function renderDiagSection(){
-  var loading  =document.getElementById('diag-loading');
-  var mainCards=document.getElementById('diag-main-cards');
-  var specWrap =document.getElementById('special-wrap');
-  var specCards=document.getElementById('diag-special-cards');
+  var loading   = document.getElementById('diag-loading');
+  var mainCards = document.getElementById('diag-main-cards');
+  var specWrap  = document.getElementById('special-wrap');
+  var specCards = document.getElementById('diag-special-cards');
 
-  var mainHtml=MAIN_CODES.map(function(code){
-    var m=DIAG_META[code];
-    var p=getApiPrice(code); if(p===null)p=m.price;
-    return renderDiagCard(code,m,p,false);
+  var mainHtml = MAIN_CODES.map(function(code){
+    var m = DIAG_META[code];
+    var p = getDiagPrice(code);
+    if(p === null) p = m.fallbackPrice;
+    return renderDiagCard(code, m, p, false);
   }).join('');
 
-  var specHtml=SPECIAL_CODES.map(function(code){
-    var m=DIAG_META[code];
-    var p=getApiPrice(code); if(p===null)p=m.price;
-    return renderDiagCard(code,m,p,true);
+  var specHtml = SPECIAL_CODES.map(function(code){
+    var m = DIAG_META[code];
+    var p = getDiagPrice(code);
+    if(p === null) p = m.fallbackPrice;
+    return renderDiagCard(code, m, p, true);
   }).join('');
 
-  loading.style.display='none';
-  mainCards.innerHTML=mainHtml;
-  mainCards.style.display='';
-  if(specHtml){ specCards.innerHTML=specHtml; specWrap.style.display=''; }
+  loading.style.display = 'none';
+  mainCards.innerHTML = mainHtml;
+  mainCards.style.display = '';
+  if(specHtml){ specCards.innerHTML = specHtml; specWrap.style.display = ''; }
 }
 
-function renderDiagCard(code,m,price,isSpecial){
-  var col=isSpecial?'col-lg-4 col-md-6':'col-lg-3 col-md-6';
-  var cls='diag-card'+(m.isRec?' recommended':'')+(isSpecial?' special-card':'');
-  var recBadge=m.isRec&&m.recLabel?'<div class="diag-rec-badge">'+m.recLabel+'</div>':'';
-  var topStyle=m.isRec?'style="margin-top:10px;"':'';
-  var featHtml=m.features.map(function(f){return'<li>'+f+'</li>';}).join('');
-  var btnCls=m.isRec?'btn-base':(isSpecial?'btn-border':'btn-border');
-  var btnStyle=isSpecial&&!m.isRec?'border-color:#7c3aed;color:#7c3aed;':'';
-  return'<div class="'+col+'"><div class="'+cls+'">'
+function renderDiagCard(code, m, price, isSpecial){
+  var col     = isSpecial ? 'col-lg-4 col-md-6' : 'col-lg-3 col-md-6';
+  var cls     = 'diag-card' + (m.isRec?' recommended':'') + (isSpecial?' special-card':'');
+  var recBadge= m.isRec && m.recLabel ? '<div class="diag-rec-badge">'+m.recLabel+'</div>' : '';
+  var featHtml= m.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
+  var btnCls  = m.isRec ? 'btn-base' : 'btn-border';
+  var btnStyle= (isSpecial && !m.isRec) ? 'border-color:#7c3aed;color:#7c3aed;' : '';
+
+  return '<div class="'+col+'"><div class="'+cls+'">'
     +recBadge
-    +'<span class="diag-icon" '+topStyle+'>'+m.icon+'</span>'
+    +'<span class="diag-icon"'+(m.isRec?' style="margin-top:10px;"':'')+'>'+m.icon+'</span>'
     +'<div class="diag-type-name">'+m.name+'</div>'
     +'<div class="diag-type-sub">'+m.sub+'</div>'
     +'<div class="diag-price">'+price.toLocaleString('ko-KR')+'<span class="unit">원</span></div>'
@@ -588,139 +789,106 @@ function renderDiagCard(code,m,price,isSpecial){
     +'</div></div>';
 }
 
-/* ═══ 4. 특수시설 토글 ═══ */
-window.toggleSpecial=function(){
-  var btn=document.getElementById('specialToggleBtn');
-  var sec=document.getElementById('specialSection');
-  var open=btn.classList.contains('open');
-  btn.classList.toggle('open',!open);
-  sec.classList.toggle('open',!open);
-};
-
-/* ═══ 5. SaaS 카드 ═══ */
-function renderSaasCards(){
-  var plans=normalizeSaas(_saasPlans||SAAS_FALLBACK);
-  var container=document.getElementById('saas-cards');
-  var loading=document.getElementById('saas-loading');
-  container.innerHTML=plans.map(function(p){return renderSaasCard(p);}).join('');
-  loading.style.display='none';
-  container.style.removeProperty('display');
-  container.className='row g-4 justify-content-center';
-}
-function normalizeSaas(raw){
-  if(!raw||!raw.length)return SAAS_FALLBACK;
-  var order=['STARTER','BUSINESS','ENTERPRISE'],map={};
-  raw.forEach(function(p){var nm=(p.plan_name||'').toUpperCase();if(!map[nm])map[nm]=p;});
-  var r=[];order.forEach(function(nm){if(map[nm])r.push(map[nm]);});
-  return r.length>=2?r:SAAS_FALLBACK;
-}
-function renderSaasCard(p){
-  var isEnt=!!(p.is_enterprise||(p.plan_name||'').toUpperCase()==='ENTERPRISE'||!p.price_monthly);
-  var isFeat=!!(p.is_recommended||p.featured);
-  var mon=parseInt(p.price_monthly||0);
-  var quota='';
-  if(!isEnt){
-    var iM=p.included_members||0,oM=p.over_member_price||0;
-    var iS=p.included_sms||0,oS=p.over_sms_price||0;
-    var iD=p.included_docs||0,oD=p.over_doc_price||0;
-    quota='<div class="plan-quota-box">'
-      +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+iM+'명</span></div>'
-      +(oM?'<div class="q-over">초과 인원당 '+oM.toLocaleString('ko-KR')+'원/월</div>':'')
-      +'<div class="q-row" style="margin-top:6px;"><span class="q-label">📩 알림 서비스</span><span class="q-val">월 '+iS+'건</span></div>'
-      +(oS?'<div class="q-over">초과 건당 '+oS.toLocaleString('ko-KR')+'원</div>':'')
-      +'<div class="q-row" style="margin-top:6px;"><span class="q-label">📄 서류 자동화</span><span class="q-val">월 '+iD+'건</span></div>'
-      +(oD?'<div class="q-over">초과 건당 '+oD.toLocaleString('ko-KR')+'원</div>':'')
-      +'</div>';
-  }else{
-    quota='<div class="plan-quota-box" style="background:#faf5ff;border-color:#e9d5ff;">'
-      +'<div class="q-row"><span class="q-label" style="color:#7c3aed;">👥 포함 인원</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
-      +'<div class="q-row" style="margin-top:6px;"><span class="q-label" style="color:#7c3aed;">📩 알림 서비스</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
-      +'<div class="q-row" style="margin-top:6px;"><span class="q-label" style="color:#7c3aed;">📄 서류 자동화</span><span class="q-val" style="color:#7c3aed;">무제한</span></div>'
-      +'</div>';
-  }
-  var feats=(p.features||[]).map(function(f){return'<li>'+f+'</li>';}).join('');
-  var priceHtml=isEnt
-    ?'<div class="plan-enterprise-price">별도 협의</div><div class="plan-price-sub" style="color:#94a3b8;">사업장 수·규모에 따라 결정</div><div class="plan-vat">&nbsp;</div>'
-    :'<div class="plan-price"><span class="price-display" data-monthly="'+mon+'">'+mon.toLocaleString('ko-KR')+'</span>원</div><div class="plan-price-sub">/ 사업장 · <span data-period-unit>월</span></div><div class="plan-vat">VAT 별도</div>';
-  var btn=isEnt
-    ?'<a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;">도입 문의하기</a>'
-    :'<button class="btn '+(isFeat?'btn-base':'btn-border')+'" style="width:100%;font-weight:700;" onclick="startSaasPayment(\''+p.plan_name+'\','+mon+')">바로 결제 <span class="price-display" data-monthly="'+mon+'">'+mon.toLocaleString('ko-KR')+'</span>원</button>';
-  var cls='plan-card'+(isFeat?' featured':'')+(isEnt?' enterprise-card':'');
-  return'<div class="col-lg-4 col-md-6"><div class="'+cls+'">'
-    +(isFeat?'<div class="plan-badge">✨ 가장 많이 선택</div>':'')
-    +'<div class="plan-name"'+(isEnt?' style="color:#7c3aed;"':'')+'>'+p.plan_name+'</div>'
-    +priceHtml+'<div class="plan-divider"></div>'+quota
-    +'<ul class="plan-features'+(isEnt?' ent-feat':'')+'">'+feats+'</ul>'+btn
-    +'</div></div>';
-}
-
-/* ═══ 6. 탭 전환 ═══ */
-window.switchTab=function(tab,btn){
-  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
-  document.querySelectorAll('.price-tab-btn').forEach(function(b){b.classList.remove('active');});
+/* ══ 6. 탭 전환 ══ */
+window.switchMainTab = function(tab, btn){
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.price-tab-btn').forEach(function(b){ b.classList.remove('active'); });
   document.getElementById('tab-'+tab).classList.add('active');
   btn.classList.add('active');
 };
 
-/* ═══ 7. 연간/월간 토글 ═══ */
-window.toggleBilling=function(){
-  isAnnual=!isAnnual;
-  document.getElementById('billing-toggle').classList.toggle('on',isAnnual);
-  document.getElementById('label-monthly').classList.toggle('active-label',!isAnnual);
-  document.getElementById('label-annual').classList.toggle('active-label',isAnnual);
+window.switchSectorTab = function(sector, btn){
+  document.querySelectorAll('.sector-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.sector-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('sector-'+sector).classList.add('active');
+  btn.classList.add('active');
+};
+
+/* ══ 7. 연간/월간 토글 ══ */
+window.toggleBilling = function(){
+  isAnnual = !isAnnual;
+  document.getElementById('billing-toggle').classList.toggle('on', isAnnual);
+  document.getElementById('label-monthly').classList.toggle('active-label', !isAnnual);
+  document.getElementById('label-annual').classList.toggle('active-label', isAnnual);
   document.querySelectorAll('.price-display[data-monthly]').forEach(function(el){
-    var m=parseInt(el.dataset.monthly);
-    el.textContent=(isAnnual?Math.round(m*10):m).toLocaleString('ko-KR');
+    var m = parseInt(el.dataset.monthly);
+    el.textContent = (isAnnual ? Math.round(m * 10) : m).toLocaleString('ko-KR');
   });
-  document.querySelectorAll('[data-period-unit]').forEach(function(el){
-    el.textContent=isAnnual?'연':'월';
+  document.querySelectorAll('.period-unit').forEach(function(el){
+    el.textContent = isAnnual ? '연' : '월';
   });
 };
 
-/* ═══ 8. 결제 ═══ */
-window.startSaasPayment=function(planName,amount){
-  new bootstrap.Modal(document.getElementById('saasReadyModal')).show();
+/* ══ 8. SaaS 결제/문의 ══ */
+window.startSaasPayment = function(planName, sector, amount){
+  var sectorLabel = { BUILDING:'건물·시설', INDUSTRY:'제조·산업', CONSTRUCTION:'건설현장' }[sector] || sector;
+  document.getElementById('saasModalTitle').textContent = planName + ' 플랜';
+  document.getElementById('saas-modal-plan').textContent = planName;
+  document.getElementById('saas-modal-sector').textContent = sectorLabel;
+  document.getElementById('saas-modal-price').textContent = amount ? amount.toLocaleString('ko-KR')+'원/월' : '별도 협의';
+  document.getElementById('saas-buyer-name').value = '';
+  document.getElementById('saas-buyer-tel').value  = '';
+  document.getElementById('saas-buyer-email').value = '';
+  _pendingSaasPlan = { planName, sector, amount };
+  new bootstrap.Modal(document.getElementById('saasModal')).show();
 };
-window.startDiagPayment=function(goodsName,amount){
-  _pendingGoods=goodsName; _pendingAmount=amount;
-  document.getElementById('diagModalTitle').textContent=goodsName;
-  document.getElementById('modal-goods-name').textContent=goodsName;
-  document.getElementById('modal-amount').textContent=amount.toLocaleString('ko-KR')+'원';
-  document.getElementById('buyer-name').value='';
-  document.getElementById('buyer-tel').value='';
-  document.getElementById('buyer-email').value='';
+
+/* ══ 9. 법령진단 결제 ══ */
+window.startDiagPayment = function(goodsName, amount){
+  _pendingGoods   = goodsName;
+  _pendingAmount  = amount;
+  document.getElementById('diagModalTitle').textContent   = goodsName;
+  document.getElementById('modal-goods-name').textContent = goodsName;
+  document.getElementById('modal-amount').textContent     = amount.toLocaleString('ko-KR')+'원';
+  document.getElementById('buyer-name').value  = '';
+  document.getElementById('buyer-tel').value   = '';
+  document.getElementById('buyer-email').value = '';
   new bootstrap.Modal(document.getElementById('diagPayModal')).show();
 };
-window.proceedPayment=function(){
-  var name=(document.getElementById('buyer-name').value||'').trim();
-  var tel=(document.getElementById('buyer-tel').value||'').trim();
-  var email=(document.getElementById('buyer-email').value||'').trim();
-  if(!name||!tel||!email){alert('구매자 정보를 모두 입력해 주세요.');return;}
-  var orderId='TAI'+Date.now();
-  document.getElementById('orderid').value=orderId;
-  document.getElementById('price').value=_pendingAmount;
-  document.getElementById('goodsname').value=_pendingGoods;
-  document.getElementById('buyername').value=name;
-  document.getElementById('buyertel').value=tel.replace(/-/g,'');
-  document.getElementById('buyeremail').value=email;
-  /* TODO: INIStdPay.js 로드 후 INIStdPay.pay('payForm') 호출 */
+
+window.proceedDiagPayment = function(){
+  var name  = (document.getElementById('buyer-name').value  || '').trim();
+  var tel   = (document.getElementById('buyer-tel').value   || '').trim();
+  var email = (document.getElementById('buyer-email').value || '').trim();
+  if(!name || !tel || !email){ alert('구매자 정보를 모두 입력해 주세요.'); return; }
+
+  var orderId = 'TAI' + Date.now();
+  document.getElementById('orderid').value   = orderId;
+  document.getElementById('price').value     = _pendingAmount;
+  document.getElementById('goodsname').value = _pendingGoods;
+  document.getElementById('buyername').value = name;
+  document.getElementById('buyertel').value  = tel.replace(/-/g, '');
+  document.getElementById('buyeremail').value= email;
+
+  /* KG이니시스 — TODO: INIStdPay.js 로드 후 INIStdPay.pay('payForm') 활성화 */
+  /* if(typeof INIStdPay !== 'undefined'){ INIStdPay.pay('payForm'); return; } */
+
   bootstrap.Modal.getInstance(document.getElementById('diagPayModal')).hide();
   setTimeout(function(){
-    location.href='contact.html?from=pricing&goods='+encodeURIComponent(_pendingGoods)+'&amount='+_pendingAmount;
-  },300);
+    location.href = 'contact.html?from=pricing&goods='+encodeURIComponent(_pendingGoods)+'&amount='+_pendingAmount;
+  }, 300);
 };
 
-/* ═══ 9. FAQ ═══ */
-window.toggleFaq=function(qEl){
-  var aEl=qEl.nextElementSibling;
-  var isOpen=qEl.classList.contains('open');
-  document.querySelectorAll('.faq-q').forEach(function(q){q.classList.remove('open');});
-  document.querySelectorAll('.faq-a').forEach(function(a){a.classList.remove('open');});
-  if(!isOpen){qEl.classList.add('open');aEl.classList.add('open');}
+/* ══ 10. 특수시설 토글 ══ */
+window.toggleSpecial = function(){
+  var btn = document.getElementById('specialToggleBtn');
+  var sec = document.getElementById('specialSection');
+  var open = btn.classList.contains('open');
+  btn.classList.toggle('open', !open);
+  sec.classList.toggle('open', !open);
 };
 
-/* ═══ 10. 초기화 ═══ */
-document.addEventListener('DOMContentLoaded',function(){loadPricingData();});
+/* ══ 11. FAQ ══ */
+window.toggleFaq = function(qEl){
+  var aEl    = qEl.nextElementSibling;
+  var isOpen = qEl.classList.contains('open');
+  document.querySelectorAll('.faq-q').forEach(function(q){ q.classList.remove('open'); });
+  document.querySelectorAll('.faq-a').forEach(function(a){ a.classList.remove('open'); });
+  if(!isOpen){ qEl.classList.add('open'); aEl.classList.add('open'); }
+};
+
+/* ══ 초기화 ══ */
+document.addEventListener('DOMContentLoaded', function(){ loadPricingData(); });
 
 })();
 </script>
