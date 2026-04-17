@@ -21,20 +21,21 @@
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
     /* ═══════════════════════════════════════════
-       히어로 — consulting 페이지와 동일한 색상·높이
+       히어로 — 한 장처럼 보이는 블렌딩 구조
+       핵심: 배경 그라디언트가 왼쪽~오른쪽 전체를 감싸고
+             이미지는 그 위에 점진적으로 나타남
     ═══════════════════════════════════════════ */
     .hero-split {
         display: flex;
         align-items: stretch;
-        /* consulting 페이지 breadcrumb-area 높이와 동일 */
         min-height: 600px;
-        /* ★ consulting 히어로 그라디언트 그대로 */
+        /* 전체 배경 — 이미지가 없어도 자연스럽게 채워짐 */
         background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
         overflow: hidden;
         position: relative;
     }
 
-    /* 왼쪽 55% — 텍스트 */
+    /* 왼쪽 55% */
     .hero-left {
         flex: 0 0 55%;
         display: flex;
@@ -42,6 +43,20 @@
         padding: 80px 64px 80px 80px;
         position: relative;
         z-index: 2;
+    }
+    /* ★ 왼쪽 오른쪽 끝을 살짝 투명하게 — 이미지로 자연스럽게 이어짐 */
+    .hero-left::after {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; right: 0;
+        width: 120px;
+        background: linear-gradient(to right,
+            transparent 0%,
+            rgba(139,92,246,.08) 60%,
+            rgba(139,92,246,.18) 100%
+        );
+        z-index: -1;
+        pointer-events: none;
     }
     .hero-left-inner { max-width: 520px; }
 
@@ -58,19 +73,18 @@
         padding: 6px 16px;
         margin-bottom: 22px;
     }
+
+    /* ★ h1 — 2줄, 엑셀 포함 전부 흰색 */
     .hero-h1 {
-        font-size: 3rem;
+        font-size: 3.2rem;
         font-weight: 900;
-        line-height: 1.18;
-        color: #fff;
+        line-height: 1.2;
+        color: #fff;          /* ★ 전체 흰색 */
         margin-bottom: 20px;
         letter-spacing: -.025em;
-        text-shadow: 0 2px 12px rgba(0,0,0,.12);
+        text-shadow: 0 2px 16px rgba(0,0,0,.18);
     }
-    .hero-h1 em {
-        font-style: normal;
-        color: #fde68a;
-    }
+
     .hero-desc {
         font-size: 1rem;
         color: rgba(255,255,255,.88);
@@ -78,7 +92,6 @@
         margin-bottom: 36px;
     }
 
-    /* CTA 버튼 — 흰 배경 + 보라 글씨 (밝은 그라디언트에 최적) */
     .hero-btn-main {
         display: inline-flex; align-items: center; gap: 8px;
         background: #fff; color: #7c3aed;
@@ -94,7 +107,7 @@
         box-shadow: 0 8px 28px rgba(0,0,0,.2);
     }
 
-    /* 오른쪽 45% — 이미지 */
+    /* 오른쪽 45% */
     .hero-right {
         flex: 0 0 45%;
         position: relative;
@@ -105,26 +118,33 @@
         object-fit: cover;
         object-position: center center;
         display: block;
-        filter: brightness(0.83) saturate(0.60) contrast(1.05);
+        filter: brightness(0.82) saturate(0.55) contrast(1.05);
     }
-    /* 좌측 페이드 — 그라디언트 끝색(#d946ef 계열)에 맞춤 */
+
+    /* ★ 핵심: 5단계 점진적 그라디언트 — 선명한 경계선 완전 제거 */
     .hero-right::before {
         content: '';
         position: absolute; inset: 0; z-index: 1; pointer-events: none;
         background: linear-gradient(
             to right,
-            rgba(109,40,217,.75) 0%,
-            rgba(139,92,246,.45) 22%,
-            rgba(139,92,246,.08) 48%,
-            transparent 100%
+            rgba(99,  50, 210, 0.92) 0%,    /* 경계 시작: 강하게 */
+            rgba(120, 70, 220, 0.72) 12%,   /* 2단계 */
+            rgba(139, 92, 246, 0.50) 28%,   /* 3단계 */
+            rgba(139, 92, 246, 0.25) 46%,   /* 4단계 */
+            rgba(139, 92, 246, 0.10) 62%,   /* 5단계 */
+            rgba(139, 92, 246, 0.03) 78%,   /* 6단계 */
+            transparent                100%  /* 완전 투명 */
         );
     }
+
+    /* 하단 페이드 */
     .hero-right::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0;
         height: 80px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.2));
+        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.15));
     }
+
     /* Before 뱃지 */
     .hero-badge {
         position: absolute; bottom: 24px; right: 20px; z-index: 2;
@@ -140,12 +160,13 @@
     @media (max-width: 991px) {
         .hero-split { flex-direction: column; min-height: auto; }
         .hero-left  { flex: none; padding: 56px 24px 40px; }
+        .hero-left::after { display: none; }
         .hero-right { flex: none; height: 280px; }
         .hero-h1    { font-size: 2.2rem; }
     }
     @media (max-width: 575px) {
-        .hero-h1    { font-size: 1.85rem; }
-        .hero-left  { padding: 48px 20px 32px; }
+        .hero-h1   { font-size: 1.85rem; }
+        .hero-left { padding: 48px 20px 32px; }
     }
 
     /* ═══ 역할 카드 ═══ */
@@ -179,34 +200,26 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- ═══════════════════════════════════════════
-         히어로: 좌텍스트 / 우이미지 — consulting 색상
-    ═══════════════════════════════════════════ -->
     <section class="hero-split">
 
-        <!-- 왼쪽: 텍스트 + CTA -->
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
+                <!-- ★ 2줄로 / 엑셀 포함 전부 흰색 -->
                 <h1 class="hero-h1">
-                    아직도 <em>엑셀</em>로<br>
-                    안전관리<br>
-                    하십니까?
+                    아직도 엑셀로 안전관리 하십니까?
                 </h1>
                 <p class="hero-desc">
                     종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>
                     이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>
                     3분 무료 진단으로 지금 바로 시작할 수 있습니다.
                 </p>
-                <!-- ★ 버튼 1개만 — "서비스 알아보기" 삭제 -->
                 <a class="hero-btn-main" href="free-diagnosis.html">
                     우리도 법령위반인지 확인하기 →
                 </a>
-                <!-- ★ 하단 숫자(신뢰 지표) 삭제 -->
             </div>
         </div>
 
-        <!-- 오른쪽: 이미지 -->
         <div class="hero-right">
             <img
                 class="hero-img"
