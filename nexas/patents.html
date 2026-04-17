@@ -14,10 +14,42 @@
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
 
+  /* ═══ 핵심 수정: navbar를 히어로 위에 투명 오버레이 ═══ */
+  .navbar-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .navbar-area .navbar { background: transparent !important; }
+  /* 로고·메뉴·버튼 텍스트를 흰색으로 (어두운 배경 위) */
+  .navbar-area .navbar-nav > li > a,
+  .navbar-area .nav-right-part a:not(.btn) {
+    color: rgba(255,255,255,.85) !important;
+  }
+  .navbar-area .navbar-nav > li > a:hover,
+  .navbar-area .nav-right-part a:not(.btn):hover {
+    color: #fff !important;
+  }
+  /* 모바일 토글 아이콘도 흰색 */
+  .navbar-area .toggle-btn .icon-left,
+  .navbar-area .toggle-btn .icon-right {
+    background: #fff !important;
+  }
+  .navbar-area .toggle-btn .icon-left::before,
+  .navbar-area .toggle-btn .icon-left::after,
+  .navbar-area .toggle-btn .icon-right::before,
+  .navbar-area .toggle-btn .icon-right::after {
+    background: #fff !important;
+  }
+
   /* ═══ 히어로: 풀블리드 이미지 + 좌측 텍스트 ═══ */
   .pat-hero {
     position: relative;
-    min-height: 520px;
+    min-height: 560px;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -63,7 +95,8 @@
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 48px 64px;
+    /* 상단 padding에 navbar 높이(~80px) 추가 → 텍스트가 네비 아래에 위치 */
+    padding: 140px 48px 64px;
     width: 100%;
   }
   .pat-hero-text {
@@ -122,8 +155,8 @@
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
 
   @media (max-width: 991px) {
-    .pat-hero { min-height: 420px; }
-    .pat-hero-content { padding: 64px 24px 48px; }
+    .pat-hero { min-height: 440px; }
+    .pat-hero-content { padding: 120px 24px 48px; }
     .pat-hero-bg::after {
       background: linear-gradient(
         to bottom,
@@ -134,8 +167,8 @@
     }
   }
   @media (max-width: 575px) {
-    .pat-hero { min-height: 360px; }
-    .pat-hero-content { padding: 56px 20px 40px; }
+    .pat-hero { min-height: 380px; }
+    .pat-hero-content { padding: 110px 20px 40px; }
   }
 
   /* ═══ 특허 카드 (기존 유지) ═══ */
