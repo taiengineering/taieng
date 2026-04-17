@@ -20,13 +20,16 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══ 히어로 분할 레이아웃 ═══ */
+    /* ═══════════════════════════════════════════
+       히어로 — consulting 페이지와 동일한 색상·높이
+    ═══════════════════════════════════════════ */
     .hero-split {
         display: flex;
         align-items: stretch;
-        min-height: 640px;
-        /* ★ 원본 히어로 톤 — 밝은 바이올렛 퍼플 */
-        background: linear-gradient(135deg, #4f46e5 0%, #3b1fa8 45%, #1e1b4b 100%);
+        /* consulting 페이지 breadcrumb-area 높이와 동일 */
+        min-height: 600px;
+        /* ★ consulting 히어로 그라디언트 그대로 */
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
         overflow: hidden;
         position: relative;
     }
@@ -36,7 +39,7 @@
         flex: 0 0 55%;
         display: flex;
         align-items: center;
-        padding: 88px 64px 88px 80px;
+        padding: 80px 64px 80px 80px;
         position: relative;
         z-index: 2;
     }
@@ -48,9 +51,9 @@
         font-weight: 700;
         letter-spacing: .14em;
         text-transform: uppercase;
-        color: #c4b5fd;
-        background: rgba(196,181,253,.15);
-        border: 1px solid rgba(196,181,253,.35);
+        color: #fff;
+        background: rgba(255,255,255,.18);
+        border: 1px solid rgba(255,255,255,.35);
         border-radius: 999px;
         padding: 6px 16px;
         margin-bottom: 22px;
@@ -62,47 +65,34 @@
         color: #fff;
         margin-bottom: 20px;
         letter-spacing: -.025em;
+        text-shadow: 0 2px 12px rgba(0,0,0,.12);
     }
     .hero-h1 em {
         font-style: normal;
-        color: #c4b5fd;
+        color: #fde68a;
     }
     .hero-desc {
         font-size: 1rem;
-        color: rgba(255,255,255,.78);
+        color: rgba(255,255,255,.88);
         line-height: 1.75;
         margin-bottom: 36px;
     }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+
+    /* CTA 버튼 — 흰 배경 + 보라 글씨 (밝은 그라디언트에 최적) */
     .hero-btn-main {
         display: inline-flex; align-items: center; gap: 8px;
-        background: #fff; color: #4f46e5;
+        background: #fff; color: #7c3aed;
         font-size: .95rem; font-weight: 800;
-        padding: 15px 30px; border-radius: 10px;
-        text-decoration: none; transition: background .2s, transform .15s;
-    }
-    .hero-btn-main:hover { background: #ede9fe; color: #4338ca; transform: translateY(-2px); }
-    .hero-btn-sub {
-        display: inline-flex; align-items: center; gap: 6px;
-        background: transparent; color: rgba(255,255,255,.85);
-        font-size: .9rem; font-weight: 600;
-        padding: 15px 22px; border-radius: 10px;
+        padding: 15px 32px; border-radius: 10px;
         text-decoration: none;
-        border: 1px solid rgba(255,255,255,.35);
-        transition: border-color .2s, color .2s, background .2s;
+        transition: background .2s, transform .15s, box-shadow .2s;
+        box-shadow: 0 4px 20px rgba(0,0,0,.15);
     }
-    .hero-btn-sub:hover { border-color: rgba(255,255,255,.7); color: #fff; background: rgba(255,255,255,.08); }
-
-    /* 신뢰 지표 */
-    .hero-trust {
-        display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-        margin-top: 44px; padding-top: 32px;
-        border-top: 1px solid rgba(255,255,255,.18);
+    .hero-btn-main:hover {
+        background: #faf5ff; color: #6d28d9;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(0,0,0,.2);
     }
-    .trust-item { display: flex; flex-direction: column; }
-    .trust-num  { font-size: 1.25rem; font-weight: 900; color: #fff; line-height: 1; }
-    .trust-lbl  { font-size: .7rem; color: rgba(255,255,255,.62); margin-top: 4px; }
-    .trust-div  { width: 1px; height: 30px; background: rgba(255,255,255,.2); }
 
     /* 오른쪽 45% — 이미지 */
     .hero-right {
@@ -115,36 +105,34 @@
         object-fit: cover;
         object-position: center center;
         display: block;
-        /* ★ 밝게 조정 — 채도도 조금 더 살림 */
         filter: brightness(0.83) saturate(0.60) contrast(1.05);
     }
-    /* 좌측 페이드: 밝아진 배경색에 맞게 */
+    /* 좌측 페이드 — 그라디언트 끝색(#d946ef 계열)에 맞춤 */
     .hero-right::before {
         content: '';
         position: absolute; inset: 0; z-index: 1; pointer-events: none;
         background: linear-gradient(
             to right,
-            #1e1b4b 0%,
-            rgba(30,27,75,.58) 20%,
-            rgba(30,27,75,.12) 48%,
+            rgba(109,40,217,.75) 0%,
+            rgba(139,92,246,.45) 22%,
+            rgba(139,92,246,.08) 48%,
             transparent 100%
         );
     }
-    /* 하단 페이드 */
     .hero-right::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0;
-        height: 90px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(30,27,75,.28));
+        height: 80px; z-index: 1; pointer-events: none;
+        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.2));
     }
     /* Before 뱃지 */
     .hero-badge {
         position: absolute; bottom: 24px; right: 20px; z-index: 2;
-        background: rgba(30,27,75,.80);
-        border: 1px solid rgba(196,181,253,.25);
+        background: rgba(30,0,60,.72);
+        border: 1px solid rgba(255,255,255,.18);
         backdrop-filter: blur(10px);
         border-radius: 10px; padding: 10px 16px;
-        color: rgba(255,255,255,.70); font-size: .76rem; line-height: 1.5;
+        color: rgba(255,255,255,.75); font-size: .76rem; line-height: 1.5;
     }
     .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
 
@@ -152,12 +140,12 @@
     @media (max-width: 991px) {
         .hero-split { flex-direction: column; min-height: auto; }
         .hero-left  { flex: none; padding: 56px 24px 40px; }
-        .hero-right { flex: none; height: 300px; }
+        .hero-right { flex: none; height: 280px; }
         .hero-h1    { font-size: 2.2rem; }
     }
     @media (max-width: 575px) {
-        .hero-h1 { font-size: 1.85rem; }
-        .hero-left { padding: 48px 20px 32px; }
+        .hero-h1    { font-size: 1.85rem; }
+        .hero-left  { padding: 48px 20px 32px; }
     }
 
     /* ═══ 역할 카드 ═══ */
@@ -191,8 +179,12 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
+    <!-- ═══════════════════════════════════════════
+         히어로: 좌텍스트 / 우이미지 — consulting 색상
+    ═══════════════════════════════════════════ -->
     <section class="hero-split">
 
+        <!-- 왼쪽: 텍스트 + CTA -->
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
@@ -206,33 +198,15 @@
                     이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>
                     3분 무료 진단으로 지금 바로 시작할 수 있습니다.
                 </p>
-                <div class="hero-btns">
-                    <a class="hero-btn-main" href="free-diagnosis.html">
-                        우리도 법령위반인지 확인하기 →
-                    </a>
-                    <a class="hero-btn-sub" href="service/saas.html">
-                        서비스 알아보기
-                    </a>
-                </div>
-                <div class="hero-trust">
-                    <div class="trust-item">
-                        <span class="trust-num">2,080+</span>
-                        <span class="trust-lbl">법령 의무 항목 DB</span>
-                    </div>
-                    <div class="trust-div"></div>
-                    <div class="trust-item">
-                        <span class="trust-num">8건</span>
-                        <span class="trust-lbl">특허 출원 완료</span>
-                    </div>
-                    <div class="trust-div"></div>
-                    <div class="trust-item">
-                        <span class="trust-num">무료</span>
-                        <span class="trust-lbl">1차 법령진단</span>
-                    </div>
-                </div>
+                <!-- ★ 버튼 1개만 — "서비스 알아보기" 삭제 -->
+                <a class="hero-btn-main" href="free-diagnosis.html">
+                    우리도 법령위반인지 확인하기 →
+                </a>
+                <!-- ★ 하단 숫자(신뢰 지표) 삭제 -->
             </div>
         </div>
 
+        <!-- 오른쪽: 이미지 -->
         <div class="hero-right">
             <img
                 class="hero-img"
