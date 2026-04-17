@@ -14,38 +14,6 @@
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
 
-  /* ═══ 핵심 수정: navbar를 히어로 위에 투명 오버레이 ═══ */
-  .navbar-area {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-  .navbar-area .navbar { background: transparent !important; }
-  /* 로고·메뉴·버튼 텍스트를 흰색으로 (어두운 배경 위) */
-  .navbar-area .navbar-nav > li > a,
-  .navbar-area .nav-right-part a:not(.btn) {
-    color: rgba(255,255,255,.85) !important;
-  }
-  .navbar-area .navbar-nav > li > a:hover,
-  .navbar-area .nav-right-part a:not(.btn):hover {
-    color: #fff !important;
-  }
-  /* 모바일 토글 아이콘도 흰색 */
-  .navbar-area .toggle-btn .icon-left,
-  .navbar-area .toggle-btn .icon-right {
-    background: #fff !important;
-  }
-  .navbar-area .toggle-btn .icon-left::before,
-  .navbar-area .toggle-btn .icon-left::after,
-  .navbar-area .toggle-btn .icon-right::before,
-  .navbar-area .toggle-btn .icon-right::after {
-    background: #fff !important;
-  }
-
   /* ═══ 히어로: 풀블리드 이미지 + 좌측 텍스트 ═══ */
   .pat-hero {
     position: relative;
@@ -65,7 +33,6 @@
     object-position: center center;
     display: block;
   }
-  /* 좌측 텍스트 가독성 그라디언트 오버레이 */
   .pat-hero-bg::after {
     content: '';
     position: absolute;
@@ -80,7 +47,6 @@
     );
     z-index: 1;
   }
-  /* 하단 페이드 */
   .pat-hero-bg::before {
     content: '';
     position: absolute;
@@ -89,68 +55,49 @@
     background: linear-gradient(to bottom, transparent, rgba(10, 10, 26, 0.3));
     z-index: 1;
   }
-
   .pat-hero-content {
     position: relative;
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
-    /* 상단 padding에 navbar 높이(~80px) 추가 → 텍스트가 네비 아래에 위치 */
     padding: 140px 48px 64px;
     width: 100%;
   }
-  .pat-hero-text {
-    max-width: 520px;
-  }
-
+  .pat-hero-text { max-width: 520px; }
   .pat-hero-eyebrow {
     display: inline-block;
-    font-size: .75rem;
-    font-weight: 700;
+    font-size: .75rem; font-weight: 700;
     letter-spacing: .08em;
     color: rgba(255,255,255,.7);
     border: 1.5px solid rgba(255,255,255,.3);
     border-radius: 8px;
-    padding: 6px 16px;
-    margin-bottom: 20px;
+    padding: 6px 16px; margin-bottom: 20px;
   }
-
   .pat-hero h1 {
     font-size: clamp(2.2rem, 5vw, 3.4rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.2;
-    letter-spacing: -.03em;
+    font-weight: 900; color: #fff;
+    line-height: 1.2; letter-spacing: -.03em;
     margin-bottom: 16px;
     text-shadow: 0 2px 20px rgba(0,0,0,.3);
   }
-
   .pat-hero .sub {
     font-size: .95rem;
     color: rgba(255,255,255,.65);
-    line-height: 1.7;
-    margin-bottom: 28px;
+    line-height: 1.7; margin-bottom: 28px;
   }
-
   .pending-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(139, 92, 246, .15);
-    border: 1.5px solid rgba(139, 92, 246, .5);
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(139,92,246,.15);
+    border: 1.5px solid rgba(139,92,246,.5);
     color: rgba(255,255,255,.85);
-    border-radius: 999px;
-    padding: 9px 22px;
-    font-size: .82rem;
-    font-weight: 700;
+    border-radius: 999px; padding: 9px 22px;
+    font-size: .82rem; font-weight: 700;
     letter-spacing: .03em;
     backdrop-filter: blur(8px);
   }
   .pending-badge .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #d946ef;
-    animation: blink 1.4s infinite;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #d946ef; animation: blink 1.4s infinite;
   }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
 
@@ -158,12 +105,8 @@
     .pat-hero { min-height: 440px; }
     .pat-hero-content { padding: 120px 24px 48px; }
     .pat-hero-bg::after {
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 10, 26, 0.85) 0%,
-        rgba(10, 10, 26, 0.55) 50%,
-        rgba(10, 10, 26, 0.3) 100%
-      );
+      background: linear-gradient(to bottom,
+        rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%);
     }
   }
   @media (max-width: 575px) {
@@ -171,7 +114,7 @@
     .pat-hero-content { padding: 110px 20px 40px; }
   }
 
-  /* ═══ 특허 카드 (기존 유지) ═══ */
+  /* ═══ 특허 카드 ═══ */
   .patent-card { background: #FEFDF8; border: 2px solid #B8960C; border-radius: 8px; padding: 28px 24px 22px; position: relative; overflow: hidden; height: 100%; transition: box-shadow .2s, transform .2s; }
   .patent-card:hover { box-shadow: 0 8px 28px rgba(184,150,12,.22); transform: translateY(-4px); }
   .patent-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(184,150,12,.5); border-radius: 4px; pointer-events: none; }
@@ -294,4 +237,67 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+
+<!-- patents 전용: navbar를 히어로 위에 투명 오버레이 + 스크롤시 고정 다크 배경 -->
+<script>
+(function(){
+  function applyNav(){
+    var nav = document.querySelector('.navbar-area');
+    if(!nav) return;
+    // 초기: absolute + 투명 (히어로 위에 얹힘)
+    nav.style.cssText = 'position:absolute;top:0;left:0;right:0;z-index:999;background:transparent;box-shadow:none;transition:background .3s ease, box-shadow .3s ease;';
+    // 내부 .navbar 배경도 투명
+    var inner = nav.querySelector('.navbar');
+    if(inner) inner.style.background = 'transparent';
+    // 메뉴 링크 흰색
+    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){
+      a.style.color = 'rgba(255,255,255,.85)';
+    });
+    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){
+      a.style.color = 'rgba(255,255,255,.85)';
+    });
+    // 로고 흰색 반전
+    nav.querySelectorAll('.logo img').forEach(function(img){
+      img.style.filter = 'brightness(0) invert(1)';
+      img.dataset.patentOrigFilter = '';
+    });
+  }
+
+  function handleScroll(){
+    var nav = document.querySelector('.navbar-area');
+    if(!nav) return;
+    var inner = nav.querySelector('.navbar');
+    var scrolled = window.scrollY > 80;
+    if(scrolled){
+      nav.style.position = 'fixed';
+      nav.style.background = 'rgba(10, 10, 26, 0.95)';
+      nav.style.boxShadow = '0 2px 20px rgba(0,0,0,.3)';
+      nav.style.backdropFilter = 'blur(10px)';
+      nav.style.webkitBackdropFilter = 'blur(10px)';
+      if(inner) inner.style.background = 'transparent';
+    } else {
+      nav.style.position = 'absolute';
+      nav.style.background = 'transparent';
+      nav.style.boxShadow = 'none';
+      nav.style.backdropFilter = 'none';
+      nav.style.webkitBackdropFilter = 'none';
+      if(inner) inner.style.background = 'transparent';
+    }
+  }
+
+  // header.js가 DOM 주입 후 실행 보장 (50ms 지연)
+  setTimeout(function(){
+    applyNav();
+    handleScroll();
+  }, 50);
+  // 혹시 늦게 주입되면 200ms에도 재실행
+  setTimeout(function(){
+    applyNav();
+    handleScroll();
+  }, 200);
+
+  // 스크롤 이벤트 (main.js의 스크롤 핸들러를 덮어씀)
+  window.addEventListener('scroll', handleScroll, {passive: true});
+})();
+</script>
 </body></html>
