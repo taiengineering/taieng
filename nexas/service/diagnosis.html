@@ -38,10 +38,36 @@
   }
   .diag-hero h1 {
     font-size: clamp(2rem, 4.5vw, 3.6rem);
-    font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 18px;
+    font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 20px;
+    letter-spacing: -0.01em;
   }
   .diag-hero h1 em { color: #fca5a5; font-style: normal; }
-  .diag-hero p { font-size: 1.05rem; color: rgba(255,255,255,.72); margin-bottom: 32px; line-height: 1.65; }
+  .diag-hero p { font-size: 1.05rem; color: rgba(255,255,255,.75); margin-bottom: 32px; line-height: 1.65; }
+
+  /* 히어로 비디오 (768x512, 3:2 비율) */
+  .diag-hero-video {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.05);
+    aspect-ratio: 3 / 2;
+    background: #000;
+  }
+  .diag-hero-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* 접근성: 모션 축소 시 비디오 정지, 포스터만 표시 */
+  @media (prefers-reduced-motion: reduce) {
+    .diag-hero-video video { display: none; }
+    .diag-hero-video {
+      background-image: url('https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+  }
 
   /* 비교 테이블 */
   .compare-section { background: #f1f5f9; padding: 80px 0; }
@@ -122,26 +148,21 @@
     <div class="row align-items-center g-5">
       <div class="col-lg-7">
         <span class="diag-eyebrow">📋 법령진단</span>
-        <h1>몰라서 맞았던 벌금,<br><em>이제 알고 대비할 수 있습니다</em></h1>
-        <p>3분 무료 진단으로 내 사업장에 적용되는 법령을 즉시 확인하세요.<br>
-        2,080개 이상의 법령 규칙 엔진이 자동으로 판단합니다.</p>
+        <h1>모르시면 벌금,<br><em>아시면 편안합니다.</em></h1>
+        <p>중대재해처벌법·산업안전보건법,<br>우리 사업장에 뭐가 적용되는지 3분 만에.</p>
         <div class="d-flex gap-3 flex-wrap">
           <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료 진단 시작</a>
           <a href="../contact.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">유료 진단 문의</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">진단 가능 섹터</p>
-          <div style="color:rgba(255,255,255,.85);font-size:.92rem;line-height:2.2;">
-            <div>🏭 산업·공장 — 설비·공정·위험기계 의무</div>
-            <div>🏗️ 건설현장 — 공정·작업·안전시설 의무</div>
-            <div>🏢 건물·시설 — 소방·전기·승강기 의무</div>
-          </div>
-          <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;">
-            <span style="font-size:1.8rem;font-weight:900;color:#fca5a5;">0원</span>
-            <span style="font-size:.85rem;color:rgba(255,255,255,.6);">1차 법령진단<br>완전 무료</span>
-          </div>
+        <div class="diag-hero-video">
+          <video
+            autoplay muted loop playsinline preload="metadata"
+            poster="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg">
+            <source src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law.webm" type="video/webm">
+            <source src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-law.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
