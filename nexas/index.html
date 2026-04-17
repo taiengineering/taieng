@@ -20,22 +20,15 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══════════════════════════════════════════
-       히어로 — 한 장처럼 보이는 블렌딩 구조
-       핵심: 배경 그라디언트가 왼쪽~오른쪽 전체를 감싸고
-             이미지는 그 위에 점진적으로 나타남
-    ═══════════════════════════════════════════ */
     .hero-split {
         display: flex;
         align-items: stretch;
         min-height: 600px;
-        /* 전체 배경 — 이미지가 없어도 자연스럽게 채워짐 */
         background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
         overflow: hidden;
         position: relative;
     }
 
-    /* 왼쪽 55% */
     .hero-left {
         flex: 0 0 55%;
         display: flex;
@@ -44,17 +37,12 @@
         position: relative;
         z-index: 2;
     }
-    /* ★ 왼쪽 오른쪽 끝을 살짝 투명하게 — 이미지로 자연스럽게 이어짐 */
     .hero-left::after {
         content: '';
         position: absolute;
         top: 0; bottom: 0; right: 0;
         width: 120px;
-        background: linear-gradient(to right,
-            transparent 0%,
-            rgba(139,92,246,.08) 60%,
-            rgba(139,92,246,.18) 100%
-        );
+        background: linear-gradient(to right, transparent 0%, rgba(139,92,246,.08) 60%, rgba(139,92,246,.18) 100%);
         z-index: -1;
         pointer-events: none;
     }
@@ -73,25 +61,21 @@
         padding: 6px 16px;
         margin-bottom: 22px;
     }
-
-    /* ★ h1 — 2줄, 엑셀 포함 전부 흰색 */
     .hero-h1 {
         font-size: 3.2rem;
         font-weight: 900;
         line-height: 1.2;
-        color: #fff;          /* ★ 전체 흰색 */
+        color: #fff;
         margin-bottom: 20px;
         letter-spacing: -.025em;
         text-shadow: 0 2px 16px rgba(0,0,0,.18);
     }
-
     .hero-desc {
         font-size: 1rem;
         color: rgba(255,255,255,.88);
         line-height: 1.75;
         margin-bottom: 36px;
     }
-
     .hero-btn-main {
         display: inline-flex; align-items: center; gap: 8px;
         background: #fff; color: #7c3aed;
@@ -107,7 +91,6 @@
         box-shadow: 0 8px 28px rgba(0,0,0,.2);
     }
 
-    /* 오른쪽 45% */
     .hero-right {
         flex: 0 0 45%;
         position: relative;
@@ -118,34 +101,32 @@
         object-fit: cover;
         object-position: center center;
         display: block;
-        filter: brightness(0.82) saturate(0.55) contrast(1.05);
+        /* ★ 사진 더 밝고 선명하게 */
+        filter: brightness(0.90) saturate(0.65) contrast(1.03);
     }
 
-    /* ★ 핵심: 5단계 점진적 그라디언트 — 선명한 경계선 완전 제거 */
+    /* ★ 핵심 수정: 오버레이 불투명도를 크게 낮춤
+       → 왼쪽 경계만 살짝 블렌딩, 나머지는 사진 그대로 보임 */
     .hero-right::before {
         content: '';
         position: absolute; inset: 0; z-index: 1; pointer-events: none;
         background: linear-gradient(
             to right,
-            rgba(99,  50, 210, 0.92) 0%,    /* 경계 시작: 강하게 */
-            rgba(120, 70, 220, 0.72) 12%,   /* 2단계 */
-            rgba(139, 92, 246, 0.50) 28%,   /* 3단계 */
-            rgba(139, 92, 246, 0.25) 46%,   /* 4단계 */
-            rgba(139, 92, 246, 0.10) 62%,   /* 5단계 */
-            rgba(139, 92, 246, 0.03) 78%,   /* 6단계 */
-            transparent                100%  /* 완전 투명 */
+            rgba(99,  50, 210, 0.48) 0%,    /* 경계: 절반만 덮음 */
+            rgba(120, 70, 220, 0.28) 15%,
+            rgba(139, 92, 246, 0.14) 30%,
+            rgba(139, 92, 246, 0.05) 48%,
+            rgba(139, 92, 246, 0.01) 65%,
+            transparent               100%   /* 이후 사진만 보임 */
         );
     }
-
-    /* 하단 페이드 */
     .hero-right::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0;
         height: 80px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.15));
+        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.10));
     }
 
-    /* Before 뱃지 */
     .hero-badge {
         position: absolute; bottom: 24px; right: 20px; z-index: 2;
         background: rgba(30,0,60,.72);
@@ -156,7 +137,6 @@
     }
     .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
 
-    /* 반응형 */
     @media (max-width: 991px) {
         .hero-split { flex-direction: column; min-height: auto; }
         .hero-left  { flex: none; padding: 56px 24px 40px; }
@@ -201,11 +181,9 @@
     <div id="tai-header"></div>
 
     <section class="hero-split">
-
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
-                <!-- ★ 2줄로 / 엑셀 포함 전부 흰색 -->
                 <h1 class="hero-h1">
                     아직도 엑셀로 안전관리 하십니까?
                 </h1>
@@ -232,7 +210,6 @@
                 엑셀 + 종이서류로 혼자 버팀
             </div>
         </div>
-
     </section>
 
     <section class="service-area default-pd-top">
