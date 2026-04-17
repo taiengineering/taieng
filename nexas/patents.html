@@ -14,105 +14,22 @@
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
 
-  /* ═══ 히어로: 풀블리드 이미지 + 좌측 텍스트 ═══ */
-  .pat-hero {
-    position: relative;
-    min-height: 560px;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-  .pat-hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  .pat-hero-bg img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    display: block;
-  }
-  .pat-hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(10, 10, 26, 0.88) 0%,
-      rgba(10, 10, 26, 0.72) 30%,
-      rgba(10, 10, 26, 0.35) 55%,
-      rgba(10, 10, 26, 0.08) 75%,
-      transparent 100%
-    );
-    z-index: 1;
-  }
-  .pat-hero-bg::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 100px;
-    background: linear-gradient(to bottom, transparent, rgba(10, 10, 26, 0.3));
-    z-index: 1;
-  }
-  .pat-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 140px 48px 64px;
-    width: 100%;
-  }
+  /* ═══ 히어로 ═══ */
+  .pat-hero { position: relative; min-height: 560px; display: flex; align-items: center; overflow: hidden; }
+  .pat-hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .pat-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .pat-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,26,.88) 0%, rgba(10,10,26,.72) 30%, rgba(10,10,26,.35) 55%, rgba(10,10,26,.08) 75%, transparent 100%); z-index: 1; }
+  .pat-hero-bg::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to bottom, transparent, rgba(10,10,26,.3)); z-index: 1; }
+  .pat-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 140px 48px 64px; width: 100%; }
   .pat-hero-text { max-width: 520px; }
-  .pat-hero-eyebrow {
-    display: inline-block;
-    font-size: .75rem; font-weight: 700;
-    letter-spacing: .08em;
-    color: rgba(255,255,255,.7);
-    border: 1.5px solid rgba(255,255,255,.3);
-    border-radius: 8px;
-    padding: 6px 16px; margin-bottom: 20px;
-  }
-  .pat-hero h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    font-weight: 900; color: #fff;
-    line-height: 1.2; letter-spacing: -.03em;
-    margin-bottom: 16px;
-    text-shadow: 0 2px 20px rgba(0,0,0,.3);
-  }
-  .pat-hero .sub {
-    font-size: .95rem;
-    color: rgba(255,255,255,.65);
-    line-height: 1.7; margin-bottom: 28px;
-  }
-  .pending-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(139,92,246,.15);
-    border: 1.5px solid rgba(139,92,246,.5);
-    color: rgba(255,255,255,.85);
-    border-radius: 999px; padding: 9px 22px;
-    font-size: .82rem; font-weight: 700;
-    letter-spacing: .03em;
-    backdrop-filter: blur(8px);
-  }
-  .pending-badge .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: #d946ef; animation: blink 1.4s infinite;
-  }
+  .pat-hero-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; color: rgba(255,255,255,.7); border: 1.5px solid rgba(255,255,255,.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 20px; }
+  .pat-hero h1 { font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 16px; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
+  .pat-hero .sub { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 28px; }
+  .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(139,92,246,.15); border: 1.5px solid rgba(139,92,246,.5); color: rgba(255,255,255,.85); border-radius: 999px; padding: 9px 22px; font-size: .82rem; font-weight: 700; letter-spacing: .03em; backdrop-filter: blur(8px); }
+  .pending-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #d946ef; animation: blink 1.4s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-
-  @media (max-width: 991px) {
-    .pat-hero { min-height: 440px; }
-    .pat-hero-content { padding: 120px 24px 48px; }
-    .pat-hero-bg::after {
-      background: linear-gradient(to bottom,
-        rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%);
-    }
-  }
-  @media (max-width: 575px) {
-    .pat-hero { min-height: 380px; }
-    .pat-hero-content { padding: 110px 20px 40px; }
-  }
+  @media (max-width: 991px) { .pat-hero { min-height: 440px; } .pat-hero-content { padding: 120px 24px 48px; } .pat-hero-bg::after { background: linear-gradient(to bottom, rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%); } }
+  @media (max-width: 575px) { .pat-hero { min-height: 380px; } .pat-hero-content { padding: 110px 20px 40px; } }
 
   /* ═══ 특허 카드 ═══ */
   .patent-card { background: #FEFDF8; border: 2px solid #B8960C; border-radius: 8px; padding: 28px 24px 22px; position: relative; overflow: hidden; height: 100%; transition: box-shadow .2s, transform .2s; }
@@ -125,16 +42,52 @@
   .patent-number { font-size: .71rem; color: #999; letter-spacing: .05em; display: block; text-align: center; margin-bottom: 10px; }
   .patent-desc { font-size: .84rem; color: #4b5563; line-height: 1.65; text-align: center; margin: 0; }
   .pat-svc { display: inline-block; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: #0f172a; color: #fff; margin-top: 14px; }
-  .flow-sec { background: #f8fafc; padding: 64px 0; }
-  .flow-node { text-align: center; background: #fff; border: 1.5px solid #B8960C; border-radius: 12px; padding: 20px 14px; height: 100%; }
-  .flow-node .fn-icon { font-size: 1.8rem; margin-bottom: 8px; }
-  .flow-node h6 { font-size: .82rem; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
-  .flow-node p  { font-size: .74rem; color: #6b7280; margin: 0; line-height: 1.45; }
-  .flow-arrow { display: flex; align-items: center; justify-content: center; color: #B8960C; font-size: 1.3rem; }
+
+  /* ═══ 프로세스 섹션 (다크) ═══ */
+  .process-sec {
+    background: #0d1117;
+    padding: 80px 0 64px;
+  }
+  .process-sec .sec-tag-light {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: rgba(255,255,255,.5);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 6px;
+    padding: 5px 14px;
+    margin-bottom: 18px;
+  }
+  .process-sec h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+    margin-bottom: 48px;
+  }
+  .process-svg-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .process-svg-wrap img {
+    width: 100%;
+    min-width: 700px;
+    height: auto;
+    display: block;
+  }
+  @media (max-width: 767px) {
+    .process-sec { padding: 56px 0 40px; }
+    .process-sec h2 { margin-bottom: 32px; }
+  }
+
+  /* ═══ 나머지 ═══ */
   .legal-notice { background: #f8f9fa; border-left: 4px solid #dc2626; border-radius: 0 10px 10px 0; padding: 24px 24px 20px; }
   .legal-notice h5 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
   .legal-notice p  { font-size: .86rem; color: #374151; line-height: 1.75; margin: 0; }
-  @media (max-width: 767px) { .flow-arrow { transform: rotate(90deg); margin: 6px 0; } }
   </style>
 </head>
 <body class="sc5">
@@ -144,11 +97,7 @@
 
 <section class="pat-hero">
   <div class="pat-hero-bg">
-    <img
-      src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-license.png"
-      alt="회로 기판 위의 빛나는 보안 방패 — TAI 특허 기술 보호"
-      loading="eager"
-    >
+    <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-license.png" alt="회로 기판 위의 빛나는 보안 방패 — TAI 특허 기술 보호" loading="eager">
   </div>
   <div class="pat-hero-content">
     <div class="pat-hero-text">
@@ -180,27 +129,17 @@
   </div>
 </section>
 
-<section class="flow-sec">
-  <div class="sec-inner">
-    <div class="text-center mb-5">
-      <span class="sec-tag">기술 통합</span>
-      <h2 class="sec-h2">8가지 특허 기술이 하나의 시스템으로</h2>
-      <p style="color:var(--sub); font-size:.9rem;">각 출원 기술은 독립적으로도, TAI 플랫폼 안에서 유기적으로도 작동합니다.</p>
-    </div>
-    <div class="row g-2 align-items-center justify-content-center">
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">⚖️</div><h6>법령 자동 판정</h6><p>조건코드 기반<br>법령·의무 자동 산출</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">👥</div><h6>분산형 안전관리</h6><p>전 작업자 참여형<br>실행 공백 제거</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">📊</div><h6>데이터 누적·예측</h6><p>누적 분석으로<br>사전 위험 경고</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">🌤</div><h6>환경 기반 판단</h6><p>기상 데이터 연동<br>작업중지 자동 증빙</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">🤝</div><h6>전문가 연계</h6><p>의무 판단 후<br>자동 매칭</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">🩺</div><h6>증상 기반 매칭</h6><p>증상 입력 → 서비스 분류<br>자격요건 검증 매칭</p></div></div>
-      <div class="col-auto"><div class="flow-arrow"><i class="fas fa-chevron-right"></i></div></div>
-      <div class="col-12 col-md"><div class="flow-node"><div class="fn-icon">📄</div><h6>문서 자동 생성</h6><p>법령 연계 안전 문서<br>자동 생성·신고 처리</p></div></div>
+<!-- ═══ 프로세스 섹션: 다크 배경 + SVG ═══ -->
+<section class="process-sec">
+  <div class="sec-inner text-center">
+    <span class="sec-tag-light">작동 방식</span>
+    <h2>새로운 방식으로 접근했습니다.<br>그리고 하나의 시스템이 되었습니다.</h2>
+    <div class="process-svg-wrap">
+      <img
+        src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/tai-process.svg"
+        alt="TAI Safe 프로세스 — 법령판정부터 문서자동생성까지 7단계 연쇄 작동"
+        loading="lazy"
+      >
     </div>
   </div>
 </section>
@@ -238,39 +177,25 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 
-<!-- patents 전용: navbar를 히어로 위에 투명 오버레이 + 스크롤시 고정 다크 배경 -->
 <script>
 (function(){
   function applyNav(){
     var nav = document.querySelector('.navbar-area');
     if(!nav) return;
-    // 초기: absolute + 투명 (히어로 위에 얹힘)
     nav.style.cssText = 'position:absolute;top:0;left:0;right:0;z-index:999;background:transparent;box-shadow:none;transition:background .3s ease, box-shadow .3s ease;';
-    // 내부 .navbar 배경도 투명
     var inner = nav.querySelector('.navbar');
     if(inner) inner.style.background = 'transparent';
-    // 메뉴 링크 흰색
-    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){
-      a.style.color = 'rgba(255,255,255,.85)';
-    });
-    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){
-      a.style.color = 'rgba(255,255,255,.85)';
-    });
-    // 로고 흰색 반전
-    nav.querySelectorAll('.logo img').forEach(function(img){
-      img.style.filter = 'brightness(0) invert(1)';
-      img.dataset.patentOrigFilter = '';
-    });
+    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){ a.style.color = 'rgba(255,255,255,.85)'; });
+    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){ a.style.color = 'rgba(255,255,255,.85)'; });
+    nav.querySelectorAll('.logo img').forEach(function(img){ img.style.filter = 'brightness(0) invert(1)'; });
   }
-
   function handleScroll(){
     var nav = document.querySelector('.navbar-area');
     if(!nav) return;
     var inner = nav.querySelector('.navbar');
-    var scrolled = window.scrollY > 80;
-    if(scrolled){
+    if(window.scrollY > 80){
       nav.style.position = 'fixed';
-      nav.style.background = 'rgba(10, 10, 26, 0.95)';
+      nav.style.background = 'rgba(10,10,26,0.95)';
       nav.style.boxShadow = '0 2px 20px rgba(0,0,0,.3)';
       nav.style.backdropFilter = 'blur(10px)';
       nav.style.webkitBackdropFilter = 'blur(10px)';
@@ -284,20 +209,9 @@
       if(inner) inner.style.background = 'transparent';
     }
   }
-
-  // header.js가 DOM 주입 후 실행 보장 (50ms 지연)
-  setTimeout(function(){
-    applyNav();
-    handleScroll();
-  }, 50);
-  // 혹시 늦게 주입되면 200ms에도 재실행
-  setTimeout(function(){
-    applyNav();
-    handleScroll();
-  }, 200);
-
-  // 스크롤 이벤트 (main.js의 스크롤 핸들러를 덮어씀)
-  window.addEventListener('scroll', handleScroll, {passive: true});
+  setTimeout(function(){ applyNav(); handleScroll(); }, 50);
+  setTimeout(function(){ applyNav(); handleScroll(); }, 200);
+  window.addEventListener('scroll', handleScroll, {passive:true});
 })();
 </script>
 </body></html>
