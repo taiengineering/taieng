@@ -44,45 +44,12 @@
   .pat-svc { display: inline-block; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: #0f172a; color: #fff; margin-top: 14px; }
 
   /* ═══ 프로세스 섹션 (다크) ═══ */
-  .process-sec {
-    background: #0d1117;
-    padding: 80px 0 64px;
-  }
-  .process-sec .sec-tag-light {
-    display: inline-block;
-    font-size: .75rem;
-    font-weight: 700;
-    letter-spacing: .1em;
-    color: rgba(255,255,255,.5);
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 6px;
-    padding: 5px 14px;
-    margin-bottom: 18px;
-  }
-  .process-sec h2 {
-    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.35;
-    letter-spacing: -.02em;
-    margin-bottom: 48px;
-  }
-  .process-svg-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .process-svg-wrap img {
-    width: 100%;
-    min-width: 700px;
-    height: auto;
-    display: block;
-  }
-  @media (max-width: 767px) {
-    .process-sec { padding: 56px 0 40px; }
-    .process-sec h2 { margin-bottom: 32px; }
-  }
+  .process-sec { background: #0d1117; padding: 80px 0 64px; }
+  .process-sec .sec-tag-light { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.15); border-radius: 6px; padding: 5px 14px; margin-bottom: 18px; }
+  .process-sec h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -.02em; margin-bottom: 48px; }
+  .process-svg-wrap { max-width: 1100px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .process-svg-wrap img { width: 100%; min-width: 700px; height: auto; display: block; }
+  @media (max-width: 767px) { .process-sec { padding: 56px 0 40px; } .process-sec h2 { margin-bottom: 32px; } }
 
   /* ═══ 나머지 ═══ */
   .legal-notice { background: #f8f9fa; border-left: 4px solid #dc2626; border-radius: 0 10px 10px 0; padding: 24px 24px 20px; }
@@ -129,17 +96,12 @@
   </div>
 </section>
 
-<!-- ═══ 프로세스 섹션: 다크 배경 + SVG ═══ -->
 <section class="process-sec">
   <div class="sec-inner text-center">
     <span class="sec-tag-light">작동 방식</span>
     <h2>새로운 방식으로 접근했습니다.<br>그리고 하나의 시스템이 되었습니다.</h2>
     <div class="process-svg-wrap">
-      <img
-        src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/tai-process.svg"
-        alt="TAI Safe 프로세스 — 법령판정부터 문서자동생성까지 7단계 연쇄 작동"
-        loading="lazy"
-      >
+      <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/tai-process.svg" alt="TAI Safe 프로세스 — 법령판정부터 문서자동생성까지 7단계 연쇄 작동" loading="lazy">
     </div>
   </div>
 </section>
@@ -177,41 +139,71 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 
+<!-- patents 전용: setProperty('important')로 style.css !important 완전 무력화 -->
 <script>
 (function(){
-  function applyNav(){
+  var I = 'important';
+
+  function forceNav(scrolled){
     var nav = document.querySelector('.navbar-area');
     if(!nav) return;
-    nav.style.cssText = 'position:absolute;top:0;left:0;right:0;z-index:999;background:transparent;box-shadow:none;transition:background .3s ease, box-shadow .3s ease;';
+    var s = nav.style;
     var inner = nav.querySelector('.navbar');
-    if(inner) inner.style.background = 'transparent';
-    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){ a.style.color = 'rgba(255,255,255,.85)'; });
-    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){ a.style.color = 'rgba(255,255,255,.85)'; });
-    nav.querySelectorAll('.logo img').forEach(function(img){ img.style.filter = 'brightness(0) invert(1)'; });
-  }
-  function handleScroll(){
-    var nav = document.querySelector('.navbar-area');
-    if(!nav) return;
-    var inner = nav.querySelector('.navbar');
-    if(window.scrollY > 80){
-      nav.style.position = 'fixed';
-      nav.style.background = 'rgba(10,10,26,0.95)';
-      nav.style.boxShadow = '0 2px 20px rgba(0,0,0,.3)';
-      nav.style.backdropFilter = 'blur(10px)';
-      nav.style.webkitBackdropFilter = 'blur(10px)';
-      if(inner) inner.style.background = 'transparent';
-    } else {
-      nav.style.position = 'absolute';
-      nav.style.background = 'transparent';
-      nav.style.boxShadow = 'none';
-      nav.style.backdropFilter = 'none';
-      nav.style.webkitBackdropFilter = 'none';
-      if(inner) inner.style.background = 'transparent';
+
+    // position + layout
+    s.setProperty('position', scrolled ? 'fixed' : 'absolute', I);
+    s.setProperty('top', '0', I);
+    s.setProperty('left', '0', I);
+    s.setProperty('right', '0', I);
+    s.setProperty('z-index', '999', I);
+    s.setProperty('transition', 'background .3s, box-shadow .3s', I);
+
+    // background
+    s.setProperty('background', scrolled ? 'rgba(10,10,26,0.95)' : 'transparent', I);
+    s.setProperty('background-color', scrolled ? 'rgba(10,10,26,0.95)' : 'transparent', I);
+    s.setProperty('box-shadow', scrolled ? '0 2px 20px rgba(0,0,0,.3)' : 'none', I);
+    s.setProperty('backdrop-filter', scrolled ? 'blur(10px)' : 'none', I);
+    s.setProperty('-webkit-backdrop-filter', scrolled ? 'blur(10px)' : 'none', I);
+
+    // inner .navbar도 투명 강제
+    if(inner){
+      inner.style.setProperty('background', 'transparent', I);
+      inner.style.setProperty('background-color', 'transparent', I);
     }
+
+    // 메뉴 텍스트 흰색
+    nav.querySelectorAll('.navbar-nav > li > a').forEach(function(a){
+      a.style.setProperty('color', 'rgba(255,255,255,.85)', I);
+    });
+    nav.querySelectorAll('.nav-right-part a:not(.btn)').forEach(function(a){
+      a.style.setProperty('color', 'rgba(255,255,255,.85)', I);
+    });
+    // 로고 반전
+    nav.querySelectorAll('.logo img').forEach(function(img){
+      img.style.setProperty('filter', 'brightness(0) invert(1)', I);
+    });
   }
-  setTimeout(function(){ applyNav(); handleScroll(); }, 50);
-  setTimeout(function(){ applyNav(); handleScroll(); }, 200);
-  window.addEventListener('scroll', handleScroll, {passive:true});
+
+  function onScroll(){ forceNav(window.scrollY > 80); }
+
+  // MutationObserver — header.js가 navbar 주입하는 순간 잡기
+  var obs = new MutationObserver(function(){
+    if(document.querySelector('.navbar-area')){
+      forceNav(window.scrollY > 80);
+    }
+  });
+  obs.observe(document.body, {childList:true, subtree:true});
+
+  // 백업 타이머
+  setTimeout(function(){ forceNav(window.scrollY > 80); }, 100);
+  setTimeout(function(){ forceNav(window.scrollY > 80); }, 300);
+  setTimeout(function(){ forceNav(window.scrollY > 80); }, 600);
+
+  // 스크롤 핸들러
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // 2초 후 옵저버 해제 (성능)
+  setTimeout(function(){ obs.disconnect(); }, 2000);
 })();
 </script>
 </body></html>
