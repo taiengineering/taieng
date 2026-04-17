@@ -28,26 +28,71 @@
         overflow: hidden;
         position: relative;
     }
+
+    /* ★ 이미지: 왼쪽 45% */
+    .hero-right {
+        flex: 0 0 45%;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+        filter: brightness(0.90) saturate(0.65) contrast(1.03);
+    }
+    /* ★ 오버레이: to left — 이미지 오른쪽 끝이 텍스트와 자연스럽게 합쳐짐 */
+    .hero-right::before {
+        content: '';
+        position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: linear-gradient(
+            to left,
+            rgba(99,  50, 210, 0.48) 0%,
+            rgba(120, 70, 220, 0.28) 15%,
+            rgba(139, 92, 246, 0.14) 30%,
+            rgba(139, 92, 246, 0.05) 48%,
+            rgba(139, 92, 246, 0.01) 65%,
+            transparent               100%
+        );
+    }
+    .hero-right::after {
+        content: '';
+        position: absolute; bottom: 0; left: 0; right: 0;
+        height: 80px; z-index: 1; pointer-events: none;
+        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.10));
+    }
+    .hero-badge {
+        position: absolute; bottom: 24px; left: 20px; z-index: 2;
+        background: rgba(30,0,60,.72);
+        border: 1px solid rgba(255,255,255,.18);
+        backdrop-filter: blur(10px);
+        border-radius: 10px; padding: 10px 16px;
+        color: rgba(255,255,255,.75); font-size: .76rem; line-height: 1.5;
+    }
+    .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
+
+    /* ★ 텍스트: 오른쪽 55% — 패딩 좌우 반전 */
     .hero-left {
         flex: 0 0 55%;
         display: flex;
         align-items: center;
-        padding: 80px 64px 80px 80px;
+        padding: 80px 80px 80px 64px;
         position: relative;
         z-index: 2;
     }
-    .hero-left::after {
+    /* ★ 왼쪽 끝 페이드 — 이미지와 자연스럽게 이어짐 */
+    .hero-left::before {
         content: '';
         position: absolute;
-        top: 0; bottom: 0; right: 0;
+        top: 0; bottom: 0; left: 0;
         width: 120px;
-        background: linear-gradient(to right, transparent 0%, rgba(139,92,246,.08) 60%, rgba(139,92,246,.18) 100%);
+        background: linear-gradient(to left, transparent 0%, rgba(139,92,246,.08) 60%, rgba(139,92,246,.18) 100%);
         z-index: -1;
         pointer-events: none;
     }
     .hero-left-inner { max-width: 520px; }
 
-    /* ★ 투명 배경 — 그라디언트가 뒤로 보임 */
     .hero-eyebrow {
         display: inline-block;
         font-size: .78rem;
@@ -60,7 +105,6 @@
         padding: 7px 18px;
         margin-bottom: 22px;
     }
-
     .hero-h1 {
         font-size: 3.8rem;
         font-weight: 900;
@@ -91,52 +135,11 @@
         box-shadow: 0 8px 28px rgba(0,0,0,.2);
     }
 
-    .hero-right {
-        flex: 0 0 45%;
-        position: relative;
-        overflow: hidden;
-    }
-    .hero-img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: center center;
-        display: block;
-        filter: brightness(0.90) saturate(0.65) contrast(1.03);
-    }
-    .hero-right::before {
-        content: '';
-        position: absolute; inset: 0; z-index: 1; pointer-events: none;
-        background: linear-gradient(
-            to right,
-            rgba(99,  50, 210, 0.48) 0%,
-            rgba(120, 70, 220, 0.28) 15%,
-            rgba(139, 92, 246, 0.14) 30%,
-            rgba(139, 92, 246, 0.05) 48%,
-            rgba(139, 92, 246, 0.01) 65%,
-            transparent               100%
-        );
-    }
-    .hero-right::after {
-        content: '';
-        position: absolute; bottom: 0; left: 0; right: 0;
-        height: 80px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.10));
-    }
-    .hero-badge {
-        position: absolute; bottom: 24px; right: 20px; z-index: 2;
-        background: rgba(30,0,60,.72);
-        border: 1px solid rgba(255,255,255,.18);
-        backdrop-filter: blur(10px);
-        border-radius: 10px; padding: 10px 16px;
-        color: rgba(255,255,255,.75); font-size: .76rem; line-height: 1.5;
-    }
-    .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
-
     @media (max-width: 1200px) { .hero-h1 { font-size: 3.2rem; } }
     @media (max-width: 991px) {
-        .hero-split { flex-direction: column; min-height: auto; }
+        .hero-split { flex-direction: column-reverse; min-height: auto; }
         .hero-left  { flex: none; padding: 56px 24px 40px; }
-        .hero-left::after { display: none; }
+        .hero-left::before { display: none; }
         .hero-right { flex: none; height: 280px; }
         .hero-h1    { font-size: 2.6rem; }
     }
@@ -177,6 +180,22 @@
     <div id="tai-header"></div>
 
     <section class="hero-split">
+
+        <!-- ★ 이미지 먼저 (왼쪽) -->
+        <div class="hero-right">
+            <img
+                class="hero-img"
+                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png"
+                alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습"
+                loading="eager"
+            >
+            <div class="hero-badge">
+                <strong>Before TAI Safe</strong>
+                엑셀 + 종이서류로 혼자 버팀
+            </div>
+        </div>
+
+        <!-- ★ 텍스트 뒤 (오른쪽) -->
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
@@ -196,18 +215,6 @@
             </div>
         </div>
 
-        <div class="hero-right">
-            <img
-                class="hero-img"
-                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png"
-                alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습"
-                loading="eager"
-            >
-            <div class="hero-badge">
-                <strong>Before TAI Safe</strong>
-                엑셀 + 종이서류로 혼자 버팀
-            </div>
-        </div>
     </section>
 
     <section class="service-area default-pd-top">
