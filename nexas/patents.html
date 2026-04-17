@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAI 기술력 | TAI 엔지니어링</title>
-  <meta name="description" content="TAI 엔지니어링의 핵심 기술은 8건의 특허 출원을 통해 법적으로 보호받고 있습니다.">
+  <meta name="description" content="서비스 하나하나가 특허입니다. TAI의 각 기능은 기존에 존재하지 않던 구조이며, 8건의 특허 출원으로 보호받고 있습니다.">
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -13,13 +13,132 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-  .pat-hero { background: linear-gradient(135deg, #0d1b2a 0%, #0f2744 100%); padding: 100px 0 68px; text-align: center; }
-  .pat-hero .page-hero-tag { margin-bottom: 16px; display: inline-block; }
-  .pat-hero h1 { font-size: clamp(2rem,4vw,2.8rem); font-weight: 900; color: #fff; margin-bottom: 14px; line-height: 1.2; }
-  .pat-hero .sub { color: rgba(255,255,255,.65); font-size: .95rem; max-width: 540px; margin: 0 auto 28px; line-height: 1.7; }
-  .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,150,12,.18); border: 1.5px solid #B8960C; color: #f5d87a; border-radius: 999px; padding: 9px 24px; font-size: .85rem; font-weight: 700; letter-spacing: .04em; }
-  .pending-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #f5d87a; animation: blink 1.4s infinite; }
+
+  /* ═══ 히어로: 풀블리드 이미지 + 좌측 텍스트 ═══ */
+  .pat-hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .pat-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .pat-hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+  /* 좌측 텍스트 가독성 그라디언트 오버레이 */
+  .pat-hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(10, 10, 26, 0.88) 0%,
+      rgba(10, 10, 26, 0.72) 30%,
+      rgba(10, 10, 26, 0.35) 55%,
+      rgba(10, 10, 26, 0.08) 75%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+  /* 하단 페이드 */
+  .pat-hero-bg::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(10, 10, 26, 0.3));
+    z-index: 1;
+  }
+
+  .pat-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 48px 64px;
+    width: 100%;
+  }
+  .pat-hero-text {
+    max-width: 520px;
+  }
+
+  .pat-hero-eyebrow {
+    display: inline-block;
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: rgba(255,255,255,.7);
+    border: 1.5px solid rgba(255,255,255,.3);
+    border-radius: 8px;
+    padding: 6px 16px;
+    margin-bottom: 20px;
+  }
+
+  .pat-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -.03em;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 20px rgba(0,0,0,.3);
+  }
+
+  .pat-hero .sub {
+    font-size: .95rem;
+    color: rgba(255,255,255,.65);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .pending-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139, 92, 246, .15);
+    border: 1.5px solid rgba(139, 92, 246, .5);
+    color: rgba(255,255,255,.85);
+    border-radius: 999px;
+    padding: 9px 22px;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    backdrop-filter: blur(8px);
+  }
+  .pending-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #d946ef;
+    animation: blink 1.4s infinite;
+  }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+  @media (max-width: 991px) {
+    .pat-hero { min-height: 420px; }
+    .pat-hero-content { padding: 64px 24px 48px; }
+    .pat-hero-bg::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 26, 0.85) 0%,
+        rgba(10, 10, 26, 0.55) 50%,
+        rgba(10, 10, 26, 0.3) 100%
+      );
+    }
+  }
+  @media (max-width: 575px) {
+    .pat-hero { min-height: 360px; }
+    .pat-hero-content { padding: 56px 20px 40px; }
+  }
+
+  /* ═══ 특허 카드 (기존 유지) ═══ */
   .patent-card { background: #FEFDF8; border: 2px solid #B8960C; border-radius: 8px; padding: 28px 24px 22px; position: relative; overflow: hidden; height: 100%; transition: box-shadow .2s, transform .2s; }
   .patent-card:hover { box-shadow: 0 8px 28px rgba(184,150,12,.22); transform: translateY(-4px); }
   .patent-card::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(184,150,12,.5); border-radius: 4px; pointer-events: none; }
@@ -48,11 +167,20 @@
 <div id="tai-header"></div>
 
 <section class="pat-hero">
-  <div class="sec-inner">
-    <span class="page-hero-tag">TAI 기술력</span>
-    <h1>TAI의 기술 혁신</h1>
-    <p class="sub">산업안전 관리의 구조적 혁신을 이루는 TAI의 핵심 기술은<br>8건의 특허 출원을 통해 법적으로 보호받고 있습니다.</p>
-    <div class="pending-badge"><span class="dot"></span>🔒 Patent Pending &nbsp;·&nbsp; 출원번호 제10-2026-0056330 외 7건</div>
+  <div class="pat-hero-bg">
+    <img
+      src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-license.png"
+      alt="회로 기판 위의 빛나는 보안 방패 — TAI 특허 기술 보호"
+      loading="eager"
+    >
+  </div>
+  <div class="pat-hero-content">
+    <div class="pat-hero-text">
+      <span class="pat-hero-eyebrow">TAI 기술력</span>
+      <h1>서비스 하나하나가<br>특허입니다.</h1>
+      <p class="sub">TAI의 각 기능은 기존에 존재하지 않던 구조입니다.<br>그래서 특허가 됐습니다.</p>
+      <div class="pending-badge"><span class="dot"></span>Patent Pending · 8건 출원</div>
+    </div>
   </div>
 </section>
 
