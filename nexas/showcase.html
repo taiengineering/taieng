@@ -47,20 +47,23 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .tb-open:hover{background:rgba(34,211,238,.25);}
 
 /* ── 그리드 래퍼 ── */
-.grid-wrap{flex:1;overflow:auto;padding:8px;}
-.grid-wrap::-webkit-scrollbar{width:4px;height:4px;}
-.grid-wrap::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px;}
+.grid-wrap{flex:1;overflow:hidden;padding:8px;}
 
 /* ── 그리드 레이아웃 ── */
 .grid{display:grid;width:100%;}
-.grid.l1  {grid-template-columns:1fr;                  gap:8px;}
-.grid.l4  {grid-template-columns:repeat(2,1fr);        gap:8px;}
-.grid.l9  {grid-template-columns:repeat(3,1fr);        gap:8px;}
-/* ★ 10열×2행 (가로 두 배, 세로 두 개 줄임) */
-.grid.l20 {grid-template-columns:repeat(10,1fr);       gap:6px;}
+.grid.l1  {grid-template-columns:1fr;               gap:8px; height:100%;}
+.grid.l4  {grid-template-columns:repeat(2,1fr);     gap:8px; grid-template-rows:1fr 1fr; height:100%;}
+.grid.l9  {grid-template-columns:repeat(3,1fr);     gap:8px; grid-template-rows:1fr 1fr 1fr; height:100%;}
+/* ★ 10열×2행 — 각 행 정확히 50% */
+.grid.l20 {
+  grid-template-columns: repeat(10,1fr);
+  grid-template-rows: 1fr 1fr;          /* ← 50% / 50% */
+  gap:6px;
+  height:100%;
+}
 
 /* ── 타일 ── */
-.tile{background:#111827;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:border-color .15s;cursor:pointer;position:relative;}
+.tile{background:#111827;border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.08);transition:border-color .15s;cursor:pointer;position:relative;display:flex;flex-direction:column;}
 .tile:hover{border-color:rgba(34,211,238,.45);}
 .tile.selected{border-color:#22d3ee;box-shadow:0 0 0 1px #22d3ee;}
 .tile-header{padding:5px 8px;background:#0d1120;display:flex;align-items:center;gap:5px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;}
@@ -72,8 +75,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .tile-name{font-size:10px;color:rgba(255,255,255,.5);margin-left:2px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .tile-new{font-size:8px;background:rgba(34,211,238,.2);color:#22d3ee;padding:1px 4px;border-radius:2px;}
 
-/* ── iframe 스케일 래퍼 ── */
-.iframe-wrap{position:relative;overflow:hidden;width:100%;}
+/* ── iframe 래퍼: 타일 남은 공간 전부 차지 ── */
+.iframe-wrap{position:relative;overflow:hidden;flex:1;}
 .iframe-wrap iframe{border:none;display:block;transform-origin:top left;}
 
 /* ── 오버레이 ── */
@@ -81,7 +84,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 .tile:hover .tile-overlay{display:flex;}
 .overlay-btn{padding:6px 14px;background:#22d3ee;color:#000;border:none;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;}
 
-/* ── 로딩 스피너 ── */
+/* ── 로딩 ── */
 .tile-loading{position:absolute;inset:0;z-index:5;background:#111827;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
 .spinner{width:18px;height:18px;border:2px solid rgba(255,255,255,.1);border-top-color:#22d3ee;border-radius:50%;animation:spin .8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -92,7 +95,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 <body>
 <div class="shell">
 
-  <!-- 사이드바 -->
   <aside class="sidebar">
     <div class="sb-logo">TAI<span>Safe</span></div>
     <div class="sb-search">
@@ -101,55 +103,35 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
     <div class="sb-list" id="sbList"></div>
   </aside>
 
-  <!-- 메인 -->
   <div class="main">
     <div class="toolbar">
       <div class="tb-title" id="tbTitle">TAI 마케팅 사이트 — 전체 화면 보기</div>
       <div class="tb-url" id="tbUrl">new.taieng.co.kr</div>
-      <!-- 현재 그리드 정보 표시 -->
-      <div class="tb-meta" id="tbMeta">10열 × 2행 (20페이지)</div>
+      <div class="tb-meta" id="tbMeta">10열 × 2행 (각 행 50%)</div>
       <div class="layout-btns">
-        <!-- 단일 -->
-        <button class="lbtn" id="lb1" onclick="setLayout(1)" title="단일 화면">
+        <button class="lbtn" id="lb1" onclick="setLayout(1)" title="단일">
           <svg viewBox="0 0 13 13"><rect x="1" y="1" width="11" height="11" rx="1"/></svg>
         </button>
-        <!-- 4분할 2×2 -->
-        <button class="lbtn" id="lb4" onclick="setLayout(4)" title="4분할 (2×2)">
+        <button class="lbtn" id="lb4" onclick="setLayout(4)" title="4분할">
           <svg viewBox="0 0 13 13"><rect x="1" y="1" width="5" height="5" rx=".4"/><rect x="7" y="1" width="5" height="5" rx=".4"/><rect x="1" y="7" width="5" height="5" rx=".4"/><rect x="7" y="7" width="5" height="5" rx=".4"/></svg>
         </button>
-        <!-- 9분할 3×3 -->
-        <button class="lbtn" id="lb9" onclick="setLayout(9)" title="9분할 (3×3)">
+        <button class="lbtn" id="lb9" onclick="setLayout(9)" title="9분할">
           <svg viewBox="0 0 13 13">
-            <rect x="1"   y="1"   width="3" height="3" rx=".3"/>
-            <rect x="5"   y="1"   width="3" height="3" rx=".3"/>
-            <rect x="9"   y="1"   width="3" height="3" rx=".3"/>
-            <rect x="1"   y="5"   width="3" height="3" rx=".3"/>
-            <rect x="5"   y="5"   width="3" height="3" rx=".3"/>
-            <rect x="9"   y="5"   width="3" height="3" rx=".3"/>
-            <rect x="1"   y="9"   width="3" height="3" rx=".3"/>
-            <rect x="5"   y="9"   width="3" height="3" rx=".3"/>
-            <rect x="9"   y="9"   width="3" height="3" rx=".3"/>
+            <rect x="1" y="1" width="3" height="3" rx=".3"/><rect x="5" y="1" width="3" height="3" rx=".3"/><rect x="9" y="1" width="3" height="3" rx=".3"/>
+            <rect x="1" y="5" width="3" height="3" rx=".3"/><rect x="5" y="5" width="3" height="3" rx=".3"/><rect x="9" y="5" width="3" height="3" rx=".3"/>
+            <rect x="1" y="9" width="3" height="3" rx=".3"/><rect x="5" y="9" width="3" height="3" rx=".3"/><rect x="9" y="9" width="3" height="3" rx=".3"/>
           </svg>
         </button>
-        <!-- 전체: 10×2 -->
-        <button class="lbtn active" id="lb20" onclick="setLayout(20)" title="전체 (10×2)">
+        <button class="lbtn active" id="lb20" onclick="setLayout(20)" title="전체 10×2">
           <svg viewBox="0 0 13 13">
-            <rect x=".5" y="1"   width="1.0" height="5" rx=".2"/>
-            <rect x="2"  y="1"   width="1.0" height="5" rx=".2"/>
-            <rect x="3.5" y="1"  width="1.0" height="5" rx=".2"/>
-            <rect x="5"  y="1"   width="1.0" height="5" rx=".2"/>
-            <rect x="6.5" y="1"  width="1.0" height="5" rx=".2"/>
-            <rect x="8"  y="1"   width="1.0" height="5" rx=".2"/>
-            <rect x="9.5" y="1"  width="1.0" height="5" rx=".2"/>
-            <rect x="11" y="1"   width="1.0" height="5" rx=".2"/>
-            <rect x=".5" y="7"   width="1.0" height="5" rx=".2"/>
-            <rect x="2"  y="7"   width="1.0" height="5" rx=".2"/>
-            <rect x="3.5" y="7"  width="1.0" height="5" rx=".2"/>
-            <rect x="5"  y="7"   width="1.0" height="5" rx=".2"/>
-            <rect x="6.5" y="7"  width="1.0" height="5" rx=".2"/>
-            <rect x="8"  y="7"   width="1.0" height="5" rx=".2"/>
-            <rect x="9.5" y="7"  width="1.0" height="5" rx=".2"/>
-            <rect x="11" y="7"   width="1.0" height="5" rx=".2"/>
+            <rect x=".5"  y="1" width="1" height="5" rx=".2"/><rect x="2"   y="1" width="1" height="5" rx=".2"/>
+            <rect x="3.5" y="1" width="1" height="5" rx=".2"/><rect x="5"   y="1" width="1" height="5" rx=".2"/>
+            <rect x="6.5" y="1" width="1" height="5" rx=".2"/><rect x="8"   y="1" width="1" height="5" rx=".2"/>
+            <rect x="9.5" y="1" width="1" height="5" rx=".2"/><rect x="11"  y="1" width="1" height="5" rx=".2"/>
+            <rect x=".5"  y="7" width="1" height="5" rx=".2"/><rect x="2"   y="7" width="1" height="5" rx=".2"/>
+            <rect x="3.5" y="7" width="1" height="5" rx=".2"/><rect x="5"   y="7" width="1" height="5" rx=".2"/>
+            <rect x="6.5" y="7" width="1" height="5" rx=".2"/><rect x="8"   y="7" width="1" height="5" rx=".2"/>
+            <rect x="9.5" y="7" width="1" height="5" rx=".2"/><rect x="11"  y="7" width="1" height="5" rx=".2"/>
           </svg>
         </button>
       </div>
@@ -164,7 +146,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#0a0e1a;font-family:
 </div>
 
 <script>
-/* nexas/ = Cloudflare Pages 루트 → prefix 없음 */
 const BASE = 'https://new.taieng.co.kr/';
 
 const PAGES = [
@@ -190,26 +171,30 @@ const PAGES = [
   {id:'patents',    name:'특허',          url:BASE+'patents.html',             group:'회사',   isNew:false},
 ];
 
-/* ── 레이아웃 정의 (cols, rows) ── */
 const LAYOUTS = {
   1:  {cols:1,  rows:1},
   4:  {cols:2,  rows:2},
   9:  {cols:3,  rows:3},
-  /* ★ 가로 두 배(10열), 세로 두 개 줄임(2행) */
   20: {cols:10, rows:2},
 };
-const META_LABEL = {1:'단일', 4:'2열×2행', 9:'3열×3행', 20:'10열×2행 (20페이지)'};
+const META_LABEL = {
+  1:'단일',
+  4:'2열×2행',
+  9:'3열×3행',
+  20:'10열 × 2행 — 각 행 50%',
+};
+
+const VPORT_W = 1440; /* iframe 가상 뷰포트 폭 */
 
 let currentLayout = 20;
 let currentPage   = null;
 const iframeMap   = {};
-const VPORT_W = 1440, VPORT_H = 900;
 
-/* ── 사이드바 렌더 ── */
+/* ── 사이드바 ── */
 function renderSidebar(){
   const el     = document.getElementById('sbList');
   const groups = [...new Set(PAGES.map(p=>p.group))];
-  el.innerHTML = groups.map(g => {
+  el.innerHTML = groups.map(g=>{
     const items = PAGES.filter(p=>p.group===g).map(p=>
       `<div class="sb-item" id="sb-${p.id}" onclick="focusPage('${p.id}')">
         <span class="dot"></span><span>${p.name}</span>
@@ -220,7 +205,7 @@ function renderSidebar(){
   }).join('');
 }
 
-/* ── 그리드 렌더 ── */
+/* ── 그리드 ── */
 function renderGrid(){
   const grid = document.getElementById('grid');
   grid.innerHTML = PAGES.map(p=>
@@ -242,41 +227,60 @@ function renderGrid(){
       </div>
     </div>`
   ).join('');
-  PAGES.forEach(p=>{ iframeMap[p.id] = document.getElementById('iframe-'+p.id); });
+  PAGES.forEach(p=>{ iframeMap[p.id]=document.getElementById('iframe-'+p.id); });
 }
 
-/* ── 타일 크기 & iframe 스케일 계산 ── */
+/* ──────────────────────────────────────────────
+   ★ 핵심: 타일 크기 & iframe 스케일
+   l20 모드:
+     - 타일 높이 = grid-wrap 가용 높이의 정확히 50%
+     - iframe 가로 스케일 = tileW / VPORT_W
+     - iframe 세로 크기  = tileH / scale (세로 콘텐츠 최대 노출)
+   ────────────────────────────────────────────── */
 function applyTileSizes(){
   const gw     = document.querySelector('.grid-wrap');
-  const availW = gw.clientWidth  - 16;   /* padding×2 */
+  const availW = gw.clientWidth  - 16;  /* padding 8px×2 */
   const availH = gw.clientHeight - 16;
   const {cols, rows} = LAYOUTS[currentLayout];
   const gap    = currentLayout===20 ? 6 : 8;
+
   const tileW  = Math.floor((availW - gap*(cols-1)) / cols);
-  const tileH  = currentLayout===1
-    ? availH - 28                                               /* 단일: 헤더 28px */
-    : Math.floor((availH - gap*(rows-1)) / rows) - 28;
-  const scale  = Math.min(tileW/VPORT_W, tileH/VPORT_H);
+  /* ★ 각 행 정확히 50%: (전체 - row 간 gap) / 2 - tile-header(28px) */
+  const tileH  = currentLayout===20
+    ? Math.floor((availH - gap*(rows-1)) / rows) - 28
+    : currentLayout===1
+      ? availH - 28
+      : Math.floor((availH - gap*(rows-1)) / rows) - 28;
+
+  /* l20: 가로 기준 스케일만 적용 → 세로는 타일을 꽉 채움 */
+  const scaleX = tileW / VPORT_W;
+  /* l20이 아닌 경우: 가로·세로 비율 유지 */
+  const scale  = currentLayout===20
+    ? scaleX
+    : Math.min(scaleX, tileH / 900);
+
+  /* iframe 세로 크기: 타일 높이 / scale = 실제로 보여질 콘텐츠 길이 */
+  const iframeH = Math.ceil(tileH / scale);
 
   PAGES.forEach(p=>{
     const wrap  = document.getElementById('wrap-'+p.id);
     const frame = iframeMap[p.id];
     if(!wrap||!frame) return;
-    wrap.style.height      = tileH+'px';
-    frame.style.width      = VPORT_W+'px';
-    frame.style.height     = VPORT_H+'px';
-    frame.style.transform  = `scale(${scale})`;
-    /* transform으로 잘리지 않게 래퍼 높이 보정 */
-    wrap.style.height = (VPORT_H * scale)+'px';
+
+    /* iframe-wrap: flex:1 이므로 CSS가 높이를 관리 — overflow:hidden으로 클립 */
+    wrap.style.height     = tileH+'px';
+
+    frame.style.width     = VPORT_W+'px';
+    frame.style.height    = iframeH+'px';   /* ★ 세로 콘텐츠 최대 노출 */
+    frame.style.transform = `scale(${scale})`;
   });
 }
 
-/* ── 지연 로드 (순차적, 300ms 간격) ── */
+/* ── 지연 로드 ── */
 let loadIdx = 0;
 function lazyLoad(){
-  if(loadIdx >= PAGES.length) return;
-  const p     = PAGES[loadIdx++];
-  const frame = iframeMap[p.id];
+  if(loadIdx>=PAGES.length) return;
+  const p=PAGES[loadIdx++], frame=iframeMap[p.id];
   if(!frame){ lazyLoad(); return; }
   frame.onload  = ()=>{ const ld=document.getElementById('load-'+p.id); if(ld) ld.style.display='none'; setTimeout(lazyLoad,80); };
   frame.onerror = ()=>{ const ld=document.getElementById('load-'+p.id); if(ld) ld.innerHTML='<div class="loading-txt" style="color:rgba(255,120,120,.7)">로드 실패</div>'; setTimeout(lazyLoad,80); };
@@ -290,16 +294,16 @@ function setLayout(n){
   document.getElementById('grid').className = 'grid l'+n;
   document.getElementById('tbMeta').textContent = META_LABEL[n];
   if(n===1){
-    const target = currentPage || PAGES[0].id;
-    PAGES.forEach(p=>{ document.getElementById('tile-'+p.id)?.classList.toggle('hidden', p.id!==target); });
+    const target = currentPage||PAGES[0].id;
+    PAGES.forEach(p=>{ document.getElementById('tile-'+p.id)?.classList.toggle('hidden',p.id!==target); });
   } else {
     PAGES.forEach(p=>{ document.getElementById('tile-'+p.id)?.classList.remove('hidden'); });
   }
-  [1,4,9,20].forEach(x=>{ document.getElementById('lb'+x)?.classList.toggle('active', x===n); });
-  setTimeout(applyTileSizes, 50);
+  [1,4,9,20].forEach(x=>{ document.getElementById('lb'+x)?.classList.toggle('active',x===n); });
+  setTimeout(applyTileSizes,50);
 }
 
-/* ── 페이지 포커스 ── */
+/* ── 포커스 ── */
 function focusPage(id){
   currentPage = id;
   const p = PAGES.find(x=>x.id===id); if(!p) return;
@@ -307,38 +311,37 @@ function focusPage(id){
   document.getElementById('sb-'+id)?.classList.add('active');
   document.querySelectorAll('.tile').forEach(el=>el.classList.remove('selected'));
   document.getElementById('tile-'+id)?.classList.add('selected');
-  document.getElementById('tbTitle').textContent = p.name + ' — ' + p.group;
-  document.getElementById('tbUrl').textContent = p.url.replace('https://','');
+  document.getElementById('tbTitle').textContent = p.name+' — '+p.group;
+  document.getElementById('tbUrl').textContent   = p.url.replace('https://','');
   if(currentLayout===1){
-    PAGES.forEach(x=>{ document.getElementById('tile-'+x.id)?.classList.toggle('hidden', x.id!==id); });
+    PAGES.forEach(x=>{ document.getElementById('tile-'+x.id)?.classList.toggle('hidden',x.id!==id); });
   }
   document.getElementById('sb-'+id)?.scrollIntoView({block:'nearest'});
 }
 
-/* ── 검색 필터 ── */
+/* ── 검색 ── */
 function filterCards(q){
-  q = q.toLowerCase();
+  q=q.toLowerCase();
   PAGES.forEach(p=>{
-    const match = !q || p.name.toLowerCase().includes(q) || p.group.toLowerCase().includes(q);
-    document.getElementById('tile-'+p.id)?.classList.toggle('hidden', !match);
-    const sb = document.getElementById('sb-'+p.id);
-    if(sb) sb.style.display = match ? '' : 'none';
+    const match=!q||p.name.toLowerCase().includes(q)||p.group.toLowerCase().includes(q);
+    document.getElementById('tile-'+p.id)?.classList.toggle('hidden',!match);
+    const sb=document.getElementById('sb-'+p.id);
+    if(sb) sb.style.display=match?'':'none';
   });
 }
 
 /* ── 유틸 ── */
 function reloadAll(){
-  loadIdx = 0;
+  loadIdx=0;
   PAGES.forEach(p=>{
-    const frame=iframeMap[p.id], ld=document.getElementById('load-'+p.id);
-    if(frame){ frame.src=''; }
+    const frame=iframeMap[p.id],ld=document.getElementById('load-'+p.id);
+    if(frame) frame.src='';
     if(ld){ ld.style.display='flex'; ld.innerHTML='<div class="spinner"></div><div class="loading-txt">재로딩...</div>'; }
   });
-  setTimeout(lazyLoad, 200);
+  setTimeout(lazyLoad,200);
 }
 function openCurrent(){
-  const p = PAGES.find(x=>x.id===currentPage)||PAGES[0];
-  window.open(p.url,'_blank');
+  window.open((PAGES.find(x=>x.id===currentPage)||PAGES[0]).url,'_blank');
 }
 
 /* ── 초기화 ── */
@@ -347,7 +350,7 @@ renderGrid();
 setLayout(20);
 applyTileSizes();
 lazyLoad();
-window.addEventListener('resize', ()=>setTimeout(applyTileSizes,100));
+window.addEventListener('resize',()=>setTimeout(applyTileSizes,100));
 </script>
 </body>
 </html>
