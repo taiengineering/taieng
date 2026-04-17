@@ -25,7 +25,8 @@
         display: flex;
         align-items: stretch;
         min-height: 640px;
-        background: linear-gradient(135deg, #1b1340 0%, #0d1b2a 100%);
+        /* ★ 원본 히어로 톤 — 밝은 바이올렛 퍼플 */
+        background: linear-gradient(135deg, #4f46e5 0%, #3b1fa8 45%, #1e1b4b 100%);
         overflow: hidden;
         position: relative;
     }
@@ -47,9 +48,9 @@
         font-weight: 700;
         letter-spacing: .14em;
         text-transform: uppercase;
-        color: #a78bfa;
-        background: rgba(167,139,250,.12);
-        border: 1px solid rgba(167,139,250,.28);
+        color: #c4b5fd;
+        background: rgba(196,181,253,.15);
+        border: 1px solid rgba(196,181,253,.35);
         border-radius: 999px;
         padding: 6px 16px;
         margin-bottom: 22px;
@@ -64,44 +65,44 @@
     }
     .hero-h1 em {
         font-style: normal;
-        color: #a78bfa;
+        color: #c4b5fd;
     }
     .hero-desc {
         font-size: 1rem;
-        color: rgba(255,255,255,.65);
+        color: rgba(255,255,255,.78);
         line-height: 1.75;
         margin-bottom: 36px;
     }
     .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
     .hero-btn-main {
         display: inline-flex; align-items: center; gap: 8px;
-        background: #7B55EA; color: #fff;
-        font-size: .95rem; font-weight: 700;
+        background: #fff; color: #4f46e5;
+        font-size: .95rem; font-weight: 800;
         padding: 15px 30px; border-radius: 10px;
         text-decoration: none; transition: background .2s, transform .15s;
     }
-    .hero-btn-main:hover { background: #6840e0; color: #fff; transform: translateY(-2px); }
+    .hero-btn-main:hover { background: #ede9fe; color: #4338ca; transform: translateY(-2px); }
     .hero-btn-sub {
         display: inline-flex; align-items: center; gap: 6px;
-        background: transparent; color: rgba(255,255,255,.7);
+        background: transparent; color: rgba(255,255,255,.85);
         font-size: .9rem; font-weight: 600;
         padding: 15px 22px; border-radius: 10px;
         text-decoration: none;
-        border: 1px solid rgba(255,255,255,.18);
-        transition: border-color .2s, color .2s;
+        border: 1px solid rgba(255,255,255,.35);
+        transition: border-color .2s, color .2s, background .2s;
     }
-    .hero-btn-sub:hover { border-color: rgba(255,255,255,.45); color: #fff; }
+    .hero-btn-sub:hover { border-color: rgba(255,255,255,.7); color: #fff; background: rgba(255,255,255,.08); }
 
     /* 신뢰 지표 */
     .hero-trust {
         display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
         margin-top: 44px; padding-top: 32px;
-        border-top: 1px solid rgba(255,255,255,.08);
+        border-top: 1px solid rgba(255,255,255,.18);
     }
     .trust-item { display: flex; flex-direction: column; }
     .trust-num  { font-size: 1.25rem; font-weight: 900; color: #fff; line-height: 1; }
-    .trust-lbl  { font-size: .7rem; color: rgba(255,255,255,.42); margin-top: 4px; }
-    .trust-div  { width: 1px; height: 30px; background: rgba(255,255,255,.1); }
+    .trust-lbl  { font-size: .7rem; color: rgba(255,255,255,.62); margin-top: 4px; }
+    .trust-div  { width: 1px; height: 30px; background: rgba(255,255,255,.2); }
 
     /* 오른쪽 45% — 이미지 */
     .hero-right {
@@ -114,18 +115,18 @@
         object-fit: cover;
         object-position: center center;
         display: block;
-        /* ★ CSS 색보정: 따뜻한 주황→쿨톤, 브랜드 다크와 어울리게 */
-        filter: brightness(0.70) saturate(0.40) contrast(1.06);
+        /* ★ 밝게 조정 — 채도도 조금 더 살림 */
+        filter: brightness(0.83) saturate(0.60) contrast(1.05);
     }
-    /* 좌측 페이드: 텍스트 영역과 자연스럽게 이어짐 */
+    /* 좌측 페이드: 밝아진 배경색에 맞게 */
     .hero-right::before {
         content: '';
         position: absolute; inset: 0; z-index: 1; pointer-events: none;
         background: linear-gradient(
             to right,
-            #0d1b2a 0%,
-            rgba(13,27,42,.65) 22%,
-            rgba(13,27,42,.15) 50%,
+            #1e1b4b 0%,
+            rgba(30,27,75,.58) 20%,
+            rgba(30,27,75,.12) 48%,
             transparent 100%
         );
     }
@@ -133,19 +134,19 @@
     .hero-right::after {
         content: '';
         position: absolute; bottom: 0; left: 0; right: 0;
-        height: 100px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(13,27,42,.35));
+        height: 90px; z-index: 1; pointer-events: none;
+        background: linear-gradient(to bottom, transparent, rgba(30,27,75,.28));
     }
-    /* Before 상황 뱃지 */
+    /* Before 뱃지 */
     .hero-badge {
         position: absolute; bottom: 24px; right: 20px; z-index: 2;
-        background: rgba(10,14,26,.82);
-        border: 1px solid rgba(255,255,255,.1);
+        background: rgba(30,27,75,.80);
+        border: 1px solid rgba(196,181,253,.25);
         backdrop-filter: blur(10px);
         border-radius: 10px; padding: 10px 16px;
-        color: rgba(255,255,255,.65); font-size: .76rem; line-height: 1.5;
+        color: rgba(255,255,255,.70); font-size: .76rem; line-height: 1.5;
     }
-    .hero-badge strong { display: block; color: #f87171; font-size: .8rem; margin-bottom: 2px; }
+    .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
 
     /* 반응형 */
     @media (max-width: 991px) {
@@ -190,12 +191,8 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- ══════════════════════════════
-         히어로: 좌텍스트 / 우이미지 분할
-    ══════════════════════════════ -->
     <section class="hero-split">
 
-        <!-- 왼쪽: 텍스트 + CTA -->
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
@@ -236,7 +233,6 @@
             </div>
         </div>
 
-        <!-- 오른쪽: 이미지 -->
         <div class="hero-right">
             <img
                 class="hero-img"
