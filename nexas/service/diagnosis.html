@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 법령진단 — 3분 무료 진단으로 내 사업장에 적용되는 법령을 즉시 확인. 무료·유료 비교, 섹터별 요금 안내.">
-  <title>법령진단 | TAI 엔지니어링</title>
+  <meta name="description" content="TAI 법령의무진단 — 3분 무료 진단으로 내 사업장에 적용되는 법령을 즉시 확인. 무료·유료 비교, 섹터별 요금 안내.">
+  <title>법령의무진단 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
@@ -45,6 +45,15 @@
   }
   .diag-hero h1 em { color: #fde68a; font-style: normal; }
   .diag-hero p { font-size: 1.05rem; color: rgba(255,255,255,.85); margin-bottom: 32px; line-height: 1.65; }
+
+  /* 버튼 세로 중앙 정렬 이슈 해결 (Vuexy .btn padding+line-height 충돌) */
+  .diag-hero .btn,
+  .subscribe-inner .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+  }
 
   /* 히어로 이미지 (3:2 비율) */
   .diag-hero-image {
@@ -140,7 +149,7 @@
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-6">
-        <span class="diag-eyebrow">📋 법령진단</span>
+        <span class="diag-eyebrow">📋 법령의무진단</span>
         <h1>모르시면 벌금,<br><em>아시면 편안합니다.</em></h1>
         <p>중대재해처벌법·산업안전보건법,<br>우리 사업장에 뭐가 적용되는지 3분 만에.</p>
         <div class="d-flex gap-3 flex-wrap">
@@ -229,14 +238,14 @@
   </div>
 </section>
 
-<!-- ══ 법령진단이 해결하는 것 (service-area 구조) ══ -->
+<!-- ══ 법령의무진단이 해결하는 것 (service-area 구조) ══ -->
 <section class="service-area default-pd-top" style="background:#fff;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="section-title text-center">
-          <h4 class="sub-title">TAI 법령진단의 가치</h4>
-          <h2 class="title">법령진단이 해결하는 것</h2>
+          <h4 class="sub-title">TAI 법령의무진단의 가치</h4>
+          <h2 class="title">법령의무진단이 해결하는 것</h2>
         </div>
       </div>
     </div>
@@ -247,7 +256,7 @@
         <div class="val-card">
           <div class="val-tag">문서·증거</div>
           <div class="val-icon">📄</div>
-          <h4>법령진단 리포트 = 점검 증거 문서</h4>
+          <h4>법령의무진단 리포트 = 점검 증거 문서</h4>
           <p>안전점검 시 해당 건에 대해 계획하고 관리하고 있다고 어필할 수 있는 문서가 됩니다.
           감독관이 왔을 때 "우리는 이렇게 관리하고 있습니다"를 증명하는 서류입니다.</p>
         </div>
@@ -271,7 +280,7 @@
           <div class="val-icon">💰</div>
           <h4>컨설팅보다 정확하고 저렴</h4>
           <p>컨설팅 비용과는 상대도 안 될 만큼 저렴합니다. 컨설팅은 사람이 하여 놓칠 수 있지만,
-          TAI 법령진단은 놓치지 않습니다. 2,080개 이상의 법령 규칙 엔진이 자동으로 판단합니다.</p>
+          TAI 법령의무진단은 놓치지 않습니다. 2,080개 이상의 법령 규칙 엔진이 자동으로 판단합니다.</p>
         </div>
       </div>
 
@@ -378,8 +387,7 @@
             </div>
             <div class="col-lg-6 offset-xl-1 align-self-center">
               <div class="d-flex gap-3 flex-wrap">
-                <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료 법령진단 시작</a>
-                <a href="../contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 24px;">유료 진단 문의</a>
+                <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료 진단하기</a>
               </div>
             </div>
           </div>
