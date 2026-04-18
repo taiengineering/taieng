@@ -77,21 +77,40 @@
       font-size: .85rem; color: #9b1c1c; font-weight: 700; line-height: 1.6;
     }
 
-    /* ── 감독관 시나리오 ── */
-    .scenario-sec { background: #fff; padding: 88px 0; }
-    .scenario-col { padding: 36px 28px; border-radius: 16px; height: 100%; }
-    .scenario-col.without { background: #fef2f2; border: 1.5px solid #fecaca; }
-    .scenario-col.with-tai { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
-    .scenario-col h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 20px; }
-    .scenario-col.without h4 { color: #dc2626; }
-    .scenario-col.with-tai h4 { color: #16a34a; }
-    .scenario-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px; }
-    .scenario-step:last-child { margin-bottom: 0; }
-    .scenario-step .s-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.6; }
-    .scenario-step p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
-    .scenario-step .s-result { font-weight: 800; }
-    .scenario-col.without .s-result { color: #dc2626; }
-    .scenario-col.with-tai .s-result { color: #16a34a; }
+    /* ── 감독관 시나리오 (이미지) ── */
+    .scenario-sec { background: #fff; padding: 80px 0; }
+    .scenario-img-wrap { max-width: 1100px; margin: 0 auto; }
+    .scenario-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.1); }
+
+    /* ── 안전 본질 섹션 ── */
+    .safety-essence {
+      background: #0f172a;
+      padding: 88px 0;
+      text-align: center;
+    }
+    .safety-essence .essence-small {
+      font-size: .88rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .safety-essence h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      letter-spacing: -.02em;
+    }
+    .safety-essence h2 em {
+      color: #e63946;
+      font-style: normal;
+    }
+    .safety-essence .essence-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.6);
+      line-height: 1.7;
+    }
 
     /* ── CTA ── */
     .owner-cta {
@@ -234,41 +253,37 @@
   </div>
 </section>
 
-<!-- ══ ⑤ 감독관 시나리오 ══ -->
+<!-- ══ ⑤ 감독관 시나리오 (이미지 1장) ══ -->
 <section class="scenario-sec">
   <div class="container">
-    <div class="section-title text-center mb-5">
-      <h2 class="title">감독관이 왔을 때</h2>
-      <p style="color:#64748b;">같은 사업장, 다른 결과</p>
+    <div class="scenario-img-wrap">
+      <img
+        src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/owner-vs.png"
+        alt="감독관청 점검 왔을 때 — TAI 없이 vs TAI 사용 중 비교"
+        loading="lazy"
+      >
     </div>
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <div class="scenario-col without">
-          <h4>TAI 없이</h4>
-          <div class="scenario-step"><span class="s-icon">😰</span><p>"서류 어디 있지?"</p></div>
-          <div class="scenario-step"><span class="s-icon">📂</span><p>캐비닛, 컴퓨터 뒤지기 시작</p></div>
-          <div class="scenario-step"><span class="s-icon">⏰</span><p>30분 지나도 못 찾음</p></div>
-          <div class="scenario-step"><span class="s-icon">📋</span><p>점검 기록 일부 누락 발견</p></div>
-          <div class="scenario-step"><span class="s-icon">⚠️</span><p>교육 이수 증빙 없음</p></div>
-          <div class="scenario-step"><span class="s-icon">📝</span><p class="s-result">과태료 통보 + 재감사 예정</p></div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="scenario-col with-tai">
-          <h4>TAI 사용 중</h4>
-          <div class="scenario-step"><span class="s-icon">📱</span><p>"잠시만요, 여기 있습니다"</p></div>
-          <div class="scenario-step"><span class="s-icon">🖨️</span><p>즉시 출력 — 전체 점검 이력</p></div>
-          <div class="scenario-step"><span class="s-icon">✅</span><p>항목별 완료 일시 + 담당자 확인</p></div>
-          <div class="scenario-step"><span class="s-icon">📊</span><p>이상 발생 → 조치 완료 추적 이력</p></div>
-          <div class="scenario-step"><span class="s-icon">📄</span><p>법정 서식 자동 생성 제출</p></div>
-          <div class="scenario-step"><span class="s-icon">👍</span><p class="s-result">통과. 끝.</p></div>
-        </div>
+  </div>
+</section>
+
+<!-- ══ ⑥ 안전의 본질 ══ -->
+<section class="safety-essence">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <p class="essence-small">
+          감독을 피하는 것.<br>
+          벌금을 내지 않는 것.<br>
+          처벌받지 않는 것.
+        </p>
+        <h2>그것보다 더 중요한 건<br><em>사람이 다치지 않는 것</em>입니다.</h2>
+        <p class="essence-sub">TAI는 안전을 제대로 지키기 위해 만들어진 서비스입니다.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ ⑥ CTA ══ -->
+<!-- ══ ⑦ CTA ══ -->
 <section class="owner-cta">
   <div class="container text-center">
     <h2>3분이면 됩니다. 무료입니다.</h2>
@@ -280,7 +295,7 @@
   </div>
 </section>
 
-<!-- ══ ⑦ 교차 링크 ══ -->
+<!-- ══ ⑧ 교차 링크 ══ -->
 <section style="background:#f8fafc;padding:48px 0;text-align:center;">
   <div class="container">
     <p style="color:#64748b;font-size:.95rem;margin-bottom:14px;">실무는 안전관리자에게 맡기세요</p>
