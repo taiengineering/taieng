@@ -4,9 +4,14 @@
   "description": "TAI public site — Railway entry (delegates to nexas/)",
   "scripts": {
     "build": "npm --prefix nexas ci && npm --prefix nexas run build",
-    "start": "npm --prefix nexas start"
+    "start": "npm --prefix nexas start",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "wrangler": "^4.83.0"
   }
 }
