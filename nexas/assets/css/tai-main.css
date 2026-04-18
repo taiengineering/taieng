@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.8 — body padding-top 제거 (navbar-area는 fixed가 아님) */
+/* TAI 공통 스타일 v1.9 — FN-07: 전문가 상담 링크 전역 숨김 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -13,6 +13,9 @@
 }
 body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding: 0; }
 a { text-decoration: none; }
+
+/* FN-07: 전문가 상담 링크 전역 숨김 — TAI는 상담 서비스가 아님 (데이터→엔진→자동판단) */
+.diag-nudge-secondary { display: none !important; }
 
 /* 스크롤바 */
 .sc5::-webkit-scrollbar { width: 8px !important; height: 8px !important; }
