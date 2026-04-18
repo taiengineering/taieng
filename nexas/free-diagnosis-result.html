@@ -12,88 +12,344 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-  .result-hero { background:var(--navy); padding:80px 0 50px; text-align:center; }
-  .result-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
-  .risk-badge { display:inline-block; background:var(--red); color:#fff; font-weight:700; font-size:1rem; border-radius:999px; padding:8px 24px; margin-bottom:16px; }
-  .result-card { background:#fff; border-radius:14px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:28px; margin-bottom:20px; }
-  .result-card h4 { font-size:1rem; font-weight:800; color:var(--navy); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
-  .result-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:.88rem; }
-  .result-row:last-child { border-bottom:none; }
-  .result-row .label { color:var(--sub); }
-  .result-row .value { font-weight:700; color:var(--navy); }
-  .risk-item { display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border); }
-  .risk-item:last-child { border-bottom:none; }
-  .risk-level { font-size:.7rem; font-weight:700; border-radius:4px; padding:3px 8px; white-space:nowrap; }
-  .risk-high { background:#fef2f2; color:var(--red); }
-  .risk-mid  { background:#fffbeb; color:#d97706; }
-  .risk-low  { background:#f0fff4; color:#1a8f4b; }
-  .risk-item .ri-title { font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:3px; }
-  .risk-item .ri-desc  { font-size:.8rem; color:var(--sub); }
-  .cta-box { background:var(--navy); border-radius:14px; padding:36px; text-align:center; }
-  .cta-box h3 { color:#fff; font-weight:900; margin-bottom:10px; }
-  .cta-box p  { color:rgba(255,255,255,.65); font-size:.9rem; margin-bottom:24px; }
+
+  /* ── 헤드라인 ── */
+  .result-hero { background: var(--navy); padding: 80px 0 50px; text-align: center; }
+  .result-hero h1 { font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; color: #fff; margin-bottom: 10px; }
+  .risk-badge { display: inline-block; background: var(--red); color: #fff; font-weight: 700; font-size: 1rem; border-radius: 999px; padding: 8px 24px; margin-bottom: 16px; }
+
+  /* ── 결과 카드 ── */
+  .result-card { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.08); padding: 28px; margin-bottom: 20px; }
+  .result-card h4 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .result-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: .88rem; }
+  .result-row:last-child { border-bottom: none; }
+  .result-row .label { color: var(--sub); }
+  .result-row .value { font-weight: 700; color: var(--navy); }
+
+  /* ── 위험 항목 ── */
+  .risk-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .risk-item:last-child { border-bottom: none; }
+  .risk-level { font-size: .7rem; font-weight: 700; border-radius: 4px; padding: 3px 8px; white-space: nowrap; }
+  .risk-high { background: #fef2f2; color: var(--red); }
+  .risk-mid  { background: #fffbeb; color: #d97706; }
+  .risk-low  { background: #f0fff4; color: #1a8f4b; }
+  .risk-item .ri-title { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .risk-item .ri-desc  { font-size: .8rem; color: var(--sub); }
+
+  /* ── 우측 CTA 박스 ── */
+  .cta-box { background: var(--navy); border-radius: 14px; padding: 36px; text-align: center; }
+  .cta-box h3 { color: #fff; font-weight: 900; margin-bottom: 10px; }
+  .cta-box p  { color: rgba(255,255,255,.65); font-size: .9rem; margin-bottom: 24px; }
+
+  /* ── 플랜 추천 섹션 (FN-06-T1 — BE-09 완료 후 표시) ── */
+  .anon-plan-recommend { background: #fff; border-radius: 14px; box-shadow: 0 4px 24px rgba(0,0,0,.08); margin-bottom: 20px; overflow: hidden; }
+  .anon-plan-recommend .rec-header { background: linear-gradient(135deg, #1e1b4b, #312e81); padding: 16px 24px; display: flex; align-items: center; gap: 10px; }
+  .anon-plan-recommend .rec-header h5 { margin: 0; color: #fff; font-size: .95rem; font-weight: 800; }
+  .anon-plan-recommend .rec-header .rec-badge { font-size: .68rem; background: rgba(255,255,255,.15); color: rgba(255,255,255,.8); padding: 2px 8px; border-radius: 4px; }
+  .anon-plan-recommend .rec-body { padding: 24px; }
+
+  /* 플랜 카드 테마 */
+  .plan-rec-card { border-radius: 12px; padding: 18px; border: 2px solid transparent; }
+  .plan-rec-card.starter  { background: #f0fdf4; border-color: #16a34a; }
+  .plan-rec-card.business { background: #eff6ff; border-color: #1d4ed8; }
+  .plan-rec-card.pro      { background: #fdf4ff; border-color: #7c3aed; }
+  .plan-rec-card.custom   { background: #fff7ed; border-color: #ea580c; }
+
+  .plan-rec-name  { font-size: .72rem; font-weight: 800; letter-spacing: .1em; margin-bottom: 4px; }
+  .plan-rec-price { font-size: 1.6rem; font-weight: 900; line-height: 1.1; margin-bottom: 4px; }
+  .plan-rec-sub   { font-size: .75rem; color: #64748b; margin-bottom: 14px; }
+
+  .plan-rec-reason { display: flex; align-items: flex-start; gap: 7px; font-size: .82rem; color: #374151; padding: 3px 0; }
+  .plan-rec-reason::before { content: '✓'; color: #16a34a; font-weight: 900; flex-shrink: 0; }
+
+  .plan-rec-compare { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-top: 12px; }
+  .plan-rec-compare .c-row { display: flex; justify-content: space-between; font-size: .82rem; padding: 3px 0; }
+  .c-label { color: #64748b; }
+  .c-val-danger  { font-weight: 800; color: #dc2626; }
+  .c-val-success { font-weight: 700; color: #059669; }
+
+  /* ── 스켈레톤 ── */
+  .skeleton { background: linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  .skel-line { height: 13px; margin-bottom: 8px; }
+  .skel-line.tall { height: 28px; }
+  .skel-line.short { width: 55%; }
   </style>
 </head>
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
-<!-- HEADER -->
 <div id="tai-header"></div>
 
-<div class="result-hero">
+<!-- ══ 헤드라인 (PART 1: BE-09 완료 후 API 동적 전환) ══ -->
+<div class="result-hero" id="result-hero">
   <div class="sec-inner">
-    <p style="color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:12px;">법령 진단 완료</p>
-    <span class="risk-badge">⚠ 위험도 : 높음</span>
-    <h1>현재 3개 항목 위반<br>가능성이 있습니다</h1>
-    <p style="color:rgba(255,255,255,.55); font-size:.9rem;">아래 결과는 입력하신 시설 정보 기반 1차 분석 결과입니다. 정확한 진단은 상세 점검이 필요합니다.</p>
+    <p style="color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:12px;" id="hero-meta">법령 진단 완료</p>
+    <!-- JS 렌더 전 기본 표시 — PART 1 완료 시 교체됨 -->
+    <span class="risk-badge" id="hero-badge">⚠ 위험도 분석 중...</span>
+    <h1 id="hero-title">잠시만 기다려 주세요</h1>
+    <p style="color:rgba(255,255,255,.55); font-size:.9rem;" id="hero-sub">진단 결과를 불러오고 있습니다.</p>
   </div>
 </div>
 
 <section class="sec" style="background:var(--gray-bg);">
   <div class="sec-inner">
     <div class="row g-4">
+
+      <!-- ── 좌: 결과 (PART 1 — BE-09 완료 후 동적 렌더) ── -->
       <div class="col-lg-8">
-        <div class="result-card">
+
+        <!-- 진단 요약 -->
+        <div class="result-card" id="summary-card">
           <h4><i class="fas fa-clipboard-list" style="color:var(--red);"></i> 진단 요약</h4>
-          <div class="result-row"><span class="label">사업장 유형</span><span class="value">산업·제조</span></div>
-          <div class="result-row"><span class="label">상시 근로자 수</span><span class="value">50 ~ 99인</span></div>
-          <div class="result-row"><span class="label">적용 법령 수</span><span class="value">산업안전보건법 외 4개</span></div>
-          <div class="result-row"><span class="label">선임 의무 여부</span><span class="value" style="color:var(--red);">필요 (안전관리자 1인 이상)</span></div>
-          <div class="result-row"><span class="label">법정 점검 항목</span><span class="value">17개 항목</span></div>
+          <!-- 스켈레톤 초기 상태 -->
+          <div class="skeleton skel-line short mb-3"></div>
+          <div class="skeleton skel-line mb-2"></div>
+          <div class="skeleton skel-line mb-2"></div>
+          <div class="skeleton skel-line short"></div>
         </div>
-        <div class="result-card">
+
+        <!-- 주요 위험 항목 -->
+        <div class="result-card" id="risk-card">
           <h4><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i> 주요 위험 항목</h4>
-          <div class="risk-item"><span class="risk-level risk-high">높음</span><div><div class="ri-title">안전관리자 미선임</div><div class="ri-desc">50인 이상 사업장은 안전관리자 선임 의무가 있습니다. 위반 시 최대 500만원 과태료.</div></div></div>
-          <div class="risk-item"><span class="risk-level risk-high">높음</span><div><div class="ri-title">지게차 작업계획서 미작성</div><div class="ri-desc">3톤 이상 지게차 운행 시 작업계획서 작성·비치 의무. 2026년 3월부터 강화.</div></div></div>
-          <div class="risk-item"><span class="risk-level risk-mid">중간</span><div><div class="ri-title">안전보건교육 미실시 가능성</div><div class="ri-desc">채용 시 교육(8시간), 분기별 정기교육 실시 여부를 확인하세요.</div></div></div>
-          <div class="risk-item"><span class="risk-level risk-low">낮음</span><div><div class="ri-title">위험성평가 기록 관리</div><div class="ri-desc">연 1회 이상 위험성평가 실시 및 결과 기록 보존 의무.</div></div></div>
+          <div class="skeleton skel-line tall mb-3"></div>
+          <div class="skeleton skel-line tall mb-3"></div>
+          <div class="skeleton skel-line tall"></div>
         </div>
+
+        <!-- ── FN-06-T1: 플랜 추천 (BE-09 완료 후 표시) ── -->
+        <div class="anon-plan-recommend" id="anon-plan-section" style="display:none;">
+          <div class="rec-header">
+            <span>📊</span>
+            <h5>진단 기반 맞춤 플랜 추천</h5>
+            <span class="rec-badge">법령엔진 자동 분석</span>
+          </div>
+          <div class="rec-body" id="anon-plan-body"><!-- JS 렌더 --></div>
+        </div>
+
       </div>
+
+      <!-- ── 우: CTA ── -->
       <div class="col-lg-4">
         <div class="cta-box">
           <h3>지금 바로 해결하세요</h3>
           <p>TAI Safe SaaS를 통해 법령 의무를 자동으로 관리하고 위반 리스크를 줄이세요.</p>
-          <a href="service/saas.html" class="btn-red d-block text-center" style="margin-bottom:12px;">TAI Safe 시작하기</a>
-          <a href="contact.html" style="display:block;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1.5px solid rgba(255,255,255,.2);border-radius:7px;padding:12px;text-align:center;font-size:.9rem;font-weight:600;">전문가 상담 신청</a>
+          <!-- FN-07: "전문가 상담 신청" 버튼 삭제 완료 -->
+          <a href="service/saas.html" class="btn-red d-block text-center">TAI Safe 시작하기</a>
         </div>
         <div style="background:#fff;border-radius:14px;padding:24px;margin-top:16px;box-shadow:0 2px 14px rgba(0,0,0,.06);">
           <p style="font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:12px;">결과 이메일로 받기</p>
-          <input type="email" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.85rem;margin-bottom:10px;" placeholder="이메일 입력">
-          <button class="btn-red" style="width:100%;font-size:.9rem;padding:11px;">결과 전송</button>
+          <input type="email" id="email-input" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.85rem;margin-bottom:10px;" placeholder="이메일 입력">
+          <button class="btn-red" style="width:100%;font-size:.9rem;padding:11px;" onclick="sendEmail()">결과 전송</button>
         </div>
         <div class="text-center mt-3"><a href="free-diagnosis.html" style="color:var(--sub);font-size:.85rem;">← 다시 진단하기</a></div>
       </div>
+
     </div>
   </div>
 </section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
-</body></html>
+<script>
+/* ════════════════════════════════════════════════════════
+   free-diagnosis-result.js
+   PART 1 (FN-05): 정적 목업 → API 동적 전환 — BE-09 완료 후 활성화
+   PART 2 (FN-06-T1): 플랜 추천 카드 — BE-09 완료 후 활성화
+   PART 3 (FN-07): 전문가 상담 버튼 삭제 — 완료
+
+   선행조건: GET /anonymous-diagnosis/{token}/transform
+             GET /anonymous-diagnosis/{token}/recommend-plan
+   ※ BE-09 완료 전까지 하단 TODO 섹션의 주석을 해제하지 마세요
+════════════════════════════════════════════════════════ */
+(function() {
+  'use strict';
+
+  const API   = 'https://api.taieng.co.kr';
+  const params = new URLSearchParams(location.search);
+  const token  = params.get('token') || '';
+
+  /* ════ TODO: BE-09 완료 후 아래 주석 해제 ════
+
+  // PART 1 — transform API
+  async function load() {
+    if (!token) { showStaticFallback(); return; }
+    try {
+      const res = await fetch(`${API}/anonymous-diagnosis/${token}/transform`);
+      if (!res.ok) { showStaticFallback(); return; }
+      const data = await res.json();
+      renderAll(data);
+    } catch (e) {
+      showStaticFallback();
+    }
+  }
+
+  function renderAll(d) {
+    const hl  = d.headline || {};
+    const sev = (hl.severity || 'MEDIUM').toUpperCase();
+    const sevLabel = { LOW:'낮음', MEDIUM:'보통', HIGH:'높음', CRITICAL:'매우높음' }[sev] || sev;
+
+    // 헤드라인
+    document.getElementById('hero-meta').textContent = `${d.company_name || ''} · ${d.sector || ''}`;
+    document.getElementById('hero-badge').textContent = `위험도: ${sevLabel}`;
+    document.getElementById('hero-badge').className = `risk-badge`;
+    document.getElementById('hero-title').textContent = hl.summary || '진단이 완료됐습니다.';
+    document.getElementById('hero-sub').textContent = '아래 결과는 입력하신 시설 정보 기반 분석 결과입니다.';
+
+    // 요약 카드
+    renderSummary(d);
+    // 위험 항목
+    renderRisks(d.obligations || []);
+    // 플랜 추천 (PART 2)
+    loadAnonPlanRecommend(token);
+  }
+
+  function renderSummary(d) {
+    const card = document.getElementById('summary-card');
+    const rows = [
+      ['사업장 유형', d.sector],
+      ['상시 근로자 수', `${d.worker_count || 0}인`],
+      ['적용 법령 수', `${(d.applicable_laws || []).length}개`],
+      ['선임 의무', d.has_appointment_duty ? '필요' : '해당 없음'],
+      ['법정 점검 항목', `${(d.obligations || []).length}개 항목`],
+    ];
+    card.innerHTML = `<h4><i class="fas fa-clipboard-list" style="color:var(--red);"></i> 진단 요약</h4>`
+      + rows.map(([l,v]) => `<div class="result-row"><span class="label">${esc(l)}</span><span class="value">${esc(v)}</span></div>`).join('');
+  }
+
+  function renderRisks(obligations) {
+    const card = document.getElementById('risk-card');
+    const top  = obligations.slice(0, 4);
+    const levelCls = { CRITICAL:'risk-high', HIGH:'risk-high', MEDIUM:'risk-mid', LOW:'risk-low' };
+    const levelLabel = { CRITICAL:'매우높음', HIGH:'높음', MEDIUM:'중간', LOW:'낮음' };
+    if (!top.length) { card.querySelector('h4') && (card.innerHTML = '<h4>주요 위험 항목 없음</h4>'); return; }
+    const items = top.map(o => `
+      <div class="risk-item">
+        <span class="risk-level ${levelCls[o.risk_level] || 'risk-low'}">${levelLabel[o.risk_level] || o.risk_level}</span>
+        <div>
+          <div class="ri-title">${esc(o.title)}</div>
+          <div class="ri-desc">${esc(o.description)}</div>
+        </div>
+      </div>`).join('');
+    card.innerHTML = `<h4><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i> 주요 위험 항목</h4>${items}`;
+  }
+
+  // PART 2 — 플랜 추천 (FN-06-T1)
+  async function loadAnonPlanRecommend(token) {
+    if (!token) return;
+    try {
+      const res = await fetch(`${API}/anonymous-diagnosis/${token}/recommend-plan`);
+      if (!res.ok) return;
+      const data = await res.json();
+      renderAnonPlanRecommend(data);
+    } catch (e) { }
+  }
+
+  function renderAnonPlanRecommend(d) {
+    const sec  = document.getElementById('anon-plan-section');
+    const body = document.getElementById('anon-plan-body');
+    if (!d || !d.recommended) return;
+
+    const plan = d.recommended;
+    const reasons = d.reasons || [];
+    const comp = d.comparison || {};
+    const alts = d.alternatives || [];
+
+    const PLAN_THEME = {
+      STARTER:  { cls:'starter',  text:'#15803d', price:'79,000' },
+      BUSINESS: { cls:'business', text:'#1e40af', price:'149,000' },
+      PRO:      { cls:'pro',      text:'#6d28d9', price:'249,000' },
+      CUSTOM:   { cls:'custom',   text:'#c2410c', price:'협의' },
+    };
+    const t = PLAN_THEME[plan] || PLAN_THEME.BUSINESS;
+
+    const penFmt = comp.penalty_max_krw ? Number(comp.penalty_max_krw).toLocaleString('ko-KR') : null;
+    const subFmt = comp.subscription_annual_krw ? Number(comp.subscription_annual_krw).toLocaleString('ko-KR') : null;
+
+    const compHtml = (penFmt || subFmt) ? `
+      <div class="plan-rec-compare mt-3">
+        <div class="c-row"><span class="c-label">최대 과태료 노출</span><span class="c-val-danger">${penFmt}원</span></div>
+        ${subFmt ? `<div class="c-row"><span class="c-label">${plan} 연간 구독료</span><span class="c-val-success">${subFmt}원</span></div>` : ''}
+        ${comp.roi_ratio ? `<div class="c-row"><span class="c-label">절감 효과</span><span class="badge" style="background:#dcfce7;color:#15803d;">${comp.roi_ratio}배</span></div>` : ''}
+      </div>` : '';
+
+    const altsHtml = alts.length
+      ? `<div class="mt-2" style="font-size:.78rem;color:#64748b;">다른 선택:${alts.map(a=>`<a href="pricing.html?highlight=${a.toLowerCase()}" class="fw-bold ms-1">${a}</a>`).join(' ·')}</div>` : '';
+
+    body.innerHTML = `
+      <div class="row g-3 align-items-start">
+        <div class="col-md-4">
+          <div class="plan-rec-card ${t.cls}">
+            <div class="plan-rec-name" style="color:${t.text};">${plan}</div>
+            <div class="plan-rec-price" style="color:${t.text};">₩${t.price}</div>
+            <div class="plan-rec-sub">/ 월 · VAT 별도</div>
+            <a href="pricing.html?recommend=${plan.toLowerCase()}&token=${token}"
+               class="btn btn-sm fw-bold d-block text-center"
+               style="background:${t.text};color:#fff;font-size:.82rem;margin-bottom:8px;">지금 구독 시작</a>
+            <a href="pricing.html" class="btn btn-sm btn-outline-secondary d-block text-center" style="font-size:.78rem;">전체 플랜 비교</a>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="fw-bold mb-2" style="font-size:.88rem;">이 플랜을 추천하는 이유</div>
+          ${reasons.map(r=>`<div class="plan-rec-reason">${esc(r)}</div>`).join('')}
+          ${compHtml}
+          ${altsHtml}
+        </div>
+      </div>`;
+
+    sec.style.display = '';
+  }
+
+  load();
+
+  ════ BE-09 완료 후 주석 해제 끝 ════ */
+
+  /* ── 현재 (BE-09 대기): 정적 폴백 표시 ── */
+  function showStaticFallback() {
+    document.getElementById('hero-badge').textContent = '⚠ 위험도 : 높음';
+    document.getElementById('hero-title').textContent = '현재 3개 항목 위반 가능성이 있습니다';
+    document.getElementById('hero-sub').textContent = '아래 결과는 입력하신 시설 정보 기반 1차 분석 결과입니다.';
+    document.getElementById('hero-meta').textContent = '법령 진단 완료';
+
+    document.getElementById('summary-card').innerHTML = `
+      <h4><i class="fas fa-clipboard-list" style="color:var(--red);"></i> 진단 요약</h4>
+      <div class="result-row"><span class="label">사업장 유형</span><span class="value">산업·제조</span></div>
+      <div class="result-row"><span class="label">상시 근로자 수</span><span class="value">50 ~ 99인</span></div>
+      <div class="result-row"><span class="label">적용 법령 수</span><span class="value">산업안전보건법 외 4개</span></div>
+      <div class="result-row"><span class="label">선임 의무 여부</span><span class="value" style="color:var(--red);">필요 (안전관리자 1인 이상)</span></div>
+      <div class="result-row"><span class="label">법정 점검 항목</span><span class="value">17개 항목</span></div>`;
+
+    document.getElementById('risk-card').innerHTML = `
+      <h4><i class="fas fa-exclamation-triangle" style="color:var(--red);"></i> 주요 위험 항목</h4>
+      <div class="risk-item"><span class="risk-level risk-high">높음</span><div><div class="ri-title">안전관리자 미선임</div><div class="ri-desc">50인 이상 사업장은 안전관리자 선임 의무가 있습니다. 위반 시 최대 500만원 과태료.</div></div></div>
+      <div class="risk-item"><span class="risk-level risk-high">높음</span><div><div class="ri-title">지게차 작업계획서 미작성</div><div class="ri-desc">3톤 이상 지게차 운행 시 작업계획서 작성·비치 의무. 2026년 3월부터 강화.</div></div></div>
+      <div class="risk-item"><span class="risk-level risk-mid">중간</span><div><div class="ri-title">안전보건교육 미실시 가능성</div><div class="ri-desc">채용 시 교육(8시간), 분기별 정기교육 실시 여부를 확인하세요.</div></div></div>
+      <div class="risk-item"><span class="risk-level risk-low">낮음</span><div><div class="ri-title">위험성평가 기록 관리</div><div class="ri-desc">연 1회 이상 위험성평가 실시 및 결과 기록 보존 의무.</div></div></div>`;
+  }
+
+  /* ── 이메일 전송 ── */
+  window.sendEmail = function() {
+    const email = (document.getElementById('email-input').value || '').trim();
+    if (!email) { alert('이메일 주소를 입력해 주세요.'); return; }
+    alert('이메일 전송 기능은 준비 중입니다. 도입 문의를 통해 결과를 받으실 수 있습니다.');
+  };
+
+  /* ── 유틸 ── */
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* BE-09 완료 전: 정적 폴백 즉시 표시 */
+  showStaticFallback();
+
+})();
+</script>
+</body>
+</html>
