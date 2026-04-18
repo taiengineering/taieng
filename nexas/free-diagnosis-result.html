@@ -216,8 +216,22 @@
     background:#fff;border-radius:var(--radius);
     border:1.5px solid var(--border);padding:22px 18px;margin-top:16px;
   }
-  .saas-section h3{font-size:.92rem;font-weight:900;color:var(--ink);margin-bottom:6px;}
-  .saas-section .saas-sub{font-size:.8rem;color:var(--gray);margin-bottom:14px;line-height:1.6;}
+  .saas-section h3{font-size:.92rem;font-weight:900;color:var(--ink);margin-bottom:10px;}
+  .saas-benefits{list-style:none;margin-bottom:14px;}
+  .saas-benefits li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:.83rem;color:var(--ink);line-height:1.55;
+    padding:8px 0;border-bottom:1px solid var(--border);
+  }
+  .saas-benefits li:last-child{border-bottom:none;}
+  .saas-benefits .benefit-num{
+    flex-shrink:0;width:22px;height:22px;border-radius:50%;
+    background:var(--blue);color:#fff;
+    font-size:.7rem;font-weight:800;
+    display:flex;align-items:center;justify-content:center;
+    margin-top:1px;
+  }
+  .saas-benefits .benefit-title{font-weight:800;color:var(--blue-dark);}
   .saas-img{width:100%;border-radius:8px;margin-bottom:14px;border:1px solid var(--border);}
   .saas-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
   @media(max-width:480px){.saas-plans{grid-template-columns:1fr;}}
@@ -328,12 +342,23 @@
   </div>
 
   <!-- ═══ S7: SaaS 전환 유도 ═══ -->
+  <!-- 수정 1: 제목·설명·버튼·링크 변경 / 무료 표현 제거 -->
   <div class="saas-section">
-    <h3>엑셀 대신 자동화</h3>
-    <p class="saas-sub">
-      TAI Safe는 이 <span id="totalObCountSaas">-</span>건의 의무를 자동으로 배분하고 추적합니다.<br>
-      안전관리자 혼자 모든 걸 하는 구조에서, 팀 전체가 나눠 처리하는 구조로.
-    </p>
+    <h3>TAI Safe가 해결합니다</h3>
+    <ul class="saas-benefits">
+      <li>
+        <span class="benefit-num">①</span>
+        <span><span class="benefit-title">법적 의무 자동 배분</span> — 안전관리자 혼자 하지 않습니다</span>
+      </li>
+      <li>
+        <span class="benefit-num">②</span>
+        <span><span class="benefit-title">D-day 자동 알림</span> — 기한 놓칠 걱정 없습니다</span>
+      </li>
+      <li>
+        <span class="benefit-num">③</span>
+        <span><span class="benefit-title">점검·교육·신고 기록</span> — 증빙 자동 생성</span>
+      </li>
+    </ul>
     <img
       class="saas-img"
       src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/11-%EC%97%85%EB%AC%B4%EB%B6%84%EC%82%B0-%EB%B9%84%ED%8F%AC%EC%95%A0%ED%94%84%ED%84%B0.svg"
@@ -358,7 +383,7 @@
         <div class="sp-label">/월 · VAT 별도</div>
       </div>
     </div>
-    <a class="btn-saas" href="https://safe.taieng.co.kr" target="_blank" rel="noopener">TAI Safe 무료로 시작하기 →</a>
+    <a class="btn-saas" href="for-safety-manager.html">TAI Safe 더 알아보기 →</a>
   </div>
 
   <!-- ═══ S8: 면책 + 푸터 ═══ -->
@@ -485,6 +510,16 @@ const PAID_PRICE = {
   INDUSTRY:     [{ label:'기본', amount:'79,000원' }, { label:'정밀', amount:'149,000원' }, { label:'종합', amount:'249,000원' }],
   CONSTRUCTION: [{ label:'기본', amount:'145,000원' }, { label:'종합', amount:'299,000원' }]
 };
+
+// 수정 2: 섹터별 결제 코드 매핑
+const PAID_CODE_MAP = {
+  BUILDING:     'BUILDING_PAID1',
+  INDUSTRY:     'INDUSTRY_V2',
+  CONSTRUCTION: 'CONSTRUCTION'
+};
+
+// 현재 섹터 (startPaid에서 사용)
+let currentSector = 'BUILDING';
 
 // ══════════════════════════════════════════════
 // INIT
@@ -660,12 +695,14 @@ function toggleAccord(gi) {
 
 /* S6 */
 function renderPaidCta(d) {
+  // 섹터 저장 (startPaid에서 사용)
+  currentSector = d.sector || 'BUILDING';
+
   const total = d.applicable_count || d.summary?.total || 0;
   document.getElementById('paidCtaTitle').textContent =
     `이 ${total}건을 체계적으로 관리하고 싶다면?`;
 
-  const sector = d.sector || 'BUILDING';
-  const prices = PAID_PRICE[sector] || PAID_PRICE.BUILDING;
+  const prices = PAID_PRICE[currentSector] || PAID_PRICE.BUILDING;
   document.getElementById('priceRow').innerHTML = prices.map(p => `
     <div class="price-item">
       <div class="p-label">${esc(p.label)}</div>
@@ -680,16 +717,18 @@ function revealPrice() {
   document.getElementById('btnPaidStart').style.display = 'block';
 }
 
+// 수정 2: 결제 URL 변경 — KG이니시스 연동 전 결제 스텝 파라미터
 function startPaid() {
   const params = new URLSearchParams(location.search);
   const token = params.get('token') || '';
-  location.href = `free-diagnosis.html?upgrade=1${token ? '&token='+token : ''}`;
+  const paidCode = PAID_CODE_MAP[currentSector] || 'BUILDING_PAID1';
+  const url = `free-diagnosis.html?paid=${paidCode}&step=payment${token ? '&token=' + token : ''}`;
+  location.href = url;
 }
 
-/* S7 */
+/* S7 — renderSaas: 총 건수 표시 제거 (HTML 고정 장점 리스트로 대체됨) */
 function renderSaas(d) {
-  const total = d.applicable_count || d.summary?.total || 0;
-  document.getElementById('totalObCountSaas').textContent = total;
+  // S7는 HTML 정적 콘텐츠로 대체됨 — JS 렌더 불필요
 }
 
 /* S5 */
