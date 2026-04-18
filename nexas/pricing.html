@@ -103,7 +103,6 @@
   .plan-price-sub { font-size: .88rem; color: #64748b; margin-bottom: 4px; }
   .plan-vat { font-size: .75rem; color: #94a3b8; margin-bottom: 12px; min-height: 18px; }
   .plan-divider { border: none; border-top: 1px solid #f1f5f9; margin: 14px 0; }
-  /* 포함건수/초과건수 박스 (크레딧 미노출) */
   .plan-quota-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; }
   .plan-quota-box .q-row { display: flex; justify-content: space-between; align-items: center; font-size: .82rem; margin-bottom: 5px; }
   .plan-quota-box .q-row:last-child { margin-bottom: 0; }
@@ -142,7 +141,6 @@
   .diag-features li { display: flex; align-items: flex-start; gap: 7px; font-size: .82rem; color: #475569; margin-bottom: 5px; line-height: 1.5; }
   .diag-features li::before { content: '·'; color: #94a3b8; font-size: 1.1rem; line-height: 1; flex-shrink: 0; }
 
-  /* 특수시설 확장 */
   .special-toggle-wrap { text-align: center; margin-top: 32px; }
   .special-toggle-btn {
     background: #fff; border: 2px solid #e9d5ff; color: #7c3aed;
@@ -191,6 +189,75 @@
   .faq-q.open .faq-icon { transform: rotate(45deg); color: #0891b2; }
   .faq-a { display: none; padding: 0 4px 18px; font-size: .88rem; color: #475569; line-height: 1.75; }
   .faq-a.open { display: block; }
+
+  /* ══ FN-06: 진단 유도 블록 ══ */
+  .diag-nudge-section {
+    background: linear-gradient(135deg, #1e1b4b, #312e81);
+    padding: 64px 0;
+  }
+  .diag-nudge-inner {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 24px;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .diag-nudge-left { flex: 1; min-width: 260px; }
+  .diag-nudge-eyebrow {
+    display: inline-block;
+    font-size: .7rem; font-weight: 800; letter-spacing: .1em;
+    color: #a78bfa; background: rgba(167,139,250,.15);
+    border: 1px solid rgba(167,139,250,.3);
+    border-radius: 4px; padding: 3px 10px; margin-bottom: 14px;
+  }
+  .diag-nudge-title {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 900; color: #fff; line-height: 1.3; margin-bottom: 10px;
+  }
+  .diag-nudge-desc {
+    font-size: .9rem; color: rgba(255,255,255,.68); line-height: 1.7; margin-bottom: 0;
+  }
+  .diag-nudge-right {
+    display: flex; flex-direction: column; gap: 12px; align-items: flex-start; flex-shrink: 0;
+  }
+  .diag-nudge-checklist {
+    list-style: none; padding: 0; margin: 0 0 4px;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .diag-nudge-checklist li {
+    display: flex; align-items: center; gap: 8px;
+    font-size: .85rem; color: rgba(255,255,255,.8);
+  }
+  .diag-nudge-checklist li::before {
+    content: '✓'; color: #4ade80; font-weight: 900; flex-shrink: 0;
+  }
+  .diag-nudge-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: #fff; color: #4338ca;
+    font-size: .95rem; font-weight: 800;
+    padding: 14px 28px; border-radius: 10px;
+    text-decoration: none; white-space: nowrap;
+    transition: background .2s, transform .15s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,.2);
+  }
+  .diag-nudge-btn:hover {
+    background: #ede9fe; color: #3730a3;
+    transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.25);
+  }
+  .diag-nudge-secondary {
+    font-size: .8rem; color: rgba(255,255,255,.5);
+    text-align: center; text-decoration: none;
+  }
+  .diag-nudge-secondary:hover { color: rgba(255,255,255,.8); }
+  @media (max-width: 767px) {
+    .diag-nudge-inner { padding: 28px 24px; flex-direction: column; }
+    .diag-nudge-right { width: 100%; }
+    .diag-nudge-btn   { width: 100%; }
+  }
 
   /* ── CTA ── */
   .price-cta { background: linear-gradient(135deg, #0891b2, #0e7490); padding: 72px 0; text-align: center; }
@@ -337,7 +404,6 @@
     <!-- ══ SaaS 탭 ══ -->
     <div id="tab-saas" class="tab-panel active">
 
-      <!-- 연간/월간 토글 -->
       <div class="billing-toggle-wrap">
         <span class="billing-label active-label" id="label-monthly">월간</span>
         <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
@@ -345,7 +411,6 @@
       </div>
       <div class="billing-note">사업장(시설/현장)당 월정액 · VAT 별도 · 포함 10명 초과 시 3,000원/명</div>
 
-      <!-- 섹터 서브탭 -->
       <div class="sector-tabs">
         <button class="sector-tab-btn active" onclick="switchSectorTab('building', this)">
           <span class="sector-icon">🏢</span>건물·시설
@@ -358,7 +423,6 @@
         </button>
       </div>
 
-      <!-- 건물 패널 -->
       <div id="sector-building" class="sector-panel active">
         <div id="building-loading" class="row g-4 justify-content-center">
           <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
@@ -367,7 +431,6 @@
         <div id="building-cards" class="row g-4 justify-content-center" style="display:none;"></div>
       </div>
 
-      <!-- 산업 패널 -->
       <div id="sector-industry" class="sector-panel">
         <div id="industry-loading" class="row g-4 justify-content-center">
           <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
@@ -377,7 +440,6 @@
         <div id="industry-cards" class="row g-4 justify-content-center" style="display:none;"></div>
       </div>
 
-      <!-- 건설 패널 -->
       <div id="sector-construction" class="sector-panel">
         <div id="construction-loading" class="row g-4 justify-content-center">
           <div class="col-lg-4 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div><div class="skeleton skel-line short"></div></div></div>
@@ -402,7 +464,6 @@
         </p>
       </div>
 
-      <!-- 로딩 -->
       <div id="diag-loading" class="row g-4 justify-content-center">
         <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
         <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
@@ -410,10 +471,8 @@
         <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
       </div>
 
-      <!-- 4종 메인 카드 -->
       <div id="diag-main-cards" class="row g-4 justify-content-center" style="display:none;"></div>
 
-      <!-- 특수시설 확장 -->
       <div id="special-wrap" style="display:none;">
         <div class="special-toggle-wrap">
           <button class="special-toggle-btn" id="specialToggleBtn" onclick="toggleSpecial()">
@@ -513,6 +572,45 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════════
+     FN-06: 진단 유도 블록 — FAQ 아래, CTA 위
+     "어떤 플랜이 맞는지 모르시겠다면 → 무료 진단"
+══════════════════════════════════════════════ -->
+<section class="diag-nudge-section">
+  <div class="container">
+    <div class="diag-nudge-inner">
+
+      <div class="diag-nudge-left">
+        <span class="diag-nudge-eyebrow">💡 플랜 선택 가이드</span>
+        <h2 class="diag-nudge-title">
+          어떤 플랜이 맞는지<br>모르시겠습니까?
+        </h2>
+        <p class="diag-nudge-desc">
+          3분 무료 진단을 받으시면 사업장 규모·업종·의무 항목 수에 따라<br>
+          가장 적합한 플랜을 자동으로 추천해 드립니다.<br>
+          <span style="color:#a78bfa;font-weight:700;">AI 없음 — 법령엔진이 데이터로 판단합니다.</span>
+        </p>
+      </div>
+
+      <div class="diag-nudge-right">
+        <ul class="diag-nudge-checklist">
+          <li>내 사업장에 적용되는 법령 자동 도출</li>
+          <li>의무 항목 수 기반 플랜 자동 추천</li>
+          <li>과태료 리스크 vs 구독료 비교 제공</li>
+          <li>진단 결과에서 바로 구독 가능</li>
+        </ul>
+        <a href="free-diagnosis.html" class="diag-nudge-btn">
+          <i class="fas fa-search me-1"></i>3분 무료 진단으로 플랜 추천받기 →
+        </a>
+        <a href="contact.html" class="diag-nudge-secondary">
+          직접 상담을 원하시면 →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="price-cta">
   <div class="container">
@@ -528,7 +626,6 @@
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
-<!-- TODO: 실결제 활성화 시 https://stdpay.inicis.com/stdjs/INIStdPay.js 로드 -->
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
@@ -540,11 +637,7 @@
 if (typeof WOW !== 'undefined') new WOW().init();
 
 /* ════════════════════════════════════════════════════
-   pricing.js v4 (FN-01)
-   3섹터 탭 구조 + API 기반 가격 (하드코딩 금지)
-   GET /public/pricing/saas-plans
-   GET /public/pricing/diagnosis-reports
-   PRICING_FINAL.md 폴백 기준
+   pricing.js v4 (FN-01 + FN-06)
 ════════════════════════════════════════════════════ */
 (function(){
 'use strict';
@@ -556,8 +649,6 @@ var _pendingGoods = '';
 var _pendingAmount = 0;
 var _pendingSaasPlan = {};
 
-/* ══ 폴백 데이터 (PRICING_FINAL.md 기준) ══ */
-/* 가격 하드코딩이 아닌 폴백 — API 우선 사용 */
 var SAAS_FALLBACK = {
   BUILDING: [
     { plan_code:'BUILDING_BASIC',    plan_name:'BASIC',    sector:'BUILDING', price_monthly:59000,  is_recommended:false, is_custom:false,
@@ -607,7 +698,6 @@ var SAAS_FALLBACK = {
   ],
 };
 
-/* ── 법령진단 메타 (폴백 가격 포함 — API 우선) ── */
 var MAIN_CODES    = ['BUILDING_V2','BUILDING_LARGE_V2','INDUSTRY_V2','CONSTRUCTION'];
 var SPECIAL_CODES = ['HAZARD_LOW','HAZARD_MID','HAZARD_HIGH'];
 var DIAG_META = {
@@ -627,7 +717,6 @@ var DIAG_META = {
     features:['PDF 법령진단 리포트','고위험 복합시설 정밀 분석','선임·점검·신고 도출','12개월 재발행·조회','별도 온보딩 지원'] },
 };
 
-/* ══ 1. 데이터 로드 ══ */
 async function loadPricingData(){
   try {
     var results = await Promise.allSettled([
@@ -648,9 +737,30 @@ async function loadPricingData(){
   renderSaasSector('INDUSTRY', 'industry');
   renderSaasSector('CONSTRUCTION', 'construction');
   renderDiagSection();
+
+  /* FN-06: URL 파라미터로 플랜 하이라이트 처리 */
+  var params = new URLSearchParams(location.search);
+  var highlight = params.get('highlight') || params.get('recommend');
+  if(highlight) highlightPlan(highlight.toUpperCase());
 }
 
-/* ══ 2. API에서 섹터별 플랜 추출 ══ */
+/* FN-06: URL 파라미터 기반 플랜 하이라이트 */
+function highlightPlan(planName){
+  setTimeout(function(){
+    var cards = document.querySelectorAll('.plan-name');
+    cards.forEach(function(el){
+      if(el.textContent.trim().toUpperCase() === planName){
+        var card = el.closest('.plan-card');
+        if(card){
+          card.style.outline = '3px solid #7c3aed';
+          card.style.boxShadow = '0 0 0 6px rgba(124,58,237,.15)';
+          card.scrollIntoView({ behavior:'smooth', block:'center' });
+        }
+      }
+    });
+  }, 800);
+}
+
 function getPlansBySector(sector){
   if(!_saasPlans || !_saasPlans.length) return null;
   var filtered = _saasPlans.filter(function(p){
@@ -660,7 +770,6 @@ function getPlansBySector(sector){
   return filtered.length ? filtered : null;
 }
 
-/* ══ 3. SaaS 섹터 렌더 ══ */
 function renderSaasSector(sector, domKey){
   var loading = document.getElementById(domKey+'-loading');
   var cards   = document.getElementById(domKey+'-cards');
@@ -702,7 +811,6 @@ function renderSaasCard(p){
       +'<div class="plan-price-sub">/ 사업장 · <span class="period-unit">월</span></div>'
       +'<div class="plan-vat">VAT 별도</div>';
 
-  /* 포함건수/초과건수 박스 (크레딧 미노출) */
   var quotaHtml = '<div class="plan-quota-box">'
     +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+(p.included_members||10)+'명</span></div>'
     +'<div class="q-over">초과 인원당 '+(p.over_member_price||3000).toLocaleString('ko-KR')+'원/명/월</div>'
@@ -728,7 +836,6 @@ function renderSaasCard(p){
     +'</div></div>';
 }
 
-/* ══ 4. 법령진단 가격 API 추출 ══ */
 function getDiagPrice(code){
   if(!_diagReports || !_diagReports.length) return null;
   var row = _diagReports.find(function(r){
@@ -739,7 +846,6 @@ function getDiagPrice(code){
   return p != null ? parseInt(p) : null;
 }
 
-/* ══ 5. 법령진단 렌더 ══ */
 function renderDiagSection(){
   var loading   = document.getElementById('diag-loading');
   var mainCards = document.getElementById('diag-main-cards');
@@ -789,7 +895,6 @@ function renderDiagCard(code, m, price, isSpecial){
     +'</div></div>';
 }
 
-/* ══ 6. 탭 전환 ══ */
 window.switchMainTab = function(tab, btn){
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.price-tab-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -804,7 +909,6 @@ window.switchSectorTab = function(sector, btn){
   btn.classList.add('active');
 };
 
-/* ══ 7. 연간/월간 토글 ══ */
 window.toggleBilling = function(){
   isAnnual = !isAnnual;
   document.getElementById('billing-toggle').classList.toggle('on', isAnnual);
@@ -819,7 +923,6 @@ window.toggleBilling = function(){
   });
 };
 
-/* ══ 8. SaaS 결제/문의 ══ */
 window.startSaasPayment = function(planName, sector, amount){
   var sectorLabel = { BUILDING:'건물·시설', INDUSTRY:'제조·산업', CONSTRUCTION:'건설현장' }[sector] || sector;
   document.getElementById('saasModalTitle').textContent = planName + ' 플랜';
@@ -833,7 +936,6 @@ window.startSaasPayment = function(planName, sector, amount){
   new bootstrap.Modal(document.getElementById('saasModal')).show();
 };
 
-/* ══ 9. 법령진단 결제 ══ */
 window.startDiagPayment = function(goodsName, amount){
   _pendingGoods   = goodsName;
   _pendingAmount  = amount;
@@ -860,16 +962,12 @@ window.proceedDiagPayment = function(){
   document.getElementById('buyertel').value  = tel.replace(/-/g, '');
   document.getElementById('buyeremail').value= email;
 
-  /* KG이니시스 — TODO: INIStdPay.js 로드 후 INIStdPay.pay('payForm') 활성화 */
-  /* if(typeof INIStdPay !== 'undefined'){ INIStdPay.pay('payForm'); return; } */
-
   bootstrap.Modal.getInstance(document.getElementById('diagPayModal')).hide();
   setTimeout(function(){
     location.href = 'contact.html?from=pricing&goods='+encodeURIComponent(_pendingGoods)+'&amount='+_pendingAmount;
   }, 300);
 };
 
-/* ══ 10. 특수시설 토글 ══ */
 window.toggleSpecial = function(){
   var btn = document.getElementById('specialToggleBtn');
   var sec = document.getElementById('specialSection');
@@ -878,7 +976,6 @@ window.toggleSpecial = function(){
   sec.classList.toggle('open', !open);
 };
 
-/* ══ 11. FAQ ══ */
 window.toggleFaq = function(qEl){
   var aEl    = qEl.nextElementSibling;
   var isOpen = qEl.classList.contains('open');
@@ -887,7 +984,6 @@ window.toggleFaq = function(qEl){
   if(!isOpen){ qEl.classList.add('open'); aEl.classList.add('open'); }
 };
 
-/* ══ 초기화 ══ */
 document.addEventListener('DOMContentLoaded', function(){ loadPricingData(); });
 
 })();
