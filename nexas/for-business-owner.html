@@ -16,38 +16,79 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
 
-    /* ── 히어로 ── */
-    .banner-area.style-3 {
-      background: linear-gradient(135deg, #0d0005 0%, #1a0008 50%, #0d0a00 100%) !important;
-      background-image: none !important;
-      min-height: 520px;
-      display: flex; align-items: center;
+    /* ── 히어로: 좌우 split (index.html 패턴) ── */
+    .owner-hero {
+      display: flex;
+      align-items: stretch;
+      min-height: 560px;
+      background: #f8fafc;
+      overflow: hidden;
     }
-    .banner-inner h1 { color: #fff; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.12; margin-bottom: 20px; }
-    .banner-inner h1 em { color: #e63946; font-style: normal; }
-    .banner-inner p { color: rgba(255,255,255,.72); font-size: 1.02rem; line-height: 1.7; margin-bottom: 32px; }
-    .banner-eyebrow {
-      display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: #e63946; background: rgba(230,57,70,.15);
-      border: 1px solid rgba(230,57,70,.4); border-radius: 4px;
-      padding: 5px 12px; margin-bottom: 22px;
+    .owner-hero-left {
+      flex: 0 0 50%;
+      display: flex;
+      align-items: center;
+      padding: 80px 48px 80px 80px;
     }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .owner-hero-left-inner { max-width: 480px; margin-left: auto; }
 
-    /* ── 숫자 배너 ── */
-    .risk-banner { background: #e63946; padding: 30px 0; }
-    .risk-stat { text-align: center; color: #fff; }
-    .risk-stat .num { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1; margin-bottom: 8px; }
-    .risk-stat .lbl { font-size: .82rem; opacity: .88; line-height: 1.5; }
-    .risk-sep { width: 1px; background: rgba(255,255,255,.25); margin: 0 auto; }
+    .owner-hero-eyebrow {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; color: #64748b;
+      border: 1.5px solid #e2e8f0; border-radius: 6px;
+      padding: 5px 14px; margin-bottom: 22px;
+    }
+    .owner-hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 900; color: #0f172a;
+      line-height: 1.18; letter-spacing: -.03em;
+      margin-bottom: 18px;
+    }
+    .owner-hero .hero-sub {
+      font-size: .98rem; color: #64748b;
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .owner-hero .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .owner-hero-right {
+      flex: 0 0 50%;
+      position: relative;
+      overflow: hidden;
+    }
+    .owner-hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* 좌측 블렌딩 */
+    .owner-hero-right::before {
+      content: '';
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: 80px;
+      background: linear-gradient(to right, #f8fafc, transparent);
+      z-index: 1;
+    }
+
+    @media (max-width: 991px) {
+      .owner-hero { flex-direction: column; min-height: auto; }
+      .owner-hero-left { flex: none; padding: 56px 24px 40px; }
+      .owner-hero-left-inner { margin-left: 0; max-width: 100%; }
+      .owner-hero-right { flex: none; height: 320px; }
+      .owner-hero-right::before { display: none; }
+    }
+    @media (max-width: 575px) {
+      .owner-hero-left { padding: 48px 20px 32px; }
+      .owner-hero-right { height: 240px; }
+    }
 
     /* ── 솔직한 공감 섹션 ── */
     .honest-sec { background: #fff; padding: 88px 0 72px; }
     .honest-list { max-width: 640px; margin: 0 auto; }
     .honest-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
     .honest-x { font-size: 1.1rem; color: #cbd5e1; font-weight: 900; flex-shrink: 0; width: 28px; text-align: center; line-height: 1.8; }
-    .honest-o { font-size: 1.1rem; color: #e63946; font-weight: 900; flex-shrink: 0; width: 28px; text-align: center; line-height: 1.8; }
-    .honest-item p { font-size: 1.05rem; color: #64748b; line-height: 1.7; margin: 0; }
+    .honest-o { font-size: 1.1rem; color: #0f172a; font-weight: 900; flex-shrink: 0; width: 28px; text-align: center; line-height: 1.8; }
+    .honest-item p { font-size: 1.05rem; color: #94a3b8; line-height: 1.7; margin: 0; }
     .honest-item.active p { color: #0f172a; font-weight: 700; font-size: 1.1rem; }
     .honest-conclusion {
       margin-top: 36px; padding: 28px 32px; background: #0f172a; border-radius: 14px;
@@ -60,21 +101,21 @@
     .sol-card {
       background: #fff; border-radius: 18px; padding: 40px 32px 34px;
       box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%;
-      border-top: 4px solid #e63946; transition: transform .2s, box-shadow .2s;
+      border-top: 4px solid #0f172a; transition: transform .2s, box-shadow .2s;
     }
     .sol-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
     .sol-card .sol-num {
       display: inline-flex; align-items: center; justify-content: center;
       width: 36px; height: 36px; border-radius: 50%;
-      background: #e63946; color: #fff; font-weight: 900; font-size: .95rem;
+      background: #0f172a; color: #fff; font-weight: 900; font-size: .95rem;
       margin-bottom: 18px;
     }
     .sol-card h4 { font-size: 1.2rem; font-weight: 900; color: #0f172a; margin-bottom: 14px; line-height: 1.35; }
     .sol-card p { font-size: .9rem; color: #64748b; line-height: 1.7; margin: 0 0 14px; }
     .sol-card .sol-highlight {
-      background: #fef2f2; border-left: 3px solid #e63946;
+      background: #f1f5f9; border-left: 3px solid #0f172a;
       padding: 12px 16px; border-radius: 0 10px 10px 0;
-      font-size: .85rem; color: #9b1c1c; font-weight: 700; line-height: 1.6;
+      font-size: .85rem; color: #334155; font-weight: 700; line-height: 1.6;
     }
 
     /* ── 감독관 시나리오 (이미지) ── */
@@ -84,41 +125,37 @@
 
     /* ── 안전 본질 섹션 ── */
     .safety-essence {
-      background: #0f172a;
+      background: #f8fafc;
       padding: 88px 0;
       text-align: center;
     }
     .safety-essence .essence-small {
-      font-size: .88rem;
-      color: rgba(255,255,255,.45);
+      font-size: .9rem;
+      color: #94a3b8;
       line-height: 1.7;
       margin-bottom: 32px;
     }
     .safety-essence h2 {
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 900;
-      color: #fff;
+      color: #0f172a;
       line-height: 1.3;
       margin-bottom: 16px;
       letter-spacing: -.02em;
     }
-    .safety-essence h2 em {
-      color: #e63946;
-      font-style: normal;
-    }
     .safety-essence .essence-sub {
       font-size: 1.05rem;
-      color: rgba(255,255,255,.6);
+      color: #64748b;
       line-height: 1.7;
     }
 
     /* ── CTA ── */
     .owner-cta {
-      background: linear-gradient(135deg, #e63946 0%, #c1121f 60%, #9b1c1c 100%);
+      background: #0f172a;
       padding: 80px 0;
     }
     .owner-cta h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 16px; }
-    .owner-cta p { color: rgba(255,255,255,.85); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
+    .owner-cta p { color: rgba(255,255,255,.7); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
   </style>
 </head>
 <body class="home-3 sc5">
@@ -126,57 +163,32 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ ① 히어로 ══ -->
-<section class="banner-area style-3">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-xl-8 col-lg-10 text-center align-self-center">
-        <div class="banner-inner">
-          <span class="banner-eyebrow">사업주 · 현장소장 · 공장장</span>
-          <h1>사고 나면<br><em>내가 책임집니다</em></h1>
-          <p class="mx-lg-4">
-            법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
-            안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
-          </p>
-          <div class="hero-btns justify-content-center">
-            <a href="free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 36px;">우리 사업장도 해당되는지 확인하기</a>
-            <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 상담 요청</a>
-          </div>
-        </div>
+<!-- ══ ① 히어로: 좌 텍스트 / 우 신문 이미지 ══ -->
+<section class="owner-hero">
+  <div class="owner-hero-left">
+    <div class="owner-hero-left-inner">
+      <span class="owner-hero-eyebrow">사업주 · 현장소장 · 공장장</span>
+      <h1>이게 다<br>내 책임입니다.</h1>
+      <p class="hero-sub">
+        법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
+        안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
+      </p>
+      <div class="hero-btns">
+        <a href="free-diagnosis.html" class="btn-navy">우리 사업장도 해당되는지 확인하기</a>
+        <a href="contact.html" class="btn-outline">전문가 상담 요청</a>
       </div>
     </div>
+  </div>
+  <div class="owner-hero-right">
+    <img
+      src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/owner-news.png"
+      alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사"
+      loading="eager"
+    >
   </div>
 </section>
 
-<!-- ══ ② 숫자 배너 ══ -->
-<div class="risk-banner">
-  <div class="container">
-    <div class="row g-4 align-items-center justify-content-center">
-      <div class="col-6 col-md-3">
-        <div class="risk-stat">
-          <div class="num">10억</div>
-          <div class="lbl">1명 사망 시 최대 벌금<br><small style="opacity:.6;">중대재해처벌법 제7조</small></div>
-        </div>
-      </div>
-      <div class="col-md-auto d-none d-md-block"><div class="risk-sep" style="height:52px;"></div></div>
-      <div class="col-6 col-md-3">
-        <div class="risk-stat">
-          <div class="num">1년+</div>
-          <div class="lbl">사망 사고 시 최소 징역<br><small style="opacity:.6;">중대재해처벌법 제6조</small></div>
-        </div>
-      </div>
-      <div class="col-md-auto d-none d-md-block"><div class="risk-sep" style="height:52px;"></div></div>
-      <div class="col-6 col-md-3">
-        <div class="risk-stat">
-          <div class="num">5인</div>
-          <div class="lbl">미만 사업장까지 확대<br><small style="opacity:.6;">2024.01 시행</small></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ ③ 솔직한 공감 ══ -->
+<!-- ══ ② 솔직한 공감 ══ -->
 <section class="honest-sec">
   <div class="container">
     <div class="section-title text-center mb-5">
@@ -215,7 +227,7 @@
   </div>
 </section>
 
-<!-- ══ ④ 해결 카드 3개 ══ -->
+<!-- ══ ③ 해결 카드 3개 ══ -->
 <section class="solution-sec">
   <div class="container">
     <div class="row g-4">
@@ -253,7 +265,7 @@
   </div>
 </section>
 
-<!-- ══ ⑤ 감독관 시나리오 (이미지 1장) ══ -->
+<!-- ══ ④ 감독관 시나리오 (이미지 1장) ══ -->
 <section class="scenario-sec">
   <div class="container">
     <div class="scenario-img-wrap">
@@ -266,7 +278,7 @@
   </div>
 </section>
 
-<!-- ══ ⑥ 안전의 본질 ══ -->
+<!-- ══ ⑤ 안전의 본질 ══ -->
 <section class="safety-essence">
   <div class="container">
     <div class="row justify-content-center">
@@ -276,30 +288,30 @@
           벌금을 내지 않는 것.<br>
           처벌받지 않는 것.
         </p>
-        <h2>그것보다 더 중요한 건<br><em>사람이 다치지 않는 것</em>입니다.</h2>
+        <h2>그것보다 더 중요한 건<br>사람이 다치지 않는 것입니다.</h2>
         <p class="essence-sub">TAI는 안전을 제대로 지키기 위해 만들어진 서비스입니다.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ ⑦ CTA ══ -->
+<!-- ══ ⑥ CTA ══ -->
 <section class="owner-cta">
   <div class="container text-center">
     <h2>3분이면 됩니다. 무료입니다.</h2>
     <p>우리 사업장이 처벌 대상인지 지금 확인하세요.<br>법령진단 리포트가 감독 점검 시 증빙 문서가 됩니다.</p>
     <div class="d-flex gap-3 flex-wrap justify-content-center">
-      <a href="free-diagnosis.html" class="btn btn-white" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료 법령진단 시작</a>
-      <a href="contact.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 28px;">전문가 상담 요청</a>
+      <a href="free-diagnosis.html" class="btn-red">무료 법령진단 시작</a>
+      <a href="contact.html" class="btn-outline-white">전문가 상담 요청</a>
     </div>
   </div>
 </section>
 
-<!-- ══ ⑧ 교차 링크 ══ -->
-<section style="background:#f8fafc;padding:48px 0;text-align:center;">
+<!-- ══ ⑦ 교차 링크 ══ -->
+<section style="background:#fff;padding:48px 0;text-align:center;">
   <div class="container">
     <p style="color:#64748b;font-size:.95rem;margin-bottom:14px;">실무는 안전관리자에게 맡기세요</p>
-    <a href="for-safety-manager.html" class="btn btn-border" style="color:#0d1b2a;border-color:#cbd5e1;">안전관리자용 TAI 보기 →</a>
+    <a href="for-safety-manager.html" class="btn-outline">안전관리자용 TAI 보기 →</a>
   </div>
 </section>
 
