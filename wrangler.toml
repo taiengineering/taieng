@@ -1,0 +1,9 @@
+# wrangler.toml — TAI 마케팅사이트 (new.taieng.co.kr)
+# Cloudflare Workers Static Assets로 nexas/ 폴더 서빙
+
+name = "taieng-new"
+compatibility_date = "2026-04-18"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./nexas"
