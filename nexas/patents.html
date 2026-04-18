@@ -20,7 +20,7 @@
   .pat-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .pat-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,26,.88) 0%, rgba(10,10,26,.72) 30%, rgba(10,10,26,.35) 55%, rgba(10,10,26,.08) 75%, transparent 100%); z-index: 1; }
   .pat-hero-bg::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to bottom, transparent, rgba(10,10,26,.3)); z-index: 1; }
-  .pat-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 140px 48px 64px; width: 100%; }
+  .pat-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 100px 48px 64px; width: 100%; }
   .pat-hero-text { max-width: 520px; }
   .pat-hero-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; color: rgba(255,255,255,.7); border: 1.5px solid rgba(255,255,255,.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 20px; }
   .pat-hero h1 { font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 16px; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
@@ -28,8 +28,8 @@
   .pending-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(139,92,246,.15); border: 1.5px solid rgba(139,92,246,.5); color: rgba(255,255,255,.85); border-radius: 999px; padding: 9px 22px; font-size: .82rem; font-weight: 700; backdrop-filter: blur(8px); }
   .pending-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #d946ef; animation: blink 1.4s infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
-  @media (max-width: 991px) { .pat-hero { min-height: 440px; } .pat-hero-content { padding: 120px 24px 48px; } .pat-hero-bg::after { background: linear-gradient(to bottom, rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%); } }
-  @media (max-width: 575px) { .pat-hero { min-height: 380px; } .pat-hero-content { padding: 110px 20px 40px; } }
+  @media (max-width: 991px) { .pat-hero { min-height: 440px; } .pat-hero-content { padding: 80px 24px 48px; } .pat-hero-bg::after { background: linear-gradient(to bottom, rgba(10,10,26,.85) 0%, rgba(10,10,26,.55) 50%, rgba(10,10,26,.3) 100%); } }
+  @media (max-width: 575px) { .pat-hero { min-height: 380px; } .pat-hero-content { padding: 72px 20px 40px; } }
 
   /* ═══ 특허 카드 ═══ */
   .patent-card { background: #FEFDF8; border: 2px solid #B8960C; border-radius: 8px; padding: 28px 24px 22px; position: relative; overflow: hidden; height: 100%; transition: box-shadow .2s, transform .2s; }
@@ -43,7 +43,7 @@
   .patent-desc { font-size: .84rem; color: #4b5563; line-height: 1.65; text-align: center; margin: 0; }
   .pat-svc { display: inline-block; font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: #0f172a; color: #fff; margin-top: 14px; }
 
-  /* ═══ 프로세스 섹션 (소프트 다크) ═══ */
+  /* ═══ 프로세스 섹션 ═══ */
   .process-sec { background: #1e293b; padding: 80px 0 64px; }
   .process-sec h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #fff; line-height: 1.35; letter-spacing: -.02em; margin-bottom: 48px; }
   .process-svg-wrap { max-width: 1100px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -51,13 +51,7 @@
   @media (max-width: 767px) { .process-sec { padding: 56px 0 40px; } .process-sec h2 { margin-bottom: 32px; } }
 
   /* ═══ 법적 보호 카드 ═══ */
-  .legal-card {
-    background: #fff;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 32px 36px 28px;
-    box-shadow: 0 4px 20px rgba(0,0,0,.06);
-  }
+  .legal-card { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 32px 36px 28px; box-shadow: 0 4px 20px rgba(0,0,0,.06); }
   .legal-card h5 { font-size: 1.05rem; font-weight: 800; color: #0f172a; margin-bottom: 12px; }
   .legal-card p  { font-size: .86rem; color: #374151; line-height: 1.75; margin: 0; }
 
@@ -147,104 +141,4 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
-
-<!-- navbar 투명화: body 끝 style 태그(최후 cascade) + JS setProperty(important) 이중 공격 -->
-<style>
-html body header.navbar-area,
-html body.sc5 header.navbar-area,
-html body .navbar-area,
-html body.sc5 .navbar-area,
-header.navbar-area,
-.navbar-area {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: 999 !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-html body header.navbar-area .navbar,
-html body.sc5 header.navbar-area .navbar,
-.navbar-area .navbar,
-.navbar-area .nav-container,
-.navbar-area .container {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-html body header.navbar-area.navbar-area-fixed,
-html body.sc5 header.navbar-area.navbar-area-fixed,
-.navbar-area.navbar-area-fixed {
-  position: fixed !important;
-  background: rgba(10,10,26,0.95) !important;
-  background-color: rgba(10,10,26,0.95) !important;
-  box-shadow: 0 2px 20px rgba(0,0,0,.3) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.navbar-area.navbar-area-fixed .navbar,
-.navbar-area.navbar-area-fixed .nav-container,
-.navbar-area.navbar-area-fixed .container {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-.navbar-area .navbar-nav > li > a,
-.navbar-area .nav-right-part a:not(.btn) {
-  color: rgba(255,255,255,.85) !important;
-}
-.navbar-area .navbar-nav > li > a:hover,
-.navbar-area .nav-right-part a:not(.btn):hover {
-  color: #fff !important;
-}
-.navbar-area .logo img {
-  filter: brightness(0) invert(1) !important;
-}
-</style>
-
-<script>
-(function(){
-  var I = 'important';
-  function forceNav(){
-    var nav = document.querySelector('.navbar-area');
-    if(!nav) return;
-    var scrolled = window.scrollY > 80;
-    var bg = scrolled ? 'rgba(10,10,26,0.95)' : 'transparent';
-    var pos = scrolled ? 'fixed' : 'absolute';
-    var shadow = scrolled ? '0 2px 20px rgba(0,0,0,.3)' : 'none';
-    // navbar-area
-    nav.style.setProperty('position', pos, I);
-    nav.style.setProperty('top', '0', I);
-    nav.style.setProperty('left', '0', I);
-    nav.style.setProperty('right', '0', I);
-    nav.style.setProperty('z-index', '999', I);
-    nav.style.setProperty('background', bg, I);
-    nav.style.setProperty('background-color', bg, I);
-    nav.style.setProperty('box-shadow', shadow, I);
-    nav.style.setProperty('border', 'none', I);
-    // 모든 내부 컨테이너
-    nav.querySelectorAll('.navbar, .nav-container, .container').forEach(function(el){
-      el.style.setProperty('background', 'transparent', I);
-      el.style.setProperty('background-color', 'transparent', I);
-    });
-    // 텍스트 흰색
-    nav.querySelectorAll('.navbar-nav > li > a, .nav-right-part a:not(.btn)').forEach(function(a){
-      a.style.setProperty('color', 'rgba(255,255,255,.85)', I);
-    });
-    nav.querySelectorAll('.logo img').forEach(function(img){
-      img.style.setProperty('filter', 'brightness(0) invert(1)', I);
-    });
-  }
-  // MutationObserver
-  var obs = new MutationObserver(function(){ forceNav(); });
-  obs.observe(document.body, {childList:true, subtree:true, attributes:true, attributeFilter:['class','style']});
-  // 타이머
-  [0,50,100,200,400,800,1500].forEach(function(ms){ setTimeout(forceNav, ms); });
-  // 스크롤
-  window.addEventListener('scroll', forceNav, {passive:true});
-  // 3초 후 옵저버 해제
-  setTimeout(function(){ obs.disconnect(); }, 3000);
-})();
-</script>
 </body></html>

@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.6 — 스크롤바 !important 강제 오버라이드 */
+/* TAI 공통 스타일 v1.8 — body padding-top 제거 (navbar-area는 fixed가 아님) */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -11,31 +11,17 @@
   --main-color: #0d1b2a !important;
   --main-color-opacity: 13, 27, 42 !important;
 }
-body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding-top: 64px; }
+body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding: 0; }
 a { text-decoration: none; }
 
-/* 스크롤바 — 보라색(#7e56ff) 강제 오버라이드 */
+/* 스크롤바 */
 .sc5::-webkit-scrollbar { width: 8px !important; height: 8px !important; }
 .sc5::-webkit-scrollbar-track { background: #1a1a2e !important; border-radius: 0 !important; }
 .sc5::-webkit-scrollbar-thumb { background: #3d4555 !important; border-radius: 4px !important; box-shadow: none !important; }
 .sc5::-webkit-scrollbar-thumb:hover { background: #555d6e !important; }
 html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
 
-/* ─────────────────────────────────────────────────────────────────
-   버튼 수직 정렬 전역 픽스 (v1.7)
-   ─────────────────────────────────────────────────────────────────
-   원인: style.css .btn {
-           display: inline-block;   ← flex 아님
-           height: 42px;
-           line-height: 40px;       ← height보다 2px 작음
-         }
-   Noto Sans KR 폰트는 영문 대비 디센더(descender) 영역이 커서
-   inline-block + line-height 방식에서 텍스트가 높이 하단에 쏠림.
-   커스텀 font-size / padding 적용 시 고정 line-height:40px 와 불일치 심화.
-
-   수정: display:inline-flex + align-items:center 로 교체
-         → font-size·padding·height 가 무엇이든 항상 수직 중앙 정렬
-   ───────────────────────────────────────────────────────────────── */
+/* 버튼 수직 정렬 전역 픽스 */
 .btn,
 .btn-base,
 .btn-border,
@@ -47,7 +33,7 @@ html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
   line-height: 1 !important;
 }
 
-/* GNB */
+/* GNB (미사용 — 향후 tai-nav 전환 시 padding-top: 64px 복원) */
 .tai-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(13,27,42,.97);
