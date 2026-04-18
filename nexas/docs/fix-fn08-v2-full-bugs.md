@@ -41,7 +41,6 @@ async function submitFree() {
     if (!row) return;
     const input = row.querySelector('input, select');
     if (!input) return;
-    // field_code 추출
     const id = input.id || '';
     const code = id.replace('free_', '');
     const val = freeData[code];
@@ -62,16 +61,13 @@ async function submitFree() {
 
 ### BUG-3: 결과 없이 "진단 데이터 처리 중" 표시 🔴
 
-**원인**: API 실패 시 fallback이 "처리 중" 메시지. 에러인데 "처리 중"으로 보임.
+**원인**: API 실패 시 fallback이 "처리 중" 메시지.
 
 **수정**: `renderFreeResult()` 함수 내:
 ```javascript
 // 현재:
 if (!data) {
-  area.innerHTML = `<div class="result-item">
-    <div class="ri-title">진단 데이터 처리 중</div>
-    <div class="ri-law">잠시 후 다시 확인해주세요.</div>
-  </div>`;
+  area.innerHTML = `... 진단 데이터 처리 중 ...`;
 
 // 수정:
 if (!data) {
@@ -79,7 +75,6 @@ if (!data) {
     <div class="ri-title">진단을 실행할 수 없습니다</div>
     <div class="ri-law">입력 정보를 확인하고 다시 시도해주세요.</div>
   </div>`;
-  // 유료 CTA 숨김 — 결과가 없으면 추천도 없음
   document.getElementById('paidCta').style.display = 'none';
   return;
 }
@@ -89,104 +84,127 @@ if (!data) {
 
 ### BUG-4: "PAID 진단에서 추가로 확인되는 항목들:" 문구 노출 🔴
 
-**원인**: HTML에 하드코딩된 텍스트가 무조건 노출.
-
-**수정**: `paid-cta` 영역 HTML 수정:
+**수정**: HTML + JS 둘 다:
 ```html
 <!-- 현재: -->
 <h5>더 정밀한 진단이 필요하신가요?</h5>
 <p>PAID 진단에서 추가로 확인되는 항목들:</p>
 
-<!-- 수정 (기획 원칙: 필요성 먼저, 가격 나중): -->
+<!-- 수정: -->
 <h5>현재 진단에서 확인할 수 없는 영역이 있습니다</h5>
-<!-- <p> 태그 제거 — 항목 리스트가 직접 나오도록 -->
+<!-- <p> 태그 제거 -->
 ```
 
-그리고 `renderFreeResult()` 내 CTA 로직:
+---
+
+## 대표님 추가 보고 — 3건 (신규)
+
+### BUG-10: 유료 진단 전 최종 점검 안내 없음 🔴
+
+**기획**: 유료 진단은 결제 후 재입력 불가.
+→ 결제 직전에 "입력 내용을 확인하세요" 확인 단계 필요.
+
+**수정**: Step 4 결제 버튼 `startPayment()` 내:
 ```javascript
-// CTA 항목 없으면 숨김
-const paidItems = data.paid_preview || unconfirmed || [];
-if (!paidItems.length && !items.length) {
-  document.getElementById('paidCta').style.display = 'none';
-  return;
+function startPayment() {
+  // 입력 내용 요약 표시
+  const paidData = formValues['paid'] || {};
+  const filledCount = Object.values(paidData).filter(v => v !== '' && v !== null).length;
+  const totalFields = document.querySelectorAll('#paidFormArea .form-row').length;
+  
+  const confirmed = confirm(
+    `입력 내용을 확인해 주세요.\n\n` +
+    `• 입력 완료: ${filledCount}건 / 전체: ${totalFields}건\n` +
+    `• 결제 금액: ${paidFee.toLocaleString()}원 (VAT 별도)\n\n` +
+    `⚠️ 진단 실행 후에는 재입력할 수 없습니다.\n` +
+    `정보를 모두 입력하셨습니까?`
+  );
+  if (!confirmed) return;
+  
+  // 기존 결제 로직
+  const modal = new bootstrap.Modal(document.getElementById('payPrepModal'));
+  modal.show();
 }
 ```
 
 ---
 
-## 로직 오류 (3건)
+### BUG-11: 여부 필드가 텍스트 input으로 렌더링 🔴
 
-### BUG-5: 건물 주소 입력 → 자동채움 순서 문제 🟡
+**DB 현황**: `field_type = 'tri_state'` 필드 **58건**
+- BUILDING PAID: 18건 (비상발전기 유무, 스프링클러 유무 등)
+- CONSTRUCTION PAID: 14건 (굴착작업 유무, 타워크레인 유무 등)
+- INDUSTRY PAID1~3: 26건 (보일러 유무, 크레인 유무 등)
 
-**기획 의도**: 주소 입력 → 주소 선택 → 건축물대장 조회 → 면적·층수 자동 채움  
-**현재**: 주소 검색 자체가 404 (Fly.io 서버 다운이었음 → 재시작으로 해결)
+**원인**: `renderField()`에 `tri_state` 핸들러가 없어서 `else` 블록(텍스트 input)으로 빠짐.
 
-**확인 필요**: 서버 재시작 후 `/juso/search` 응답 정상 여부 재테스트.
-
-
-### BUG-6: 면책동의 체크 없이 진단 버튼 활성화 가능 🟡
-
-**확인**: `onDisclaimerChange()`가 버튼 disabled 제어하는데,
-페이지 로드 시 초기 상태에서 `btnSubmit.disabled = true`가 정상 설정되는지 확인.
-
+**수정**: `renderField()` 함수에 `tri_state` 분기 추가:
 ```javascript
-// loadFreeForm() 내에 확실히 초기화:
-document.getElementById('disclaimerCheck').checked = false;
-document.getElementById('btnSubmit').disabled = true;
+} else if (f.field_type === 'tri_state') {
+  // 예 / 아니오 / 모름 3버튼
+  ctrl = `<div class="yn-grid" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="yn-btn" onclick="setTriState('${f.field_code}','yes',this,'${prefix}')">예</div>
+    <div class="yn-btn" onclick="setTriState('${f.field_code}','no',this,'${prefix}')">아니오</div>
+    <div class="yn-btn" onclick="setTriState('${f.field_code}','unknown',this,'${prefix}')"
+      style="color:#9a8f80;font-size:.82rem;">모름</div>
+  </div>`;
 ```
 
-
-### BUG-7: 좌측 패널 섹터별 동적 변경 안 됨 🟡
-
-**기획**: Step 2에서 섹터에 따라 좌측 패널 메시지가 변경되어야 함.
-```
-BUILDING: "주소만 입력하면 바로 확인됩니다"
-INDUSTRY: "업종과 규모만으로 진단합니다"
-CONSTRUCTION: "공사 기본 정보로 진단합니다"
-```
-**확인 필요**: 현재 좌측 패널이 모든 Step에서 동일한지, Step별로 변경되는지.
-
----
-
-## UX 기획 위반 (2건)
-
-### BUG-8: 주소 필드만 먼저 표시 후 나머지 필드 출력 🟢
-
-**기획 의도**: 건물 섹터는 주소만 먼저 보이고,
-주소 선택 후 자동채움된 필드들이 표시되는 방식.
-
-TAI UI 원칙: "지금 보지 않아도 되는 것은 보여주지 않는다."
-
-**구현 방안** (선택적 — 대표님 판단):
-```
-Option A: 전체 표시 (현재) — 간단하지만 필드가 많아 보임
-Option B: 주소만 독립 카드 → 자동채움 후 나머지 표시
-```
-
-### BUG-9: CTA 문구 기획 불일치 🟢
-
-**기획 원칙**: "더 정밀한" 아니라 "지금 안 보이는 법령이 있다"
-
-```html
-<!-- 현재: -->
-<h5>더 정밀한 진단이 필요하신가요?</h5>
-
-<!-- 수정: -->
-<h5>현재 진단에서 확인할 수 없는 영역이 있습니다</h5>
+`setTriState()` 함수 추가:
+```javascript
+function setTriState(code, val, el, prefix) {
+  el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
+  if (val === 'yes') el.className = 'yn-btn sel-yes';
+  else if (val === 'no') el.className = 'yn-btn sel-no';
+  else el.className = 'yn-btn sel-no'; // 모름도 선택 스타일
+  setVal(code, val, prefix);
+}
 ```
 
 ---
 
-## 수정 우선순위
+### BUG-12: 숫자 필드에 한글/특수문자 입력 가능 🔴
+
+**DB 현황**: `field_type = 'number'` 필드 **36건**
+- 예: 지하주차장 면적(㎡), 연면적(㎡), 총 공사금액(만원), 근로자 수(명) 등
+
+**원인**: `<input type="number">`이지만 추가 입력 제어 없음.
+모바일 키보드가 한글 모드일 때 한글 입력 가능.
+
+**수정**: `renderField()` 내 number 분기:
+```javascript
+} else if (f.field_type === 'number') {
+  ctrl = `<div class="num-wrap">
+    <input type="number" class="form-input-tai" id="${id}"
+      placeholder="${f.placeholder || '0'}" min="0"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      oninput="this.value=this.value.replace(/[^0-9.]/g,''); setVal('${f.field_code}',this.value,'${prefix}')"
+      ${f.auto_source === 'building_register' ? 'data-auto-source="building_register"' : ''}>
+    ${f.unit ? `<span class="num-unit">${f.unit}</span>` : ''}
+  </div>`;
+```
+
+핵심 변경:
+- `inputmode="numeric"` — 모바일 숫자 키보드 강제
+- `pattern="[0-9]*"` — iOS 숫자 키보드
+- `oninput` — 한글/특수문자 즉시 제거 (소수점은 허용)
+
+---
+
+## 최종 수정 우선순위 (12건)
 
 | 순서 | 버그 | 심각도 | 예상 시간 |
 |---|---|---|---|
 | 1 | BUG-1: 건설 주소 검색버튼 | 🔴 | 1분 |
-| 2 | BUG-2: 필수 필드 validation | 🔴 | 10분 |
-| 3 | BUG-3: 결과 없음 메시지 | 🔴 | 2분 |
-| 4 | BUG-4: PAID 문구 노출 | 🔴 | 3분 |
-| 5 | BUG-6: 면책동의 초기화 | 🟡 | 1분 |
-| 6 | BUG-9: CTA 문구 변경 | 🟢 | 2분 |
-| 7 | BUG-5: 주소검색 재테스트 | 🟡 | 확인 |
-| 8 | BUG-7: 좌측 패널 동적 | 🟡 | 확인 |
-| 9 | BUG-8: 주소 우선 표시 | 🟢 | 대표님 판단 |
+| 2 | BUG-11: tri_state 렌더러 (58건) | 🔴 | 10분 |
+| 3 | BUG-12: number 입력 제어 (36건) | 🔴 | 5분 |
+| 4 | BUG-2: 필수 필드 validation | 🔴 | 10분 |
+| 5 | BUG-10: 유료 결제 전 최종 확인 | 🔴 | 5분 |
+| 6 | BUG-3: 결과 없음 메시지 | 🔴 | 2분 |
+| 7 | BUG-4: PAID 문구 노출 | 🔴 | 3분 |
+| 8 | BUG-6: 면책동의 초기화 | 🟡 | 1분 |
+| 9 | BUG-9: CTA 문구 변경 | 🟢 | 2분 |
+| 10 | BUG-5: 주소검색 재확인 | 🟡 | 재테스트 |
+| 11 | BUG-7: 좌측 패널 동적 | 🟡 | 확인 |
+| 12 | BUG-8: 주소 우선 표시 | 🟢 | 대표님 판단 |
