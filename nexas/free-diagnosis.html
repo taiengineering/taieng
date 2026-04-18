@@ -813,21 +813,28 @@ async function fetchBuildingRegister(addrPrefix, roadAddr, diagPrefix) {
     const r = await fetch(`${API}/building-register/search?address=${encodeURIComponent(roadAddr)}`);
     const json = await r.json();
     const d = json.data;
-    if (!d?.total_floor_area && !d?.floor_count) {
+    if (!d?.building_area && !d?.total_floor_area && d?.floor_count == null) {
       if (statusEl) { statusEl.className = 'register-status warn'; statusEl.textContent = '⚠️ 자동 조회가 되지 않았습니다. 아래 항목을 직접 입력해주세요.'; }
       return;
     }
-    const fieldMap = { total_floor_area:d.total_floor_area, floor_count:d.floor_count,
-      basement_count:d.basement_count, building_use_type:d.building_use_type,
-      built_year:d.built_year, main_structure:d.main_structure };
+    const fieldMap = {
+      total_floor_area: d.total_floor_area ?? d.building_area,
+      floor_count: d.floor_count,
+      basement_count: d.basement_count ?? d.underground_floor_count,
+      building_use_type: d.main_purpose_name || d.building_use_code || d.building_use_type,
+      built_year: d.built_year ?? d.completion_year,
+      main_structure: d.main_structure ?? null
+    };
     Object.entries(fieldMap).forEach(([code, val]) => {
       if (val == null) return;
       setVal(code, val, diagPrefix);
       const el = document.getElementById(`${diagPrefix}_${code}`);
       if (el) el.value = val;
     });
-    if (d.total_floor_area) fetchPriceTier(d.total_floor_area, diagPrefix);
-    if (d.built_year && parseInt(d.built_year) <= 2009 && asbestosEl) asbestosEl.classList.add('show');
+    const areaForTier = d.total_floor_area || d.building_area;
+    if (areaForTier) fetchPriceTier(areaForTier, diagPrefix);
+    const yearAsbestos = d.completion_year ?? d.built_year;
+    if (yearAsbestos && parseInt(yearAsbestos, 10) <= 2009 && asbestosEl) asbestosEl.classList.add('show');
     const filled = Object.values(fieldMap).filter(v => v != null).length;
     if (statusEl) { statusEl.className = 'register-status success'; statusEl.textContent = `✅ ${filled}개 항목이 자동으로 입력되었습니다.`; }
   } catch(e) {
