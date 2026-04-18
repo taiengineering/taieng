@@ -272,7 +272,7 @@
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-<div id="tai-header"></div>
+<!-- FN-FIX-6: tai-header 제거 -->
 
 <div class="diag-layout">
   <!-- 좌측 설명 패널 -->
@@ -282,7 +282,8 @@
     <p class="dl-desc">사업장 정보를 입력하면 적용 산업안전 법령과<br>선임 의무를 즉시 확인합니다.</p>
     <ul class="dl-list">
       <li>업종·규모 기반 선임 의무 자동 판정</li>
-      <li>건축물대장 자동 연동 (건물 섹터)</li>
+      <!-- FN-FIX-4: 건축물대장 언급 제거 -->
+      <li>주소 입력 시 사업장 정보 자동 확인</li>
       <li>중대재해처벌법 해당 여부 확인</li>
       <li>유료 진단: 항목별 상세 분석 + PDF</li>
     </ul>
@@ -310,7 +311,6 @@
       <p class="panel-title">사업장 정보를 보호합니다</p>
       <p class="panel-sub">진단 내용은 본인만 확인할 수 있습니다. 휴대폰으로 간단히 확인해 주세요.</p>
 
-      <!-- 횟수 초과 시 표시 -->
       <div id="limitExceededBox" class="limit-used-box" style="display:none;">
         <div class="lu-title">⚠️ 무료 진단 횟수를 모두 사용하셨습니다</div>
         <div class="lu-desc">동일 정보로 무료 진단은 총 3회까지 가능합니다.<br>유료 진단으로 더 정밀한 결과를 받아보세요.</div>
@@ -364,15 +364,19 @@
       <p class="panel-title" id="step2Title">기본 정보 입력</p>
       <p class="panel-sub" id="step2Sub">필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다</p>
       <div class="price-banner" id="priceBanner"></div>
-      <!-- 동적 폼 영역 -->
       <div id="dynFormArea">
         <div style="text-align:center;padding:40px 0;color:#9a8f80;">항목을 불러오는 중...</div>
       </div>
-      <!-- 면책 동의 -->
+      <!-- FN-FIX-5: 확정 면책 문구 -->
       <div class="disclaimer-box">
         <div class="disclaimer-text">
-          본 진단 결과는 입력 정보를 기반으로 정밀 분석하여 도출된 참고 자료입니다.<br>
-          법령 해석의 최종 책임은 사업주에게 있으며, 해당 법령이 추가 적용될 수 있습니다.
+          본 진단 결과는 현행 법령과 사업장 정보를 정밀 분석하여
+          적용 가능한 법적 의무를 도출한 것입니다.<br>
+          본 서비스는 법률 상담·자문·의견 제공이 아니며,
+          개별 사안에 대한 법적 판단이나 해석을 포함하지 않습니다.<br>
+          실제 행정 처분·감독 기준은 관할 기관의 판단에 따라
+          달라질 수 있으므로, 구체적 법률 적용이 필요한 경우
+          관할 행정기관 또는 법률 전문가에게 확인하시기 바랍니다.
         </div>
         <label class="disclaimer-check">
           <input type="checkbox" id="disclaimerCheck" onchange="onDisclaimerChange()">
@@ -388,7 +392,6 @@
       <p class="panel-title">무료 법령진단 결과</p>
       <p class="panel-sub" id="step3Sub"></p>
       <div id="freeResultArea"><div class="result-empty">진단 결과를 불러오는 중...</div></div>
-      <!-- 유료 CTA -->
       <div class="paid-cta" id="paidCta" style="display:none;">
         <h5>더 정밀한 진단이 필요하신가요?</h5>
         <p>PAID 진단에서 추가로 확인되는 항목들:</p>
@@ -406,11 +409,8 @@
     <div class="panel" id="step4">
       <p class="panel-title" id="step4Title">유료 진단</p>
       <p class="panel-sub" id="step4Sub">추가 항목을 입력하고 상세 법령진단 리포트를 받으세요</p>
-      <!-- 산업 등급 선택 -->
       <div id="tierSelectArea"></div>
-      <!-- 유료 폼 -->
       <div id="paidFormArea"></div>
-      <!-- 결제 영역 -->
       <div id="paymentArea" style="display:none;">
         <div class="price-banner show" id="finalPriceBanner"></div>
         <button class="btn-primary-tai" id="btnPay" onclick="startPayment()">결제 후 진단 시작 →</button>
@@ -432,7 +432,7 @@
   </div><!-- /.diag-right -->
 </div><!-- /.diag-layout -->
 
-<!-- 결제 준비 중 모달 -->
+<!-- 결제 모달 -->
 <div class="modal fade" id="payPrepModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -455,61 +455,49 @@
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/header.js"></script>
-<script src="assets/js/nav-auth.js"></script>
+<!-- FN-FIX-6: header.js / nav-auth.js 제거 -->
 <script>
 const API = 'https://api.taieng.co.kr';
 
 // ── 전역 상태 ──
-let sector = '';           // BUILDING | INDUSTRY | CONSTRUCTION
-let formValues = {};       // { free: {}, paid: {} }
-let paidTier = '';         // BASIC | STANDARD | PREMIUM | PAID
+let sector = '';
+let formValues = {};
+let paidTier = '';
 let paidFee = 0;
-let authToken = '';        // BE-10: FE 노출용 UUID (CI는 서버에만)
-let disclaimerLogId = '';  // POST /diagnosis/disclaimer 응답
+let authToken = '';
+let disclaimerLogId = '';
 let freeResultData = null;
 let paidResultData = null;
 let pdfUrl = '';
 
-// ── 초기화: URL 파라미터 감지 ──
+// ── 초기화 ──
 (function init() {
   const params = new URLSearchParams(location.search);
   const paidCode = params.get('paid');
   const orderId = params.get('order_id');
-
   if (paidCode && orderId) {
-    // 경로 2: 결제 완료 후 직입 — 본인인증 스킵
     handlePaidEntry(paidCode, orderId);
   } else {
-    // 경로 1: 무료 직접 진입
     updateProgress(0);
   }
 })();
 
-// ── 경로 2: 유료 직입 처리 ──
+// ── 경로 2: 유료 직입 ──
 async function handlePaidEntry(paidCode, orderId) {
-  // 스텝바 숨김
   document.querySelector('.pb-wrap').style.display = 'none';
-  // 결제 검증
   try {
     const r = await fetch(`${API}/payment/verify?order_id=${orderId}`);
     const json = await r.json();
     const d = json.data;
     if (!d || d.status !== 'paid') {
-      showPanelOnly('step0');
-      alert('결제 정보를 확인할 수 없습니다. 다시 시도해주세요.');
-      return;
+      showPanelOnly('step0'); alert('결제 정보를 확인할 수 없습니다.'); return;
     }
-    // 섹터 자동 세팅
     sector = d.sector || paidCode.split('_')[0] || 'INDUSTRY';
     paidTier = d.tier || 'PAID';
     paidFee = d.amount || 0;
     authToken = d.auth_token || '';
-    // 유료 결과 즉시 실행
     await runPaidDiagnosis(orderId);
-  } catch(e) {
-    showPanelOnly('step0');
-  }
+  } catch(e) { showPanelOnly('step0'); }
 }
 
 async function runPaidDiagnosis(orderId) {
@@ -521,12 +509,7 @@ async function runPaidDiagnosis(orderId) {
     const r = await fetch(`${API}/diagnosis/run`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sector, tier: paidTier,
-        auth_token: authToken,
-        payment_ref: orderId,
-        form_data: formValues['paid'] || {}
-      })
+      body: JSON.stringify({ sector, tier: paidTier, auth_token: authToken, payment_ref: orderId, form_data: formValues['paid'] || {} })
     });
     const json = await r.json();
     paidResultData = json.data;
@@ -566,7 +549,6 @@ function goStep(n) {
   updateProgress(n);
 }
 
-// ── 섹터 선택 ──
 function selectSector(val, el) {
   document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
@@ -581,18 +563,14 @@ async function startAuth() {
   const btn = document.getElementById('btnAuth');
   btn.disabled = true; btn.textContent = '준비 중...';
   try {
-    // 이니시스 팝업 파라미터 요청
     const r = await fetch(`${API}/diagnosis/auth/prepare`, { method: 'POST' });
     if (r.status === 503) {
-      // INICIS_VERIFY_MID 미설정 — graceful degradation
       alert('본인인증 서비스를 일시적으로 이용할 수 없습니다. 잠시 후 다시 시도해주세요.');
       btn.disabled = false; btn.textContent = '본인 확인 시작 →';
       return;
     }
     const json = await r.json();
-    const params = json.data;
-    // 이니시스 팝업 호출
-    openInicisPopup(params);
+    openInicisPopup(json.data);
   } catch(e) {
     alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     btn.disabled = false; btn.textContent = '본인 확인 시작 →';
@@ -600,36 +578,30 @@ async function startAuth() {
 }
 
 function openInicisPopup(params) {
-  // KG이니시스 표준 팝업 호출
   if (typeof INIStdPay !== 'undefined') {
     INIStdPay.pay(params);
   } else {
-    // 팝업 라이브러리 미로드 시 콜백 직접 처리
     onAuthSuccess({ auth_token: 'DEV_TOKEN_' + Date.now() });
   }
 }
 
-// 이니시스 콜백 (global)
 window.onAuthCallback = async function(callbackData) {
   try {
     const r = await fetch(`${API}/diagnosis/auth/callback`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(callbackData)
     });
     const json = await r.json();
-    if (json.data?.auth_token) {
-      await onAuthSuccess(json.data);
-    }
+    if (json.data?.auth_token) await onAuthSuccess(json.data);
   } catch(e) {}
 };
 
 async function onAuthSuccess(data) {
   authToken = data.auth_token;
-  // 횟수 확인
-  const checkR = await fetch(`${API}/diagnosis/auth/check`, {
-    headers: { 'X-Auth-Token': authToken }
-  });
+  // FN-FIX-2: query param 방식으로 변경
+  const checkR = await fetch(
+    `${API}/diagnosis/auth/check?auth_token=${encodeURIComponent(authToken)}`
+  );
   const checkJson = await checkR.json();
   const { free_count = 0, free_limit = 3, remaining = 3 } = checkJson.data || {};
 
@@ -638,15 +610,12 @@ async function onAuthSuccess(data) {
     document.getElementById('authMainArea').style.display = 'none';
     return;
   }
-  // 무료 남은 횟수 표시
   const noteEl = document.querySelector('.auth-note');
   if (noteEl) noteEl.textContent = `* 무료 진단 사용: ${free_count}회 / ${free_limit}회 (남은 횟수: ${remaining}회)`;
-  // Step 1으로 이동
   goStep(1);
 }
 
 function goToPaidDirect() {
-  // 섹터 없는 상태에서 유료 전환 — 섹터 선택 먼저
   showPanelOnly('step1');
   updateProgress(1);
   document.getElementById('btnBackToResult').style.display = 'none';
@@ -658,7 +627,6 @@ async function loadFreeForm() {
   document.getElementById('step2Title').textContent = titleMap[sector] || '기본 정보 입력';
   document.getElementById('step2Sub').textContent = '필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다';
   document.getElementById('dynFormArea').innerHTML = '<div style="text-align:center;padding:30px 0;color:#9a8f80;">입력 항목 불러오는 중...</div>';
-  // 면책 동의 초기화
   document.getElementById('disclaimerCheck').checked = false;
   document.getElementById('btnSubmit').disabled = true;
   try {
@@ -670,7 +638,6 @@ async function loadFreeForm() {
   }
 }
 
-// ── 면책 동의 체크 ──
 function onDisclaimerChange() {
   document.getElementById('btnSubmit').disabled = !document.getElementById('disclaimerCheck').checked;
 }
@@ -680,14 +647,12 @@ function renderDynForm(containerId, groups, prefix) {
   const container = document.getElementById(containerId);
   if (!groups.length) { container.innerHTML = '<p style="color:#9a8f80;text-align:center;">입력 항목이 없습니다.</p>'; return; }
   let html = '';
-  groups.forEach((g, gi) => {
-    html += `<div class="form-card">
-      <div class="form-card-title">${g.group}</div>`;
+  groups.forEach(g => {
+    html += `<div class="form-card"><div class="form-card-title">${g.group}</div>`;
     g.fields.forEach(f => { html += renderField(f, prefix); });
     html += `</div>`;
   });
   container.innerHTML = html;
-  // 주소 이벤트 바인딩
   container.querySelectorAll('[data-addr-prefix]').forEach(el => {
     const p = el.dataset.addrPrefix;
     el.addEventListener('input', () => {
@@ -748,10 +713,7 @@ function renderField(f, prefix) {
       oninput="setVal('${f.field_code}',this.value,'${prefix}')">`;
   }
 
-  return `<div class="form-row">
-    <label class="form-label-tai">${f.field_name} ${req}</label>
-    ${ctrl}${help}
-  </div>`;
+  return `<div class="form-row"><label class="form-label-tai">${f.field_name} ${req}</label>${ctrl}${help}</div>`;
 }
 
 // ── 값 저장 ──
@@ -773,12 +735,12 @@ function toggleMulti(code, el, prefix) {
   if (idx === -1) arr.push(v); else arr.splice(idx, 1);
 }
 
-// ── GET /diagnosis/price-tier (BE-10 연동) ──
+// FN-FIX-7: floor_area 파라미터명 수정
 async function fetchPriceTier(area, prefix) {
   const noteEl = document.getElementById(`${prefix}_areaNote`);
   if (!noteEl) return;
   try {
-    const r = await fetch(`${API}/diagnosis/price-tier?sector=BUILDING&total_floor_area=${area}`);
+    const r = await fetch(`${API}/diagnosis/price-tier?sector=BUILDING&floor_area=${area}`);
     const json = await r.json();
     const d = json.data;
     if (d) {
@@ -789,7 +751,7 @@ async function fetchPriceTier(area, prefix) {
   } catch(e) {}
 }
 
-// ── 주소 검색 ──
+// FN-FIX-1: 주소 검색 — 배열 처리 + 복수 결과 드롭다운
 async function searchAddr(prefix) {
   const query = document.getElementById(prefix + 'Input')?.value?.trim();
   if (!query || query.length < 2) return;
@@ -800,17 +762,23 @@ async function searchAddr(prefix) {
   try {
     const r = await fetch(`${API}/juso/search?query=${encodeURIComponent(query)}`);
     const json = await r.json();
-    const item = json.data;
-    if (!item?.road_address) {
+    // FN-FIX-1: 배열로 처리
+    const items = json.data || [];
+    if (!items.length) {
       dd.innerHTML = '<div class="addr-item" style="color:#9a8f80;">검색 결과가 없습니다</div>';
       dd.classList.add('show'); return;
     }
-    const bNm = item.raw?.bdNm ? ` (${item.raw.bdNm})` : '';
-    dd.innerHTML = `<div class="addr-item" onclick="selectAddr('${prefix}')">
-      <div class="road">${item.road_address}${bNm}</div>
-      <div class="jibun">우편번호 ${item.zip_code || ''}</div>
-    </div>`;
-    window['_addrData_'+prefix] = item;
+    // 복수 결과 표시
+    let listHtml = '';
+    items.forEach((item, idx) => {
+      const bNm = item.building_name ? ` (${item.building_name})` : '';
+      listHtml += `<div class="addr-item" onclick="selectAddr('${prefix}', ${idx})">
+        <div class="road">${item.road_address}${bNm}</div>
+        <div class="jibun">우편번호 ${item.zip_code || ''}</div>
+      </div>`;
+    });
+    window['_addrList_'+prefix] = items;
+    dd.innerHTML = listHtml;
     dd.classList.add('show');
   } catch(e) {
     if (dd) { dd.innerHTML = '<div class="addr-item" style="color:#dc2626;">오류가 발생했습니다</div>'; dd.classList.add('show'); }
@@ -819,8 +787,10 @@ async function searchAddr(prefix) {
   }
 }
 
-async function selectAddr(prefix) {
-  const item = window['_addrData_'+prefix];
+// FN-FIX-1: selectAddr — 배열 인덱스 받기
+async function selectAddr(prefix, idx) {
+  const items = window['_addrList_'+prefix] || [];
+  const item = items[idx || 0];
   if (!item) return;
   const roadAddr = item.road_address;
   const inp = document.getElementById(prefix + 'Input');
@@ -834,16 +804,17 @@ async function selectAddr(prefix) {
   if (sector === 'BUILDING') fetchBuildingRegister(prefix, roadAddr, diagPrefix);
 }
 
+// FN-FIX-4: 건축물대장 언급 제거 → "사업장 정보" 메시지
 async function fetchBuildingRegister(addrPrefix, roadAddr, diagPrefix) {
   const statusEl = document.getElementById(addrPrefix + 'RegStatus');
   const asbestosEl = document.getElementById(addrPrefix + 'AsbestosWarn');
-  if (statusEl) { statusEl.className = 'register-status loading'; statusEl.textContent = '🔍 건축물대장 조회 중...'; }
+  if (statusEl) { statusEl.className = 'register-status loading'; statusEl.textContent = '🔍 사업장 정보 조회 중...'; }
   try {
     const r = await fetch(`${API}/building-register/search?address=${encodeURIComponent(roadAddr)}`);
     const json = await r.json();
     const d = json.data;
     if (!d?.total_floor_area && !d?.floor_count) {
-      if (statusEl) { statusEl.className = 'register-status warn'; statusEl.textContent = '⚠️ 건축물대장을 찾지 못했습니다. 아래 항목을 직접 입력해주세요.'; }
+      if (statusEl) { statusEl.className = 'register-status warn'; statusEl.textContent = '⚠️ 자동 조회가 되지 않았습니다. 아래 항목을 직접 입력해주세요.'; }
       return;
     }
     const fieldMap = { total_floor_area:d.total_floor_area, floor_count:d.floor_count,
@@ -858,9 +829,9 @@ async function fetchBuildingRegister(addrPrefix, roadAddr, diagPrefix) {
     if (d.total_floor_area) fetchPriceTier(d.total_floor_area, diagPrefix);
     if (d.built_year && parseInt(d.built_year) <= 2009 && asbestosEl) asbestosEl.classList.add('show');
     const filled = Object.values(fieldMap).filter(v => v != null).length;
-    if (statusEl) { statusEl.className = 'register-status success'; statusEl.textContent = `✅ 건축물대장에서 ${filled}개 항목을 자동으로 채웠습니다.`; }
+    if (statusEl) { statusEl.className = 'register-status success'; statusEl.textContent = `✅ ${filled}개 항목이 자동으로 입력되었습니다.`; }
   } catch(e) {
-    if (statusEl) { statusEl.className = 'register-status warn'; statusEl.textContent = '⚠️ 건축물대장 조회 오류 — 직접 입력해주세요.'; }
+    if (statusEl) { statusEl.className = 'register-status warn'; statusEl.textContent = '⚠️ 자동 조회 중 오류 — 직접 입력해주세요.'; }
   }
 }
 
@@ -869,21 +840,19 @@ async function submitFree() {
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true; btn.textContent = '분석 중...';
   try {
-    // 1) 면책 동의 저장 (POST /diagnosis/disclaimer)
+    // FN-FIX-3: disclaimer body 스키마 수정 {auth_token, agreed:true}
     const disclR = await fetch(`${API}/diagnosis/disclaimer`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         auth_token: authToken,
-        sector,
-        disclaimer_text: '본 진단 결과는 입력 정보를 기반으로 정밀 분석하여 도출된 참고 자료입니다. 법령 해석의 최종 책임은 사업주에게 있습니다.',
-        ip: ''
+        agreed: true
       })
     });
     const disclJson = await disclR.json();
-    disclaimerLogId = disclJson.data?.disclaimer_log_id || '';
+    // FN-FIX-3: data 래핑 없는 응답 구조 맞춤
+    disclaimerLogId = disclJson.disclaimer_log_id || disclJson.data?.disclaimer_log_id || '';
 
-    // 2) 진단 실행 (POST /diagnosis/run)
     const runR = await fetch(`${API}/diagnosis/run`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -953,26 +922,20 @@ function renderFreeResult(data) {
 
   area.innerHTML = html;
 
-  // 유료 CTA
   const paidCta = document.getElementById('paidCta');
   const ctaItems = document.getElementById('paidCtaItems');
   const paidItems = data.paid_preview || unconfirmed || [];
   if (paidItems.length) {
-    ctaItems.innerHTML = paidItems.slice(0,4).map(i =>
-      `<li>${i.title || i.name || '추가 법령 항목'}</li>`).join('');
+    ctaItems.innerHTML = paidItems.slice(0,4).map(i => `<li>${i.title || i.name || '추가 법령 항목'}</li>`).join('');
   } else {
-    ctaItems.innerHTML = `<li>특수설비 법령 적용 여부</li>
-      <li>전문가 선임 의무 상세</li>
-      <li>안전관리비 산정 기준</li>`;
+    ctaItems.innerHTML = `<li>특수설비 법령 적용 여부</li><li>전문가 선임 의무 상세</li><li>안전관리비 산정 기준</li>`;
   }
-  // 가격 계산
   const feeMap = { BUILDING: paidFee || 99000, INDUSTRY: 79000, CONSTRUCTION: 145000 };
   paidFee = paidFee || feeMap[sector] || 99000;
   document.getElementById('paidPriceText').textContent = `${paidFee.toLocaleString()}원`;
   paidCta.style.display = 'block';
 }
 
-// 유료 가격 노출 (버튼 클릭 후)
 function revealPaidPrice() {
   document.getElementById('paidPriceReveal').style.display = 'block';
   document.querySelector('.btn-paid-reveal').style.display = 'none';
@@ -988,7 +951,6 @@ async function loadPaidFlow() {
   if (sector === 'INDUSTRY') {
     renderIndustryTierSelect();
   } else {
-    // BUILDING/CONSTRUCTION: 가격 자동판정
     paidTier = 'PAID';
     const feeMap = { BUILDING: paidFee || 99000, CONSTRUCTION: 145000 };
     paidFee = paidFee || feeMap[sector] || 99000;
@@ -1030,7 +992,6 @@ async function loadPaidForm(tierCode) {
     const r = await fetch(`${API}/diagnosis/fields?sector=${sector}&tier=${tierCode}`);
     const json = await r.json();
     renderDynForm('paidFormArea', json.data?.groups || [], 'paid');
-    // FREE 값 자동 채움
     Object.entries(formValues['free'] || {}).forEach(([code, val]) => {
       const el = document.getElementById(`paid_${code}`);
       if (el) el.value = val;
@@ -1043,13 +1004,11 @@ async function loadPaidForm(tierCode) {
   }
 }
 
-// ── 결제 ──
 function startPayment() {
   const modal = new bootstrap.Modal(document.getElementById('payPrepModal'));
   modal.show();
 }
 
-// ── PAID 결과 렌더링 (Step 5) ──
 function renderPaidResult(data) {
   const area = document.getElementById('paidResultArea');
   const btn = document.getElementById('btnDownloadPdf');
@@ -1058,8 +1017,7 @@ function renderPaidResult(data) {
     return;
   }
   const items = data.obligations || data.results || data.items || [];
-  let html = `<div class="result-section">
-    <div class="result-section-title">상세 법령 의무 (${items.length}건)</div>`;
+  let html = `<div class="result-section"><div class="result-section-title">상세 법령 의무 (${items.length}건)</div>`;
   items.forEach(it => {
     html += `<div class="result-item">
       <div class="ri-title">${it.title || it.name || '항목'}</div>
@@ -1069,17 +1027,11 @@ function renderPaidResult(data) {
   });
   html += `</div>`;
   area.innerHTML = html;
-  if (data.pdf_url || pdfUrl) {
-    pdfUrl = data.pdf_url || pdfUrl;
-    btn.style.display = 'block';
-  }
+  if (data.pdf_url || pdfUrl) { pdfUrl = data.pdf_url || pdfUrl; btn.style.display = 'block'; }
 }
 
-function downloadPdf() {
-  if (pdfUrl) window.open(pdfUrl, '_blank');
-}
+function downloadPdf() { if (pdfUrl) window.open(pdfUrl, '_blank'); }
 
-// ── 주소 드롭다운 외부 클릭 닫기 ──
 document.addEventListener('click', function(e) {
   document.querySelectorAll('.addr-dropdown').forEach(dd => {
     if (!dd.closest('.addr-wrap')?.contains(e.target)) dd.classList.remove('show');
