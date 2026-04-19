@@ -1,12 +1,32 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
- * v2.3.0 (2026-04-14): 특허 8건(외 7건), 메뉴명 'TAI 기술력'
+ * v2.4.0 (2026-04-19): nexas 하위 경로 base 보정, 서비스/역할별 메뉴 nav 03 정렬, 시작하기에서 요금제 제거
  */
 (function () {
   'use strict';
-  var path  = window.location.pathname;
-  var inSub = /\/(service|target|mypage)\//.test(path);
-  var b     = inSub ? '../' : '';
+  function nexasRelBase() {
+    var path = window.location.pathname || '';
+    var marker = '/nexas/';
+    var i = path.indexOf(marker);
+    if (i < 0) return '';
+    var rest = path.slice(i + marker.length);
+    var parts = rest.split('/').filter(Boolean);
+    if (parts.length <= 1) return '';
+    var depth = parts.length - 1;
+    return new Array(depth + 1).join('../');
+  }
+  function legacyRelBase() {
+    var path = window.location.pathname || '';
+    if (/\/(service|target)\//.test(path)) return '../';
+    var m = path.match(/\/mypage\/(.+)/);
+    if (m) {
+      var n = m[1].split('/').filter(Boolean).length;
+      return n >= 2 ? '../../' : '../';
+    }
+    return '';
+  }
+  var b = nexasRelBase();
+  if (!b) b = legacyRelBase();
 
   var html = '<footer class="footer-area style-1">' +
     '<div class="footer-patent-bar" style="background:rgba(255,255,255,.05);padding:10px 0;text-align:center;">' +
@@ -27,7 +47,7 @@
     '            <p style="margin-bottom:4px;"><span class="footer-company-name" style="font-weight:700;">TAI 엔지니어링</span>&nbsp;&nbsp;<span style="font-size:.85rem;">대표 심태왕</span></p>' +
     '            <p style="margin-bottom:3px;font-size:.85rem;">서울특별시 강남구 테헤란로79길 6 JS타워 3층</p>' +
     '            <p style="margin-bottom:3px;font-size:.85rem;">TEL: 070-8080-1858 &nbsp;·&nbsp; FAX: 0504-845-8888</p>' +
-    '            <p style="margin-bottom:3px;font-size:.85rem;">EMAIL: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>' +
+    '            <p style="margin-bottom:3px;font-size:.85rem;">EMAIL: tai@taieng.co.kr</p>' +
     '            <p style="margin-bottom:3px;font-size:.85rem;">사업자등록번호: 723-39-01422</p>' +
     '            <p style="font-size:.85rem;">통신판매업 신고번호: 제2026-서울강남-02132호</p>' +
     '          </div>' +
@@ -37,19 +57,22 @@
     '        <div class="footer-widget widget widget_link">' +
     '          <h6 class="widget-title">서비스</h6>' +
     '          <ul>' +
-    '            <li><a href="' + b + 'service/education.html"><i class="fas fa-angle-right"></i>교육사업</a></li>' +
-    '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
-    '            <li><a href="' + b + 'service/repair.html"><i class="fas fa-angle-right"></i>수선 연결</a></li>' +
-    '            <li><a href="' + b + 'service/consulting.html"><i class="fas fa-angle-right"></i>컨설팅</a></li>' +
-    '            <li><a href="' + b + 'service/appointment.html"><i class="fas fa-angle-right"></i>선임 연결</a></li>' +
-    '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
     '            <li><a href="' + b + 'service/diagnosis.html"><i class="fas fa-angle-right"></i>법령진단</a></li>' +
+    '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
+    '            <li><a href="' + b + 'service/education.html"><i class="fas fa-angle-right"></i>교육사업</a></li>' +
+    '            <li><a href="' + b + 'service/appointment.html"><i class="fas fa-angle-right"></i>전문가 매칭</a></li>' +
+    '            <li><a href="' + b + 'pricing.html"><i class="fas fa-angle-right"></i>요금제</a></li>' +
+    '            <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>' +
+    '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
+    '            <li><a href="' + b + 'fix-request.html?from=footer&type=repair"><i class="fas fa-angle-right"></i>수선 연결</a></li>' +
+    '            <li><a href="' + b + 'fix-request.html?from=footer&type=consulting"><i class="fas fa-angle-right"></i>컨설팅</a></li>' +
+    '            <li><a href="' + b + 'fix-request.html?from=footer&type=appointment"><i class="fas fa-angle-right"></i>선임 연결</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
     '      <div class="col-xl-2 col-lg-2 col-6">' +
     '        <div class="footer-widget widget widget_link">' +
-    '          <h6 class="widget-title">대상별</h6>' +
+    '          <h6 class="widget-title">업종별</h6>' +
     '          <ul>' +
     '            <li><a href="' + b + 'target/building.html"><i class="fas fa-angle-right"></i>건물·시설</a></li>' +
     '            <li><a href="' + b + 'target/factory.html"><i class="fas fa-angle-right"></i>제조공장</a></li>' +
@@ -58,7 +81,8 @@
     '          <h6 class="widget-title" style="margin-top:20px;">역할별</h6>' +
     '          <ul>' +
     '            <li><a href="' + b + 'for-safety-manager.html"><i class="fas fa-angle-right"></i>안전관리자</a></li>' +
-    '            <li><a href="' + b + 'for-business-owner.html"><i class="fas fa-angle-right"></i>사업주·현장소장</a></li>' +
+    '            <li><a href="' + b + 'for-business-owner.html"><i class="fas fa-angle-right"></i>사업주</a></li>' +
+    '            <li><a href="' + b + 'provider-register.html"><i class="fas fa-angle-right"></i>전문가</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
@@ -67,8 +91,7 @@
     '          <h6 class="widget-title">시작하기</h6>' +
     '          <ul>' +
     '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
-    '            <li><a href="' + b + 'pricing.html"><i class="fas fa-angle-right"></i>요금제</a></li>' +
-    '            <li><a href="' + b + 'contact.html"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
+    '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
     '            <li><a href="' + b + 'safety-news.html"><i class="fas fa-angle-right"></i>안전정보</a></li>' +
     '          </ul>' +

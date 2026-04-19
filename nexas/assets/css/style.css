@@ -4769,23 +4769,23 @@ ul.solarsystem li.saturn.bottom-2 {
 }
 
 /*--------------------------------------------------
-  TAI Engineering — logo sizing (50% of prior 30px/28px; width auto)
+  TAI Engineering — 헤더 로고 (읽기 가능한 기본 크기)
 ---------------------------------------------------*/
 .navbar-area .nav-container .logo .main-logo img {
-  height: 15px;
+  height: 30px;
   width: auto;
   max-width: none;
 }
 
 .footer-area .footer-widget .logo img {
-  height: 15px;
+  height: 36px;
   width: auto;
   max-width: none;
 }
 
 @media all and (max-width: 575px) {
   .navbar-area .nav-container .logo .main-logo img {
-    height: 14px;
+    height: 28px;
     width: auto;
   }
   .navbar-area .nav-container .logo a img {

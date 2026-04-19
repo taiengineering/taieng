@@ -26,7 +26,7 @@
       {
         question: '무료 법령 진단은 어떻게 이용하나요?',
         answer:
-          '진단 시작 페이지에서 안내에 따라 정보를 입력하시면 됩니다. 문의가 필요하면 <a href="contact.html">문의하기</a>로 연락해 주세요.'
+          '진단 시작 페이지에서 안내에 따라 정보를 입력하시면 됩니다. 문의가 필요하면 <a href="fix-request.html?from=faq&type=general">문의하기</a>로 연락해 주세요.'
       }
     ];
   }

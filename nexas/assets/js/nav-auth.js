@@ -2,10 +2,7 @@
  * TAI — nav-auth.js v2.2
  * 1) 공통 nav 링크 자동 렌더링 (tai-nav 내 .nav-links 대상)
  * 2) 로그인 상태에 따른 게스트/유저 토글
- * 3) 무료 진단 클릭 시 미로그인이면 안내 후 로그인 페이지로 이동
- *
- * 안전정보 → safety-news.html (뉴스 + 판례 하이라이트)
- * 판례 전용 검색 → index-5.html (safety-news에서 링크)
+ * 3) (구) 무료 진단 탑 버튼은 header에서 제거됨 — 로그인 페이지 tai-nav만 별도 링크 유지 시 참고
  */
 (function () {
   var STORAGE_KEY = 'tai_session';
@@ -14,10 +11,9 @@
   var TAI_NAV_ITEMS = [
     { label: 'TAI SAFE',    href: 'index-1.html' },
     { label: 'TAI MANAGER', href: 'index-2.html' },
-    { label: 'TAI FIX',    href: 'tai-fix.html' },
+    { label: 'TAI FIX',    href: 'fix-request.html?from=nav&type=repair' },
     { label: 'TAI AGENT',  href: 'index-3.html' },
     { label: 'TAI CARE',   href: 'index-4.html' },
-    { label: '안전정보',     href: 'safety-news.html' },
   ];
 
   // ─── nav 렌더링 ───────────────────────────────────────────
@@ -26,11 +22,9 @@
     if (!wrap) return;
 
     var currentFile = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    var safetyPages = ['safety-news.html', 'index-5.html'];
-
     var menuHTML = TAI_NAV_ITEMS.map(function (item) {
-      var isActive = currentFile === item.href.toLowerCase() ||
-                     (item.href === 'safety-news.html' && safetyPages.indexOf(currentFile) !== -1);
+      var itemFile = (item.href.split('?')[0] || '').toLowerCase();
+      var isActive = currentFile === itemFile;
       return '<a href="' + item.href + '"' + (isActive ? ' class="active"' : '') + '>' + item.label + '</a>';
     }).join('');
 
@@ -39,8 +33,6 @@
     menuHTML += '<a href="sign-up.html" class="nav-auth-guest">회원가입</a>';
     menuHTML += '<a href="mypage/" class="nav-auth-user d-none">마이페이지</a>';
     menuHTML += '<a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>';
-    // 무료 진단 버튼 — 클릭 시 로그인 체크
-    menuHTML += '<a href="free-diagnosis.html" class="nav-cta tai-diag-btn" style="margin-left:8px;" onclick="return taiDiagClick(event)">무료 진단</a>';
 
     wrap.innerHTML = menuHTML;
   }
