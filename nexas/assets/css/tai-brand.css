@@ -50,25 +50,48 @@
 }
 
 /*
- * 헤더 정렬: 이 테마는 <nav> 직계 자식이 .container 하나뿐이라
- * Bootstrap의 .navbar { justify-content: space-between }가 로고·메뉴에 닿지 않음.
- * 로고와 .navbar-collapse는 .nav-container 안의 형제이므로 여기서 flex로 양끝 정렬.
+ * 헤더 정렬: 로고는 좌측, 메인 메뉴·로그인은 우측에 붙이고 서로 간격 유지
+ * (theme style.css 의 .navbar-nav { width:100% } 를 데스크톱에서 덮어씀)
  */
 @media (min-width: 992px) {
   .navbar-area .nav-container {
     display: flex !important;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start !important;
     position: relative;
   }
+  .navbar-area .nav-container > .logo {
+    flex-shrink: 0;
+    margin-right: auto;
+  }
   .navbar-area .nav-container .navbar-collapse {
+    display: flex !important;
     justify-content: flex-end !important;
-    flex: 0 1 auto;
+    flex: 0 0 auto !important;
+    flex-grow: 0 !important;
+    flex-basis: auto !important;
+    width: auto !important;
+    max-width: none !important;
   }
   .navbar-area .nav-container .navbar-collapse .navbar-nav {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
     width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
     text-align: right;
+  }
+  .navbar-area .nav-container .navbar-collapse .navbar-nav > li {
+    display: flex !important;
+    align-items: center;
+  }
+  .navbar-area .nav-container .nav-right-part.nav-right-part-desktop {
+    margin-left: 1.75rem !important;
+    flex-shrink: 0;
   }
 }
 
