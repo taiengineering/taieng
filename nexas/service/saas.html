@@ -3,55 +3,473 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe SaaS — 법령 기반 자동 일정, 작업자 배정, D-3 알림, TBM 전자서명, 신고서식 자동화. 안전관리자와 현장의 입장에서 설계한 안전관리 플랫폼.">
-  <title>SaaS 구독 | TAI 엔지니어링</title>
+  <meta name="description" content="TAI Safe — 산업안전 법적 의무를 자동으로 배분·추적·증빙합니다. 안전관리자 혼자 하지 않아도 됩니다.">
+  <title>TAI Safe SaaS | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/magnific.min.css">
-  <link rel="stylesheet" href="../assets/css/nice-select.min.css">
-  <link rel="stylesheet" href="../assets/css/owl.min.css">
-  <link rel="stylesheet" href="../assets/css/slick-slide.min.css">
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
   <style>
-    /* placeholder 이미지 오버레이 */
-    .feat-img-wrap { position: relative; display: inline-block; width: 100%; }
-    .feat-img-wrap img { border-radius: 12px; width: 100%; }
-    .feat-img-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: rgba(0,0,0,.55); color: #fff;
-      font-size: .78rem; padding: 8px 14px;
-      border-radius: 0 0 12px 12px;
-      text-align: center;
-    }
-    /* 가격 카드 */
-    .price-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 36px 28px;
-      box-shadow: 0 4px 24px rgba(0,0,0,.08);
-      text-align: center;
-      height: 100%;
-    }
-    .price-card.featured { border: 3px solid var(--main-color, #7B55EA); }
-    .price-card .price-amount { font-size: 2.4rem; font-weight: 900; color: var(--main-color, #7B55EA); }
-    .price-card .price-unit { font-size: .9rem; color: #64748b; }
-    .price-card h4 { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
-    /* 강조 배너 */
-    .highlight-bar {
-      background: linear-gradient(135deg, #7B55EA, #9b59b6);
-      padding: 36px 0;
-      text-align: center;
-    }
-    .highlight-bar p {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #fff;
-      margin: 0;
-    }
+  /* ═══════════════════════════════════════
+     SAAS PAGE — DESIGN SYSTEM
+  ═══════════════════════════════════════ */
+  :root {
+    --tai-blue:   #1A5FD4;
+    --tai-dark:   #0f172a;
+    --tai-red:    #dc2626;
+    --tai-green:  #15803d;
+    --tai-gray:   #64748b;
+    --tai-border: #e2e8f0;
+    --tai-bg:     #f8fafc;
+    --phone-w:    260px;
+  }
+  body { font-family: 'Noto Sans KR', sans-serif; }
+
+  /* ── 히어로 ── */
+  .s-hero {
+    min-height: 100vh;
+    background: url('../assets/img/saas/hero-bg.jpg') center center / cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .s-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg,
+      rgba(10,20,50,.82) 0%,
+      rgba(26,95,212,.65) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 760px;
+    padding: 0 24px;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    color: rgba(255,255,255,.85);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-title {
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.18;
+    margin-bottom: 16px;
+    letter-spacing: -.02em;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: #60a5fa;
+  }
+  .hero-sub {
+    font-size: clamp(.9rem, 2vw, 1.12rem);
+    color: rgba(255,255,255,.72);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+  .hero-cta-wrap { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-hero-primary {
+    background: #fff; color: var(--tai-blue);
+    border: none; border-radius: 12px;
+    padding: 16px 32px; font-size: 1rem; font-weight: 800;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-hero-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    color: var(--tai-blue);
+  }
+  .btn-hero-secondary {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.5);
+    color: #fff; border-radius: 12px;
+    padding: 14px 28px; font-size: 1rem; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: all .15s;
+  }
+  .btn-hero-secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.1); }
+  .hero-scroll {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 2; color: rgba(255,255,255,.5); font-size: .8rem;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+  /* ── 섹션 공통 ── */
+  .sec { padding: 96px 0; }
+  .sec-sm { padding: 64px 0; }
+  .sec-dark { background: var(--tai-dark); color: #fff; }
+  .sec-blue { background: var(--tai-blue); color: #fff; }
+  .sec-gray { background: var(--tai-bg); }
+  .sec-label {
+    font-size: .72rem; font-weight: 800;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tai-blue); margin-bottom: 10px;
+  }
+  .sec-dark .sec-label { color: #93c5fd; }
+  .sec-blue .sec-label { color: rgba(255,255,255,.75); }
+  .sec-title {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 900; line-height: 1.25;
+    letter-spacing: -.02em; margin-bottom: 16px;
+  }
+  .sec-desc {
+    font-size: 1rem; color: var(--tai-gray);
+    line-height: 1.75; margin-bottom: 32px;
+  }
+  .sec-dark .sec-desc { color: #94a3b8; }
+  .sec-blue .sec-desc { color: rgba(255,255,255,.8); }
+
+  /* ── 비포 공감 3카드 ── */
+  .pain-card {
+    background: #fff;
+    border: 1.5px solid var(--tai-border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  .pain-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--tai-red);
+  }
+  .pain-icon { font-size: 2rem; margin-bottom: 14px; }
+  .pain-title {
+    font-size: 1.05rem; font-weight: 800;
+    color: var(--tai-dark); margin-bottom: 8px;
+  }
+  .pain-desc {
+    font-size: .88rem; color: var(--tai-gray);
+    line-height: 1.7;
+  }
+
+  /* ── 기능 섹션 좌우 레이아웃 ── */
+  .feat-section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--tai-border);
+  }
+  .feat-section:last-child { border-bottom: none; }
+  .feat-num {
+    display: inline-block;
+    background: var(--tai-blue);
+    color: #fff;
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: .7rem; font-weight: 800;
+    letter-spacing: .08em;
+    margin-bottom: 12px;
+  }
+  .feat-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 900;
+    color: var(--tai-dark);
+    line-height: 1.25;
+    margin-bottom: 12px;
+    letter-spacing: -.02em;
+  }
+  .feat-title strong { color: var(--tai-blue); }
+  .feat-desc {
+    font-size: .95rem;
+    color: var(--tai-gray);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .feat-bullets {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .feat-bullets li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: .9rem; color: var(--tai-dark); line-height: 1.55;
+  }
+  .feat-bullets .bi {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--tai-blue); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .65rem; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── 폰 모크업 ── */
+  .phone-wrap {
+    display: flex; justify-content: center; align-items: center;
+  }
+  .phone-frame {
+    width: var(--phone-w);
+    background: #0f172a;
+    border-radius: 40px;
+    padding: 14px;
+    box-shadow:
+      0 0 0 2px #1e293b,
+      0 30px 80px rgba(0,0,0,.35),
+      0 10px 30px rgba(0,0,0,.2);
+    position: relative;
+  }
+  .phone-frame::before {
+    content: '';
+    display: block;
+    width: 80px; height: 8px;
+    background: #1e293b;
+    border-radius: 999px;
+    margin: 0 auto 10px;
+  }
+  .phone-screen {
+    background: #fff;
+    border-radius: 26px;
+    overflow: hidden;
+    min-height: 480px;
+  }
+  .pscreen-header {
+    padding: 12px 14px 10px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pscreen-header .logo {
+    font-size: .75rem; font-weight: 900;
+    color: var(--tai-blue); letter-spacing: -.01em;
+  }
+  .pscreen-header .page-name {
+    font-size: .68rem; color: var(--tai-gray);
+  }
+  .pscreen-body { padding: 8px 12px 16px; }
+  .pscreen-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .pscreen-row:last-child { border-bottom: none; }
+  .check-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; flex-shrink: 0;
+  }
+  .check-circle.done { background: #dcfce7; color: #15803d; }
+  .check-circle.todo { background: #f1f5f9; color: #94a3b8; }
+  .check-circle.warn { background: #fee2e2; color: #dc2626; }
+  .pscreen-item-title { font-size: .78rem; font-weight: 700; color: #0f172a; }
+  .pscreen-item-sub { font-size: .66rem; color: var(--tai-gray); margin-top: 1px; }
+  .pscreen-tag {
+    display: inline-block;
+    font-size: .6rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;
+    margin-left: 4px;
+  }
+  .pscreen-tag.done { background: #dcfce7; color: #15803d; }
+  .pscreen-tag.wait { background: #fef9c3; color: #854d0e; }
+  .pscreen-tag.urgent { background: #fee2e2; color: #dc2626; }
+
+  /* 대시보드 mockup */
+  .dash-card {
+    background: var(--tai-bg);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+  }
+  .dash-card .dk { font-size: .65rem; color: var(--tai-gray); margin-bottom: 2px; }
+  .dash-card .dv { font-size: 1.3rem; font-weight: 900; color: var(--tai-blue); }
+  .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+
+  /* 서명 mockup */
+  .sign-area {
+    background: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    color: #94a3b8; font-size: .72rem;
+    margin: 10px 0;
+  }
+  .sign-done {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex; align-items: center; gap: 8px;
+    margin: 6px 0;
+  }
+
+  /* 알림 mockup */
+  .notif-card {
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .notif-card.emergency { background: #fef2f2; border-left: 3px solid var(--tai-red); }
+  .notif-card.normal { background: #f0f9ff; border-left: 3px solid #38bdf8; }
+  .notif-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .notif-title { font-size: .75rem; font-weight: 800; color: var(--tai-dark); }
+  .notif-sub { font-size: .65rem; color: var(--tai-gray); margin-top: 1px; }
+
+  /* 작업 요청 mockup */
+  .req-card {
+    background: var(--tai-bg);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border: 1px solid var(--tai-border);
+  }
+  .req-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .req-title { font-size: .75rem; font-weight: 800; color: var(--tai-dark); }
+  .req-badge {
+    font-size: .62rem; font-weight: 700; padding: 2px 7px; border-radius: 4px;
+  }
+  .req-badge.pending { background: #fef9c3; color: #854d0e; }
+  .req-badge.approved { background: #dcfce7; color: #15803d; }
+  .req-meta { font-size: .65rem; color: var(--tai-gray); line-height: 1.5; }
+  .btn-approve {
+    display: block; width: 100%;
+    background: var(--tai-blue); color: #fff;
+    border: none; border-radius: 8px;
+    padding: 9px; font-size: .78rem; font-weight: 800;
+    text-align: center; margin-top: 8px;
+  }
+
+  /* ── SVG 다이어그램 래퍼 ── */
+  .diagram-wrap {
+    background: #fff;
+    border: 1.5px solid var(--tai-border);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  }
+  .diagram-wrap img {
+    width: 100%; height: auto;
+    display: block;
+  }
+  .diagram-caption {
+    text-align: center;
+    font-size: .76rem;
+    color: var(--tai-gray);
+    margin-top: 10px;
+  }
+
+  /* ── 위험 경고 배너 ── */
+  .danger-bar {
+    background: var(--tai-red);
+    padding: 28px 0;
+    text-align: center;
+  }
+  .danger-bar p {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── 가격 카드 ── */
+  .price-card {
+    background: #fff;
+    border: 1.5px solid var(--tai-border);
+    border-radius: 20px;
+    padding: 32px 24px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .price-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+  .price-card.featured {
+    border-color: var(--tai-blue);
+    border-width: 2.5px;
+  }
+  .price-card.featured::before {
+    content: '추천';
+    position: absolute; top: 16px; right: 16px;
+    background: var(--tai-blue); color: #fff;
+    font-size: .7rem; font-weight: 800;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  .pc-sector {
+    font-size: .7rem; font-weight: 800;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--tai-gray); margin-bottom: 8px;
+  }
+  .pc-amount {
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--tai-blue); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pc-unit { font-size: .82rem; color: var(--tai-gray); margin-bottom: 20px; }
+  .pc-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .pc-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: .86rem; color: #475569; line-height: 1.45;
+  }
+  .pc-list li::before {
+    content: '✓';
+    color: var(--tai-green);
+    font-weight: 900; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pc-cta {
+    display: block;
+    background: var(--tai-blue); color: #fff;
+    border-radius: 10px; padding: 13px;
+    text-align: center; font-weight: 800; font-size: .9rem;
+    text-decoration: none; margin-top: 24px;
+    transition: background .15s;
+  }
+  .pc-cta:hover { background: #1248a8; color: #fff; }
+  .price-card.featured .pc-cta { background: var(--tai-blue); }
+
+  /* ── CTA 최종 ── */
+  .final-cta {
+    background: linear-gradient(135deg, #0f172a 0%, #1A5FD4 100%);
+    padding: 100px 0;
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900; color: #fff;
+    line-height: 1.25; margin-bottom: 16px;
+  }
+  .final-cta p { color: rgba(255,255,255,.72); font-size: 1rem; line-height: 1.75; margin-bottom: 40px; }
+  .cta-flow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 36px;
+  }
+  .cta-step {
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 12px; padding: 16px 24px;
+    text-align: center;
+  }
+  .cta-step .cs-num {
+    font-size: .7rem; font-weight: 800;
+    color: #93c5fd; letter-spacing: .1em;
+    margin-bottom: 6px;
+  }
+  .cta-step .cs-text { font-size: .92rem; font-weight: 700; color: #fff; }
+  .cta-arrow { font-size: 1.4rem; color: rgba(255,255,255,.4); }
+
+  /* ── 반응형 ── */
+  @media(max-width: 768px) {
+    .feat-section { padding: 56px 0; }
+    .sec { padding: 64px 0; }
+    .phone-frame { --phone-w: 220px; }
+    .cta-arrow { display: none; }
+  }
   </style>
 </head>
 <body class="home-4 sc5">
@@ -62,356 +480,760 @@
     </div>
   </div>
   <div class="body-overlay" id="body-overlay"></div>
-
-  <!-- HEADER -->
   <div id="tai-header"></div>
 
-  <!-- ① 히어로 ──────────────────────────── -->
-  <section class="banner-area style-4" style="background-image: url(../assets/img/home-4/banner/bg.png);">
+
+  <!-- ════════════════════════════════════════
+       S1. 히어로 — 결말을 먼저 보여준다
+  ════════════════════════════════════════ -->
+  <section class="s-hero">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-10 align-self-center order-lg-1 order-2">
-          <div class="banner-inner text-lg-start text-center">
-            <div class="section-title style-2">
-              <h4 class="sub-title">TAI Safe SaaS</h4>
-              <h1 class="title">아직도 종이나 엑셀을<br>쓰고 계십니까?</h1>
-              <p>마땅한 프로그램이 없어서 그랬을 겁니다. TAI Safe가 답입니다.<br>안전관리자는 서류 작성 하느라 정작 안전관리를 하기 어렵습니다. 겸직까지 하면 더 요식행위를 하게 됩니다.</p>
-              <div class="btn-area mt-4">
-                <a class="btn btn-base me-3" href="../free-diagnosis.html">무료로 시작하기</a>
-                <a class="btn btn-border" href="../pricing.html">요금제 전체 보기</a>
-              </div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">TAI Safe — 산업안전 관리 플랫폼</div>
+        <h1 class="hero-title">
+          오늘 감사가 나왔습니다.<br>
+          <em>아무 문제 없었습니다.</em>
+        </h1>
+        <p class="hero-sub">
+          기록은 자동으로 쌓였고, 점검은 현장에서 끝났고,<br>
+          법령은 시스템이 추적하고 있었기 때문입니다.
+        </p>
+        <div class="hero-cta-wrap">
+          <a href="../free-diagnosis.html" class="btn-hero-primary">
+            법령진단 시작하기 →
+          </a>
+          <a href="../pricing.html" class="btn-hero-secondary">
+            요금제 보기
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>어떻게 가능했을까요?</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       S2. 비포 공감 — 지금 이렇게 하고 계시죠?
+  ════════════════════════════════════════ -->
+  <section class="sec sec-gray">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sec-label">Before TAI Safe</div>
+        <h2 class="sec-title" style="color:#0f172a;">지금 이렇게 하고 계시죠?</h2>
+        <p class="sec-desc" style="max-width:540px;margin:0 auto;">
+          안전관리자 혼자 수십 가지 의무를 엑셀로 관리하고 있는
+          전국 수만 개 사업장의 이야기입니다.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="pain-card">
+            <div class="pain-icon">📋</div>
+            <div class="pain-title">"다음 점검이 언제더라?"</div>
+            <div class="pain-desc">
+              법령별 점검 주기가 제각각입니다. 놓치면 과태료.
+              엑셀 파일을 열고, 지난 기록을 찾고,
+              다음 날짜를 직접 계산합니다.
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-md-8 order-1 order-lg-2">
-          <div class="thumb text-end">
-            <img src="../assets/img/home-4/banner/1.png" alt="[이미지: TAI Safe 대시보드 메인 화면]">
+        <div class="col-md-4">
+          <div class="pain-card">
+            <div class="pain-icon">😰</div>
+            <div class="pain-title">"감사 나왔는데 서류가 없어"</div>
+            <div class="pain-desc">
+              점검은 했는데 기록이 없습니다.
+              서명은 받았는데 종이가 사라졌습니다.
+              감독관 앞에서 파일을 뒤지는 아찔한 순간.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="pain-card">
+            <div class="pain-icon">⚖️</div>
+            <div class="pain-title">"법이 또 바뀌었나?"</div>
+            <div class="pain-desc">
+              산업안전보건법, 중대재해처벌법, 소방법…
+              아무도 알려주지 않습니다.
+              모르고 있다가 뒤늦게 알게 되는 것이 더 위험합니다.
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 설계 철학 한줄 -->
-  <div class="py-3 text-center" style="background:#f8f4ff; border-top:1px solid #e9e0ff; border-bottom:1px solid #e9e0ff;">
-    <p class="mb-0" style="color:#7B55EA; font-weight:700; font-size:.95rem;">
-      안전관리자와 현장의 입장에서 설계하고 만들었습니다
-    </p>
-  </div>
 
-  <!-- ② 기능 1: 법령 기반 자동 일정 ───── (이미지 좌) -->
-  <section class="about-area pd-top-110 pd-bottom-90 text-center text-lg-start">
+  <!-- ════════════════════════════════════════
+       S3. 전환 — 구조가 바뀝니다 (SVG #11 + #25)
+  ════════════════════════════════════════ -->
+  <section class="sec">
     <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-8">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/about/1.png" alt="[이미지: 점검 캘린더 화면에 자동 생성된 일정들]">
-            <div class="feat-img-caption">점검 캘린더 화면에 자동 생성된 일정들</div>
-          </div>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <div class="sec-label">구조의 변화</div>
+          <h2 class="sec-title" style="color:#0f172a;">
+            혼자 하는 구조에서<br>
+            <span style="color:var(--tai-blue);">팀이 나누는 구조로</span>
+          </h2>
+          <p class="sec-desc">
+            TAI Safe의 핵심은 기능이 아닙니다.
+            안전관리자가 "하는 사람"에서
+            "배분하고 확인하는 사람"으로 역할이 바뀌는 것입니다.
+          </p>
+          <ul class="feat-bullets">
+            <li><span class="bi">→</span> 의무 목록이 자동으로 생성됩니다</li>
+            <li><span class="bi">→</span> 누가 언제 할지 시스템이 배분합니다</li>
+            <li><span class="bi">→</span> 했다는 기록이 자동으로 남습니다</li>
+          </ul>
         </div>
-        <div class="col-xl-5 col-lg-6 align-self-center offset-xl-1">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 01</h4>
-            <h2 class="title">법령 기반 자동 일정</h2>
-            <p>스케줄을 한번만 세팅하면, 일정을 놓치지 않고 제대로 된 안전관리를 할 수 있습니다. 법령에서 요구하는 주기·시기·담당자까지 자동으로 배치됩니다.</p>
+        <div class="col-lg-7">
+          <div class="diagram-wrap">
+            <img
+              src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/11-업무분산-비포애프터.svg"
+              alt="겸직 안전관리자 업무 분산 — 비포애프터"
+              loading="lazy"
+            >
+            <div class="diagram-caption">TAI Safe 도입 전·후 업무 구조 변화</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ③ 기능 2: 작업자 배정 + D-3 알림 ── (이미지 우) -->
-  <section class="work-area pd-top-90 pd-bottom-90 text-center text-lg-start" style="background:#f9f9f9;">
+
+  <!-- ════════════════════════════════════════
+       S4. 안전관리자를 위한 기능 4개
+  ════════════════════════════════════════ -->
+  <div style="background:var(--tai-bg);">
     <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-5 col-lg-6 align-self-center order-lg-2">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 02</h4>
-            <h2 class="title">작업자 배정 + D-3 알림</h2>
-            <p>SMS·카카오톡으로 3일 전 자동 발송. 안전관리자는 배정하고 확인만 합니다. 누락으로 인한 과태료 위험이 사라집니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 order-lg-1 align-self-center">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/about/2.png" alt="[이미지: 카카오톡 알림 메시지 예시 화면]">
-            <div class="feat-img-caption">카카오톡 알림 메시지 예시 화면</div>
-          </div>
-        </div>
+      <div class="text-center pt-5 pb-2">
+        <div class="sec-label">안전관리자를 위해</div>
+        <h2 class="sec-title" style="color:#0f172a;">당신 혼자 감당 안 해도 됩니다</h2>
       </div>
     </div>
-  </section>
 
-  <!-- ④ 기능 3: 현장 앱 ─────────────────── (이미지 좌) -->
-  <section class="about-area pd-top-90 pd-bottom-90 text-center text-lg-start">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-8">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/1.png" alt="[이미지: 작업자가 모바일로 QR 스캔하며 점검하는 장면]">
-            <div class="feat-img-caption">작업자가 모바일로 QR 스캔하며 점검하는 장면</div>
+    <!-- 기능 ① 배분 + 알림 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-lg-2">
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="pscreen-header" style="background:var(--tai-blue);">
+                    <span class="logo" style="color:#fff;">TAI Safe</span>
+                    <span class="page-name" style="color:rgba(255,255,255,.7);">오늘의 업무</span>
+                  </div>
+                  <div class="pscreen-body">
+                    <div class="dash-grid">
+                      <div class="dash-card">
+                        <div class="dk">완료</div>
+                        <div class="dv" style="color:var(--tai-green);">12<span style="font-size:.7rem;font-weight:500;"> 건</span></div>
+                      </div>
+                      <div class="dash-card">
+                        <div class="dk">대기</div>
+                        <div class="dv" style="color:var(--tai-red);">3<span style="font-size:.7rem;font-weight:500;"> 건</span></div>
+                      </div>
+                    </div>
+                    <div style="font-size:.68rem;font-weight:800;color:var(--tai-gray);margin:10px 0 6px;">오늘 처리 필요</div>
+                    <div class="pscreen-row">
+                      <div class="check-circle warn">!</div>
+                      <div>
+                        <div class="pscreen-item-title">소화기 월간 점검 <span class="pscreen-tag urgent">D-2</span></div>
+                        <div class="pscreen-item-sub">담당: 김현장 · 2공장</div>
+                      </div>
+                    </div>
+                    <div class="pscreen-row">
+                      <div class="check-circle done">✓</div>
+                      <div>
+                        <div class="pscreen-item-title">위험성평가 서명 <span class="pscreen-tag done">완료</span></div>
+                        <div class="pscreen-item-sub">담당: 박안전 · 완료 09:14</div>
+                      </div>
+                    </div>
+                    <div class="pscreen-row">
+                      <div class="check-circle todo">○</div>
+                      <div>
+                        <div class="pscreen-item-title">TBM 작성 <span class="pscreen-tag wait">진행중</span></div>
+                        <div class="pscreen-item-sub">담당: 이반장 · 3층</div>
+                      </div>
+                    </div>
+                    <div style="background:#eff6ff;border-radius:10px;padding:10px 12px;margin-top:10px;">
+                      <div style="font-size:.68rem;font-weight:800;color:var(--tai-blue);margin-bottom:3px;">📲 D-3 알림 발송 완료</div>
+                      <div style="font-size:.64rem;color:var(--tai-gray);">승강기 정기검사 · 담당자 3명</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-xl-5 col-lg-6 align-self-center offset-xl-1">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 03</h4>
-            <h2 class="title">현장 앱 — 1분 이내 처리</h2>
-            <p>현장에서 1분 이내에 처리 가능한 현장용 앱을 제공합니다. QR이나 RFID를 사용하여 빠르고 정확하게 점검할 수 있습니다. 장갑 낀 손으로도 사용 가능한 큰 버튼 UI.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑤ 기능 4: TBM 전자서명 ───────────── (이미지 우) -->
-  <section class="work-area pd-top-90 pd-bottom-90 text-center text-lg-start" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-5 col-lg-6 align-self-center order-lg-2">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 04</h4>
-            <h2 class="title">TBM 전자서명</h2>
-            <p>작업반장 및 작업자들이 전자서명으로, 종이 받으러 안 다녀도 됩니다. 모바일에서 바로 TBM 기록·서명·저장이 완결됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 order-lg-1 align-self-center">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/2.png" alt="[이미지: 모바일 TBM 서명 화면]">
-            <div class="feat-img-caption">모바일 TBM 서명 화면</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑥ 기능 5: 비상상황 알림 ───────────── (이미지 좌) -->
-  <section class="about-area pd-top-90 pd-bottom-90 text-center text-lg-start">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-8">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/3.png" alt="[이미지: 긴급 알림 화면]">
-            <div class="feat-img-caption">긴급 알림 화면</div>
-          </div>
-        </div>
-        <div class="col-xl-5 col-lg-6 align-self-center offset-xl-1">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 05</h4>
-            <h2 class="title">비상상황 즉시 알림</h2>
-            <p>비상상황 발생 시 즉시 안전관리자에게 통보가 와서 골든타임을 놓치지 않습니다. 현장에서 이상 보고 즉시 담당자 전체에게 동시 발송됩니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑦ 기능 6: 기록 자동 보관 ───────────── (이미지 우) -->
-  <section class="work-area pd-top-90 pd-bottom-90 text-center text-lg-start" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-5 col-lg-6 align-self-center order-lg-2">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 06</h4>
-            <h2 class="title">기록 자동 보관</h2>
-            <p>안전관리회의록 등의 기록을 철저히 보관하여, 안전점검 시 문제가 전혀 없습니다. 점검 이력·서명·조치 결과가 모두 클라우드에 자동 저장됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 order-lg-1 align-self-center">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/4.png" alt="[이미지: 기록 리스트 화면]">
-            <div class="feat-img-caption">기록 리스트 화면</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑧ 기능 7: 경영진 대시보드 ──────────── (이미지 좌) -->
-  <section class="about-area pd-top-90 pd-bottom-90 text-center text-lg-start">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-8">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/about/1.png" alt="[이미지: 대시보드 — 전체 완료율, 이상 현황 등]">
-            <div class="feat-img-caption">대시보드 — 전체 완료율, 이상 현황</div>
-          </div>
-        </div>
-        <div class="col-xl-5 col-lg-6 align-self-center offset-xl-1">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 07</h4>
-            <h2 class="title">경영진 대시보드</h2>
-            <p>회사의 안전관리 상황을 안전관리자 외에 상급자나 대표도 상세히 확인할 수 있습니다. 중대재해처벌법 대응에 필요한 관리 증거를 실시간으로 확보합니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑨ 기능 8: 법 변경 자동 적용 ──────── (이미지 우) -->
-  <section class="work-area pd-top-90 pd-bottom-90 text-center text-lg-start" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-5 col-lg-6 align-self-center order-lg-2">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 08</h4>
-            <h2 class="title">법 변경 자동 적용</h2>
-            <p>바뀌는 법에 대해 자동 적용하고 알려드려서, 법 바뀌는 것에 마음 놓을 수 있습니다. 법령 엔진이 항상 최신 상태로 유지됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 order-lg-1 align-self-center">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/about/2.png" alt="[이미지: 법령 업데이트 알림 카드]">
-            <div class="feat-img-caption">법령 업데이트 알림 카드</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑩ 기능 9: 전자계약 ─────────────────── (이미지 좌) -->
-  <section class="about-area pd-top-90 pd-bottom-90 text-center text-lg-start">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-6 col-lg-6 col-md-8">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/1.png" alt="[이미지: 전자계약 서명 화면]">
-            <div class="feat-img-caption">전자계약 서명 화면</div>
-          </div>
-        </div>
-        <div class="col-xl-5 col-lg-6 align-self-center offset-xl-1">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 09</h4>
-            <h2 class="title">전자계약</h2>
-            <p>전자계약을 지원하여 도장 찾지 않아도 되고, 항상 보관되어 있습니다. 선임계약·외주계약·안전협약서 등 모든 계약을 플랫폼 안에서 처리합니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑪ 기능 10: 신고서식 자동화 ──────────── (이미지 우) -->
-  <section class="work-area pd-top-90 pd-bottom-90 text-center text-lg-start" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center justify-content-lg-start align-items-center">
-        <div class="col-xl-5 col-lg-6 align-self-center order-lg-2">
-          <div class="section-title style-2 mb-lg-0">
-            <h4 class="sub-title">기능 10</h4>
-            <h2 class="title">신고서식 자동화</h2>
-            <p>서류 작성 시간을 안전관리 시간으로 돌릴 수 있습니다. 점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성되고, 출력 후 날인만 하면 됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 order-lg-1 align-self-center">
-          <div class="feat-img-wrap">
-            <img src="../assets/img/home-4/project/2.png" alt="[이미지: 자동 생성된 신고서식 PDF]">
-            <div class="feat-img-caption">자동 생성된 신고서식 PDF</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑫ 가격 미리보기 ─────────────────────── -->
-  <section class="pricing-area pd-top-110 pd-bottom-90 text-center" style="background:#fff;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">요금제</h4>
-            <h2 class="title">컨설팅 비용과는 상대도 안 될 만큼 저렴합니다</h2>
-            <p>월 구독 하나로 법령 판정·일정·알림·기록·서류까지 모두 해결됩니다.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-3">
-
-        <div class="col-lg-4 col-md-6">
-          <div class="price-card">
-            <h4>기본</h4>
-            <div class="price-amount">79,000<span class="price-unit">원</span></div>
-            <p class="price-unit mb-3">/ 월</p>
-            <ul class="pricing-list text-start mt-3">
-              <li><i class="fas fa-check"></i>법령 기반 자동 일정</li>
-              <li><i class="fas fa-check"></i>D-3 SMS 알림</li>
-              <li><i class="fas fa-check"></i>현장 앱 (작업자용)</li>
-              <li><i class="fas fa-check"></i>기록 자동 보관</li>
+          <div class="col-lg-6 order-lg-1">
+            <div class="feat-num">안전관리자 ①</div>
+            <h3 class="feat-title">혼자 안 해도 됩니다.<br><strong>자동으로 배분됩니다.</strong></h3>
+            <p class="feat-desc">
+              법령진단으로 파악된 의무 전체가 캘린더에 자동 배치되고,
+              담당자에게 D-day 알림이 자동 발송됩니다.
+              안전관리자는 배분하고 결과만 확인합니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 법령별 점검 주기 자동 계산</li>
+              <li><span class="bi">✓</span> 담당자 지정 → SMS 자동 발송</li>
+              <li><span class="bi">✓</span> D-3·D-1 리마인더 자동 재발송</li>
+              <li><span class="bi">✓</span> 미이행 항목 실시간 대시보드</li>
             </ul>
           </div>
         </div>
+      </div>
+    </div>
 
+    <!-- 기능 ② 현장 1분 점검 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="pscreen-header" style="background:#0f172a;">
+                    <span class="logo" style="color:#fff;">TAI Safe</span>
+                    <span class="page-name" style="color:rgba(255,255,255,.6);">현장 점검</span>
+                  </div>
+                  <div style="padding:14px 12px;">
+                    <!-- QR 스캔 완료 상태 -->
+                    <div style="text-align:center;margin-bottom:12px;">
+                      <div style="font-size:2.4rem;">✅</div>
+                      <div style="font-size:.9rem;font-weight:900;color:var(--tai-green);margin-top:4px;">지게차 #3 점검 완료</div>
+                      <div style="font-size:.68rem;color:var(--tai-gray);">소요시간 0분 47초</div>
+                    </div>
+                    <div style="border-top:1px solid #f1f5f9;padding-top:10px;">
+                      <div class="pscreen-row">
+                        <div class="check-circle done">✓</div>
+                        <div><div class="pscreen-item-title">타이어 상태 이상 없음</div></div>
+                      </div>
+                      <div class="pscreen-row">
+                        <div class="check-circle done">✓</div>
+                        <div><div class="pscreen-item-title">경적 정상 작동</div></div>
+                      </div>
+                      <div class="pscreen-row">
+                        <div class="check-circle done">✓</div>
+                        <div><div class="pscreen-item-title">브레이크 정상</div></div>
+                      </div>
+                      <div class="pscreen-row">
+                        <div class="check-circle done">✓</div>
+                        <div><div class="pscreen-item-title">안전벨트 착용 확인</div></div>
+                      </div>
+                    </div>
+                    <div style="background:#f0fdf4;border-radius:8px;padding:8px 10px;margin-top:8px;font-size:.68rem;color:var(--tai-green);font-weight:700;">
+                      기록 자동 저장 · 관리자 즉시 확인 가능
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="feat-num">안전관리자 ②</div>
+            <h3 class="feat-title">현장에서<br><strong>1분 안에 점검 완료.</strong></h3>
+            <p class="feat-desc">
+              QR 스캔 한 번으로 해당 설비의 점검 항목이 열립니다.
+              장갑 낀 손으로도 빠르게 체크. 완료하면 기록이 자동 저장됩니다.
+              안전관리자는 현장에 없어도 됩니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 설비 QR 스캔 → 점검항목 자동 로드</li>
+              <li><span class="bi">✓</span> 사진 첨부 가능 (이상 발견 시)</li>
+              <li><span class="bi">✓</span> 완료 즉시 관리자 화면에 반영</li>
+              <li><span class="bi">✓</span> 법정 점검 기록으로 자동 보관</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기능 ③ TBM 서명 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-lg-2">
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="pscreen-header" style="background:var(--tai-blue);">
+                    <span class="logo" style="color:#fff;">TAI Safe</span>
+                    <span class="page-name" style="color:rgba(255,255,255,.7);">TBM</span>
+                  </div>
+                  <div class="pscreen-body">
+                    <div style="font-size:.72rem;font-weight:800;color:var(--tai-dark);margin-bottom:4px;">오늘의 TBM</div>
+                    <div style="font-size:.65rem;color:var(--tai-gray);margin-bottom:10px;">2025-04-19 · 08:00 · 3공장 반장 김철수</div>
+                    <div style="background:#f8fafc;border-radius:8px;padding:8px 10px;font-size:.68rem;color:#334155;line-height:1.6;margin-bottom:10px;">
+                      오늘 작업: 용접 및 고소작업 예정<br>
+                      위험요소: 화기·추락<br>
+                      안전수칙: 안전벨트 필수 착용
+                    </div>
+                    <div style="font-size:.68rem;font-weight:800;color:var(--tai-dark);margin-bottom:6px;">참석자 서명</div>
+                    <div class="sign-done">
+                      <span style="font-size:.9rem;">✅</span>
+                      <div>
+                        <div style="font-size:.72rem;font-weight:700;">김철수 반장</div>
+                        <div style="font-size:.62rem;color:var(--tai-gray);">08:03 서명 완료</div>
+                      </div>
+                    </div>
+                    <div class="sign-done">
+                      <span style="font-size:.9rem;">✅</span>
+                      <div>
+                        <div style="font-size:.72rem;font-weight:700;">이영희 · 박민준 외 4명</div>
+                        <div style="font-size:.62rem;color:var(--tai-gray);">08:05 서명 완료</div>
+                      </div>
+                    </div>
+                    <div style="background:#f0fdf4;border-radius:8px;padding:7px 10px;margin-top:8px;font-size:.65rem;color:var(--tai-green);font-weight:700;">
+                      TBM 기록 자동 저장 완료 ✓
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="feat-num">안전관리자 ③</div>
+            <h3 class="feat-title">TBM 사인 받으러<br><strong>안 다녀도 됩니다.</strong></h3>
+            <p class="feat-desc">
+              작업반장이 모바일로 TBM 내용을 작성하면,
+              참석 작업자가 각자 폰으로 서명합니다.
+              종이 들고 현장 다닐 필요 없습니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 반장이 TBM 내용 입력 → 공유</li>
+              <li><span class="bi">✓</span> 작업자 개인 폰으로 서명</li>
+              <li><span class="bi">✓</span> 서명 기록 클라우드 자동 저장</li>
+              <li><span class="bi">✓</span> 법정 TBM 기록으로 활용 가능</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기능 ④ 법령 자동 업데이트 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="diagram-wrap">
+              <img
+                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/01-중대재해처벌법-적용-흐름도.svg"
+                alt="중대재해처벌법 적용 흐름도"
+                loading="lazy"
+              >
+              <div class="diagram-caption">중대재해처벌법 적용 흐름도 — TAI 법령 엔진이 자동 추적합니다</div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="feat-num">안전관리자 ④</div>
+            <h3 class="feat-title">법이 바뀌어도<br><strong>모릅니다.</strong></h3>
+            <p class="feat-desc">
+              TAI 법령 엔진이 산업안전보건법, 중대재해처벌법 등
+              주요 안전 법령을 상시 모니터링합니다.
+              개정이 감지되면 적용 의무가 자동 업데이트됩니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 주요 안전 법령 상시 모니터링</li>
+              <li><span class="bi">✓</span> 개정 감지 시 자동 의무 업데이트</li>
+              <li><span class="bi">✓</span> 변경 내역 알림으로 확인 가능</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /안전관리자 섹션 끝 -->
+
+
+  <!-- ════════════════════════════════════════
+       S5. 총책임자를 위한 기능 4개
+  ════════════════════════════════════════ -->
+  <div style="background:#fff;">
+    <div class="container">
+      <div class="text-center pt-5 pb-2">
+        <div class="sec-label" style="color:#7c3aed;">총책임자·경영진을 위해</div>
+        <h2 class="sec-title" style="color:#0f172a;">
+          할 것을 다 했다는 증거가<br>
+          <span style="color:var(--tai-blue);">자동으로 쌓입니다.</span>
+        </h2>
+      </div>
+    </div>
+
+    <!-- 기능 ⑤ 감사 와도 다 있습니다 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-lg-2">
+            <div class="diagram-wrap">
+              <img
+                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/25-안전관리-분산구조도.svg"
+                alt="안전관리 분산 구조도"
+                loading="lazy"
+              >
+              <div class="diagram-caption">조직 전체에 분산된 안전관리 구조 — 기록이 자동으로 완성됩니다</div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="feat-num">총책임자 ①</div>
+            <h3 class="feat-title">감사가 와도<br><strong>다 있습니다.</strong></h3>
+            <p class="feat-desc">
+              점검 기록, TBM 서명, 교육 이수, 선임 서류 —
+              모든 이행 증거가 클라우드에 자동 보관됩니다.
+              감독관이 요구하는 자료를 즉시 꺼낼 수 있습니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 전체 이행 기록 클라우드 보관</li>
+              <li><span class="bi">✓</span> 법정 보존 기간 자동 관리</li>
+              <li><span class="bi">✓</span> 경영진 보고용 요약 리포트 즉시 출력</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기능 ⑥ 사고나면 즉시 통보 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="pscreen-header" style="background:#0f172a;">
+                    <span class="logo" style="color:#fff;">TAI Safe</span>
+                    <span class="page-name" style="color:rgba(255,255,255,.6);">알림</span>
+                  </div>
+                  <div class="pscreen-body">
+                    <div class="notif-card emergency">
+                      <div class="notif-icon">🚨</div>
+                      <div>
+                        <div class="notif-title">긴급 이상 발생</div>
+                        <div class="notif-sub">3공장 프레스 구역 · 09:47<br>작업자: 김○○ 보고</div>
+                        <div style="margin-top:6px;">
+                          <button style="background:var(--tai-red);color:#fff;border:none;border-radius:6px;padding:4px 10px;font-size:.66rem;font-weight:700;">즉시 확인</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="notif-card normal">
+                      <div class="notif-icon">✅</div>
+                      <div>
+                        <div class="notif-title">소화기 점검 완료</div>
+                        <div class="notif-sub">1공장 전체 · 12건 완료 · 08:55</div>
+                      </div>
+                    </div>
+                    <div class="notif-card normal">
+                      <div class="notif-icon">📅</div>
+                      <div>
+                        <div class="notif-title">승강기 정기검사 D-3</div>
+                        <div class="notif-sub">담당자 3명에게 알림 발송됨</div>
+                      </div>
+                    </div>
+                    <div style="margin-top:8px;background:#f8fafc;border-radius:8px;padding:8px 10px;">
+                      <div style="font-size:.65rem;font-weight:800;color:var(--tai-gray);margin-bottom:4px;">수신자</div>
+                      <div style="font-size:.68rem;color:var(--tai-dark);">안전관리자 · 공장장 · 대표이사</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="feat-num">총책임자 ②</div>
+            <h3 class="feat-title">사고가 나면<br><strong>즉시 통보됩니다.</strong></h3>
+            <p class="feat-desc">
+              현장에서 이상 발생 보고가 올라오는 순간,
+              안전관리자·공장장·대표이사에게 동시에 알림이 전달됩니다.
+              골든타임을 놓치지 않습니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 이상 발생 즉시 지정 수신자 전체 통보</li>
+              <li><span class="bi">✓</span> SMS + 앱 알림 동시 발송</li>
+              <li><span class="bi">✓</span> 조치 내역도 기록으로 남김</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기능 ⑦ 날씨 감시 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-lg-2">
+            <div class="diagram-wrap">
+              <img
+                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/17-작업중지-판단기준.svg"
+                alt="작업중지 판단 기준 플로우"
+                loading="lazy"
+              >
+              <div class="diagram-caption">기상 조건별 작업중지 판단 기준 — 30분 간격 자동 감시</div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-lg-1">
+            <div class="feat-num">총책임자 ③</div>
+            <h3 class="feat-title">날씨까지<br><strong>감시하고 있습니다.</strong></h3>
+            <p class="feat-desc">
+              기상청 API와 연동해 현장 인근 기상 상황을
+              30분 간격으로 자동 모니터링합니다.
+              법정 기준 초과 시 작업중지 권고 알림을 자동 발송합니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 기상청 API 30분 간격 자동 확인</li>
+              <li><span class="bi">✓</span> 강풍·폭염·한파 법정 기준 감지</li>
+              <li><span class="bi">✓</span> 작업중지 권고 알림 자동 발송</li>
+              <li><span class="bi">✓</span> 작업중지 이행 기록 자동 보관</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기능 ⑧ 작업요청 즉시 승인 -->
+    <div class="feat-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="phone-wrap">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <div class="pscreen-header" style="background:var(--tai-blue);">
+                    <span class="logo" style="color:#fff;">TAI Safe</span>
+                    <span class="page-name" style="color:rgba(255,255,255,.7);">작업 요청</span>
+                  </div>
+                  <div class="pscreen-body">
+                    <div class="req-card">
+                      <div class="req-header">
+                        <div class="req-title">고소작업 허가 요청</div>
+                        <div class="req-badge pending">승인대기</div>
+                      </div>
+                      <div class="req-meta">
+                        요청자: 김철수 반장<br>
+                        장소: 3공장 5m 고소구간<br>
+                        일시: 2025-04-19 14:00~16:00<br>
+                        안전조치: 안전벨트, 2인 1조
+                      </div>
+                      <button class="btn-approve">✓ 즉시 승인</button>
+                    </div>
+                    <div class="req-card" style="margin-top:6px;">
+                      <div class="req-header">
+                        <div class="req-title">화기작업 허가 요청</div>
+                        <div class="req-badge approved">승인완료</div>
+                      </div>
+                      <div class="req-meta">
+                        요청자: 박용접 · 09:30 승인
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="feat-num">총책임자 ④</div>
+            <h3 class="feat-title">작업 요청,<br><strong>즉시 요청 · 즉시 승인.</strong></h3>
+            <p class="feat-desc">
+              고소작업·화기작업 등 위험 작업 허가가
+              모바일로 즉시 요청되고 승인됩니다.
+              현장-관리자 사이의 불필요한 오고감이 사라집니다.
+            </p>
+            <ul class="feat-bullets">
+              <li><span class="bi">✓</span> 위험 작업 모바일 즉시 요청</li>
+              <li><span class="bi">✓</span> 책임자 폰에서 바로 승인</li>
+              <li><span class="bi">✓</span> 승인 기록 법적 증거로 보관</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /총책임자 섹션 끝 -->
+
+
+  <!-- ════════════════════════════════════════
+       S6. 처벌 경고 — 결재권자 각인
+  ════════════════════════════════════════ -->
+  <section class="sec sec-dark">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sec-label">중대재해처벌법</div>
+        <h2 class="sec-title">이게 안 되면 어떻게 되나요?</h2>
+        <p class="sec-desc">
+          안전보건관리체계를 갖추지 않은 상태에서 중대재해가 발생하면
+          경영책임자 개인이 형사처벌을 받습니다.
+        </p>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <div class="diagram-wrap" style="background:#1e293b;border-color:#334155;">
+            <img
+              src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/06-과태료-벌칙-구조.svg"
+              alt="과태료·벌칙 구조 인포그래픽"
+              loading="lazy"
+              style="filter:brightness(1.05);"
+            >
+            <div class="diagram-caption" style="color:#94a3b8;">미이행 시 과태료 및 형사처벌 구조</div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div style="background:#1e293b;border:1.5px solid #dc2626;border-radius:16px;padding:28px 24px;">
+            <div style="font-size:.72rem;font-weight:800;letter-spacing:.1em;color:#f87171;margin-bottom:12px;">중대재해처벌법 제4조</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#fff;line-height:1.6;margin-bottom:16px;">
+              경영책임자가 안전보건 의무를 다하지 않아 중대산업재해가 발생한 경우:
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:rgba(220,38,38,.15);border-radius:10px;padding:14px 16px;">
+                <div style="font-size:.75rem;font-weight:800;color:#fca5a5;margin-bottom:4px;">경영책임자 (개인)</div>
+                <div style="font-size:1rem;font-weight:900;color:#fff;">1년 이상 징역</div>
+                <div style="font-size:.8rem;color:#94a3b8;">또는 10억원 이하 벌금</div>
+              </div>
+              <div style="background:rgba(220,38,38,.15);border-radius:10px;padding:14px 16px;">
+                <div style="font-size:.75rem;font-weight:800;color:#fca5a5;margin-bottom:4px;">법인 (양벌규정)</div>
+                <div style="font-size:1rem;font-weight:900;color:#fff;">50억원 이하 벌금</div>
+              </div>
+            </div>
+            <div style="margin-top:16px;font-size:.82rem;color:#60a5fa;font-weight:700;">
+              TAI Safe는 이 의무 이행의 증거를 자동으로 만듭니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       S7. 도입 4단계 — SVG #24
+  ════════════════════════════════════════ -->
+  <section class="sec sec-gray">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sec-label">도입 과정</div>
+        <h2 class="sec-title" style="color:#0f172a;">이렇게 시작합니다</h2>
+        <p class="sec-desc">법령진단부터 운영까지, 4단계로 완성됩니다.</p>
+      </div>
+      <div class="diagram-wrap" style="max-width:860px;margin:0 auto;">
+        <img
+          src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/24-TAI-도입-4단계.svg"
+          alt="TAI Safe 도입 4단계"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════
+       S8. 가격 — ROI 비교 + 가격표
+  ════════════════════════════════════════ -->
+  <section class="sec">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="sec-label">요금제</div>
+        <h2 class="sec-title" style="color:#0f172a;">과태료 1건보다 저렴합니다</h2>
+        <p class="sec-desc">안전관리자 미선임 과태료 최대 500만원 · TAI Safe 연간 이용료 비교</p>
+      </div>
+      <div class="diagram-wrap mb-5" style="max-width:760px;margin:0 auto 40px;">
+        <img
+          src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/23-TAI-ROI-비교.svg"
+          alt="TAI Safe ROI 비교"
+          loading="lazy"
+        >
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="price-card">
+            <div class="pc-sector">건물</div>
+            <div class="pc-amount">59,000<span style="font-size:1rem;">원</span></div>
+            <div class="pc-unit">/월 · VAT 별도 · 시작 플랜</div>
+            <ul class="pc-list">
+              <li>법령 기반 자동 일정</li>
+              <li>D-day 알림 (SMS)</li>
+              <li>점검 기록 자동 보관</li>
+              <li>관리자 대시보드</li>
+            </ul>
+            <a href="../free-diagnosis.html" class="pc-cta">법령진단 후 시작</a>
+          </div>
+        </div>
         <div class="col-lg-4 col-md-6">
           <div class="price-card featured">
-            <span class="tag">추천</span>
-            <h4>프리미엄</h4>
-            <div class="price-amount">149,000<span class="price-unit">원</span></div>
-            <p class="price-unit mb-3">/ 월</p>
-            <ul class="pricing-list text-start mt-3">
-              <li><i class="fas fa-check"></i>기본 플랜 전체 포함</li>
-              <li><i class="fas fa-check"></i>TBM 전자서명</li>
-              <li><i class="fas fa-check"></i>신고서식 자동화</li>
-              <li><i class="fas fa-check"></i>경영진 대시보드</li>
-              <li><i class="fas fa-check"></i>전자계약</li>
+            <div class="pc-sector">산업</div>
+            <div class="pc-amount">79,000<span style="font-size:1rem;">원</span></div>
+            <div class="pc-unit">/월 · VAT 별도 · 시작 플랜</div>
+            <ul class="pc-list">
+              <li>법령 기반 자동 일정</li>
+              <li>현장 QR 점검 앱</li>
+              <li>TBM 전자서명</li>
+              <li>작업요청·즉시승인</li>
+              <li>기상 작업중지 감시</li>
+              <li>법정 서식 자동 생성</li>
             </ul>
+            <a href="../free-diagnosis.html" class="pc-cta">법령진단 후 시작</a>
           </div>
         </div>
-
         <div class="col-lg-4 col-md-6">
           <div class="price-card">
-            <h4>엔터프라이즈</h4>
-            <div class="price-amount" style="font-size:1.6rem;">별도 협의</div>
-            <p class="price-unit mb-3">&nbsp;</p>
-            <ul class="pricing-list text-start mt-3">
-              <li><i class="fas fa-check"></i>프리미엄 플랜 전체</li>
-              <li><i class="fas fa-check"></i>다중 사업장 통합 관리</li>
-              <li><i class="fas fa-check"></i>전담 매니저</li>
-              <li><i class="fas fa-check"></i>커스텀 연동</li>
+            <div class="pc-sector">건설</div>
+            <div class="pc-amount">145,000<span style="font-size:1rem;">원</span></div>
+            <div class="pc-unit">/월 · VAT 별도 · 시작 플랜</div>
+            <ul class="pc-list">
+              <li>산업 플랜 전체 포함</li>
+              <li>공사장 단위 관리</li>
+              <li>협력업체 통합 관리</li>
+              <li>건설 특화 법령 엔진</li>
             </ul>
+            <a href="../free-diagnosis.html" class="pc-cta">법령진단 후 시작</a>
           </div>
         </div>
-
       </div>
-      <div class="mt-5">
-        <a class="btn btn-base" href="../pricing.html">요금제 상세 보기</a>
+      <div class="text-center mt-4">
+        <a href="../pricing.html" style="color:var(--tai-blue);font-weight:700;font-size:.9rem;">상위 플랜 전체 보기 →</a>
       </div>
     </div>
   </section>
 
-  <!-- ⑬ 강조 배너 ─────────────────────────── -->
-  <div class="highlight-bar">
+
+  <!-- ════════════════════════════════════════
+       S9. 최종 CTA
+  ════════════════════════════════════════ -->
+  <div class="final-cta">
     <div class="container">
-      <p>"이 시스템으로 관리한다면, 중대재해처벌법은 어림없습니다."</p>
+      <h2>지금 사업장에 적용되는<br>법적 의무를 확인하세요</h2>
+      <p>
+        법령진단 3분 → 의무 목록 즉시 확인 → TAI Safe 구독으로 자동 관리<br>
+        법령진단은 무료입니다.
+      </p>
+      <div class="cta-flow">
+        <div class="cta-step">
+          <div class="cs-num">STEP 01</div>
+          <div class="cs-text">법령진단 (3분, 무료)</div>
+        </div>
+        <div class="cta-arrow">→</div>
+        <div class="cta-step">
+          <div class="cs-num">STEP 02</div>
+          <div class="cs-text">의무 목록 즉시 확인</div>
+        </div>
+        <div class="cta-arrow">→</div>
+        <div class="cta-step">
+          <div class="cs-num">STEP 03</div>
+          <div class="cs-text">TAI Safe 구독 시작</div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+        <a href="../free-diagnosis.html" class="btn-hero-primary">무료 법령진단 시작하기 →</a>
+        <a href="../contact.html" class="btn-hero-secondary">도입 문의</a>
+      </div>
     </div>
   </div>
 
-  <!-- ⑭ CTA ───────────────────────────────── -->
-  <section class="fact-area text-center pd-top-110 pd-bottom-110" style="background-image: url(../assets/img/other/3.png); background-size: contain; background-position: center; background-repeat: no-repeat;">
-    <div class="bg-main"></div>
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title mb-4">
-            <h2 class="title text-white">법령진단은 완전 무료.<br>3분이면 시작할 수 있습니다.</h2>
-            <p class="text-white">사업장 정보를 입력하면 적용 법령과 점검 항목을 즉시 확인할 수 있습니다.</p>
-          </div>
-          <div class="btn-area">
-            <a class="btn btn-white me-3" href="../free-diagnosis.html">무료로 시작하기</a>
-            <a class="btn btn-border-white" href="../contact.html">도입 문의</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
   <div id="tai-footer"></div>
-
-  <div class="back-to-top">
-    <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
-  </div>
+  <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
   <script src="../assets/js/jquery.3.6.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
-  <script src="../assets/js/imageloded.min.js"></script>
-  <script src="../assets/js/magnific.min.js"></script>
-  <script src="../assets/js/fontawesome.min.js"></script>
   <script src="../assets/js/wow.min.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/header.js"></script>
