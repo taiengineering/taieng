@@ -255,6 +255,53 @@
 <script>
 const API = 'https://api.taieng.co.kr';
 
+/* ── 로그인/가입 후 이동: redirect 쿼리 → postLoginRedirect → 이전 페이지(referrer) → 마이페이지 ── */
+function taiIsAuthPagePath(pathname) {
+  if (!pathname) return false;
+  var p = String(pathname).toLowerCase();
+  return /(^|\/)log-in\.html$/.test(p) || /(^|\/)sign-up\.html$/.test(p);
+}
+function taiSafeRedirectTarget(raw) {
+  if (raw == null || typeof raw !== 'string') return null;
+  var t = raw.trim();
+  if (!t) return null;
+  if (/^javascript:/i.test(t)) return null;
+  if (/^\/\//.test(t)) return null;
+  try {
+    if (/^https?:\/\//i.test(t)) {
+      var u = new URL(t);
+      if (u.origin !== location.origin) return null;
+      t = u.pathname + u.search + u.hash;
+    }
+  } catch (e) { return null; }
+  var pathOnly = t.split('#')[0].split('?')[0];
+  if (taiIsAuthPagePath(pathOnly)) return null;
+  return t;
+}
+function taiRedirectFromReferrer() {
+  try {
+    var ref = document.referrer;
+    if (!ref) return null;
+    var u = new URL(ref);
+    if (u.origin !== location.origin) return null;
+    if (taiIsAuthPagePath(u.pathname)) return null;
+    return u.pathname + u.search + u.hash;
+  } catch (e2) { return null; }
+}
+function taiPostLoginTarget() {
+  var params = new URLSearchParams(location.search);
+  var fromQuery = taiSafeRedirectTarget(params.get('redirect'));
+  if (fromQuery) return fromQuery;
+  var fromStorage = null;
+  try {
+    fromStorage = taiSafeRedirectTarget(localStorage.getItem('postLoginRedirect'));
+    if (fromStorage) localStorage.removeItem('postLoginRedirect');
+  } catch (e) {}
+  if (fromStorage) return fromStorage;
+  return taiRedirectFromReferrer() || 'mypage/';
+}
+window.taiPostLoginTarget = taiPostLoginTarget;
+
 /* ── 패널 전환 ── */
 function switchPanel(panel) {
   const isLogin = panel === 'login';
@@ -350,8 +397,7 @@ async function doLogin() {
     if (!res.ok) { showMsg(d.detail || '입력 정보가 올바르지 않습니다.', 'error'); return; }
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
-    const redirect = new URLSearchParams(location.search).get('redirect');
-    location.href = redirect || 'mypage/';
+    location.href = taiPostLoginTarget();
   } catch(e) {
     showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
   } finally {
@@ -398,7 +444,7 @@ async function doRegister() {
     saveSession(d.data || d);
     if (typeof window.taiApplyNavAuth === 'function') window.taiApplyNavAuth();
     showMsg('🎉 가입이 완료되었습니다! 마이페이지로 이동합니다...', 'success');
-    setTimeout(() => { location.href = 'mypage/'; }, 1200);
+    setTimeout(() => { location.href = taiPostLoginTarget(); }, 1200);
   } catch(e) {
     showMsg('서버 연결에 실패했습니다. 잠시 후 다시 시도해 주세요.', 'error');
   } finally {

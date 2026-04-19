@@ -20,7 +20,7 @@
       var back = 'free-diagnosis-result.html?token=' + encodeURIComponent(token);
       localStorage.setItem('postLoginRedirect', back);
     } catch (e) {}
-    w.location.href = 'log-in.html';
+    w.location.href = 'log-in.html?redirect=' + encodeURIComponent(back);
   };
 
   w.TAI_API_BASE = TAI_API;

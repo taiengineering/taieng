@@ -37,6 +37,16 @@
   var base = nexasRelBase();
   if (!base) base = legacyRelBase();
 
+  var loginRedirectQs = '';
+  try {
+    var lp = window.location.pathname || '';
+    if (!/\/log-in\.html$/i.test(lp)) {
+      loginRedirectQs =
+        '?redirect=' +
+        encodeURIComponent(lp + (window.location.search || '') + (window.location.hash || ''));
+    }
+  } catch (e) {}
+
   var html = [
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
@@ -109,7 +119,7 @@
     '      <div class="nav-right-part nav-right-part-desktop">',
     '        <ul>',
     '          <li class="nav-auth-guest">',
-    '            <a href="' + base + 'log-in.html">로그인</a>',
+    '            <a href="' + base + 'log-in.html' + loginRedirectQs + '">로그인</a>',
     '          </li>',
     '          <li class="nav-auth-user d-none">',
     '            <a href="' + base + 'mypage/">마이페이지</a>',

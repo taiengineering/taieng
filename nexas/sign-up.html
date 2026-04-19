@@ -7,7 +7,21 @@
   <title>회원가입 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <!-- 회원가입은 log-in.html#register 패널에 통합되어 있습니다 -->
-  <script>location.replace('log-in.html#register');</script>
+  <script>
+  (function () {
+    var tail = '#register';
+    try {
+      var ref = document.referrer;
+      if (ref) {
+        var u = new URL(ref);
+        if (u.origin === location.origin && !/(^|\/)log-in\.html$/i.test(u.pathname) && !/(^|\/)sign-up\.html$/i.test(u.pathname)) {
+          tail = '?redirect=' + encodeURIComponent(u.pathname + u.search + u.hash) + tail;
+        }
+      }
+    } catch (e) {}
+    location.replace('log-in.html' + tail);
+  })();
+  </script>
 </head>
 <body></body>
 </html>

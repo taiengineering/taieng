@@ -29,7 +29,14 @@
     }).join('');
 
     menuHTML += '<span class="nav-sep">|</span>';
-    menuHTML += '<a href="log-in.html" class="nav-auth-guest">로그인</a>';
+    var loginQs = '';
+    try {
+      var p = window.location.pathname || '';
+      if (!/\/log-in\.html$/i.test(p)) {
+        loginQs = '?redirect=' + encodeURIComponent(p + (window.location.search || '') + (window.location.hash || ''));
+      }
+    } catch (e) {}
+    menuHTML += '<a href="log-in.html' + loginQs + '" class="nav-auth-guest">로그인</a>';
     menuHTML += '<a href="sign-up.html" class="nav-auth-guest">회원가입</a>';
     menuHTML += '<a href="mypage/" class="nav-auth-user d-none">마이페이지</a>';
     menuHTML += '<a href="#" class="tai-logout nav-auth-user d-none">로그아웃</a>';
@@ -102,7 +109,14 @@
   window.taiGoLogin = function () {
     var modal = document.getElementById('tai-login-required-modal');
     if (modal) modal.remove();
-    window.location.href = 'log-in.html?redirect=free-diagnosis.html';
+    var qs = '';
+    try {
+      var p = window.location.pathname || '';
+      if (!/\/log-in\.html$/i.test(p)) {
+        qs = '?redirect=' + encodeURIComponent(p + (window.location.search || '') + (window.location.hash || ''));
+      }
+    } catch (e) {}
+    window.location.href = 'log-in.html' + qs;
   };
 
   // ─── 모달 애니메이션 CSS ─────────────────────────────────
@@ -173,7 +187,10 @@
       e.preventDefault();
       window.localStorage.setItem(STORAGE_KEY, '1');
       var params = new URLSearchParams(window.location.search);
-      window.location.href = params.get('redirect') || 'mypage/';
+      window.location.href =
+        typeof window.taiPostLoginTarget === 'function'
+          ? window.taiPostLoginTarget()
+          : params.get('redirect') || 'mypage/';
     });
   }
 
