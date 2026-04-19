@@ -1,9 +1,41 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
- * v2.4.0 (2026-04-19): nexas 하위 경로 base 보정, 서비스/역할별 메뉴 nav 03 정렬, 시작하기에서 요금제 제거
+ * v2.4.0 (2026-04-19): nexas 하위 경로 base 보정, 서비스/업종별/역할별 nav 03 정렬, 시작하기에서 요금제 제거
+ * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
+ * v2.3.0 (2026-04-14): 특허 8건(외 7건), 메뉴명 'TAI 기술력'
  */
 (function () {
   'use strict';
+
+  function injectFooterDarkTheme() {
+    if (document.getElementById('tai-footer-dark-theme')) return;
+    var css = [
+      '.footer-area.style-1 { background: #0f172a !important; }',
+      '.footer-area.style-1 .footer-inner { background: transparent !important; }',
+      '.footer-area.style-1 .footer-bottom { background: rgba(255,255,255,.04) !important; border-top: 1px solid rgba(255,255,255,.08) !important; }',
+      '.footer-area.style-1 .footer-patent-bar { background: rgba(255,255,255,.05) !important; border-bottom: 1px solid rgba(255,255,255,.06) !important; }',
+      '.footer-area.style-1 .footer-patent-bar p { color: rgba(255,255,255,.45) !important; }',
+      '.footer-area.style-1 .footer-patent-bar a { color: rgba(255,255,255,.35) !important; }',
+      '.footer-area.style-1 .footer-patent-bar a:hover { color: rgba(255,255,255,.65) !important; }',
+      '.footer-area.style-1 .widget-title, .footer-area.style-1 h6.widget-title { color: #fff !important; font-size:.82rem !important; letter-spacing:.08em !important; }',
+      '.footer-area.style-1 .footer-widget p, .footer-area.style-1 .footer-company-info p { color: rgba(255,255,255,.58) !important; }',
+      '.footer-area.style-1 .footer-company-name { color: rgba(255,255,255,.9) !important; }',
+      '.footer-area.style-1 .widget_link ul li a { color: rgba(255,255,255,.58) !important; transition: color .15s !important; }',
+      '.footer-area.style-1 .widget_link ul li a:hover { color: #93c5fd !important; }',
+      '.footer-area.style-1 .widget_link ul li a i { color: rgba(255,255,255,.3) !important; }',
+      '.footer-area.style-1 .footer-company-info a { color: rgba(255,255,255,.58) !important; }',
+      '.footer-area.style-1 .footer-company-info a:hover { color: #93c5fd !important; }',
+      '.footer-area.style-1 .footer-bottom p { color: rgba(255,255,255,.38) !important; }',
+      '.footer-area.style-1 .footer-bottom p a { color: rgba(255,255,255,.38) !important; }',
+      '.footer-area.style-1 .footer-bottom p a:hover { color: rgba(255,255,255,.65) !important; }',
+      '.footer-area.style-1 .logo img { filter: brightness(1.15) !important; }',
+    ].join('\n');
+    var styleEl = document.createElement('style');
+    styleEl.id = 'tai-footer-dark-theme';
+    styleEl.textContent = css;
+    document.head.appendChild(styleEl);
+  }
+
   function nexasRelBase() {
     var path = window.location.pathname || '';
     var marker = '/nexas/';
@@ -15,6 +47,7 @@
     var depth = parts.length - 1;
     return new Array(depth + 1).join('../');
   }
+
   function legacyRelBase() {
     var path = window.location.pathname || '';
     if (/\/(service|target)\//.test(path)) return '../';
@@ -25,15 +58,18 @@
     }
     return '';
   }
+
+  injectFooterDarkTheme();
+
   var b = nexasRelBase();
   if (!b) b = legacyRelBase();
 
   var html = '<footer class="footer-area style-1">' +
-    '<div class="footer-patent-bar" style="background:rgba(255,255,255,.05);padding:10px 0;text-align:center;">' +
+    '<div class="footer-patent-bar" style="padding:10px 0;text-align:center;">' +
     '  <div class="container">' +
-    '    <p style="margin:0;font-size:.8rem;color:rgba(255,255,255,.55);">' +
+    '    <p style="margin:0;font-size:.8rem;">' +
     '      특허 출원 중 (Patent Pending) &nbsp;·&nbsp; 제10-2026-0056330 외 7건 &nbsp;·&nbsp; 상표출원 중' +
-    '      <a href="' + b + 'patents.html" style="color:rgba(255,255,255,.45);margin-left:10px;">\uae30\uc220 \ud601\uc2e0 \ubcf4\uae30 \u2192</a>' +
+    '      <a href="' + b + 'patents.html" style="margin-left:10px;">\uae30\uc220 \ud601\uc2e0 \ubcf4\uae30 \u2192</a>' +
     '    </p>' +
     '  </div>' +
     '</div>' +
@@ -123,7 +159,7 @@
     '        <div class="author-area">' +
     '          <p class="mb-0" style="font-size:.82rem;">' +
     '            특허 출원 중 (Patent Pending) &nbsp;·&nbsp;' +
-    '            <a href="' + b + 'site-map.html" style="opacity:.5;">사이트맵</a>' +
+    '            <a href="' + b + 'site-map.html">사이트맵</a>' +
     '          </p>' +
     '        </div>' +
     '      </div>' +
