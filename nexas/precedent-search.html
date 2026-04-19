@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>판례 검색 | TAI 엔지니어링</title>
+  <meta name="description" content="산업안전보건법·중대재해처벌법·산재 관련 주요 판례를 키워드로 검색하세요.">
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -12,61 +13,80 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-  .prec-hero { background:var(--navy); padding:100px 0 80px; }
-  .prec-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
-  .prec-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
-  .search-wrap { background:#fff; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:24px; margin-top:-40px; position:relative; z-index:10; }
-  .search-input-wrap { position:relative; margin-bottom:18px; }
-  .search-input { width:100%; padding:16px 120px 16px 48px; font-size:.95rem; border:2px solid var(--border); border-radius:12px; transition:border-color .15s; font-family:inherit; box-sizing:border-box; }
-  .search-input:focus { outline:none; border-color:var(--navy); }
-  .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--sub); font-size:1.05rem; pointer-events:none; }
-  .search-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); padding:10px 22px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:.85rem; font-weight:700; cursor:pointer; font-family:inherit; }
-  .search-btn:hover { background:#000; }
-  .src-filter { display:flex; gap:8px; flex-wrap:wrap; }
-  .src-btn { padding:7px 16px; border-radius:999px; font-size:.82rem; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:#fff; color:var(--sub); transition:all .15s; font-family:inherit; }
-  .src-btn:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
-  .src-btn.active { background:var(--navy); color:#fff; border-color:var(--navy); }
-  .result-meta { margin:28px 0 18px; font-size:.88rem; color:var(--sub); }
-  .result-meta strong { color:var(--navy); }
-  .prec-card-wrap { display:block; text-decoration:none; color:inherit; }
-  .prec-card-wrap:hover { text-decoration:none; color:inherit; }
-  .prec-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 2px 14px rgba(0,0,0,.06); border-left:4px solid var(--navy); margin-bottom:14px; transition:transform .2s, box-shadow .2s; }
-  .prec-card.sanjae { border-left-color:#1a6fb5; }
-  .prec-card-wrap:hover .prec-card { transform:translateX(4px); box-shadow:0 4px 20px rgba(0,0,0,.1); }
-  .prec-card-head { display:flex; gap:14px; align-items:flex-start; margin-bottom:10px; }
-  .prec-card-icon { width:40px; height:40px; border-radius:8px; background:#f0f4ff; color:#3b5bdb; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .prec-card.sanjae .prec-card-icon { background:#e8f4fd; color:#1a6fb5; }
-  .prec-card-type { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:3px 8px; background:#f0f4ff; color:#3b5bdb; margin-bottom:6px; }
-  .prec-card.sanjae .prec-card-type { background:#e8f4fd; color:#1a6fb5; }
-  .prec-card-title { font-size:1rem; font-weight:800; color:var(--navy); line-height:1.4; margin:0; }
-  .prec-card-body p { font-size:.85rem; color:var(--sub); line-height:1.6; margin:0 0 12px; }
-  .prec-card-meta { display:flex; gap:14px; font-size:.78rem; color:var(--sub); padding-top:12px; border-top:1px solid var(--border); flex-wrap:wrap; }
-  .prec-card-meta span i { margin-right:5px; }
-  .prec-loading { text-align:center; padding:60px 20px; color:var(--sub); }
-  .prec-empty { text-align:center; padding:60px 20px; color:var(--sub); }
-  .prec-empty i { font-size:2.2rem; color:var(--border); display:block; margin-bottom:14px; }
-  .pagination-wrap { text-align:center; margin-top:30px; }
+
+  /* ═══ 히어로 (patents.html 패턴 준수) ═══ */
+  .prec-hero { position: relative; min-height: 520px; display: flex; align-items: center; overflow: hidden; background: #0a0a1a; }
+  .prec-hero-bg { position: absolute; inset: 0; z-index: 0; background:
+      radial-gradient(circle at 18% 28%, rgba(59,91,219,.28) 0%, transparent 45%),
+      radial-gradient(circle at 82% 72%, rgba(26,111,181,.22) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0a1a 0%, #111b3a 55%, #0a0a1a 100%);
+  }
+  .prec-hero-bg::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, transparent, rgba(10,10,26,.45)); }
+  .prec-hero-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 100px 48px 72px; width: 100%; }
+  .prec-hero-text { max-width: 580px; }
+  .prec-hero-eyebrow { display: inline-block; font-size: .75rem; font-weight: 700; letter-spacing: .08em; color: rgba(255,255,255,.7); border: 1.5px solid rgba(255,255,255,.3); border-radius: 8px; padding: 6px 16px; margin-bottom: 20px; }
+  .prec-hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 900; color: #fff; line-height: 1.2; letter-spacing: -.03em; margin-bottom: 16px; text-shadow: 0 2px 20px rgba(0,0,0,.3); }
+  .prec-hero .sub { font-size: .95rem; color: rgba(255,255,255,.65); line-height: 1.7; margin: 0; }
+  @media (max-width: 991px) { .prec-hero { min-height: 420px; } .prec-hero-content { padding: 80px 24px 56px; } }
+  @media (max-width: 575px) { .prec-hero { min-height: 360px; } .prec-hero-content { padding: 72px 20px 44px; } }
+
+  /* ═══ 검색/필터 섹션 (히어로와 분리, 겹침 없음) ═══ */
+  .search-sec { background: var(--gray-bg, #f8fafc); padding: 56px 0 72px; }
+  .search-wrap { background: #fff; border-radius: 14px; box-shadow: 0 2px 14px rgba(0,0,0,.06); padding: 24px; margin-bottom: 32px; }
+  .search-input-wrap { position: relative; margin-bottom: 16px; }
+  .search-input { width: 100%; padding: 14px 116px 14px 44px; font-size: .95rem; border: 1.5px solid var(--border, #e2e8f0); border-radius: 10px; transition: border-color .15s; font-family: inherit; box-sizing: border-box; background: #fff; }
+  .search-input:focus { outline: none; border-color: var(--navy, #0f172a); }
+  .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--sub, #64748b); font-size: 1rem; pointer-events: none; }
+  .search-btn { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); padding: 9px 20px; background: var(--navy, #0f172a); color: #fff; border: none; border-radius: 8px; font-size: .85rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .search-btn:hover { background: #000; }
+  .src-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+  .src-btn { padding: 7px 16px; border-radius: 999px; font-size: .82rem; font-weight: 600; cursor: pointer; border: 1.5px solid var(--border, #e2e8f0); background: #fff; color: var(--sub, #64748b); transition: all .15s; font-family: inherit; }
+  .src-btn:hover, .src-btn.active { background: var(--navy, #0f172a); color: #fff; border-color: var(--navy, #0f172a); }
+
+  /* ═══ 결과 ═══ */
+  .result-meta { margin-bottom: 18px; font-size: .88rem; color: var(--sub, #64748b); }
+  .result-meta strong { color: var(--navy, #0f172a); }
+  .prec-card-wrap { display: block; text-decoration: none; color: inherit; }
+  .prec-card-wrap:hover { text-decoration: none; color: inherit; }
+  .prec-card { background: #fff; border-radius: 12px; padding: 22px; box-shadow: 0 2px 14px rgba(0,0,0,.06); border-left: 4px solid var(--navy, #0f172a); margin-bottom: 14px; transition: transform .2s, box-shadow .2s; }
+  .prec-card.sanjae { border-left-color: #1a6fb5; }
+  .prec-card-wrap:hover .prec-card { transform: translateX(4px); box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+  .prec-card-head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+  .prec-card-icon { width: 40px; height: 40px; border-radius: 8px; background: #f0f4ff; color: #3b5bdb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .prec-card.sanjae .prec-card-icon { background: #e8f4fd; color: #1a6fb5; }
+  .prec-card-type { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 4px; padding: 3px 8px; background: #f0f4ff; color: #3b5bdb; margin-bottom: 6px; }
+  .prec-card.sanjae .prec-card-type { background: #e8f4fd; color: #1a6fb5; }
+  .prec-card-title { font-size: 1rem; font-weight: 800; color: var(--navy, #0f172a); line-height: 1.4; margin: 0; }
+  .prec-card-body p { font-size: .85rem; color: var(--sub, #64748b); line-height: 1.6; margin: 0 0 12px; }
+  .prec-card-meta { display: flex; gap: 14px; font-size: .78rem; color: var(--sub, #64748b); padding-top: 12px; border-top: 1px solid var(--border, #e2e8f0); flex-wrap: wrap; }
+  .prec-card-meta span i { margin-right: 5px; }
+  .prec-loading { text-align: center; padding: 60px 20px; color: var(--sub, #64748b); }
+  .prec-empty { text-align: center; padding: 60px 20px; color: var(--sub, #64748b); }
+  .prec-empty i { font-size: 2.2rem; color: var(--border, #e2e8f0); display: block; margin-bottom: 14px; }
+  .pagination-wrap { text-align: center; margin-top: 30px; }
   @media (max-width: 576px) {
-    .search-btn { position:static; transform:none; width:100%; margin-top:10px; padding:14px; }
-    .search-input { padding-right:20px; }
+    .search-btn { position: static; transform: none; width: 100%; margin-top: 10px; padding: 13px; }
+    .search-input { padding-right: 16px; }
   }
   </style>
 </head>
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
-<!-- HEADER -->
 <div id="tai-header"></div>
 
-<div class="prec-hero">
-  <div class="sec-inner">
-    <h1>판례 검색</h1>
-    <p>산업안전보건법 · 중대재해처벌법 · 산재 관련 주요 판례를 검색하세요</p>
+<section class="prec-hero">
+  <div class="prec-hero-bg"></div>
+  <div class="prec-hero-content">
+    <div class="prec-hero-text">
+      <span class="prec-hero-eyebrow">안전정보 · 판례</span>
+      <h1>판례 검색</h1>
+      <p class="sub">산업안전보건법 · 중대재해처벌법 · 산재 관련<br>주요 판례를 키워드로 찾을 수 있습니다.</p>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="sec" style="background:var(--gray-bg); padding-top:0; padding-bottom:60px;">
+<section class="search-sec">
   <div class="sec-inner">
     <div class="search-wrap">
       <div class="search-input-wrap">
@@ -89,7 +109,7 @@
       <button class="btn-outline" style="padding:12px 36px;" onclick="loadMore()">+ 더 보기</button>
     </div>
   </div>
-</div>
+</section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
