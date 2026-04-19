@@ -1,10 +1,8 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v2.4.3 (2026-04-19): 역할별 링크 .html 제거
  * v2.4.2 (2026-04-19): 안전정보 블록 — 판례검색·안전정보 링크
- * v2.4.1 (2026-04-19): 푸터「서비스」열은 nav 개편 전 목록·순서 유지, 시작하기에 요금제 복원
- * v2.4.0 (2026-04-19): nexas 하위 경로 base 보정, 업종별/역할별 푸터 라벨
  * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
- * v2.3.0 (2026-04-14): 특허 8건(외 7건), 메뉴명 'TAI 기술력'
  */
 (function () {
   'use strict';
@@ -115,9 +113,9 @@
     '          </ul>' +
     '          <h6 class="widget-title" style="margin-top:20px;">역할별</h6>' +
     '          <ul>' +
-    '            <li><a href="' + b + 'for-safety-manager.html"><i class="fas fa-angle-right"></i>안전관리자</a></li>' +
-    '            <li><a href="' + b + 'for-business-owner.html"><i class="fas fa-angle-right"></i>사업주</a></li>' +
-    '            <li><a href="' + b + 'provider-register.html"><i class="fas fa-angle-right"></i>전문가</a></li>' +
+    '            <li><a href="' + b + 'for-safety-manager"><i class="fas fa-angle-right"></i>안전관리자</a></li>' +
+    '            <li><a href="' + b + 'for-business-owner"><i class="fas fa-angle-right"></i>사업주</a></li>' +
+    '            <li><a href="' + b + 'provider-register"><i class="fas fa-angle-right"></i>전문가</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
