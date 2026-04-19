@@ -32,16 +32,10 @@
   .notice-bar { background:#fffbeb; border:1px solid #fcd34d; border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:12px; align-items:center; }
   .notice-bar .icon { color:#f59e0b; font-size:1.1rem; flex-shrink:0; }
   .notice-bar p { margin:0; font-size:.88rem; color:#92400e; }
-  .prec-mini-card { background:#fff; border-radius:12px; padding:18px 16px; box-shadow:0 2px 12px rgba(0,0,0,.06); border-left:4px solid var(--navy); margin-bottom:12px; display:flex; gap:14px; align-items:flex-start; transition:transform .2s; text-decoration:none; }
-  .prec-mini-card:hover { transform:translateX(3px); }
-  .prec-mini-card.sanjae { border-left-color:#1a6fb5; }
-  .prec-mini-icon { width:36px; height:36px; border-radius:8px; background:#f0f4ff; color:#3b5bdb; display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; }
-  .prec-mini-card.sanjae .prec-mini-icon { background:#e8f4fd; color:#1a6fb5; }
-  .prec-mini-card h6 { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:4px; line-height:1.4; }
-  .prec-mini-card p { font-size:.8rem; color:var(--sub); margin:0; line-height:1.5; }
-  .prec-mini-meta { font-size:.74rem; color:var(--sub); margin-top:6px; }
   .news-loading { text-align:center; padding:40px; color:var(--sub); }
-  .prec-loading { text-align:center; padding:24px; color:var(--sub); font-size:.88rem; }
+  .prec-cta { margin-top:50px; padding:32px 20px; background:#fff; border-radius:14px; box-shadow:0 2px 14px rgba(0,0,0,.06); text-align:center; }
+  .prec-cta h3 { font-size:1.25rem; font-weight:800; color:var(--navy); margin-bottom:8px; }
+  .prec-cta p { color:var(--sub); font-size:.9rem; margin-bottom:20px; }
   </style>
 </head>
 <body class="sc5">
@@ -76,33 +70,14 @@
     <div class="text-center mt-4" id="loadMoreWrap" style="display:none;">
       <button class="btn-outline" style="padding:12px 36px;" onclick="loadMoreNews()">+ 더 보기</button>
     </div>
+
+    <div class="prec-cta">
+      <h3>최신 산업안전·산재 판례도 검색해 보세요</h3>
+      <p>현장에서 꼭 알아야 할 산업안전보건법·중대재해처벌법·산재 판례를 키워드로 찾을 수 있습니다.</p>
+      <a href="precedent-search.html" class="btn-red" style="display:inline-block;">판례 검색 →</a>
+    </div>
   </div>
 </div>
-
-<section class="sec" style="background:#fff;">
-  <div class="sec-inner">
-    <div class="row align-items-center mb-4">
-      <div class="col">
-        <span class="sec-tag">주요 판례</span>
-        <h2 class="sec-h2" style="margin-bottom:6px;">이 판례, 알고 계셨나요?</h2>
-        <p style="color:var(--sub); font-size:.9rem;">현장에서 꼭 알아야 할 최신 산업안전·산재 판례를 요약합니다</p>
-      </div>
-    </div>
-    <div class="row g-3">
-      <div class="col-lg-6">
-        <div style="font-size:.75rem; font-weight:800; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid var(--border);">산업안전 판례</div>
-        <div id="precSafety"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
-      </div>
-      <div class="col-lg-6">
-        <div style="font-size:.75rem; font-weight:800; color:#1a6fb5; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #e8f4fd;">산재 전문 판례</div>
-        <div id="precSanjae"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
-      </div>
-    </div>
-    <div class="text-center mt-4">
-      <a href="faq.html" class="btn-red" style="display:inline-block;">더 많은 안전정보 보기 →</a>
-    </div>
-  </div>
-</section>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
@@ -147,25 +122,8 @@ async function loadMoreNews() {
   _newsPage++;
   try { const params=_curType==='all'?'':`&post_type=${_curType}`; const res=await fetch(`${API}/posts?size=${PAGE_SZ}&page=${_newsPage}${params}`); const data=await res.json(); const posts=(data.data&&data.data.items)||data.data||[]; if(!posts.length){ document.getElementById('loadMoreWrap').style.display='none'; return; } const grid=document.getElementById('newsGrid'); grid.insertAdjacentHTML('beforeend',posts.map((p,i)=>{ const tag=TAG_MAP[p.post_type]||{label:'정보',cls:'tag-guide'}; const img=p.thumbnail_url||IMG_FALLBACK[i%IMG_FALLBACK.length]; return `<div class="col-lg-4 col-md-6"><div class="news-card"><img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag ${tag.cls}">${esc(tag.label)}</span><h5>${esc(p.title)}</h5><p>${esc((p.content||'').slice(0,80))}…</p><div class="news-meta"><span>${fmtDate(p.published_at)}</span><span>${esc(p.source||'TAI')}</span></div></div></div></div>`; }).join('')); if(posts.length<PAGE_SZ) document.getElementById('loadMoreWrap').style.display='none'; } catch {}
 }
-const PREC_SAMPLE_SAFETY=[{title:'지게차 충돌 사망 — 안전관리자 선임 의무 위반',판시사항:'안전관리자 미선임 상태 작업 → 사망. 산안법+중대재해법 병합 적용.',법원명:'대법원',선고일자:'2024.11.14',판례상세링크:''},{title:'프레스 방호장치 제거 → 손가락 절단',판시사항:'사업주가 방호장치 제거 지시. 손해배상 1억 2천만 원.',법원명:'서울고법',선고일자:'2024.09.03',판례상세링크:''},{title:'밀폐공간 산소농도 미측정 → 2명 질식 사망',판시사항:'맨홀 작업 전 측정 의무 미이행. 벌금 5,000만 원.',법원명:'대법원',선고일자:'2024.04.11',판례상세링크:''}];
-const PREC_SAMPLE_SANJAE=[{title:'출퇴근 재해 — 편의점 경유 후 교통사고, 산재 인정',판시사항:'통상 경로 소폭 이탈이라도 생활필수행위는 산재 인정.',법원명:'서울행법',선고일자:'2024.11.28',판례상세링크:''},{title:'과로 뇌출혈 — 12주 평균 주 60시간 초과 시 산재 추정',판시사항:'발병 12주 전 평균 주 60시간 이상 시 업무상 재해 강하게 추정.',법원명:'서울행법',선고일자:'2024.08.20',판례상세링크:''},{title:'직장 내 갑질 → 우울증 악화 → 자해, 업무상 재해',판시사항:'상사의 폭언·모욕으로 인한 정신질환 발병은 업무상 재해.',법원명:'부산고법',선고일자:'2024.06.14',판례상세링크:''}];
-function renderPrecList(containerId, items, isSanjae) {
-  const el=document.getElementById(containerId);
-  if(!items.length){ el.innerHTML='<p class="prec-loading">판례 데이터 없음</p>'; return; }
-  function esc2(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  el.innerHTML=items.slice(0,3).map(p=>{ const link=p.판례상세링크||''; const tag=isSanjae?'sanjae':''; const icon=isSanjae?'fa-file-medical':'fa-gavel'; const card=`<div class="prec-mini-card ${tag}"><div class="prec-mini-icon"><i class="fas ${icon}"></i></div><div><h6>${esc2(p.사건명||p.title||'')}</h6><p>${esc2((p.판시사항||p.판결요지||'').slice(0,70))}${(p.판시사항||'').length>70?'…':''}</p><div class="prec-mini-meta">${esc2(p.법원명||'')}${p.선고일자?' · '+esc2(p.선고일자):''}</div></div></div>`; return link?`<a href="${esc2(link)}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${card}</a>`:card; }).join('');
-}
-async function loadPrecHighlights() {
-  try {
-    const [r1,r2]=await Promise.all([fetch(`${API}/precedents/search?query=산업안전보건&size=3`),fetch(`${API}/precedents/search?query=산재&source=sanjae&size=3`)]);
-    const [d1,d2]=await Promise.all([r1.json(),r2.json()]);
-    renderPrecList('precSafety',(d1.data&&d1.data.prec)||(d1.items)||[],false);
-    renderPrecList('precSanjae',(d2.data&&d2.data.prec)||(d2.items)||[],true);
-  } catch { renderPrecList('precSafety',PREC_SAMPLE_SAFETY,false); renderPrecList('precSanjae',PREC_SAMPLE_SANJAE,true); }
-}
 document.addEventListener('DOMContentLoaded',function(){
   loadNews('all');
-  loadPrecHighlights();
   document.getElementById('noticeBar').style.display='flex';
   document.getElementById('noticeText').innerHTML='<strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요.';
 });

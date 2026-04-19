@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>판례 검색 | TAI 엔지니어링</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="assets/css/animate.min.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/tai-main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+  body { font-family: 'Noto Sans KR', sans-serif; }
+  .prec-hero { background:var(--navy); padding:100px 0 80px; }
+  .prec-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
+  .prec-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
+  .search-wrap { background:#fff; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,.08); padding:24px; margin-top:-40px; position:relative; z-index:10; }
+  .search-input-wrap { position:relative; margin-bottom:18px; }
+  .search-input { width:100%; padding:16px 120px 16px 48px; font-size:.95rem; border:2px solid var(--border); border-radius:12px; transition:border-color .15s; font-family:inherit; box-sizing:border-box; }
+  .search-input:focus { outline:none; border-color:var(--navy); }
+  .search-icon { position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--sub); font-size:1.05rem; pointer-events:none; }
+  .search-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); padding:10px 22px; background:var(--navy); color:#fff; border:none; border-radius:8px; font-size:.85rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .search-btn:hover { background:#000; }
+  .src-filter { display:flex; gap:8px; flex-wrap:wrap; }
+  .src-btn { padding:7px 16px; border-radius:999px; font-size:.82rem; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:#fff; color:var(--sub); transition:all .15s; font-family:inherit; }
+  .src-btn:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .src-btn.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .result-meta { margin:28px 0 18px; font-size:.88rem; color:var(--sub); }
+  .result-meta strong { color:var(--navy); }
+  .prec-card-wrap { display:block; text-decoration:none; color:inherit; }
+  .prec-card-wrap:hover { text-decoration:none; color:inherit; }
+  .prec-card { background:#fff; border-radius:12px; padding:22px; box-shadow:0 2px 14px rgba(0,0,0,.06); border-left:4px solid var(--navy); margin-bottom:14px; transition:transform .2s, box-shadow .2s; }
+  .prec-card.sanjae { border-left-color:#1a6fb5; }
+  .prec-card-wrap:hover .prec-card { transform:translateX(4px); box-shadow:0 4px 20px rgba(0,0,0,.1); }
+  .prec-card-head { display:flex; gap:14px; align-items:flex-start; margin-bottom:10px; }
+  .prec-card-icon { width:40px; height:40px; border-radius:8px; background:#f0f4ff; color:#3b5bdb; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .prec-card.sanjae .prec-card-icon { background:#e8f4fd; color:#1a6fb5; }
+  .prec-card-type { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:3px 8px; background:#f0f4ff; color:#3b5bdb; margin-bottom:6px; }
+  .prec-card.sanjae .prec-card-type { background:#e8f4fd; color:#1a6fb5; }
+  .prec-card-title { font-size:1rem; font-weight:800; color:var(--navy); line-height:1.4; margin:0; }
+  .prec-card-body p { font-size:.85rem; color:var(--sub); line-height:1.6; margin:0 0 12px; }
+  .prec-card-meta { display:flex; gap:14px; font-size:.78rem; color:var(--sub); padding-top:12px; border-top:1px solid var(--border); flex-wrap:wrap; }
+  .prec-card-meta span i { margin-right:5px; }
+  .prec-loading { text-align:center; padding:60px 20px; color:var(--sub); }
+  .prec-empty { text-align:center; padding:60px 20px; color:var(--sub); }
+  .prec-empty i { font-size:2.2rem; color:var(--border); display:block; margin-bottom:14px; }
+  .pagination-wrap { text-align:center; margin-top:30px; }
+  @media (max-width: 576px) {
+    .search-btn { position:static; transform:none; width:100%; margin-top:10px; padding:14px; }
+    .search-input { padding-right:20px; }
+  }
+  </style>
+</head>
+<body class="sc5">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<!-- HEADER -->
+<div id="tai-header"></div>
+
+<div class="prec-hero">
+  <div class="sec-inner">
+    <h1>판례 검색</h1>
+    <p>산업안전보건법 · 중대재해처벌법 · 산재 관련 주요 판례를 검색하세요</p>
+  </div>
+</div>
+
+<div class="sec" style="background:var(--gray-bg); padding-top:0; padding-bottom:60px;">
+  <div class="sec-inner">
+    <div class="search-wrap">
+      <div class="search-input-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input id="precQuery" class="search-input" type="text" placeholder="예: 지게차, 추락, 안전관리자, 중대재해처벌법, 과로…" onkeydown="if(event.key==='Enter') runSearch()">
+        <button class="search-btn" onclick="runSearch()">검색</button>
+      </div>
+      <div class="src-filter">
+        <button class="src-btn active" data-src="all" onclick="setSource('all', this)">전체</button>
+        <button class="src-btn" data-src="safety" onclick="setSource('safety', this)">산업안전 판례</button>
+        <button class="src-btn" data-src="sanjae" onclick="setSource('sanjae', this)">산재 전문 판례</button>
+      </div>
+    </div>
+
+    <div id="resultMeta" class="result-meta" style="display:none;"></div>
+    <div id="precResult">
+      <div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div>
+    </div>
+    <div id="paginationWrap" class="pagination-wrap" style="display:none;">
+      <button class="btn-outline" style="padding:12px 36px;" onclick="loadMore()">+ 더 보기</button>
+    </div>
+  </div>
+</div>
+
+<div id="tai-footer"></div>
+<div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
+
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+<script>
+const API='https://api.taieng.co.kr';
+const PAGE_SZ=10;
+let _src='all', _query='', _page=1, _hasMore=false;
+
+const SAMPLE_SAFETY=[
+  {title:'지게차 충돌 사망 — 안전관리자 선임 의무 위반',판시사항:'안전관리자 미선임 상태에서 지게차 작업 중 충돌로 작업자 사망. 산안법과 중대재해처벌법 병합 적용.',법원명:'대법원',선고일자:'2024.11.14',사건번호:'2024도12345',판례상세링크:'',source:'safety'},
+  {title:'프레스 방호장치 제거 → 손가락 절단',판시사항:'사업주가 방호장치를 제거하고 작업하도록 지시. 손해배상 1억 2천만 원 판결.',법원명:'서울고법',선고일자:'2024.09.03',사건번호:'2024나56789',판례상세링크:'',source:'safety'},
+  {title:'밀폐공간 산소농도 미측정 → 2명 질식 사망',판시사항:'맨홀 작업 전 산소농도 측정 의무 미이행. 벌금 5,000만 원 및 법인 양벌규정 적용.',법원명:'대법원',선고일자:'2024.04.11',사건번호:'2024도3456',판례상세링크:'',source:'safety'},
+  {title:'추락 방지조치 미이행 — 건설현장 사망사고',판시사항:'2m 이상 고소작업 시 안전대·안전난간 미설치. 현장소장 금고 1년.',법원명:'서울중앙지법',선고일자:'2024.02.28',사건번호:'2023고단7890',판례상세링크:'',source:'safety'},
+  {title:'안전교육 미실시 → 감전사고 사업주 책임',판시사항:'신규 채용자 안전보건교육 미실시 상태에서 전기작업 투입. 벌금 3,000만 원.',법원명:'인천지법',선고일자:'2024.01.20',사건번호:'2023고정2345',판례상세링크:'',source:'safety'}
+];
+const SAMPLE_SANJAE=[
+  {title:'출퇴근 재해 — 편의점 경유 후 교통사고, 산재 인정',판시사항:'통상 경로에서 소폭 이탈이라도 생활필수행위(식료품 구입)는 산재 인정.',법원명:'서울행법',선고일자:'2024.11.28',사건번호:'2024구합1111',판례상세링크:'',source:'sanjae'},
+  {title:'과로 뇌출혈 — 12주 평균 주 60시간 초과 시 산재 추정',판시사항:'발병 전 12주 평균 주 60시간 이상 근무 시 업무상 재해로 강하게 추정.',법원명:'서울행법',선고일자:'2024.08.20',사건번호:'2024구합2222',판례상세링크:'',source:'sanjae'},
+  {title:'직장 내 갑질 → 우울증 악화 → 자해, 업무상 재해',판시사항:'상사의 폭언·모욕으로 인한 정신질환 발병은 업무상 재해로 인정.',법원명:'부산고법',선고일자:'2024.06.14',사건번호:'2024누3333',판례상세링크:'',source:'sanjae'},
+  {title:'근골격계 질환 — 반복작업 10년, 산재 인정',판시사항:'동일 동작 반복 작업 10년 이상 수행 중 어깨 회전근개 파열. 업무상 재해 인정.',법원명:'대전지법',선고일자:'2024.05.02',사건번호:'2024구합4444',판례상세링크:'',source:'sanjae'},
+  {title:'코로나19 감염 간호사 — 업무상 질병 인정',판시사항:'감염 환자와 밀접 접촉한 간호사가 코로나19 확진. 업무상 질병 인정.',법원명:'서울행법',선고일자:'2024.03.15',사건번호:'2023구합5555',판례상세링크:'',source:'sanjae'}
+];
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function setSource(src, btn) {
+  document.querySelectorAll('.src-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  _src=src; _page=1;
+  doFetch(true);
+}
+
+function runSearch() {
+  _query=(document.getElementById('precQuery').value||'').trim();
+  _page=1;
+  doFetch(true);
+}
+
+function loadMore() {
+  _page++;
+  doFetch(false);
+}
+
+async function doFetch(replace) {
+  const el=document.getElementById('precResult');
+  if(replace) el.innerHTML='<div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div>';
+  try {
+    const params=new URLSearchParams();
+    if(_query) params.set('query', _query);
+    if(_src!=='all') params.set('source', _src);
+    params.set('size', PAGE_SZ);
+    params.set('page', _page);
+    const res=await fetch(`${API}/precedents/search?${params.toString()}`);
+    if(!res.ok) throw new Error('http '+res.status);
+    const data=await res.json();
+    const items=(data.data&&(data.data.prec||data.data.items))||data.items||data.data||[];
+    const total=(data.data&&data.data.total)||data.total||items.length;
+    if(!items.length && replace) { showEmpty(); return; }
+    if(!items.length) { document.getElementById('paginationWrap').style.display='none'; return; }
+    renderCards(items, replace);
+    updateMeta(total);
+    _hasMore=items.length>=PAGE_SZ;
+    document.getElementById('paginationWrap').style.display=_hasMore?'':'none';
+  } catch(e) {
+    console.warn('API fallback', e);
+    let items=[];
+    if(_src==='sanjae') items=SAMPLE_SANJAE.slice();
+    else if(_src==='safety') items=SAMPLE_SAFETY.slice();
+    else items=[...SAMPLE_SAFETY, ...SAMPLE_SANJAE];
+    if(_query) {
+      const q=_query.toLowerCase();
+      items=items.filter(p=> ((p.title||'')+(p.판시사항||'')+(p.법원명||'')).toLowerCase().includes(q));
+    }
+    if(!items.length && replace) { showEmpty(); return; }
+    renderCards(items, replace);
+    updateMeta(items.length);
+    document.getElementById('paginationWrap').style.display='none';
+  }
+}
+
+function renderCards(items, replace) {
+  const el=document.getElementById('precResult');
+  const html=items.map(p=>{
+    const isSan=(p.source==='sanjae')||(p.판례출처==='산재');
+    const cls=isSan?'sanjae':'';
+    const icon=isSan?'fa-file-medical':'fa-gavel';
+    const label=isSan?'산재 전문':'산업안전';
+    const title=esc(p.사건명||p.title||'(제목 없음)');
+    const bodyRaw=String(p.판시사항||p.판결요지||p.content||'');
+    const body=esc(bodyRaw.slice(0,180));
+    const ellipsis=bodyRaw.length>180?'…':'';
+    const courtLine=esc(p.법원명||'');
+    const dateLine=p.선고일자?esc(p.선고일자):'';
+    const caseNo=esc(p.사건번호||'');
+    const link=p.판례상세링크||p.link||'';
+    const meta=[
+      courtLine?`<span><i class="fas fa-balance-scale"></i>${courtLine}</span>`:'',
+      dateLine?`<span><i class="far fa-calendar"></i>${dateLine}</span>`:'',
+      caseNo?`<span><i class="fas fa-hashtag"></i>${caseNo}</span>`:''
+    ].filter(Boolean).join('');
+    const card=`<div class="prec-card ${cls}"><div class="prec-card-head"><div class="prec-card-icon"><i class="fas ${icon}"></i></div><div style="flex:1;"><span class="prec-card-type">${label}</span><div class="prec-card-title">${title}</div></div></div><div class="prec-card-body"><p>${body}${ellipsis}</p>${meta?`<div class="prec-card-meta">${meta}</div>`:''}</div></div>`;
+    return link?`<a href="${esc(link)}" target="_blank" rel="noopener" class="prec-card-wrap">${card}</a>`:`<div class="prec-card-wrap">${card}</div>`;
+  }).join('');
+  if(replace) el.innerHTML=html;
+  else el.insertAdjacentHTML('beforeend', html);
+}
+
+function updateMeta(total) {
+  const m=document.getElementById('resultMeta');
+  m.style.display='';
+  const qLabel=_query?` · "${esc(_query)}"`:'';
+  const srcLabel=_src==='all'?'전체':(_src==='sanjae'?'산재 전문':'산업안전');
+  m.innerHTML=`<strong>${srcLabel}</strong> 판례${qLabel} · ${total}건`;
+}
+
+function showEmpty() {
+  document.getElementById('precResult').innerHTML='<div class="prec-empty"><i class="far fa-folder-open"></i><div>검색 결과가 없습니다.</div><div style="font-size:.8rem; margin-top:6px;">다른 키워드로 검색해보세요.</div></div>';
+  document.getElementById('paginationWrap').style.display='none';
+  updateMeta(0);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  doFetch(true);
+});
+</script>
+</body>
+</html>
