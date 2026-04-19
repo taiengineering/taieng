@@ -8,92 +8,47 @@
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/magnific.min.css">
-  <link rel="stylesheet" href="assets/css/nice-select.min.css">
-  <link rel="stylesheet" href="assets/css/owl.min.css">
-  <link rel="stylesheet" href="assets/css/slick-slide.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    /* Pain Point 말풍선 카드 */
-    .pain-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,.07);
-      position: relative;
-      height: 100%;
-    }
-    .pain-card .pain-num {
-      display: inline-block;
-      width: 36px;
-      height: 36px;
-      background: var(--main-color, #7B55EA);
-      color: #fff;
-      border-radius: 50%;
-      font-weight: 900;
-      font-size: .9rem;
-      line-height: 36px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-    .pain-card p {
-      font-size: 1rem;
-      color: #374151;
-      line-height: 1.65;
-      margin: 0;
-      font-style: italic;
-    }
-    .pain-card p::before { content: '\201C'; font-size: 1.4rem; color: #9ca3af; vertical-align: -4px; margin-right: 2px; }
-    .pain-card p::after  { content: '\201D'; font-size: 1.4rem; color: #9ca3af; vertical-align: -4px; margin-left: 2px; }
-    /* 비교 박스 */
-    .compare-box {
-      border-radius: 12px;
-      padding: 32px 28px;
-      height: 100%;
-    }
-    .compare-box.before { background: #fff5f5; border: 2px solid #fed7d7; }
-    .compare-box.after  { background: #f0fff4; border: 2px solid #9ae6b4; }
-    .compare-box h4 { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; }
-    .compare-box.before h4 { color: #e53e3e; }
-    .compare-box.after  h4 { color: #276749; }
-    .compare-box ul { list-style: none; padding: 0; margin: 0; }
-    .compare-box ul li { padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,.06); font-size: .92rem; color: #4a5568; }
-    .compare-box ul li:last-child { border-bottom: none; }
-    /* 이미지 플레이스홀더 */
-    .img-placeholder {
-      background: linear-gradient(135deg, #e9ecef 0%, #ced4da 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 320px;
-      color: #6c757d;
-      font-size: .88rem;
-      text-align: center;
-      padding: 24px;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .img-placeholder i { font-size: 2.5rem; opacity: .4; }
+    body { font-family: 'Noto Sans KR', sans-serif; }
+
+    /* Pain Point 카드 */
+    .pain-card { background:#fff; border-radius:12px; padding:28px 24px; box-shadow:0 4px 20px rgba(0,0,0,.07); height:100%; }
+    .pain-card .pain-num { display:inline-block; width:36px; height:36px; background:#1A5FD4; color:#fff; border-radius:50%; font-weight:900; font-size:.9rem; line-height:36px; text-align:center; margin-bottom:14px; }
+    .pain-card p { font-size:1rem; color:#374151; line-height:1.65; margin:0; font-style:italic; }
+    .pain-card p::before { content:'\201C'; font-size:1.4rem; color:#9ca3af; vertical-align:-4px; margin-right:2px; }
+    .pain-card p::after  { content:'\201D'; font-size:1.4rem; color:#9ca3af; vertical-align:-4px; margin-left:2px; }
+
+    /* Before / After */
+    .compare-box { border-radius:12px; padding:32px 28px; height:100%; }
+    .compare-box.before { background:#fff5f5; border:2px solid #fed7d7; }
+    .compare-box.after  { background:#f0fff4; border:2px solid #9ae6b4; }
+    .compare-box h4 { font-size:1.1rem; font-weight:800; margin-bottom:20px; }
+    .compare-box.before h4 { color:#e53e3e; }
+    .compare-box.after  h4 { color:#276749; }
+    .compare-box ul { list-style:none; padding:0; margin:0; }
+    .compare-box ul li { padding:8px 0; border-bottom:1px solid rgba(0,0,0,.06); font-size:.92rem; color:#4a5568; }
+    .compare-box ul li:last-child { border-bottom:none; }
+
+    /* 기능 소개 박스 */
+    .feat-box { background:#f8fafc; border-radius:14px; padding:32px 28px; height:100%; border-left:4px solid #1A5FD4; }
+    .feat-box .fb-icon { font-size:2.2rem; margin-bottom:14px; display:block; }
+    .feat-box h4 { font-size:1.05rem; font-weight:800; color:#0f172a; margin-bottom:10px; }
+    .feat-box p { font-size:.88rem; color:#64748b; line-height:1.7; margin:0; }
   </style>
 </head>
 <body class="sc5 home-2">
 
-  <!-- preloader -->
   <div class="preloader" id="preloader">
-    <div class="preloader-inner">
-      <div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>
-    </div>
+    <div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div>
   </div>
   <div class="body-overlay" id="body-overlay"></div>
-
-  <!-- HEADER -->
   <div id="tai-header"></div>
 
-  <!-- ① 히어로 -->
+  <!-- 히어로 -->
   <section class="banner-area style-2" style="background-image: url(assets/img/home-2/banner/02.png);">
     <div class="container">
       <div class="row justify-content-center">
@@ -112,7 +67,7 @@
     </div>
   </section>
 
-  <!-- ② Pain Points -->
+  <!-- Pain Points -->
   <section class="service-area pd-top-130 pd-bottom-90">
     <div class="container">
       <div class="row justify-content-center">
@@ -125,41 +80,16 @@
         </div>
       </div>
       <div class="row justify-content-center g-4 mt-2">
-        <div class="col-xl-4 col-md-6">
-          <div class="pain-card">
-            <div class="pain-num">1</div>
-            <p>점검 일정을 직접 엑셀로 관리하고, 작업자한테 일일이 연락합니다</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="pain-card">
-            <div class="pain-num">2</div>
-            <p>무슨 법령이 적용되는지 찾는 것만 하루가 걸립니다</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="pain-card">
-            <div class="pain-num">3</div>
-            <p>보고서·서류·교육까지 혼자라 항상 뭔가 빠뜨릴까봐 불안합니다</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="pain-card">
-            <div class="pain-num">4</div>
-            <p>겸직이라 안전관리가 뒷전이 될까봐 걱정됩니다</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="pain-card">
-            <div class="pain-num">5</div>
-            <p>TBM 서명 받으러 종이 들고 다니는 게 아직도 현실입니다</p>
-          </div>
-        </div>
+        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">1</div><p>점검 일정을 직접 엑셀로 관리하고, 작업자한테 일일이 연락합니다</p></div></div>
+        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">2</div><p>무슨 법령이 적용되는지 찾는 것만 하루가 걸립니다</p></div></div>
+        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">3</div><p>보고서·서류·교육까지 혼자라 항상 뭔가 빠뜨릴까봐 불안합니다</p></div></div>
+        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">4</div><p>겸직이라 안전관리가 뒷전이 될까봐 걱정됩니다</p></div></div>
+        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">5</div><p>TBM 서명 받으러 종이 들고 다니는 게 아직도 현실입니다</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ③ TAI가 대신 해드리는 것 (6개 카드) -->
+  <!-- TAI가 대신 해드리는 것 -->
   <section class="service-area pd-top-110 pd-bottom-90" style="background:#f9f9f9;">
     <div class="container">
       <div class="row justify-content-center">
@@ -173,55 +103,43 @@
       </div>
       <div class="row justify-content-center g-4 mt-2">
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-balance-scale" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">⚖️</span>
             <h4>법령 의무 자동 판정</h4>
             <p>업종·규모·설비·공정 정보 입력 → 적용 법령과 의무 항목이 자동 도출됩니다. 법령 공부할 시간이 없어도 됩니다.</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-calendar-check" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">📅</span>
             <h4>점검 일정 자동 생성</h4>
             <p>법령 기반으로 연간·월간 점검 일정이 자동 생성됩니다. 엑셀로 관리할 필요 없이 시스템이 알아서 배치합니다.</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-users" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">👥</span>
             <h4>작업자 분산 배정</h4>
             <p>안전관리자가 처음 1회 배정하면 이후 자동으로 반복됩니다. 작업자가 직접 체크하고, 이상 발생 시 즉시 알림이 옵니다.</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-bell" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">🔔</span>
             <h4>D-3 사전 알림</h4>
-            <p>마감 3일 전 SMS·카카오톡으로 담당자에게 자동 발송됩니다. 누락으로 인한 과태료 위험이 사라집니다.</p>
+            <p>마감 3일 전 SMS로 담당자에게 자동 발송됩니다. 누락으로 인한 과태료 위험이 사라집니다.</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-file-alt" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">📄</span>
             <h4>신고서식 자동화</h4>
             <p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p>
           </div>
         </div>
         <div class="col-xl-4 col-md-6">
-          <div class="single-service-inner">
-            <div class="thumb text-center mb-3">
-              <i class="fas fa-signature" style="font-size:3rem;color:var(--main-color,#7B55EA);"></i>
-            </div>
+          <div class="feat-box">
+            <span class="fb-icon">✍️</span>
             <h4>TBM 전자서명</h4>
             <p>종이 들고 다니며 서명 받을 필요 없습니다. 모바일에서 바로 TBM 기록 + 서명 + 저장이 완결됩니다.</p>
           </div>
@@ -230,7 +148,7 @@
     </div>
   </section>
 
-  <!-- ④ 도입 전 vs 도입 후 -->
+  <!-- 도입 전 vs 도입 후 -->
   <section class="featured-area pd-top-110 pd-bottom-110">
     <div class="container">
       <div class="row justify-content-center">
@@ -262,7 +180,7 @@
             <ul>
               <li>법령 의무 3분 자동 도출</li>
               <li>연간 일정 시스템 자동 생성</li>
-              <li>D-3 카카오톡 자동 발송</li>
+              <li>D-3 SMS 자동 발송</li>
               <li>신고서식 자동 작성·출력</li>
               <li>누락 원천 차단</li>
               <li>모바일 TBM 전자서명</li>
@@ -274,35 +192,7 @@
     </div>
   </section>
 
-  <!-- ⑤ 현장 앱 -->
-  <section class="management-area pd-top-110 pd-bottom-110" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-5 align-self-center">
-          <div class="img-placeholder">
-            <i class="fas fa-mobile-alt"></i>
-            <p>[이미지: 작업자가 현장에서 모바일로 점검 체크하는 장면]</p>
-          </div>
-        </div>
-        <div class="col-xl-5 col-lg-6 col-md-10 offset-xl-1 align-self-center">
-          <div class="section-title mb-0">
-            <h4 class="sub-title">현장 작업자 앱</h4>
-            <h2 class="title">5초면 체크 완료</h2>
-            <p>작업자가 실제로 쓸 수 있어야 의미 있습니다. TAI는 현장 환경을 먼저 생각합니다.</p>
-            <ul class="nx-inner mt-4">
-              <li><i class="far fa-check-circle"></i>현장에서 1분 이내에 처리 가능한 현장용 앱</li>
-              <li><i class="far fa-check-circle"></i>QR이나 RFID를 사용하여 빠르고 정확한 점검</li>
-              <li><i class="far fa-check-circle"></i>장갑 낀 손으로도 터치 가능한 큰 버튼</li>
-              <li><i class="far fa-check-circle"></i>안전관리자 효율이 안전을 더 확보합니다</li>
-            </ul>
-            <a class="btn btn-base mt-3" href="free-diagnosis.html">무료 진단 시작</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ⑥ CTA -->
+  <!-- CTA -->
   <section class="app-screen-area-2" style="background-image: url(assets/img/home-2/other/cta-bg.png);">
     <div class="container">
       <div class="row justify-content-center">
@@ -320,18 +210,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <div id="tai-footer"></div>
-
-  <div class="back-to-top">
-    <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
-  </div>
+  <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
   <script src="assets/js/jquery.3.6.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/imageloded.min.js"></script>
-  <script src="assets/js/magnific.min.js"></script>
-  <script src="assets/js/fontawesome.min.js"></script>
   <script src="assets/js/wow.min.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/header.js"></script>

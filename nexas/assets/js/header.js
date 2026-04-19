@@ -1,12 +1,8 @@
 /**
  * TAI 공통 Header — assets/js/header.js
- * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.3.1 (2026-04-19): 안전정보 드롭다운 — 판례검색(precedent-search)·안전정보(safety-news)
- * v2.3.0 (2026-04-19): 03_nav — 서비스·업종별·역할별·안전정보, nexas base 보정
- *
- * 경로:
- *   URL에 /nexas/가 있으면 그 이후 경로 깊이로 ../ 계산
- *   그 외에는 service|target(1단) / mypage(다단) 보조 규칙
+ * v2.4.0 (2026-04-19): 역할별 링크 .html 제거
+ * v2.3.1 (2026-04-19): 안전정보 드롭다운 — 판례검색·안전정보
+ * v2.3.0 (2026-04-19): 03_nav — 서비스·업종별·역할별·안전정보
  */
 (function () {
   'use strict';
@@ -95,13 +91,13 @@
     '            </ul>',
     '          </li>',
 
-    /* 역할별 ▼ */
+    /* 역할별 ▼ — .html 없는 클린 URL */
     '          <li class="menu-item-has-children">',
     '            <a href="#">역할별</a>',
     '            <ul class="sub-menu">',
-    '              <li><a href="' + base + 'for-safety-manager.html">안전관리자</a></li>',
-    '              <li><a href="' + base + 'for-business-owner.html">사업주</a></li>',
-    '              <li><a href="' + base + 'provider-register.html">전문가</a></li>',
+    '              <li><a href="' + base + 'for-safety-manager">안전관리자</a></li>',
+    '              <li><a href="' + base + 'for-business-owner">사업주</a></li>',
+    '              <li><a href="' + base + 'provider-register">전문가</a></li>',
     '            </ul>',
     '          </li>',
 
