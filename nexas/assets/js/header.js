@@ -1,7 +1,7 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.2.0 (2026-04-19): 03_nav — 서비스·업종별·역할별 구조, 요금제 서비스 하위, 안전정보·무료진단 탑 제거, nexas 하위 경로 base 보정
+ * v2.3.0 (2026-04-19): 03_nav — 서비스(표 상단 5 + 구분선 + 기존 하단 동일)·업종별·역할별·안전정보 단일 링크, nexas base 보정
  *
  * 경로:
  *   URL에 /nexas/가 있으면 그 이후 경로 깊이로 ../ 계산
@@ -67,6 +67,9 @@
     '              <li><a href="' + base + 'pricing.html">요금제</a></li>',
     '              <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>',
     '              <li><a href="' + base + 'service/inapp.html">인앱 서비스</a></li>',
+    '              <li><a href="' + base + 'fix-request.html?from=nav&type=repair">수선 연결</a></li>',
+    '              <li><a href="' + base + 'fix-request.html?from=nav&type=consulting">컨설팅</a></li>',
+    '              <li><a href="' + base + 'fix-request.html?from=nav&type=appointment">선임 연결</a></li>',
     '              <li><a href="' + base + 'connect.html" style="color:#fbbf24;font-weight:700;">연결서비스 사전등록</a></li>',
     '            </ul>',
     '          </li>',
@@ -90,6 +93,8 @@
     '              <li><a href="' + base + 'provider-register.html">전문가</a></li>',
     '            </ul>',
     '          </li>',
+
+    '          <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
 
     '        </ul>',
     '      </div>',

@@ -6,7 +6,7 @@
 - **업종별** (구 대상별): 건물·시설, 제조공장, 건설현장
 - **역할별**: 안전관리자, 사업주, 전문가
 - 최상위 **요금제** 제거 → 서비스 하위로 이동
-- 최상위 **안전정보** 제거 (콘텐츠는 `safety-news.html` 등으로 직접 링크·푸터 유지)
+- 최상위 **안전정보** 유지 (`safety-news.html` 단일 링크, 드롭다운 없음)
 - 우측 **무료 진단** 버튼 제거
 - 헤더 로고 크기: `style.css`의 과도 축소(15px) 해제 → 약 30px 수준 복원
 
@@ -15,7 +15,7 @@
 - `nexas/assets/js/header.js` — 주입 헤더 HTML
 - `nexas/assets/css/style.css` — `.main-logo img` / 푸터 로고 높이
 - 레거시 정적 헤더(팀·블로그 템플릿): `<div id="tai-header"></div>` + `header.js`로 통일
-- `nexas/assets/js/footer.js` — 메뉴 정렬 + 다크 테마 (`#0f172a`) + `nexas/` 기준 상대 경로
+- `nexas/assets/js/footer.js` — 다크 테마·경로 보정만; **「서비스」열 링크 목록·순서는 개편 전과 동일** (요금제는「시작하기」에 유지)
 
 ## 작업 순서 (권장)
 
