@@ -14,8 +14,11 @@
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Pretendard','Noto Sans KR',sans-serif;background:#f8fafc;}
 
+  /* ── nav 아래로 밀기 ── */
+  .navbar-area{position:relative !important;}
+
   /* ── 좌우 분할 레이아웃 ── */
-  .fix-layout{min-height:100vh;display:grid;grid-template-columns:40% 60%;}
+  .fix-layout{min-height:calc(100vh - 80px);display:grid;grid-template-columns:40% 60%;}
   @media(max-width:768px){
     .fix-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
   }
@@ -25,11 +28,11 @@
     background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%);
     padding:56px 40px;
     display:flex;flex-direction:column;justify-content:center;
-    color:#fff;position:sticky;top:0;height:100vh;
+    color:#fff;position:sticky;top:80px;height:calc(100vh - 80px);
   }
   @media(max-width:768px){
     .fix-left{
-      position:relative;height:auto;padding:32px 24px;
+      position:relative;height:auto;padding:32px 24px;top:0;
     }
   }
 
@@ -68,11 +71,11 @@
   /* ── 오른쪽 패널 (채팅) ── */
   .fix-right{
     display:flex;flex-direction:column;
-    height:100vh;overflow:hidden;
+    height:calc(100vh - 80px);overflow:hidden;
     background:#1e293b;
   }
   @media(max-width:768px){
-    .fix-right{height:calc(100vh - 200px);min-height:400px;}
+    .fix-right{height:calc(100vh - 280px);min-height:400px;}
   }
 
   /* 채팅 헤더 */
@@ -309,6 +312,7 @@
   </div>
 </div>
 
+<div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -330,6 +334,25 @@ window.addEventListener('DOMContentLoaded', () => {
   startChat();
 });
 
+function getLocalGreeting(fromPage, serviceType) {
+  const raw = (serviceType || 'general').toLowerCase();
+  const st = ['appointment', 'repair', 'consulting', 'general'].includes(raw) ? raw : 'general';
+  const greetings = {
+    appointment: '안녕하세요! 안전관리자 선임이 필요하신 상황이시군요. 사업장 규모와 업종을 말씀해주시면 적합한 전문가를 연결해드리겠습니다.',
+    repair: '안녕하세요! 설비 수선·보수가 필요하신가요? 어떤 설비에서 어떤 문제가 발생했는지 편하게 말씀해주세요.',
+    consulting: '안녕하세요! 안전관리 컨설팅에 대해 알아보고 계시군요. 현재 사업장의 안전관리 상황을 간단히 알려주시면 맞춤 안내를 드리겠습니다.',
+    general: '안녕하세요. TAI 매칭 전문가입니다. 어떤 상황인지 편하게 말씀해주세요.'
+  };
+  let msg = greetings[st];
+  if (fromPage === 'diagnosis' && st === 'general') {
+    msg = '안녕하세요! 법령진단·도입 관련 문의를 도와드리겠습니다. 필요하신 내용을 편하게 말씀해주세요.';
+  }
+  if (fromPage === 'diagnosis-result' && st === 'repair') {
+    msg = '안녕하세요! 법령진단 결과를 바탕으로 수선·보수 연결이 필요하신가요? 설비와 증상을 알려주시면 적합한 업체 매칭을 도와드리겠습니다.';
+  }
+  return msg;
+}
+
 async function startChat() {
   // 기존 세션 확인
   const savedSession = sessionStorage.getItem('fix_session_id');
@@ -339,9 +362,9 @@ async function startChat() {
     return;
   }
 
-  // from 파라미터 처리
   const params = new URLSearchParams(window.location.search);
-  const fromCtx = params.get('from');
+  const fromPage = params.get('from') || '';
+  const serviceType = (params.get('type') || 'general').toLowerCase();
 
   try {
     const res = await fetch(`${API}/fix/chat/start`, {
@@ -353,7 +376,7 @@ async function startChat() {
     if (json.session_id) {
       sessionId = json.session_id;
       sessionStorage.setItem('fix_session_id', sessionId);
-      appendExpertMsg(json.greeting_message || getGreeting(fromCtx));
+      appendExpertMsg(json.greeting_message || getLocalGreeting(fromPage, serviceType));
     } else {
       throw new Error('session_id 없음');
     }
@@ -361,16 +384,9 @@ async function startChat() {
     // API 미구현 — 기본 인사 메시지
     sessionId = 'guest_' + Date.now();
     sessionStorage.setItem('fix_session_id', sessionId);
-    appendExpertMsg(getGreeting(fromCtx));
+    appendExpertMsg(getLocalGreeting(fromPage, serviceType));
   }
   updateTurnBadge();
-}
-
-function getGreeting(fromCtx) {
-  if (fromCtx === 'diagnosis') {
-    return '안녕하세요! 법령진단 결과를 바탕으로 전문 업체를 연결해드립니다. 어떤 항목에 대해 도움이 필요하신가요?';
-  }
-  return '안녕하세요! 저는 TAI 전문가입니다. 어떤 문제가 발생하셨나요? 편하게 말씀해주세요.';
 }
 
 // ── 메시지 전송 ──
