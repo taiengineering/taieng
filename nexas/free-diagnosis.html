@@ -182,6 +182,18 @@
   .paid-result-header h4{font-weight:900;color:var(--craft-ink);margin-bottom:4px;}
   .paid-result-header p{font-size:.84rem;color:#5a4a2e;margin:0;}
   .result-empty{text-align:center;padding:40px 0;color:#9a8f80;font-size:.9rem;}
+  .diag-table-wrap{border:1.5px solid var(--craft-line);border-radius:10px;padding:12px;background:#fff;margin-top:4px;}
+  .diag-table-head{display:grid;gap:6px;font-size:.68rem;font-weight:800;color:var(--craft-sub);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;}
+  .diag-table-row{display:grid;gap:8px;align-items:start;padding:10px 0;border-bottom:1px solid #eee;}
+  .diag-table-row:last-child{border-bottom:none;}
+  .diag-table-add{margin-top:10px;font-size:.84rem;font-weight:700;color:var(--stamp-red);background:none;border:1.5px dashed var(--craft-line);border-radius:8px;padding:10px;cursor:pointer;width:100%;}
+  .diag-table-add:hover{border-color:var(--stamp-red);}
+  .diag-ss-wrap{position:relative;}
+  .diag-ss-dd{position:absolute;left:0;right:0;top:100%;z-index:20;background:#fff;border:1.5px solid var(--craft-line);border-radius:8px;max-height:180px;overflow-y:auto;display:none;box-shadow:0 4px 12px rgba(0,0,0,.08);}
+  .diag-ss-dd.show{display:block;}
+  .diag-ss-item{padding:9px 11px;font-size:.82rem;cursor:pointer;border-bottom:1px solid #f1f5f9;}
+  .diag-ss-item:hover{background:#faf8f4;}
+  .dt-del{font-size:.72rem;color:#9a8f80;border:none;background:none;cursor:pointer;padding:4px;}
   </style>
 </head>
 <body class="sc5">
@@ -396,9 +408,15 @@ async function runPaidDiagnosis(orderId) {
   const area = document.getElementById('paidResultArea');
   area.innerHTML = '<div class="result-empty">⏳ 진단 분석 중...</div>';
   try {
+    const industryPaid = { BASIC: 'INDUSTRY_V2', STANDARD: 'INDUSTRY_STANDARD', PREMIUM: 'INDUSTRY_PREMIUM' };
+    const userTier = sector === 'INDUSTRY' ? (industryPaid[paidTier] || paidTier) : undefined;
     const r = await fetch(`${API}/diagnosis/run`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sector, tier: paidTier, auth_token: authToken, payment_ref: orderId, form_data: formValues['paid'] || {} })
+      body: JSON.stringify({
+        sector, tier: paidTier, user_tier: userTier,
+        auth_token: authToken, payment_ref: orderId,
+        form_data: formValues['paid'] || {}
+      })
     });
     const json = await r.json();
     paidResultData = json.data;
@@ -531,6 +549,246 @@ function onDisclaimerChange() {
   document.getElementById('btnSubmit').disabled = !document.getElementById('disclaimerCheck').checked;
 }
 
+window.__diagEquipOpts = null;
+async function loadEquipmentOptionsOnce() {
+  if (window.__diagEquipOpts) return window.__diagEquipOpts;
+  try {
+    const r = await fetch(`${API}/diagnosis/equipment-options`);
+    const j = await r.json();
+    window.__diagEquipOpts = j.data || { equipment_types: [], capacity_units: [] };
+  } catch (e) {
+    window.__diagEquipOpts = { equipment_types: [], capacity_units: [] };
+  }
+  return window.__diagEquipOpts;
+}
+
+function ksicPartsFromForm(prefix) {
+  const d = formValues[prefix] || {};
+  const raw = (d.ksic_major || d.ksic_code || '').toString().trim().toUpperCase();
+  if (!raw) return { major: '', sub: '' };
+  const m = raw.match(/^([A-Z])([0-9A-Z]*)$/);
+  if (m) return { major: m[1], sub: m[2] || '' };
+  return { major: raw, sub: '' };
+}
+
+function ensureFormTableRows(prefix, fieldCode, minRows) {
+  if (!formValues[prefix]) formValues[prefix] = {};
+  if (!Array.isArray(formValues[prefix][fieldCode])) formValues[prefix][fieldCode] = [];
+  const arr = formValues[prefix][fieldCode];
+  while (arr.length < (minRows || 1)) arr.push({});
+  return arr;
+}
+
+function addTableRow(prefix, fieldCode) {
+  ensureFormTableRows(prefix, fieldCode, 0);
+  formValues[prefix][fieldCode].push({});
+  const wrap = document.querySelector(`[data-diag-table-wrap="${prefix}:${fieldCode}"]`);
+  if (wrap) rerenderOneTable(wrap);
+}
+
+function removeTableRow(prefix, fieldCode, rowIdx) {
+  const wrap = document.querySelector(`[data-diag-table-wrap="${prefix}:${fieldCode}"]`);
+  const minRows = wrap ? parseInt(wrap.dataset.minRows || '1', 10) : 1;
+  const arr = (formValues[prefix] || {})[fieldCode];
+  if (!Array.isArray(arr) || arr.length <= minRows) return;
+  arr.splice(rowIdx, 1);
+  if (wrap) rerenderOneTable(wrap);
+}
+
+function rerenderOneTable(wrap) {
+  const prefix = wrap.dataset.prefix;
+  const fieldCode = wrap.dataset.fieldCode;
+  const minRows = parseInt(wrap.dataset.minRows || '1', 10);
+  let cols = [];
+  try { cols = JSON.parse(decodeURIComponent(wrap.dataset.colsEnc || '%5B%5D')); } catch (e) { cols = []; }
+  const addLabel = wrap.dataset.addLabel || '행 추가';
+  ensureFormTableRows(prefix, fieldCode, minRows);
+  const bodyEl = wrap.querySelector('.diag-table-body');
+  if (bodyEl) bodyEl.innerHTML = buildTableRowsHtml(prefix, fieldCode, cols, minRows);
+  bindTableRowEvents(wrap, prefix, fieldCode, cols);
+}
+
+function buildTableRowsHtml(prefix, fieldCode, cols, minRows) {
+  const rows = ensureFormTableRows(prefix, fieldCode, minRows);
+  return rows.map((row, ri) => {
+    const cells = cols.map(c => `<div class="diag-td" data-ci="${ri}:${c.key}">${renderTableCellHtml(c, row, ri, prefix, fieldCode)}</div>`).join('');
+    const del = rows.length > minRows ? `<button type="button" class="dt-del" data-rm-row="${ri}">삭제</button>` : '';
+    return `<div class="diag-table-row" style="grid-template-columns:repeat(${cols.length},1fr) auto;">${cells}<div>${del}</div></div>`;
+  }).join('');
+}
+
+function renderTableCellHtml(col, row, ri, prefix, fieldCode) {
+  const v = row[col.key];
+  if (col.type === 'number') {
+    const mn = col.min != null ? `min="${col.min}"` : '';
+    return `<input type="number" class="form-input-tai" value="${v != null ? v : ''}" ${mn} data-tc="${col.key}" data-ri="${ri}" />`;
+  }
+  if (col.type === 'boolean') {
+    const ck = v === true || v === 'true' || v === 1 ? 'checked' : '';
+    return `<label style="font-size:.82rem;display:flex;align-items:center;gap:6px;"><input type="checkbox" data-tc="${col.key}" data-ri="${ri}" ${ck}/> ${col.label}</label>`;
+  }
+  if (col.type === 'multi_select') {
+    const opts = col.options || [];
+    const sel = Array.isArray(v) ? v : [];
+    const optHtml = opts.map(o => `<option value="${o}" ${sel.includes(o) ? 'selected' : ''}>${o}</option>`).join('');
+    return `<select class="form-select-tai" multiple data-tc="${col.key}" data-ri="${ri}" style="min-height:72px;font-size:.8rem;">${optHtml}</select>`;
+  }
+  if (col.type === 'select' && col.source === 'system_codes') {
+    const cat = col.source_category || '';
+    return `<select class="form-select-tai diag-syscode" data-tc="${col.key}" data-ri="${ri}" data-src-cat="${cat}"><option value="">선택</option></select>`;
+  }
+  if (col.type === 'searchable_select') {
+    const manual = v && String(v).startsWith('__MANUAL__::') ? String(v).slice(12) : '';
+    const show = manual ? manual : (v || '');
+    return `<div class="diag-ss-wrap">
+      <input type="text" class="form-input-tai diag-ss-inp" data-tc="${col.key}" data-ri="${ri}" value="${String(show).replace(/"/g,'&quot;')}" placeholder="${(col.manual_placeholder||'검색 또는 직접입력').replace(/"/g,'&quot;')}" autocomplete="off" />
+      <div class="diag-ss-dd"></div>
+    </div>`;
+  }
+  return `<input type="text" class="form-input-tai" data-tc="${col.key}" data-ri="${ri}" value="${v != null ? String(v).replace(/"/g,'&quot;') : ''}" placeholder="${(col.placeholder||'').replace(/"/g,'&quot;')}" />`;
+}
+
+function renderTableField(f, prefix) {
+  const opts = (typeof f.input_options === 'object' && f.input_options) ? f.input_options : {};
+  const cols = opts.columns || [];
+  const minRows = opts.min_rows || 1;
+  const addLabel = opts.add_row_label || '행 추가';
+  const req = f.is_required ? '<span class="req">*</span>' : '';
+  const help = f.help_text ? `<div class="form-help">${f.help_text}</div>` : '';
+  const colsEnc = encodeURIComponent(JSON.stringify(cols));
+  const headStyle = `grid-template-columns:repeat(${cols.length},1fr) auto;`;
+  ensureFormTableRows(prefix, f.field_code, minRows);
+  const headCells = cols.map(c => `<div>${c.label || c.key}${c.required ? ' *' : ''}</div>`).join('');
+  const bodyHtml = buildTableRowsHtml(prefix, f.field_code, cols, minRows);
+  const ctrl = `<div class="diag-table-wrap" data-diag-table-wrap="${prefix}:${f.field_code}" data-prefix="${prefix}" data-field-code="${f.field_code}" data-min-rows="${minRows}" data-cols-enc="${colsEnc}" data-add-label="${addLabel.replace(/"/g,'&quot;')}">
+    <div class="diag-table-head" style="${headStyle}">${headCells}<div></div></div>
+    <div class="diag-table-body">${bodyHtml}</div>
+    <button type="button" class="diag-table-add" data-add-table="${prefix}:${f.field_code}">+ ${addLabel}</button>
+  </div>`;
+  return `<div class="form-row" data-table-field="${f.field_code}"><label class="form-label-tai">${f.field_name} ${req}</label>${ctrl}${help}</div>`;
+}
+
+async function initDiagnosisTables(container) {
+  await loadEquipmentOptionsOnce();
+  const { equipment_types = [], capacity_units = [] } = window.__diagEquipOpts || {};
+  container.querySelectorAll('.diag-table-wrap').forEach(wrap => {
+    const prefix = wrap.dataset.prefix;
+    const fieldCode = wrap.dataset.fieldCode;
+    let cols = [];
+    try { cols = JSON.parse(decodeURIComponent(wrap.dataset.colsEnc || '%5B%5D')); } catch (e) { cols = []; }
+    wrap.querySelectorAll('select.diag-syscode').forEach(sel => {
+      const cat = sel.dataset.srcCat;
+      const list = cat === 'equipment_capacity_unit' ? capacity_units : equipment_types;
+      const rowsAll = (formValues[prefix] || {})[fieldCode] || [];
+      const ri = parseInt(sel.dataset.ri, 10);
+      const key = sel.dataset.tc;
+      const rowVal = (rowsAll[ri] || {})[key] || '';
+      const opts = list.map(it => `<option value="${it.code}" ${String(rowVal) === String(it.code) ? 'selected' : ''}>${it.name}</option>`).join('');
+      sel.innerHTML = '<option value="">선택</option>' + opts;
+    });
+    bindTableRowEvents(wrap, prefix, fieldCode, cols);
+  });
+}
+
+function bindTableRowEvents(wrap, prefix, fieldCode, cols) {
+  const syncFromDom = () => {
+    const rows = wrap.querySelectorAll('.diag-table-row');
+    const out = [];
+    rows.forEach(row => {
+      const obj = {};
+      row.querySelectorAll('[data-tc]').forEach(el => {
+        const k = el.dataset.tc;
+        const ri = parseInt(el.dataset.ri, 10);
+        if (el.type === 'checkbox') obj[k] = el.checked;
+        else if (el.tagName === 'SELECT' && el.multiple) {
+          obj[k] = Array.from(el.selectedOptions).map(o => o.value);
+        } else obj[k] = el.value;
+      });
+      out.push(obj);
+    });
+    if (!formValues[prefix]) formValues[prefix] = {};
+    formValues[prefix][fieldCode] = out;
+  };
+  wrap.querySelectorAll('input,select').forEach(el => {
+    el.addEventListener('change', syncFromDom);
+    el.addEventListener('input', syncFromDom);
+  });
+  wrap.querySelectorAll('.diag-ss-inp').forEach(inp => {
+    inp.addEventListener('input', () => debounceProcessSearch(inp, prefix, fieldCode, cols, syncFromDom));
+    inp.addEventListener('focus', () => debounceProcessSearch(inp, prefix, fieldCode, cols, syncFromDom));
+  });
+  const addBtn = wrap.querySelector('[data-add-table]');
+  if (addBtn) addBtn.onclick = () => { addTableRow(prefix, fieldCode); };
+  wrap.querySelectorAll('[data-rm-row]').forEach(btn => {
+    btn.onclick = () => removeTableRow(prefix, fieldCode, parseInt(btn.dataset.rmRow, 10));
+  });
+}
+
+let __procSearchTimer = null;
+function debounceProcessSearch(inp, prefix, fieldCode, cols, syncFromDom) {
+  clearTimeout(__procSearchTimer);
+  __procSearchTimer = setTimeout(() => runProcessSearch(inp, prefix, fieldCode, cols, syncFromDom), 280);
+}
+
+async function runProcessSearch(inp, prefix, fieldCode, cols, syncFromDom) {
+  const wrapCell = inp.closest('.diag-ss-wrap');
+  const dd = wrapCell && wrapCell.querySelector('.diag-ss-dd');
+  if (!dd) return;
+  const { major, sub } = ksicPartsFromForm(prefix);
+  const q = inp.value.trim();
+  try {
+    const url = `${API}/diagnosis/process-options?ksic_major=${encodeURIComponent(major)}&ksic_sub=${encodeURIComponent(sub)}`;
+    const r = await fetch(url);
+    const j = await r.json();
+    const procs = (j.data && j.data.processes) || [];
+    const qlow = q.toLowerCase();
+    const filt = qlow ? procs.filter(p => (p.process_name || '').toLowerCase().includes(qlow) || (p.process_lv2 || '').toLowerCase().includes(qlow)) : procs.slice(0, 40);
+    dd.innerHTML = filt.slice(0, 50).map(p => `<div class="diag-ss-item" data-pick="${String(p.process_name).replace(/"/g,'&quot;')}">${p.process_name}<span style="color:#9a8f80;font-size:.72rem;"> · ${p.process_lv2 || ''}</span></div>`).join('');
+    dd.classList.add('show');
+    dd.querySelectorAll('.diag-ss-item').forEach(item => {
+      item.onclick = () => {
+        inp.value = item.dataset.pick;
+        dd.classList.remove('show');
+        dd.innerHTML = '';
+        syncFromDom();
+      };
+    });
+  } catch (e) {
+    dd.innerHTML = '';
+    dd.classList.remove('show');
+  }
+}
+
+function validateTables(prefix) {
+  const area = document.getElementById(prefix === 'paid' ? 'paidFormArea' : 'dynFormArea');
+  if (!area) return true;
+  const wraps = area.querySelectorAll('.diag-table-wrap');
+  for (const wrap of wraps) {
+    const fieldCode = wrap.dataset.fieldCode;
+    const minRows = parseInt(wrap.dataset.minRows || '1', 10);
+    let cols = [];
+    try { cols = JSON.parse(decodeURIComponent(wrap.dataset.colsEnc || '%5B%5D')); } catch (e) {}
+    const rows = (formValues[prefix] || {})[fieldCode];
+    if (!Array.isArray(rows) || rows.length < minRows) {
+      alert(`${fieldCode}: 최소 ${minRows}행 이상 입력해 주세요.`);
+      return false;
+    }
+    for (let ri = 0; ri < rows.length; ri++) {
+      const row = rows[ri] || {};
+      for (const c of cols) {
+        if (!c.required) continue;
+        const val = row[c.key];
+        const empty = val === undefined || val === null || val === '' || (Array.isArray(val) && !val.length);
+        if (empty) {
+          alert(`${fieldCode} ${ri + 1}행: ${c.label || c.key} 은(는) 필수입니다.`);
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}
+
 // ── 동적 폼 렌더링 ──
 function renderDynForm(containerId, groups, prefix) {
   const container = document.getElementById(containerId);
@@ -542,6 +800,7 @@ function renderDynForm(containerId, groups, prefix) {
     html += `</div>`;
   });
   container.innerHTML = html;
+  initDiagnosisTables(container);
   container.querySelectorAll('[data-addr-prefix]').forEach(el => {
     const p = el.dataset.addrPrefix;
     el.addEventListener('input', () => {
@@ -553,6 +812,7 @@ function renderDynForm(containerId, groups, prefix) {
 }
 
 function renderField(f, prefix) {
+  if (f.field_type === 'table') return renderTableField(f, prefix);
   const id = `${prefix}_${f.field_code}`;
   const req = f.is_required ? '<span class="req">*</span>' : '';
   const help = f.help_text ? `<div class="form-help">${f.help_text}</div>` : '';
@@ -788,6 +1048,7 @@ async function submitFree() {
     alert(`필수 항목을 입력해주세요:\n- ${missing.join('\n- ')}`);
     return;
   }
+  if (!validateTables('free')) return;
 
   const btn = document.getElementById('btnSubmit');
   btn.disabled = true; btn.textContent = '분석 중...';
@@ -932,7 +1193,8 @@ async function loadPaidForm(tierCode) {
   const area = document.getElementById('paidFormArea');
   area.innerHTML = '<div style="text-align:center;padding:20px 0;color:#9a8f80;">항목 불러오는 중...</div>';
   try {
-    const r = await fetch(`${API}/diagnosis/fields?sector=${sector}&tier=${tierCode}`);
+    const tierApi = { BASIC: 'PAID1', STANDARD: 'PAID2', PREMIUM: 'PAID3' }[tierCode] || tierCode;
+    const r = await fetch(`${API}/diagnosis/fields?sector=${sector}&tier=${tierApi}`);
     const json = await r.json();
     renderDynForm('paidFormArea', json.data?.groups || [], 'paid');
     Object.entries(formValues['free'] || {}).forEach(([code, val]) => {
@@ -961,6 +1223,7 @@ function startPayment() {
     `정보를 모두 입력하셨습니까?`
   );
   if (!confirmed) return;
+  if (!validateTables('paid')) return;
 
   const modal = new bootstrap.Modal(document.getElementById('payPrepModal'));
   modal.show();
