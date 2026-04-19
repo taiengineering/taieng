@@ -15,14 +15,9 @@
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  /*
-   * #saas-page wrapper로 모든 커스텀 CSS 감싸기
-   * TAI style.css 글로벌 스타일보다 높은 특이성 확보
-   */
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
-  /* 히어로 */
   #saas-page .sp-hero { min-height:100vh; background:url('../assets/img/saas/hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg,#0a1432,#1A5FD4); position:relative; display:flex; align-items:center; overflow:hidden; }
   #saas-page .sp-hero::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(10,20,50,.85),rgba(26,95,212,.6)); }
   #saas-page .sp-hero-inner { position:relative; z-index:2; max-width:760px; padding:120px 24px 80px; }
@@ -39,7 +34,6 @@
   #saas-page .sp-scroll-hint i { display:block; margin-top:4px; animation:sp-bounce 2s infinite; }
   @keyframes sp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
-  /* 공통 섹션 */
   #saas-page .sp-sec { padding:90px 0; }
   #saas-page .sp-sec-gray { background:var(--sp-bg); }
   #saas-page .sp-sec-dark { background:var(--sp-dark); }
@@ -51,14 +45,12 @@
   #saas-page .sp-desc { font-size:.95rem; color:var(--sp-gray); line-height:1.75; margin-bottom:0; }
   #saas-page .sp-sec-dark .sp-desc { color:#94a3b8; }
 
-  /* 비포 카드 */
   #saas-page .sp-pain { background:#fff; border:1.5px solid var(--sp-border); border-radius:14px; padding:26px 22px; height:100%; position:relative; overflow:hidden; }
   #saas-page .sp-pain::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--sp-red); }
   #saas-page .sp-pain-icon { font-size:1.8rem; margin-bottom:12px; display:block; }
   #saas-page .sp-pain-title { font-size:1rem; font-weight:800; color:var(--sp-dark); margin-bottom:8px; }
   #saas-page .sp-pain-desc { font-size:.86rem; color:var(--sp-gray); line-height:1.7; margin:0; }
 
-  /* 기능 행 */
   #saas-page .sp-feat { padding:72px 0; border-bottom:1px solid var(--sp-border); }
   #saas-page .sp-feat:last-child { border-bottom:none; }
   #saas-page .sp-feat-badge { display:inline-block; background:var(--sp-blue); color:#fff; border-radius:6px; padding:3px 10px; font-size:.68rem; font-weight:800; letter-spacing:.06em; margin-bottom:10px; }
@@ -69,7 +61,6 @@
   #saas-page .sp-bullets li { display:flex; align-items:flex-start; gap:9px; font-size:.88rem; color:var(--sp-dark); line-height:1.5; }
   #saas-page .sp-bullets .dot { width:20px; height:20px; border-radius:50%; background:var(--sp-blue); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.6rem; flex-shrink:0; margin-top:2px; }
 
-  /* 폰 목업 */
   #saas-page .sp-phone-wrap { display:flex; justify-content:center; }
   #saas-page .sp-phone { width:252px; background:#0f172a; border-radius:38px; padding:13px; box-shadow:0 0 0 2px #1e293b,0 28px 72px rgba(0,0,0,.3); }
   #saas-page .sp-phone::before { content:''; display:block; width:72px; height:7px; background:#1e293b; border-radius:999px; margin:0 auto 10px; }
@@ -112,14 +103,12 @@
   #saas-page .ps-req-m { font-size:.62rem; color:var(--sp-gray); line-height:1.5; }
   #saas-page .ps-approve { display:block; width:100%; background:var(--sp-blue); color:#fff; border:none; border-radius:7px; padding:8px; font-size:.74rem; font-weight:800; text-align:center; margin-top:7px; }
 
-  /* 다이어그램 */
   #saas-page .sp-diagram { background:#fff; border:1.5px solid var(--sp-border); border-radius:14px; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
-  #saas-page .sp-diagram img { width:100%; height:auto; display:block; }
+  #saas-page .sp-diagram img { width:100%; height:auto; display:block; min-height:200px; background:#f8fafc; }
   #saas-page .sp-diagram-dark { background:#1e293b; border-color:#334155; }
   #saas-page .sp-cap { text-align:center; font-size:.73rem; color:var(--sp-gray); margin-top:9px; }
   #saas-page .sp-diagram-dark .sp-cap { color:#64748b; }
 
-  /* 처벌 카드 */
   #saas-page .sp-penalty { background:#1e293b; border:1.5px solid var(--sp-red); border-radius:14px; padding:24px 20px; }
   #saas-page .sp-penalty-label { font-size:.68rem; font-weight:800; letter-spacing:.1em; color:#f87171; margin-bottom:10px; }
   #saas-page .sp-penalty-title { font-size:1rem; font-weight:800; color:#fff; line-height:1.6; margin-bottom:14px; }
@@ -129,7 +118,6 @@
   #saas-page .sp-penalty-row .ps { font-size:.76rem; color:#94a3b8; }
   #saas-page .sp-penalty-note { font-size:.8rem; color:#60a5fa; font-weight:700; margin-top:12px; }
 
-  /* 가격 카드 */
   #saas-page .sp-price { background:#fff; border:1.5px solid var(--sp-border); border-radius:18px; padding:28px 22px; height:100%; position:relative; overflow:hidden; transition:transform .15s,box-shadow .15s; }
   #saas-page .sp-price:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.1); }
   #saas-page .sp-price.featured { border-color:var(--sp-blue); border-width:2px; }
@@ -143,7 +131,6 @@
   #saas-page .sp-price-cta { display:block; background:var(--sp-blue); color:#fff; border-radius:9px; padding:12px; text-align:center; font-weight:800; font-size:.86rem; text-decoration:none; transition:background .15s; }
   #saas-page .sp-price-cta:hover { background:#1248a8; color:#fff; }
 
-  /* 최종 CTA */
   #saas-page .sp-final { background:linear-gradient(135deg,#0f172a,#1A5FD4); padding:96px 0; text-align:center; }
   #saas-page .sp-final h2 { font-size:clamp(1.7rem,4vw,2.6rem); font-weight:900; color:#fff; line-height:1.25; margin-bottom:14px; }
   #saas-page .sp-final p { color:rgba(255,255,255,.7); font-size:.95rem; line-height:1.75; margin-bottom:36px; }
@@ -219,7 +206,7 @@
         </div>
         <div class="col-lg-7">
           <div class="sp-diagram">
-            <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/11-%EC%97%85%EB%AC%B4%EB%B6%84%EC%82%B0-%EB%B9%84%ED%8F%AC%EC%95%A0%ED%94%84%ED%84%B0.svg" alt="업무분산 비포애프터" loading="lazy">
+            <img src="https://api.taieng.co.kr/api/v1/diagrams/11" alt="업무분산 비포애프터" loading="lazy">
             <p class="sp-cap">TAI Safe 도입 전·후 업무 구조 변화</p>
           </div>
         </div>
@@ -303,7 +290,7 @@
     <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
       <div class="col-lg-6">
         <div class="sp-diagram">
-          <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/01-%EC%A4%91%EB%8C%80%EC%9E%AC%ED%95%B4%EC%B2%98%EB%B2%8C%EB%B2%95-%EC%A0%81%EC%9A%A9-%ED%9D%90%EB%A6%84%EB%8F%84.svg" alt="중대재해처벌법 적용 흐름도" loading="lazy">
+          <img src="https://api.taieng.co.kr/api/v1/diagrams/1" alt="중대재해처벌법 적용 흐름도" loading="lazy">
           <p class="sp-cap">중대재해처벌법 적용 흐름도 — TAI 법령 엔진이 자동 추적합니다</p>
         </div>
       </div>
@@ -323,7 +310,7 @@
     <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
       <div class="col-lg-6 order-lg-2">
         <div class="sp-diagram">
-          <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/25-%EC%95%88%EC%A0%84%EA%B4%80%EB%A6%AC-%EB%B6%84%EC%82%B0%EA%B5%AC%EC%A1%B0%EB%8F%84.svg" alt="안전관리 분산 구조도" loading="lazy">
+          <img src="https://api.taieng.co.kr/api/v1/diagrams/25" alt="안전관리 분산 구조도" loading="lazy">
           <p class="sp-cap">조직 전체에 분산된 안전관리 구조</p>
         </div>
       </div>
@@ -358,7 +345,7 @@
     <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
       <div class="col-lg-6 order-lg-2">
         <div class="sp-diagram">
-          <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/17-%EC%9E%91%EC%97%85%EC%A4%91%EC%A7%80-%ED%8C%90%EB%8B%A8%EA%B8%B0%EC%A4%80.svg" alt="작업중지 판단 기준" loading="lazy">
+          <img src="https://api.taieng.co.kr/api/v1/diagrams/17" alt="작업중지 판단 기준" loading="lazy">
           <p class="sp-cap">기상 조건별 작업중지 판단 기준 — 30분 간격 자동 감시</p>
         </div>
       </div>
@@ -394,7 +381,7 @@
     <div class="container">
       <div class="text-center mb-5"><span class="sp-label">중대재해처벌법</span><h2 class="sp-h2">이게 안 되면 어떻게 되나요?</h2><p class="sp-desc">안전보건관리체계를 갖추지 않은 상태에서 중대재해가 발생하면 경영책임자 개인이 형사처벌을 받습니다.</p></div>
       <div class="row g-4 align-items-center">
-        <div class="col-lg-7"><div class="sp-diagram sp-diagram-dark"><img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/06-%EA%B3%BC%ED%83%9C%EB%A3%8C-%EB%B2%8C%EC%B9%99-%EA%B5%AC%EC%A1%B0.svg" alt="과태료·벌칙 구조" loading="lazy" style="filter:brightness(1.05);"><p class="sp-cap">미이행 시 과태료 및 형사처벌 구조</p></div></div>
+        <div class="col-lg-7"><div class="sp-diagram sp-diagram-dark"><img src="https://api.taieng.co.kr/api/v1/diagrams/6" alt="과태료·벌칙 구조" loading="lazy" style="filter:brightness(1.05);"><p class="sp-cap">미이행 시 과태료 및 형사처벌 구조</p></div></div>
         <div class="col-lg-5">
           <div class="sp-penalty">
             <div class="sp-penalty-label">중대재해처벌법 제4조</div>
@@ -412,7 +399,9 @@
   <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="text-center mb-5"><span class="sp-label">도입 과정</span><h2 class="sp-h2">이렇게 시작합니다</h2><p class="sp-desc">법령진단부터 운영까지, 4단계로 완성됩니다.</p></div>
-      <div class="sp-diagram" style="max-width:860px;margin:0 auto;"><img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/24-TAI-%EB%8F%84%EC%9E%85-4%EB%8B%A8%EA%B3%84.svg" alt="TAI Safe 도입 4단계" loading="lazy"></div>
+      <div class="sp-diagram" style="max-width:860px;margin:0 auto;">
+        <img src="https://api.taieng.co.kr/api/v1/diagrams/24" alt="TAI Safe 도입 4단계" loading="lazy">
+      </div>
     </div>
   </section>
 
@@ -420,7 +409,9 @@
   <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="text-center mb-5"><span class="sp-label">요금제</span><h2 class="sp-h2">과태료 1건보다 저렴합니다</h2><p class="sp-desc">안전관리자 미선임 과태료 최대 500만원 · TAI Safe 연간 이용료 비교</p></div>
-      <div class="sp-diagram" style="max-width:760px;margin:0 auto 40px;"><img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/23-TAI-ROI-%EB%B9%84%EA%B5%90.svg" alt="TAI Safe ROI 비교" loading="lazy"></div>
+      <div class="sp-diagram" style="max-width:760px;margin:0 auto 40px;">
+        <img src="https://api.taieng.co.kr/api/v1/diagrams/23" alt="TAI Safe ROI 비교" loading="lazy">
+      </div>
       <div class="row g-4 justify-content-center">
         <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="sect">건물</div><div class="amt">59,000<span style="font-size:.95rem;">원</span></div><div class="unit">/월 · VAT 별도</div><ul><li>법령 기반 자동 일정</li><li>D-day 알림 (SMS)</li><li>점검 기록 자동 보관</li><li>관리자 대시보드</li></ul><a href="../free-diagnosis.html" class="sp-price-cta">법령진단 후 시작</a></div></div>
         <div class="col-lg-4 col-md-6"><div class="sp-price featured"><div class="sect">산업</div><div class="amt">79,000<span style="font-size:.95rem;">원</span></div><div class="unit">/월 · VAT 별도</div><ul><li>법령 기반 자동 일정</li><li>현장 QR 점검 앱</li><li>TBM 전자서명</li><li>작업요청·즉시승인</li><li>기상 작업중지 감시</li><li>법정 서식 자동 생성</li></ul><a href="../free-diagnosis.html" class="sp-price-cta">법령진단 후 시작</a></div></div>
