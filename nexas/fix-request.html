@@ -27,45 +27,43 @@
   /* ── 왼쪽 패널 (마케팅) ── */
   .fix-left{
     background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%);
-    padding:56px 40px;
-    display:flex;flex-direction:column;justify-content:center;
+    padding:48px 36px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
     color:#fff;position:sticky;top:80px;height:calc(100vh - 80px);
+    text-align:center;
   }
   @media(max-width:768px){
     .fix-left{
-      position:relative;height:auto;padding:32px 24px;top:0;
+      position:relative;height:auto;padding:28px 20px;top:0;
     }
   }
 
-  .fix-left .fl-icon{font-size:2.6rem;margin-bottom:16px;}
-  .fix-left h2{font-size:1.8rem;font-weight:900;line-height:1.35;margin-bottom:10px;color:#fff;}
+  .fix-left h2{font-size:1.6rem;font-weight:900;line-height:1.35;margin:0 0 6px;color:#fff;}
   .fix-left h2 em{color:#60a5fa;font-style:normal;}
-  .fix-left .fl-sub{font-size:.92rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:32px;}
+  .fix-left .fl-sub{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:28px;}
 
-  .fl-features{list-style:none;padding:0;margin:0 0 32px;}
-  .fl-features li{display:flex;align-items:flex-start;gap:12px;padding:12px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.55;}
-  .fl-features li:last-child{border-bottom:none;}
-  .fl-features .fi-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
-  .fl-features .fi-title{font-weight:700;color:#fff;display:block;}
-  .fl-features .fi-desc{color:rgba(255,255,255,.55);font-size:.82rem;}
+  /* 흐름도 SVG */
+  .fl-diagram{width:100%;max-width:420px;margin:0 auto 28px;}
+  .fl-diagram img{width:100%;height:auto;filter:brightness(1.15);display:block;}
+  @media(max-width:768px){
+    .fl-diagram{max-width:280px;margin-bottom:16px;}
+  }
 
-  .fl-benefits{list-style:none;padding:0;margin:0 0 28px;}
-  .fl-benefits li{font-size:.84rem;color:rgba(255,255,255,.75);padding:7px 0;
+  .fl-benefits{list-style:none;padding:0;margin:0 0 24px;text-align:left;width:100%;max-width:360px;}
+  .fl-benefits li{font-size:.84rem;color:rgba(255,255,255,.75);padding:6px 0;
     display:flex;align-items:center;gap:8px;}
   .fl-benefits li::before{content:'✓';color:#60a5fa;font-weight:900;flex-shrink:0;}
 
-  .fl-trust{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;margin-top:auto;}
+  .fl-trust{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:auto;width:100%;max-width:360px;}
   .fl-trust .ft-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-    color:rgba(255,255,255,.35);margin-bottom:8px;}
-  .fl-trust .ft-line{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.6;}
+    color:rgba(255,255,255,.35);margin-bottom:6px;}
+  .fl-trust .ft-line{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.6;}
 
   /* ── 모바일 왼쪽 패널 축약 ── */
   @media(max-width:768px){
-    .fix-left h2{font-size:1.3rem;margin-bottom:6px;}
-    .fix-left .fl-sub{font-size:.82rem;margin-bottom:16px;}
-    .fl-features{display:none;}
-    .fl-benefits{margin-bottom:0;}
+    .fix-left h2{font-size:1.2rem;margin-bottom:4px;}
+    .fix-left .fl-sub{font-size:.8rem;margin-bottom:12px;}
+    .fl-benefits{display:none;}
     .fl-trust{display:none;}
   }
 
@@ -217,13 +215,6 @@
     display:inline-block;text-decoration:none;
   }
   .cta-card .btn-cta:hover{background:#2563eb;color:#fff;}
-
-  /* 채팅 비활성 overlay */
-  .chat-disabled{position:relative;}
-  .chat-disabled::after{
-    content:'';position:absolute;inset:0;
-    background:rgba(30,41,59,.6);pointer-events:all;
-  }
   </style>
 </head>
 <body class="sc5">
@@ -232,41 +223,24 @@
 <div id="tai-header"></div>
 
 <div class="fix-layout">
-  <!-- ── 왼쪽 패널: 마케팅 ── -->
+  <!-- ── 왼쪽 패널: 흐름도 중심 마케팅 ── -->
   <div class="fix-left">
-    <div class="fl-icon">🎧</div>
-    <h2>TAI <em>전문가 매칭</em></h2>
-    <p class="fl-sub">상황만 말하면 전문 업체를 연결합니다.<br>복잡한 견적 요청 없이 대화로 해결하세요.</p>
+    <h2><em>상황만 말하면</em><br>전문 업체를 연결합니다</h2>
+    <p class="fl-sub">복잡한 견적 요청 없이 대화로 해결하세요.</p>
 
-    <ul class="fl-features">
-      <li>
-        <span class="fi-icon">🔧</span>
-        <div><span class="fi-title">수선·보수</span><span class="fi-desc">설비 고장, 누수, 전기 이상 등</span></div>
-      </li>
-      <li>
-        <span class="fi-icon">👷</span>
-        <div><span class="fi-title">선임 연결</span><span class="fi-desc">안전관리자·보건관리자 선임</span></div>
-      </li>
-      <li>
-        <span class="fi-icon">🔍</span>
-        <div><span class="fi-title">점검 대행</span><span class="fi-desc">법정 정기검사, 안전점검 대행</span></div>
-      </li>
-      <li>
-        <span class="fi-icon">📋</span>
-        <div><span class="fi-title">안전 진단</span><span class="fi-desc">위험성평가, 작업환경측정</span></div>
-      </li>
-    </ul>
+    <div class="fl-diagram">
+      <img src="assets/img/matching-flow.svg" alt="TAI 전문가 매칭 흐름도">
+    </div>
 
     <ul class="fl-benefits">
       <li>비회원도 3턴까지 무료 상담</li>
       <li>회원가입 시 전문 업체 즉시 매칭</li>
       <li>법령·과태료 정보 무료 제공</li>
-      <li>견적 비교 없이 검증된 업체 연결</li>
     </ul>
 
     <div class="fl-trust">
       <div class="ft-label">Patent Pending</div>
-      <div class="ft-line">제10-2026-0056330 외 7건<br>법령 규칙 엔진 2,080+ 의무 항목 DB</div>
+      <div class="ft-line">제10-2026-0056330 외 7건 · 법령 규칙 엔진 2,080+ 의무 항목 DB</div>
     </div>
   </div>
 
@@ -355,7 +329,6 @@ function getLocalGreeting(fromPage, serviceType) {
 }
 
 async function startChat() {
-  // 기존 세션 확인
   const savedSession = sessionStorage.getItem('fix_session_id');
   if (savedSession) {
     sessionId = savedSession;
@@ -382,7 +355,6 @@ async function startChat() {
       throw new Error('session_id 없음');
     }
   } catch(e) {
-    // API 미구현 — 기본 인사 메시지
     sessionId = 'guest_' + Date.now();
     sessionStorage.setItem('fix_session_id', sessionId);
     appendExpertMsg(getLocalGreeting(fromPage, serviceType));
@@ -403,7 +375,6 @@ async function sendMessage() {
   turnCount++;
   updateTurnBadge();
 
-  // 3턴 도달
   if (turnCount >= MAX_TURNS) {
     isEnded = true;
     disableInput();
@@ -427,13 +398,11 @@ async function sendMessage() {
       appendExpertMsg(reply);
     }
 
-    // API가 is_last_turn 반환하거나 로컬 카운트 초과 시 결과 표시
     if (json.is_last_turn || json.data?.is_last_turn || isEnded) {
       setTimeout(showResult, 600);
     }
   } catch(e) {
     hideTyping();
-    // API 미구현 — 더미 응답
     const dummies = [
       '말씀해주신 상황을 분석하고 있습니다. 조금 더 자세히 설명해 주실 수 있으신가요? 어느 위치에서 발생했나요?',
       '네, 파악했습니다. 마지막으로 언제부터 이 문제가 발생했는지 알려주시면 더 정확한 업체를 연결해드릴 수 있습니다.',
@@ -521,7 +490,6 @@ function hideTyping() {
 }
 
 function disableInput() {
-  const bar = document.getElementById('inputBar');
   const inp = document.getElementById('msgInput');
   const btn = document.getElementById('btnSend');
   inp.disabled = true;
