@@ -1,7 +1,8 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
- * v2.3.0 (2026-04-19): 03_nav — 서비스(표 상단 5 + 구분선 + 기존 하단 동일)·업종별·역할별·안전정보 단일 링크, nexas base 보정
+ * v2.3.1 (2026-04-19): 안전정보 드롭다운 — 판례검색(precedent-search)·안전정보(safety-news)
+ * v2.3.0 (2026-04-19): 03_nav — 서비스·업종별·역할별·안전정보, nexas base 보정
  *
  * 경로:
  *   URL에 /nexas/가 있으면 그 이후 경로 깊이로 ../ 계산
@@ -94,7 +95,13 @@
     '            </ul>',
     '          </li>',
 
-    '          <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
+    '          <li class="menu-item-has-children">',
+    '            <a href="#">안전정보</a>',
+    '            <ul class="sub-menu">',
+    '              <li><a href="' + base + 'precedent-search.html">판례 검색</a></li>',
+    '              <li><a href="' + base + 'safety-news.html">안전정보</a></li>',
+    '            </ul>',
+    '          </li>',
 
     '        </ul>',
     '      </div>',

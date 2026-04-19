@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v2.4.2 (2026-04-19): 안전정보 블록 — 판례검색·안전정보 링크
  * v2.4.1 (2026-04-19): 푸터「서비스」열은 nav 개편 전 목록·순서 유지, 시작하기에 요금제 복원
  * v2.4.0 (2026-04-19): nexas 하위 경로 base 보정, 업종별/역할별 푸터 라벨
  * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
@@ -128,6 +129,10 @@
     '            <li><a href="' + b + 'pricing.html"><i class="fas fa-angle-right"></i>요금제</a></li>' +
     '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
+    '          </ul>' +
+    '          <h6 class="widget-title" style="margin-top:20px;">안전정보</h6>' +
+    '          <ul>' +
+    '            <li><a href="' + b + 'precedent-search.html"><i class="fas fa-angle-right"></i>판례 검색</a></li>' +
     '            <li><a href="' + b + 'safety-news.html"><i class="fas fa-angle-right"></i>안전정보</a></li>' +
     '          </ul>' +
     '        </div>' +
