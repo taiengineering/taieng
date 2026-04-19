@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.9 — FN-07: 전문가 상담 링크 전역 숨김 */
+/* TAI 공통 스타일 v1.10 — 헤더 로고 전역 확대 (SVG, 약 2배) */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -16,6 +16,29 @@ a { text-decoration: none; }
 
 /* FN-07: 전문가 상담 링크 전역 숨김 — TAI는 상담 서비스가 아님 (데이터→엔진→자동판단) */
 .diag-nudge-secondary { display: none !important; }
+
+/* ── 헤더 로고: 전역 확대 (SVG 무한 확대 가능) ────────────── */
+.navbar-area .logo .main-logo img,
+.navbar-area .logo img {
+  height: 60px !important;
+  width: auto !important;
+  max-height: 60px !important;
+  display: block !important;
+}
+@media (max-width: 991px) {
+  .navbar-area .logo .main-logo img,
+  .navbar-area .logo img {
+    height: 48px !important;
+    max-height: 48px !important;
+  }
+}
+@media (max-width: 575px) {
+  .navbar-area .logo .main-logo img,
+  .navbar-area .logo img {
+    height: 42px !important;
+    max-height: 42px !important;
+  }
+}
 
 /* 스크롤바 */
 .sc5::-webkit-scrollbar { width: 8px !important; height: 8px !important; }

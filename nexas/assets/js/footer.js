@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v2.4.1 (2026-04-19): 로고 PNG → SVG 전환
  * v2.4.0 (2026-04-19): 풋터 다크 테마 (#0f172a) 적용
  * v2.3.0 (2026-04-14): 특허 8건(외 7건), 메뉴명 'TAI 기술력'
  */
@@ -53,7 +54,7 @@
     '    <div class="row">' +
     '      <div class="col-xl-4 col-lg-4 col-sm-6">' +
     '        <div class="footer-widget widget">' +
-    '          <a class="logo" href="' + b + 'index.html"><img src="' + b + 'assets/img/tai-logo.png" alt="TAI 엔지니어링" style="height:36px;"></a>' +
+    '          <a class="logo" href="' + b + 'index.html"><img src="' + b + 'assets/img/tai-logo.svg" alt="TAI 엔지니어링" style="height:44px;"></a>' +
     '          <div class="footer-company-info" style="margin-top:16px;">' +
     '            <p style="margin-bottom:4px;"><span class="footer-company-name" style="font-weight:700;">TAI 엔지니어링</span>&nbsp;&nbsp;<span style="font-size:.85rem;">대표 심태왕</span></p>' +
     '            <p style="margin-bottom:3px;font-size:.85rem;">서울특별시 강남구 테헤란로79길 6 JS타워 3층</p>' +

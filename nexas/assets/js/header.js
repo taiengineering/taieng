@@ -1,6 +1,7 @@
 /**
  * TAI 공통 Header — assets/js/header.js
  * 모든 페이지에서 <div id="tai-header"></div> + <script src="...assets/js/header.js"> 로 사용
+ * v2.2.0 (2026-04-19): 로고 PNG → SVG 전환 (무한 확대 가능, 2배 이상 크게 표시)
  * v2.1.2 (2026-04-15): 탑메뉴 '회사소개' 드롭다운 제거 → '안전정보' 단일 링크
  *
  * 경로 자동 감지:
@@ -31,7 +32,7 @@
     /* 로고 */
     '      <div class="logo">',
     '        <a class="main-logo" href="' + base + 'index.html">',
-    '          <img src="' + base + 'assets/img/tai-logo.png" alt="TAI 엔지니어링">',
+    '          <img src="' + base + 'assets/img/tai-logo.svg" alt="TAI 엔지니어링">',
     '        </a>',
     '      </div>',
 
