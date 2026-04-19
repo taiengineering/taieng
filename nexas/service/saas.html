@@ -131,29 +131,34 @@
     box-shadow:0 4px 16px rgba(15,23,42,.2);
   }
   #saas-page .sp-sector-btn .sb-icon { font-size:1.2rem; }
-
-  /* 섹터 패널 */
   #saas-page .sp-sector-panel { display:none; }
   #saas-page .sp-sector-panel.active { display:block; }
 
-  /* 플랜 카드 */
-  #saas-page .sp-price { background:#fff; border:1.5px solid var(--sp-border); border-radius:18px; padding:28px 22px; height:100%; position:relative; overflow:hidden; transition:transform .15s,box-shadow .15s; }
+  /* ── 플랜 카드 (버튼 항상 하단 고정) ── */
+  #saas-page .sp-price {
+    background:#fff; border:1.5px solid var(--sp-border); border-radius:18px;
+    padding:28px 22px; height:100%; position:relative;
+    transition:transform .15s,box-shadow .15s;
+    /* flex column으로 버튼 하단 고정 */
+    display:flex; flex-direction:column;
+  }
   #saas-page .sp-price:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.1); }
-  #saas-page .sp-price.featured { border-color:var(--sp-blue); border-width:2px; }
-  #saas-page .sp-price.featured::before { content:'추천'; position:absolute; top:14px; right:14px; background:var(--sp-blue); color:#fff; font-size:.66rem; font-weight:800; padding:2px 9px; border-radius:999px; }
+  /* 추천 배지 없음 — featured 스타일 제거 */
   #saas-page .sp-price .tier { font-size:.68rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--sp-gray); margin-bottom:4px; }
   #saas-page .sp-price .plan-name { font-size:1.1rem; font-weight:900; color:var(--sp-dark); margin-bottom:16px; line-height:1.2; }
-  #saas-page .sp-price .amt  { font-size:2.2rem; font-weight:900; color:var(--sp-blue); line-height:1; margin-bottom:3px; }
+  #saas-page .sp-price .amt { font-size:2.2rem; font-weight:900; color:var(--sp-blue); line-height:1; margin-bottom:3px; }
   #saas-page .sp-price .amt.consult { font-size:1.4rem; color:var(--sp-dark); }
   #saas-page .sp-price .unit { font-size:.78rem; color:var(--sp-gray); margin-bottom:20px; }
   #saas-page .sp-price hr { border:none; border-top:1px solid var(--sp-border); margin:0 0 16px; }
-  #saas-page .sp-price ul { list-style:none; padding:0; margin:0 0 22px; display:flex; flex-direction:column; gap:9px; }
+  /* ul이 남은 공간을 모두 차지 → 버튼이 항상 하단 */
+  #saas-page .sp-price ul { list-style:none; padding:0; margin:0; flex:1; display:flex; flex-direction:column; gap:9px; }
   #saas-page .sp-price ul li { display:flex; gap:8px; font-size:.84rem; color:#475569; line-height:1.45; align-items:flex-start; }
   #saas-page .sp-price ul li::before { content:'✓'; color:var(--sp-green); font-weight:900; flex-shrink:0; margin-top:1px; }
   #saas-page .sp-price-cta {
     display:block; background:var(--sp-blue); color:#fff; border-radius:10px;
     padding:13px; text-align:center; font-weight:800; font-size:.9rem;
-    text-decoration:none; transition:background .15s; border:none; width:100%; cursor:pointer;
+    text-decoration:none; transition:background .15s; border:none; width:100%;
+    cursor:pointer; margin-top:22px;
   }
   #saas-page .sp-price-cta:hover { background:#1248a8; color:#fff; }
   #saas-page .sp-price-cta.consult-cta { background:var(--sp-dark); }
@@ -449,7 +454,7 @@
       <div class="text-center mb-4">
         <span class="sp-label">요금제</span>
         <h2 class="sp-h2">과태료 1건보다 저렴합니다</h2>
-        <p class="sp-desc">사업장 유형을 선택하면 해당 요금제를 확인할 수 있습니다.</p>
+        <p class="sp-desc">사업장 유형을 선택하면 해당 요금제를 확인할 수 있습니다. <strong>시설 1개당 과금</strong>입니다.</p>
       </div>
 
       <div class="sp-diagram" style="max-width:760px;margin:0 auto 48px;">
@@ -458,31 +463,24 @@
 
       <!-- 섹터 탭 -->
       <div class="sp-sector-tabs" role="tablist">
-        <button class="sp-sector-btn active" data-sector="building" role="tab" aria-selected="true">
-          <span class="sb-icon">🏢</span> 건물
-        </button>
-        <button class="sp-sector-btn" data-sector="industry" role="tab" aria-selected="false">
-          <span class="sb-icon">🏭</span> 산업
-        </button>
-        <button class="sp-sector-btn" data-sector="construction" role="tab" aria-selected="false">
-          <span class="sb-icon">🏗️</span> 건설
-        </button>
+        <button class="sp-sector-btn active" data-sector="building" role="tab" aria-selected="true"><span class="sb-icon">🏢</span> 건물</button>
+        <button class="sp-sector-btn" data-sector="industry" role="tab" aria-selected="false"><span class="sb-icon">🏭</span> 산업</button>
+        <button class="sp-sector-btn" data-sector="construction" role="tab" aria-selected="false"><span class="sb-icon">🏗️</span> 건설</button>
       </div>
 
       <!-- ── 건물 패널 ── -->
       <div class="sp-sector-panel active" id="panel-building">
         <div class="sp-sector-note">
           <span class="sn-icon">🏢</span>
-          <span><strong>건물 사업장</strong> — 소방·승강기·전기설비 등 건물 안전관리 의무를 자동화합니다. 연면적·용도에 따라 법령이 자동 적용됩니다.</span>
+          <span><strong>건물 사업장</strong> — 건물 1개 기준 과금. 소방·승강기·전기설비 등 건물 안전관리 의무를 자동화합니다.</span>
         </div>
         <div class="row g-4 justify-content-center">
-          <!-- 건물 스타터 -->
           <div class="col-lg-4 col-md-6">
             <div class="sp-price">
               <div class="tier">STARTER</div>
               <div class="plan-name">건물 기본</div>
               <div class="amt">59,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 건물 1개</div>
               <hr>
               <ul>
                 <li>법령 기반 점검 일정 자동 생성</li>
@@ -491,29 +489,27 @@
                 <li>안전관리자 대시보드</li>
                 <li>기본 보고서 출력</li>
               </ul>
-              <a href="../payment.html?sector=building&plan=starter" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','STARTER',59000,'TAI Safe 건물 기본')">결제하기</button>
             </div>
           </div>
-          <!-- 건물 프로 (추천) -->
           <div class="col-lg-4 col-md-6">
-            <div class="sp-price featured">
+            <div class="sp-price">
               <div class="tier">PRO</div>
               <div class="plan-name">건물 전문</div>
               <div class="amt">249,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 건물 1개</div>
               <hr>
               <ul>
                 <li>스타터 플랜 전체 포함</li>
                 <li>소방시설 자체점검 연동</li>
                 <li>승강기 검사 주기 관리</li>
                 <li>석면·에너지 점검 일정</li>
-                <li>위반 위험 알림</li>
+                <li>위반 위험 사전 알림</li>
                 <li>법정 서식 자동 생성</li>
               </ul>
-              <a href="../payment.html?sector=building&plan=pro" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','PRO',249000,'TAI Safe 건물 전문')">결제하기</button>
             </div>
           </div>
-          <!-- 건물 엔터프라이즈 (협의) -->
           <div class="col-lg-4 col-md-6">
             <div class="sp-price">
               <div class="tier">ENTERPRISE</div>
@@ -523,7 +519,7 @@
               <hr>
               <ul>
                 <li>프로 플랜 전체 포함</li>
-                <li>다중 건물 통합 관리</li>
+                <li>2개 이상 건물 통합 관리</li>
                 <li>전담 법령 업데이트 알림</li>
                 <li>API 연동 지원</li>
                 <li>전담 CS · SLA 보장</li>
@@ -538,33 +534,31 @@
       <div class="sp-sector-panel" id="panel-industry">
         <div class="sp-sector-note">
           <span class="sn-icon">🏭</span>
-          <span><strong>산업 사업장</strong> — 제조·물류·유통 등 산업안전보건법·중대재해처벌법 의무를 자동화합니다. 공정·설비별 점검이 체계적으로 관리됩니다.</span>
+          <span><strong>산업 사업장</strong> — 사업장 1개 기준 과금. 제조·물류·유통 등 산업안전보건법·중대재해처벌법 의무를 자동화합니다.</span>
         </div>
         <div class="row g-4 justify-content-center">
-          <!-- 산업 스타터 -->
           <div class="col-lg-3 col-md-6">
             <div class="sp-price">
               <div class="tier">STARTER</div>
               <div class="plan-name">산업 기본</div>
               <div class="amt">79,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 사업장 1개</div>
               <hr>
               <ul>
                 <li>법령 기반 점검 일정 자동 생성</li>
                 <li>D-day 알림 (SMS)</li>
                 <li>점검 기록 자동 보관</li>
-                <li>관리자 대시보드</li>
+                <li>안전관리자 대시보드</li>
               </ul>
-              <a href="../payment.html?sector=industry&plan=starter" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','STARTER',79000,'TAI Safe 산업 기본')">결제하기</button>
             </div>
           </div>
-          <!-- 산업 프로 (추천) -->
           <div class="col-lg-3 col-md-6">
-            <div class="sp-price featured">
+            <div class="sp-price">
               <div class="tier">PRO</div>
               <div class="plan-name">산업 전문</div>
               <div class="amt">149,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 사업장 1개</div>
               <hr>
               <ul>
                 <li>스타터 플랜 전체 포함</li>
@@ -574,28 +568,26 @@
                 <li>기상 작업중지 감시</li>
                 <li>법정 서식 자동 생성</li>
               </ul>
-              <a href="../payment.html?sector=industry&plan=pro" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','PRO',149000,'TAI Safe 산업 전문')">결제하기</button>
             </div>
           </div>
-          <!-- 산업 비즈니스 -->
           <div class="col-lg-3 col-md-6">
             <div class="sp-price">
               <div class="tier">BUSINESS</div>
               <div class="plan-name">산업 비즈니스</div>
               <div class="amt">249,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 사업장 1개</div>
               <hr>
               <ul>
                 <li>프로 플랜 전체 포함</li>
-                <li>다공장 통합 관리</li>
                 <li>안전보건 종합 보고서</li>
                 <li>법령 개정 자동 업데이트</li>
                 <li>위험성평가 작성 지원</li>
+                <li>협력업체 안전관리 연동</li>
               </ul>
-              <a href="../payment.html?sector=industry&plan=business" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','BUSINESS',249000,'TAI Safe 산업 비즈니스')">결제하기</button>
             </div>
           </div>
-          <!-- 산업 엔터프라이즈 -->
           <div class="col-lg-3 col-md-6">
             <div class="sp-price">
               <div class="tier">ENTERPRISE</div>
@@ -605,7 +597,7 @@
               <hr>
               <ul>
                 <li>비즈니스 플랜 전체 포함</li>
-                <li>전담 구축 지원</li>
+                <li>2개 이상 사업장 통합 관리</li>
                 <li>ERP·MES 연동</li>
                 <li>API 전체 개방</li>
                 <li>전담 CS · SLA 보장</li>
@@ -620,48 +612,45 @@
       <div class="sp-sector-panel" id="panel-construction">
         <div class="sp-sector-note">
           <span class="sn-icon">🏗️</span>
-          <span><strong>건설 사업장</strong> — 공사장 안전관리 3법(산업안전보건법·중대재해처벌법·건설기술진흥법) 의무를 공사장·공정별로 자동화합니다.</span>
+          <span><strong>건설 사업장</strong> — 공사장 1개 기준 과금. 산업안전보건법·중대재해처벌법·건설기술진흥법 의무를 자동화합니다.</span>
         </div>
         <div class="row g-4 justify-content-center">
-          <!-- 건설 스타터 -->
           <div class="col-lg-4 col-md-6">
             <div class="sp-price">
               <div class="tier">STARTER</div>
               <div class="plan-name">건설 기본</div>
               <div class="amt">145,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 공사장 1개</div>
               <hr>
               <ul>
-                <li>공사장별 법령 의무 자동 산출</li>
+                <li>공사장 법령 의무 자동 산출</li>
                 <li>D-day 알림 (SMS)</li>
                 <li>현장 QR 점검 앱</li>
                 <li>TBM 전자서명</li>
                 <li>기상 작업중지 감시</li>
                 <li>법정 서식 자동 생성</li>
               </ul>
-              <a href="../payment.html?sector=construction&plan=starter" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','STARTER',145000,'TAI Safe 건설 기본')">결제하기</button>
             </div>
           </div>
-          <!-- 건설 프로 (추천) -->
           <div class="col-lg-4 col-md-6">
-            <div class="sp-price featured">
+            <div class="sp-price">
               <div class="tier">PRO</div>
               <div class="plan-name">건설 전문</div>
               <div class="amt">385,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도</div>
+              <div class="unit">/월 · VAT 별도 · 공사장 1개</div>
               <hr>
               <ul>
                 <li>스타터 플랜 전체 포함</li>
-                <li>협력업체 통합 관리</li>
-                <li>다현장 통합 대시보드</li>
+                <li>협력업체 안전관리 연동</li>
                 <li>안전관리계획서 작성 지원</li>
                 <li>위험성평가 통합 관리</li>
                 <li>전담 법령 업데이트</li>
+                <li>안전보건 종합 보고서</li>
               </ul>
-              <a href="../payment.html?sector=construction&plan=pro" class="sp-price-cta">결제하기</a>
+              <button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','PRO',385000,'TAI Safe 건설 전문')">결제하기</button>
             </div>
           </div>
-          <!-- 건설 엔터프라이즈 -->
           <div class="col-lg-4 col-md-6">
             <div class="sp-price">
               <div class="tier">ENTERPRISE</div>
@@ -671,7 +660,7 @@
               <hr>
               <ul>
                 <li>프로 플랜 전체 포함</li>
-                <li>대형 건설사 맞춤 구축</li>
+                <li>2개 이상 공사장 통합 관리</li>
                 <li>발주처·원도급 연동</li>
                 <li>API 전체 개방</li>
                 <li>전담 CS · SLA 보장</li>
@@ -709,6 +698,29 @@
 
   </div><!-- /#saas-page -->
 
+  <!-- 이니시스 결제 폼 (숨김) -->
+  <form id="sp_inicis_form" method="POST" accept-charset="euc-kr" style="display:none">
+    <input type="hidden" name="version" value="1.0">
+    <input type="hidden" name="gopaymethod" value="Card">
+    <input type="hidden" name="currency" value="WON">
+    <input type="hidden" name="langtype" value="KO">
+    <input type="hidden" name="acceptmethod" value="CARDONLY:CARDPOINT:centerCd(Y)">
+    <input type="hidden" name="use_chkfake" value="Y">
+    <input type="hidden" id="sp_f_mid" name="mid">
+    <input type="hidden" id="sp_f_mKey" name="mKey">
+    <input type="hidden" id="sp_f_oid" name="oid">
+    <input type="hidden" id="sp_f_price" name="price">
+    <input type="hidden" id="sp_f_goodname" name="goodname">
+    <input type="hidden" id="sp_f_buyername" name="buyername">
+    <input type="hidden" id="sp_f_buyertel" name="buyertel">
+    <input type="hidden" id="sp_f_buyeremail" name="buyeremail">
+    <input type="hidden" id="sp_f_timestamp" name="timestamp">
+    <input type="hidden" id="sp_f_signature" name="signature">
+    <input type="hidden" id="sp_f_verification" name="verification">
+    <input type="hidden" id="sp_f_returnUrl" name="returnUrl">
+    <input type="hidden" id="sp_f_closeUrl" name="closeUrl">
+  </form>
+
   <div id="tai-footer"></div>
   <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
@@ -719,6 +731,8 @@
   <script src="../assets/js/header.js"></script>
   <script src="../assets/js/nav-auth.js"></script>
   <script src="../assets/js/footer.js"></script>
+  <!-- 이니시스 표준결제 JS -->
+  <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
   <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 
   <!-- 섹터 탭 스위칭 -->
@@ -726,36 +740,98 @@
   (function() {
     var btns = document.querySelectorAll('#saas-page .sp-sector-btn');
     var panels = document.querySelectorAll('#saas-page .sp-sector-panel');
-
     btns.forEach(function(btn) {
       btn.addEventListener('click', function() {
         var sector = this.getAttribute('data-sector');
-
-        // 탭 활성화
-        btns.forEach(function(b) {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        this.classList.add('active');
-        this.setAttribute('aria-selected', 'true');
-
-        // 패널 표시
+        btns.forEach(function(b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        this.classList.add('active'); this.setAttribute('aria-selected','true');
         panels.forEach(function(p) { p.classList.remove('active'); });
-        var target = document.getElementById('panel-' + sector);
-        if (target) target.classList.add('active');
+        var t = document.getElementById('panel-' + sector);
+        if (t) t.classList.add('active');
       });
     });
-
-    // URL hash로 섹터 사전 선택 (#pricing-industry 등)
     var hash = location.hash;
     if (hash) {
-      var match = hash.match(/pricing-(building|industry|construction)/);
-      if (match) {
-        var btn = document.querySelector('[data-sector="' + match[1] + '"]');
-        if (btn) btn.click();
-      }
+      var m = hash.match(/pricing-(building|industry|construction)/);
+      if (m) { var b = document.querySelector('[data-sector="'+m[1]+'"]'); if (b) b.click(); }
     }
   })();
+  </script>
+
+  <!-- 이니시스 결제 함수 -->
+  <script>
+  'use strict';
+  var SP_API = 'https://api.taieng.co.kr';
+  var SP_RETURN  = SP_API + '/payments/inicis/return';
+  var SP_CLOSE   = SP_API + '/payments/result?resultCode=CLOSE';
+
+  function spPay(e, productType, planCode, amount, goodname) {
+    e.preventDefault();
+    var token  = localStorage.getItem('access_token') || '';
+    var userId = localStorage.getItem('user_id') || '';
+    var companyId = localStorage.getItem('company_id') || '';
+
+    if (!token || !userId) {
+      alert('로그인 후 결제해주세요.');
+      location.href = 'https://safe.taieng.co.kr/login?redirect=' + encodeURIComponent(location.href);
+      return;
+    }
+
+    var btn = e.target;
+    btn.disabled = true;
+    btn.textContent = '처리 중...';
+
+    var payload = JSON.stringify({
+      user_id:       userId,
+      product_type:  productType,
+      amount:        amount,
+      goodname:      goodname,
+      plan_code:     planCode,
+      period_months: 1,
+      payment_type:  'CARD',
+      return_url:    SP_RETURN,
+      close_url:     SP_CLOSE
+    });
+    if (companyId) {
+      var p = JSON.parse(payload);
+      p.company_id = companyId;
+      payload = JSON.stringify(p);
+    }
+
+    fetch(SP_API + '/payments/inicis/prepare', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: payload
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (!res || res.status !== 'success') {
+        throw new Error((res && (res.detail || res.message)) || '결제 준비 실패');
+      }
+      var d = res.data;
+      document.getElementById('sp_f_mid').value         = d.mid         || '';
+      document.getElementById('sp_f_mKey').value        = d.mKey        || '';
+      document.getElementById('sp_f_oid').value         = d.oid         || '';
+      document.getElementById('sp_f_price').value       = d.price       || String(amount);
+      document.getElementById('sp_f_goodname').value    = d.goodname    || goodname;
+      document.getElementById('sp_f_buyername').value   = d.buyername   || '고객';
+      document.getElementById('sp_f_buyertel').value    = d.buyertel    || '00000000000';
+      document.getElementById('sp_f_buyeremail').value  = d.buyeremail  || '';
+      document.getElementById('sp_f_timestamp').value   = d.timestamp   || '';
+      document.getElementById('sp_f_signature').value   = d.signature   || '';
+      document.getElementById('sp_f_verification').value = d.verification || '';
+      document.getElementById('sp_f_returnUrl').value   = SP_RETURN;
+      document.getElementById('sp_f_closeUrl').value    = SP_CLOSE;
+      INIStdPay.pay('sp_inicis_form');
+    })
+    .catch(function(err) {
+      alert('오류: ' + err.message);
+    })
+    .finally(function() {
+      btn.disabled = false;
+      btn.textContent = '결제하기';
+    });
+  }
   </script>
 </body>
 </html>
