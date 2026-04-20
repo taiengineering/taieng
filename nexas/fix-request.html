@@ -14,21 +14,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800;900&amp;family=Noto+Sans+KR:wght@400;500;700;900&amp;display=swap" rel="stylesheet">
   <style>
   *{box-sizing:border-box;}
-  body{margin:0;font-family:'Pretendard','Noto Sans KR',sans-serif;background:#f8fafc;}
 
   /*
-   * ── 헤더 높이 기준: --tai-nav-h (= 90px, header.js에서 주입)
-   * ── position: relative !important 로 헤더를 flow에 포함시킴
-   * ── 배경 추가: 투명 헤더가 흰 body bg(#f8fafc)를 노출하던 문제 해결
+   * 핵심 구조:
+   * 1. 헤더: position:fixed (style.css 기본값, 건드리지 않음) — 스크롤해도 항상 상단 고정
+   * 2. body: padding-top:90px — 헤더 아래에서 콘텐츠 시작 (fixed 헤더가 콘텐츠를 가리는 것 방지)
+   * 3. 헤더 배경: 이 페이지는 다크 레이아웃 → 항상 불투명 배경 부여
+   * 4. fix-layout, fix-left, fix-right: calc(100vh - 90px) — 뷰포트를 꽉 채움
    */
-  .navbar-area{
-    position: relative !important;
-    background: rgba(13,27,42,.96) !important;
+  body {
+    margin: 0;
+    font-family: 'Pretendard','Noto Sans KR',sans-serif;
+    background: #0d1b2a;
+    padding-top: var(--tai-nav-h, 90px);
+  }
+
+  /* 헤더 배경: 다크 (transparent 헤더가 배경 노출하는 문제 차단) */
+  .navbar-area {
+    background: rgba(13,27,42,.97) !important;
     backdrop-filter: blur(8px);
   }
 
-  /* 풀뷰포트 레이아웃 — header.js의 --tai-nav-h 변수 사용 (90px) */
-  .fix-layout{
+  .fix-layout {
     min-height: calc(100vh - var(--tai-nav-h, 90px));
     display: grid;
     grid-template-columns: 40% 60%;
@@ -37,14 +44,15 @@
     .fix-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
   }
 
+  /* sticky: body에 padding-top이 있으므로 top:0 = 헤더 바로 아래에 붙음 */
   .fix-left{
     background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%);
     padding:32px 24px;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     color:#fff;
-    position: sticky;
-    top: var(--tai-nav-h, 90px);          /* 80px → 90px */
-    height: calc(100vh - var(--tai-nav-h, 90px));  /* 80px → 90px */
+    position:sticky;
+    top:0;
+    height:calc(100vh - var(--tai-nav-h, 90px));
     text-align:center;
   }
   @media(max-width:768px){
@@ -58,7 +66,7 @@
   @media(max-width:768px){.fl-diagram{max-width:320px;margin-bottom:16px;}}
   .fl-benefits{list-style:none;padding:0;margin:0 0 24px;text-align:left;width:100%;max-width:360px;}
   .fl-benefits li{font-size:.84rem;color:rgba(255,255,255,.75);padding:6px 0;display:flex;align-items:center;gap:8px;}
-  .fl-benefits li::before{content:'✓';color:#60a5fa;font-weight:900;flex-shrink:0;}
+  .fl-benefits li::before{content:'\u2713';color:#60a5fa;font-weight:900;flex-shrink:0;}
   .fl-trust{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:auto;width:100%;max-width:360px;}
   .fl-trust .ft-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
   .fl-trust .ft-line{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.6;}
@@ -71,7 +79,7 @@
 
   .fix-right{
     display:flex;flex-direction:column;
-    height: calc(100vh - var(--tai-nav-h, 90px));  /* 80px → 90px */
+    height:calc(100vh - var(--tai-nav-h, 90px));
     overflow:hidden;
     background:#1e293b;
   }
@@ -119,7 +127,7 @@
   .result-item .ri-label{font-size:.7rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
   .result-item .ri-value{font-size:.88rem;font-weight:700;color:#e2e8f0;}
   .result-item.blurred .ri-value{filter:blur(5px);user-select:none;pointer-events:none;}
-  .result-item.blurred::after{content:'🔒';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1rem;}
+  .result-item.blurred::after{content:'\ud83d\udd12';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1rem;}
   .result-item.blurred .ri-label{color:#475569;}
   .cta-card{background:linear-gradient(135deg,#1e3a5f,#2563eb);border-radius:14px;padding:20px;margin-top:12px;text-align:center;}
   .cta-card h5{color:#fff;font-weight:900;font-size:.95rem;margin-bottom:6px;}
