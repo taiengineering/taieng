@@ -15,11 +15,41 @@
   <style>
   *{box-sizing:border-box;}
   body{margin:0;font-family:'Pretendard','Noto Sans KR',sans-serif;background:#f8fafc;}
-  .navbar-area{position:relative !important;}
-  .fix-layout{min-height:calc(100vh - 80px);display:grid;grid-template-columns:40% 60%;}
-  @media(max-width:768px){.fix-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;}}
-  .fix-left{background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%);padding:32px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;position:sticky;top:80px;height:calc(100vh - 80px);text-align:center;}
-  @media(max-width:768px){.fix-left{position:relative;height:auto;padding:28px 20px;top:0;}}
+
+  /*
+   * ── 헤더 높이 기준: --tai-nav-h (= 90px, header.js에서 주입)
+   * ── position: relative !important 로 헤더를 flow에 포함시킴
+   * ── 배경 추가: 투명 헤더가 흰 body bg(#f8fafc)를 노출하던 문제 해결
+   */
+  .navbar-area{
+    position: relative !important;
+    background: rgba(13,27,42,.96) !important;
+    backdrop-filter: blur(8px);
+  }
+
+  /* 풀뷰포트 레이아웃 — header.js의 --tai-nav-h 변수 사용 (90px) */
+  .fix-layout{
+    min-height: calc(100vh - var(--tai-nav-h, 90px));
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
+  @media(max-width:768px){
+    .fix-layout{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
+  }
+
+  .fix-left{
+    background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%);
+    padding:32px 24px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    color:#fff;
+    position: sticky;
+    top: var(--tai-nav-h, 90px);          /* 80px → 90px */
+    height: calc(100vh - var(--tai-nav-h, 90px));  /* 80px → 90px */
+    text-align:center;
+  }
+  @media(max-width:768px){
+    .fix-left{position:relative;height:auto;padding:28px 20px;top:0;}
+  }
   .fix-left h2{font-size:1.4rem;font-weight:900;line-height:1.35;margin:0 0 4px;color:#fff;}
   .fix-left h2 em{color:#60a5fa;font-style:normal;}
   .fix-left .fl-sub{font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:16px;}
@@ -32,9 +62,23 @@
   .fl-trust{border-top:1px solid rgba(255,255,255,.1);padding-top:16px;margin-top:auto;width:100%;max-width:360px;}
   .fl-trust .ft-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:6px;}
   .fl-trust .ft-line{font-size:.76rem;color:rgba(255,255,255,.45);line-height:1.6;}
-  @media(max-width:768px){.fix-left h2{font-size:1.2rem;margin-bottom:4px;}.fix-left .fl-sub{font-size:.8rem;margin-bottom:12px;}.fl-benefits{display:none;}.fl-trust{display:none;}}
-  .fix-right{display:flex;flex-direction:column;height:calc(100vh - 80px);overflow:hidden;background:#1e293b;}
-  @media(max-width:768px){.fix-right{height:calc(100vh - 280px);min-height:400px;}}
+  @media(max-width:768px){
+    .fix-left h2{font-size:1.2rem;margin-bottom:4px;}
+    .fix-left .fl-sub{font-size:.8rem;margin-bottom:12px;}
+    .fl-benefits{display:none;}
+    .fl-trust{display:none;}
+  }
+
+  .fix-right{
+    display:flex;flex-direction:column;
+    height: calc(100vh - var(--tai-nav-h, 90px));  /* 80px → 90px */
+    overflow:hidden;
+    background:#1e293b;
+  }
+  @media(max-width:768px){
+    .fix-right{height:calc(100vh - 280px);min-height:400px;}
+  }
+
   .chat-header{background:linear-gradient(135deg,#0d1b2a,#1a3a5c);padding:18px 24px;display:flex;align-items:center;gap:14px;flex-shrink:0;}
   .chat-header .avatar{width:42px;height:42px;border-radius:50%;background:#3b82f6;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;flex-shrink:0;}
   .chat-header .info h5{color:#fff;font-weight:900;font-size:.95rem;margin:0;}
@@ -135,29 +179,19 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-/* ───────────────────────────────────────────────────────
-   fix-request.html — 대화 저장·복원 버그 수정
-   B1: catch 더미 제거 → 에러 표시 + 재시도 버튼
-   B3: startChat()에서 이전 메시지 API 로드
-   B4: sessionStorage → localStorage (tai_fix_session_id)
-   B5: 로그인 후 claim → 세션 소유권 연결 + 잔여턴 복원
-──────────────────────────────────────────────────────── */
 const API = 'https://api.taieng.co.kr';
 const MAX_TURNS = 3;
-const LS_KEY = 'tai_fix_session_id'; // B4: localStorage 키
+const LS_KEY = 'tai_fix_session_id';
 
 let sessionId  = null;
 let turnCount  = 0;
 let maxTurns   = MAX_TURNS;
 let isEnded    = false;
 let isSending  = false;
-let lastFailedMsg = null; // B1: 재시도용
+let lastFailedMsg = null;
 
-window.addEventListener('DOMContentLoaded', () => {
-  startChat();
-});
+window.addEventListener('DOMContentLoaded', () => { startChat(); });
 
-/* ── 인사 메시지 (from/type URL 파라미터 유지) ── */
 function getLocalGreeting(f, s) {
   const r = (s || 'general').toLowerCase();
   const t = ['appointment','repair','consulting','general'].includes(r) ? r : 'general';
@@ -175,77 +209,60 @@ function getLocalGreeting(f, s) {
   return m;
 }
 
-/* ── B3+B4: 시작 — localStorage 확인 → 이전 메시지 로드 ── */
 async function startChat() {
-  const savedId = localStorage.getItem(LS_KEY); // B4: localStorage
+  const savedId = localStorage.getItem(LS_KEY);
   const p  = new URLSearchParams(window.location.search);
   const fp = p.get('from') || '';
   const st = (p.get('type') || 'general').toLowerCase();
 
   if (savedId) {
-    // B3: 이전 세션 — API로 메시지 복원
     try {
       const r = await fetch(`${API}/fix/chat/sessions/${savedId}/messages`);
       if (!r.ok) throw new Error('session gone');
       const j = await r.json();
-
       sessionId = savedId;
       maxTurns  = j.max_turns  || MAX_TURNS;
       turnCount = j.current_turn || 0;
-
-      // 이전 메시지 렌더링
       const msgs = j.messages || [];
       if (msgs.length > 0) {
         msgs.forEach(m => {
-          if (m.role === 'user')      appendUserMsg(m.content);
+          if (m.role === 'user')           appendUserMsg(m.content);
           else if (m.role === 'assistant') appendExpertMsg(m.content);
         });
       } else {
         appendExpertMsg('안녕하세요! 이전 대화를 이어서 진행하겠습니다. 추가로 말씀하실 내용이 있으신가요?');
       }
-
-      // 세션이 완료됐으면 입력 비활성화 + 결과 표시
       if (j.status === 'COMPLETED' || j.remaining_turns <= 0) {
-        isEnded = true;
-        disableInput();
-        setTimeout(showResult, 300);
+        isEnded = true; disableInput(); setTimeout(showResult, 300);
       }
-
       updateTurnBadge();
-
-      // B5: 로그인한 사용자면 세션 claim
       _tryClaimSession(savedId);
       return;
-
     } catch (e) {
-      // 세션 만료/삭제 → localStorage 정리 후 새 세션
       localStorage.removeItem(LS_KEY);
     }
   }
 
-  // 새 세션 생성
   try {
     const r = await fetch(`${API}/fix/chat/start`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({user_type: 'GUEST'}),
     });
     const j = await r.json();
     if (j.session_id) {
       sessionId = j.session_id;
       maxTurns  = j.max_turns || MAX_TURNS;
-      localStorage.setItem(LS_KEY, sessionId); // B4
+      localStorage.setItem(LS_KEY, sessionId);
       appendExpertMsg(j.greeting_message || getLocalGreeting(fp, st));
     } else throw new Error('no sid');
   } catch (e) {
     sessionId = 'guest_' + Date.now();
-    localStorage.setItem(LS_KEY, sessionId); // B4
+    localStorage.setItem(LS_KEY, sessionId);
     appendExpertMsg(getLocalGreeting(fp, st));
   }
   updateTurnBadge();
 }
 
-/* ── B5: 로그인한 사용자면 세션 claim ── */
 async function _tryClaimSession(sid) {
   const token = localStorage.getItem('access_token');
   if (!token || !sid) return;
@@ -257,68 +274,44 @@ async function _tryClaimSession(sid) {
     });
     if (!r.ok) return;
     const j = await r.json();
-    // 회원으로 업그레이드되면 잔여턴 갱신
-    if (j.max_turns && j.max_turns > maxTurns) {
-      maxTurns = j.max_turns;
-      updateTurnBadge();
-    }
-  } catch (e) {
-    // claim 실패는 무시 (서비스에 영향 없음)
-  }
+    if (j.max_turns && j.max_turns > maxTurns) { maxTurns = j.max_turns; updateTurnBadge(); }
+  } catch (e) {}
 }
 
-/* ── B1+B4: 메시지 전송 — 더미 제거, 에러 표시 + 재시도 ── */
 async function sendMessage(retryMsg) {
   if (isEnded || isSending) return;
   const input = document.getElementById('msgInput');
   const msg = retryMsg || input.value.trim();
   if (!msg) return;
-
   if (!retryMsg) { input.value = ''; autoResize(input); }
   hideError();
   appendUserMsg(msg);
   turnCount++;
   updateTurnBadge();
-
   if (turnCount >= maxTurns) { isEnded = true; disableInput(); }
-
   isSending = true;
   document.getElementById('btnSend').disabled = true;
   showTyping();
-
   try {
     const r = await fetch(`${API}/fix/chat/message`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({session_id: sessionId, message: msg}),
     });
-
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({}));
-      throw new Error(err.detail || `HTTP ${r.status}`);
-    }
-
+    if (!r.ok) { const err = await r.json().catch(() => ({})); throw new Error(err.detail || `HTTP ${r.status}`); }
     const j = await r.json();
     hideTyping();
     const reply = j.reply || j.data?.reply;
     if (reply) appendExpertMsg(reply);
     lastFailedMsg = null;
-
     if (j.is_last_turn || j.data?.is_last_turn || isEnded) setTimeout(showResult, 600);
-
   } catch (e) {
-    // B1 수정: 더미 응답 대신 에러 표시 + 재시도 버튼
     hideTyping();
-    turnCount = Math.max(0, turnCount - 1); // 실패한 턴 되돌림
+    turnCount = Math.max(0, turnCount - 1);
     updateTurnBadge();
     if (isEnded && turnCount < maxTurns) { isEnded = false; enableInput(); }
     lastFailedMsg = msg;
-    showError(
-      '일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
-      true // 재시도 버튼 표시
-    );
+    showError('일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', true);
   }
-
   isSending = false;
   if (!isEnded) {
     document.getElementById('btnSend').disabled = false;
@@ -326,14 +319,13 @@ async function sendMessage(retryMsg) {
   }
 }
 
-/* ── 결과 카드 (3턴 후) ── */
 function showResult() {
   const items = [
-    {label: '접수 의도',    value: '전문 업체 수선·보수 요청',                                        blurred: false},
-    {label: '증상 요약',    value: '설비/시설 이상 증상 감지, 전문가 점검 필요',                       blurred: false},
-    {label: '관련 법령',    value: '산업안전보건법 제36조 위험성평가 의무, 안전관리규정 준수',          blurred: true},
-    {label: '과태료 정보',  value: '위반 시 500만원 이하 과태료 부과 가능',                            blurred: true},
-    {label: '매칭 가능 업체', value: '해당 지역 전문업체 3곳 매칭 가능',                              blurred: true},
+    {label: '접수 의도',    value: '전문 업체 수선·보수 요청',                               blurred: false},
+    {label: '증상 요약',    value: '설비/시설 이상 증상 감지, 전문가 점검 필요',              blurred: false},
+    {label: '관련 법령',    value: '산업안전보건법 제36조 위험성평가 의무, 안전관리규정 준수', blurred: true},
+    {label: '과태료 정보',  value: '위반 시 500만원 이하 과태료 부과 가능',                  blurred: true},
+    {label: '매칭 가능 업체', value: '해당 지역 전문업체 3곳 매칭 가능',                   blurred: true},
   ];
   const el = document.getElementById('resultItems');
   el.innerHTML = items.map(it =>
@@ -343,18 +335,15 @@ function showResult() {
   document.getElementById('resultSection').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
-/* ── DOM 헬퍼 ── */
 function appendExpertMsg(text) {
   const b = document.getElementById('chatBody');
-  const r = document.createElement('div');
-  r.className = 'msg-row';
+  const r = document.createElement('div'); r.className = 'msg-row';
   r.innerHTML = `<div class="msg-avatar">T</div><div><div class="bubble expert">${escHtml(text)}</div><div class="msg-time">${nowTime()}</div></div>`;
   b.appendChild(r); scrollBottom();
 }
 function appendUserMsg(text) {
   const b = document.getElementById('chatBody');
-  const r = document.createElement('div');
-  r.className = 'msg-row user';
+  const r = document.createElement('div'); r.className = 'msg-row user';
   r.innerHTML = `<div><div class="bubble user">${escHtml(text)}</div><div class="msg-time">${nowTime()}</div></div>`;
   b.appendChild(r); scrollBottom();
 }
@@ -362,8 +351,7 @@ function appendUserMsg(text) {
 let typingEl = null;
 function showTyping() {
   const b = document.getElementById('chatBody');
-  typingEl = document.createElement('div');
-  typingEl.className = 'msg-row'; typingEl.id = 'typingRow';
+  typingEl = document.createElement('div'); typingEl.className = 'msg-row'; typingEl.id = 'typingRow';
   typingEl.innerHTML = `<div class="msg-avatar">T</div><div class="typing-indicator">TAI 전문가가 입력 중<div class="typing-dots"><span></span><span></span><span></span></div></div>`;
   b.appendChild(typingEl); scrollBottom();
 }
@@ -371,9 +359,7 @@ function hideTyping() { const e = document.getElementById('typingRow'); if (e) e
 
 function showError(msg, withRetry) {
   const el = document.getElementById('chatError');
-  el.innerHTML = escHtml(msg) + (withRetry
-    ? `<button class="btn-retry" onclick="retryLast()">다시 시도</button>`
-    : '');
+  el.innerHTML = escHtml(msg) + (withRetry ? `<button class="btn-retry" onclick="retryLast()">다시 시도</button>` : '');
   el.classList.add('show');
 }
 function hideError() { document.getElementById('chatError').classList.remove('show'); }
@@ -390,12 +376,10 @@ function enableInput() {
   document.getElementById('msgInput').placeholder = '상황을 편하게 말씀해주세요';
 }
 
-function updateTurnBadge() {
-  document.getElementById('turnBadge').textContent = `${turnCount} / ${maxTurns} 턴`;
-}
+function updateTurnBadge() { document.getElementById('turnBadge').textContent = `${turnCount} / ${maxTurns} 턴`; }
 function scrollBottom() { const b = document.getElementById('chatBody'); b.scrollTop = b.scrollHeight; }
 function autoResize(el) { el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
-function onEnterKey(e) { if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }}
+function onEnterKey(e) { if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); } }
 function nowTime() { return new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}); }
 function escHtml(s) {
   return String(s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
