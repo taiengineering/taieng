@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v2.6.0 (2026-04-21): 전문가 세부 페이지 연결 (for-agency/repair/consultant/expert)
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입 + 풀뷰포트 레이아웃 자동 보정
  * v2.4.0 (2026-04-19): 역할별 링크 .html 제거
  * v2.3.1 (2026-04-19): 안전정보 드롭다운 — 판례검색·안전정보
@@ -121,9 +122,9 @@
     '              <li><a href="' + base + 'pricing.html">\uC694\uAE08\uC81C</a></li>',
     '              <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>',
     '              <li><a href="' + base + 'service/inapp.html">\uC778\uC571 \uC11C\uBE44\uC2A4</a></li>',
-    '              <li><a href="' + base + 'fix-request.html?from=nav&type=repair">\uC218\uC120 \uC5F0\uACB0</a></li>',
-    '              <li><a href="' + base + 'fix-request.html?from=nav&type=consulting">\uCEE8\uC124\uD305</a></li>',
-    '              <li><a href="' + base + 'fix-request.html?from=nav&type=appointment">\uC120\uC784 \uC5F0\uACB0</a></li>',
+    '              <li><a href="' + base + 'for-repair.html">\uC218\uC120 \uC5F0\uACB0</a></li>',
+    '              <li><a href="' + base + 'for-consultant.html">\uCEE8\uC124\uD305</a></li>',
+    '              <li><a href="' + base + 'for-agency.html">\uC120\uC784 \uC5F0\uACB0</a></li>',
     '              <li><a href="' + base + 'connect.html" style="color:#fbbf24;font-weight:700;">\uC5F0\uACB0\uC11C\uBE44\uC2A4 \uC0AC\uC804\uB4F1\uB85D</a></li>',
     '            </ul>',
     '          </li>',
@@ -144,7 +145,7 @@
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'for-safety-manager">\uC548\uC804\uAD00\uB9AC\uC790</a></li>',
     '              <li><a href="' + base + 'for-business-owner">\uC0AC\uC5C5\uC8FC</a></li>',
-    '              <li><a href="' + base + 'provider-register">\uC804\uBB38\uAC00</a></li>',
+    '              <li><a href="' + base + 'for-expert">\uC804\uBB38\uAC00</a></li>',
     '            </ul>',
     '          </li>',
 
