@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="안전관리자의 업무 부담을 TAI Safe가 줄여드립니다. 법령 자동 판정, 점검 일정 자동 생성, 작업자 배정, D-3 알림, 서류 자동화.">
-  <title>안전관리자를 위한 TAI Safe | TAI 엔지니어링</title>
+  <meta name="description" content="안전관리자를 위한 TAI 한 페이지 안내. 법령진단부터 SaaS, 수선·선임·컨설팅까지 하나의 흐름으로.">
+  <title>안전관리자를 위한 TAI | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -13,31 +13,193 @@
   <link rel="stylesheet" href="assets/css/responsive.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Noto Sans KR', sans-serif; }
+    .badge-coming { background: #f59e0b; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
 
-    /* Pain Point 카드 */
-    .pain-card { background:#fff; border-radius:12px; padding:28px 24px; box-shadow:0 4px 20px rgba(0,0,0,.07); height:100%; }
-    .pain-card .pain-num { display:inline-block; width:36px; height:36px; background:#1A5FD4; color:#fff; border-radius:50%; font-weight:900; font-size:.9rem; line-height:36px; text-align:center; margin-bottom:14px; }
-    .pain-card p { font-size:1rem; color:#374151; line-height:1.65; margin:0; font-style:italic; }
-    .pain-card p::before { content:'\201C'; font-size:1.4rem; color:#9ca3af; vertical-align:-4px; margin-right:2px; }
-    .pain-card p::after  { content:'\201D'; font-size:1.4rem; color:#9ca3af; vertical-align:-4px; margin-left:2px; }
+    #fsm-page { --fsm-blue:#1A5FD4; --fsm-dark:#0f172a; --fsm-gray:#64748b; --fsm-border:#e2e8f0; --fsm-bg:#f8fafc; font-family:'Noto Sans KR',sans-serif; }
+    #fsm-page * { box-sizing: border-box; }
 
-    /* Before / After */
-    .compare-box { border-radius:12px; padding:32px 28px; height:100%; }
-    .compare-box.before { background:#fff5f5; border:2px solid #fed7d7; }
-    .compare-box.after  { background:#f0fff4; border:2px solid #9ae6b4; }
-    .compare-box h4 { font-size:1.1rem; font-weight:800; margin-bottom:20px; }
-    .compare-box.before h4 { color:#e53e3e; }
-    .compare-box.after  h4 { color:#276749; }
-    .compare-box ul { list-style:none; padding:0; margin:0; }
-    .compare-box ul li { padding:8px 0; border-bottom:1px solid rgba(0,0,0,.06); font-size:.92rem; color:#4a5568; }
-    .compare-box ul li:last-child { border-bottom:none; }
+    /* ── S1 공감: 다크 히어로 (짧은 2~3뷰포트 분량) ── */
+    #fsm-page .fsm-hero {
+      position: relative;
+      min-height: 72vh;
+      max-height: 880px;
+      display: flex;
+      align-items: center;
+      background: url(assets/img/home-2/banner/02.png) center/cover no-repeat, linear-gradient(135deg,#0a1432,#1e3a5f);
+      overflow: hidden;
+    }
+    #fsm-page .fsm-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(10,20,40,.88) 0%, rgba(15,23,42,.82) 45%, rgba(26,95,212,.45) 100%);
+    }
+    #fsm-page .fsm-hero-inner { position: relative; z-index: 2; padding: 72px 0 56px; max-width: 720px; }
+    #fsm-page .fsm-hero h1 {
+      color: #fff;
+      font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.22;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+    #fsm-page .fsm-hero-lead {
+      color: rgba(255,255,255,.88);
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      font-weight: 700;
+      line-height: 1.55;
+      margin-bottom: 18px;
+      border-left: 4px solid #93c5fd;
+      padding-left: 16px;
+    }
+    #fsm-page .fsm-hero-sub {
+      color: rgba(255,255,255,.65);
+      font-size: .95rem;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+    #fsm-page .fsm-hero-scroll {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255,255,255,.4);
+      font-size: .72rem;
+      text-align: center;
+    }
+    #fsm-page .fsm-hero-scroll i { display: block; margin-top: 4px; animation: fsm-bounce 2s infinite; }
+    @keyframes fsm-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
 
-    /* 기능 소개 박스 */
-    .feat-box { background:#f8fafc; border-radius:14px; padding:32px 28px; height:100%; border-left:4px solid #1A5FD4; }
-    .feat-box .fb-icon { font-size:2.2rem; margin-bottom:14px; display:block; }
-    .feat-box h4 { font-size:1.05rem; font-weight:800; color:#0f172a; margin-bottom:10px; }
-    .feat-box p { font-size:.88rem; color:#64748b; line-height:1.7; margin:0; }
+    /* ── S2 서비스 카드 ── */
+    #fsm-page .fsm-sec { padding: 72px 0; }
+    #fsm-page .fsm-sec-light { background: var(--fsm-bg); }
+    #fsm-page .fsm-sec-title { text-align: center; margin-bottom: 12px; }
+    #fsm-page .fsm-sec-title .eyebrow {
+      font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--fsm-blue); display: block; margin-bottom: 8px;
+    }
+    #fsm-page .fsm-sec-title h2 { font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 900; color: var(--fsm-dark); letter-spacing: -.02em; }
+    #fsm-page .fsm-sec-title p { color: var(--fsm-gray); font-size: .92rem; max-width: 560px; margin: 10px auto 0; line-height: 1.65; }
+
+    #fsm-page .fsm-card {
+      background: #fff;
+      border: 1.5px solid var(--fsm-border);
+      border-radius: 16px;
+      padding: 20px 18px 22px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 4px 24px rgba(15,23,42,.05);
+    }
+    #fsm-page .fsm-card--soon { opacity: .92; }
+    #fsm-page .fsm-card-badge-top { position: absolute; top: 14px; right: 14px; z-index: 2; }
+
+    #fsm-page .fsm-pair { font-size: .78rem; line-height: 1.45; margin-bottom: 10px; }
+    #fsm-page .fsm-pair .worry { color: #b91c1c; font-weight: 700; margin-bottom: 4px; }
+    #fsm-page .fsm-pair .solve { color: #15803d; font-weight: 700; }
+
+    #fsm-page .fsm-card h3 { font-size: 1.05rem; font-weight: 900; color: var(--fsm-dark); margin-bottom: 8px; line-height: 1.3; }
+    #fsm-page .fsm-card .body { font-size: .86rem; color: var(--fsm-gray); line-height: 1.65; flex: 1; margin-bottom: 14px; }
+
+    #fsm-page .fsm-cta-row { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+    #fsm-page .fsm-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 11px 16px; border-radius: 10px; font-size: .86rem; font-weight: 800; text-decoration: none; text-align: center; border: none; cursor: pointer; transition: .15s;
+    }
+    #fsm-page .fsm-btn-blue { background: var(--fsm-blue); color: #fff; }
+    #fsm-page .fsm-btn-blue:hover { background: #1248a8; color: #fff; }
+    #fsm-page .fsm-btn-amber { background: #fff; color: #c2410c; border: 2px solid #fdba74; }
+    #fsm-page .fsm-btn-amber:hover { background: #fff7ed; color: #9a3412; }
+
+    #fsm-page .fsm-live { display: inline-block; font-size: .68rem; font-weight: 800; color: #15803d; background: #dcfce7; border-radius: 6px; padding: 3px 8px; margin-bottom: 8px; }
+
+    /* 모바일 프레임 */
+    #fsm-page .fsm-phone-wrap { display: flex; justify-content: center; margin-bottom: 14px; }
+    #fsm-page .fsm-phone {
+      width: 148px;
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 9px 10px 11px;
+      box-shadow: 0 0 0 2px #1e293b, 0 16px 40px rgba(0,0,0,.18);
+    }
+    #fsm-page .fsm-phone::before {
+      content: ''; display: block; width: 48px; height: 5px; background: #1e293b; border-radius: 999px; margin: 0 auto 8px;
+    }
+    #fsm-page .fsm-screen {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 168px;
+    }
+    #fsm-page .fsm-ph { padding: 8px 9px; font-size: .58rem; font-weight: 800; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    #fsm-page .fsm-pb { padding: 8px 9px 10px; font-size: .58rem; color: #334155; line-height: 1.4; }
+    #fsm-page .fsm-mini { background: #f1f5f9; border-radius: 5px; padding: 5px 6px; margin-top: 4px; font-size: .55rem; color: #475569; }
+
+    /* ── S3 프로세스 ── */
+    #fsm-page .fsm-flow-wrap { max-width: 1000px; margin: 0 auto; padding: 8px 4px; }
+    #fsm-page .fsm-flow-svg-d { display: block; }
+    #fsm-page .fsm-flow-svg-m { display: none; }
+    @media (max-width: 767px) {
+      #fsm-page .fsm-flow-svg-d { display: none; }
+      #fsm-page .fsm-flow-svg-m { display: block; }
+    }
+
+    /* ── S4 신뢰 ── */
+    #fsm-page .fsm-trust-photo {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--fsm-border);
+      box-shadow: 0 12px 40px rgba(0,0,0,.08);
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    #fsm-page .fsm-trust-photo img { width: 100%; display: block; aspect-ratio: 4/5; object-fit: cover; }
+    #fsm-page .fsm-quote {
+      background: #fff;
+      border: 1px solid var(--fsm-border);
+      border-radius: 16px;
+      padding: 24px 22px;
+      position: relative;
+    }
+    #fsm-page .fsm-quote::before {
+      content: '“'; position: absolute; top: 12px; left: 16px; font-size: 2.5rem; line-height: 1; color: #e2e8f0; font-weight: 900;
+    }
+    #fsm-page .fsm-quote p { font-size: .95rem; color: #334155; line-height: 1.75; margin: 0 0 12px; padding-left: 8px; position: relative; z-index: 1; }
+    #fsm-page .fsm-quote .sig { font-size: .82rem; font-weight: 800; color: var(--fsm-dark); padding-left: 8px; }
+
+    #fsm-page .fsm-patent-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 20px; }
+    @media (max-width: 991px) { #fsm-page .fsm-patent-grid { grid-template-columns: repeat(2, 1fr); } }
+    #fsm-page .fsm-pat {
+      background: var(--fsm-bg);
+      border: 1px solid var(--fsm-border);
+      border-radius: 10px;
+      padding: 10px 8px;
+      font-size: .62rem;
+      color: #475569;
+      line-height: 1.35;
+      text-align: center;
+    }
+    #fsm-page .fsm-pat strong { display: block; font-size: .58rem; color: var(--fsm-blue); font-weight: 800; margin-bottom: 4px; }
+
+    /* ── S5 CTA ── */
+    #fsm-page .fsm-cta-sec {
+      background: linear-gradient(135deg, #0f172a, #1A5FD4);
+      padding: 72px 0;
+      text-align: center;
+    }
+    #fsm-page .fsm-cta-sec h2 { color: #fff; font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 900; margin-bottom: 12px; line-height: 1.25; }
+    #fsm-page .fsm-cta-sec > .container > p { color: rgba(255,255,255,.72); font-size: .92rem; margin-bottom: 28px; }
+    #fsm-page .fsm-cta-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    #fsm-page .fsm-cta-prim {
+      background: #fff; color: var(--fsm-blue); font-weight: 800; padding: 14px 24px; border-radius: 10px; text-decoration: none; font-size: .92rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    }
+    #fsm-page .fsm-cta-prim:hover { color: #1248a8; }
+    #fsm-page .fsm-cta-sec .fsm-btn-outline {
+      border: 2px solid rgba(255,255,255,.45); color: #fff; background: transparent; padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: .88rem;
+    }
+    #fsm-page .fsm-cta-sec .fsm-btn-outline:hover { background: rgba(255,255,255,.1); color: #fff; }
   </style>
 </head>
 <body class="sc5 home-2">
@@ -48,167 +210,278 @@
   <div class="body-overlay" id="body-overlay"></div>
   <div id="tai-header"></div>
 
-  <!-- 히어로 -->
-  <section class="banner-area style-2" style="background-image: url(assets/img/home-2/banner/02.png);">
+  <div id="fsm-page">
+
+  <!-- S1 [공감] -->
+  <section class="fsm-hero">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-9 align-self-center text-center">
-          <div class="banner-inner">
-            <h6>안전관리자를 위한 TAI Safe</h6>
-            <h1>혼자 다 하는 구조,<br>이제 끝냅니다</h1>
-            <p class="mx-lg-5">법령 의무 파악부터 일정 생성·작업자 배정·서류 자동화까지.<br>당신은 확인하고 대응만 하면 됩니다.</p>
-            <div class="btn-area mt-4">
-              <a class="btn btn-white" href="free-diagnosis.html">무료 진단 시작</a>
-              <a class="btn btn-border-white" href="service/saas.html">SaaS 자세히 보기</a>
+      <div class="fsm-hero-inner">
+        <h1>혼자 다 하고 계시죠?</h1>
+        <p class="fsm-hero-lead">당신이 못해서가 아닙니다.<br>구조가 그렇게 되어 있는 겁니다.</p>
+        <p class="fsm-hero-sub">법령·일정·현장·서류가 한 사람에게 몰리면, 아무리 잘해도 빈틈은 생깁니다. 아래에서 TAI가 어떻게 나누는지 한 번에 보세요.</p>
+      </div>
+    </div>
+    <div class="fsm-hero-scroll">아래로<i class="fas fa-chevron-down"></i></div>
+  </section>
+
+  <!-- S2 [해결] 6카드 -->
+  <section class="fsm-sec fsm-sec-light">
+    <div class="container">
+      <div class="fsm-sec-title">
+        <span class="eyebrow">해결</span>
+        <h2>TAI가 이 전부를 해결합니다</h2>
+        <p>안전관리자 업무 흐름 순서대로 정리했습니다. 지금 쓰실 수 있는 것과, 곧 이어질 연결을 함께 표시합니다.</p>
+      </div>
+      <div class="row g-4 mt-1">
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card">
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:var(--fsm-blue);"><span>TAI</span><span>법령진단</span></div>
+                <div class="fsm-pb">
+                  <strong style="color:#0f172a;">적용 의무 요약</strong>
+                  <div class="fsm-mini">점검 42건 · 선임 3건 · 교육 주기 반영</div>
+                </div>
+              </div></div>
+            </div>
+            <span class="fsm-live">✅ 이용 가능 · 무료</span>
+            <h3>법령진단</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 뭐가 우리한테 적용되는지 매번 헷갈림</div><div class="solve">해결 · 입력만으로 적용 법령·의무를 즉시 정리</div></div>
+            <p class="body">사업장 조건에 맞는 의무 리스트가 먼저 서야, 그다음 일정과 알림이 의미가 있습니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-blue" href="free-diagnosis.html">무료 법령진단 시작</a>
             </div>
           </div>
         </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card">
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:#0f172a;"><span>TAI Safe</span><span>SaaS</span></div>
+                <div class="fsm-pb">
+                  오늘 할 일 <strong style="color:#1A5FD4;">7</strong> · D-2 알림 발송됨
+                  <div class="fsm-mini">점검 · TBM · 승인 한 화면</div>
+                </div>
+              </div></div>
+            </div>
+            <span class="fsm-live">✅ 이용 가능 · 구독</span>
+            <h3>TAI Safe SaaS</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 진단 결과를 현장이행·증빙까지 못 끌고 감</div><div class="solve">해결 · 일정·배분·알림·모바일 점검·기록 자동 축적</div></div>
+            <p class="body">건물·산업·건설 유형별 플랜으로 바로 운영에 올릴 수 있습니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-blue" href="service/saas.html#pricing">SaaS 요금제 보기</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card fsm-card--soon">
+            <div class="fsm-card-badge-top"><span class="badge-coming">준비 중</span></div>
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:#334155;"><span>TAI Safe</span><span>결제</span></div>
+                <div class="fsm-pb">추가 모듈 · 사용자석<br><span style="color:#94a3b8;">앱 안에서 바로 결제</span></div>
+              </div></div>
+            </div>
+            <h3>인앱 결제</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 견적·입금 확인 때문에 도입이 늦어짐</div><div class="solve">해결 · 구독 안에서 필요한 만큼 즉시 결제</div></div>
+            <p class="body">플랜 외 옵션을 앱에서 바로 구매하는 흐름을 준비 중입니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-amber" href="fix-request.html?from=for-safety-manager&type=general&amp;interest=inapp-pay">사전등록</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card fsm-card--soon">
+            <div class="fsm-card-badge-top"><span class="badge-coming">준비 중</span></div>
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:#0d9488;"><span>TAI Fix</span><span>수선</span></div>
+                <div class="fsm-pb">증상 입력 → 적격 업체 매칭<br><span style="color:#94a3b8;">법정 자격 자동 검증</span></div>
+              </div></div>
+            </div>
+            <h3>수선 연결</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 급할 때 믿을 업체를 못 고름</div><div class="solve">해결 · 증상·법령 기준으로 수선 업체를 연결</div></div>
+            <p class="body">설비 이상부터 긴급 수리까지, 진단·이력과 연계된 매칭을 붙입니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-amber" href="fix-request.html?from=for-safety-manager&type=general&amp;interest=fix-repair">사전등록</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card fsm-card--soon">
+            <div class="fsm-card-badge-top"><span class="badge-coming">준비 중</span></div>
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:#4f46e5;"><span>TAI</span><span>선임</span></div>
+                <div class="fsm-pb">선임 필요 여부 자동 판정<br><span style="color:#94a3b8;">기관·전문가 매칭</span></div>
+              </div></div>
+            </div>
+            <h3>선임 연결</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 누구를 선임해야 하는지·검증이 부담</div><div class="solve">해결 · 의무 기반으로 선임 후보를 안내</div></div>
+            <p class="body">법령이 요구하는 선임·검사를 데이터로 묶어 연결합니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-amber" href="fix-request.html?from=for-safety-manager&type=general&amp;interest=appointment">사전등록</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="fsm-card fsm-card--soon">
+            <div class="fsm-card-badge-top"><span class="badge-coming">준비 중</span></div>
+            <div class="fsm-phone-wrap">
+              <div class="fsm-phone"><div class="fsm-screen">
+                <div class="fsm-ph" style="background:#7c3aed;"><span>TAI</span><span>컨설팅</span></div>
+                <div class="fsm-pb">현장 진단·개선 로드맵<br><span style="color:#94a3b8;">전문가 1:1</span></div>
+              </div></div>
+            </div>
+            <h3>컨설팅</h3>
+            <div class="fsm-pair"><div class="worry">고민 · 시스템만으로는 부족한 맞춤 과제</div><div class="solve">해결 · 데이터 기반 현장 컨설팅 예약</div></div>
+            <p class="body">중대재해 대응·공정 변경 등, 사람이 들어가야 하는 영역을 연결합니다.</p>
+            <div class="fsm-cta-row">
+              <a class="fsm-btn fsm-btn-amber" href="fix-request.html?from=for-safety-manager&type=general&amp;interest=consulting">사전등록</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Pain Points -->
-  <section class="service-area pd-top-130 pd-bottom-90">
+  <!-- S3 [흐름] -->
+  <section class="fsm-sec" style="background:#fff;">
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="fsm-sec-title">
+        <span class="eyebrow">흐름</span>
+        <h2>따로따로가 아닙니다.<br class="d-md-none"> 하나의 흐름입니다.</h2>
+        <p>진단에서 시작해 운영으로 이어지고, 결제·수선·선임·컨설팅은 같은 데이터 위에 얹힙니다.</p>
+      </div>
+      <div class="fsm-flow-wrap">
+        <svg class="fsm-flow-svg-d" viewBox="0 0 920 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fsmFlowDTitle">
+          <title id="fsmFlowDTitle">TAI 서비스 흐름 다이어그램</title>
+          <defs>
+            <linearGradient id="fsmG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1A5FD4"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
+          </defs>
+          <rect x="10" y="40" width="118" height="68" rx="10" fill="#1e3a5f" stroke="#1A5FD4" stroke-width="2"/>
+          <text x="69" y="68" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 가능</text>
+          <text x="69" y="88" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">법령진단</text>
+          <path d="M138 74 H158" stroke="url(#fsmG)" stroke-width="2.5"/>
+          <polygon points="158,74 168,74 163,69 163,79" fill="#38bdf8"/>
+          <rect x="172" y="40" width="118" height="68" rx="10" fill="#1e3a5f" stroke="#1A5FD4" stroke-width="2"/>
+          <text x="231" y="68" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 가능</text>
+          <text x="231" y="88" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">SaaS 운영</text>
+          <path d="M300 74 H320" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 4"/>
+          <polygon points="320,74 328,74 324,70 324,78" fill="#94a3b8"/>
+          <rect x="332" y="40" width="108" height="68" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="386" y="62" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="386" y="88" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">인앱결제</text>
+          <path d="M448 74 H468" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 4"/>
+          <polygon points="468,74 476,74 472,70 472,78" fill="#94a3b8"/>
+          <rect x="480" y="40" width="108" height="68" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="534" y="62" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="534" y="88" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">수선연결</text>
+          <path d="M596 74 H616" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 4"/>
+          <polygon points="616,74 624,74 620,70 620,78" fill="#94a3b8"/>
+          <rect x="628" y="40" width="108" height="68" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="682" y="62" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="682" y="88" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">선임연결</text>
+          <path d="M744 74 H764" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="5 4"/>
+          <polygon points="764,74 772,74 768,70 768,78" fill="#94a3b8"/>
+          <rect x="776" y="40" width="124" height="68" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="838" y="62" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="838" y="88" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">컨설팅</text>
+          <text x="460" y="26" text-anchor="middle" fill="#64748b" font-size="10" font-family="Noto Sans KR,sans-serif">동일 프로필 · 이행 로그 위에서 단계적으로 확장</text>
+        </svg>
+        <svg class="fsm-flow-svg-m" viewBox="0 0 280 520" width="100%" height="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fsmFlowMTitle">
+          <title id="fsmFlowMTitle">TAI 서비스 흐름 세로 다이어그램</title>
+          <rect x="76" y="8" width="128" height="56" rx="10" fill="#1e3a5f" stroke="#1A5FD4" stroke-width="2"/>
+          <text x="140" y="32" text-anchor="middle" fill="#93c5fd" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 가능</text>
+          <text x="140" y="50" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">법령진단</text>
+          <line x1="140" y1="64" x2="140" y2="82" stroke="#1A5FD4" stroke-width="2"/>
+          <polygon points="140,88 136,82 144,82" fill="#1A5FD4"/>
+          <rect x="76" y="92" width="128" height="56" rx="10" fill="#1e3a5f" stroke="#1A5FD4" stroke-width="2"/>
+          <text x="140" y="116" text-anchor="middle" fill="#93c5fd" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 가능</text>
+          <text x="140" y="134" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">SaaS 운영</text>
+          <line x1="140" y1="148" x2="140" y2="166" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+          <polygon points="140,172 136,166 144,166" fill="#94a3b8"/>
+          <rect x="76" y="176" width="128" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="140" y="198" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="140" y="216" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">인앱결제</text>
+          <line x1="140" y1="232" x2="140" y2="250" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+          <polygon points="140,256 136,250 144,250" fill="#94a3b8"/>
+          <rect x="76" y="260" width="128" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="140" y="282" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="140" y="300" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">수선연결</text>
+          <line x1="140" y1="316" x2="140" y2="334" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+          <polygon points="140,340 136,334 144,334" fill="#94a3b8"/>
+          <rect x="76" y="344" width="128" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="140" y="366" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="140" y="384" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">선임연결</text>
+          <line x1="140" y1="400" x2="140" y2="418" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4 4"/>
+          <polygon points="140,424 136,418 144,418" fill="#94a3b8"/>
+          <rect x="76" y="428" width="128" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <text x="140" y="450" text-anchor="middle" fill="#b45309" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
+          <text x="140" y="468" text-anchor="middle" fill="#475569" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">컨설팅</text>
+          <text x="140" y="505" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans KR,sans-serif">한 줄기 데이터로 이어짐</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 [신뢰] -->
+  <section class="fsm-sec fsm-sec-light">
+    <div class="container">
+      <div class="fsm-sec-title">
+        <span class="eyebrow">신뢰</span>
+        <h2>안전관리자 자격증을 가진 대표가<br class="d-md-none"> 직접 만들었습니다</h2>
+        <p>현장을 모르고는 만들 수 없는 제품입니다.</p>
+      </div>
+      <div class="row align-items-center g-4 g-lg-5">
+        <div class="col-lg-4">
+          <div class="fsm-trust-photo">
+            <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/about/ceo-profile.jpg" alt="심태왕 대표" width="640" height="800" loading="lazy">
+          </div>
+        </div>
         <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">현장의 진짜 고민</h4>
-            <h2 class="title">이런 상황, 아닙니까?</h2>
-            <p>안전관리자라면 누구나 공감할 현실입니다. TAI는 이 구조를 바꿉니다.</p>
+          <div class="fsm-quote">
+            <p>현장을 보고 느꼈습니다. <strong>“이건 안전관리자 한 사람이 감당할 수 없겠구나.”</strong> 법령은 계속 바뀌고, 정해진 양식도 없고, 혼자 다 해야 하는 구조였습니다. 그래서 플랫폼과 IT로 이 문제를 구조화했습니다.</p>
+            <p><strong>안전관리자 자격을 보유한 대표</strong>가 제품 방향을 직접 잡고, 아래와 같이 <strong>특허 출원 8건</strong>으로 핵심 기술을 보호하고 있습니다.</p>
+            <div class="sig">— 심태왕, TAI 엔지니어링 대표</div>
           </div>
-        </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">1</div><p>점검 일정을 직접 엑셀로 관리하고, 작업자한테 일일이 연락합니다</p></div></div>
-        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">2</div><p>무슨 법령이 적용되는지 찾는 것만 하루가 걸립니다</p></div></div>
-        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">3</div><p>보고서·서류·교육까지 혼자라 항상 뭔가 빠뜨릴까봐 불안합니다</p></div></div>
-        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">4</div><p>겸직이라 안전관리가 뒷전이 될까봐 걱정됩니다</p></div></div>
-        <div class="col-xl-4 col-md-6"><div class="pain-card"><div class="pain-num">5</div><p>TBM 서명 받으러 종이 들고 다니는 게 아직도 현실입니다</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TAI가 대신 해드리는 것 -->
-  <section class="service-area pd-top-110 pd-bottom-90" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">TAI Safe 핵심 기능</h4>
-            <h2 class="title">TAI가 대신 해드리는 것들</h2>
-            <p>안전관리자는 할당·모니터링·이상대응만 하면 됩니다</p>
+          <div class="fsm-patent-grid">
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>①</strong>법령 자동 판정</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>②</strong>분산 안전관리</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>③</strong>위험 예측</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>④</strong>환경·작업중지</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>⑤</strong>전문가 매칭</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>⑥</strong>분산 입력 판단</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>⑦</strong>수선·자격 검증</a>
+            <a class="fsm-pat text-decoration-none" href="patents.html"><strong>⑧</strong>문서·신고 자동</a>
           </div>
-        </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">⚖️</span>
-            <h4>법령 의무 자동 판정</h4>
-            <p>업종·규모·설비·공정 정보 입력 → 적용 법령과 의무 항목이 자동 도출됩니다. 법령 공부할 시간이 없어도 됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">📅</span>
-            <h4>점검 일정 자동 생성</h4>
-            <p>법령 기반으로 연간·월간 점검 일정이 자동 생성됩니다. 엑셀로 관리할 필요 없이 시스템이 알아서 배치합니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">👥</span>
-            <h4>작업자 분산 배정</h4>
-            <p>안전관리자가 처음 1회 배정하면 이후 자동으로 반복됩니다. 작업자가 직접 체크하고, 이상 발생 시 즉시 알림이 옵니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">🔔</span>
-            <h4>D-3 사전 알림</h4>
-            <p>마감 3일 전 SMS로 담당자에게 자동 발송됩니다. 누락으로 인한 과태료 위험이 사라집니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">📄</span>
-            <h4>신고서식 자동화</h4>
-            <p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="feat-box">
-            <span class="fb-icon">✍️</span>
-            <h4>TBM 전자서명</h4>
-            <p>종이 들고 다니며 서명 받을 필요 없습니다. 모바일에서 바로 TBM 기록 + 서명 + 저장이 완결됩니다.</p>
-          </div>
+          <p class="text-center text-md-start mt-3 mb-0" style="font-size:.8rem;color:#64748b;">출원번호·요약은 <a href="patents.html" style="font-weight:800;color:var(--fsm-blue);">특허 안내 페이지</a>에서 확인하세요.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 도입 전 vs 도입 후 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
+  <!-- S5 [행동] -->
+  <section class="fsm-cta-sec">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">Before &amp; After</h4>
-            <h2 class="title">도입 전 vs 도입 후</h2>
-          </div>
-        </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-md-5">
-          <div class="compare-box before">
-            <h4>❌ 도입 전</h4>
-            <ul>
-              <li>법령 공부에 하루 소요</li>
-              <li>엑셀로 점검 일정 수동 관리</li>
-              <li>작업자에게 일일이 전화 연락</li>
-              <li>보고서·서류 직접 수동 작성</li>
-              <li>누락 발생 시 과태료 리스크</li>
-              <li>종이 TBM 서명 받으러 현장 순회</li>
-              <li>안전관리자 1인 번아웃</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-5">
-          <div class="compare-box after">
-            <h4>✅ 도입 후</h4>
-            <ul>
-              <li>법령 의무 3분 자동 도출</li>
-              <li>연간 일정 시스템 자동 생성</li>
-              <li>D-3 SMS 자동 발송</li>
-              <li>신고서식 자동 작성·출력</li>
-              <li>누락 원천 차단</li>
-              <li>모바일 TBM 전자서명</li>
-              <li>안전관리자는 확인·대응만</li>
-            </ul>
-          </div>
-        </div>
+      <h2>지금 바로 시작할 수 있습니다</h2>
+      <p>무료 진단으로 법적 의무를 확인하고, SaaS로 현장 이행까지 이어가세요.</p>
+      <div class="fsm-cta-btns">
+        <a class="fsm-cta-prim" href="free-diagnosis.html">무료 법령진단 시작</a>
+        <a class="fsm-btn-outline" href="service/saas.html#pricing">SaaS 요금제 보기</a>
+        <a class="fsm-btn-outline" href="fix-request.html?from=for-safety-manager&type=general">도입 문의</a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="app-screen-area-2" style="background-image: url(assets/img/home-2/other/cta-bg.png);">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-xl-6 col-lg-8 text-center align-self-center">
-          <div class="section-title mb-4">
-            <h2 class="title text-white">법령진단은 완전 무료입니다.<br>3분이면 됩니다.</h2>
-            <p class="text-white">사업장 정보를 입력하면 적용 법령, 선임 의무, 점검 항목을 즉시 확인할 수 있습니다.</p>
-          </div>
-          <div class="btn-area">
-            <a class="btn btn-white" href="free-diagnosis.html">무료 법령진단 시작</a>
-            <a class="btn btn-border-white" href="fix-request.html?from=for-safety-manager&type=general">도입 문의하기</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div><!-- /#fsm-page -->
 
   <div id="tai-footer"></div>
   <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
