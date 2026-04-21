@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v2.5.0 (2026-04-21): tai-logo.svg 교체 (벡터 로고)
  * v2.4.3 (2026-04-19): 역할별 링크 .html 제거
  * v2.4.2 (2026-04-19): 안전정보 블록 — 판례검색·안전정보 링크
  * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
@@ -78,7 +79,7 @@
     '    <div class="row">' +
     '      <div class="col-xl-4 col-lg-4 col-sm-6">' +
     '        <div class="footer-widget widget">' +
-    '          <a class="logo" href="' + b + 'index.html"><img src="' + b + 'assets/img/tai-logo.png" alt="TAI 엔지니어링" style="height:36px;"></a>' +
+    '          <a class="logo" href="' + b + 'index.html"><img src="' + b + 'assets/img/tai-logo.svg" alt="TAI 엔지니어링" style="height:36px;"></a>' +
     '          <div class="footer-company-info" style="margin-top:16px;">' +
     '            <p style="margin-bottom:4px;"><span class="footer-company-name" style="font-weight:700;">TAI 엔지니어링</span>&nbsp;&nbsp;<span style="font-size:.85rem;">대표 심태왕</span></p>' +
     '            <p style="margin-bottom:3px;font-size:.85rem;">서울특별시 강남구 테헤란로79길 6 JS타워 3층</p>' +

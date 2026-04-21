@@ -1,17 +1,13 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v2.7.0 (2026-04-21): tai-logo.svg 교체 (벡터 로고)
  * v2.6.0 (2026-04-21): 전문가 세부 페이지 연결 (for-agency/repair/consultant/expert)
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입 + 풀뷰포트 레이아웃 자동 보정
  * v2.4.0 (2026-04-19): 역할별 링크 .html 제거
- * v2.3.1 (2026-04-19): 안전정보 드롭다운 — 판례검색·안전정보
- * v2.3.0 (2026-04-19): 03_nav — 서비스·업종별·역할별·안전정보
  *
  * ┌ 헤더 높이 기준 ─────────────────────────────────────────────────┐
  * │  실제 렌더링 높이: 90px                                           │
  * │  CSS 변수: --tai-nav-h (전 페이지에서 calc()에 사용 가능)         │
- * │  풀뷰포트 레이아웃 클래스: .full-vp-layout                       │
- * │  → min-height/height 자동으로 calc(100vh - 90px) 적용           │
- * │  → sticky 요소 top 자동으로 90px 적용                           │
  * └──────────────────────────────────────────────────────────────────┘
  */
 (function () {
@@ -21,13 +17,8 @@
   (function injectNavCss() {
     if (document.getElementById('tai-nav-vars')) return;
     var css = [
-      /* 헤더 높이 전역 변수 */
       ':root { --tai-nav-h: 90px; }',
-
-      /* .full-vp-layout: fix-request 등 풀뷰포트 그리드 레이아웃 */
       '.full-vp-layout { min-height: calc(100vh - var(--tai-nav-h)); }',
-
-      /* .full-vp-left: sticky 사이드패널 */
       '.full-vp-left {',
       '  position: sticky;',
       '  top: var(--tai-nav-h);',
@@ -36,16 +27,12 @@
       '@media(max-width:768px){',
       '  .full-vp-left { position: relative; height: auto; top: 0; }',
       '}',
-
-      /* .full-vp-right: 우측 스크롤 패널 */
       '.full-vp-right {',
       '  height: calc(100vh - var(--tai-nav-h));',
       '}',
       '@media(max-width:768px){',
       '  .full-vp-right { height: calc(100vh - 280px); min-height: 400px; }',
       '}',
-
-      /* .tai-page-top: 헤더 fixed일 때 콘텐츠가 헤더 뒤로 숨지 않도록 */
       '.tai-page-top { padding-top: var(--tai-nav-h); }',
     ].join('\n');
 
@@ -104,7 +91,7 @@
 
     '      <div class="logo">',
     '        <a class="main-logo" href="' + base + 'index.html">',
-    '          <img src="' + base + 'assets/img/tai-logo.png" alt="TAI \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1">',
+    '          <img src="' + base + 'assets/img/tai-logo.svg" alt="TAI \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1" height="40">',
     '        </a>',
     '      </div>',
 
