@@ -1,6 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
- * v2.7.0 (2026-04-21): tai-logo.svg 교체 (벡터 로고)
+ * v2.8.0 (2026-04-21): 로고 Supabase Storage URL 적용
  * v2.6.0 (2026-04-21): 전문가 세부 페이지 연결 (for-agency/repair/consultant/expert)
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입 + 풀뷰포트 레이아웃 자동 보정
  * v2.4.0 (2026-04-19): 역할별 링크 .html 제거
@@ -12,6 +12,8 @@
  */
 (function () {
   'use strict';
+
+  var LOGO_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai-logo.svg';
 
   /* ── 헤더 높이 CSS 변수 + 풀뷰포트 레이아웃 유틸 주입 ── */
   (function injectNavCss() {
@@ -91,7 +93,7 @@
 
     '      <div class="logo">',
     '        <a class="main-logo" href="' + base + 'index.html">',
-    '          <img src="' + base + 'assets/img/tai-logo.svg" alt="TAI \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1" height="40">',
+    '          <img src="' + LOGO_URL + '" alt="TAI \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1" height="40">',
     '        </a>',
     '      </div>',
 
