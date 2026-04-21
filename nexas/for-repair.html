@@ -113,6 +113,16 @@
     #fr2 .ui-mini .col { background:#f8fafc; border:1px solid var(--bd); border-radius:10px; padding:8px; text-align:center; }
     #fr2 .ui-mini .col.bad { background:#fef2f2; border-color:#fecaca; }
     #fr2 .ui-mini .col.good { background:#eff6ff; border-color:#bfdbfe; }
+
+    #fr2 .fr2-identity-line { font-size:.82rem; color:rgba(255,255,255,.45); margin-top:14px; max-width:48ch; line-height:1.55; }
+    #fr2 .fr2-a .fr2-release-line { font-size:.82rem; color:rgba(255,255,255,.4); margin-top:18px; }
+    #fr2 .fr2-a--compact .fr2-release-line { text-align:center; }
+    #fr2 .fr2-e-pickup { font-size:.78rem; color:var(--g); font-weight:700; margin-top:16px; text-align:center; }
+    #fr2 .fr2-e-prereg { font-size:.78rem; color:var(--g); font-weight:700; margin-top:8px; text-align:center; }
+    #fr2 .fr2-cta-free { font-size:.88rem; color:rgba(255,255,255,.75); margin:0 auto; max-width:42ch; text-align:center; }
+    #fr2 .fr2-incentive { border:1px solid rgba(255,255,255,.15); border-radius:12px; padding:16px 20px; max-width:480px; margin:16px auto 0; text-align:left; }
+    #fr2 .fr2-incentive strong { display:block; font-size:.88rem; font-weight:900; color:#fbbf24; margin-bottom:8px; }
+    #fr2 .fr2-incentive ul { margin:0; padding:0 0 0 1.1em; font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.8; }
   </style>
 </head>
 <body class="sc5 home-2">
@@ -131,6 +141,8 @@
       <h1>기술은 있는데,<br>줄이 안 서 있습니다.</h1>
       <p class="lead">소규모 정비업체 사장님, 설비 전문 수선 기사님.<br>밖에서는 안 보이는 실력 이야기부터 적어 두었습니다.</p>
       <p class="sub">TAI Fix는 증상 기반으로 의뢰를 만들고, 자격·거리·실적을 함께 보는 매칭을 준비하고 있습니다. 전체는 아직 <strong style="color:#93c5fd;">준비 중</strong>입니다.</p>
+      <p class="fr2-identity-line">TAI는 473개 법령을 분석해 사업장의 안전 의무를 자동 감지하는 산업안전 플랫폼입니다.</p>
+      <p class="fr2-release-line">2026년 하반기 출시를 목표로 준비하고 있습니다.</p>
       <div class="fr2-scroll">스크롤<i class="fas fa-chevron-down"></i></div>
     </div>
   </section>
@@ -222,7 +234,33 @@
     </div>
   </section>
 
-  <!-- §5 [C] -->
+  <!-- §5 [C] 범용 플랫폼 비교 -->
+  <section class="fr2-sec bg-muted">
+    <div class="fr2-inner fr2-split fr2-split--rev">
+      <div class="fr2-col-text">
+        <span class="fr2-kicker">범용 플랫폼</span>
+        <p class="fr2-mind"><q>숨고에 올려봤어요.<br>'설비 정비' 카테고리가 있긴 한데<br>거기서 공장 보일러 수선 찾는 사람이 있겠어요?<br>이사짐 사이에 끼어 있으면 누가 찾아요.</q></p>
+        <p class="fr2-solve"><strong>방향</strong> — TAI는 <strong>산업 설비 전용 플랫폼</strong>입니다. 법령진단으로 정비 의무를 확인한 사업장에서 증상을 입력하면 자격과 거리 기준으로 연결됩니다. 범용 플랫폼과는 수요의 질이 다릅니다.</p>
+      </div>
+      <div class="fr2-col-vis">
+        <div class="fr2-device" aria-hidden="true">
+          <div class="fr2-device-inner">
+            <div class="fr2-df-h" style="background:#64748b;border-radius:10px;margin-bottom:8px;"><span>플랫폼 비교</span><span>예시</span></div>
+            <div class="fr2-df-b" style="font-size:.54rem;line-height:1.55;">
+              <div style="border-bottom:1px solid #e2e8f0;padding-bottom:8px;margin-bottom:8px;">
+                <strong style="color:var(--d);">숨고</strong><br>카테고리 혼재, 범용 수요<br><span style="color:#b91c1c;font-weight:800;">→ 설비정비 문의 거의 없음</span>
+              </div>
+              <div>
+                <strong style="color:var(--b);">TAI Fix</strong><br>산업안전 전용<br><span style="color:#15803d;font-weight:800;">→ 법적 의무 기반 진성 수요</span><br><span style="color:#15803d;font-weight:800;">→ 자격·거리 매칭</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 [C] -->
   <section class="fr2-sec bg-muted">
     <div class="fr2-inner fr2-split fr2-split--rev">
       <div class="fr2-col-text">
@@ -246,17 +284,18 @@
     </div>
   </section>
 
-  <!-- §6 [A] -->
+  <!-- §7 [A] -->
   <section class="fr2-sec fr2-a fr2-a--compact fr2-sec-dark">
     <div class="fr2-inner" style="max-width:720px;text-align:center;">
       <span class="fr2-kicker">TAI Fix</span>
       <h2 class="fr2-h2">증상 기반 매칭 <span class="badge-coming" style="vertical-align:middle;margin-left:6px;">준비 중</span></h2>
       <p class="fr2-solve" style="max-width:none;margin-left:auto;margin-right:auto;font-size:1rem;line-height:1.75;">사업장에서 증상을 입력하면 분석·자격 필터·거리 순으로 후보가 정리되고, 업체에 알림이 가며 수락 후 출동·정산까지 이어지게 설계 중입니다. 세부 UI와 과금은 런칭 전까지 계속 다듬습니다.</p>
       <p class="fr2-solve" style="max-width:none;margin:12px auto 0;">연결 이후에만 <strong>매칭 서비스료</strong>를 정산하는 방향을 검토하고 있습니다.</p>
+      <p class="fr2-release-line">2026년 하반기 출시를 목표로 준비하고 있습니다.</p>
     </div>
   </section>
 
-  <!-- §7 [B] -->
+  <!-- §8 [B] -->
   <section class="fr2-sec bg-white">
     <div class="fr2-inner fr2-split">
       <div class="fr2-col-text">
@@ -281,7 +320,7 @@
     </div>
   </section>
 
-  <!-- §8 [C] -->
+  <!-- §9 [C] -->
   <section class="fr2-sec bg-muted">
     <div class="fr2-inner fr2-split fr2-split--rev">
       <div class="fr2-col-text">
@@ -305,7 +344,7 @@
     </div>
   </section>
 
-  <!-- §9 [F] -->
+  <!-- §10 [F] -->
   <section class="fr2-sec fr2-flow fr2-sec-dark">
     <div class="fr2-inner">
       <h2 class="fr2-h2">TAI Fix가 잇는 한 줄기입니다.</h2>
@@ -379,7 +418,7 @@
     </div>
   </section>
 
-  <!-- §10 [D] -->
+  <!-- §11 [D] -->
   <section class="fr2-sec bg-white fr2-count-scope">
     <div class="fr2-inner" style="text-align:center;">
       <span class="fr2-kicker" style="display:inline-block;margin-bottom:8px;">비용 원칙 (안내)</span>
@@ -393,7 +432,7 @@
     </div>
   </section>
 
-  <!-- §11 [E] -->
+  <!-- §12 [E] -->
   <section class="fr2-sec bg-muted">
     <div class="fr2-inner">
       <h2 class="fr2-h2" style="text-align:center;">파트너 유형 (예시)</h2>
@@ -415,14 +454,25 @@
           <p>전기 안전·소방 설비 점검 일정과 맞물리는 수선·보수 의뢰를 준비하고 있습니다.</p>
         </div>
       </div>
+      <p class="fr2-e-pickup">출시 시 등록 순서대로 우선 매칭됩니다.</p>
+      <p class="fr2-e-prereg">현재 사전등록 접수 중 — 2026년 하반기 출시 예정</p>
     </div>
   </section>
 
-  <!-- §12 [A] -->
+  <!-- §13 [A] -->
   <section class="fr2-sec fr2-a fr2-sec-dark fr2-a--compact">
     <div class="fr2-inner" style="text-align:center;">
       <h2 class="fr2-h2" style="max-width:none;">수선 파트너 사전등록</h2>
       <p class="fr2-solve" style="max-width:46ch;margin-left:auto;margin-right:auto;text-align:center;">TAI Fix 파일럿 지역·순서에 맞춰 연락드릴 수 있게 남겨 주세요.</p>
+      <p class="fr2-cta-free">등록은 무료이며, 의무 사항은 없습니다.</p>
+      <div class="fr2-incentive">
+        <strong>사전등록 혜택</strong>
+        <ul>
+          <li>출시 후 첫 3건 매칭 서비스료 면제</li>
+          <li>베타 테스트 우선 참여</li>
+          <li>등록 순서 기반 우선 매칭</li>
+        </ul>
+      </div>
       <div class="fr2-cta-row">
         <a class="fr2-btn fr2-btn-pri" href="fix-request.html?from=for-repair&amp;type=general&amp;interest=partner-repair">파트너 사전등록 →</a>
       </div>
@@ -431,6 +481,7 @@
         <a class="fr2-btn fr2-btn-ghost" href="for-agency.html">안전관리 대행 파트너 →</a>
         <a class="fr2-btn fr2-btn-sec" href="for-consultant.html">안전 컨설턴트 →</a>
       </div>
+      <p class="fr2-release-line">2026년 하반기 출시를 목표로 준비하고 있습니다.</p>
     </div>
   </section>
 
