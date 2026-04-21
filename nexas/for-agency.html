@@ -148,7 +148,7 @@
       <div class="fa2-col-text">
         <span class="fa2-kicker">단가 경쟁</span>
         <p class="fa2-mind"><q>깎아달라는 곳만 있어요. 실력으로 따지면 우리가 나은데 가격표만 보고 결정해요.</q></p>
-        <p class="fa2-solve"><strong>방향</strong> — 최저가 비교만으로 매칭되지 않도록, 실적·자격·이력이 함께 보이는 카드를 준비하고 있습니다. <strong>매칭 서비스료</strong>는 연결이 성사될 때만 정산하는 쪽을 지향합니다.</p>
+        <p class="fa2-solve"><strong>방향</strong> — 최저가 비교만으로 매칭되지 않도록, 실적·자격·이력이 함께 보이는 카드를 준비하고 있습니다. 완료 건수와 응답률이 매칭 점수에 반영되며, 점수가 올라갈수록 더 많은 의뢰가 자동으로 연결됩니다. <strong>매칭 서비스료</strong>는 연결이 성사될 때만 정산하는 쪽을 지향합니다.</p>
       </div>
       <div class="fa2-col-vis">
         <div class="fa2-device" aria-hidden="true">
@@ -218,17 +218,32 @@
       <div class="fa2-col-text">
         <span class="fa2-kicker">고객 이탈</span>
         <p class="fa2-mind"><q>3년 했던 고객이 갑자기 다른 데로 갔어요. 기록이 안 남으니까 3년 잘해준 게 의미 없어요.</q></p>
-        <p class="fa2-solve"><strong>방향</strong> — 점검·소통·납품 기록이 남는 프로필 쪽으로 연결해 둘 생각입니다. ‘누가 어떤 현장을 어떻게 해 왔는지’가 한눈에 보이게요.</p>
+        <p class="fa2-solve"><strong>방향</strong> — 점검·소통·납품 기록이 남는 프로필 쪽으로 연결해 둘 생각입니다. ‘누가 어떤 현장을 어떻게 해 왔는지’가 한눈에 보이게요. 완료 건수와 응답률이 점수에 반영되어, 더 많은 의뢰가 자동으로 연결됩니다.</p>
       </div>
       <div class="fa2-col-vis">
         <div class="fa2-device" aria-hidden="true">
           <div class="fa2-device-inner">
-            <div class="fa2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>전문가 프로필</span><span>공개</span></div>
-            <div class="fa2-df-b">
-              <div style="font-weight:900;color:var(--d);font-size:.62rem;">김○○ · 10년</div>
-              <div style="font-size:.52rem;color:#64748b;">평점 <strong style="color:var(--d);">4.8</strong> · 완료 214건 · 재계약율 62%</div>
-              <div class="ui-bar" style="margin-top:8px;"><span style="width:78%;"></span></div>
-              <div style="font-size:.5rem;color:#94a3b8;">프로필 예시 목업</div>
+            <div class="fa2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>전문가 프로필</span><span>내부</span></div>
+            <div class="fa2-df-b" style="font-size:.52rem;line-height:1.55;color:#475569;">
+              <div style="font-weight:900;color:var(--d);font-size:.58rem;">전문가 프로필</div>
+              <div style="border-top:1px solid #e2e8f0;margin:6px 0;padding-top:6px;display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap;">
+                <span style="color:#64748b;">매칭 점수</span>
+                <span><span style="font-size:1.2rem;font-weight:900;color:var(--b);">82</span><span style="font-weight:900;color:var(--b);">점</span> <span style="color:#22c55e;font-weight:900;">▲</span></span>
+              </div>
+              <div style="border-top:1px solid #e2e8f0;margin:6px 0;padding-top:6px;">
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>완료</span><span style="font-weight:900;color:var(--d);">23건</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>응답률</span><span style="font-weight:900;color:var(--d);">94%</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>자격 검증</span><span class="ui-check">✓</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>보험 확인</span><span class="ui-check">✓</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>지역</span><span style="font-weight:800;">서울·경기</span></div>
+              </div>
+              <div style="font-size:.48rem;color:#94a3b8;background:#f8fafc;border-radius:6px;padding:6px;margin:6px 0;line-height:1.45;">
+                <strong style="color:#64748b;display:block;margin-bottom:3px;font-size:.5rem;">점수 산정 기준</strong>
+                · 완료 건수 · 응답 속도<br>
+                · 자격 보유 · 전문분야 일치
+              </div>
+              <div style="border-top:1px solid #e2e8f0;margin-top:6px;padding-top:6px;font-size:.5rem;color:#64748b;">매칭 점수가 올라갈수록<br>더 많은 의뢰가 연결됩니다.</div>
+              <div style="font-size:.48rem;color:#94a3b8;margin-top:6px;">TAI 매칭 점수 · 전문가 본인만 확인</div>
             </div>
           </div>
         </div>
@@ -264,6 +279,7 @@
               <div class="ui-row"><span>무분별 비교견적</span><span class="ui-x">✕</span></div>
               <div class="ui-row"><span>의무·업종 일치</span><span class="ui-check">✓</span></div>
               <div class="ui-row"><span>실적·자격 요약</span><span class="ui-check">✓</span></div>
+              <div class="ui-row"><span>매칭 점수 70점 이상</span><span class="ui-check">✓</span></div>
             </div>
           </div>
         </div>
@@ -300,17 +316,25 @@
       <div class="fa2-col-text">
         <span class="fa2-kicker">경력 증명</span>
         <p class="fa2-mind"><q>10년 했는데 처음 하는 사람이랑 똑같이 취급받아요.</q></p>
-        <p class="fa2-solve"><strong>방향</strong> — 누적 실적·업종 매칭·재계약 흐름을 한 화면에 모아 보는 대시보드를 준비하고 있습니다. 숫자가 말하게요.</p>
+        <p class="fa2-solve"><strong>방향</strong> — 누적 실적·업종 매칭·재계약 흐름을 한 화면에 모아 보는 대시보드를 준비하고 있습니다. 숫자가 말하게요. 매칭 점수가 올라갈수록 연결 빈도가 높아집니다. 점수는 완료 건수, 응답 속도, 자격 보유 등을 기준으로 내부에서 산정됩니다.</p>
       </div>
       <div class="fa2-col-vis">
         <div class="fa2-device" aria-hidden="true">
           <div class="fa2-device-inner">
-            <div class="fa2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>실적 대시보드</span><span>YTD</span></div>
-            <div class="fa2-df-b">
-              <div class="ui-row"><span>완료 건수</span><span style="font-weight:900;color:var(--d);">48</span></div>
-              <div class="ui-row"><span>재계약</span><span style="font-weight:900;color:var(--b);">71%</span></div>
-              <div class="ui-row"><span>평균 응답</span><span style="font-weight:800;">2.4h</span></div>
-              <div style="margin-top:8px;font-size:.5rem;color:#94a3b8;">집계 예시 목업</div>
+            <div class="fa2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>내 매칭 현황</span><span>내부</span></div>
+            <div class="fa2-df-b" style="font-size:.52rem;line-height:1.55;color:#475569;">
+              <div style="font-weight:900;color:var(--d);font-size:.56rem;">내 매칭 현황</div>
+              <div style="border-top:1px solid #e2e8f0;margin:6px 0;padding-top:6px;">
+                <div style="font-weight:800;color:#64748b;margin-bottom:4px;">매칭 점수 추이</div>
+                <div>1월 54점 → 4월 <span style="font-size:1.05rem;font-weight:900;color:var(--b);">82</span><span style="font-weight:900;color:var(--b);">점</span> <span style="color:#22c55e;font-weight:900;">▲</span></div>
+              </div>
+              <div style="border-top:1px solid #e2e8f0;margin:6px 0;padding-top:6px;">
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>올해 완료</span><span style="font-weight:900;color:var(--d);">18건</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>평균 응답</span><span style="font-weight:800;">2.1시간</span></div>
+                <div class="ui-row" style="border-bottom:none;padding:2px 0;"><span>매칭 연결</span><span style="font-weight:900;color:var(--d);">월 3.2건</span> <span style="color:#22c55e;font-weight:900;">▲</span></div>
+              </div>
+              <div style="border-top:1px solid #e2e8f0;margin-top:6px;padding-top:6px;font-size:.5rem;color:#64748b;">점수가 올라갈수록<br>매칭 빈도가 높아집니다.</div>
+              <div style="font-size:.48rem;color:#94a3b8;margin-top:6px;">고객(사업장)에게 점수는 노출되지 않음</div>
             </div>
           </div>
         </div>
