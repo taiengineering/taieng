@@ -167,6 +167,29 @@
     .role-card.rc3 .role-link { background: #16a34a; }
     .role-card.rc4 .role-link { background: #d97706; }
     .featured-area { background: #f1f5f9; }
+
+    /* ═══ 앱 스크린 3열 그리드 ═══ */
+    .app-screens-grid {
+        display: flex;
+        gap: 14px;
+        align-items: stretch;
+    }
+    .app-screens-grid .app-screen-item {
+        flex: 1;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+        aspect-ratio: 9/16;
+    }
+    .app-screens-grid .app-screen-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    @media (max-width: 767px) {
+        .app-screens-grid { gap: 10px; }
+    }
     </style>
 </head>
 <body class="sc5">
@@ -176,8 +199,6 @@
     <div id="tai-header"></div>
 
     <section class="hero-split">
-
-        <!-- 텍스트: 왼쪽 -->
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
@@ -196,8 +217,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- 이미지: 오른쪽 -->
         <div class="hero-right">
             <img
                 class="hero-img"
@@ -210,7 +229,6 @@
                 엑셀 + 종이서류로 혼자 버팀
             </div>
         </div>
-
     </section>
 
     <section class="service-area default-pd-top">
@@ -261,9 +279,30 @@
 
     <section class="app-screen-area" style="background-image: url(assets/img/other/3.png); background-size: contain">
         <div class="bg-main-gradient"></div>
-        <div class="container"><div class="row justify-content-center">
-            <div class="col-xl-4 col-lg-5 align-self-center"><div class="section-title mb-0 pb-4"><h2 class="title text-white">직접 보시면 바로 아십니다</h2><p class="text-white">현장에서 1분 이내에 처리 가능한 현장용 앱</p></div><div class="btn-area"><a class="btn btn-white" href="free-diagnosis.html">무료 진단 시작</a><a class="btn btn-border-white" href="fix-request.html?from=landing&type=general">도입 문의</a></div></div>
-            <div class="col-xl-8 col-lg-7"><div class="app-screen-inner"><div class="screenshot-slider owl-carousel"><div class="item"><div class="screenshot-thumb"><img src="assets/img/app-screen/1.svg" alt="TAI Safe 홈 대시보드 — 미완료 점검 현황 및 오늘 점검 시작"></div></div><div class="item"><div class="screenshot-thumb"><img src="assets/img/app-screen/2.svg" alt="TAI Safe 점검 화면 — 항목별 완료·미완료 현황 및 사진 첨부"></div></div><div class="item"><div class="screenshot-thumb"><img src="assets/img/app-screen/3.svg" alt="TAI Safe 기록 화면 — TBM 서명, 위험성평가, 월별 이력 PDF"></div></div></div></div></div>
+        <div class="container"><div class="row justify-content-center align-items-center">
+            <div class="col-xl-4 col-lg-5 align-self-center">
+                <div class="section-title mb-0 pb-4">
+                    <h2 class="title text-white">직접 보시면 바로 아십니다</h2>
+                    <p class="text-white">현장에서 1분 이내에 점검 가능한 현장용 앱</p>
+                </div>
+                <div class="btn-area">
+                    <a class="btn btn-white" href="free-diagnosis.html">무료 진단 시작</a>
+                    <a class="btn btn-border-white" href="fix-request.html?from=landing&type=general">도입 문의</a>
+                </div>
+            </div>
+            <div class="col-xl-8 col-lg-7">
+                <div class="app-screens-grid">
+                    <div class="app-screen-item">
+                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-main.jpeg" alt="TAI Safe 홈 대시보드 화면" loading="lazy">
+                    </div>
+                    <div class="app-screen-item">
+                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-check.jpeg" alt="TAI Safe 점검 화면" loading="lazy">
+                    </div>
+                    <div class="app-screen-item">
+                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-check1.jpeg" alt="TAI Safe 기록 화면" loading="lazy">
+                    </div>
+                </div>
+            </div>
         </div></div>
     </section>
 
