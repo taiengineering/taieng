@@ -51,7 +51,7 @@
   #saas-page .sp-tl-t { font-size:.9rem; font-weight:800; color:var(--sp-dark); margin-bottom:4px; }
   #saas-page .sp-tl-d { font-size:.82rem; color:var(--sp-gray); line-height:1.55; margin:0; }
   #saas-page .sp-tl-visual { margin-top:28px; border-radius:14px; overflow:hidden; border:1.5px solid var(--sp-border); }
-  #saas-page .sp-tl-visual img { width:100%; display:block; min-height:180px; object-fit:cover; background:#e2e8f0; }
+  #saas-page .sp-tl-visual img { width:100%; height:auto; display:block; }
 
   #saas-page .sp-asis-svg { width:100%; height:auto; display:block; }
   #saas-page .sp-asis-legend { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:14px; font-size:.78rem; color:var(--sp-gray); }
@@ -301,19 +301,6 @@
           <span class="sp-label">공감</span>
           <h2 class="sp-h2">겸직 안전관리자의<br>08:00 ~ 18:00</h2>
           <p class="sp-desc" style="margin-bottom:20px;">본업 회의와 안전 업무가 겹칠 때, 하루는 이렇게 흩어집니다. 아래 타임라인을 따라가 보세요.</p>
-          <div class="sp-tl-visual" aria-hidden="true">
-            <svg viewBox="0 0 400 200" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" style="display:block;background:linear-gradient(135deg,#e0e7ff,#f8fafc);">
-              <rect x="24" y="32" width="110" height="72" rx="8" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
-              <text x="79" y="58" text-anchor="middle" fill="#64748b" font-size="11" font-family="Noto Sans KR,sans-serif">엑셀</text>
-              <text x="79" y="78" text-anchor="middle" fill="#1e293b" font-size="13" font-weight="700" font-family="Noto Sans KR,sans-serif">??건</text>
-              <rect x="150" y="48" width="100" height="56" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
-              <text x="200" y="82" text-anchor="middle" fill="#92400e" font-size="11" font-weight="700" font-family="Noto Sans KR,sans-serif">본업 회의</text>
-              <rect x="270" y="28" width="100" height="88" rx="8" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
-              <text x="320" y="52" text-anchor="middle" fill="#64748b" font-size="10" font-family="Noto Sans KR,sans-serif">서류 더미</text>
-              <path d="M60 120 Q200 160 340 118" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="6 4" opacity=".7"/>
-              <text x="200" y="178" text-anchor="middle" fill="#dc2626" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">추적 끊김 · 증빙 공백</text>
-            </svg>
-          </div>
         </div>
         <div class="col-lg-7">
           <div class="sp-tl-wrap">
@@ -324,7 +311,7 @@
             </div>
             <div class="sp-tl-item">
               <div class="sp-tl-time">10:30</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">📎</span><div><div class="sp-tl-t">엑셀·PDF 사이를 왔다 갔다</div><p class="sp-tl-d">점검표 버전이 파일마다 다릅니다. “이게 최종인가요?”라는 질문에 답하려면 반나절이 갑니다.</p></div></div>
+              <div class="sp-tl-card"><span class="sp-tl-ico">📎</span><div><div class="sp-tl-t">엑셀·PDF 사이를 왔다 갔다</div><p class="sp-tl-d">점검표 버전이 파일마다 다릅니다. "이게 최종인가요?"라는 질문에 답하려면 반나절이 갑니다.</p></div></div>
             </div>
             <div class="sp-tl-item">
               <div class="sp-tl-time">13:00</div>
@@ -332,12 +319,19 @@
             </div>
             <div class="sp-tl-item">
               <div class="sp-tl-time">16:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">📞</span><div><div class="sp-tl-t">협력사·본사·노동청 요청이 한꺼번에</div><p class="sp-tl-d">“자료 주세요”가 동시에 들어오면, 우선순위를 정하는 것만으로도 에너지가 바닥납니다.</p></div></div>
+              <div class="sp-tl-card"><span class="sp-tl-ico">📞</span><div><div class="sp-tl-t">협력사·본사·노동청 요청이 한꺼번에</div><p class="sp-tl-d">"자료 주세요"가 동시에 들어오면, 우선순위를 정하는 것만으로도 에너지가 바닥납니다.</p></div></div>
             </div>
             <div class="sp-tl-item">
               <div class="sp-tl-time">18:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">🌙</span><div><div class="sp-tl-t">퇴근 후에야 떠오르는 빠진 항목</div><p class="sp-tl-d">“아, 그 점검 주기 바뀌지 않았나?” — 하루의 끝에서 불안이 다시 시작됩니다.</p></div></div>
+              <div class="sp-tl-card"><span class="sp-tl-ico">🌙</span><div><div class="sp-tl-t">퇴근 후에야 떠오르는 빠진 항목</div><p class="sp-tl-d">"아, 그 점검 주기 바뀌지 않았나?" — 하루의 끝에서 불안이 다시 시작됩니다.</p></div></div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="sp-tl-visual">
+            <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/daily.svg" alt="겸직 안전관리자의 하루 — 추적 끊김과 증빙 공백 시각화" loading="lazy">
           </div>
         </div>
       </div>
@@ -404,7 +398,7 @@
         <span class="sp-feat-badge">기능 ①</span>
         <div class="sp-feat-pair"><div class="fp-p">문제 · 의무가 한 사람에게 몰림</div><div class="fp-s">해결 · 법령 기반으로 자동 배분·알림</div></div>
         <h3>캘린더와 알림이<br><strong>대신 외칩니다.</strong></h3>
-        <p>법령진단으로 뽑힌 의무가 일정으로 깔리고, 담당자에게 D-day가 자동 발송됩니다. 겸직 관리자는 “쫓아다니기”보다 “확인하기”에 시간을 씁니다.</p>
+        <p>법령진단으로 뽑힌 의무가 일정으로 깔리고, 담당자에게 D-day가 자동 발송됩니다. 겸직 관리자는 "쫓아다니기"보다 "확인하기"에 시간을 씁니다.</p>
         <ul class="sp-bullets"><li><span class="dot">✓</span> 점검 주기·법정 기한 자동 계산</li><li><span class="dot">✓</span> 담당자별 SMS·리마인더</li><li><span class="dot">✓</span> 미이행 대시보드</li></ul>
       </div>
       <div class="col-lg-6 order-lg-2">
@@ -591,7 +585,7 @@
   <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;">가입·설정·배포까지를 하루 단위로 쪼갠 4단계입니다. 실제 일정은 사업장 규모에 따라 달라질 수 있습니다.</p></div>
-      <p class="sp-adopt-lead">하루 만에 “돌아가는” 최소 루프를 만듭니다</p>
+      <p class="sp-adopt-lead">하루 만에 "돌아가는" 최소 루프를 만듭니다</p>
       <div class="sp-adopt-grid mb-5">
         <div class="sp-adopt-card"><div class="ac-n">STEP 1</div><div class="ac-t">무료 법령진단<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">적용 법령·의무 스캔</span></div></div>
         <div class="sp-adopt-card"><div class="ac-n">STEP 2</div><div class="ac-t">사업장 프로필<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">시설·인력 반영</span></div></div>
@@ -611,7 +605,7 @@
           <rect x="340" y="60" width="180" height="120" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
           <text x="430" y="92" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="800" font-family="Noto Sans KR,sans-serif">Day 1 · 내일</text>
           <text x="430" y="118" text-anchor="middle" fill="#64748b" font-size="10" font-family="Noto Sans KR,sans-serif">첫 점검·알림 발송</text>
-          <text x="280" y="198" text-anchor="middle" fill="#1A5FD4" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">“내일 아침, 담당자 폰에 첫 할 일이 뜹니다”</text>
+          <text x="280" y="198" text-anchor="middle" fill="#1A5FD4" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">"내일 아침, 담당자 폰에 첫 할 일이 뜹니다"</text>
         </svg>
         <p class="sp-cap">가입 당일에 데이터가 들어오면, 다음 영업일부터 리마인더가 움직이기 시작합니다.</p>
       </div>
