@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v2.7.0 (2026-04-23): 특허 출원번호 마스킹, 건수 9건 반영
  * v2.6.0 (2026-04-21): 로고 Supabase Storage URL 적용
  * v2.4.3 (2026-04-19): 역할별 링크 .html 제거
  * v2.4.2 (2026-04-19): 안전정보 블록 — 판례검색·안전정보 링크
@@ -71,8 +72,8 @@
     '<div class="footer-patent-bar" style="padding:10px 0;text-align:center;">' +
     '  <div class="container">' +
     '    <p style="margin:0;font-size:.8rem;">' +
-    '      특허 출원 중 (Patent Pending) &nbsp;·&nbsp; 제10-2026-0056330 외 7건 &nbsp;·&nbsp; 상표출원 중' +
-    '      <a href="' + b + 'patents.html" style="margin-left:10px;">\uae30\uc220 \ud601\uc2e0 \ubcf4\uae30 \u2192</a>' +
+    '      특허 출원 (Patent Pending) &nbsp;·&nbsp; 제10-202*-***6330 외 8건' +
+    '      <a href="' + b + 'patents.html" style="margin-left:16px;">기술 혁신 보기 →</a>' +
     '    </p>' +
     '  </div>' +
     '</div>' +
@@ -163,7 +164,7 @@
     '      <div class="col-md-6 align-self-center text-md-end">' +
     '        <div class="author-area">' +
     '          <p class="mb-0" style="font-size:.82rem;">' +
-    '            특허 출원 중 (Patent Pending) &nbsp;·&nbsp;' +
+    '            특허 출원 (Patent Pending) &nbsp;·&nbsp;' +
     '            <a href="' + b + 'site-map.html">사이트맵</a>' +
     '          </p>' +
     '        </div>' +
