@@ -201,18 +201,15 @@
     background:#fff; border:1.5px solid var(--sp-border); border-radius:18px;
     padding:28px 22px; height:100%; position:relative;
     transition:transform .15s,box-shadow .15s;
-    /* flex column으로 버튼 하단 고정 */
     display:flex; flex-direction:column;
   }
   #saas-page .sp-price:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.1); }
-  /* 추천 배지 없음 — featured 스타일 제거 */
   #saas-page .sp-price .tier { font-size:.68rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--sp-gray); margin-bottom:4px; }
   #saas-page .sp-price .plan-name { font-size:1.1rem; font-weight:900; color:var(--sp-dark); margin-bottom:16px; line-height:1.2; }
   #saas-page .sp-price .amt { font-size:2.2rem; font-weight:900; color:var(--sp-blue); line-height:1; margin-bottom:3px; }
   #saas-page .sp-price .amt.consult { font-size:1.4rem; color:var(--sp-dark); }
   #saas-page .sp-price .unit { font-size:.78rem; color:var(--sp-gray); margin-bottom:20px; }
   #saas-page .sp-price hr { border:none; border-top:1px solid var(--sp-border); margin:0 0 16px; }
-  /* ul이 남은 공간을 모두 차지 → 버튼이 항상 하단 */
   #saas-page .sp-price ul { list-style:none; padding:0; margin:0; flex:1; display:flex; flex-direction:column; gap:9px; }
   #saas-page .sp-price ul li { display:flex; gap:8px; font-size:.84rem; color:#475569; line-height:1.45; align-items:flex-start; }
   #saas-page .sp-price ul li::before { content:'✓'; color:var(--sp-green); font-weight:900; flex-shrink:0; margin-top:1px; }
@@ -632,229 +629,38 @@
         <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-23.svg" alt="TAI Safe ROI 비교" loading="lazy">
       </div>
 
-      <!-- 섹터 탭 -->
       <div class="sp-sector-tabs" role="tablist">
         <button class="sp-sector-btn active" data-sector="building" role="tab" aria-selected="true"><span class="sb-icon">🏢</span> 건물</button>
         <button class="sp-sector-btn" data-sector="industry" role="tab" aria-selected="false"><span class="sb-icon">🏭</span> 산업</button>
         <button class="sp-sector-btn" data-sector="construction" role="tab" aria-selected="false"><span class="sb-icon">🏗️</span> 건설</button>
       </div>
 
-      <!-- ── 건물 패널 ── -->
       <div class="sp-sector-panel active" id="panel-building">
-        <div class="sp-sector-note">
-          <span class="sn-icon">🏢</span>
-          <span><strong>건물 사업장</strong> — 건물 1개 기준 과금. 소방·승강기·전기설비 등 건물 안전관리 의무를 자동화합니다. (면적·규모에 맞는 플랜 선택)</span>
-        </div>
+        <div class="sp-sector-note"><span class="sn-icon">🏢</span><span><strong>건물 사업장</strong> — 건물 1개 기준 과금. 소방·승강기·전기설비 등 건물 안전관리 의무를 자동화합니다. (면적·규모에 맞는 플랜 선택)</span></div>
         <div class="row g-4 justify-content-center">
-          <div class="col-xl-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">BASIC</div>
-              <div class="plan-name">기본관리</div>
-              <div class="amt">59,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 건물 1개 · 소형(5,000㎡ 미만)</div>
-              <hr>
-              <ul>
-                <li>법령 기반 점검 일정 자동 생성</li>
-                <li>D-day 알림 (SMS)</li>
-                <li>점검 기록 자동 보관</li>
-                <li>안전관리자 대시보드</li>
-                <li>기본 보고서 출력</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_BASIC',59000,'TAI Safe 건물 기본관리')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">STANDARD</div>
-              <div class="plan-name">정밀관리</div>
-              <div class="amt">145,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 건물 1개 · 대형(5,000㎡ 이상)</div>
-              <hr>
-              <ul>
-                <li>기본관리 전체 포함</li>
-                <li>소방시설 자체점검 연동</li>
-                <li>승강기 검사 주기 관리</li>
-                <li>석면·에너지 점검 일정</li>
-                <li>위반 위험 사전 알림</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_STANDARD',145000,'TAI Safe 건물 정밀관리')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">CUSTOM</div>
-              <div class="plan-name">대형건물</div>
-              <div class="amt">249,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 건물 1개 · 복합·특수건물</div>
-              <hr>
-              <ul>
-                <li>정밀관리 전체 포함</li>
-                <li>법정 서식 자동 생성</li>
-                <li>다층·다동 라인 점검 묶음</li>
-                <li>법령 개정 자동 반영</li>
-                <li>안전보건 종합 리포트</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_CUSTOM',249000,'TAI Safe 건물 대형')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">ENTERPRISE</div>
-              <div class="plan-name">Enterprise</div>
-              <div class="amt consult">별도 협의</div>
-              <div class="unit">다동·다지역 통합 등</div>
-              <hr>
-              <ul>
-                <li>대형건물 플랜 범위 협의</li>
-                <li>2개 이상 건물 통합 관리</li>
-                <li>전담 법령 업데이트 알림</li>
-                <li>API 연동 지원</li>
-                <li>전담 CS · SLA 보장</li>
-              </ul>
-              <a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a>
-            </div>
-          </div>
+          <div class="col-xl-3 col-md-6"><div class="sp-price"><div class="tier">BASIC</div><div class="plan-name">기본관리</div><div class="amt">59,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 건물 1개 · 소형(5,000㎡ 미만)</div><hr><ul><li>법령 기반 점검 일정 자동 생성</li><li>D-day 알림 (SMS)</li><li>점검 기록 자동 보관</li><li>안전관리자 대시보드</li><li>기본 보고서 출력</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_BASIC',59000,'TAI Safe 건물 기본관리')">결제하기</button></div></div>
+          <div class="col-xl-3 col-md-6"><div class="sp-price"><div class="tier">STANDARD</div><div class="plan-name">정밀관리</div><div class="amt">145,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 건물 1개 · 대형(5,000㎡ 이상)</div><hr><ul><li>기본관리 전체 포함</li><li>소방시설 자체점검 연동</li><li>승강기 검사 주기 관리</li><li>석면·에너지 점검 일정</li><li>위반 위험 사전 알림</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_STANDARD',145000,'TAI Safe 건물 정밀관리')">결제하기</button></div></div>
+          <div class="col-xl-3 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">대형건물</div><div class="amt">249,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 건물 1개 · 복합·특수건물</div><hr><ul><li>정밀관리 전체 포함</li><li>법정 서식 자동 생성</li><li>다층·다동 라인 점검 묶음</li><li>법령 개정 자동 반영</li><li>안전보건 종합 리포트</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_CUSTOM',249000,'TAI Safe 건물 대형')">결제하기</button></div></div>
+          <div class="col-xl-3 col-md-6"><div class="sp-price"><div class="tier">ENTERPRISE</div><div class="plan-name">Enterprise</div><div class="amt consult">별도 협의</div><div class="unit">다동·다지역 통합 등</div><hr><ul><li>대형건물 플랜 범위 협의</li><li>2개 이상 건물 통합 관리</li><li>전담 법령 업데이트 알림</li><li>API 연동 지원</li><li>전담 CS · SLA 보장</li></ul><a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
-      <!-- ── 산업 패널 ── -->
       <div class="sp-sector-panel" id="panel-industry">
-        <div class="sp-sector-note">
-          <span class="sn-icon">🏭</span>
-          <span><strong>산업 사업장</strong> — 사업장 1개 기준 과금. 제조·물류·유통 등 산업안전보건법·중대재해처벌법 의무를 자동화합니다.</span>
-        </div>
+        <div class="sp-sector-note"><span class="sn-icon">🏭</span><span><strong>산업 사업장</strong> — 사업장 1개 기준 과금. 제조·물류·유통 등 산업안전보건법·중대재해처벌법 의무를 자동화합니다.</span></div>
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">STARTER</div>
-              <div class="plan-name">산업 STARTER</div>
-              <div class="amt">79,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 사업장 1개 · 소규모(5~30인 겸직)</div>
-              <hr>
-              <ul>
-                <li>법령 기반 점검 일정 자동 생성</li>
-                <li>D-day 알림 (SMS)</li>
-                <li>점검 기록 자동 보관</li>
-                <li>안전관리자 대시보드</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_STARTER_V2',79000,'TAI Safe 산업 STARTER')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">BUSINESS</div>
-              <div class="plan-name">산업 BUSINESS</div>
-              <div class="amt">149,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 사업장 1개 · 중규모(30~100인)</div>
-              <hr>
-              <ul>
-                <li>스타터 플랜 전체 포함</li>
-                <li>현장 QR 점검 앱</li>
-                <li>TBM 전자서명</li>
-                <li>위험작업 요청·즉시승인</li>
-                <li>기상 작업중지 감시</li>
-                <li>법정 서식 자동 생성</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_BUSINESS_V2',149000,'TAI Safe 산업 BUSINESS')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">PRO</div>
-              <div class="plan-name">산업 PRO</div>
-              <div class="amt">249,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 사업장 1개 · 대규모(100인+)</div>
-              <hr>
-              <ul>
-                <li>비즈니스 플랜 전체 포함</li>
-                <li>안전보건 종합 보고서</li>
-                <li>법령 개정 자동 업데이트</li>
-                <li>위험성평가 작성 지원</li>
-                <li>협력업체 안전관리 연동</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_PRO',249000,'TAI Safe 산업 PRO')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="sp-price">
-              <div class="tier">CUSTOM</div>
-              <div class="plan-name">산업 CUSTOM</div>
-              <div class="amt consult">별도 협의</div>
-              <div class="unit">대기업·다사업장</div>
-              <hr>
-              <ul>
-                <li>프로 플랜 범위 협의 확장</li>
-                <li>2개 이상 사업장 통합 관리</li>
-                <li>ERP·MES 연동</li>
-                <li>API 전체 개방</li>
-                <li>전담 CS · SLA 보장</li>
-              </ul>
-              <a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a>
-            </div>
-          </div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">STARTER</div><div class="plan-name">산업 STARTER</div><div class="amt">79,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 사업장 1개 · 소규모(5~30인 겸직)</div><hr><ul><li>법령 기반 점검 일정 자동 생성</li><li>D-day 알림 (SMS)</li><li>점검 기록 자동 보관</li><li>안전관리자 대시보드</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_STARTER_V2',79000,'TAI Safe 산업 STARTER')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">BUSINESS</div><div class="plan-name">산업 BUSINESS</div><div class="amt">149,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 사업장 1개 · 중규모(30~100인)</div><hr><ul><li>스타터 플랜 전체 포함</li><li>현장 QR 점검 앱</li><li>TBM 전자서명</li><li>위험작업 요청·즉시승인</li><li>기상 작업중지 감시</li><li>법정 서식 자동 생성</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_BUSINESS_V2',149000,'TAI Safe 산업 BUSINESS')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">PRO</div><div class="plan-name">산업 PRO</div><div class="amt">249,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 사업장 1개 · 대규모(100인+)</div><hr><ul><li>비즈니스 플랜 전체 포함</li><li>안전보건 종합 보고서</li><li>법령 개정 자동 업데이트</li><li>위험성평가 작성 지원</li><li>협력업체 안전관리 연동</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_PRO',249000,'TAI Safe 산업 PRO')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">산업 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">대기업·다사업장</div><hr><ul><li>프로 플랜 범위 협의 확장</li><li>2개 이상 사업장 통합 관리</li><li>ERP·MES 연동</li><li>API 전체 개방</li><li>전담 CS · SLA 보장</li></ul><a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
-      <!-- ── 건설 패널 ── -->
       <div class="sp-sector-panel" id="panel-construction">
-        <div class="sp-sector-note">
-          <span class="sn-icon">🏗️</span>
-          <span><strong>건설 사업장</strong> — 공사장 1개 기준 과금. 산업안전보건법·중대재해처벌법·건설기술진흥법 의무를 자동화합니다.</span>
-        </div>
+        <div class="sp-sector-note"><span class="sn-icon">🏗️</span><span><strong>건설 사업장</strong> — 공사장 1개 기준 과금. 산업안전보건법·중대재해처벌법·건설기술진흥법 의무를 자동화합니다.</span></div>
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-4 col-md-6">
-            <div class="sp-price">
-              <div class="tier">STANDARD</div>
-              <div class="plan-name">건설 STANDARD</div>
-              <div class="amt">145,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 공사장 1개 · 50억 미만 현장</div>
-              <hr>
-              <ul>
-                <li>공사장 법령 의무 자동 산출</li>
-                <li>D-day 알림 (SMS)</li>
-                <li>현장 QR 점검 앱</li>
-                <li>TBM 전자서명</li>
-                <li>기상 작업중지 감시</li>
-                <li>법정 서식 자동 생성</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_STANDARD_V2',145000,'TAI Safe 건설 STANDARD')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="sp-price">
-              <div class="tier">PREMIUM</div>
-              <div class="plan-name">건설 PREMIUM</div>
-              <div class="amt">385,000<span style="font-size:1rem;">원</span></div>
-              <div class="unit">/월 · VAT 별도 · 공사장 1개 · 50억+ 현장</div>
-              <hr>
-              <ul>
-                <li>스탠다드 플랜 전체 포함</li>
-                <li>협력업체 안전관리 연동</li>
-                <li>안전관리계획서 작성 지원</li>
-                <li>위험성평가 통합 관리</li>
-                <li>전담 법령 업데이트</li>
-                <li>안전보건 종합 보고서</li>
-              </ul>
-              <button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_PREMIUM_V2',385000,'TAI Safe 건설 PREMIUM')">결제하기</button>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="sp-price">
-              <div class="tier">CUSTOM</div>
-              <div class="plan-name">건설 CUSTOM</div>
-              <div class="amt consult">별도 협의</div>
-              <div class="unit">대형건설사·다현장</div>
-              <hr>
-              <ul>
-                <li>프리미엄 플랜 범위 협의</li>
-                <li>2개 이상 공사장 통합 관리</li>
-                <li>발주처·원도급 연동</li>
-                <li>API 전체 개방</li>
-                <li>전담 CS · SLA 보장</li>
-              </ul>
-              <a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a>
-            </div>
-          </div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">STANDARD</div><div class="plan-name">건설 STANDARD</div><div class="amt">145,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 공사장 1개 · 50억 미만 현장</div><hr><ul><li>공사장 법령 의무 자동 산출</li><li>D-day 알림 (SMS)</li><li>현장 QR 점검 앱</li><li>TBM 전자서명</li><li>기상 작업중지 감시</li><li>법정 서식 자동 생성</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_STANDARD_V2',145000,'TAI Safe 건설 STANDARD')">결제하기</button></div></div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">PREMIUM</div><div class="plan-name">건설 PREMIUM</div><div class="amt">385,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도 · 공사장 1개 · 50억+ 현장</div><hr><ul><li>스탠다드 플랜 전체 포함</li><li>협력업체 안전관리 연동</li><li>안전관리계획서 작성 지원</li><li>위험성평가 통합 관리</li><li>전담 법령 업데이트</li><li>안전보건 종합 보고서</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_PREMIUM_V2',385000,'TAI Safe 건설 PREMIUM')">결제하기</button></div></div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">건설 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">대형건설사·다현장</div><hr><ul><li>프리미엄 플랜 범위 협의</li><li>2개 이상 공사장 통합 관리</li><li>발주처·원도급 연동</li><li>API 전체 개방</li><li>전담 CS · SLA 보장</li></ul><a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
@@ -897,7 +703,6 @@
 
   </div><!-- /#saas-page -->
 
-  <!-- 이니시스 결제 폼 (숨김) -->
   <form id="sp_inicis_form" method="POST" accept-charset="euc-kr" style="display:none">
     <input type="hidden" name="version" value="1.0">
     <input type="hidden" name="gopaymethod" value="Card">
@@ -930,11 +735,9 @@
   <script src="../assets/js/header.js"></script>
   <script src="../assets/js/nav-auth.js"></script>
   <script src="../assets/js/footer.js"></script>
-  <!-- 이니시스 표준결제 JS -->
   <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
   <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 
-  <!-- 카운트업 (IntersectionObserver) — 요금/결제 스크립트와 분리 -->
   <script>
   (function() {
     function fmt(n, sep) { return sep ? n.toLocaleString('ko-KR') : String(n); }
@@ -964,10 +767,7 @@
       });
     }
     var scopes = document.querySelectorAll('#saas-page .sp-count-scope');
-    if (!('IntersectionObserver' in window)) {
-      scopes.forEach(fire);
-      return;
-    }
+    if (!('IntersectionObserver' in window)) { scopes.forEach(fire); return; }
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(en) { if (en.isIntersecting) fire(en.target); });
     }, { threshold: 0.2, rootMargin: '0px 0px -32px 0px' });
@@ -975,7 +775,6 @@
   })();
   </script>
 
-  <!-- 섹터 탭 스위칭 -->
   <script>
   (function() {
     var btns = document.querySelectorAll('#saas-page .sp-sector-btn');
@@ -998,7 +797,6 @@
   })();
   </script>
 
-  <!-- 이니시스 결제 함수 -->
   <script>
   'use strict';
   var SP_API = 'https://api.taieng.co.kr';
