@@ -24,14 +24,13 @@
 
     .hero-split {
         display: flex; align-items: stretch;
-        min-height: 510px;
+        min-height: 550px;
         background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
         overflow: hidden; position: relative;
     }
     .hero-left {
-        flex: 0 0 55%; display: flex; align-items: center;
+        flex: 0 0 40%; display: flex; align-items: center;
         padding: 56px 48px 56px 80px; position: relative; z-index: 2;
-        /* padding-left는 tai-hero-fix.css에서 container 기준으로 동적 설정 */
     }
     .hero-left::after {
         content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 120px;
@@ -60,7 +59,7 @@
         box-shadow: 0 4px 20px rgba(0,0,0,.15);
     }
     .hero-btn-main:hover { background: #faf5ff; color: #6d28d9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
-    .hero-right { flex: 0 0 45%; position: relative; overflow: hidden; }
+    .hero-right { flex: 0 0 60%; position: relative; overflow: hidden; }
     .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; filter: brightness(0.92) saturate(0.75) contrast(1.02); }
     .hero-right::before {
         content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
@@ -76,109 +75,32 @@
     /* ═══ 역할 배너 섹션 ═══ */
     .role-banner-area { background: #f1f5f9; padding: 80px 0 70px; }
     .role-banner-area .section-title { margin-bottom: 36px; }
-
-    .role-banner-wrap {
-        position: relative;
-        overflow: hidden;
-        border-radius: 20px;
-        box-shadow: 0 12px 48px rgba(0,0,0,.10);
-        margin-bottom: 32px;
-        cursor: pointer;
-    }
-    .role-banner-img {
-        width: 100%;
-        display: block;
-        margin: -6% 0;
-    }
-    .role-banner-links {
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-    }
-    .role-banner-link {
-        display: block;
-        height: 100%;
-        background: transparent;
-        transition: background .2s;
-    }
-    .role-banner-link:hover {
-        background: rgba(0,0,0,0.06);
-    }
-
-    .role-btn-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 14px;
-    }
-    .role-btn-grid .btn {
-        width: 100%;
-        text-align: center;
-        font-weight: 700;
-        font-size: .92rem;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        min-height: 52px;
-        padding: 0 12px;
-        line-height: 1.2;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    @media (max-width: 767px) {
-        .role-btn-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .role-banner-area { padding: 60px 0 50px; }
-        .role-banner-img { margin: -4% 0; }
-    }
-    @media (max-width: 400px) {
-        .role-btn-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    }
+    .role-banner-wrap { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,.10); margin-bottom: 32px; cursor: pointer; }
+    .role-banner-img { width: 100%; display: block; margin: -6% 0; }
+    .role-banner-links { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .role-banner-link { display: block; height: 100%; background: transparent; transition: background .2s; }
+    .role-banner-link:hover { background: rgba(0,0,0,0.06); }
+    .role-btn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .role-btn-grid .btn { width: 100%; text-align: center; font-weight: 700; font-size: .92rem; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 52px; padding: 0 12px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 767px) { .role-btn-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .role-banner-area { padding: 60px 0 50px; } .role-banner-img { margin: -4% 0; } }
+    @media (max-width: 400px) { .role-btn-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
 
     /* ═══ 앱 스크린 섹션 ═══ */
-    .app-screen-area {
-        background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #1a0d3d 100%) !important;
-        position: relative; overflow: hidden; padding: 90px 0 70px;
-    }
+    .app-screen-area { background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #1a0d3d 100%) !important; position: relative; overflow: hidden; padding: 90px 0 70px; }
     .app-screen-area[style] { background-image: none !important; }
     .app-screen-area .bg-main-gradient { display: none !important; }
-    .app-screen-area::before {
-        content: ''; position: absolute; top: -100px; right: -100px;
-        width: 480px; height: 480px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%);
-        pointer-events: none;
-    }
-    .app-screen-area::after {
-        content: ''; position: absolute; bottom: -80px; left: 8%;
-        width: 360px; height: 360px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%);
-        pointer-events: none;
-    }
+    .app-screen-area::before { content: ''; position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%); pointer-events: none; }
+    .app-screen-area::after { content: ''; position: absolute; bottom: -80px; left: 8%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%); pointer-events: none; }
     .app-screen-area .section-title h2.title { font-size: 2rem; line-height: 1.35; }
     .app-screen-area .section-title p { opacity: .7; margin-top: 10px; }
     .app-screen-area .btn-area { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
-
     .app-screens-grid { display: flex; gap: 14px; align-items: flex-end; justify-content: center; }
-    .app-screens-grid .app-screen-item {
-        flex: 1; max-width: 240px; display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
+    .app-screens-grid .app-screen-item { flex: 1; max-width: 240px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .app-screens-grid .app-screen-item.center-phone { flex: 1.12; max-width: 280px; transform: translateY(-10px); }
-    .app-screens-grid .app-screen-item img {
-        width: 100%; height: auto; max-height: min(52vh, 540px);
-        object-fit: contain; display: block; border-radius: 24px;
-        box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
-    }
-    .app-screen-label {
-        font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,.6);
-        text-align: center; letter-spacing: .05em; text-transform: uppercase;
-    }
+    .app-screens-grid .app-screen-item img { width: 100%; height: auto; max-height: min(52vh, 540px); object-fit: contain; display: block; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06); }
+    .app-screen-label { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; letter-spacing: .05em; text-transform: uppercase; }
     .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(148,130,255,.8); }
-    @media (max-width: 767px) {
-        .app-screens-grid { gap: 10px; flex-wrap: wrap; }
-        .app-screens-grid .app-screen-item,
-        .app-screens-grid .app-screen-item.center-phone { flex: 1 1 42%; max-width: none; transform: none; }
-        .app-screen-area { padding: 60px 0 50px; }
-    }
+    @media (max-width: 767px) { .app-screens-grid { gap: 10px; flex-wrap: wrap; } .app-screens-grid .app-screen-item, .app-screens-grid .app-screen-item.center-phone { flex: 1 1 42%; max-width: none; transform: none; } .app-screen-area { padding: 60px 0 50px; } }
     </style>
 </head>
 <body class="sc5">
@@ -212,7 +134,6 @@
         </div>
     </section>
 
-    <!-- ═══ 역할 배너 섹션 ═══ -->
     <section class="role-banner-area pd-top-110">
         <div class="container">
             <div class="row justify-content-center">
@@ -225,12 +146,7 @@
                 </div>
             </div>
             <div class="role-banner-wrap">
-                <img
-                    src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg"
-                    alt="TAI Safe 역할별 서비스 — 경영자 / 안전관리자 / 대행 필요 사업장 / 안전 전문가"
-                    class="role-banner-img"
-                    loading="lazy"
-                >
+                <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg" alt="TAI Safe 역할별 서비스" class="role-banner-img" loading="lazy">
                 <div class="role-banner-links">
                     <a href="for-business-owner.html" class="role-banner-link" aria-label="경영자 / 총무 페이지로 이동"></a>
                     <a href="for-safety-manager.html" class="role-banner-link" aria-label="안전관리자 페이지로 이동"></a>
