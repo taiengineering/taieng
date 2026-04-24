@@ -7,16 +7,34 @@
 /* index.html 히어로 */
 .hero-split {
   margin-top: 90px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* for-business-owner.html 히어로 */
 .owner-hero {
   margin-top: 90px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* for-safety-manager.html 등 동일 구조 대응 */
 .manager-hero {
   margin-top: 90px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 히어로 좌측 패널 — 내용이 오른쪽으로 밀리지 않도록 */
+.owner-hero-left {
+  min-width: 0;
+}
+
+.owner-hero-left-inner {
+  margin-left: 0 !important;
+  max-width: 480px;
 }
 
 @media (max-width: 991px) {
