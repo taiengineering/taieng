@@ -1,37 +1,39 @@
 /**
- * TAI 히어로 navbar fixed 보정
- * navbar: position fixed, height 90px
- * 히어로 섹션이 navbar 뒤에 겹치지 않도록 margin-top 적용
+ * TAI 히어로 navbar fixed 보정 v3
+ * margin-top → padding-top 교체
+ * margin-top은 히어로 밖에 흰색 body 배경을 노출시킴
+ * padding-top은 히어로 내부에서 공간을 만들어 배경색이 유지됨
  */
 
-/* index.html 히어로 */
+/* index.html 히어로 — 그라디언트 배경 안에서 패딩 */
 .hero-split {
-  margin-top: 90px;
+  padding-top: 90px;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* for-business-owner.html 히어로 */
-.owner-hero {
-  margin-top: 90px;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+.owner-hero-section {
+  padding-top: 90px;
 }
 
-/* for-safety-manager.html 등 동일 구조 대응 */
+.owner-hero-left-col {
+  min-height: 470px;
+}
+
+/* for-safety-manager 등 */
 .manager-hero {
-  margin-top: 90px;
-  width: 100%;
-  max-width: 100%;
+  padding-top: 90px;
 }
 
-/* 히어로 좌측 패널 — 내용이 오른쪽으로 밀리지 않도록 */
-.owner-hero-left {
-  min-width: 0;
+/* .page-wrap 사용하는 페이지 */
+.page-wrap {
+  padding-top: 90px;
 }
 
+/* 좌측 패널 밀림 방지 */
 .owner-hero-left-inner {
   margin-left: 0 !important;
   max-width: 480px;
@@ -39,8 +41,12 @@
 
 @media (max-width: 991px) {
   .hero-split,
-  .owner-hero,
-  .manager-hero {
-    margin-top: 70px;
+  .owner-hero-section,
+  .manager-hero,
+  .page-wrap {
+    padding-top: 72px;
+  }
+  .owner-hero-left-col {
+    min-height: auto;
   }
 }
