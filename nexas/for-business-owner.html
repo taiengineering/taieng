@@ -12,23 +12,64 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
-  <link rel="stylesheet" href="assets/css/tai-hero-fix.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
 
-    /* ── 히어로: 좌우 split ── */
-    .owner-hero { display: flex; align-items: stretch; min-height: 560px; background: #f8fafc; overflow: hidden; }
-    .owner-hero-left { flex: 0 0 50%; display: flex; align-items: center; padding: 80px 48px 80px 80px; }
-    .owner-hero-left-inner { max-width: 480px; margin-left: 0; }
-    .owner-hero-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: #64748b; border: 1.5px solid #e2e8f0; border-radius: 6px; padding: 5px 14px; margin-bottom: 22px; }
-    .owner-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; color: #0f172a; line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px; }
-    .owner-hero .hero-sub { font-size: .98rem; color: #64748b; line-height: 1.7; margin-bottom: 32px; }
-    .owner-hero-right { flex: 0 0 50%; position: relative; overflow: hidden; }
-    .owner-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-    .owner-hero-right::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 80px; background: linear-gradient(to right, #f8fafc, transparent); z-index: 1; }
-    @media (max-width: 991px) { .owner-hero { flex-direction: column; min-height: auto; } .owner-hero-left { flex: none; padding: 56px 24px 40px; } .owner-hero-left-inner { margin-left: 0; max-width: 100%; } .owner-hero-right { flex: none; height: 320px; } .owner-hero-right::before { display: none; } }
-    @media (max-width: 575px) { .owner-hero-left { padding: 48px 20px 32px; } .owner-hero-right { height: 240px; } }
+    /* ── navbar fixed 보정 ── */
+    .page-wrap { padding-top: 90px; }
+    @media(max-width:991px){ .page-wrap { padding-top: 72px; } }
+
+    /* ── 히어로 ── */
+    .owner-hero-section { background: #f8fafc; }
+    .owner-hero-left-col {
+      display: flex;
+      align-items: center;
+      padding: 80px 48px 80px 80px;
+      min-height: 560px;
+    }
+    .owner-hero-eyebrow {
+      display: inline-block; font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; color: #64748b;
+      border: 1.5px solid #e2e8f0; border-radius: 6px;
+      padding: 5px 14px; margin-bottom: 22px;
+    }
+    .owner-hero-left-col h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 900; color: #0f172a;
+      line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px;
+    }
+    .owner-hero-left-col .hero-sub {
+      font-size: .98rem; color: #64748b;
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .owner-hero-right-col {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+      padding: 0;
+    }
+    .owner-hero-right-col img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      position: absolute; top: 0; left: 0;
+    }
+    .owner-hero-right-col::before {
+      content: ''; position: absolute;
+      top: 0; bottom: 0; left: 0; width: 80px;
+      background: linear-gradient(to right, #f8fafc, transparent);
+      z-index: 1;
+    }
+    @media(max-width:991px) {
+      .owner-hero-left-col { padding: 56px 24px 40px; min-height: auto; }
+      .owner-hero-right-col { min-height: 320px; }
+      .owner-hero-right-col::before { display: none; }
+    }
+    @media(max-width:575px) {
+      .owner-hero-left-col { padding: 48px 20px 32px; }
+      .owner-hero-right-col { min-height: 240px; }
+    }
 
     /* ── 솔직한 공감 ── */
     .honest-sec { background: #fff; padding: 88px 0 72px; }
@@ -52,7 +93,6 @@
 
     /* ── 감독관 시나리오 ── */
     .scenario-sec { background: #fff; padding: 80px 0; }
-    .scenario-img-wrap { max-width: 1100px; margin: 0 auto; }
     .scenario-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.1); }
 
     /* ── 안전 본질 ── */
@@ -72,21 +112,27 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
+<div class="page-wrap">
+
 <!-- ══ ① 히어로 ══ -->
-<section class="owner-hero">
-  <div class="owner-hero-left">
-    <div class="owner-hero-left-inner">
-      <span class="owner-hero-eyebrow">사업주 · 현장소장 · 공장장</span>
-      <h1>이게 다<br>내 책임입니다.</h1>
-      <p class="hero-sub">
-        법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
-        안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
-      </p>
-      <a href="free-diagnosis.html" class="btn-navy">우리 사업장도 해당되는지 확인하기</a>
+<section class="owner-hero-section">
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <div class="col-lg-6 owner-hero-left-col">
+        <div style="max-width:480px;">
+          <span class="owner-hero-eyebrow">사업주 · 현장소장 · 공장장</span>
+          <h1>이게 다<br>내 책임입니다.</h1>
+          <p class="hero-sub">
+            법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
+            안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
+          </p>
+          <a href="free-diagnosis.html" class="btn-navy">우리 사업장도 해당되는지 확인하기</a>
+        </div>
+      </div>
+      <div class="col-lg-6 owner-hero-right-col">
+        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/owner-news.png" alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사" loading="eager">
+      </div>
     </div>
-  </div>
-  <div class="owner-hero-right">
-    <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/owner-news.png" alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사" loading="eager">
   </div>
 </section>
 
@@ -181,6 +227,8 @@
     <a href="for-safety-manager.html" class="btn-outline">안전관리자용 TAI 보기 →</a>
   </div>
 </section>
+
+</div><!-- /.page-wrap -->
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>

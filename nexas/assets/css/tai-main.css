@@ -1,4 +1,4 @@
-/* TAI 공통 스타일 v1.9 — FN-07: 전문가 상담 링크 전역 숨김 */
+/* TAI 공통 스타일 v2.0 — navbar fixed 보정 전역 적용 */
 *, *::before, *::after { box-sizing: border-box; }
 :root {
   --red: #e63946;
@@ -14,7 +14,17 @@
 body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding: 0; }
 a { text-decoration: none; }
 
-/* FN-07: 전문가 상담 링크 전역 숨김 — TAI는 상담 서비스가 아님 (데이터→엔진→자동판단) */
+/* ── navbar fixed 보정: .page-wrap 사용 페이지 전역 적용 ── */
+.page-wrap {
+  padding-top: 90px;
+}
+@media(max-width: 991px) {
+  .page-wrap {
+    padding-top: 72px;
+  }
+}
+
+/* FN-07: 전문가 상담 링크 전역 숨김 */
 .diag-nudge-secondary { display: none !important; }
 
 /* 스크롤바 */
@@ -36,7 +46,7 @@ html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
   line-height: 1 !important;
 }
 
-/* GNB (미사용 — 향후 tai-nav 전환 시 padding-top: 64px 복원) */
+/* GNB (미사용) */
 .tai-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
   background: rgba(13,27,42,.97);
