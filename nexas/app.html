@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TAI Safe 현장 앱 — 작업자가 장갑 끼기 전에 끝나는 점검. 지게차·기계·설비 작업 전 점검, TBM 서명, 이상 신고까지 1분 이내.">
+  <title>TAI Safe 앱 | 현장 안전점검 앱</title>
+  <link rel="icon" href="assets/img/fevicon.png">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/tai-brand.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:'Noto Sans KR',sans-serif;background:#0d1117;color:#fff}
+    .app-hero{min-height:100vh;background:linear-gradient(160deg,#0d1117 0%,#0f172a 45%,#1a0d3d 100%);display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 0 80px}
+    .app-hero::before{content:'';position:absolute;top:-120px;right:-80px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.18) 0%,transparent 65%);pointer-events:none}
+    .app-hero::after{content:'';position:absolute;bottom:-80px;left:5%;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.12) 0%,transparent 65%);pointer-events:none}
+    .app-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.35);border-radius:999px;padding:6px 16px;font-size:.78rem;font-weight:700;color:#a5b4fc;letter-spacing:.05em;margin-bottom:24px}
+    .app-eyebrow::before{content:'●';font-size:.5rem;color:#6366f1;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .app-hero h1{font-size:3.6rem;font-weight:900;line-height:1.18;letter-spacing:-.03em;margin-bottom:20px}
+    .app-hero h1 .highlight{background:linear-gradient(90deg,#818cf8,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .app-hero .sub{font-size:1.05rem;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:36px;max-width:440px}
+    .app-cta-group{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
+    .btn-app-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-weight:800;font-size:.95rem;padding:14px 28px;border-radius:12px;text-decoration:none;border:none;box-shadow:0 8px 24px rgba(99,102,241,.35);transition:transform .2s,box-shadow .2s}
+    .btn-app-primary:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(99,102,241,.45);color:#fff}
+    .btn-app-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);font-weight:700;font-size:.95rem;padding:14px 28px;border-radius:12px;text-decoration:none;border:1px solid rgba(255,255,255,.12);transition:background .2s,color .2s}
+    .btn-app-secondary:hover{background:rgba(255,255,255,.10);color:#fff}
+    .trust-row{display:flex;gap:28px;flex-wrap:wrap;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+    .trust-item{display:flex;align-items:center;gap:8px}
+    .trust-item .icon{font-size:1.2rem}
+    .trust-item .txt{font-size:.82rem;color:rgba(255,255,255,.5)}
+    .trust-item .txt strong{color:rgba(255,255,255,.8);display:block;font-size:.9rem}
+    .app-phones-wrap{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:18px;padding-top:24px}
+    .phone-frame{position:relative;border-radius:36px;background:#111827;border:2px solid rgba(255,255,255,.10);overflow:hidden;box-shadow:0 32px 72px rgba(0,0,0,.7),0 0 40px rgba(99,102,241,.08)}
+    .phone-frame::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:66px;height:16px;background:#0d1117;border-radius:0 0 10px 10px;z-index:10}
+    .phone-frame img{width:100%;height:100%;object-fit:contain;display:block}
+    .phone-main{width:220px;aspect-ratio:9/19.5;z-index:2;border-color:rgba(99,102,241,.30);box-shadow:0 40px 80px rgba(0,0,0,.75),0 0 60px rgba(99,102,241,.20)}
+    .phone-side{width:175px;aspect-ratio:9/19.5;transform:translateY(28px) scale(.94);opacity:.85}
+    .feature-section{background:#0f172a;padding:100px 0}
+    .section-label{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#818cf8;margin-bottom:12px}
+    .section-title-app{font-size:2.1rem;font-weight:900;line-height:1.3;margin-bottom:14px}
+    .section-sub{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.7}
+    .feature-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:28px 24px;height:100%;transition:border-color .2s,background .2s}
+    .feature-card:hover{border-color:rgba(99,102,241,.3);background:rgba(99,102,241,.05)}
+    .feature-icon{width:48px;height:48px;background:rgba(99,102,241,.15);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
+    .feature-card h4{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+    .feature-card p{font-size:.87rem;color:rgba(255,255,255,.55);line-height:1.65;margin:0}
+    .workflow-section{background:#0d1117;padding:100px 0}
+    .step-list{counter-reset:step}
+    .step-item{display:flex;gap:20px;align-items:flex-start;padding:24px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .step-item:last-child{border-bottom:none}
+    .step-num{counter-increment:step;flex-shrink:0;width:36px;height:36px;background:rgba(99,102,241,.15);border:1px solid rgba(99,102,241,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#a5b4fc}
+    .step-num::after{content:counter(step)}
+    .step-content h5{font-size:1rem;font-weight:800;margin-bottom:4px}
+    .step-content p{font-size:.87rem;color:rgba(255,255,255,.5);margin:0;line-height:1.6}
+    .step-time{margin-left:auto;flex-shrink:0;font-size:.72rem;font-weight:700;color:#818cf8;background:rgba(99,102,241,.1);border-radius:999px;padding:4px 12px}
+    .app-cta-bar{background:linear-gradient(135deg,#1e1b4b,#1a0d3d);border-top:1px solid rgba(99,102,241,.2);padding:72px 0;text-align:center}
+    .app-cta-bar h2{font-size:2.4rem;font-weight:900;margin-bottom:12px}
+    .app-cta-bar p{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:36px}
+    @media(max-width:991px){.app-hero{padding:100px 0 60px}.app-hero h1{font-size:2.8rem}.app-phones-wrap{margin-top:48px}.phone-main{width:180px}.phone-side{width:140px}}
+    @media(max-width:575px){.app-hero h1{font-size:2.2rem}.phone-side:first-child{display:none}.phone-main{width:200px}.app-cta-bar h2{font-size:1.8rem}}
+  </style>
+</head>
+<body>
+<div id="tai-header"></div>
+<section class="app-hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="app-eyebrow">현장용 안전관리 앱</div>
+        <h1>장갑 끼기 전에<br><span class="highlight">끝납니다</span></h1>
+        <p class="sub">지게차·기계·설비 작업 전 점검,<br>TBM 서명, 이상 신고까지<br>현장에서 <strong style="color:#fff">1분 이내</strong>로 완료됩니다.</p>
+        <div class="app-cta-group">
+          <a href="free-diagnosis.html" class="btn-app-primary"><span>📋</span> 무료 법령진단 시작</a>
+          <a href="fix-request.html?from=app&type=general" class="btn-app-secondary"><span>💬</span> 도입 문의</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="icon">⚡</span><div class="txt"><strong>1분 이내</strong>점검 완료</div></div>
+          <div class="trust-item"><span class="icon">🛡️</span><div class="txt"><strong>법령 기반</strong>자동 점검표</div></div>
+          <div class="trust-item"><span class="icon">📡</span><div class="txt"><strong>실시간</strong>관리자 알림</div></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="app-phones-wrap">
+          <div class="phone-frame phone-side"><img src="assets/img/app-screen/1.svg" alt="홈 대시보드" loading="lazy"></div>
+          <div class="phone-frame phone-main"><img src="assets/img/app-screen/2.svg" alt="점검 완료" loading="lazy"></div>
+          <div class="phone-frame phone-side"><img src="assets/img/app-screen/3.svg" alt="TBM 기록" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="feature-section">
+  <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-7 text-center">
+        <div class="section-label">핵심 기능</div>
+        <h2 class="section-title-app">작업자가 5초 만에 응답하는<br>단문형 점검 구조</h2>
+        <p class="section-sub">정상 / 이상 / 보류 세 가지만 누르면 됩니다.</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">📋</div><h4>작업 전 점검</h4><p>법령 기반 점검 항목이 자동 배정됩니다. 설비별 체크리스트를 따로 찾을 필요 없습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">🤝</div><h4>TBM 서명</h4><p>작업 전 안전교육 참석을 앱 서명으로 기록합니다. 종이 없이 법적 근거가 남습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">🚨</div><h4>이상 즉시 신고</h4><p>이상 선택 시 관리자에게 즉시 알림 전송. 골든타임을 놓치지 않습니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">📊</div><h4>누적 데이터 분석</h4><p>이상 빈도·작업자 신뢰도·위험도가 자동 집계됩니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">📍</div><h4>QR 코드 점검</h4><p>설비 QR 스캔 시 해당 설비 점검표가 즉시 표시됩니다.</p></div></div>
+      <div class="col-lg-4 col-md-6"><div class="feature-card"><div class="feature-icon">☁️</div><h4>클라우드 자동 저장</h4><p>모든 기록 자동 저장. 실태조사·감사 대비 원클릭 출력 가능.</p></div></div>
+    </div>
+  </div>
+</section>
+<section class="workflow-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="section-label">작동 방식</div>
+        <h2 class="section-title-app">현장에서<br>이렇게 작동합니다</h2>
+        <p class="section-sub">처음 사용하는 작업자도 바로 사용할 수 있습니다.</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="step-list">
+          <div class="step-item"><div class="step-num"></div><div class="step-content"><h5>QR 스캔 또는 앱 실행</h5><p>설비 QR 코드를 스캔하거나 앱을 열어 오늘의 점검 목록을 확인합니다.</p></div><span class="step-time">5초</span></div>
+          <div class="step-item"><div class="step-num"></div><div class="step-content"><h5>점검 항목 응답</h5><p>자동 생성된 항목을 확인하고 정상 / 이상 / 보류를 선택합니다.</p></div><span class="step-time">30초~1분</span></div>
+          <div class="step-item"><div class="step-num"></div><div class="step-content"><h5>이상 발견 시 자동 알림</h5><p>이상 선택 즉시 관리자 알림 발송, 정비 요청 버튼 활성화.</p></div><span class="step-time">자동</span></div>
+          <div class="step-item"><div class="step-num"></div><div class="step-content"><h5>점검 완료 저장</h5><p>완료 버튼 하나로 서명·기록·보고서가 동시 저장됩니다.</p></div><span class="step-time">1클릭</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="app-cta-bar">
+  <div class="container">
+    <h2>지금 바로 시작하세요</h2>
+    <p>3분 무료 법령진단으로 내 현장에 필요한 점검 항목을 확인하세요.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="free-diagnosis.html" class="btn-app-primary">무료 법령진단 시작 →</a>
+      <a href="fix-request.html?from=app&type=general" class="btn-app-secondary">도입 문의하기</a>
+    </div>
+  </div>
+</section>
+<div id="tai-footer"></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+</body>
+</html>

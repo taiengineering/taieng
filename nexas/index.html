@@ -47,126 +47,82 @@
         pointer-events: none;
     }
     .hero-left-inner { max-width: 520px; }
-
     .hero-eyebrow {
         display: inline-block;
-        font-size: .78rem;
-        font-weight: 700;
-        letter-spacing: .06em;
-        color: #fff;
-        background: transparent;
+        font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+        color: #fff; background: transparent;
         border: 1.5px solid rgba(255,255,255,.55);
-        border-radius: 8px;
-        padding: 7px 18px;
-        margin-bottom: 22px;
+        border-radius: 8px; padding: 7px 18px; margin-bottom: 22px;
     }
     .hero-h1 {
-        font-size: 3.8rem;
-        font-weight: 900;
-        line-height: 1.18;
-        color: #fff;
-        margin-bottom: 24px;
-        letter-spacing: -.03em;
-        text-shadow: 0 2px 16px rgba(0,0,0,.18);
+        font-size: 3.8rem; font-weight: 900; line-height: 1.18;
+        color: #fff; margin-bottom: 24px;
+        letter-spacing: -.03em; text-shadow: 0 2px 16px rgba(0,0,0,.18);
     }
-    .hero-desc {
-        font-size: 1rem;
-        color: rgba(255,255,255,.88);
-        line-height: 1.75;
-        margin-bottom: 36px;
-    }
+    .hero-desc { font-size: 1rem; color: rgba(255,255,255,.88); line-height: 1.75; margin-bottom: 36px; }
     .hero-btn-main {
         display: inline-flex; align-items: center; gap: 8px;
         background: #fff; color: #7c3aed;
         font-size: .95rem; font-weight: 800;
-        padding: 15px 32px; border-radius: 10px;
-        text-decoration: none;
+        padding: 15px 32px; border-radius: 10px; text-decoration: none;
         transition: background .2s, transform .15s, box-shadow .2s;
         box-shadow: 0 4px 20px rgba(0,0,0,.15);
     }
-    .hero-btn-main:hover {
-        background: #faf5ff; color: #6d28d9;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(0,0,0,.2);
-    }
-
-    .hero-right {
-        flex: 0 0 45%;
-        position: relative;
-        overflow: hidden;
-    }
-    .hero-img {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: center center;
-        display: block;
-        filter: brightness(0.90) saturate(0.65) contrast(1.03);
-    }
+    .hero-btn-main:hover { background: #faf5ff; color: #6d28d9; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
+    .hero-right { flex: 0 0 45%; position: relative; overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; filter: brightness(0.90) saturate(0.65) contrast(1.03); }
     .hero-right::before {
-        content: '';
-        position: absolute; inset: 0; z-index: 1; pointer-events: none;
-        background: linear-gradient(
-            to right,
-            rgba(99,  50, 210, 0.48) 0%,
-            rgba(120, 70, 220, 0.28) 15%,
-            rgba(139, 92, 246, 0.14) 30%,
-            rgba(139, 92, 246, 0.05) 48%,
-            rgba(139, 92, 246, 0.01) 65%,
-            transparent               100%
-        );
+        content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+        background: linear-gradient(to right, rgba(99,50,210,0.48) 0%, rgba(120,70,220,0.28) 15%, rgba(139,92,246,0.14) 30%, rgba(139,92,246,0.05) 48%, rgba(139,92,246,0.01) 65%, transparent 100%);
     }
-    .hero-right::after {
-        content: '';
-        position: absolute; bottom: 0; left: 0; right: 0;
-        height: 80px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(109,40,217,.10));
-    }
-    .hero-badge {
-        position: absolute; bottom: 24px; right: 20px; z-index: 2;
-        background: rgba(30,0,60,.72);
-        border: 1px solid rgba(255,255,255,.18);
-        backdrop-filter: blur(10px);
-        border-radius: 10px; padding: 10px 16px;
-        color: rgba(255,255,255,.75); font-size: .76rem; line-height: 1.5;
-    }
+    .hero-right::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, transparent, rgba(109,40,217,.10)); }
+    .hero-badge { position: absolute; bottom: 24px; right: 20px; z-index: 2; background: rgba(30,0,60,.72); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(10px); border-radius: 10px; padding: 10px 16px; color: rgba(255,255,255,.75); font-size: .76rem; line-height: 1.5; }
     .hero-badge strong { display: block; color: #fca5a5; font-size: .8rem; margin-bottom: 2px; }
-
     @media (max-width: 1200px) { .hero-h1 { font-size: 3.2rem; } }
-    @media (max-width: 991px) {
-        .hero-split { flex-direction: column; min-height: auto; }
-        .hero-left  { flex: none; padding: 56px 24px 40px; }
-        .hero-left::after { display: none; }
-        .hero-right { flex: none; height: 280px; }
-        .hero-h1    { font-size: 2.6rem; }
-    }
-    @media (max-width: 575px) {
-        .hero-h1   { font-size: 2.1rem; }
-        .hero-left { padding: 48px 20px 32px; }
-    }
+    @media (max-width: 991px) { .hero-split { flex-direction: column; min-height: auto; } .hero-left { flex: none; padding: 56px 24px 40px; } .hero-left::after { display: none; } .hero-right { flex: none; height: 280px; } .hero-h1 { font-size: 2.6rem; } }
+    @media (max-width: 575px) { .hero-h1 { font-size: 2.1rem; } .hero-left { padding: 48px 20px 32px; } }
 
     /* ═══ 역할 카드 ═══ */
     .role-card { background: #fff; border-radius: 16px; padding: 32px 24px; height: 100%; box-shadow: 0 4px 20px rgba(0,0,0,.08); border-top: 5px solid transparent; transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column; }
     .role-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,.14); }
-    .role-card.rc1 { border-top-color: #e63946; }
-    .role-card.rc2 { border-top-color: #1a5fd4; }
-    .role-card.rc3 { border-top-color: #16a34a; }
-    .role-card.rc4 { border-top-color: #d97706; }
+    .role-card.rc1 { border-top-color: #e63946; } .role-card.rc2 { border-top-color: #1a5fd4; } .role-card.rc3 { border-top-color: #16a34a; } .role-card.rc4 { border-top-color: #d97706; }
     .role-tag { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; margin-bottom: 8px; }
     .role-emoji { font-size: 2.4rem; margin-bottom: 12px; }
     .role-card h4 { font-size: 1.1rem; font-weight: 900; color: #0d1b2a; margin-bottom: 10px; }
     .role-card p { font-size: .87rem; color: #64748b; line-height: 1.65; flex: 1; margin-bottom: 16px; }
     .role-solution { font-size: .82rem; font-weight: 700; padding: 10px 14px; border-radius: 8px; border-left: 3px solid; background: #f8fafc; margin-bottom: 18px; line-height: 1.5; }
-    .role-card.rc1 .role-solution { border-color: #e63946; color: #e63946; }
-    .role-card.rc2 .role-solution { border-color: #1a5fd4; color: #1a5fd4; }
-    .role-card.rc3 .role-solution { border-color: #16a34a; color: #16a34a; }
-    .role-card.rc4 .role-solution { border-color: #d97706; color: #d97706; }
+    .role-card.rc1 .role-solution { border-color: #e63946; color: #e63946; } .role-card.rc2 .role-solution { border-color: #1a5fd4; color: #1a5fd4; } .role-card.rc3 .role-solution { border-color: #16a34a; color: #16a34a; } .role-card.rc4 .role-solution { border-color: #d97706; color: #d97706; }
     .role-link { display: block; text-align: center; padding: 11px; border-radius: 8px; font-weight: 700; font-size: .88rem; text-decoration: none; transition: opacity .15s; color: #fff; }
     .role-link:hover { opacity: .85; color: #fff; }
-    .role-card.rc1 .role-link { background: #e63946; }
-    .role-card.rc2 .role-link { background: #1a5fd4; }
-    .role-card.rc3 .role-link { background: #16a34a; }
-    .role-card.rc4 .role-link { background: #d97706; }
+    .role-card.rc1 .role-link { background: #e63946; } .role-card.rc2 .role-link { background: #1a5fd4; } .role-card.rc3 .role-link { background: #16a34a; } .role-card.rc4 .role-link { background: #d97706; }
     .featured-area { background: #f1f5f9; }
+
+    /* ═══ 앱 스크린 섹션 배경 ═══ */
+    .app-screen-area {
+        background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #1a0d3d 100%) !important;
+        position: relative;
+        overflow: hidden;
+        padding: 90px 0 70px;
+    }
+    .app-screen-area[style] { background-image: none !important; }
+    .app-screen-area .bg-main-gradient { display: none !important; }
+    .app-screen-area::before {
+        content: '';
+        position: absolute; top: -100px; right: -100px;
+        width: 480px; height: 480px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .app-screen-area::after {
+        content: '';
+        position: absolute; bottom: -80px; left: 8%;
+        width: 360px; height: 360px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .app-screen-area .section-title h2.title { font-size: 2rem; line-height: 1.35; }
+    .app-screen-area .section-title p { opacity: .7; margin-top: 10px; }
+    .app-screen-area .btn-area { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
 
     /* ═══ 앱 스크린 3열 그리드 ═══ */
     .app-screens-grid {
@@ -194,25 +150,25 @@
         max-height: min(52vh, 540px);
         object-fit: contain;
         display: block;
-        border-radius: 16px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
     }
     .app-screen-label {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         font-weight: 700;
-        color: rgba(255, 255, 255, 0.92);
+        color: rgba(255,255,255,.6);
         text-align: center;
-        line-height: 1.35;
-        letter-spacing: -0.02em;
+        letter-spacing: .05em;
+        text-transform: uppercase;
     }
+    .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(148,130,255,.8); }
     @media (max-width: 767px) {
         .app-screens-grid { gap: 10px; flex-wrap: wrap; }
         .app-screens-grid .app-screen-item,
         .app-screens-grid .app-screen-item.center-phone {
-            flex: 1 1 42%;
-            max-width: none;
-            transform: none;
+            flex: 1 1 42%; max-width: none; transform: none;
         }
+        .app-screen-area { padding: 60px 0 50px; }
     }
     </style>
 </head>
@@ -226,32 +182,14 @@
         <div class="hero-left">
             <div class="hero-left-inner">
                 <span class="hero-eyebrow">산업안전 법령 자동화 플랫폼</span>
-                <h1 class="hero-h1">
-                    아직도 엑셀로<br>
-                    안전관리<br>
-                    하십니까?
-                </h1>
-                <p class="hero-desc">
-                    종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>
-                    이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>
-                    3분 무료 진단으로 지금 바로 시작할 수 있습니다.
-                </p>
-                <a class="hero-btn-main" href="free-diagnosis.html">
-                    우리도 법령위반인지 확인하기 →
-                </a>
+                <h1 class="hero-h1">아직도 엑셀로<br>안전관리<br>하십니까?</h1>
+                <p class="hero-desc">종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>3분 무료 진단으로 지금 바로 시작할 수 있습니다.</p>
+                <a class="hero-btn-main" href="free-diagnosis.html">우리도 법령위반인지 확인하기 →</a>
             </div>
         </div>
         <div class="hero-right">
-            <img
-                class="hero-img"
-                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png"
-                alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습"
-                loading="eager"
-            >
-            <div class="hero-badge">
-                <strong>Before TAI Safe</strong>
-                엑셀 + 종이서류로 혼자 버팀
-            </div>
+            <img class="hero-img" src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png" alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습" loading="eager">
+            <div class="hero-badge"><strong>Before TAI Safe</strong>엑셀 + 종이서류로 혼자 버팀</div>
         </div>
     </section>
 
@@ -306,7 +244,7 @@
         <div class="container"><div class="row justify-content-center align-items-center">
             <div class="col-xl-4 col-lg-5 align-self-center">
                 <div class="section-title mb-0 pb-4">
-                    <h2 class="title text-white">직접 보시면 바로 아십니다</h2>
+                    <h2 class="title text-white">직접 보시면<br>바로 아십니다</h2>
                     <p class="text-white">현장에서 1분 이내에 점검 가능한 현장용 앱</p>
                 </div>
                 <div class="btn-area">
