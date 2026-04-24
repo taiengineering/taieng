@@ -1,27 +1,14 @@
 /**
- * TAI 히어로 navbar 보정 v4
- * navbar가 position:relative일 때는 padding-top 불필요
- * navbar가 fixed/sticky일 때만 padding-top 적용
+ * TAI 히어로 navbar 보정 v5
+ * 핵심: 히어로 텍스트 왼쪽을 navbar container(로고)와 정렬
+ * Bootstrap .container max-width: 1320px → left offset = (100vw - 1320px)/2 + 12px
  */
 
-/* 기본: navbar relative → padding 불필요 */
-.hero-split,
-.owner-hero-section,
-.manager-hero,
-.page-wrap {
-  padding-top: 0;
-}
-
-/* navbar가 fixed일 때만 보정 */
-.navbar-fixed-top ~ .hero-split,
-.navbar-fixed-top ~ .owner-hero-section,
-.navbar-fixed-top ~ .manager-hero,
-.navbar-fixed-top ~ .page-wrap,
-body.nav-fixed .hero-split,
-body.nav-fixed .owner-hero-section,
-body.nav-fixed .manager-hero,
-body.nav-fixed .page-wrap {
-  padding-top: 90px;
+/* 히어로 왼쪽 패딩을 container와 정렬 */
+.hero-split .hero-left,
+.owner-hero-section .owner-hero-left-col,
+.manager-hero .manager-hero-left {
+  padding-left: max(24px, calc((100vw - 1320px) / 2 + 12px));
 }
 
 /* hero-split 기본 레이아웃 */
@@ -41,18 +28,37 @@ body.nav-fixed .page-wrap {
   max-width: 480px;
 }
 
+@media (max-width: 1399px) {
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: max(24px, calc((100vw - 1140px) / 2 + 12px));
+  }
+}
+
+@media (max-width: 1199px) {
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: max(24px, calc((100vw - 960px) / 2 + 12px));
+  }
+}
+
 @media (max-width: 991px) {
-  .navbar-fixed-top ~ .hero-split,
-  .navbar-fixed-top ~ .owner-hero-section,
-  .navbar-fixed-top ~ .manager-hero,
-  .navbar-fixed-top ~ .page-wrap,
-  body.nav-fixed .hero-split,
-  body.nav-fixed .owner-hero-section,
-  body.nav-fixed .manager-hero,
-  body.nav-fixed .page-wrap {
-    padding-top: 72px;
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: 24px;
   }
   .owner-hero-left-col {
     min-height: auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: 20px;
   }
 }
