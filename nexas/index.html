@@ -22,37 +22,26 @@
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
     .hero-split {
-        display: flex;
-        align-items: stretch;
+        display: flex; align-items: stretch;
         min-height: 600px;
         background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
-        overflow: hidden;
-        position: relative;
+        overflow: hidden; position: relative;
     }
     .hero-left {
-        flex: 0 0 55%;
-        display: flex;
-        align-items: center;
-        padding: 80px 64px 80px 80px;
-        position: relative;
-        z-index: 2;
+        flex: 0 0 55%; display: flex; align-items: center;
+        padding: 80px 64px 80px 80px; position: relative; z-index: 2;
     }
     .hero-left::after {
-        content: '';
-        position: absolute;
-        top: 0; bottom: 0; right: 0;
-        width: 120px;
+        content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 120px;
         background: linear-gradient(to right, transparent 0%, rgba(139,92,246,.08) 60%, rgba(139,92,246,.18) 100%);
-        z-index: -1;
-        pointer-events: none;
+        z-index: -1; pointer-events: none;
     }
     .hero-left-inner { max-width: 520px; }
     .hero-eyebrow {
-        display: inline-block;
-        font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+        display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .06em;
         color: #fff; background: transparent;
-        border: 1.5px solid rgba(255,255,255,.55);
-        border-radius: 8px; padding: 7px 18px; margin-bottom: 22px;
+        border: 1.5px solid rgba(255,255,255,.55); border-radius: 8px;
+        padding: 7px 18px; margin-bottom: 22px;
     }
     .hero-h1 {
         font-size: 3.8rem; font-weight: 900; line-height: 1.18;
@@ -83,76 +72,62 @@
     @media (max-width: 575px) { .hero-h1 { font-size: 2.1rem; } .hero-left { padding: 48px 20px 32px; } }
 
     /* ═══ 역할 배너 섹션 ═══ */
-    .role-banner-area {
-        background: #f1f5f9;
-        padding: 80px 0 70px;
-    }
+    .role-banner-area { background: #f1f5f9; padding: 80px 0 70px; }
     .role-banner-area .section-title { margin-bottom: 36px; }
-    .role-banner-img {
-        width: 100%;
-        display: block;
+
+    /* SVG 상하 여백 크롭 */
+    .role-banner-wrap {
+        overflow: hidden;
         border-radius: 20px;
         box-shadow: 0 12px 48px rgba(0,0,0,.10);
         margin-bottom: 32px;
     }
-    /* 버튼 4열 */
+    .role-banner-img {
+        width: 100%;
+        display: block;
+        margin: -6% 0;
+    }
+
+    /* 버튼 그리드 — 기존 btn 스타일 활용 */
     .role-btn-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 14px;
     }
-    .role-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        padding: 18px 12px;
-        border-radius: 14px;
-        font-weight: 800;
-        font-size: .88rem;
-        text-decoration: none;
+    .role-btn-grid .btn {
+        width: 100%;
         text-align: center;
-        line-height: 1.4;
-        transition: transform .2s, box-shadow .2s;
-        color: #fff;
+        font-weight: 700;
+        padding: 14px 12px;
+        font-size: .92rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    .role-btn:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.18); color: #fff; }
-    .role-btn .rb-icon { font-size: 1.6rem; }
-    .role-btn .rb-label { font-size: .72rem; font-weight: 600; opacity: .85; margin-top: 2px; }
-    .role-btn.rb1 { background: linear-gradient(135deg, #e63946, #c1121f); }
-    .role-btn.rb2 { background: linear-gradient(135deg, #1a5fd4, #1245a8); }
-    .role-btn.rb3 { background: linear-gradient(135deg, #16a34a, #15803d); }
-    .role-btn.rb4 { background: linear-gradient(135deg, #d97706, #b45309); }
-
     @media (max-width: 767px) {
         .role-btn-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .role-banner-area { padding: 60px 0 50px; }
+        .role-banner-img { margin: -4% 0; }
     }
     @media (max-width: 400px) {
         .role-btn-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-        .role-btn { padding: 14px 8px; font-size: .82rem; }
     }
 
-    /* ═══ 앱 스크린 섹션 배경 ═══ */
+    /* ═══ 앱 스크린 섹션 ═══ */
     .app-screen-area {
         background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #1a0d3d 100%) !important;
-        position: relative;
-        overflow: hidden;
-        padding: 90px 0 70px;
+        position: relative; overflow: hidden; padding: 90px 0 70px;
     }
     .app-screen-area[style] { background-image: none !important; }
     .app-screen-area .bg-main-gradient { display: none !important; }
     .app-screen-area::before {
-        content: '';
-        position: absolute; top: -100px; right: -100px;
+        content: ''; position: absolute; top: -100px; right: -100px;
         width: 480px; height: 480px; border-radius: 50%;
         background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%);
         pointer-events: none;
     }
     .app-screen-area::after {
-        content: '';
-        position: absolute; bottom: -80px; left: 8%;
+        content: ''; position: absolute; bottom: -80px; left: 8%;
         width: 360px; height: 360px; border-radius: 50%;
         background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%);
         pointer-events: none;
@@ -161,50 +136,25 @@
     .app-screen-area .section-title p { opacity: .7; margin-top: 10px; }
     .app-screen-area .btn-area { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
 
-    /* ═══ 앱 스크린 3열 그리드 ═══ */
-    .app-screens-grid {
-        display: flex;
-        gap: 14px;
-        align-items: flex-end;
-        justify-content: center;
-    }
+    .app-screens-grid { display: flex; gap: 14px; align-items: flex-end; justify-content: center; }
     .app-screens-grid .app-screen-item {
-        flex: 1;
-        max-width: 240px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
+        flex: 1; max-width: 240px; display: flex; flex-direction: column; align-items: center; gap: 10px;
     }
-    .app-screens-grid .app-screen-item.center-phone {
-        flex: 1.12;
-        max-width: 280px;
-        transform: translateY(-10px);
-    }
+    .app-screens-grid .app-screen-item.center-phone { flex: 1.12; max-width: 280px; transform: translateY(-10px); }
     .app-screens-grid .app-screen-item img {
-        width: 100%;
-        height: auto;
-        max-height: min(52vh, 540px);
-        object-fit: contain;
-        display: block;
-        border-radius: 24px;
+        width: 100%; height: auto; max-height: min(52vh, 540px);
+        object-fit: contain; display: block; border-radius: 24px;
         box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
     }
     .app-screen-label {
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: rgba(255,255,255,.6);
-        text-align: center;
-        letter-spacing: .05em;
-        text-transform: uppercase;
+        font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,.6);
+        text-align: center; letter-spacing: .05em; text-transform: uppercase;
     }
     .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(148,130,255,.8); }
     @media (max-width: 767px) {
         .app-screens-grid { gap: 10px; flex-wrap: wrap; }
         .app-screens-grid .app-screen-item,
-        .app-screens-grid .app-screen-item.center-phone {
-            flex: 1 1 42%; max-width: none; transform: none;
-        }
+        .app-screens-grid .app-screen-item.center-phone { flex: 1 1 42%; max-width: none; transform: none; }
         .app-screen-area { padding: 60px 0 50px; }
     }
     </style>
@@ -240,7 +190,7 @@
         </div>
     </section>
 
-    <!-- ═══ 역할 배너 섹션 (SVG + 버튼) ═══ -->
+    <!-- ═══ 역할 배너 섹션 ═══ -->
     <section class="role-banner-area pd-top-110">
         <div class="container">
             <div class="row justify-content-center">
@@ -252,33 +202,19 @@
                     </div>
                 </div>
             </div>
-            <img
-                src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg"
-                alt="TAI Safe 역할별 서비스 — 경영자 / 안전관리자 / 대행 필요 사업장 / 안전 전문가"
-                class="role-banner-img"
-                loading="lazy"
-            >
+            <div class="role-banner-wrap">
+                <img
+                    src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg"
+                    alt="TAI Safe 역할별 서비스 — 경영자 / 안전관리자 / 대행 필요 사업장 / 안전 전문가"
+                    class="role-banner-img"
+                    loading="lazy"
+                >
+            </div>
             <div class="role-btn-grid">
-                <a href="for-business-owner.html" class="role-btn rb1">
-                    <span class="rb-icon">🏭</span>
-                    경영자 / 총무
-                    <span class="rb-label">법령위반 진단 →</span>
-                </a>
-                <a href="for-safety-manager.html" class="role-btn rb2">
-                    <span class="rb-icon">📋</span>
-                    안전관리자
-                    <span class="rb-label">업무 자동화 →</span>
-                </a>
-                <a href="fix-request.html?from=landing&type=consulting" class="role-btn rb3">
-                    <span class="rb-icon">🤝</span>
-                    대행 필요 사업장
-                    <span class="rb-label">전문가 연결 →</span>
-                </a>
-                <a href="service/appointment.html" class="role-btn rb4">
-                    <span class="rb-icon">🛡️</span>
-                    안전 전문가
-                    <span class="rb-label">파트너 등록 →</span>
-                </a>
+                <a href="for-business-owner.html" class="btn btn-border">경영자 / 총무</a>
+                <a href="for-safety-manager.html" class="btn btn-border">안전관리자</a>
+                <a href="fix-request.html?from=landing&type=consulting" class="btn btn-border">대행 필요 사업장</a>
+                <a href="service/appointment.html" class="btn btn-border">안전 전문가</a>
             </div>
         </div>
     </section>
