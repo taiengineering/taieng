@@ -1,49 +1,55 @@
 /**
- * TAI 히어로 navbar fixed 보정 v3
- * margin-top → padding-top 교체
- * margin-top은 히어로 밖에 흰색 body 배경을 노출시킴
- * padding-top은 히어로 내부에서 공간을 만들어 배경색이 유지됨
+ * TAI 히어로 navbar 보정 v4
+ * navbar가 position:relative일 때는 padding-top 불필요
+ * navbar가 fixed/sticky일 때만 padding-top 적용
  */
 
-/* index.html 히어로 — 그라디언트 배경 안에서 패딩 */
-.hero-split {
+/* 기본: navbar relative → padding 불필요 */
+.hero-split,
+.owner-hero-section,
+.manager-hero,
+.page-wrap {
+  padding-top: 0;
+}
+
+/* navbar가 fixed일 때만 보정 */
+.navbar-fixed-top ~ .hero-split,
+.navbar-fixed-top ~ .owner-hero-section,
+.navbar-fixed-top ~ .manager-hero,
+.navbar-fixed-top ~ .page-wrap,
+body.nav-fixed .hero-split,
+body.nav-fixed .owner-hero-section,
+body.nav-fixed .manager-hero,
+body.nav-fixed .page-wrap {
   padding-top: 90px;
+}
+
+/* hero-split 기본 레이아웃 */
+.hero-split {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
   box-sizing: border-box;
 }
 
-/* for-business-owner.html 히어로 */
-.owner-hero-section {
-  padding-top: 90px;
-}
-
 .owner-hero-left-col {
   min-height: 470px;
 }
 
-/* for-safety-manager 등 */
-.manager-hero {
-  padding-top: 90px;
-}
-
-/* .page-wrap 사용하는 페이지 */
-.page-wrap {
-  padding-top: 90px;
-}
-
-/* 좌측 패널 밀림 방지 */
 .owner-hero-left-inner {
   margin-left: 0 !important;
   max-width: 480px;
 }
 
 @media (max-width: 991px) {
-  .hero-split,
-  .owner-hero-section,
-  .manager-hero,
-  .page-wrap {
+  .navbar-fixed-top ~ .hero-split,
+  .navbar-fixed-top ~ .owner-hero-section,
+  .navbar-fixed-top ~ .manager-hero,
+  .navbar-fixed-top ~ .page-wrap,
+  body.nav-fixed .hero-split,
+  body.nav-fixed .owner-hero-section,
+  body.nav-fixed .manager-hero,
+  body.nav-fixed .page-wrap {
     padding-top: 72px;
   }
   .owner-hero-left-col {
