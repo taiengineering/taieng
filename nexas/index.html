@@ -172,23 +172,47 @@
     .app-screens-grid {
         display: flex;
         gap: 14px;
-        align-items: stretch;
+        align-items: flex-end;
+        justify-content: center;
     }
     .app-screens-grid .app-screen-item {
         flex: 1;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 12px 40px rgba(0,0,0,0.35);
-        aspect-ratio: 9/16;
+        max-width: 240px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .app-screens-grid .app-screen-item.center-phone {
+        flex: 1.12;
+        max-width: 280px;
+        transform: translateY(-10px);
     }
     .app-screens-grid .app-screen-item img {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        height: auto;
+        max-height: min(52vh, 540px);
+        object-fit: contain;
         display: block;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    .app-screen-label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.92);
+        text-align: center;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
     }
     @media (max-width: 767px) {
-        .app-screens-grid { gap: 10px; }
+        .app-screens-grid { gap: 10px; flex-wrap: wrap; }
+        .app-screens-grid .app-screen-item,
+        .app-screens-grid .app-screen-item.center-phone {
+            flex: 1 1 42%;
+            max-width: none;
+            transform: none;
+        }
     }
     </style>
 </head>
@@ -277,7 +301,7 @@
         </div>
     </section>
 
-    <section class="app-screen-area" style="background-image: url(assets/img/other/3.png); background-size: contain">
+    <section class="app-screen-area">
         <div class="bg-main-gradient"></div>
         <div class="container"><div class="row justify-content-center align-items-center">
             <div class="col-xl-4 col-lg-5 align-self-center">
@@ -293,13 +317,16 @@
             <div class="col-xl-8 col-lg-7">
                 <div class="app-screens-grid">
                     <div class="app-screen-item">
-                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-main.jpeg" alt="TAI Safe 홈 대시보드 화면" loading="lazy">
+                        <img src="assets/img/app-screen/1.svg" alt="TAI Safe 홈 대시보드 화면" loading="lazy">
+                        <div class="app-screen-label">홈 대시보드</div>
+                    </div>
+                    <div class="app-screen-item center-phone">
+                        <img src="assets/img/app-screen/2.svg" alt="TAI Safe 점검 화면" loading="lazy">
+                        <div class="app-screen-label">점검 완료</div>
                     </div>
                     <div class="app-screen-item">
-                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-check.jpeg" alt="TAI Safe 점검 화면" loading="lazy">
-                    </div>
-                    <div class="app-screen-item">
-                        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/app/app-check1.jpeg" alt="TAI Safe 기록 화면" loading="lazy">
+                        <img src="assets/img/app-screen/3.svg" alt="TAI Safe TBM 기록 화면" loading="lazy">
+                        <div class="app-screen-label">TBM 기록</div>
                     </div>
                 </div>
             </div>
