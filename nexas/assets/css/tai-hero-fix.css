@@ -1,0 +1,28 @@
+/**
+ * TAI 히어로 navbar fixed 보정
+ * navbar: position fixed, height 90px
+ * 히어로 섹션이 navbar 뒤에 겹치지 않도록 margin-top 적용
+ */
+
+/* index.html 히어로 */
+.hero-split {
+  margin-top: 90px;
+}
+
+/* for-business-owner.html 히어로 */
+.owner-hero {
+  margin-top: 90px;
+}
+
+/* for-safety-manager.html 등 동일 구조 대응 */
+.manager-hero {
+  margin-top: 90px;
+}
+
+@media (max-width: 991px) {
+  .hero-split,
+  .owner-hero,
+  .manager-hero {
+    margin-top: 70px;
+  }
+}
