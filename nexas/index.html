@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/tai-brand.css">
+    <link rel="stylesheet" href="assets/css/tai-hero-fix.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
@@ -75,7 +76,6 @@
     .role-banner-area { background: #f1f5f9; padding: 80px 0 70px; }
     .role-banner-area .section-title { margin-bottom: 36px; }
 
-    /* SVG 이미지 + 4분할 링크 오버레이 */
     .role-banner-wrap {
         position: relative;
         overflow: hidden;
@@ -89,7 +89,6 @@
         display: block;
         margin: -6% 0;
     }
-    /* 4분할 투명 링크 오버레이 */
     .role-banner-links {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -106,7 +105,6 @@
         background: rgba(0,0,0,0.06);
     }
 
-    /* 버튼 그리드 */
     .role-btn-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -117,7 +115,6 @@
         text-align: center;
         font-weight: 700;
         font-size: .92rem;
-        /* 세로 중앙 정렬 */
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -226,7 +223,6 @@
                     </div>
                 </div>
             </div>
-            <!-- SVG 배너 + 4분할 링크 오버레이 -->
             <div class="role-banner-wrap">
                 <img
                     src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg"
@@ -234,7 +230,6 @@
                     class="role-banner-img"
                     loading="lazy"
                 >
-                <!-- 이미지 위 4등분 투명 링크 -->
                 <div class="role-banner-links">
                     <a href="for-business-owner.html" class="role-banner-link" aria-label="경영자 / 총무 페이지로 이동"></a>
                     <a href="for-safety-manager.html" class="role-banner-link" aria-label="안전관리자 페이지로 이동"></a>
@@ -242,7 +237,6 @@
                     <a href="service/appointment.html" class="role-banner-link" aria-label="안전 전문가 페이지로 이동"></a>
                 </div>
             </div>
-            <!-- 버튼 4개 (세로 중앙정렬) -->
             <div class="role-btn-grid">
                 <a href="for-business-owner.html" class="btn btn-border">경영자 / 총무</a>
                 <a href="for-safety-manager.html" class="btn btn-border">안전관리자</a>
