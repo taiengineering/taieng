@@ -18,33 +18,34 @@
     body { font-family: 'Noto Sans KR', sans-serif; }
 
     /* ── 히어로 ── */
-    .owner-hero-section { background: #f8fafc; }
+    .owner-hero-section {
+      background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
+    }
     .owner-hero-left-col {
       display: flex;
       align-items: center;
-      padding: 80px 48px 80px 80px;
-      /* padding-left는 tai-hero-fix.css에서 container 기준으로 동적 설정 */
-      min-height: 560px;
+      padding: 56px 48px 56px 80px;
+      min-height: 420px;
     }
     .owner-hero-eyebrow {
       display: inline-block; font-size: .72rem; font-weight: 700;
-      letter-spacing: .1em; color: #64748b;
-      border: 1.5px solid #e2e8f0; border-radius: 6px;
+      letter-spacing: .1em; color: rgba(255,255,255,.9);
+      border: 1.5px solid rgba(255,255,255,.4); border-radius: 6px;
       padding: 5px 14px; margin-bottom: 22px;
     }
     .owner-hero-left-col h1 {
       font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-      font-weight: 900; color: #0f172a;
+      font-weight: 900; color: #fff;
       line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px;
     }
     .owner-hero-left-col .hero-sub {
-      font-size: .98rem; color: #64748b;
+      font-size: .98rem; color: rgba(255,255,255,.82);
       line-height: 1.7; margin-bottom: 32px;
     }
     .owner-hero-right-col {
       position: relative;
       overflow: hidden;
-      min-height: 560px;
+      min-height: 420px;
       padding: 0;
     }
     .owner-hero-right-col img {
@@ -55,17 +56,17 @@
     }
     .owner-hero-right-col::before {
       content: ''; position: absolute;
-      top: 0; bottom: 0; left: 0; width: 80px;
-      background: linear-gradient(to right, #f8fafc, transparent);
+      top: 0; bottom: 0; left: 0; width: 100px;
+      background: linear-gradient(to right, rgba(15,43,74,.75), transparent);
       z-index: 1;
     }
     @media(max-width:991px) {
-      .owner-hero-left-col { min-height: auto; }
-      .owner-hero-right-col { min-height: 320px; }
+      .owner-hero-left-col { min-height: auto; padding: 48px 24px; }
+      .owner-hero-right-col { min-height: 280px; }
       .owner-hero-right-col::before { display: none; }
     }
     @media(max-width:575px) {
-      .owner-hero-right-col { min-height: 240px; }
+      .owner-hero-right-col { min-height: 220px; }
     }
 
     /* ── 솔직한 공감 ── */
@@ -114,7 +115,7 @@
   <div class="container-fluid px-0">
     <div class="row g-0">
       <div class="col-lg-6 owner-hero-left-col">
-        <div style="max-width:480px;">
+        <div class="owner-hero-left-inner">
           <span class="owner-hero-eyebrow">사업주 · 현장소장 · 공장장</span>
           <h1>이게 다<br>내 책임입니다.</h1>
           <p class="hero-sub">
