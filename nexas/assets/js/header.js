@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
  * v2.8.0 (2026-04-21): 로고 Supabase Storage URL 적용
  * v2.6.0 (2026-04-21): 전문가 세부 페이지 연결 (for-agency/repair/consultant/expert)
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입 + 풀뷰포트 레이아웃 자동 보정
@@ -144,6 +145,7 @@
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'precedent-search.html">\uD310\uB840 \uAC80\uC0C9</a></li>',
     '              <li><a href="' + base + 'safety-news.html">\uC548\uC804\uC815\uBCF4</a></li>',
+    '              <li><a href="' + base + 'law-updates.html">\uAC1C\uC815\uBC95\uB839</a></li>',
     '            </ul>',
     '          </li>',
 
