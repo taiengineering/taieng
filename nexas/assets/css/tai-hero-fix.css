@@ -1,67 +1,24 @@
 /**
- * TAI 히어로 navbar 보정 v5
- * 핵심: 히어로 텍스트 왼쪽을 navbar container(로고)와 정렬
+ * TAI hero fix v6
  */
-
-/* 히어로 왼쪽 패딩을 container와 정렬 */
 .hero-split .hero-left,
 .owner-hero-section .owner-hero-left-col,
 .manager-hero .manager-hero-left {
   padding-left: max(24px, calc((100vw - 1320px) / 2 + 12px));
 }
-
-.hero-split {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-.owner-hero-left-col {
-  min-height: 470px;
-}
-
-.owner-hero-left-inner {
-  margin-left: 0 !important;
-  max-width: 480px;
-}
-
-/* TODO: 앱 스크린 이미지 교체 후 이 줄 제거 */
-.app-screen-area {
-  display: none !important;
-}
-
+.hero-split { width: 100%; max-width: 100%; overflow-x: hidden; box-sizing: border-box; }
+.owner-hero-left-col { min-height: 470px; }
+.owner-hero-left-inner { margin-left: 0 !important; max-width: 480px; }
 @media (max-width: 1399px) {
-  .hero-split .hero-left,
-  .owner-hero-section .owner-hero-left-col,
-  .manager-hero .manager-hero-left {
-    padding-left: max(24px, calc((100vw - 1140px) / 2 + 12px));
-  }
+  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: max(24px, calc((100vw - 1140px) / 2 + 12px)); }
 }
-
 @media (max-width: 1199px) {
-  .hero-split .hero-left,
-  .owner-hero-section .owner-hero-left-col,
-  .manager-hero .manager-hero-left {
-    padding-left: max(24px, calc((100vw - 960px) / 2 + 12px));
-  }
+  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: max(24px, calc((100vw - 960px) / 2 + 12px)); }
 }
-
 @media (max-width: 991px) {
-  .hero-split .hero-left,
-  .owner-hero-section .owner-hero-left-col,
-  .manager-hero .manager-hero-left {
-    padding-left: 24px;
-  }
-  .owner-hero-left-col {
-    min-height: auto;
-  }
+  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: 24px; }
+  .owner-hero-left-col { min-height: auto; }
 }
-
 @media (max-width: 575px) {
-  .hero-split .hero-left,
-  .owner-hero-section .owner-hero-left-col,
-  .manager-hero .manager-hero-left {
-    padding-left: 20px;
-  }
+  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: 20px; }
 }
