@@ -20,11 +20,12 @@
     /* ── 히어로 ── */
     .owner-hero-section {
       background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
+      padding-top: 70px; /* fixed 헤더 높이 보정 */
     }
     .owner-hero-left-col {
       display: flex;
       align-items: center;
-      padding: 56px 48px 56px 80px;
+      padding: 50px 48px 50px 80px;
       min-height: 420px;
     }
     .owner-hero-eyebrow {
@@ -61,11 +62,13 @@
       z-index: 1;
     }
     @media(max-width:991px) {
-      .owner-hero-left-col { min-height: auto; padding: 48px 24px; }
+      .owner-hero-section { padding-top: 64px; }
+      .owner-hero-left-col { min-height: auto; padding: 40px 24px; }
       .owner-hero-right-col { min-height: 280px; }
       .owner-hero-right-col::before { display: none; }
     }
     @media(max-width:575px) {
+      .owner-hero-section { padding-top: 60px; }
       .owner-hero-right-col { min-height: 220px; }
     }
 
