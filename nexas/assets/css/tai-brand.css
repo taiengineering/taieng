@@ -1,6 +1,7 @@
 /**
  * TAI 브랜드 색상 (단일 관리)
  * ─────────────────────────
+ * v2.1.0 (2026-04-26): 스크롤 고정 헤더 네이비로 변경
  * v2.0.0 (2026-04-25): 흰색 + 어두운 블루 톤으로 전환
  *   - 밝은 배경 + 깊은 네이비 조합
  *   - 히어로/CTA 배경을 거의 검정(#0b1324)에서 네이비(#0f2b4a)로
@@ -46,9 +47,14 @@
   );
 }
 
+/* 스크롤 시 고정 헤더 — 네이비 배경 */
+.navbar-area-fixed {
+  background: rgba(var(--tai-surface-dark-rgb), 0.92) !important;
+}
+
 /* home-6 전용 스티키 내비가 테마 보라색을 쓰지 않도록 */
 .home-6 .navbar-area-fixed {
-  background: rgba(var(--tai-primary-rgb), 0.85);
+  background: rgba(var(--tai-surface-dark-rgb), 0.92) !important;
 }
 
 /*
