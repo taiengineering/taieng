@@ -3,270 +3,341 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 유료 법령진단 결과 — PDF 리포트와 동일한 섹션 구조 웹 버전">
+  <meta name="description" content="TAI 유료진단 결과 리포트 v3">
   <title>유료진단 결과 | TAI Safe</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=DM+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --blue:#1e68e5; --blue-soft:#eff6ff; --line:#dbeafe; --text:#0f172a; --muted:#64748b;
-      --high-bg:#fee2e2; --high-tx:#991b1b; --med-bg:#fef9c3; --med-tx:#854d0e; --low-bg:#dcfce7; --low-tx:#15803d;
-      --appoint-bg:#dbeafe; --appoint-tx:#1e40af; --inspect-bg:#dcfce7; --inspect-tx:#15803d;
-      --action-bg:#fee2e2; --action-tx:#991b1b; --report-bg:#fef9c3; --report-tx:#854d0e; --notify-bg:#f1f5f9; --notify-tx:#475569;
+    :root {
+      --blue: #1A5FD4;
+      --blue-mid: #2563EB;
+      --blue-light: #EBF1FD;
+      --blue-pale: #F4F8FF;
+      --dark: #0A0F1E;
+      --navy: #0F1E3D;
+      --navy-mid: #1A3A6E;
+      --white: #FFFFFF;
+      --gray-50: #F8F9FC;
+      --gray-100: #F0F2F8;
+      --gray-200: #E2E6F0;
+      --gray-400: #9BA5BE;
+      --gray-600: #4A5568;
+      --gray-800: #1A2035;
+      --green: #0F9D6A;
+      --green-light: #E6F7F1;
+      --red: #DC2626;
+      --red-mid: #EF4444;
+      --red-light: #FEF2F2;
+      --red-dark: #7F1D1D;
+      --orange: #D97706;
+      --orange-mid: #F59E0B;
+      --orange-light: #FFFBEB;
+      --shadow-sm: 0 1px 3px rgba(10,15,30,0.08), 0 1px 2px rgba(10,15,30,0.04);
+      --shadow-md: 0 4px 12px rgba(10,15,30,0.10), 0 2px 6px rgba(10,15,30,0.06);
+      --shadow-lg: 0 10px 30px rgba(10,15,30,0.15), 0 4px 10px rgba(10,15,30,0.08);
     }
-    html{ scroll-behavior:smooth; }
-    body{ font-family:'Noto Sans KR',sans-serif; color:var(--text); background:#f8fbff; }
-    .heading-font{ font-family:'Outfit','Noto Sans KR',sans-serif; }
-    .hero{ background:linear-gradient(135deg,#dbeafe,#eff6ff); border:1px solid var(--line); border-radius:18px; padding:24px; }
-    .hero-meta{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-    .chip{ background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 10px; font-size:.75rem; font-weight:700; color:#1e3a8a; }
-    .risk-badge{ border-radius:999px; font-weight:900; padding:6px 14px; font-size:.78rem; }
-    .risk-HIGH{ background:var(--high-bg); color:var(--high-tx); }
-    .risk-MEDIUM{ background:var(--med-bg); color:var(--med-tx); }
-    .risk-LOW{ background:var(--low-bg); color:var(--low-tx); }
-
-    .toc-wrap{ position:sticky; top:0; z-index:90; background:rgba(248,251,255,.96); backdrop-filter:blur(4px); border-bottom:1px solid var(--line); }
-    .toc{ display:flex; gap:8px; overflow:auto; white-space:nowrap; padding:10px 0; }
-    .toc a{ border:1px solid var(--line); background:#fff; color:#1e3a8a; border-radius:999px; padding:5px 12px; font-size:.78rem; text-decoration:none; font-weight:700; }
-    .toc a:hover{ background:var(--blue-soft); }
-
-    .blk{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px; margin-top:16px; }
-    .blk h2{ font-size:1.06rem; font-weight:900; margin-bottom:12px; }
-    .sum-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; height:100%; }
-    .sum-card .v{ font-size:1.55rem; font-weight:900; color:var(--blue); }
-    .risk-box{ background:var(--high-bg); color:var(--high-tx); border:1px solid #fecaca; border-radius:12px; padding:12px; font-weight:700; }
-    .warn-box{ background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; border-radius:12px; padding:12px; font-weight:700; }
-    .rank-item{ display:flex; gap:10px; padding:10px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; }
-    .rank-no{ width:26px; height:26px; border-radius:50%; background:#e2e8f0; color:#334155; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    .small-muted{ color:var(--muted); font-size:.82rem; }
-
-    .ob-badge{ border-radius:999px; padding:2px 8px; font-size:.72rem; font-weight:800; display:inline-block; }
-    .ob-APPOINT{ background:var(--appoint-bg); color:var(--appoint-tx); }
-    .ob-INSPECT{ background:var(--inspect-bg); color:var(--inspect-tx); }
-    .ob-ACTION{ background:var(--action-bg); color:var(--action-tx); }
-    .ob-REPORT{ background:var(--report-bg); color:var(--report-tx); }
-    .ob-NOTIFY{ background:var(--notify-bg); color:var(--notify-tx); }
-    .ob-OTHER{ background:#f1f5f9; color:#334155; }
-
-    .table-wrap{ overflow:auto; }
-    table th{ font-size:.78rem; color:var(--muted); white-space:nowrap; }
-    table td{ font-size:.82rem; vertical-align:top; }
-    .penalty{ color:#b91c1c; font-weight:800; }
-    .sched-group{ background:#f8fbff; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:10px; }
-
-    .plan-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-    .plan-card{ border:1px solid var(--line); border-radius:12px; padding:12px; background:#fff; }
-    .plan-card.reco{ border:2px solid var(--blue); background:var(--blue-soft); }
-    .bridge-table td,.bridge-table th{ font-size:.79rem; }
-
-    @media (max-width: 991px){ .plan-grid{ grid-template-columns:1fr; } }
+    body { font-family:'Noto Sans KR',sans-serif; background:var(--gray-50); color:var(--gray-800); }
+    .dm { font-family:'DM Sans',sans-serif; }
+    .layout { display:grid; grid-template-columns:280px minmax(0,1fr); gap:16px; }
+    .sidebar { position:sticky; top:0; align-self:start; height:100vh; overflow:auto; }
+    .cover { background:linear-gradient(180deg,var(--navy),var(--navy-mid)); color:#fff; border-radius:14px; padding:16px; box-shadow:var(--shadow-md); }
+    .cover-brand { font:800 26px/1 'DM Sans',sans-serif; color:#93c5fd; letter-spacing:.02em; }
+    .cover-line { height:2px; margin:10px 0 12px; background:linear-gradient(90deg,#60a5fa,#1d4ed8); }
+    .badge-pill { display:inline-block; border-radius:999px; padding:3px 10px; font-size:11px; font-weight:700; }
+    .b-high { background:var(--red-light); color:var(--red-dark); }
+    .b-med { background:var(--orange-light); color:var(--orange); }
+    .b-low { background:var(--green-light); color:var(--green); }
+    .toc { margin-top:10px; background:#fff; border:1px solid var(--gray-200); border-radius:12px; box-shadow:var(--shadow-sm); overflow:hidden; }
+    .toc-row { display:flex; align-items:center; gap:10px; padding:9px 12px; border-bottom:1px solid var(--gray-100); color:var(--gray-600); text-decoration:none; font-size:13px; font-weight:600; }
+    .toc-row:last-child { border-bottom:none; }
+    .toc-row .n { font:700 12px/1 'DM Sans',sans-serif; color:var(--blue-mid); width:30px; }
+    .toc-row.active { background:var(--blue-pale); color:var(--blue); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; background:#fff; border:1px solid var(--gray-200); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow-sm); margin-bottom:12px; }
+    .topbar .title { font:700 15px/1.2 'DM Sans',sans-serif; color:var(--gray-800); }
+    .btn-pdf { background:var(--blue); color:#fff; border:none; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:700; text-decoration:none; }
+    .mobile-toc { display:none; margin-bottom:10px; }
+    .section { background:#fff; border:1px solid var(--gray-200); border-radius:12px; box-shadow:var(--shadow-sm); margin-bottom:14px; }
+    .sh { background:var(--blue-light); border-left:5px solid var(--blue); border-radius:12px 12px 0 0; padding:10px 14px; font:800 15px/1.2 'DM Sans',sans-serif; color:var(--blue); }
+    .sec-body { padding:14px; }
+    .ss { border-left:3px solid var(--blue); padding-left:9px; margin:14px 0 8px; font:700 14px/1.2 'DM Sans',sans-serif; color:var(--gray-800); }
+    .ss.red { border-left-color:var(--red); color:var(--red-dark); }
+    .bt { font-size:13px; line-height:1.7; color:var(--gray-600); }
+    .ib { border-radius:10px; padding:10px 12px; font-size:12px; line-height:1.6; margin:8px 0; border:1px solid transparent; }
+    .ib.blue { background:var(--blue-pale); border-color:#bfdbfe; color:#1e3a8a; }
+    .ib.gray { background:#f8fafc; border-color:#e2e8f0; color:#475569; }
+    .ib.red { background:var(--red-light); border-color:#fecaca; color:var(--red-dark); }
+    .wb { border-radius:10px; padding:12px; border:1px solid #fecaca; font-size:13px; font-weight:700; }
+    .wb.red { background:linear-gradient(180deg,#fff,#fef2f2); color:var(--red-dark); }
+    .pb { margin-top:8px; border-radius:10px; padding:10px; background:linear-gradient(180deg,#fff,#fef2f2); border:1px dashed #fca5a5; }
+    .sc-wrap { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+    .sc { border:1px solid var(--gray-200); border-radius:10px; background:#fff; padding:10px; }
+    .sc .k { font-size:11px; color:var(--gray-400); font-weight:700; }
+    .sc .v { margin-top:3px; font:800 24px/1 'DM Sans',sans-serif; color:var(--blue); }
+    .sc.alert .v { color:var(--red); }
+    .stat-hl { margin-top:8px; border-radius:10px; padding:10px; background:linear-gradient(135deg,#dbeafe,#eff6ff); }
+    .stat-hl-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; text-align:center; }
+    .stat-hl .n { font:800 20px/1 'DM Sans',sans-serif; color:var(--blue); }
+    .stat-hl .t { font-size:11px; color:var(--gray-600); }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th, td { border:1px solid var(--gray-200); padding:7px; vertical-align:top; }
+    th { background:#f8fafc; font-weight:700; color:#334155; white-space:nowrap; }
+    .th-dark th { background:#e2e8f0; color:#0f172a; }
+    .th-blue th { background:#dbeafe; color:#1e3a8a; }
+    .th-red th { background:#fee2e2; color:#7f1d1d; }
+    .td-red { color:#b91c1c; font-weight:700; }
+    .ob { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:3px; }
+    .ob-APPOINT { background:#dbeafe; color:#1e40af; }
+    .ob-INSPECT { background:#dcfce7; color:#15803d; }
+    .ob-ACTION  { background:#fee2e2; color:#991b1b; }
+    .ob-REPORT  { background:#fef9c3; color:#854d0e; }
+    .ob-NOTIFY  { background:#f1f5f9; color:#475569; }
+    .ob-OTHER   { background:#f1f5f9; color:#334155; }
+    .rc-wrap { display:grid; gap:8px; }
+    .rc { border:1px solid var(--gray-200); border-left:4px solid var(--blue); border-radius:10px; padding:10px; background:#fff; display:flex; gap:10px; }
+    .rc.orange { border-left-color:var(--orange); background:#fffbeb; }
+    .rc.red { border-left-color:var(--red); background:#fef2f2; }
+    .rc .idx { width:24px; height:24px; border-radius:50%; background:#dbeafe; color:#1e3a8a; font:800 12px/24px 'DM Sans',sans-serif; text-align:center; flex-shrink:0; }
+    .rc.red .idx { background:#fee2e2; color:#991b1b; }
+    .scroll-x { overflow:auto; }
+    .saa-box { border:1px solid var(--gray-200); border-radius:10px; padding:10px; background:#fff; }
+    .plans { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:8px 0; }
+    .plan { border:1px solid var(--gray-200); border-radius:8px; padding:8px; }
+    .plan.reco { border:2px solid var(--blue); background:var(--blue-pale); }
+    @media (max-width: 768px) {
+      .layout { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .mobile-toc { display:block; }
+      .sc-wrap, .stat-hl-grid, .plans { grid-template-columns:1fr 1fr; }
+    }
   </style>
 </head>
 <body class="sc5">
 <div id="tai-header"></div>
-
 <div class="container py-3">
-  <!-- 1. 히어로 -->
-  <section class="hero" id="sec-hero">
-    <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
-      <div>
-        <h1 class="heading-font mb-1" id="heroTitle">사업장 법령진단 결과</h1>
-        <div class="hero-meta">
-          <span class="chip" id="heroSector">섹터</span>
-          <span class="chip" id="heroReceipt">접수번호 -</span>
-          <span class="chip" id="heroDate">진단일 -</span>
+  <div class="topbar">
+    <div class="title">TAI 유료진단 웹 리포트</div>
+    <a class="btn-pdf" id="pdfTopBtn" target="_blank">PDF 다운로드</a>
+  </div>
+
+  <div class="mobile-toc">
+    <select id="mobileToc" class="form-select form-select-sm">
+      <option value="">목차로 이동</option>
+      <option value="sec01">SECTION 01 시설 개요</option>
+      <option value="sec02">SECTION 02 적용 법령</option>
+      <option value="sec03">SECTION 03 의무 진단</option>
+      <option value="sec04">SECTION 04 처벌 리스크</option>
+      <option value="sec05">SECTION 05 사고 통계</option>
+      <option value="sec06">SECTION 06 개선 권고</option>
+      <option value="sec-saas">SaaS 전환</option>
+      <option value="appendix">부록</option>
+    </select>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="cover">
+        <div class="cover-brand">TAI Safe</div>
+        <div class="cover-line"></div>
+        <div id="coverCompany" style="font-size:16px;font-weight:800;line-height:1.4;">사업장명</div>
+        <div style="margin-top:8px;">
+          <span class="badge-pill" id="coverSector" style="background:rgba(255,255,255,.15);color:#dbeafe;">SECTOR</span>
+          <span class="badge-pill b-low" id="coverRisk">LOW</span>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#cbd5e1;">
+          <div id="coverDate">진단일 -</div>
+          <div id="coverReceipt">접수번호 -</div>
         </div>
       </div>
-      <div class="d-flex align-items-center gap-2">
-        <span class="risk-badge" id="riskBadge">LOW</span>
-        <a id="pdfBtn" class="btn btn-primary btn-sm" target="_blank">PDF 다운로드</a>
-      </div>
-    </div>
-  </section>
-</div>
+      <nav class="toc" id="tocNav">
+        <a class="toc-row" href="#sec01"><span class="n">01</span><span>시설 개요</span></a>
+        <a class="toc-row" href="#sec02"><span class="n">02</span><span>적용 법령</span></a>
+        <a class="toc-row" href="#sec03"><span class="n">03</span><span>의무 진단</span></a>
+        <a class="toc-row" href="#sec04"><span class="n">04</span><span>처벌 리스크</span></a>
+        <a class="toc-row" href="#sec05"><span class="n">05</span><span>사고 통계</span></a>
+        <a class="toc-row" href="#sec06"><span class="n">06</span><span>개선 권고</span></a>
+        <a class="toc-row" href="#sec-saas"><span class="n">07</span><span>SaaS 전환</span></a>
+        <a class="toc-row" href="#appendix"><span class="n">APP</span><span>부록</span></a>
+      </nav>
+    </aside>
 
-<!-- 스티키 목차 -->
-<div class="toc-wrap">
-  <div class="container">
-    <nav class="toc">
-      <a href="#sec-summary">경영진요약</a>
-      <a href="#sec-facility">시설개요</a>
-      <a href="#sec-law">법률분석</a>
-      <a href="#sec-risk">처벌리스크</a>
-      <a href="#sec-manage">관리방안</a>
-      <a href="#sec-app-a">부록A</a>
-      <a href="#sec-app-b">부록B</a>
-      <a href="#sec-app-c">부록C</a>
-      <a href="#sec-app-d">부록D</a>
-    </nav>
-  </div>
-</div>
+    <main>
+      <section class="section" id="sec01" data-toc="#sec01">
+        <div class="sh">SECTION 01. 시설 개요 및 입력 정보 요약</div>
+        <div class="sec-body">
+          <div class="scroll-x">
+            <table class="th-dark">
+              <thead><tr><th>라벨</th><th>값</th><th>6하원칙</th></tr></thead>
+              <tbody id="overviewBody"></tbody>
+            </table>
+          </div>
+          <div class="ib blue" id="csiaInfo">중대재해처벌법 적용 여부를 계산 중입니다.</div>
+        </div>
+      </section>
 
-<div class="container py-3">
-  <!-- 2. 경영진 요약 -->
-  <section class="blk" id="sec-summary">
-    <h2>2. 경영진 요약</h2>
-    <div class="row g-2 mb-2" id="sumTop"></div>
-    <div class="row g-2 mb-2" id="sum4"></div>
-    <div class="risk-box mb-2" id="maxPenaltyBox">최대 과태료/벌칙 정보를 계산 중입니다.</div>
-    <div class="warn-box mb-2 d-none" id="csiaBox">중대재해처벌법 적용 대상입니다.</div>
-    <h6 class="mb-2">TOP 5 리스크</h6>
-    <div id="top5"></div>
-  </section>
+      <section class="section" id="sec02" data-toc="#sec02">
+        <div class="sh">SECTION 02. 적용 법령 및 사회적 배경</div>
+        <div class="sec-body">
+          <div class="ss">왜 지금 산업안전이 중요한가?</div>
+          <div class="bt">
+            중대재해처벌법 시행 이후 사업장 안전보건관리 체계의 실효성과 증빙가능성이 핵심 경영 리스크가 되었습니다.
+            법정 의무를 누락 없이 파악하고, 점검·선임·보고를 체계적으로 관리해야 과태료와 형사 리스크를 줄일 수 있습니다.
+          </div>
+          <div class="ss">귀 시설에 적용되는 주요 법령</div>
+          <div class="scroll-x">
+            <table class="th-dark">
+              <thead><tr><th>법령명</th><th>적용 근거</th><th>주요 의무</th></tr></thead>
+              <tbody id="lawBadgesBody"></tbody>
+            </table>
+          </div>
+          <div class="ss">핵심 통계</div>
+          <div class="stat-hl">
+            <div class="stat-hl-grid">
+              <div><div class="n dm" id="hlTotal">0</div><div class="t">총 의무건수</div></div>
+              <div><div class="n dm" id="hlLaw">0</div><div class="t">적용법령수</div></div>
+              <div><div class="n dm" id="hlInspect">0</div><div class="t">점검의무</div></div>
+              <div><div class="n dm" id="hlAppoint">0</div><div class="t">선임의무</div></div>
+            </div>
+          </div>
+          <div class="ib gray">출처: 국가법령정보센터/고용노동부/중대재해처벌법 공개자료</div>
+        </div>
+      </section>
 
-  <!-- 3. 면책조항 -->
-  <section class="blk" id="sec-disclaimer">
-    <h2>3. 면책조항</h2>
-    <div class="accordion" id="discAcc">
-      <div class="accordion-item">
-        <h2 class="accordion-header">
-          <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#discBody">면책조항 보기</button>
-        </h2>
-        <div id="discBody" class="accordion-collapse collapse">
-          <div class="accordion-body">
-            본 진단 결과는 현행 법령과 사업장 정보를 정밀 분석하여 적용 가능한 법적 의무를 도출한 것입니다.
-            본 서비스는 법률 상담·자문이 아니며, 최종 법적 판단은 관할 기관 또는 전문가 확인이 필요합니다.
-            <div class="small-muted mt-2" id="discMeta">진단일 -, 엔진 버전 -</div>
+      <section class="section" id="sec03" data-toc="#sec03">
+        <div class="sh">SECTION 03. 법적 의무 사항 진단 결과</div>
+        <div class="sec-body">
+          <div class="sc-wrap" id="scWrap"></div>
+          <div class="ss">선임 의무 현황</div>
+          <div class="scroll-x"><table class="th-dark"><thead><tr><th>구분</th><th>근거 법령</th><th>조항</th><th>선임 기준</th><th>과태료</th></tr></thead><tbody id="appointRows"></tbody></table></div>
+          <div class="ss">점검·검사 의무</div>
+          <div class="scroll-x"><table class="th-dark"><thead><tr><th>점검 항목</th><th>근거 법령</th><th>조항</th><th>점검 주기</th><th>수행 주체</th><th>제출 기관</th></tr></thead><tbody id="inspectRows"></tbody></table></div>
+          <div class="ss">조치 의무</div>
+          <div class="scroll-x"><table class="th-dark"><thead><tr><th>조치 항목</th><th>근거 법령</th><th>조항</th><th>내용</th><th>과태료</th></tr></thead><tbody id="actionRows"></tbody></table></div>
+          <div class="ss">보고 의무</div>
+          <div class="scroll-x"><table class="th-dark"><thead><tr><th>보고 항목</th><th>근거 법령</th><th>조항</th><th>제출 기관</th><th>과태료</th></tr></thead><tbody id="reportRows"></tbody></table></div>
+          <div class="ss">신고 의무</div>
+          <div class="scroll-x"><table class="th-dark"><thead><tr><th>신고 항목</th><th>근거 법령</th><th>조항</th><th>제출 기관</th><th>과태료</th></tr></thead><tbody id="notifyRows"></tbody></table></div>
+        </div>
+      </section>
+
+      <section class="section" id="sec04" data-toc="#sec04">
+        <div class="sh">SECTION 04. 처벌 조항 및 리스크 분석</div>
+        <div class="sec-body">
+          <div class="wb red" id="riskWarn"></div>
+          <div class="ss">위반 시 처벌 규정</div>
+          <div class="scroll-x">
+            <table class="th-red">
+              <thead><tr><th>위반 사항</th><th>근거 법령</th><th>조항</th><th>처벌 내용</th><th>위험도</th></tr></thead>
+              <tbody id="penaltyRows"></tbody>
+            </table>
+          </div>
+          <div class="pb" id="pbCsia"></div>
+          <div class="ib gray">출처: 관련 법령 벌칙조항 및 시행령 기준</div>
+        </div>
+      </section>
+
+      <section class="section" id="sec05" data-toc="#sec05">
+        <div class="sh">SECTION 05. 사고 통계 및 위험 현황</div>
+        <div class="sec-body">
+          <div class="ss">전국 산업재해 현황</div>
+          <div class="scroll-x">
+            <table class="th-blue">
+              <thead><tr><th>구분</th><th>재해자수</th><th>사망자수</th><th>재해율</th><th>사망만인율</th></tr></thead>
+              <tbody>
+                <tr><td>전체</td><td>130,348</td><td>598</td><td>0.68%</td><td>0.31</td></tr>
+                <tr><td>제조업</td><td>31,522</td><td>171</td><td>0.84%</td><td>0.45</td></tr>
+                <tr><td>건설업</td><td>27,217</td><td>303</td><td>1.21%</td><td>1.35</td></tr>
+                <tr><td>서비스업</td><td>56,440</td><td>86</td><td>0.47%</td><td>0.07</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ss">설비별 사고 발생 현황</div>
+          <div class="scroll-x">
+            <table class="th-dark">
+              <thead><tr><th>설비</th><th>사고 비중</th><th>주요 사고 유형</th></tr></thead>
+              <tbody>
+                <tr><td>프레스</td><td>18%</td><td>끼임, 절단</td></tr>
+                <tr><td>크레인</td><td>14%</td><td>낙하, 충돌</td></tr>
+                <tr><td>컨베이어</td><td>11%</td><td>끼임, 말림</td></tr>
+                <tr><td>용접</td><td>9%</td><td>화상, 화재</td></tr>
+                <tr><td>지게차</td><td>8%</td><td>충돌, 전도</td></tr>
+                <tr><td>기타</td><td>40%</td><td>전도, 추락 등</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ib gray">출처: 고용노동부 산업재해 통계(최근 공개자료 기준)</div>
+        </div>
+      </section>
+
+      <section class="section" id="sec06" data-toc="#sec06">
+        <div class="sh">SECTION 06. 개선 권고사항</div>
+        <div class="sec-body">
+          <div class="ss red">즉시 조치 권고 — 위험도 높음</div>
+          <div class="rc-wrap" id="rcUrgent"></div>
+          <div class="ss">단기 개선 권고</div>
+          <div class="rc-wrap" id="rcShort"></div>
+          <div class="ss">TAI 전문 서비스</div>
+          <div class="scroll-x">
+            <table class="th-blue">
+              <thead><tr><th>아이콘</th><th>서비스명</th><th>내용</th><th>제공 방식</th></tr></thead>
+              <tbody>
+                <tr><td>📋</td><td>안전관리자 선임 지원</td><td>법정 선임 기준 검토 및 행정 지원</td><td>전문가 매칭</td></tr>
+                <tr><td>📊</td><td>위험성평가 대행</td><td>현장 위험요인 진단 및 개선안</td><td>현장+원격</td></tr>
+                <tr><td>🎓</td><td>안전보건교육</td><td>법정 교육 콘텐츠/이수 관리</td><td>온라인/집체</td></tr>
+                <tr><td>🔍</td><td>정기 컨설팅 (TAI Safe)</td><td>의무이행 추적/점검 자동화</td><td>SaaS</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- 4. 시설 개요 -->
-  <section class="blk" id="sec-facility">
-    <h2>4. SECTION 01 시설 개요</h2>
-    <div class="row g-2">
-      <div class="col-md-6"><div class="sum-card"><div class="small-muted">사업장명</div><div id="fCompany">-</div></div></div>
-      <div class="col-md-6"><div class="sum-card"><div class="small-muted">섹터</div><div id="fSector">-</div></div></div>
-      <div class="col-md-6"><div class="sum-card"><div class="small-muted">사업자번호</div><div id="fBizNo">-</div></div></div>
-      <div class="col-md-6"><div class="sum-card"><div class="small-muted">대표자</div><div id="fCeo">-</div></div></div>
-      <div class="col-md-6"><div class="sum-card"><div class="small-muted">주소</div><div id="fAddr">-</div></div></div>
-      <div class="col-md-3"><div class="sum-card"><div class="small-muted">근로자수</div><div id="fWorker">-</div></div></div>
-      <div class="col-md-3"><div class="sum-card"><div class="small-muted">면적</div><div id="fArea">-</div></div></div>
-    </div>
-    <div class="warn-box mt-2 d-none" id="csiaMini">근로자 5인 이상으로 중대재해처벌법 관리대상일 수 있습니다.</div>
-  </section>
+      <section class="section" id="sec-saas" data-toc="#sec-saas">
+        <div class="sh">SaaS 마케팅 — 이 의무를 어떻게 관리할 것인가</div>
+        <div class="sec-body">
+          <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/11-%EC%97%85%EB%AC%B4%EB%B6%84%EC%82%B0-%EB%B9%84%ED%8F%AC%EC%95%A0%ED%94%84%ED%84%B0.svg" alt="업무분산 비포애프터" style="max-width:100%;margin:8px 0;border:1px solid var(--gray-200);border-radius:8px;">
+          <div class="plans">
+            <div class="plan" id="planB">건물 플랜<br><strong class="dm">59K~</strong></div>
+            <div class="plan" id="planI">산업 플랜<br><strong class="dm">79K~</strong></div>
+            <div class="plan" id="planC">건설 플랜<br><strong class="dm">145K~</strong></div>
+          </div>
+          <div class="scroll-x">
+            <table class="th-blue">
+              <thead><tr><th></th><th>엑셀 직접 관리</th><th>TAI Safe</th></tr></thead>
+              <tbody>
+                <tr><td>점검 일정</td><td>수동</td><td>자동 생성</td></tr>
+                <tr><td>업무 배분</td><td>전화/카톡</td><td>앱으로 자동</td></tr>
+                <tr><td>미이행 추적</td><td>모름</td><td>자동 알림</td></tr>
+                <tr><td>서류 보관</td><td>USB/폴더</td><td>클라우드 자동</td></tr>
+                <tr><td>월 비용</td><td>0원 + 과태료 리스크</td><td id="cmpPrice">-</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="service/saas.html" class="btn btn-primary btn-sm mt-2">14일 무료 체험 시작하기</a>
+        </div>
+      </section>
 
-  <!-- 5. 법률별 의무 분석 -->
-  <section class="blk" id="sec-law">
-    <h2>5. SECTION 02 법률별 의무 분석</h2>
-    <div class="accordion" id="lawAccordion"></div>
-  </section>
-
-  <!-- 6. 처벌 조항 및 리스크 -->
-  <section class="blk" id="sec-risk">
-    <h2>6. SECTION 03 처벌 조항 및 리스크</h2>
-    <div class="warn-box mb-2 d-none" id="csiaPenalty">중대재해처벌법: 경영책임자 1년 이상 징역 또는 10억원 이하 벌금 위험.</div>
-    <div class="table-wrap">
-      <table class="table table-sm table-hover">
-        <thead><tr><th>법령</th><th>조항</th><th>유형</th><th>의무 내용</th><th>벌칙</th></tr></thead>
-        <tbody id="penaltyBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 7. 결론 및 관리 방안 -->
-  <section class="blk" id="sec-manage">
-    <h2>7. SECTION 04 결론 및 관리 방안</h2>
-    <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/11-%EC%97%85%EB%AC%B4%EB%B6%84%EC%82%B0-%EB%B9%84%ED%8F%AC%EC%95%A0%ED%94%84%ED%84%B0.svg" alt="업무분산 비포애프터" style="width:100%;border:1px solid var(--line);border-radius:12px;">
-    <div class="plan-grid mt-3">
-      <div class="plan-card" id="planBuilding"><strong>건물</strong><div class="small-muted">59,000원~</div></div>
-      <div class="plan-card" id="planIndustry"><strong>산업</strong><div class="small-muted">79,000원~</div></div>
-      <div class="plan-card" id="planConstruction"><strong>건설</strong><div class="small-muted">145,000원~</div></div>
-    </div>
-    <div class="small-muted mt-2" id="recoPlan">추천 플랜: -</div>
-    <div class="table-wrap mt-2">
-      <table class="table table-sm bridge-table mb-0">
-        <thead><tr><th></th><th>엑셀 직접 관리</th><th>TAI Safe</th></tr></thead>
-        <tbody>
-          <tr><td>점검 일정</td><td>수동</td><td id="cmpSchedule">자동 생성</td></tr>
-          <tr><td>업무 배분</td><td>전화/카톡</td><td>앱으로 자동</td></tr>
-          <tr><td>미이행 추적</td><td>모름</td><td>자동 알림</td></tr>
-          <tr><td>서류 보관</td><td>USB/폴더</td><td>클라우드 자동</td></tr>
-          <tr><td>월 비용</td><td>0원 + 과태료 리스크</td><td id="cmpPrice">-</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <a class="btn btn-primary btn-sm mt-2" href="service/saas.html">14일 무료 체험 시작하기</a>
-  </section>
-
-  <!-- 8. 부록 A -->
-  <section class="blk" id="sec-app-a">
-    <h2>8. 부록 A 전체 규칙 테이블</h2>
-    <div class="d-flex gap-2 mb-2">
-      <input id="q" class="form-control form-control-sm" placeholder="법령/의무 검색">
-      <select id="typeFilter" class="form-select form-select-sm"><option value="">유형 전체</option></select>
-    </div>
-    <div class="table-wrap">
-      <table class="table table-sm table-hover">
-        <thead><tr><th>No</th><th>법령</th><th>조항</th><th>의무유형</th><th>내용</th><th>주기</th><th>제출기관</th></tr></thead>
-        <tbody id="rulesBody"></tbody>
-      </table>
-    </div>
-    <div class="d-flex justify-content-between align-items-center">
-      <span class="small-muted" id="pageMeta"></span>
-      <div class="d-flex gap-2"><button class="btn btn-outline-secondary btn-sm" id="prevBtn">이전</button><button class="btn btn-outline-secondary btn-sm" id="nextBtn">다음</button></div>
-    </div>
-  </section>
-
-  <!-- 9. 부록 B -->
-  <section class="blk" id="sec-app-b">
-    <h2>9. 부록 B 점검 일정 요약</h2>
-    <div id="scheduleList"></div>
-  </section>
-
-  <!-- 10. 부록 C -->
-  <section class="blk" id="sec-app-c">
-    <h2>10. 부록 C 선임 의무 상세</h2>
-    <div class="table-wrap">
-      <table class="table table-sm table-hover">
-        <thead><tr><th>No</th><th>선임 대상</th><th>근거 법령</th><th>조항</th><th>과태료</th></tr></thead>
-        <tbody id="appointBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 11. 부록 D -->
-  <section class="blk" id="sec-app-d">
-    <h2>11. 부록 D 용어 및 참고 법령</h2>
-    <h6>주요 용어</h6>
-    <ul>
-      <li>과태료: 행정법 위반에 대한 금전적 제재</li>
-      <li>중대재해: 사망 등 중대 인명피해를 동반한 산업재해</li>
-      <li>위험성평가: 유해·위험요인 식별 및 감소조치 절차</li>
-      <li>선임의무: 법정 책임자 지정 의무</li>
-      <li>안전관리자: 사업장 안전관리 실무 책임자</li>
-      <li>법정점검: 법령이 정한 주기적 점검</li>
-      <li>inspection_cycle: 점검 반복 주기(월/분기/반기/연)</li>
-    </ul>
-    <h6>참고 법령 링크</h6>
-    <ul>
-      <li><a href="https://www.law.go.kr" target="_blank">국가법령정보센터</a></li>
-      <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%82%B0%EC%97%85%EC%95%88%EC%A0%84%EB%B3%B4%EA%B1%B4%EB%B2%95" target="_blank">산업안전보건법</a></li>
-      <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%A4%91%EB%8C%80%EC%9E%AC%ED%95%B4%EC%B2%98%EB%B2%8C%EB%B2%95" target="_blank">중대재해처벌법</a></li>
-      <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%86%8C%EB%B0%A9%EA%B8%B0%EB%B3%B8%EB%B2%95" target="_blank">소방 관련 법령</a></li>
-      <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%99%94%ED%95%99%EB%AC%BC%EC%A7%88%EA%B4%80%EB%A6%AC%EB%B2%95" target="_blank">화학물질관리법</a></li>
-    </ul>
-    <div class="small-muted">문의: TAI Engineering / taiengcokr@gmail.com</div>
-  </section>
-
-  <!-- 12. 세금계산서 -->
-  <section class="blk" id="sec-invoice">
-    <h2>12. 세금계산서 + PDF 다운로드</h2>
-    <div class="row g-2">
-      <div class="col-md-4"><input id="invoiceBizNo" class="form-control" placeholder="사업자등록번호"></div>
-      <div class="col-md-4"><input id="invoiceCompany" class="form-control" placeholder="상호"></div>
-      <div class="col-md-4"><input id="invoiceEmail" class="form-control" placeholder="수신 이메일"></div>
-    </div>
-    <div class="mt-2 d-flex gap-2">
-      <button id="invoiceBtn" class="btn btn-outline-primary btn-sm">세금계산서 요청</button>
-      <a id="pdfBtn2" class="btn btn-primary btn-sm" target="_blank">PDF 다운로드</a>
-    </div>
-  </section>
+      <section class="section" id="appendix" data-toc="#appendix">
+        <div class="sh">부록</div>
+        <div class="sec-body">
+          <div class="ss">적용 법령 링크</div>
+          <div class="scroll-x">
+            <table class="th-dark"><thead><tr><th>법령명</th><th>링크</th></tr></thead><tbody id="lawLinks"></tbody></table>
+          </div>
+          <div class="ss">PDF 다운로드 + 세금계산서 요청</div>
+          <div class="saa-box">
+            <div class="row g-2">
+              <div class="col-md-4"><input id="invoiceBizNo" class="form-control form-control-sm" placeholder="사업자등록번호"></div>
+              <div class="col-md-4"><input id="invoiceEmail" class="form-control form-control-sm" placeholder="수신 이메일"></div>
+              <div class="col-md-4"><button id="invoiceBtn" class="btn btn-outline-primary btn-sm w-100">세금계산서 요청</button></div>
+            </div>
+            <a id="pdfBottomBtn" class="btn-pdf mt-2 d-inline-block" target="_blank">PDF 다운로드</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 </div>
 
 <div id="tai-footer"></div>
@@ -279,189 +350,205 @@
 <script>
 const API = "https://api.taieng.co.kr";
 const token = new URLSearchParams(location.search).get("token") || "";
-const today = new Date().toISOString().slice(0,10);
-let allRules = [], filtered = [], page = 1, pageSize = 15, dataObj = {};
+const today = new Date().toISOString().slice(0, 10);
 
-function esc(v){ return (v ?? "").toString().replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s])); }
-function obClass(t){ return ["APPOINT","INSPECT","ACTION","REPORT","NOTIFY"].includes(t)?`ob-${t}`:"ob-OTHER"; }
-function num(v){ return Number(v||0).toLocaleString(); }
-
-function renderHero(d){
-  const risk = (d.risk_level || "LOW").toUpperCase();
-  document.getElementById("heroTitle").textContent = `${d.company_name || "사업장"} 법령진단 결과`;
-  document.getElementById("heroSector").textContent = d.sector_label || d.sector || "-";
-  document.getElementById("heroReceipt").textContent = `접수번호 ${d.public_token || token}`;
-  document.getElementById("heroDate").textContent = `진단일 ${today}`;
-  const rb = document.getElementById("riskBadge");
-  rb.textContent = risk; rb.className = `risk-badge risk-${risk}`;
+function esc(v){ return (v ?? "").toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function n(v){ return Number(v || 0).toLocaleString(); }
+function obClass(t){
+  if(["APPOINT","INSPECT","ACTION","REPORT","NOTIFY"].includes(t)) return `ob-${t}`;
+  return "ob-OTHER";
+}
+function riskBadgeClass(r){
+  const u = (r || "").toUpperCase();
+  if(u === "HIGH") return "b-high";
+  if(u === "MEDIUM") return "b-med";
+  return "b-low";
 }
 
-function renderSummary(d){
-  const s = d.summary || {};
-  document.getElementById("sumTop").innerHTML = [
-    ["총 의무건수", s.total || 0], ["선임의무", s.appointment || 0], ["적용법령수", s.law_count || 0]
-  ].map(x=>`<div class="col-md-4"><div class="sum-card"><div class="small-muted">${x[0]}</div><div class="v">${num(x[1])}</div></div></div>`).join("");
-  document.getElementById("sum4").innerHTML = [
-    ["선임", s.appointment || 0], ["점검·검사", s.inspection || 0], ["조치", s.action || 0], ["보고·신고", (s.report||0)]
-  ].map(x=>`<div class="col-6 col-lg-3"><div class="sum-card"><div class="small-muted">${x[0]}</div><strong>${num(x[1])}건</strong></div></div>`).join("");
-  document.getElementById("cmpSchedule").textContent = `자동 생성 (${num(s.inspection||0)}건 즉시)`;
-  document.getElementById("cmpPrice").textContent = (d.recommended_plan || {}).price || "도입 상담";
-  document.getElementById("recoPlan").textContent = `추천 플랜: ${(d.recommended_plan||{}).name || "-"} / ${(d.recommended_plan||{}).price || "-"}`;
+function renderOverview(data){
+  const i = data.input_data || {};
+  const rows = [
+    ["사업장명", i.company_name || data.company_name || "-", "누가(WHO)"],
+    ["사업자등록번호", i.business_no || "-", "누가(WHO)"],
+    ["대표자", i.ceo_name || "-", "누가(WHO)"],
+    ["소재지", i.address || "-", "어디서(WHERE)"],
+    ["섹터", data.sector_label || data.sector || "-", "무엇을(WHAT)"],
+    ["상시근로자", i.worker_count ? `${n(i.worker_count)}명` : "-", "무엇을(WHAT)"],
+    ["면적", i.floor_area ? `${n(i.floor_area)}㎡` : "-", "무엇을(WHAT)"],
+  ];
+  document.getElementById("overviewBody").innerHTML = rows.map(r => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join("");
+  const csia = (data.summary || {}).csia_applicable;
+  document.getElementById("csiaInfo").textContent = csia
+    ? "중대재해처벌법 적용 대상(상시근로자 5인 이상)으로 고강도 관리가 필요합니다."
+    : "중대재해처벌법 직접 적용 대상이 아닐 수 있으나, 산업안전 의무 이행은 동일하게 필요합니다.";
+}
 
-  const top5 = (d.key_obligations || []).slice(0,5);
-  document.getElementById("top5").innerHTML = top5.map((it,idx)=>`<div class="rank-item">
-    <div class="rank-no">${idx+1}</div><div>
-      <div><strong>${esc(it.obligation_summary || it.summary || "핵심 의무")}</strong></div>
-      <div class="small-muted">${esc(it.law_name || "-")} / ${esc(it.law_article || "-")}</div>
-      <div class="small-muted">과태료: ${esc(it.penalty_summary || "-")}</div>
-    </div></div>`).join("") || '<div class="small-muted">리스크 데이터가 없습니다.</div>';
+function renderLawBadges(data){
+  const laws = data.law_badges || [];
+  document.getElementById("lawBadgesBody").innerHTML = laws.map(l => `<tr>
+    <td>${esc(l.law_name || l.name || "-")}</td>
+    <td>${esc(l.reason || "사업장 조건 매칭")}</td>
+    <td>${esc(l.summary || "선임/점검/보고 의무")}</td>
+  </tr>`).join("") || '<tr><td colspan="3">적용 법령 정보가 없습니다.</td></tr>';
+  const s = data.summary || {};
+  document.getElementById("hlTotal").textContent = n(s.total || 0);
+  document.getElementById("hlLaw").textContent = n(s.law_count || laws.length);
+  document.getElementById("hlInspect").textContent = n(s.inspection || 0);
+  document.getElementById("hlAppoint").textContent = n(s.appointment || 0);
+}
 
-  const penalties = (d.rules_table || []).map(r=>r.penalty_summary).filter(Boolean);
-  document.getElementById("maxPenaltyBox").textContent = penalties.length
-    ? `최대 과태료/벌칙 경고: ${penalties[0]}`
-    : "과태료/벌칙 정보가 명시된 항목이 없습니다.";
-  if((s.csia_applicable || false) === true){
-    document.getElementById("csiaBox").classList.remove("d-none");
-    document.getElementById("csiaPenalty").classList.remove("d-none");
-    document.getElementById("csiaMini").classList.remove("d-none");
+function filterRows(rows, type){ return (rows || []).filter(r => (r.obligation_type || "") === type); }
+
+function fillRows(el, rows, mapper, colspan){
+  const node = document.getElementById(el);
+  if(!rows.length){ node.innerHTML = `<tr><td colspan="${colspan}">데이터가 없습니다.</td></tr>`; return; }
+  node.innerHTML = rows.map(mapper).join("");
+}
+
+function renderSec03(data){
+  const rules = data.rules_table || [];
+  const s = data.summary || {};
+  document.getElementById("scWrap").innerHTML = `
+    <div class="sc"><div class="k">적용 법령</div><div class="v dm">${n(s.law_count || 0)}</div></div>
+    <div class="sc"><div class="k">선임 의무</div><div class="v dm">${n(s.appointment || 0)}</div></div>
+    <div class="sc"><div class="k">정기 점검</div><div class="v dm">${n(s.inspection || 0)}</div></div>
+    <div class="sc alert"><div class="k">즉시조치 필요</div><div class="v dm">${n(s.action || 0)}</div></div>`;
+
+  fillRows("appointRows", filterRows(rules, "APPOINT"), r => `<tr>
+    <td><span class="ob ${obClass(r.obligation_type)}">${esc(r.obligation_type || "-")}</span></td>
+    <td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || r.article_no || "-")}</td>
+    <td>${esc(r.appointment_target || r.obligation_summary || "-")}</td><td class="td-red">${esc(r.penalty_summary || "-")}</td>
+  </tr>`, 5);
+
+  fillRows("inspectRows", filterRows(rules, "INSPECT"), r => `<tr>
+    <td>${esc(r.obligation_summary || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || "-")}</td>
+    <td>${esc(r.inspection_cycle || r.inspection_cycle_value || "-")}</td><td>${esc(r.executor_type_label || r.executor || "-")}</td><td>${esc(r.submit_org_label || r.submit_org || "-")}</td>
+  </tr>`, 6);
+
+  fillRows("actionRows", filterRows(rules, "ACTION"), r => `<tr>
+    <td>${esc(r.obligation_summary || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || "-")}</td>
+    <td>${esc(r.remarks || "-")}</td><td class="td-red">${esc(r.penalty_summary || "-")}</td>
+  </tr>`, 5);
+
+  fillRows("reportRows", filterRows(rules, "REPORT"), r => `<tr>
+    <td>${esc(r.obligation_summary || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || "-")}</td>
+    <td>${esc(r.submit_org_label || r.submit_org || "-")}</td><td class="td-red">${esc(r.penalty_summary || "-")}</td>
+  </tr>`, 5);
+
+  fillRows("notifyRows", filterRows(rules, "NOTIFY"), r => `<tr>
+    <td>${esc(r.obligation_summary || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || "-")}</td>
+    <td>${esc(r.submit_org_label || r.submit_org || "-")}</td><td class="td-red">${esc(r.penalty_summary || "-")}</td>
+  </tr>`, 5);
+}
+
+function renderSec04(data){
+  const rules = (data.rules_table || []).filter(r => !!r.penalty_summary);
+  document.getElementById("riskWarn").textContent = `현재 귀 사업장은 ${n((data.summary || {}).total || 0)}건의 법적 의무 사항이 확인되었습니다. 미이행 시 과태료/형사처벌 리스크가 발생할 수 있습니다.`;
+  fillRows("penaltyRows", rules, r => `<tr>
+    <td>${esc(r.obligation_summary || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || "-")}</td>
+    <td class="td-red">${esc(r.penalty_summary || "-")}</td><td><span class="badge-pill ${riskBadgeClass((data.risk_level || "LOW").toUpperCase())}">${esc((data.risk_level || "LOW").toUpperCase())}</span></td>
+  </tr>`, 5);
+  const csia = (data.summary || {}).csia_applicable;
+  document.getElementById("pbCsia").innerHTML = csia ? `
+    <strong>중대재해처벌법 적용 경고</strong>
+    <table class="th-red" style="margin-top:8px;">
+      <tbody>
+        <tr><td>사망사고 발생 시</td><td class="td-red">1년 이상 징역 또는 10억원 이하 벌금</td></tr>
+        <tr><td>부상·질병 사고 시</td><td class="td-red">7년 이하 징역 또는 1억원 이하 벌금</td></tr>
+        <tr><td>양벌규정 (법인)</td><td class="td-red">50억원 이하 벌금</td></tr>
+      </tbody>
+    </table>` : `<span class="small-muted">중대재해처벌법 직접 적용 대상 여부를 추가 확인하세요.</span>`;
+}
+
+function renderSec06(data){
+  const key = data.key_obligations || [];
+  const urgent = key.filter(k => (k.penalty_summary || k.penalty || "").length > 0).slice(0, 3);
+  const short = key.filter(k => !urgent.includes(k));
+  document.getElementById("rcUrgent").innerHTML = urgent.map((k, i) => `<div class="rc red"><div class="idx">${i+1}</div><div>
+    <div style="font-weight:800;">${esc(k.obligation_summary || k.summary || "-")}</div>
+    <div class="small">${esc(k.ai_reasoning || k.remarks || "")}</div>
+  </div></div>`).join("") || '<div class="small text-muted">긴급 권고 항목이 없습니다.</div>';
+  document.getElementById("rcShort").innerHTML = short.map((k, i) => `<div class="rc orange"><div class="idx">${i+1}</div><div>
+    <div style="font-weight:800;">${esc(k.obligation_summary || k.summary || "-")}</div>
+    <div class="small">${esc(k.ai_reasoning || k.remarks || "")}</div>
+  </div></div>`).join("") || '<div class="small text-muted">단기 권고 항목이 없습니다.</div>';
+}
+
+function renderAppendix(data){
+  const links = data.law_badges || [];
+  document.getElementById("lawLinks").innerHTML = links.map(l => `<tr>
+    <td>${esc(l.law_name || l.name || "-")}</td>
+    <td><a href="https://www.law.go.kr" target="_blank">law.go.kr 바로가기</a></td>
+  </tr>`).join("") || '<tr><td colspan="2">법령 링크 데이터가 없습니다.</td></tr>';
+}
+
+function setupTOCObserver(){
+  const rows = [...document.querySelectorAll(".toc-row")];
+  const map = new Map(rows.map(r => [r.getAttribute("href"), r]));
+  const sections = [...document.querySelectorAll("section[data-toc]")];
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        rows.forEach(r => r.classList.remove("active"));
+        const key = `#${e.target.id}`;
+        const row = map.get(key);
+        if(row) row.classList.add("active");
+      }
+    });
+  }, { rootMargin: "-40% 0px -50% 0px", threshold: 0.01 });
+  sections.forEach(s => io.observe(s));
+}
+
+function setupMobileToc(){
+  document.getElementById("mobileToc").addEventListener("change", (e) => {
+    const id = e.target.value;
+    if(!id) return;
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+async function init(){
+  if(!token){
+    document.querySelector("main").innerHTML = '<div class="alert alert-danger">token 파라미터가 없습니다.</div>';
+    return;
   }
-}
-
-function renderDisclaimer(d){
-  document.getElementById("discMeta").textContent = `진단일 ${today}, 엔진 버전 ${d.engine_version || "-"}`;
-}
-
-function renderFacility(d){
-  const i = d.input_data || {};
-  document.getElementById("fCompany").textContent = i.company_name || d.company_name || "-";
-  document.getElementById("fSector").textContent = d.sector_label || d.sector || "-";
-  document.getElementById("fBizNo").textContent = i.business_no || "-";
-  document.getElementById("fCeo").textContent = i.ceo_name || "-";
-  document.getElementById("fAddr").textContent = i.address || "-";
-  document.getElementById("fWorker").textContent = i.worker_count ? `${num(i.worker_count)}명` : "-";
-  document.getElementById("fArea").textContent = i.floor_area ? `${num(i.floor_area)}㎡` : "-";
-}
-
-function renderLawAnalysis(d){
-  const groups = d.law_groups || [];
-  document.getElementById("lawAccordion").innerHTML = groups.map((g,i)=>`
-    <div class="accordion-item">
-      <h2 class="accordion-header"><button class="accordion-button ${i?'collapsed':''}" data-bs-toggle="collapse" data-bs-target="#law${i}">${esc(g.law_name)} <span class="small-muted ms-2">(${g.count}건)</span></button></h2>
-      <div id="law${i}" class="accordion-collapse collapse ${i===0?'show':''}" data-bs-parent="#lawAccordion"><div class="accordion-body table-wrap">
-        <table class="table table-sm mb-0">
-          <thead><tr><th>유형</th><th>조항</th><th>내용</th><th>주기</th><th>제출기관</th></tr></thead>
-          <tbody>${(g.rules||[]).map(r=>`<tr>
-            <td><span class="ob-badge ${obClass(r.obligation_type)}">${esc(r.obligation_type||"-")}</span></td>
-            <td>${esc(r.law_article || r.article_no || "-")}</td>
-            <td>${esc(r.remarks || r.obligation_summary || "-")}</td>
-            <td>${esc(r.inspection_cycle || r.inspection_cycle_value || "-")}</td>
-            <td>${esc(r.submit_org || r.submit_org_code || "-")}</td>
-          </tr>`).join("")}</tbody>
-        </table>
-      </div></div>
-    </div>`).join("") || '<div class="small-muted">법령 그룹 데이터가 없습니다.</div>';
-}
-
-function renderPenaltyTable(d){
-  const rows = (d.rules_table || []).filter(r => !!r.penalty_summary);
-  document.getElementById("penaltyBody").innerHTML = rows.map(r=>`<tr>
-    <td>${esc(r.law_name||"-")}</td><td>${esc(r.law_article||r.article_no||"-")}</td>
-    <td><span class="ob-badge ${obClass(r.obligation_type)}">${esc(r.obligation_type||"-")}</span></td>
-    <td>${esc(r.obligation_summary||"-")}</td><td class="penalty">${esc(r.penalty_summary||"-")}</td>
-  </tr>`).join("") || '<tr><td colspan="5" class="small-muted">벌칙 정보가 있는 항목이 없습니다.</td></tr>';
-}
-
-function resetFilterRules(){
-  allRules = dataObj.rules_table || [];
-  filtered = [...allRules];
-  const types = [...new Set(allRules.map(r=>r.obligation_type).filter(Boolean))];
-  document.getElementById("typeFilter").innerHTML = '<option value="">유형 전체</option>' + types.map(t=>`<option value="${esc(t)}">${esc(t)}</option>`).join("");
-}
-
-function applyRulesFilter(){
-  const q = document.getElementById("q").value.trim().toLowerCase();
-  const t = document.getElementById("typeFilter").value;
-  filtered = allRules.filter(r=>{
-    const blob = `${r.law_name||""} ${r.law_article||""} ${r.obligation_summary||""}`.toLowerCase();
-    if(q && !blob.includes(q)) return false;
-    if(t && (r.obligation_type||"") !== t) return false;
-    return true;
-  });
-  page = 1;
-  renderAppendixA();
-}
-
-function renderAppendixA(){
-  const start = (page-1)*pageSize;
-  const rows = filtered.slice(start, start+pageSize);
-  document.getElementById("rulesBody").innerHTML = rows.map((r,idx)=>`<tr>
-    <td>${start+idx+1}</td><td>${esc(r.law_name||"-")}</td><td>${esc(r.law_article||r.article_no||"-")}</td>
-    <td><span class="ob-badge ${obClass(r.obligation_type)}">${esc(r.obligation_type||"-")}</span></td>
-    <td>${esc(r.obligation_summary||"-")}</td><td>${esc(r.inspection_cycle||r.inspection_cycle_value||"-")}</td><td>${esc(r.submit_org||r.submit_org_code||"-")}</td>
-  </tr>`).join("") || '<tr><td colspan="7" class="small-muted">표시할 데이터가 없습니다.</td></tr>';
-  const totalPage = Math.max(1, Math.ceil(filtered.length/pageSize));
-  document.getElementById("pageMeta").textContent = `${filtered.length}건 중 ${page}/${totalPage}페이지`;
-  document.getElementById("prevBtn").disabled = page <= 1;
-  document.getElementById("nextBtn").disabled = page >= totalPage;
-}
-
-function renderAppendixB(d){
-  const periodic = (((d.inspection_schedule||{}).periodic)||[]);
-  const groups = {};
-  periodic.forEach(it => {
-    const k = it.cycle_label || it.cycle || "기타";
-    if(!groups[k]) groups[k] = [];
-    groups[k].push(it);
-  });
-  document.getElementById("scheduleList").innerHTML = Object.entries(groups).map(([k,arr])=>`
-    <div class="sched-group">
-      <strong>${esc(k)}</strong> <span class="small-muted">(${arr.length}건)</span>
-      <div class="table-wrap mt-2"><table class="table table-sm mb-0">
-        <thead><tr><th>No</th><th>법령</th><th>조항</th><th>점검 항목</th><th>주기</th><th>제출기관</th></tr></thead>
-        <tbody>${arr.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.law_name||"-")}</td><td>${esc(x.law_article||x.article_no||"-")}</td><td>${esc(x.title||x.obligation_summary||x.rule_id||"-")}</td><td>${esc(k)}</td><td>${esc(x.submit_org||x.submit_org_code||"-")}</td></tr>`).join("")}</tbody>
-      </table></div>
-    </div>`).join("") || '<div class="small-muted">점검 일정 데이터가 없습니다.</div>';
-}
-
-function renderAppendixC(d){
-  const appoint = (d.rules_table || []).filter(r => (r.obligation_type||"") === "APPOINT");
-  document.getElementById("appointBody").innerHTML = appoint.map((r,i)=>`<tr>
-    <td>${i+1}</td><td>${esc(r.appointment_target || "-")}</td><td>${esc(r.law_name || "-")}</td><td>${esc(r.law_article || r.article_no || "-")}</td><td class="penalty">${esc(r.penalty_summary || "-")}</td>
-  </tr>`).join("") || '<tr><td colspan="5" class="small-muted">선임 의무 항목이 없습니다.</td></tr>';
-}
-
-async function loadData(){
-  if(!token){ alert("token 파라미터가 없습니다."); return; }
   const res = await fetch(`${API}/diagnosis/paid-result/${encodeURIComponent(token)}`);
-  if(!res.ok){ document.body.innerHTML = `<div class="container py-5"><h2>결과 조회 실패 (${res.status})</h2><p class="text-muted">토큰을 확인해주세요.</p></div>`; return; }
-  const j = await res.json();
-  dataObj = j.data || {};
-  dataObj.public_token = dataObj.public_token || token;
+  if(!res.ok){
+    document.querySelector("main").innerHTML = `<div class="alert alert-danger">결과 조회 실패 (${res.status})</div>`;
+    return;
+  }
+  const json = await res.json();
+  const data = json.data || {};
+  const pdfUrl = `${API}${data.pdf_url || `/diagnosis/report-pdf/${token}`}`;
+  document.getElementById("pdfTopBtn").href = pdfUrl;
+  document.getElementById("pdfBottomBtn").href = pdfUrl;
 
-  const pdfUrl = `${API}${dataObj.pdf_url || `/diagnosis/report-pdf/${token}`}`;
-  document.getElementById("pdfBtn").href = pdfUrl;
-  document.getElementById("pdfBtn2").href = pdfUrl;
-  document.getElementById("invoiceBizNo").value = (dataObj.input_data||{}).business_no || "";
+  const risk = (data.risk_level || "LOW").toUpperCase();
+  document.getElementById("coverCompany").textContent = data.company_name || "사업장";
+  document.getElementById("coverSector").textContent = data.sector_label || data.sector || "-";
+  document.getElementById("coverRisk").textContent = risk;
+  document.getElementById("coverRisk").className = `badge-pill ${riskBadgeClass(risk)}`;
+  document.getElementById("coverDate").textContent = `진단일 ${today}`;
+  document.getElementById("coverReceipt").textContent = `접수번호 ${data.public_token || token}`;
+  document.getElementById("cmpPrice").textContent = (data.recommended_plan || {}).price || "도입 상담";
+  document.getElementById("invoiceBizNo").value = (data.input_data || {}).business_no || "";
 
-  renderHero(dataObj);
-  renderSummary(dataObj);
-  renderDisclaimer(dataObj);
-  renderFacility(dataObj);
-  renderLawAnalysis(dataObj);
-  renderPenaltyTable(dataObj);
-  resetFilterRules();
-  renderAppendixA();
-  renderAppendixB(dataObj);
-  renderAppendixC(dataObj);
+  renderOverview(data);
+  renderLawBadges(data);
+  renderSec03(data);
+  renderSec04(data);
+  renderSec06(data);
+  renderAppendix(data);
+  setupTOCObserver();
+  setupMobileToc();
+
+  document.getElementById("invoiceBtn").addEventListener("click", () => {
+    alert("세금계산서 요청이 접수되었습니다.");
+  });
 }
 
-document.getElementById("q").addEventListener("input", applyRulesFilter);
-document.getElementById("typeFilter").addEventListener("change", applyRulesFilter);
-document.getElementById("prevBtn").addEventListener("click", ()=>{ if(page>1){ page--; renderAppendixA(); }});
-document.getElementById("nextBtn").addEventListener("click", ()=>{ const t=Math.ceil(filtered.length/pageSize); if(page<t){ page++; renderAppendixA(); }});
-document.getElementById("invoiceBtn").addEventListener("click", ()=> alert("세금계산서 요청이 접수되었습니다."));
-
-loadData();
+init();
 </script>
 </body>
 </html>
