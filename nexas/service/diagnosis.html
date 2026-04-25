@@ -17,16 +17,19 @@
   <style>
   body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-  /* 히어로 — index와 동일 보라 그라디언트 */
+  /* 히어로 — index와 동일 네이비 그라디언트, 420px */
   .diag-hero {
-    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 45%, #d946ef 100%);
-    padding: 110px 0 80px;
+    background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    padding: 80px 0 60px;
     position: relative; overflow: hidden;
   }
   .diag-hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(255,255,255,.10) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 80% at 15% 50%, rgba(255,255,255,.08) 0%, transparent 70%);
     pointer-events: none;
   }
   .diag-eyebrow {
@@ -46,7 +49,7 @@
   .diag-hero h1 em { color: #fde68a; font-style: normal; }
   .diag-hero p { font-size: 1.05rem; color: rgba(255,255,255,.85); margin-bottom: 32px; line-height: 1.65; }
 
-  /* 버튼 세로 중앙 정렬 이슈 해결 (Vuexy .btn padding+line-height 충돌) */
+  /* 버튼 세로 중앙 정렬 이슈 해결 */
   .diag-hero .btn,
   .subscribe-inner .btn {
     display: inline-flex;
@@ -60,7 +63,7 @@
     position: relative;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 25px 60px rgba(76,29,149,.35), 0 0 0 1px rgba(255,255,255,.1);
+    box-shadow: 0 25px 60px rgba(10,25,50,.35), 0 0 0 1px rgba(255,255,255,.1);
     aspect-ratio: 3 / 2;
     background: #000;
   }
@@ -86,7 +89,7 @@
   .check-y { color: #16a34a; font-weight: 700; }
   .check-n { color: #94a3b8; }
 
-  /* 가치 블록 (service-area 재사용) */
+  /* 가치 블록 */
   .val-card {
     background: #fff;
     border-radius: 16px;
@@ -153,7 +156,7 @@
         <h1>모르시면 벌금,<br><em>아시면 편안합니다.</em></h1>
         <p>중대재해처벌법·산업안전보건법,<br>우리 사업장에 뭐가 적용되는지 3분 만에.</p>
         <div class="d-flex gap-3 flex-wrap">
-          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;background:#fff;color:#6366f1;border-color:#fff;">무료 진단 시작하기</a>
+          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;background:#fff;color:#0f2b4a;border-color:#fff;">무료 진단 시작하기</a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -237,7 +240,7 @@
   </div>
 </section>
 
-<!-- ══ 법령의무진단이 해결하는 것 (service-area 구조) ══ -->
+<!-- ══ 법령의무진단이 해결하는 것 ══ -->
 <section class="service-area default-pd-top" style="background:#fff;">
   <div class="container">
     <div class="row justify-content-center">
@@ -249,8 +252,6 @@
       </div>
     </div>
     <div class="row g-4">
-
-      <!-- 블록 1 -->
       <div class="col-lg-6">
         <div class="val-card">
           <div class="val-tag">문서·증거</div>
@@ -260,8 +261,6 @@
           감독관이 왔을 때 "우리는 이렇게 관리하고 있습니다"를 증명하는 서류입니다.</p>
         </div>
       </div>
-
-      <!-- 블록 2 -->
       <div class="col-lg-6">
         <div class="val-card" style="border-left-color:#1a5fd4;">
           <div class="val-tag" style="color:#1a5fd4;background:rgba(26,95,212,.1);">법 변경 대응</div>
@@ -271,8 +270,6 @@
           더 이상 법 개정 공문을 직접 찾아볼 필요가 없습니다.</p>
         </div>
       </div>
-
-      <!-- 블록 3 -->
       <div class="col-lg-6">
         <div class="val-card" style="border-left-color:#16a34a;">
           <div class="val-tag" style="color:#16a34a;background:rgba(22,163,74,.1);">비용 효율</div>
@@ -282,8 +279,6 @@
           TAI 법령의무진단은 놓치지 않습니다. 2,080개 이상의 법령 규칙 엔진이 자동으로 판단합니다.</p>
         </div>
       </div>
-
-      <!-- 블록 4 -->
       <div class="col-lg-6">
         <div class="val-card" style="border-left-color:#d97706;">
           <div class="val-tag" style="color:#d97706;background:rgba(217,119,6,.1);">정확한 의무 파악</div>
@@ -293,12 +288,11 @@
           무엇을, 언제, 누가, 어떻게 해야 하는지 — 모호함 없이 구체적으로 명시됩니다.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══ 진단 유형별 가격 안내 (pricing-area 구조) ══ -->
+<!-- ══ 진단 유형별 가격 안내 ══ -->
 <section class="pricing-area default-pd-top pd-bottom-120 text-center" style="background:#f8fafc;">
   <div class="container">
     <div class="row justify-content-center">
@@ -311,8 +305,6 @@
       </div>
     </div>
     <div class="row justify-content-center g-4">
-
-      <!-- 건물·시설 -->
       <div class="col-lg-4 col-md-6">
         <div class="price-type-card">
           <div class="ptc-icon">🏢</div>
@@ -329,8 +321,6 @@
           <a href="../free-diagnosis.html" class="btn btn-border" style="width:100%;">무료 진단 먼저</a>
         </div>
       </div>
-
-      <!-- 산업·공장 -->
       <div class="col-lg-4 col-md-6">
         <div class="price-type-card">
           <div class="ptc-icon">🏭</div>
@@ -347,8 +337,6 @@
           <a href="../free-diagnosis.html" class="btn btn-base" style="width:100%;">무료 진단 먼저</a>
         </div>
       </div>
-
-      <!-- 건설현장 (가장 높음) -->
       <div class="col-lg-4 col-md-6">
         <div class="price-type-card featured">
           <div class="ptc-icon">🏗️</div>
@@ -365,7 +353,6 @@
           <a href="../fix-request.html?from=diagnosis-service&type=general" class="btn btn-base" style="width:100%;background:#e63946;border-color:#e63946;">유료 진단 문의</a>
         </div>
       </div>
-
     </div>
     <div class="text-center mt-5">
       <a href="../pricing.html" class="btn btn-border" style="padding:12px 32px;font-size:.95rem;">요금제 전체 상세 보기 →</a>
@@ -373,7 +360,7 @@
   </div>
 </section>
 
-<!-- ══ CTA (subscribe-area) ══ -->
+<!-- ══ CTA ══ -->
 <section class="subscribe-area">
   <div class="container">
     <div class="row">
