@@ -260,6 +260,64 @@
     #saas-page .feat-pair { padding: 52px 0; }
   }
 
+
+  #saas-page .scroll-anchor { scroll-margin-top: 96px; }
+  #saas-page a.sp-card { text-decoration: none; color: inherit; display: block; height: 100%; }
+  #saas-page .sp-card-patent {
+    background: #f0f6ff; border: 1px solid rgba(21,101,192,.15);
+    border-left: 4px solid #1565c0; border-radius: 14px;
+    padding: 28px 24px; position: relative;
+  }
+  #saas-page .sp-card-patent .sp-badge-patent {
+    position: absolute; top: 12px; right: 12px;
+    background: #1565c0; color: #fff; font-size: .6rem; font-weight: 800;
+    padding: 3px 10px; border-radius: 999px; letter-spacing: .05em;
+  }
+  #saas-page .sp-card-patent h4 { font-size: 1.05rem; font-weight: 900; color: #0f2b4a; margin: 0 0 8px; }
+  #saas-page .sp-card-patent p { font-size: .85rem; color: #475569; line-height: 1.6; margin: 0; }
+  #saas-page .sp-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+    padding: 24px 20px; transition: transform .2s, box-shadow .2s;
+  }
+  #saas-page .sp-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  #saas-page .sp-card .sp-icon { font-size: 2rem; margin-bottom: 10px; }
+  #saas-page .sp-card h4 { font-size: .95rem; font-weight: 800; color: #0f172a; margin: 0 0 6px; }
+  #saas-page .sp-card p { font-size: .82rem; color: #64748b; line-height: 1.5; margin: 0; }
+  #saas-page .sp-badge-paid {
+    display: inline-block; background: #fbbf24; color: #0f172a;
+    font-size: .6rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+    margin-left: 6px; vertical-align: middle;
+  }
+  #saas-page .sp-badge-soon {
+    display: inline-block; background: #f97316; color: #fff;
+    font-size: .6rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+    margin-left: 6px;
+  }
+  #saas-page .sp-badge-review {
+    display: inline-block; background: #94a3b8; color: #fff;
+    font-size: .55rem; font-weight: 800; padding: 2px 8px; border-radius: 999px;
+    margin-left: 6px;
+  }
+  #saas-page .sp-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  #saas-page .sp-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  #saas-page .sp-stub { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+  #saas-page .sp-stub h4 { font-size: .9rem; font-weight: 800; color: #0f172a; margin: 0 0 6px; }
+  #saas-page .sp-stub p { font-size: .82rem; color: #64748b; line-height: 1.6; margin: 0; }
+  #saas-page .m-stats4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }
+  @media(max-width:575px) { #saas-page .m-stats4 { grid-template-columns: repeat(2, 1fr); } }
+  #saas-page .m-stat.blue { background: #dbeafe; } #saas-page .m-stat.blue .n { color: #1e40af; }
+  #saas-page .m-stat.red { background: #fef2f2; } #saas-page .m-stat.red .n { color: #dc2626; }
+  #saas-page .m-stat.green { background: #dcfce7; } #saas-page .m-stat.green .n { color: #15803d; }
+  #saas-page .m-stat.orange { background: #ffedd5; } #saas-page .m-stat.orange .n { color: #c2410c; }
+  @media(max-width:991px) {
+    #saas-page .sp-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    #saas-page .sp-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width:575px) {
+    #saas-page .sp-grid-3 { grid-template-columns: 1fr; }
+    #saas-page .sp-grid-4 { grid-template-columns: 1fr; }
+  }
+
   </style>
 </head>
 <body class="sc5">
@@ -281,54 +339,41 @@
 TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
       <div class="sp-hero-btns">
         <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작 →</a>
-        <a href="#saas-overview" class="sp-btn-secondary">기능 둘러보기</a>
+        <a href="#saas-feature-cards" class="sp-btn-secondary">기능 둘러보기 ↓</a>
       </div>
     </div>
   </section>
 
-  <!-- ② 한눈에 보는 TAI Safe -->
-  <section class="sp-sec sp-sec-white" id="saas-overview">
+  <!-- ② 31개 기능 카드 -->
+  <section class="sp-sec sp-sec-white" id="saas-feature-cards">
     <div class="container">
-      <div class="text-center mb-2">
-        <span class="sp-label">한눈에</span>
-        <h2 class="sp-h2">TAI Safe가 다루는 일</h2>
-        <p class="sp-desc" style="max-width:640px;margin:0 auto 32px;">법령진단이 입구이고, SaaS가 운영 엔진입니다. TAI만의 자동화는 위에서 강조하고, 어디에나 있는 기능은 가볍게 정리했습니다.</p>
+      <div class="text-center mb-4">
+        <span class="sp-label">기능 31</span>
+        <h2 class="sp-h2">빠짐없이, 전부 담았습니다</h2>
+        <p class="sp-desc" style="max-width:700px;margin:0 auto;">안전관리자와 사업주가 같이 보는 페이지입니다. 특허 기술은 파란 카드로, SaaS 핵심은 흰 카드로, 부가·유료·로드맵은 하단 그리드로 정리했습니다.</p>
       </div>
-      <div class="feat-grid-highlight">
-        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">👥</div><h4>안전업무 분산 배분</h4><p>의무를 작업자에게 자동 배분, 안전관리자는 통제</p></div>
-        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🔄</div><h4>법령 개정 자동 반영</h4><p>법이 바뀌면 의무가 자동으로 갱신</p></div>
-        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🌬️</div><h4>기상 작업중지 판단</h4><p>기상청 연동, 법정 기준 초과 시 자동 중지 권고</p></div>
-        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">📋</div><h4>점검 → 서류 자동 변환</h4><p>체크 데이터가 바로 법정 서식 서류</p></div>
-        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🚨</div><h4>사고 즉시 알림</h4><p>현장 신고 1분 내 관계자 전원 알림</p></div>
-      </div>
-      <p class="sp-desc text-center" style="margin-bottom:16px;font-size:.88rem;">일반 기능</p>
-      <div class="feat-grid-normal">
-        <div class="feat-card-nm"><div class="feat-icon">⚡</div><h4>1일 세팅</h4><p>가입·프로필·배포</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">✍️</div><h4>TBM 앱 서명</h4><p>전자서명·보관</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">📊</div><h4>보고서 자동</h4><p>월간·종합</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">📝</div><h4>작업지시 앱</h4><p>승인·이력</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">📱</div><h4>대시보드</h4><p>미이행·KPI</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">🔲</div><h4>QR 출입기록</h4><p>현장 체크인</p></div>
-        <div class="feat-card-nm paid"><div class="feat-icon">📤</div><h4>문서자동제출</h4><p>기관 제출</p></div>
-        <div class="feat-card-nm"><div class="feat-icon">🗄️</div><h4>문서보관함</h4><p>법정 보존</p></div>
-      </div>
+      <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">A. TAI 특허 기술</h3>
+      <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-pat-01" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>1. 법령 자동 분석</h4><p>사업장 정보만 넣으면, 적용되는 법령과 의무를 자동으로 뽑아냅니다. 수십 개 법령, 수백 개 조문 — 사람이 하면 며칠, TAI는 3분.</p></div></a><a href="#feat-mock-dispatch" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>2. 안전업무 분산 배분</h4><p>안전관리자 혼자 떠안던 업무를, 작업자 전원이 나눠서 실행합니다. 배분·추적·알림이 자동. 안전관리자는 통제만.</p></div></a><a href="#feat-pat-03" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>3. 법령 개정 자동 반영</h4><p>법이 바뀌면 TAI가 먼저 알고, 의무와 점검표를 자동으로 바꿉니다. 관보를 매일 확인할 필요 없습니다.</p></div></a><a href="#feat-mock-weather" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>4. 기상 작업중지 자동 판단</h4><p>기상청 데이터를 30분마다 확인하고, 법정 기준 초과 시 자동 중지 권고. 판정값·알림·현장 조치가 한 묶음으로 저장됩니다.</p></div></a><a href="#feat-mock-check" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>5. 점검 → 서류 자동 변환</h4><p>현장에서 체크한 데이터가 법정 서식에 맞춰 서류가 됩니다. 엑셀에 옮길 필요 없습니다. 감독관이 오면 PDF 한 번에 출력.</p></div></a><a href="#feat-mock-emergency" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>6. 사고 즉시 알림</h4><p>현장에서 1-tap 신고 → 안전관리자·소장·본사까지 1분 내 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p></div></a></div>
+      <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">B. SaaS 핵심 기능</h3>
+      <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>7. 전용 안전 대시보드</h4><p>로그인하면 오늘 해야 할 일, 놓친 것, 이행률이 한눈에. D-day 기반 자동 정렬.</p></a><a href="#feat-08" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>8. 점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 캘린더에 자동으로 깔립니다. 빠뜨릴 수 없습니다.</p></a><a href="#feat-mock-check" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>9. 5초 현장 점검</h4><p>QR 찍고, 정상/이상 터치. 장갑 끼기 전에 끝납니다. 이상 시 관리자에게 즉시 알림.</p></a><a href="#feat-10" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>10. D-day 알림</h4><p>점검 기한 3일 전, 7일 전 — 담당자에게 SMS 자동 발송. 깜빡할 수 없는 구조.</p></a><a href="#feat-mock-dispatch" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>11. 담당자 세밀 배정</h4><p>법령 의무 하나하나에 담당자를 지정합니다. 누가 뭘 하는지 시스템이 추적.</p></a><a href="#feat-12" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>12. TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명. 미서명자 자동 알림.</p></a><a href="#feat-13" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>13. 안전회의 관리</h4><p>산업안전보건위원회, 정기회의 — 의사록 자동 생성. 참석·안건·결의 기록 보관.</p></a><a href="#feat-14" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>14. 교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적. 미이수자 알림.</p></a><a href="#feat-15" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>15. 미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다. 누가 뭘 안 했는지 1초 만에 파악.</p></a><a href="#feat-16" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>16. 설비 관리 + QR</h4><p>설비마다 QR을 붙이면, 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></a><a href="#feat-17" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>17. 공정 관리</h4><p>KSIC 기반으로 공정을 등록하면, 해당 공정의 법적 의무가 자동으로 연결됩니다.</p></a><a href="#feat-18" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>18. 작업 지시·요청</h4><p>작업 지시를 앱으로 내리면, 작업자가 받고, 완료 보고까지. 전화 불필요, 기록이 남음.</p></a><a href="#feat-19" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>19. 업무 일정</h4><p>안전관리자의 모든 업무가 일정으로. 날짜별·담당별 필터. 놓치는 것 없이.</p></a><a href="#feat-20" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>20. 작업자 관리</h4><p>근로자 명부·자격·교육이수·점검이력을 한 곳에서 관리. 감독관이 오면 즉시 출력.</p></a><a href="#feat-21" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>21. 권한 설정</h4><p>관리감독자·안전관리자·작업자 — 역할별 접근 권한을 세밀하게 설정.</p></a><a href="#feat-22" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>22. 하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서. 점검·서류·교육 통합 관리.</p></a><a href="#feat-23" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>23. 안전정보 피드</h4><p>산업안전 뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></a></div>
+      <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">C. 추가 서비스 · 유료 · 로드맵</h3>
+      <div class="sp-grid-4"><a href="#feat-24" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>24. 문서 보관함</h4><p>점검표·TBM·보고서 — 3년간 자동 보관. 감독관이 오면 즉시 출력.</p></a><a href="#feat-25" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>25. 보고서 자동 생성</h4><p>월간·분기 안전관리 보고서가 데이터 기반으로 자동 생성. 사장님에게 바로 보고.</p></a><a href="#feat-26" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>26. 일정 관리</h4><p>법령 엔진이 뽑아낸 의무가 일정으로 자동 변환. 수동 입력 불필요.</p></a><a href="#feat-27" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>27. 건설현장 전용</h4><p>현장등록·공정관리·근로자·업무·점검 — 건설 특화 메뉴를 별도로 제공합니다.</p></a><a href="#feat-28" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>28. 문서 자동 제출<span class="sp-badge-paid">유료</span></h4><p>안전관리자 선임신고, 점검결과 보고 — 관공서에 자동 전송. 직접 갈 필요 없습니다.</p></a><a href="#feat-29" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>29. 위험성평가<span class="sp-badge-review">유료 검토중</span></h4><p>위험성평가 작성부터 승인·서명까지 — 서식 자동 적용, 이력 자동 보관.</p></a><a href="#feat-30" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⏳</div><h4>30. 전문가 연결<span class="sp-badge-soon">2026 하반기 오픈 예정</span></h4><p>안전관리자 선임·컨설팅·수선 — 자격 검증된 전문가를 채팅으로 바로 연결합니다.</p></a><a href="#feat-31" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">🛡️</div><h4>31. 엔터프라이즈·SLA</h4><p>다사업장·다지역 통합, API, 전담 CS와 SLA까지 — 규모가 커져도 같은 엔진으로 갑니다.</p></a></div>
     </div>
   </section>
 
-  <!-- ③ TAI 특징 기능 상세 (순서: 분산배분 → 점검서류 → 법령개정 → 기상 → 사고) -->
+  <!-- ③ 기능 상세 목업 5개 -->
   <div class="sp-sec-gray" id="saas-feature-detail">
     <div class="container text-center" style="padding-top:56px;padding-bottom:8px;">
-      <span class="sp-label">상세</span>
-      <h2 class="sp-h2">관리 화면과 현장 앱이 맞물립니다</h2>
-      <p class="sp-desc" style="max-width:600px;margin:12px auto 0;">안전관리자 관점의 웹과 작업자 앱을 나란히 두어, 실제 운영 흐름을 보여드립니다.</p>
+      <span class="sp-label">화면</span>
+      <h2 class="sp-h2">웹과 앱이 실제처럼 붙어 있습니다</h2>
+      <p class="sp-desc" style="max-width:620px;margin:12px auto 0;">구매 결정권자도 한눈에 이해할 수 있게, 대표 흐름만 크게 보여드립니다.</p>
     </div>
 
-    <!-- 1 안전업무 분산 배분 -->
-    <div class="container feat-pair">
+    <div class="container feat-pair" id="feat-mock-dispatch">
       <div class="feat-info">
         <h3>혼자 다 하지 마세요.
 시스템이 나눠줍니다.</h3>
-        <p>법령 엔진이 뽑아낸 의무 하나하나에 담당자를 지정하면, 작업자 앱에 할 일이 자동으로 뜹니다. 안전관리자는 &quot;쫓아다니기&quot;에서 &quot;확인하기&quot;로 바뀝니다.</p>
+        <p>법령 엔진이 뽑아낸 의무에 담당자를 지정하면, 작업자 앱에 할 일이 자동으로 뜹니다. 안전관리자는 &quot;쫓아다니기&quot;에서 &quot;확인하기&quot;로 바뀝니다.</p>
         <div class="feat-check">법령 의무별 담당자 세밀 배치</div>
         <div class="feat-check">작업자 앱에 할 일 자동 전달</div>
         <div class="feat-check">미이행 시 관리자에게 즉시 알림</div>
@@ -350,12 +395,12 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
                 <div class="m-row"><span>소화기 점검</span><span>김현장 (2공장)</span><span>월 1회</span><span class="m-badge green">완료</span></div>
                 <div class="m-row"><span>지게차 일일점검</span><span>이반장 (3층)</span><span>매일</span><span class="m-badge orange">대기</span></div>
                 <div class="m-row"><span>안전교육 확인</span><span>박안전</span><span>분기</span><span class="m-badge blue">D-14</span></div>
-                <div class="m-row"><span>위험성평가</span><span>최기사</span><span>반기</span><span class="m-badge green">완료</span></div>
+                <div class="m-row"><span>크레인 정기검사</span><span>최기사</span><span>연 1회</span><span class="m-badge green">완료</span></div>
                 <div class="m-foot">의무 47건 중 42건 배정 완료</div>
               </div>
             </div>
           </div>
-          <div class="flow-arrow">→<small>배분</small></div>
+          <div class="flow-arrow">→<small>자동 배분</small></div>
           <div class="phone-frame">
             <div class="phone-screen">
               <div class="phone-top">오늘의 업무</div>
@@ -371,12 +416,11 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
       </div>
     </div>
 
-    <!-- 2 점검 → 서류 -->
-    <div class="container feat-pair">
+    <div class="container feat-pair" id="feat-mock-check">
       <div class="feat-info">
         <h3>현장에서 체크하면,
 서류는 자동으로 만들어집니다.</h3>
-        <p>작업자가 현장에서 5초 만에 점검 체크. 그 데이터가 법정 서식에 맞춰 자동으로 서류가 됩니다. 엑셀에 옮길 필요 없습니다. 감독관이 오면 PDF 즉시 출력.</p>
+        <p>작업자가 5초 만에 점검 체크. 그 데이터가 법정 서식에 맞춰 서류가 됩니다. 감독관이 오면 PDF 즉시 출력. 엑셀에 옮기는 시대는 끝났습니다.</p>
         <div class="feat-check">설비별 맞춤 점검 항목 (법령 기반)</div>
         <div class="feat-check">이상 발견 시 사진 첨부 + 관리자 자동 알림</div>
         <div class="feat-check">완료 즉시 법정 서류 자동 생성 + 3년 보관</div>
@@ -434,53 +478,11 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
       </div>
     </div>
 
-    <!-- 3 법령 개정 자동 반영 (웹만) -->
-    <div class="container feat-pair">
-      <div class="feat-info">
-        <h3>법이 바뀌어도
-뒤처지지 않습니다.</h3>
-        <p>법령 엔진이 개정·고시를 자동으로 수집하고, 귀사 사업장 유형에 맞춰 의무를 다시 계산합니다. 안전관리자가 매일 관보를 확인할 필요가 없습니다.</p>
-        <div class="feat-check">법령 개정 자동 감지 + 알림</div>
-        <div class="feat-check">사업장 프로필 기준 영향 분석</div>
-        <div class="feat-check">점검표·의무 템플릿 자동 갱신</div>
-      </div>
-      <div class="feat-visual">
-        <div class="browser-frame">
-          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 안전정보</div></div>
-          <div class="browser-content">
-            <div class="mock-side">
-              <div class="mock-side-item">대시보드</div>
-              <div class="mock-side-item on">안전정보</div>
-              <div class="mock-side-item">문서관리</div>
-            </div>
-            <div class="mock-body">
-              <div class="m-title">법령 업데이트</div>
-              <div class="m-card hl">
-                <strong>📜 산업안전보건법 시행규칙 개정</strong>
-                <div class="m-foot">적용일: 2026-05-01 · 변경 조문 12건</div>
-                <hr style="border:none;border-top:1px solid #e2e8f0;margin:8px 0;">
-                <div class="m-foot" style="color:#1e40af;font-weight:700;">⚡ 의무 템플릿 자동 갱신 — 점검표 v2.1 배포됨</div>
-                <div class="m-foot">✓ 사업장 맞춤 영향 분석 — 귀사 적용 3건 · 확인 필요</div>
-                <div class="m-btn-row"><span class="m-btn active">상세보기</span></div>
-              </div>
-              <div class="m-card">
-                <strong>📜 건설기술 진흥법 시행령 일부개정</strong>
-                <div class="m-foot">적용일: 2026-06-01 · 변경 조문 4건</div>
-                <div class="m-foot">✓ 귀사 적용 1건</div>
-              </div>
-              <div class="m-foot">법령 엔진이 자동 수집 → 사업장 매핑 → 의무 갱신</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4 기상 작업중지 -->
-    <div class="container feat-pair">
+    <div class="container feat-pair" id="feat-mock-weather">
       <div class="feat-info">
         <h3>날씨까지
 감시하고 있습니다.</h3>
-        <p>기상청 API와 현장 좌표를 연결해 풍속·기온·강수량을 30분 간격으로 확인합니다. 법정 기준 초과 시 현장에 자동 알림 → 이행 확인까지 한 흐름.</p>
+        <p>기상청 API와 현장 좌표를 연결해 30분 간격으로 자동 확인. 법정 기준 초과 시 현장에 자동 알림 → 이행 확인까지 한 흐름. 중지·재개 이력이 법적 증빙으로 축적됩니다.</p>
         <div class="feat-check">기상청 연동 30분 자동 확인</div>
         <div class="feat-check">법정 기준 초과 시 자동 작업중지 권고</div>
         <div class="feat-check">중지·재개 이력 법적 증빙으로 축적</div>
@@ -521,12 +523,11 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
       </div>
     </div>
 
-    <!-- 5 사고 즉시 알림 -->
-    <div class="container feat-pair" style="border-bottom:none;">
+    <div class="container feat-pair" id="feat-mock-emergency">
       <div class="feat-info">
         <h3>사고 발생 1분 안에
 관계자 전원이 알게 됩니다.</h3>
-        <p>현장에서 긴급 신고가 접수되면, 안전관리자·소장·본사까지 즉시 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p>
+        <p>현장에서 긴급 신고 → 안전관리자·소장·본사까지 즉시 푸시 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다. 골든타임을 확보합니다.</p>
         <div class="feat-check">현장 1-tap 긴급 신고 (사진 + 위치)</div>
         <div class="feat-check">관계자 전원 동시 푸시 알림</div>
         <div class="feat-check">대응 이력 자동 기록 → 법적 증빙</div>
@@ -561,8 +562,8 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
                   <div class="m-foot" style="color:#991b1b;">2공장 B라인 프레스 #3 — 작업자 부상 · 신고자: 이반장 · 사진 3장</div>
                 </div>
                 <div class="m-title">알림 발송 현황</div>
-                <div class="m-row"><span>📲 안전관리자</span><span>14:23 발송</span><span>✅ 14:24 확인</span></div>
-                <div class="m-row"><span>📲 소장</span><span>14:23 발송</span><span>✅ 14:25 확인</span></div>
+                <div class="m-row"><span>📲 안전관리자</span><span>14:23 발송</span><span class="m-badge green">확인</span></div>
+                <div class="m-row"><span>📲 소장</span><span>14:23 발송</span><span class="m-badge green">확인</span></div>
                 <div class="m-row"><span>📲 본사 안전팀</span><span>14:24 발송</span><span class="m-badge orange">대기</span></div>
                 <div class="m-foot">사고 접수 → 전원 알림: 1분 이내</div>
               </div>
@@ -571,15 +572,54 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
         </div>
       </div>
     </div>
+
+    <div class="container feat-pair" id="feat-mock-dashboard" style="border-bottom:none;">
+      <div class="feat-info">
+        <h3>로그인하면
+오늘 할 일이 바로 보입니다.</h3>
+        <p>완료·미처리·이행률·경고가 한 화면에. D-day 기반으로 긴급한 것이 위로 올라옵니다. 안전관리자는 &quot;무엇을 놓쳤는지&quot;를 1초 만에 알 수 있습니다.</p>
+        <div class="feat-check">담당자별 업무 이행 현황 실시간</div>
+        <div class="feat-check">D-day 기반 자동 우선순위 정렬</div>
+        <div class="feat-check">미이행 항목 즉시 파악 + 알림</div>
+      </div>
+      <div class="feat-visual">
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 대시보드</div></div>
+          <div class="browser-content">
+            <div class="mock-side">
+              <div class="mock-side-item on">전용대시보드</div>
+              <div class="mock-side-item">시설관리</div>
+              <div class="mock-side-item">점검관리</div>
+              <div class="mock-side-item">TBM관리</div>
+              <div class="mock-side-item">위험관리</div>
+              <div class="mock-side-item">문서관리</div>
+            </div>
+            <div class="mock-body">
+              <div class="m-title">안전관리 현황</div>
+              <div class="m-stats4">
+                <div class="m-stat blue"><span class="n">12</span><span class="l">완료</span></div>
+                <div class="m-stat red"><span class="n">3</span><span class="l">미처리</span></div>
+                <div class="m-stat green"><span class="n">97%</span><span class="l">이행률</span></div>
+                <div class="m-stat orange"><span class="n">2</span><span class="l">경고</span></div>
+              </div>
+              <div class="m-card"><span class="m-badge red">D-2</span> 소화기 월간 점검 · 김현장 · 2공장 <span class="m-badge orange">대기</span></div>
+              <div class="m-card"><span class="m-badge green">✓</span> 위험성평가 서명 · 박안전 · 09:14 <span class="m-badge green">완료</span></div>
+              <div class="m-card"><span class="m-badge blue">진행</span> TBM 작성 진행중 · 이반장 · 3층</div>
+              <div class="m-card"><span class="m-badge gray">예정</span> 안전교육 분기 · D-14</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- ④ 바뀌는 것 — 다이어그램 -->
+  <!-- ④ 다이어그램 -->
   <section style="background:#f8fafc; padding:80px 0;">
     <div class="container text-center">
       <h2 class="sp-h2" style="margin-bottom:12px;">혼자 하던 안전관리,<br>전 작업자가 함께합니다</h2>
       <p style="color:#64748b; margin-bottom:40px; line-height:1.75;">
         안전관리자 한 사람에게 집중되던 의무를,<br>
-        시스템이 쪼개서 현장과 담당자에게 배분합니다.
+        시스템이 쪼개서 담당자에게 배분합니다.
       </p>
       <div style="max-width:900px; margin:0 auto 24px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
         <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-11.svg"
@@ -591,6 +631,8 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
       </div>
     </div>
   </section>
+
+  <section class="sp-sec sp-sec-white" id="saas-feature-stubs"><div class="container"><span class="sp-label">기능 안내</span><h2 class="sp-h2">카드에서 바로 이동</h2><p class="sp-desc" style="max-width:640px;margin-bottom:24px;">위 카드를 누르면 해당 항목 설명으로 스크롤됩니다. 목업이 있는 기능은 아래 화면에서 확인하세요.</p><article id="feat-pat-01" class="scroll-anchor sp-stub"><h4>법령 자동 분석</h4><p>무료 법령진단에서 사업장 프로필을 입력하면 적용 법령·의무가 자동 산출됩니다. SaaS 구독 후에는 동일한 엔진이 운영 중에도 계속 맞춰 갱신합니다.</p></article><article id="feat-pat-03" class="scroll-anchor sp-stub"><h4>법령 개정 자동 반영</h4><p>개정·고시를 엔진이 수집하고 사업장 유형에 매핑해 점검표·알림·일정을 자동으로 바꿉니다.</p></article><article id="feat-08" class="scroll-anchor sp-stub"><h4>점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 캘린더에 자동으로 깔립니다. 빠뜨릴 수 없습니다.</p></article><article id="feat-10" class="scroll-anchor sp-stub"><h4>D-day 알림</h4><p>점검 기한 3일 전, 7일 전 — 담당자에게 SMS 자동 발송. 깜빡할 수 없는 구조.</p></article><article id="feat-12" class="scroll-anchor sp-stub"><h4>TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명. 미서명자 자동 알림.</p></article><article id="feat-13" class="scroll-anchor sp-stub"><h4>안전회의 관리</h4><p>산업안전보건위원회, 정기회의 — 의사록 자동 생성. 참석·안건·결의 기록 보관.</p></article><article id="feat-14" class="scroll-anchor sp-stub"><h4>교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적. 미이수자 알림.</p></article><article id="feat-15" class="scroll-anchor sp-stub"><h4>미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다. 누가 뭘 안 했는지 1초 만에 파악.</p></article><article id="feat-16" class="scroll-anchor sp-stub"><h4>설비 관리 + QR</h4><p>설비마다 QR을 붙이면, 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></article><article id="feat-17" class="scroll-anchor sp-stub"><h4>공정 관리</h4><p>KSIC 기반으로 공정을 등록하면, 해당 공정의 법적 의무가 자동으로 연결됩니다.</p></article><article id="feat-18" class="scroll-anchor sp-stub"><h4>작업 지시·요청</h4><p>작업 지시를 앱으로 내리면, 작업자가 받고, 완료 보고까지. 전화 불필요, 기록이 남음.</p></article><article id="feat-19" class="scroll-anchor sp-stub"><h4>업무 일정</h4><p>안전관리자의 모든 업무가 일정으로. 날짜별·담당별 필터. 놓치는 것 없이.</p></article><article id="feat-20" class="scroll-anchor sp-stub"><h4>작업자 관리</h4><p>근로자 명부·자격·교육이수·점검이력을 한 곳에서 관리. 감독관이 오면 즉시 출력.</p></article><article id="feat-21" class="scroll-anchor sp-stub"><h4>권한 설정</h4><p>관리감독자·안전관리자·작업자 — 역할별 접근 권한을 세밀하게 설정.</p></article><article id="feat-22" class="scroll-anchor sp-stub"><h4>하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서. 점검·서류·교육 통합 관리.</p></article><article id="feat-23" class="scroll-anchor sp-stub"><h4>안전정보 피드</h4><p>산업안전 뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></article><article id="feat-24" class="scroll-anchor sp-stub"><h4>문서 보관함</h4><p>모든 점검·서명·보고 자료가 법정 보존 기간에 맞춰 자동 보관됩니다.</p></article><article id="feat-25" class="scroll-anchor sp-stub"><h4>보고서 자동 생성</h4><p>현장 데이터를 모아 월간·분기 보고서 초안을 자동으로 만듭니다.</p></article><article id="feat-26" class="scroll-anchor sp-stub"><h4>일정 관리</h4><p>의무 템플릿이 캘린더·알림으로 바로 연결됩니다.</p></article><article id="feat-27" class="scroll-anchor sp-stub"><h4>건설현장 전용</h4><p>공사 규모·공종에 맞춘 건설 메뉴와 의무 세트를 제공합니다.</p></article><article id="feat-28" class="scroll-anchor sp-stub"><h4>문서 자동 제출</h4><p>관공서 제출 서식을 연결해 전송까지 지원합니다. (유료 옵션)</p></article><article id="feat-29" class="scroll-anchor sp-stub"><h4>위험성평가</h4><p>평가 작성·검토·승인 흐름을 시스템에 담습니다. (유료 · 검토 중)</p></article><article id="feat-30" class="scroll-anchor sp-stub"><h4>전문가 연결</h4><p>2026 하반기 오픈 예정 — 자격 검증 전문가 매칭.</p></article><article id="feat-31" class="scroll-anchor sp-stub"><h4>엔터프라이즈·SLA</h4><p>요금제 Enterprise / Custom 구간에서 다동·API·전담 지원 범위를 협의합니다.</p></article></div></section>
 
   <!-- ⑤ 법령 엔진 규모 -->
   <section class="sp-sec sp-sec-white">
@@ -734,8 +776,8 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
           <text x="370" y="88" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Noto Sans KR,sans-serif">즉시 생성</text>
         </svg>
       </div>
-      <h2>무료 법령진단으로<br>시작하세요</h2>
-      <p>몇 분이면 적용 법령과 조문이 정리됩니다. 그다음은 TAI Safe가 일정·알림·증빙을 이어 받습니다.</p>
+      <h2>무료 법령진단으로 시작하세요</h2>
+      <p>몇 분이면 적용 법령과 조문이 정리됩니다. 그다음은 TAI Safe가 이어받습니다.</p>
       <div class="sp-steps">
         <div class="sp-step"><div class="sn">진단</div><div class="st">3분 무료</div></div>
         <div class="sp-arrow">→</div>
