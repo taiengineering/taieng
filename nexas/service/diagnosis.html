@@ -412,6 +412,31 @@
     display: inline-block; background: var(--navy); color: #fff; font-size: .72rem; font-weight: 800;
     padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; letter-spacing: .02em;
   }
+  /* 무료 결과 목업 — free-diagnosis-result 구조 */
+  #free-sample .fd-free-browser {
+    max-width: 600px; margin: 0 auto; border-radius: 14px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(15,43,74,.15), 0 0 0 1px var(--border);
+    background: #fff;
+  }
+  #free-sample .fd-free-browser .fd-bar {
+    background: #e2e8f0; padding: 10px 14px; display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid #cbd5e1;
+  }
+  #free-sample .fd-free-browser .fd-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  #free-sample .fd-free-browser .fd-dot.r { background: #ef4444; }
+  #free-sample .fd-free-browser .fd-dot.y { background: #eab308; }
+  #free-sample .fd-free-browser .fd-dot.g { background: #22c55e; }
+  #free-sample .fd-free-browser .fd-url {
+    flex: 1; background: #fff; border-radius: 6px; padding: 6px 12px;
+    font-size: .72rem; color: #475569; font-family: ui-monospace, monospace;
+    border: 1px solid #cbd5e1;
+  }
+  #free-sample .fd-free-cat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px;
+  }
+  @media (max-width: 575px) {
+    #free-sample .fd-free-cat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
   .mock-law-list.diag-law-full { list-style: none; padding: 0; margin: 0; }
   .mock-law-list.diag-law-full li {
     font-size: .78rem; color: #334155; padding: 8px 0; border-bottom: 1px solid #e2e8f0;
@@ -671,41 +696,105 @@
       <div class="col-lg-8 text-center">
         <span class="diag-label">무료 결과</span>
         <h2 class="sec-title">무료로 이만큼 알 수 있습니다</h2>
-        <p class="sec-desc">3분 입력만으로 적용 법령, 선임 의무, 점검 항목, 위험등급까지. 회원가입 없이, 비용 없이, 바로 확인할 수 있습니다.</p>
+        <p class="sec-desc">3분 입력만으로 위험등급, 긴급 처리 항목, 적용 법령 18개, 법률별 의무 상세까지.<br>무료에서도 빠짐없이 보여드립니다. 유료는 &apos;어떻게 대응하는지&apos;를 알려줍니다. 회원가입 없이, 비용 없이, 바로 확인할 수 있습니다.</p>
       </div>
     </div>
-    <div class="browser-mock">
-      <div class="bm-bar">
-        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="bm-url">new.taieng.co.kr/diagnosis-result</div>
+    <div class="fd-free-browser">
+      <div class="fd-bar">
+        <span class="fd-dot r" aria-hidden="true"></span>
+        <span class="fd-dot y" aria-hidden="true"></span>
+        <span class="fd-dot g" aria-hidden="true"></span>
+        <div class="fd-url">new.taieng.co.kr/free-diagnosis-result</div>
       </div>
-      <div class="bm-body">
-        <span class="badge-high">위험등급: HIGH</span>
-        <div class="mock-context-badge">제조업 · 50인 · 500㎡ 기준</div>
-        <div class="mock-summary-box">
-          <h4>종합 분석</h4>
-          <div class="mock-summary-grid">
-            <div>적용 법령 <strong style="color:var(--blue);font-size:1rem;">12개</strong></div>
-            <div>선임 의무 <strong style="color:var(--blue);font-size:1rem;">3건</strong></div>
-            <div>정기 점검 <strong style="color:var(--blue);font-size:1rem;">18건</strong></div>
-            <div>즉시 조치 <strong style="color:var(--blue);font-size:1rem;">15건</strong></div>
+      <div style="background:#fff;padding:20px;font-size:.75rem;">
+
+        <div style="display:inline-block;background:#f1f5f9;border-radius:999px;padding:4px 12px;font-size:.65rem;color:#64748b;font-weight:700;margin-bottom:12px;">
+          건물 · 제조업 · 50인 · 500㎡ 기준
+        </div>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;">
+          <span style="background:#dc2626;color:#fff;font-weight:900;font-size:.8rem;padding:6px 14px;border-radius:8px;">HIGH RISK</span>
+          <span style="font-size:.85rem;font-weight:800;color:#0f172a;">
+            205건의 법적 의무가 확인되었습니다
+          </span>
+        </div>
+
+        <div class="fd-free-cat-grid">
+          <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:900;color:#0f172a;">8</div>
+            <div style="font-size:.6rem;color:#64748b;">선임 의무</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:900;color:#0f172a;">37</div>
+            <div style="font-size:.6rem;color:#64748b;">점검·검사</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:900;color:#0f172a;">129</div>
+            <div style="font-size:.6rem;color:#64748b;">조치 의무</div>
+          </div>
+          <div style="background:#f8fafc;border-radius:8px;padding:10px;text-align:center;">
+            <div style="font-size:1.1rem;font-weight:900;color:#0f172a;">31</div>
+            <div style="font-size:.6rem;color:#64748b;">보고·신고</div>
           </div>
         </div>
-        <p style="font-size:.8rem;font-weight:800;color:var(--navy);margin:0 0 8px;">적용 법령 목록 <span style="font-weight:600;color:#64748b;">(각 법령별 실행 가이드는 유료)</span></p>
-        <ul class="mock-law-list diag-law-full">
-          <li>산업안전보건법 <span class="diag-law-lock" aria-hidden="true">🔒 실행 가이드 → 유료</span></li>
-          <li>중대재해처벌법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>건설기술 진흥법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>소방시설법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>위험물안전관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>고압가스 안전관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>전기사업법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>산업안전보건기준에 관한 규칙 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>산업재해보상보험법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>화학물질관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>폐기물관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-          <li>대기환경보전법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
-        </ul>
+
+        <div style="background:#fef2f2;border-left:3px solid #dc2626;border-radius:0 8px 8px 0;padding:10px 12px;margin-bottom:14px;">
+          <div style="font-weight:800;font-size:.72rem;color:#991b1b;margin-bottom:8px;">⚠️ 긴급 처리 필요 (4건)</div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;color:#0f172a;padding:4px 0;border-bottom:1px solid #fecaca;gap:8px;flex-wrap:wrap;">
+            <span><strong style="color:#dc2626;">D-3</strong> 안전관리자 선임</span>
+            <span style="color:#dc2626;">500만원</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;color:#0f172a;padding:4px 0;border-bottom:1px solid #fecaca;gap:8px;flex-wrap:wrap;">
+            <span><strong style="color:#dc2626;">D-7</strong> 소방안전관리자 선임</span>
+            <span style="color:#dc2626;">200만원</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;color:#0f172a;padding:4px 0;border-bottom:1px solid #fecaca;gap:8px;flex-wrap:wrap;">
+            <span><strong style="color:#f59e0b;">D-14</strong> 건축물 정기점검</span>
+            <span style="color:#dc2626;">300만원</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;color:#0f172a;padding:4px 0;gap:8px;flex-wrap:wrap;">
+            <span><strong style="color:#f59e0b;">D-30</strong> 안전보건관리체계 구축</span>
+            <span style="color:#dc2626;">징역 1년 / 10억원</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <div style="font-weight:800;font-size:.72rem;color:#0f172a;margin-bottom:8px;">📚 적용 법령 (18개)</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">산업안전보건법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">건축법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">소방시설법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">중대재해처벌법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">승강기안전관리법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">전기안전관리법</span>
+            <span style="background:#dbeafe;color:#1e40af;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">화재예방법</span>
+            <span style="background:#f1f5f9;color:#64748b;font-size:.55rem;font-weight:600;padding:3px 8px;border-radius:999px;">외 11개</span>
+          </div>
+        </div>
+
+        <div style="border:1px solid #e2e8f0;border-radius:8px;padding:10px 12px;">
+          <div style="font-weight:800;font-size:.72rem;color:#0f172a;margin-bottom:8px;">⚖️ 법률별 의무 상세</div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;padding:5px 0;border-bottom:1px solid #f1f5f9;gap:8px;flex-wrap:wrap;">
+            <span style="font-weight:700;">산업안전보건법 (3건)</span>
+            <span style="color:#64748b;">선임 1 · 보고 1 · 조치 1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;padding:5px 0;border-bottom:1px solid #f1f5f9;gap:8px;flex-wrap:wrap;">
+            <span style="font-weight:700;">소방시설법 (3건)</span>
+            <span style="color:#64748b;">선임 1 · 점검 1 · 조치 1</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.65rem;padding:5px 0;border-bottom:1px solid #f1f5f9;gap:8px;flex-wrap:wrap;">
+            <span style="font-weight:700;">건축법 (2건)</span>
+            <span style="color:#64748b;">점검 1 · 보고 1</span>
+          </div>
+          <div style="font-size:.6rem;color:#94a3b8;padding:5px 0;text-align:center;">
+            ▼ 15개 법령 더 보기
+          </div>
+        </div>
+
+        <div style="margin-top:14px;background:#f0f6ff;border:1px dashed #93c5fd;border-radius:8px;padding:12px;text-align:center;">
+          <div style="font-size:.7rem;color:#1e40af;font-weight:800;">🔒 각 의무별 실행 가이드 · 판례 · 과태료 합산 → 유료 진단</div>
+        </div>
+
         <div style="margin-top:18px;text-align:center;">
           <a href="#paid-value" class="btn-outline-diag" style="font-size:.82rem;padding:10px 18px;">유료 진단으로 상세 분석 받기 →</a>
         </div>
