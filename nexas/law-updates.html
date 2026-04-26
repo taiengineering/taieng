@@ -12,89 +12,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-
-  .lu-layout {
-    min-height: calc(100vh - var(--tai-nav-h, 90px));
-    display: grid;
-    grid-template-columns: 40% 60%;
-  }
-
-  /* ── 왼쪽 패널 ── */
-  .lu-left {
-    background: linear-gradient(160deg, #0d1b2a 0%, #1a3a5c 100%);
-    padding: 36px 28px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    color: #fff;
-    position: sticky;
-    top: var(--tai-nav-h, 90px);
-    height: calc(100vh - var(--tai-nav-h, 90px));
-    overflow-y: auto;
-  }
-
-  .lu-left h2 { font-size:1.5rem; font-weight:900; line-height:1.35; margin:0 0 6px; color:#fff; text-align:center; }
+  .lu-layout { min-height:calc(100vh - var(--tai-nav-h,90px)); display:grid; grid-template-columns:40% 60%; }
+  .lu-left { background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%); padding:36px 28px; display:flex; flex-direction:column; align-items:center; color:#fff; position:sticky; top:var(--tai-nav-h,90px); height:calc(100vh - var(--tai-nav-h,90px)); overflow-y:auto; }
+  .lu-left h2 { font-size:1.5rem; font-weight:900; line-height:1.35; margin:0 0 6px; text-align:center; }
   .lu-left h2 em { font-style:normal; color:#60a5fa; }
-  .lu-left .lu-sub { font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:24px; text-align:center; }
-
+  .lu-sub { font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:24px; text-align:center; }
   .lu-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:100%; max-width:420px; margin-bottom:24px; }
   .lu-stat { background:rgba(255,255,255,.08); border-radius:10px; padding:10px 8px; text-align:center; }
-  .lu-stat .num { font-size:1.3rem; font-weight:900; color:#fff; }
+  .lu-stat .num { font-size:1.3rem; font-weight:900; }
   .lu-stat .label { font-size:.65rem; color:rgba(255,255,255,.5); margin-top:2px; }
-
   .lu-search { position:relative; width:100%; max-width:420px; margin-bottom:20px; }
-  .lu-search input {
-    width:100%; padding:12px 14px 12px 40px; border:1.5px solid rgba(255,255,255,.15);
-    border-radius:12px; font-size:.88rem; font-family:inherit;
-    background:rgba(255,255,255,.08); color:#fff; outline:none; transition:border-color .2s;
-  }
+  .lu-search input { width:100%; padding:12px 14px 12px 40px; border:1.5px solid rgba(255,255,255,.15); border-radius:12px; font-size:.88rem; font-family:inherit; background:rgba(255,255,255,.08); color:#fff; outline:none; transition:border-color .2s; }
   .lu-search input::placeholder { color:rgba(255,255,255,.4); }
-  .lu-search input:focus { border-color:#60a5fa; background:rgba(255,255,255,.12); }
+  .lu-search input:focus { border-color:#60a5fa; }
   .lu-search .icon { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:rgba(255,255,255,.4); font-size:.9rem; }
-
   .lu-cat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; max-width:420px; margin-bottom:22px; }
-  .lu-cat-card {
-    background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1); border-radius:14px;
-    padding:18px 14px; cursor:pointer; transition:all .2s; text-align:center;
-  }
+  .lu-cat-card { background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1); border-radius:14px; padding:18px 14px; cursor:pointer; transition:all .2s; text-align:center; }
   .lu-cat-card:hover { border-color:#60a5fa; background:rgba(96,165,250,.12); transform:translateY(-2px); }
-  .lu-cat-card.active { border-color:#60a5fa; background:rgba(96,165,250,.2); box-shadow:0 0 20px rgba(96,165,250,.15); }
+  .lu-cat-card.active { border-color:#60a5fa; background:rgba(96,165,250,.2); }
   .lu-cat-card .icon { font-size:1.5rem; margin-bottom:6px; }
   .lu-cat-card .name { font-size:.82rem; font-weight:700; color:rgba(255,255,255,.8); }
   .lu-cat-card.active .name { color:#fff; }
   .lu-cat-card .count { font-size:1.4rem; font-weight:900; margin-top:4px; color:rgba(255,255,255,.6); }
   .lu-cat-card.active .count { color:#60a5fa; }
   .lu-cat-all { grid-column:1/-1; }
-
   .lu-filter-group { width:100%; max-width:420px; margin-bottom:14px; }
   .lu-filter-title { font-size:.68rem; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:.08em; text-transform:uppercase; margin-bottom:8px; }
   .lu-filter-chips { display:flex; flex-wrap:wrap; gap:6px; }
-  .lu-chip {
-    padding:6px 14px; border:1.5px solid rgba(255,255,255,.12); border-radius:999px;
-    font-size:.78rem; font-weight:600; cursor:pointer; background:transparent; color:rgba(255,255,255,.5); transition:all .15s;
-  }
+  .lu-chip { padding:6px 14px; border:1.5px solid rgba(255,255,255,.12); border-radius:999px; font-size:.78rem; font-weight:600; cursor:pointer; background:transparent; color:rgba(255,255,255,.5); transition:all .15s; }
   .lu-chip:hover { border-color:rgba(255,255,255,.3); color:rgba(255,255,255,.8); }
   .lu-chip.active { background:#60a5fa; border-color:#60a5fa; color:#fff; }
-
-  .lu-year-select {
-    width:100%; max-width:420px; padding:9px 12px; border:1.5px solid rgba(255,255,255,.12); border-radius:10px;
-    font-size:.85rem; font-family:inherit; background:rgba(255,255,255,.06); color:#fff; cursor:pointer; outline:none; margin-bottom:14px;
-  }
-  .lu-year-select option { background:#1e293b; color:#fff; }
-
-  /* ── 오른쪽 패널 ── */
+  .lu-year-select { width:100%; max-width:420px; padding:9px 12px; border:1.5px solid rgba(255,255,255,.12); border-radius:10px; font-size:.85rem; font-family:inherit; background:rgba(255,255,255,.06); color:#fff; cursor:pointer; outline:none; margin-bottom:14px; }
+  .lu-year-select option { background:#1e293b; }
   .lu-right { background:var(--gray-bg,#f4f6f8); padding:28px 32px; overflow-y:auto; }
-
   .lu-right-header { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px; }
   .lu-right-header h3 { font-size:1.15rem; font-weight:900; color:var(--navy,#0d1b2a); margin:0; }
-  .lu-right-header .result-count { font-size:.82rem; color:var(--sub,#5a6476); font-weight:600; }
-
+  .result-count { font-size:.82rem; color:var(--sub,#5a6476); font-weight:600; }
   .lu-month-group { margin-bottom:24px; }
   .lu-month-label { display:flex; align-items:center; gap:10px; font-size:.82rem; font-weight:700; color:var(--sub,#5a6476); margin-bottom:10px; }
   .lu-month-label .bar { flex:1; height:1px; background:var(--border,#e8eaed); }
   .lu-month-label .cnt { font-size:.7rem; font-weight:700; background:#e2e8f0; padding:2px 10px; border-radius:99px; color:#475569; }
-
   .lu-row { background:#fff; border:1.5px solid var(--border,#e8eaed); border-radius:14px; margin-bottom:8px; overflow:hidden; transition:box-shadow .2s,border-color .2s; }
   .lu-row:hover { box-shadow:0 4px 16px rgba(0,0,0,.06); border-color:#cbd5e1; }
   .lu-row-head { display:grid; grid-template-columns:1fr 90px 80px 70px 32px; align-items:center; padding:14px 18px; cursor:pointer; gap:10px; }
@@ -102,7 +59,6 @@
   .lu-name-cell { display:flex; align-items:center; gap:8px; min-width:0; }
   .lu-name-cell .name { font-size:.9rem; font-weight:800; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--navy,#0d1b2a); }
   .lu-name-cell .law-type { font-size:.72rem; color:var(--sub,#5a6476); white-space:nowrap; }
-
   .lu-badge { display:inline-block; padding:3px 8px; border-radius:4px; font-size:.7rem; font-weight:700; white-space:nowrap; }
   .badge-ilbu { background:#ede9fe; color:#7c3aed; }
   .badge-ta { background:#f1f5f9; color:#64748b; }
@@ -111,46 +67,63 @@
   .badge-high { background:#fde8e8; color:#b91c1c; }
   .badge-medium { background:#fef3c7; color:#92400e; }
   .badge-low { background:#f1f5f9; color:#64748b; }
-
   .lu-date { font-size:.82rem; color:#374151; font-variant-numeric:tabular-nums; }
   .lu-impact { text-align:center; }
   .lu-expand { text-align:center; font-size:.9rem; color:#94a3b8; transition:transform .2s; }
   .lu-row.open .lu-expand { transform:rotate(180deg); }
-
   .lu-detail { display:none; border-top:1px solid #f0f1f5; padding:18px 22px; background:#fafbfd; }
   .lu-row.open .lu-detail { display:block; }
-  .lu-detail-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:14px; }
+  .lu-detail-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
   .lu-detail-item .k { font-size:.7rem; color:var(--sub,#5a6476); font-weight:600; margin-bottom:3px; }
   .lu-detail-item .v { font-size:.82rem; font-weight:600; color:var(--navy,#0d1b2a); }
 
-  .lu-summary-box { background:#f8fafc; border-radius:10px; padding:12px 14px; margin-bottom:14px; font-size:.83rem; color:#334155; line-height:1.7; }
-  .lu-impact-box { background:#fff8f0; border-left:3px solid #f59e0b; border-radius:0 8px 8px 0; padding:10px 14px; margin-bottom:14px; font-size:.82rem; color:#78350f; line-height:1.6; }
-
-  /* 내부 조문 보기 버튼 */
-  .lu-btn-source {
-    display:inline-flex; align-items:center; gap:6px; padding:9px 16px; margin-top:10px;
-    background:#0d1b2a; border:1.5px solid #0d1b2a; border-radius:10px;
-    font-size:.82rem; font-weight:700; color:#fff; text-decoration:none; transition:all .15s;
+  /* 개정 요약 박스 — 핵심 */
+  .lu-change-summary {
+    background:#fff;
+    border:1.5px solid #e2e8f0;
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
   }
-  .lu-btn-source:hover { background:#1a3a5c; border-color:#1a3a5c; color:#fff; }
-  .lu-btn-source i { font-size:.8rem; }
+  .lu-change-summary .cs-title {
+    font-size:.72rem; font-weight:800; color:#64748b;
+    letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .lu-change-summary .cs-title::before {
+    content:''; display:inline-block; width:3px; height:14px;
+    background:#7367f0; border-radius:2px;
+  }
+  .lu-change-body {
+    font-size:.83rem; color:#334155; line-height:1.9;
+    white-space:pre-line;
+  }
+  .lu-change-body strong { color:#0d1b2a; }
+
+  /* 조문 보기 버튼 */
+  .lu-btn-source {
+    display:inline-flex; align-items:center; gap:6px; padding:9px 18px; margin-top:10px;
+    background:#0d1b2a; border:1.5px solid #0d1b2a; border-radius:10px;
+    font-size:.82rem; font-weight:700; color:#fff; text-decoration:none; transition:background .15s;
+  }
+  .lu-btn-source:hover { background:#1a3a5c; color:#fff; }
 
   .lu-empty { text-align:center; padding:60px 20px; color:var(--sub,#5a6476); }
   .lu-empty .icon { font-size:2.8rem; margin-bottom:10px; }
   .lu-empty .msg { font-size:.95rem; font-weight:600; }
 
-  @media (max-width:992px) {
-    .lu-layout { grid-template-columns:1fr; }
-    .lu-left { position:static; height:auto; padding:28px 20px; min-height:auto; }
-    .lu-right { height:auto; min-height:60vh; }
-    .lu-row-head { grid-template-columns:1fr 80px 32px; }
-    .lu-date,.lu-impact { display:none; }
+  @media(max-width:992px){
+    .lu-layout{grid-template-columns:1fr;}
+    .lu-left{position:static;height:auto;padding:28px 20px;}
+    .lu-right{min-height:60vh;}
+    .lu-row-head{grid-template-columns:1fr 80px 32px;}
+    .lu-date,.lu-impact{display:none;}
   }
-  @media (max-width:576px) {
-    .lu-left { padding:24px 16px; }
-    .lu-right { padding:20px 16px; }
-    .lu-stats { grid-template-columns:repeat(2,1fr); }
-    .lu-left h2 { font-size:1.2rem; }
+  @media(max-width:576px){
+    .lu-left{padding:24px 16px;}
+    .lu-right{padding:20px 16px;}
+    .lu-stats{grid-template-columns:repeat(2,1fr);}
+    .lu-left h2{font-size:1.2rem;}
   }
   </style>
 </head>
@@ -162,7 +135,7 @@
 <div class="lu-layout">
   <div class="lu-left">
     <h2><em>개정법령</em> 현황</h2>
-    <p class="lu-sub">TAI가 수집한 법령 개정 이력을 섹터별로 확인하세요</p>
+    <p class="lu-sub">TAI가 수집한 법령 개정 이력 — 변경된 조문을 직접 확인하세요</p>
     <div class="lu-stats">
       <div class="lu-stat"><div class="num" id="s-total">-</div><div class="label">전체</div></div>
       <div class="lu-stat"><div class="num" id="s-active">-</div><div class="label">시행중</div></div>
@@ -235,210 +208,150 @@
 <script>
 const SB_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhudGRrcmpoZ2NzY21xY3RkenlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNzM5NjksImV4cCI6MjA4ODY0OTk2OX0.VUe805Y1s4il1RgY1KV94xUw6F3YD7_to46yUIaQrBE';
-const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' };
+const H = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+const SL = { BUILDING:'건물·시설', MANUFACTURING:'산업·제조', CONSTRUCTION:'건설', COMMON:'공통' };
 
-const SL = { BUILDING: '건물·시설', MANUFACTURING: '산업·제조', CONSTRUCTION: '건설', COMMON: '공통' };
 let allData = [];
-let filters = { sector: 'ALL', year: '2026', type: 'ALL', impact: 'ALL', status: 'ALL', search: '' };
+let filters = { sector:'ALL', year:'2026', type:'ALL', impact:'ALL', status:'ALL', search:'' };
 
 async function loadData() {
   try {
-    // law_revision_board 단일 테이블 조회 — 이미 내부 URL 포함
     const res = await fetch(
-      SB_URL + '/rest/v1/law_revision_board?is_public=eq.true&status=eq.PUBLISHED&order=revision_date.desc&select=*',
+      SB_URL + '/rest/v1/law_revision_board?is_public=eq.true&status=eq.PUBLISHED&order=revision_date.desc&select=law_name,law_type,revision_type,revision_date,enforcement_date,summary,body,affected_sectors,impact_level,source_url',
       { headers: H }
     );
     const rows = await res.json();
-
-    const today = new Date().toISOString().slice(0, 10);
-    allData = (rows || []).map(r => ({
-      law_name:      r.law_name || '',
-      law_type:      r.law_type || '-',
-      rev:           r.revision_type || '',
-      ann:           r.revision_date,
-      enf:           r.enforcement_date,
-      title:         r.title || r.law_name || '',
-      summary:       r.summary || '',
-      impact_desc:   r.impact_description || '',
-      sectors:       Array.isArray(r.affected_sectors) ? r.affected_sectors : [],
-      impact:        r.impact_level || 'LOW',
-      src:           r.source_url || null,
-      status:        (r.enforcement_date && r.enforcement_date > today) ? '시행예정' : '시행중',
-      year:          (r.enforcement_date || r.revision_date || '').slice(0, 4),
-      month:         (r.enforcement_date || r.revision_date || '').slice(5, 7),
+    const today = new Date().toISOString().slice(0,10);
+    allData = (rows||[]).map(r => ({
+      law_name:   r.law_name||'',
+      law_type:   r.law_type||'-',
+      rev:        r.revision_type||'',
+      ann:        r.revision_date,
+      enf:        r.enforcement_date,
+      summary:    r.summary||'',
+      body:       r.body||'',
+      sectors:    Array.isArray(r.affected_sectors) ? r.affected_sectors : [],
+      impact:     r.impact_level||'LOW',
+      src:        r.source_url||null,
+      status:     (r.enforcement_date && r.enforcement_date > today) ? '시행예정' : '시행중',
+      year:       (r.enforcement_date||r.revision_date||'').slice(0,4),
+      month:      (r.enforcement_date||r.revision_date||'').slice(5,7),
     }));
-  } catch (e) {
-    console.error('loadData error:', e);
-  }
-  updateStats();
-  render();
+  } catch(e) { console.error(e); }
+  updateStats(); render();
 }
 
 function updateStats() {
   const d = allData;
   document.getElementById('s-total').textContent   = d.length;
-  document.getElementById('s-active').textContent  = d.filter(x => x.status === '시행중').length;
-  document.getElementById('s-pending').textContent = d.filter(x => x.status === '시행예정').length;
-  document.getElementById('s-ilbu').textContent    = d.filter(x => x.rev === '일부개정').length;
-
-  const sc = { ALL: 0, BUILDING: 0, MANUFACTURING: 0, CONSTRUCTION: 0, COMMON: 0 };
-  d.forEach(x => {
-    sc.ALL++;
-    (x.sectors || []).forEach(s => { if (sc[s] !== undefined) sc[s]++; });
+  document.getElementById('s-active').textContent  = d.filter(x=>x.status==='시행중').length;
+  document.getElementById('s-pending').textContent = d.filter(x=>x.status==='시행예정').length;
+  document.getElementById('s-ilbu').textContent    = d.filter(x=>x.rev==='일부개정').length;
+  const sc={ALL:0,BUILDING:0,MANUFACTURING:0,CONSTRUCTION:0,COMMON:0};
+  d.forEach(x=>{ sc.ALL++; (x.sectors||[]).forEach(s=>{if(sc[s]!==undefined)sc[s]++;}); });
+  ['all','bld','mfg','con','cmn'].forEach((k,i)=>{
+    document.getElementById('c-'+k).textContent=sc[['ALL','BUILDING','MANUFACTURING','CONSTRUCTION','COMMON'][i]];
   });
-  document.getElementById('c-all').textContent = sc.ALL;
-  document.getElementById('c-bld').textContent = sc.BUILDING;
-  document.getElementById('c-mfg').textContent = sc.MANUFACTURING;
-  document.getElementById('c-con').textContent = sc.CONSTRUCTION;
-  document.getElementById('c-cmn').textContent = sc.COMMON;
 }
 
-function getFiltered() {
-  return allData.filter(d => {
-    if (filters.year   !== 'ALL' && d.year   !== filters.year)   return false;
-    if (filters.type   !== 'ALL' && d.rev    !== filters.type)   return false;
-    if (filters.impact !== 'ALL' && d.impact !== filters.impact) return false;
-    if (filters.status !== 'ALL' && d.status !== filters.status) return false;
-    if (filters.sector !== 'ALL' && !(d.sectors || []).includes(filters.sector)) return false;
-    if (filters.search && !d.law_name.includes(filters.search))  return false;
+function getFiltered(){
+  return allData.filter(d=>{
+    if(filters.year!=='ALL'&&d.year!==filters.year)return false;
+    if(filters.type!=='ALL'&&d.rev!==filters.type)return false;
+    if(filters.impact!=='ALL'&&d.impact!==filters.impact)return false;
+    if(filters.status!=='ALL'&&d.status!==filters.status)return false;
+    if(filters.sector!=='ALL'&&!(d.sectors||[]).includes(filters.sector))return false;
+    if(filters.search&&!d.law_name.includes(filters.search))return false;
     return true;
   });
 }
 
-function esc(s) {
-  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function impactBadge(l){
+  return l==='HIGH'?'<span class="lu-badge badge-high">높음</span>':
+         l==='MEDIUM'?'<span class="lu-badge badge-medium">보통</span>':
+         '<span class="lu-badge badge-low">낮음</span>';
 }
 
-function impactBadge(level) {
-  if (level === 'HIGH')   return '<span class="lu-badge badge-high">높음</span>';
-  if (level === 'MEDIUM') return '<span class="lu-badge badge-medium">보통</span>';
-  return '<span class="lu-badge badge-low">낮음</span>';
-}
+function render(){
+  const list=getFiltered(), el=document.getElementById('mainList');
+  document.getElementById('resultCount').textContent=list.length+'건';
+  if(!list.length){ el.innerHTML='<div class="lu-empty"><div class="icon">📭</div><div class="msg">조건에 맞는 개정 법령이 없습니다</div></div>'; return; }
 
-function render() {
-  const list = getFiltered();
-  const el = document.getElementById('mainList');
-  document.getElementById('resultCount').textContent = list.length + '건';
+  const groups={};
+  list.forEach(d=>{ const k=d.year+'-'+d.month; if(!groups[k])groups[k]=[]; groups[k].push(d); });
 
-  if (!list.length) {
-    el.innerHTML = '<div class="lu-empty"><div class="icon">📭</div><div class="msg">조건에 맞는 개정 법령이 없습니다</div></div>';
-    return;
-  }
+  let html='';
+  Object.keys(groups).sort().reverse().forEach(k=>{
+    const[y,m]=k.split('-'), items=groups[k];
+    html+='<div class="lu-month-group"><div class="lu-month-label">'+y+'년 '+parseInt(m)+'월<span class="bar"></span><span class="cnt">'+items.length+'건</span></div>';
 
-  // 월별 그룹핑
-  const groups = {};
-  list.forEach(d => {
-    const k = d.year + '-' + d.month;
-    if (!groups[k]) groups[k] = [];
-    groups[k].push(d);
-  });
+    items.sort((a,b)=>(b.enf||'').localeCompare(a.enf||'')).forEach(d=>{
+      const rb=d.rev==='일부개정'?'<span class="lu-badge badge-ilbu">일부개정</span>':
+               d.rev==='타법개정'?'<span class="lu-badge badge-ta">타법개정</span>':
+               '<span class="lu-badge badge-ta">'+esc(d.rev||'-')+'</span>';
+      const sb=d.status==='시행중'?'<span class="lu-badge badge-ok">시행중</span>':'<span class="lu-badge badge-wait">시행예정</span>';
+      const ib=impactBadge(d.impact);
 
-  let html = '';
-  Object.keys(groups).sort().reverse().forEach(k => {
-    const [y, m] = k.split('-');
-    const items = groups[k];
-    html += '<div class="lu-month-group"><div class="lu-month-label">' + y + '년 ' + parseInt(m) + '월<span class="bar"></span><span class="cnt">' + items.length + '건</span></div>';
+      // 변경 조문 요약 박스 (body 필드 우선, 없으면 summary)
+      let changeHtml='';
+      if(d.body && d.body.trim()) {
+        changeHtml='<div class="lu-change-summary">'
+          +'<div class="cs-title">개정 내용</div>'
+          +'<div class="lu-change-body">'+esc(d.body)+'</div>'
+          +'</div>';
+      } else if(d.summary && d.summary.trim()) {
+        changeHtml='<div class="lu-change-summary">'
+          +'<div class="cs-title">개정 요약</div>'
+          +'<div class="lu-change-body">'+esc(d.summary)+'</div>'
+          +'</div>';
+      }
 
-    items.sort((a, b) => (b.enf || '').localeCompare(a.enf || '')).forEach(d => {
-      const rb = d.rev === '일부개정'
-        ? '<span class="lu-badge badge-ilbu">일부개정</span>'
-        : d.rev === '타법개정'
-          ? '<span class="lu-badge badge-ta">타법개정</span>'
-          : '<span class="lu-badge badge-ta">' + esc(d.rev || '-') + '</span>';
+      const btnHtml=d.src?'<a href="'+esc(d.src)+'" class="lu-btn-source"><i class="fas fa-book-open"></i> 조문 전체 보기</a>':'';
+      const st=(d.sectors||[]).map(s=>SL[s]||s).join(' · ');
 
-      const sb = d.status === '시행중'
-        ? '<span class="lu-badge badge-ok">시행중</span>'
-        : '<span class="lu-badge badge-wait">시행예정</span>';
-
-      const ib = impactBadge(d.impact);
-
-      const st = (d.sectors || []).map(s => SL[s] || s).join(' · ');
-
-      // 내부 조문 보기 버튼 (source_url = 내부 URL)
-      const btnHtml = d.src
-        ? '<a href="' + esc(d.src) + '" class="lu-btn-source"><i class="fas fa-book-open"></i> 조문 전체 보기</a>'
-        : '';
-
-      const summaryHtml = d.summary
-        ? '<div class="lu-summary-box">' + esc(d.summary) + '</div>'
-        : '';
-
-      const impactHtml = d.impact_desc
-        ? '<div class="lu-impact-box">' + esc(d.impact_desc) + '</div>'
-        : '';
-
-      html += '<div class="lu-row">';
-      html += '<div class="lu-row-head" onclick="this.parentElement.classList.toggle(\'open\')">';
-      html += '<div class="lu-name-cell">' + rb + '<span class="name" title="' + esc(d.law_name) + '">' + esc(d.law_name) + '</span><span class="law-type">' + esc(d.law_type) + '</span></div>';
-      html += '<div class="lu-date">' + (d.enf || '').slice(5).replace('-', '.') + '</div>';
-      html += sb;
-      html += '<div class="lu-impact">' + ib + '</div>';
-      html += '<div class="lu-expand">▾</div>';
-      html += '</div>'; // row-head
-
-      html += '<div class="lu-detail">';
-      html += '<div class="lu-detail-grid">';
-      html += '<div class="lu-detail-item"><div class="k">공포일</div><div class="v">' + (d.ann || '-') + '</div></div>';
-      html += '<div class="lu-detail-item"><div class="k">시행일</div><div class="v">' + (d.enf || '-') + '</div></div>';
-      html += '<div class="lu-detail-item"><div class="k">법령 유형</div><div class="v">' + esc(d.law_type) + '</div></div>';
-      html += '<div class="lu-detail-item"><div class="k">개정 유형</div><div class="v">' + esc(d.rev || '-') + '</div></div>';
-      html += '<div class="lu-detail-item"><div class="k">적용 섹터</div><div class="v">' + (st || '미분류') + '</div></div>';
-      html += '<div class="lu-detail-item"><div class="k">영향도</div><div class="v">' + ib + '</div></div>';
-      html += '</div>'; // detail-grid
-      html += summaryHtml;
-      html += impactHtml;
-      html += btnHtml;
-      html += '</div>'; // detail
-      html += '</div>'; // row
+      html+='<div class="lu-row">';
+      html+='<div class="lu-row-head" onclick="this.parentElement.classList.toggle(\'open\')">';
+      html+='<div class="lu-name-cell">'+rb+'<span class="name" title="'+esc(d.law_name)+'">'+esc(d.law_name)+'</span><span class="law-type">'+esc(d.law_type)+'</span></div>';
+      html+='<div class="lu-date">'+(d.enf||'').slice(5).replace('-','.')+'</div>'+sb;
+      html+='<div class="lu-impact">'+ib+'</div>';
+      html+='<div class="lu-expand">▾</div>';
+      html+='</div>';
+      html+='<div class="lu-detail">';
+      html+='<div class="lu-detail-grid">';
+      html+='<div class="lu-detail-item"><div class="k">공포일</div><div class="v">'+(d.ann||'-')+'</div></div>';
+      html+='<div class="lu-detail-item"><div class="k">시행일</div><div class="v">'+(d.enf||'-')+'</div></div>';
+      html+='<div class="lu-detail-item"><div class="k">법령 유형</div><div class="v">'+esc(d.law_type)+'</div></div>';
+      html+='<div class="lu-detail-item"><div class="k">개정 유형</div><div class="v">'+esc(d.rev||'-')+'</div></div>';
+      html+='<div class="lu-detail-item"><div class="k">적용 섹터</div><div class="v">'+(st||'미분류')+'</div></div>';
+      html+='<div class="lu-detail-item"><div class="k">영향도</div><div class="v">'+ib+'</div></div>';
+      html+='</div>';
+      html+=changeHtml;
+      html+=btnHtml;
+      html+='</div></div>';
     });
-    html += '</div>'; // month-group
+    html+='</div>';
   });
-
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-// 필터 이벤트
-document.getElementById('catGrid').addEventListener('click', function(e) {
-  const c = e.target.closest('.lu-cat-card');
-  if (!c) return;
-  this.querySelectorAll('.lu-cat-card').forEach(x => x.classList.remove('active'));
-  c.classList.add('active');
-  filters.sector = c.dataset.sector;
-  render();
+// 이벤트
+document.getElementById('catGrid').addEventListener('click',function(e){
+  const c=e.target.closest('.lu-cat-card');if(!c)return;
+  this.querySelectorAll('.lu-cat-card').forEach(x=>x.classList.remove('active'));c.classList.add('active');
+  filters.sector=c.dataset.sector;render();
 });
-document.getElementById('yearSelect').addEventListener('change', function() {
-  filters.year = this.value; render();
+document.getElementById('yearSelect').addEventListener('change',function(){filters.year=this.value;render();});
+['typeChips','impactChips','statusChips'].forEach(id=>{
+  document.getElementById(id).addEventListener('click',function(e){
+    const c=e.target.closest('.lu-chip');if(!c)return;
+    this.querySelectorAll('.lu-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');
+    const key=id==='typeChips'?'type':id==='impactChips'?'impact':'status';
+    filters[key]=c.dataset[key]||c.dataset.type||c.dataset.impact||c.dataset.status;render();
+  });
 });
-document.getElementById('typeChips').addEventListener('click', function(e) {
-  const c = e.target.closest('.lu-chip');
-  if (!c) return;
-  this.querySelectorAll('.lu-chip').forEach(x => x.classList.remove('active'));
-  c.classList.add('active');
-  filters.type = c.dataset.type;
-  render();
-});
-document.getElementById('impactChips').addEventListener('click', function(e) {
-  const c = e.target.closest('.lu-chip');
-  if (!c) return;
-  this.querySelectorAll('.lu-chip').forEach(x => x.classList.remove('active'));
-  c.classList.add('active');
-  filters.impact = c.dataset.impact;
-  render();
-});
-document.getElementById('statusChips').addEventListener('click', function(e) {
-  const c = e.target.closest('.lu-chip');
-  if (!c) return;
-  this.querySelectorAll('.lu-chip').forEach(x => x.classList.remove('active'));
-  c.classList.add('active');
-  filters.status = c.dataset.status;
-  render();
-});
-document.getElementById('searchInput').addEventListener('input', function() {
-  filters.search = this.value.trim();
-  render();
-});
-
-document.addEventListener('DOMContentLoaded', loadData);
+document.getElementById('searchInput').addEventListener('input',function(){filters.search=this.value.trim();render();});
+document.addEventListener('DOMContentLoaded',loadData);
 </script>
 </body>
 </html>
