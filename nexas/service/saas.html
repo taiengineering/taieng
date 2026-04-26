@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe — 적용 법령을 진단하고, 점검·증빙을 자동화합니다. 겸직 안전관리자의 하루부터 법령 엔진까지 한눈에.">
+  <meta name="description" content="법령기반 산업안전 운영 플랫폼 TAI Safe — 무료 법령진단으로 의무를 확인하고, 점검·알림·증빙·보고까지 이어집니다.">
   <title>TAI Safe SaaS | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
@@ -13,54 +13,153 @@
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="../assets/css/tai-brand.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link rel="stylesheet" href="../assets/css/tai-hero-fix.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
-  #saas-page .sp-hero { min-height:100vh; background:url('../assets/img/saas/hero-bg.jpg') center/cover no-repeat, linear-gradient(135deg,#0a1432,#1A5FD4); position:relative; display:flex; align-items:center; overflow:hidden; }
-  #saas-page .sp-hero::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(10,20,50,.85),rgba(26,95,212,.6)); }
-  #saas-page .sp-hero-inner { position:relative; z-index:2; max-width:760px; padding:120px 24px 80px; }
-  #saas-page .sp-eyebrow { display:inline-block; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.9); border-radius:999px; padding:6px 18px; font-size:.76rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:20px; }
-  #saas-page .sp-hero h1 { font-size:clamp(2rem,5vw,3.4rem); font-weight:900; color:#fff; line-height:1.2; margin-bottom:14px; letter-spacing:-.02em; }
-  #saas-page .sp-hero h1 em { font-style:normal; color:#93c5fd; }
-  #saas-page .sp-hero-sub { font-size:clamp(.88rem,2vw,1.05rem); color:rgba(255,255,255,.72); line-height:1.75; margin-bottom:32px; max-width:540px; }
-  #saas-page .sp-hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
-  #saas-page .sp-btn-primary { background:#fff; color:var(--sp-blue); border:none; border-radius:10px; padding:14px 28px; font-size:.95rem; font-weight:800; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:transform .15s,box-shadow .15s; }
-  #saas-page .sp-btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.2); color:var(--sp-blue); }
-  #saas-page .sp-btn-secondary { background:transparent; border:2px solid rgba(255,255,255,.5); color:#fff; border-radius:10px; padding:12px 24px; font-size:.95rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; transition:all .15s; }
-  #saas-page .sp-btn-secondary:hover { border-color:#fff; color:#fff; background:rgba(255,255,255,.1); }
-  #saas-page .sp-scroll-hint { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; text-align:center; color:rgba(255,255,255,.45); font-size:.76rem; }
-  #saas-page .sp-scroll-hint i { display:block; margin-top:4px; animation:sp-bounce 2s infinite; }
-  @keyframes sp-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  #saas-page .pat-hero {
+    min-height: 100vh; background: linear-gradient(135deg, #0f2b4a, #1565c0);
+    position: relative; display: flex; align-items: center; overflow: hidden;
+    padding: 120px 0 88px;
+  }
+  #saas-page .pat-hero .container { position: relative; z-index: 2; }
+  #saas-page .pat-eyebrow {
+    display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+    color: rgba(255,255,255,.92); border-radius: 999px; padding: 6px 18px; font-size: .74rem; font-weight: 800;
+    letter-spacing: .06em; margin-bottom: 18px;
+  }
+  #saas-page .pat-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.35rem); font-weight: 900; color: #fff; line-height: 1.18; margin-bottom: 14px; letter-spacing: -.02em; white-space: pre-line;
+  }
+  #saas-page .pat-hero-sub { font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.78); line-height: 1.75; margin-bottom: 28px; max-width: 560px; white-space: pre-line; }
+  #saas-page .sp-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  #saas-page .sp-btn-primary {
+    background: #fff; color: var(--sp-blue); border: none; border-radius: 10px; padding: 14px 28px; font-size: .95rem; font-weight: 800;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: transform .15s, box-shadow .15s;
+  }
+  #saas-page .sp-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); color: var(--sp-blue); }
+  #saas-page .sp-btn-secondary {
+    background: transparent; border: 2px solid rgba(255,255,255,.5); color: #fff; border-radius: 10px; padding: 12px 24px; font-size: .95rem; font-weight: 700;
+    text-decoration: none; display: inline-flex; align-items: center; transition: all .15s;
+  }
+  #saas-page .sp-btn-secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.1); }
 
-  #saas-page .sp-hero .container { position:relative; z-index:2; padding:96px 24px 96px; }
-  #saas-page .sp-hero-inner { max-width:none; padding:0; }
-  #saas-page .sp-hero-stat { background:rgba(15,23,42,.55); border:1px solid rgba(255,255,255,.2); border-radius:18px; padding:22px 20px; text-align:center; backdrop-filter:blur(10px); }
-  #saas-page .sp-hero-stat .sp-hero-stat-q { font-size:.82rem; color:rgba(255,255,255,.78); line-height:1.55; margin-bottom:10px; }
-  #saas-page .sp-hero-count { font-size:clamp(2.6rem,8vw,4rem); font-weight:900; color:#93c5fd; line-height:1; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
-  #saas-page .sp-hero-count-suf { font-size:clamp(1.2rem,3vw,1.6rem); font-weight:800; color:rgba(255,255,255,.55); margin-left:4px; }
-  #saas-page .sp-hero-stat-cap { font-size:.74rem; color:rgba(255,255,255,.55); margin-top:12px; line-height:1.5; }
+  #saas-page .feat-grid-highlight { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  #saas-page .feat-card-hl {
+    background: #f0f6ff; border: 1px solid rgba(21,101,192,.15); border-left: 4px solid #1565c0; border-radius: 12px; padding: 24px 20px;
+  }
+  #saas-page .feat-card-hl .feat-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  #saas-page .feat-card-hl h4 { font-size: .95rem; font-weight: 800; color: #0f2b4a; margin: 0 0 6px; }
+  #saas-page .feat-card-hl p { font-size: .82rem; color: #475569; margin: 0; line-height: 1.5; }
+  #saas-page .feat-grid-normal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  #saas-page .feat-card-nm {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; position: relative;
+  }
+  #saas-page .feat-card-nm .feat-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  #saas-page .feat-card-nm h4 { font-size: .85rem; font-weight: 700; color: #0f172a; margin: 0 0 4px; }
+  #saas-page .feat-card-nm p { font-size: .75rem; color: #94a3b8; margin: 0; }
+  #saas-page .feat-card-nm.paid::after {
+    content: '유료'; position: absolute; top: 8px; right: 8px;
+    background: #fbbf24; color: #0f172a; font-size: .6rem; font-weight: 800;
+    padding: 2px 6px; border-radius: 999px;
+  }
+  @media(max-width:991px) { #saas-page .feat-grid-highlight { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:575px) {
+    #saas-page .feat-grid-highlight { grid-template-columns: 1fr; }
+    #saas-page .feat-grid-normal { grid-template-columns: repeat(2, 1fr); }
+  }
 
-  #saas-page .sp-tl-wrap { max-width:720px; margin:0 auto; position:relative; padding-left:8px; }
-  #saas-page .sp-tl-line { position:absolute; left:52px; top:8px; bottom:8px; width:3px; background:linear-gradient(180deg,var(--sp-blue),#94a3b8); border-radius:3px; opacity:.35; }
-  #saas-page .sp-tl-item { display:flex; gap:18px; margin-bottom:18px; position:relative; }
-  #saas-page .sp-tl-time { flex:0 0 52px; font-size:.78rem; font-weight:900; color:var(--sp-blue); text-align:right; padding-top:10px; }
-  #saas-page .sp-tl-card { flex:1; background:#fff; border:1.5px solid var(--sp-border); border-radius:14px; padding:14px 16px; box-shadow:0 4px 18px rgba(0,0,0,.04); display:flex; gap:12px; align-items:flex-start; }
-  #saas-page .sp-tl-ico { font-size:1.35rem; flex-shrink:0; line-height:1; }
-  #saas-page .sp-tl-t { font-size:.9rem; font-weight:800; color:var(--sp-dark); margin-bottom:4px; }
-  #saas-page .sp-tl-d { font-size:.82rem; color:var(--sp-gray); line-height:1.55; margin:0; }
-  #saas-page .sp-tl-visual { margin-top:28px; border-radius:14px; overflow:hidden; border:1.5px solid var(--sp-border); }
-  #saas-page .sp-tl-visual img { width:100%; height:auto; display:block; }
+  #saas-page .browser-frame {
+    width: 100%; max-width: 540px;
+    background: #fff; border: 1px solid #d1d5db; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.12); flex-shrink: 0;
+  }
+  #saas-page .browser-bar {
+    background: #f3f4f6; padding: 8px 12px;
+    display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e5e7eb;
+  }
+  #saas-page .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  #saas-page .browser-dot.r { background: #ef4444; } #saas-page .browser-dot.y { background: #f59e0b; } #saas-page .browser-dot.g { background: #22c55e; }
+  #saas-page .browser-url {
+    flex: 1; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px;
+    padding: 4px 10px; font-size: .65rem; color: #9ca3af; margin-left: 8px;
+  }
+  #saas-page .browser-content { min-height: 340px; font-size: .75rem; color: #0f172a; overflow: hidden; }
+  #saas-page .mock-side { width: 160px; background: #0f172a; color: rgba(255,255,255,.6); float: left; min-height: 340px; padding: 10px 0; }
+  #saas-page .mock-side-item { padding: 7px 14px; font-size: .65rem; }
+  #saas-page .mock-side-item.on { background: rgba(255,255,255,.1); color: #fff; font-weight: 700; }
+  #saas-page .mock-body { margin-left: 160px; padding: 14px; background: #f8fafc; min-height: 340px; }
 
-  #saas-page .sp-asis-svg { width:100%; height:auto; display:block; }
-  #saas-page .sp-asis-legend { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-top:14px; font-size:.78rem; color:var(--sp-gray); }
-  #saas-page .sp-asis-legend span { display:inline-flex; align-items:center; gap:6px; }
-  #saas-page .sp-asis-legend i { width:10px; height:10px; border-radius:2px; display:inline-block; }
+  #saas-page .phone-frame {
+    width: 280px; background: #0f172a; border-radius: 32px;
+    padding: 10px; box-shadow: 0 16px 48px rgba(0,0,0,.2); flex-shrink: 0;
+  }
+  #saas-page .phone-frame::before {
+    content: ''; display: block; width: 70px; height: 20px;
+    background: #0f172a; border-radius: 0 0 12px 12px;
+    margin: 0 auto 0;
+  }
+  #saas-page .phone-screen {
+    background: #f8fafc; border-radius: 24px; overflow: hidden;
+    min-height: 440px; font-size: .75rem;
+  }
+  #saas-page .phone-top { background: #0f2b4a; color: #fff; padding: 10px 14px; font-size: .8rem; font-weight: 800; }
+  #saas-page .phone-top.alert { background: #b91c1c; }
 
-  #saas-page .sp-feat-pair { margin-bottom:14px; }
-  #saas-page .sp-feat-pair .fp-p { font-size:.78rem; font-weight:800; color:var(--sp-red); margin-bottom:4px; }
-  #saas-page .sp-feat-pair .fp-s { font-size:.78rem; font-weight:800; color:var(--sp-green); margin-bottom:0; }
+  #saas-page .flow-pair { display: flex; align-items: center; gap: 24px; }
+  #saas-page .flow-arrow {
+    font-size: 1.5rem; color: #1565c0; font-weight: 900;
+    flex-shrink: 0; text-align: center;
+  }
+  #saas-page .flow-arrow small { display: block; font-size: .6rem; color: #94a3b8; font-weight: 400; margin-top: 4px; }
+
+  #saas-page .feat-pair {
+    display: flex; align-items: center; gap: 48px; padding: 72px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  #saas-page .feat-pair:nth-child(even) { flex-direction: row-reverse; }
+  #saas-page .feat-pair .feat-info { flex: 1; min-width: 0; }
+  #saas-page .feat-pair .feat-info h3 {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 14px; white-space: pre-line;
+  }
+  #saas-page .feat-pair .feat-info p { font-size: .92rem; color: #64748b; line-height: 1.7; margin-bottom: 18px; }
+  #saas-page .feat-check { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: #0f172a; font-weight: 600; margin-bottom: 6px; }
+  #saas-page .feat-check::before { content: '✓'; color: #1565c0; font-weight: 900; }
+  #saas-page .feat-visual { flex-shrink: 0; }
+
+  #saas-page .m-card { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; margin-bottom:8px; }
+  #saas-page .m-row { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-bottom:1px solid #f1f5f9; font-size:.7rem; gap:8px; flex-wrap:wrap; }
+  #saas-page .m-row:last-child { border-bottom: none; }
+  #saas-page .m-badge { font-size:.6rem; font-weight:700; padding:2px 8px; border-radius:999px; white-space:nowrap; }
+  #saas-page .m-badge.blue { background:#dbeafe; color:#1e40af; }
+  #saas-page .m-badge.red { background:#fee2e2; color:#dc2626; }
+  #saas-page .m-badge.green { background:#dcfce7; color:#15803d; }
+  #saas-page .m-badge.orange { background:#ffedd5; color:#c2410c; }
+  #saas-page .m-badge.gray { background:#f1f5f9; color:#64748b; }
+  #saas-page .m-title { font-weight:800; font-size:.8rem; color:#0f172a; margin-bottom:8px; }
+  #saas-page .m-stat-row { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:10px; }
+  #saas-page .m-stat { background:#f8fafc; border-radius:8px; padding:8px; text-align:center; }
+  #saas-page .m-stat .n { font-size:1.1rem; font-weight:900; display:block; }
+  #saas-page .m-stat .l { font-size:.55rem; color:#94a3b8; }
+  #saas-page .m-btn { display:inline-block; padding:6px 10px; border-radius:8px; font-size:.62rem; font-weight:700; border:1px solid #e2e8f0; margin-right:4px; cursor:default; }
+  #saas-page .m-btn.active { background:#0f172a; color:#fff; border-color:#0f172a; }
+  #saas-page .m-btn.danger { background:#dc2626; color:#fff; border-color:#dc2626; }
+  #saas-page .m-btn-row { margin-top:6px; }
+  #saas-page .m-foot { font-size:.62rem; color:#64748b; margin-top:8px; }
+  #saas-page .m-card.hl { border:2px solid #93c5fd; }
+  #saas-page .m-banner { background:#fef2f2; border-left:4px solid #dc2626; padding:10px 12px; margin-bottom:10px; border-radius:8px; }
+
+  #saas-page .sp-sec { padding: 90px 0; }
+  #saas-page .sp-sec-gray { background: var(--sp-bg); }
+  #saas-page .sp-sec-white { background: #fff; }
+  #saas-page .sp-label { font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--sp-blue); display: block; margin-bottom: 8px; }
+  #saas-page .sp-h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 900; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 14px; color: var(--sp-dark); }
+  #saas-page .sp-desc { font-size: .95rem; color: var(--sp-gray); line-height: 1.75; margin-bottom: 0; }
 
   #saas-page .sp-law { border-radius:18px; padding:36px 24px; background:linear-gradient(160deg,#0f172a 0%,#1e3a5f 100%); border:1px solid #334155; }
   #saas-page .sp-law-nums { display:flex; flex-wrap:wrap; justify-content:center; gap:32px 48px; margin-bottom:28px; }
@@ -75,7 +174,6 @@
   #saas-page .sp-adopt-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--sp-blue); }
   #saas-page .sp-adopt-card .ac-n { font-size:.65rem; font-weight:800; color:var(--sp-blue); letter-spacing:.08em; margin-bottom:6px; }
   #saas-page .sp-adopt-card .ac-t { font-size:.88rem; font-weight:800; color:var(--sp-dark); line-height:1.35; }
-
   #saas-page .sp-setup-box {
     max-width:720px; margin:32px auto 0; padding:18px 20px; border-radius:14px;
     border:1.5px solid #bae6fd; background:linear-gradient(135deg,#f0f9ff,#eff6ff);
@@ -86,101 +184,10 @@
   #saas-page .sp-setup-box .ss-d { font-size:.84rem; color:#0369a1; line-height:1.65; margin:0; }
   #saas-page .sp-setup-box a { font-weight:800; color:var(--sp-blue); }
 
-  #saas-page .fk-card { background:#fff; border-radius:12px; border:1px solid #e2e8f0; padding:10px 10px 12px; margin-bottom:8px; box-shadow:0 2px 8px rgba(15,23,42,.04); }
-  #saas-page .fk-h { font-size:.62rem; font-weight:800; color:#64748b; text-transform:uppercase; letter-spacing:.04em; margin-bottom:6px; }
-  #saas-page .fk-title { font-size:.78rem; font-weight:900; color:#0f172a; margin-bottom:8px; }
-  #saas-page .fk-row { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f1f5f9; font-size:.68rem; }
-  #saas-page .fk-row:last-of-type { border-bottom:none; }
-  #saas-page .fk-pill { border-radius:999px; padding:2px 8px; font-size:.58rem; font-weight:800; }
-  #saas-page .fk-pill.ok { background:#dcfce7; color:#15803d; }
-  #saas-page .fk-pill.na { background:#f1f5f9; color:#64748b; }
-  #saas-page .fk-foot { margin-top:8px; padding:8px; border-radius:8px; background:#eff6ff; font-size:.62rem; font-weight:700; color:var(--sp-blue); text-align:center; }
-
-  #saas-page .sp-sec { padding:90px 0; }
-  #saas-page .sp-sec-gray { background:var(--sp-bg); }
-  #saas-page .sp-sec-dark { background:var(--sp-dark); }
-  #saas-page .sp-sec-white { background:#fff; }
-  #saas-page .sp-label { font-size:.7rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--sp-blue); display:block; margin-bottom:8px; }
-  #saas-page .sp-sec-dark .sp-label { color:#93c5fd; }
-  #saas-page .sp-h2 { font-size:clamp(1.6rem,3.5vw,2.3rem); font-weight:900; line-height:1.25; letter-spacing:-.02em; margin-bottom:14px; color:var(--sp-dark); }
-  #saas-page .sp-sec-dark .sp-h2 { color:#fff; }
-  #saas-page .sp-desc { font-size:.95rem; color:var(--sp-gray); line-height:1.75; margin-bottom:0; }
-  #saas-page .sp-sec-dark .sp-desc { color:#94a3b8; }
-
-  #saas-page .sp-pain { background:#fff; border:1.5px solid var(--sp-border); border-radius:14px; padding:26px 22px; height:100%; position:relative; overflow:hidden; }
-  #saas-page .sp-pain::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--sp-red); }
-  #saas-page .sp-pain-icon { font-size:1.8rem; margin-bottom:12px; display:block; }
-  #saas-page .sp-pain-title { font-size:1rem; font-weight:800; color:var(--sp-dark); margin-bottom:8px; }
-  #saas-page .sp-pain-desc { font-size:.86rem; color:var(--sp-gray); line-height:1.7; margin:0; }
-
-  #saas-page .sp-feat { padding:72px 0; border-bottom:1px solid var(--sp-border); }
-  #saas-page .sp-feat:last-child { border-bottom:none; }
-  #saas-page .sp-feat-badge { display:inline-block; background:var(--sp-blue); color:#fff; border-radius:6px; padding:3px 10px; font-size:.68rem; font-weight:800; letter-spacing:.06em; margin-bottom:10px; }
-  #saas-page .sp-feat h3 { font-size:clamp(1.35rem,2.8vw,1.9rem); font-weight:900; color:var(--sp-dark); line-height:1.3; margin-bottom:10px; letter-spacing:-.02em; }
-  #saas-page .sp-feat h3 strong { color:var(--sp-blue); }
-  #saas-page .sp-feat p { font-size:.92rem; color:var(--sp-gray); line-height:1.8; margin-bottom:20px; }
-  #saas-page .sp-bullets { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:9px; }
-  #saas-page .sp-bullets li { display:flex; align-items:flex-start; gap:9px; font-size:.88rem; color:var(--sp-dark); line-height:1.5; }
-  #saas-page .sp-bullets .dot { width:20px; height:20px; border-radius:50%; background:var(--sp-blue); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.6rem; flex-shrink:0; margin-top:2px; }
-
-  #saas-page .sp-phone-wrap { display:flex; justify-content:center; }
-  #saas-page .sp-phone { width:252px; background:#0f172a; border-radius:38px; padding:13px; box-shadow:0 0 0 2px #1e293b,0 28px 72px rgba(0,0,0,.3); }
-  #saas-page .sp-phone::before { content:''; display:block; width:72px; height:7px; background:#1e293b; border-radius:999px; margin:0 auto 10px; }
-  #saas-page .sp-screen { background:#fff; border-radius:24px; overflow:hidden; min-height:460px; }
-  #saas-page .ps-head { padding:11px 13px 9px; display:flex; justify-content:space-between; align-items:center; }
-  #saas-page .ps-logo { font-size:.72rem; font-weight:900; color:#fff; }
-  #saas-page .ps-page { font-size:.64rem; color:rgba(255,255,255,.65); }
-  #saas-page .ps-body { padding:8px 11px 14px; }
-  #saas-page .ps-row { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid #f1f5f9; }
-  #saas-page .ps-row:last-child { border-bottom:none; }
-  #saas-page .ps-chk { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.7rem; flex-shrink:0; }
-  #saas-page .ps-chk.ok  { background:#dcfce7; color:#15803d; }
-  #saas-page .ps-chk.no  { background:#f1f5f9; color:#94a3b8; }
-  #saas-page .ps-chk.hot { background:#fee2e2; color:#dc2626; }
-  #saas-page .ps-title { font-size:.75rem; font-weight:700; color:#0f172a; }
-  #saas-page .ps-sub   { font-size:.63rem; color:var(--sp-gray); margin-top:1px; }
-  #saas-page .ps-tag   { display:inline-block; font-size:.58rem; font-weight:700; padding:1px 5px; border-radius:3px; margin-left:4px; }
-  #saas-page .ps-tag.ok  { background:#dcfce7; color:#15803d; }
-  #saas-page .ps-tag.hot { background:#fee2e2; color:#dc2626; }
-  #saas-page .ps-tag.ing { background:#fef9c3; color:#854d0e; }
-  #saas-page .ps-mini { background:var(--sp-bg); border-radius:8px; padding:8px 10px; margin-bottom:6px; }
-  #saas-page .ps-mini .mk { font-size:.62rem; color:var(--sp-gray); }
-  #saas-page .ps-mini .mv { font-size:1.2rem; font-weight:900; color:var(--sp-blue); line-height:1; }
-  #saas-page .ps-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-bottom:6px; }
-  #saas-page .ps-signed { background:#f0fdf4; border:1px solid #86efac; border-radius:8px; padding:7px 10px; display:flex; align-items:center; gap:7px; margin-bottom:5px; }
-  #saas-page .ps-signed .sn { font-size:.72rem; font-weight:700; }
-  #saas-page .ps-signed .st { font-size:.61rem; color:var(--sp-gray); }
-  #saas-page .ps-notif { border-radius:8px; padding:9px 10px; margin-bottom:5px; display:flex; gap:8px; align-items:flex-start; }
-  #saas-page .ps-notif.emg { background:#fef2f2; border-left:3px solid var(--sp-red); }
-  #saas-page .ps-notif.nrm { background:#f0f9ff; border-left:3px solid #38bdf8; }
-  #saas-page .ps-ni { font-size:1rem; flex-shrink:0; }
-  #saas-page .ps-nt { font-size:.72rem; font-weight:800; color:var(--sp-dark); }
-  #saas-page .ps-ns { font-size:.62rem; color:var(--sp-gray); margin-top:1px; }
-  #saas-page .ps-req { background:var(--sp-bg); border:1px solid var(--sp-border); border-radius:8px; padding:9px 10px; margin-bottom:5px; }
-  #saas-page .ps-req-h { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
-  #saas-page .ps-req-t { font-size:.72rem; font-weight:800; color:var(--sp-dark); }
-  #saas-page .ps-req-b { font-size:.6rem; font-weight:700; padding:2px 6px; border-radius:3px; }
-  #saas-page .ps-req-b.wait { background:#fef9c3; color:#854d0e; }
-  #saas-page .ps-req-b.done { background:#dcfce7; color:#15803d; }
-  #saas-page .ps-req-m { font-size:.62rem; color:var(--sp-gray); line-height:1.5; }
-  #saas-page .ps-approve { display:block; width:100%; background:var(--sp-blue); color:#fff; border:none; border-radius:7px; padding:8px; font-size:.74rem; font-weight:800; text-align:center; margin-top:7px; }
-
   #saas-page .sp-diagram { background:#fff; border:1.5px solid var(--sp-border); border-radius:14px; padding:20px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
-  #saas-page .sp-diagram img { width:100%; height:auto; display:block; min-height:200px; background:#f8fafc; }
-  #saas-page .sp-diagram-dark { background:#1e293b; border-color:#334155; }
+  #saas-page .sp-diagram img { width:100%; height:auto; display:block; min-height:120px; background:#f8fafc; }
   #saas-page .sp-cap { text-align:center; font-size:.73rem; color:var(--sp-gray); margin-top:9px; }
-  #saas-page .sp-diagram-dark .sp-cap { color:#64748b; }
 
-  #saas-page .sp-penalty { background:#1e293b; border:1.5px solid var(--sp-red); border-radius:14px; padding:24px 20px; }
-  #saas-page .sp-penalty-label { font-size:.68rem; font-weight:800; letter-spacing:.1em; color:#f87171; margin-bottom:10px; }
-  #saas-page .sp-penalty-title { font-size:1rem; font-weight:800; color:#fff; line-height:1.6; margin-bottom:14px; }
-  #saas-page .sp-penalty-row { background:rgba(220,38,38,.15); border-radius:8px; padding:12px 14px; margin-bottom:8px; }
-  #saas-page .sp-penalty-row .pr { font-size:.72rem; font-weight:800; color:#fca5a5; margin-bottom:3px; }
-  #saas-page .sp-penalty-row .pa { font-size:.95rem; font-weight:900; color:#fff; }
-  #saas-page .sp-penalty-row .ps { font-size:.76rem; color:#94a3b8; }
-  #saas-page .sp-penalty-note { font-size:.8rem; color:#60a5fa; font-weight:700; margin-top:12px; }
-
-  /* ── 섹터 탭 UI ── */
   #saas-page .sp-sector-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:40px; flex-wrap:wrap; }
   #saas-page .sp-sector-btn {
     background:#fff; border:2px solid var(--sp-border); color:var(--sp-gray);
@@ -195,8 +202,6 @@
   #saas-page .sp-sector-btn .sb-icon { font-size:1.2rem; }
   #saas-page .sp-sector-panel { display:none; }
   #saas-page .sp-sector-panel.active { display:block; }
-
-  /* ── 플랜 카드 (버튼 항상 하단 고정) ── */
   #saas-page .sp-price {
     background:#fff; border:1.5px solid var(--sp-border); border-radius:18px;
     padding:28px 22px; height:100%; position:relative;
@@ -222,8 +227,6 @@
   #saas-page .sp-price-cta:hover { background:#1248a8; color:#fff; }
   #saas-page .sp-price-cta.consult-cta { background:var(--sp-dark); }
   #saas-page .sp-price-cta.consult-cta:hover { background:#1e293b; color:#fff; }
-
-  /* 섹터 설명 배너 */
   #saas-page .sp-sector-note {
     background:var(--sp-bg); border:1px solid var(--sp-border); border-radius:12px;
     padding:14px 20px; margin-bottom:28px; font-size:.88rem; color:var(--sp-gray);
@@ -241,16 +244,22 @@
   #saas-page .sp-step .st { font-size:.88rem; font-weight:700; color:#fff; }
   #saas-page .sp-arrow { font-size:1.3rem; color:rgba(255,255,255,.35); }
 
-  @media(max-width:768px) {
-    #saas-page .sp-feat { padding:52px 0; }
-    #saas-page .sp-sec  { padding:64px 0; }
-    #saas-page .sp-phone { width:216px; }
+  @media(max-width:991px) {
+    #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 28px; }
+    #saas-page .browser-frame { max-width: 100%; }
+    #saas-page .mock-side { display: none; } #saas-page .mock-body { margin-left: 0; }
+    #saas-page .phone-frame { width: 240px; }
+    #saas-page .flow-pair { flex-direction: column; }
+    #saas-page .flow-arrow { transform: rotate(90deg); }
+    #saas-page .sp-adopt-grid { grid-template-columns:1fr 1fr; }
     #saas-page .sp-arrow { display:none; }
     #saas-page .sp-sector-btn { padding:10px 18px; font-size:.9rem; }
-    #saas-page .sp-adopt-grid { grid-template-columns:1fr 1fr; }
-    #saas-page .sp-tl-line { left:44px; }
-    #saas-page .sp-tl-time { flex-basis:44px; font-size:.72rem; }
   }
+  @media(max-width:768px) {
+    #saas-page .sp-sec { padding: 64px 0; }
+    #saas-page .feat-pair { padding: 52px 0; }
+  }
+
   </style>
 </head>
 <body class="sc5">
@@ -262,252 +271,328 @@
   <div id="tai-header"></div>
 
   <div id="saas-page">
-
-  <!-- S1. 히어로 — 문제인식 + 카운트업 -->
-  <section class="sp-hero">
+  <!-- ① 히어로 -->
+  <section class="pat-hero">
     <div class="container">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-7">
-          <div class="sp-hero-inner">
-            <span class="sp-eyebrow">TAI Safe — 산업안전 관리 플랫폼</span>
-            <h1>귀사에 적용되는 안전 법령,<br><em>몇 개인지 아십니까?</em></h1>
-            <p class="sp-hero-sub">엑셀과 기억에 맡기면 빠집니다. TAI Safe는 법령진단으로 적용 법령·조문을 집계하고, 점검·알림·증빙까지 한 흐름으로 묶습니다.</p>
-            <div class="sp-hero-btns">
-              <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작하기 →</a>
-              <a href="#pricing" class="sp-btn-secondary">요금제 보기</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="sp-hero-stat sp-count-scope" id="sp-hero-count-scope">
-            <div class="sp-hero-stat-q">사업장마다 다르지만, 보통 이렇게 많습니다.</div>
-            <div class="sp-hero-count"><span data-sp-count="127">0</span><span class="sp-hero-count-suf">+</span></div>
-            <div class="sp-hero-stat-cap">동시에 추적해야 할 <strong style="color:#e2e8f0;">의무·조항</strong>이 한곳에 쌓일 수 있습니다. 정확한 개수는 법령진단에서 확인하세요.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="sp-scroll-hint">겸직 안전관리자의 하루를 따라가 보기<i class="fas fa-chevron-down"></i></div>
-  </section>
-
-  <!-- S2. 공감 — 겸직 안전관리자의 하루 -->
-  <section class="sp-sec sp-sec-gray">
-    <div class="container">
-      <div class="row g-5 align-items-start">
-        <div class="col-lg-5">
-          <span class="sp-label">공감</span>
-          <h2 class="sp-h2">겸직 안전관리자의<br>08:00 ~ 18:00</h2>
-          <p class="sp-desc" style="margin-bottom:20px;">본업 회의와 안전 업무가 겹칠 때, 하루는 이렇게 흩어집니다. 아래 타임라인을 따라가 보세요.</p>
-          <div style="margin-top:16px;border-radius:14px;overflow:hidden;border:1px solid var(--sp-border);box-shadow:0 4px 18px rgba(0,0,0,.06);">
-            <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/service/safe-worker.gif" alt="겸직 안전관리자의 하루" style="width:100%;height:auto;display:block;" loading="lazy">
-          </div>
-        </div>
-        <div class="col-lg-7">
-          <div class="sp-tl-wrap">
-            <div class="sp-tl-line" aria-hidden="true"></div>
-            <div class="sp-tl-item">
-              <div class="sp-tl-time">08:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">☕</span><div><div class="sp-tl-t">출근과 동시에 알림 폭주</div><p class="sp-tl-d">전날 미처리 문자·메일을 정리하다 보면 본업 첫 미팅 직전까지 스크롤만 합니다.</p></div></div>
-            </div>
-            <div class="sp-tl-item">
-              <div class="sp-tl-time">10:30</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">📎</span><div><div class="sp-tl-t">엑셀·PDF 사이를 왔다 갔다</div><p class="sp-tl-d">점검표 버전이 파일마다 다릅니다. "이게 최종인가요?"라는 질문에 답하려면 반나절이 갑니다.</p></div></div>
-            </div>
-            <div class="sp-tl-item">
-              <div class="sp-tl-time">13:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">🏃</span><div><div class="sp-tl-t">현장 뛰다 보면 기록은 뒷전</div><p class="sp-tl-d">지게차·소화기·승강기… 현장 확인은 했는데, 사진·서명·일시를 나중에 채우기엔 이미 기억이 흐릿합니다.</p></div></div>
-            </div>
-            <div class="sp-tl-item">
-              <div class="sp-tl-time">16:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">📞</span><div><div class="sp-tl-t">협력사·본사·노동청 요청이 한꺼번에</div><p class="sp-tl-d">"자료 주세요"가 동시에 들어오면, 우선순위를 정하는 것만으로도 에너지가 바닥납니다.</p></div></div>
-            </div>
-            <div class="sp-tl-item">
-              <div class="sp-tl-time">18:00</div>
-              <div class="sp-tl-card"><span class="sp-tl-ico">🌙</span><div><div class="sp-tl-t">퇴근 후에야 떠오르는 빠진 항목</div><p class="sp-tl-d">"아, 그 점검 주기 바뀌지 않았나?" — 하루의 끝에서 불안이 다시 시작됩니다.</p></div></div>
-            </div>
-          </div>
-        </div>
+      <span class="pat-eyebrow">법령기반 산업안전 운영 플랫폼</span>
+      <h1>법령을 진단하면,
+운영이 시작됩니다.</h1>
+      <p class="pat-hero-sub">무료 법령진단으로 법적 의무를 확인하세요.
+TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
+      <div class="sp-hero-btns">
+        <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작 →</a>
+        <a href="#saas-overview" class="sp-btn-secondary">기능 둘러보기</a>
       </div>
     </div>
   </section>
 
-  <!-- S3. AS-IS / TO-BE -->
-  <section class="sp-sec sp-sec-white">
+  <!-- ② 한눈에 보는 TAI Safe -->
+  <section class="sp-sec sp-sec-white" id="saas-overview">
     <div class="container">
-      <div class="text-center mb-4">
-        <span class="sp-label">구조 변화</span>
-        <h2 class="sp-h2">혼자 떠안는 AS-IS,<br><span style="color:var(--sp-blue);">배분·증빙되는 TO-BE</span></h2>
-        <p class="sp-desc" style="max-width:640px;margin:0 auto;">안전관리자 한 사람의 머릿속·엑셀에만 있던 의무를, 시스템이 쪼개서 현장과 책임자에게 흘려보냅니다.</p>
+      <div class="text-center mb-2">
+        <span class="sp-label">한눈에</span>
+        <h2 class="sp-h2">TAI Safe가 다루는 일</h2>
+        <p class="sp-desc" style="max-width:640px;margin:0 auto 32px;">법령진단이 입구이고, SaaS가 운영 엔진입니다. TAI만의 자동화는 위에서 강조하고, 어디에나 있는 기능은 가볍게 정리했습니다.</p>
       </div>
-      <div class="sp-diagram" style="max-width:960px;margin:0 auto;padding:16px 12px 20px;">
-        <svg class="sp-asis-svg" viewBox="0 0 880 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="spAsisTitle">
-          <title id="spAsisTitle">AS-IS 대 TO-BE 구조 비교</title>
-          <defs>
-            <linearGradient id="gAs" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fee2e2"/><stop offset="100%" stop-color="#fecaca"/></linearGradient>
-            <linearGradient id="gTo" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#dbeafe"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
-          </defs>
-          <text x="200" y="36" text-anchor="middle" fill="#991b1b" font-size="15" font-weight="900" font-family="Noto Sans KR,sans-serif">AS-IS</text>
-          <text x="680" y="36" text-anchor="middle" fill="#1e40af" font-size="15" font-weight="900" font-family="Noto Sans KR,sans-serif">TO-BE (TAI Safe)</text>
-          <rect x="32" y="52" width="336" height="220" rx="14" fill="url(#gAs)" stroke="#f87171" stroke-width="2"/>
-          <rect x="512" y="52" width="336" height="220" rx="14" fill="url(#gTo)" stroke="#3b82f6" stroke-width="2"/>
-          <text x="200" y="88" text-anchor="middle" fill="#7f1d1d" font-size="12" font-weight="700" font-family="Noto Sans KR,sans-serif">안전관리자 1인</text>
-          <circle cx="200" cy="140" r="36" fill="#fff" stroke="#dc2626" stroke-width="2"/>
-          <text x="200" y="148" text-anchor="middle" fill="#0f172a" font-size="22">👤</text>
-          <rect x="70" y="188" width="80" height="44" rx="6" fill="#fff" stroke="#cbd5e1"/>
-          <text x="110" y="214" text-anchor="middle" fill="#475569" font-size="10" font-weight="700" font-family="Noto Sans KR,sans-serif">엑셀</text>
-          <rect x="160" y="188" width="80" height="44" rx="6" fill="#fff" stroke="#cbd5e1"/>
-          <text x="200" y="214" text-anchor="middle" fill="#475569" font-size="10" font-weight="700" font-family="Noto Sans KR,sans-serif">메모</text>
-          <rect x="250" y="188" width="80" height="44" rx="6" fill="#fff" stroke="#cbd5e1"/>
-          <text x="290" y="214" text-anchor="middle" fill="#475569" font-size="10" font-weight="700" font-family="Noto Sans KR,sans-serif">종이</text>
-          <text x="200" y="258" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="700" font-family="Noto Sans KR,sans-serif">추적·알림·증빙 단절</text>
-          <text x="680" y="88" text-anchor="middle" fill="#1e3a8a" font-size="12" font-weight="700" font-family="Noto Sans KR,sans-serif">법령 엔진 + 현장 앱</text>
-          <rect x="552" y="108" width="100" height="52" rx="8" fill="#fff" stroke="#1A5FD4" stroke-width="2"/>
-          <text x="602" y="132" text-anchor="middle" fill="#1A5FD4" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">의무 자동</text>
-          <text x="602" y="148" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans KR,sans-serif">캘린더</text>
-          <rect x="672" y="108" width="100" height="52" rx="8" fill="#fff" stroke="#1A5FD4" stroke-width="2"/>
-          <text x="722" y="132" text-anchor="middle" fill="#1A5FD4" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">현장 QR</text>
-          <text x="722" y="148" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans KR,sans-serif">점검</text>
-          <rect x="612" y="178" width="136" height="44" rx="8" fill="#0f172a" stroke="#334155" stroke-width="2"/>
-          <text x="680" y="206" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">증빙 자동 적재</text>
-          <text x="680" y="252" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="700" font-family="Noto Sans KR,sans-serif">배분 · 리마인더 · 서명</text>
-          <path d="M388 150 L492 150" fill="none" stroke="#64748b" stroke-width="3" marker-end="url(#arr)"/>
-          <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L10,3 L0,6 Z" fill="#64748b"/></marker></defs>
-          <text x="440" y="138" text-anchor="middle" fill="#475569" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">전환</text>
-        </svg>
-        <div class="sp-asis-legend">
-          <span><i style="background:#fecaca;"></i> AS-IS: 단일 병목</span>
-          <span><i style="background:#bfdbfe;"></i> TO-BE: 자동 파이프라인</span>
-        </div>
+      <div class="feat-grid-highlight">
+        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">👥</div><h4>안전업무 분산 배분</h4><p>의무를 작업자에게 자동 배분, 안전관리자는 통제</p></div>
+        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🔄</div><h4>법령 개정 자동 반영</h4><p>법이 바뀌면 의무가 자동으로 갱신</p></div>
+        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🌬️</div><h4>기상 작업중지 판단</h4><p>기상청 연동, 법정 기준 초과 시 자동 중지 권고</p></div>
+        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">📋</div><h4>점검 → 서류 자동 변환</h4><p>체크 데이터가 바로 법정 서식 서류</p></div>
+        <div class="feat-card-hl"><div class="feat-icon" aria-hidden="true">🚨</div><h4>사고 즉시 알림</h4><p>현장 신고 1분 내 관계자 전원 알림</p></div>
+      </div>
+      <p class="sp-desc text-center" style="margin-bottom:16px;font-size:.88rem;">일반 기능</p>
+      <div class="feat-grid-normal">
+        <div class="feat-card-nm"><div class="feat-icon">⚡</div><h4>1일 세팅</h4><p>가입·프로필·배포</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">✍️</div><h4>TBM 앱 서명</h4><p>전자서명·보관</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">📊</div><h4>보고서 자동</h4><p>월간·종합</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">📝</div><h4>작업지시 앱</h4><p>승인·이력</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">📱</div><h4>대시보드</h4><p>미이행·KPI</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">🔲</div><h4>QR 출입기록</h4><p>현장 체크인</p></div>
+        <div class="feat-card-nm paid"><div class="feat-icon">📤</div><h4>문서자동제출</h4><p>기관 제출</p></div>
+        <div class="feat-card-nm"><div class="feat-icon">🗄️</div><h4>문서보관함</h4><p>법정 보존</p></div>
       </div>
     </div>
   </section>
 
-  <!-- S4. 핵심 기능 5 (문제→해결, 좌우 교차) -->
-  <div class="sp-sec-gray">
-    <div class="container"><div class="text-center" style="padding:72px 0 8px;"><span class="sp-label">해결</span><h2 class="sp-h2">핵심 기능 다섯 가지</h2><p class="sp-desc" style="max-width:560px;margin:12px auto 0;">각 기능을 <strong>문제 → 해결</strong> 한 쌍으로 정리했습니다. 오른쪽·왼쪽 화면은 모두 실제와 같은 모바일 프레임 안의 목업입니다.</p></div></div>
+  <!-- ③ TAI 특징 기능 상세 (순서: 분산배분 → 점검서류 → 법령개정 → 기상 → 사고) -->
+  <div class="sp-sec-gray" id="saas-feature-detail">
+    <div class="container text-center" style="padding-top:56px;padding-bottom:8px;">
+      <span class="sp-label">상세</span>
+      <h2 class="sp-h2">관리 화면과 현장 앱이 맞물립니다</h2>
+      <p class="sp-desc" style="max-width:600px;margin:12px auto 0;">안전관리자 관점의 웹과 작업자 앱을 나란히 두어, 실제 운영 흐름을 보여드립니다.</p>
+    </div>
 
-    <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
-      <div class="col-lg-6 order-lg-1">
-        <span class="sp-feat-badge">기능 ①</span>
-        <div class="sp-feat-pair"><div class="fp-p">문제 · 의무가 한 사람에게 몰림</div><div class="fp-s">해결 · 법령 기반으로 자동 배분·알림</div></div>
-        <h3>캘린더와 알림이<br><strong>대신 외칩니다.</strong></h3>
-        <p>법령진단으로 뽑힌 의무가 일정으로 깔리고, 담당자에게 D-day가 자동 발송됩니다. 겸직 관리자는 "쫓아다니기"보다 "확인하기"에 시간을 씁니다.</p>
-        <ul class="sp-bullets"><li><span class="dot">✓</span> 점검 주기·법정 기한 자동 계산</li><li><span class="dot">✓</span> 담당자별 SMS·리마인더</li><li><span class="dot">✓</span> 미이행 대시보드</li></ul>
+    <!-- 1 안전업무 분산 배분 -->
+    <div class="container feat-pair">
+      <div class="feat-info">
+        <h3>혼자 다 하지 마세요.
+시스템이 나눠줍니다.</h3>
+        <p>법령 엔진이 뽑아낸 의무 하나하나에 담당자를 지정하면, 작업자 앱에 할 일이 자동으로 뜹니다. 안전관리자는 &quot;쫓아다니기&quot;에서 &quot;확인하기&quot;로 바뀝니다.</p>
+        <div class="feat-check">법령 의무별 담당자 세밀 배치</div>
+        <div class="feat-check">작업자 앱에 할 일 자동 전달</div>
+        <div class="feat-check">미이행 시 관리자에게 즉시 알림</div>
       </div>
-      <div class="col-lg-6 order-lg-2">
-        <div class="sp-phone-wrap"><div class="sp-phone"><div class="sp-screen">
-          <div class="ps-head" style="background:var(--sp-blue);"><span class="ps-logo">TAI Safe</span><span class="ps-page">오늘의 업무</span></div>
-          <div class="ps-body">
-            <div class="ps-grid2"><div class="ps-mini"><div class="mk">완료</div><div class="mv" style="color:#15803d;">12<small style="font-size:.6rem;"> 건</small></div></div><div class="ps-mini"><div class="mk">대기</div><div class="mv" style="color:#dc2626;">3<small style="font-size:.6rem;"> 건</small></div></div></div>
-            <div style="font-size:.64rem;font-weight:800;color:#64748b;margin:8px 0 5px;">오늘 처리 필요</div>
-            <div class="ps-row"><div class="ps-chk hot">!</div><div><div class="ps-title">소화기 월간 점검 <span class="ps-tag hot">D-2</span></div><div class="ps-sub">담당: 김현장 · 2공장</div></div></div>
-            <div class="ps-row"><div class="ps-chk ok">✓</div><div><div class="ps-title">위험성평가 서명 <span class="ps-tag ok">완료</span></div><div class="ps-sub">담당: 박안전 · 09:14</div></div></div>
-            <div class="ps-row"><div class="ps-chk no">○</div><div><div class="ps-title">TBM 작성 <span class="ps-tag ing">진행중</span></div><div class="ps-sub">담당: 이반장 · 3층</div></div></div>
-            <div style="background:#eff6ff;border-radius:8px;padding:8px 10px;margin-top:8px;"><div style="font-size:.64rem;font-weight:800;color:var(--sp-blue);margin-bottom:2px;">📲 D-3 알림 발송 완료</div><div style="font-size:.6rem;color:#64748b;">승강기 정기검사 · 담당자 3명</div></div>
-          </div>
-        </div></div></div>
-      </div>
-    </div></div></div>
-
-    <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <div class="sp-phone-wrap"><div class="sp-phone"><div class="sp-screen" style="min-height:480px;">
-          <div class="ps-head" style="background:#0f172a;"><span class="ps-logo">TAI Safe</span><span class="ps-page">설비 점검</span></div>
-          <div class="ps-body">
-            <div class="fk-card">
-              <div class="fk-h">지게차 · 일일점검 #3</div>
-              <div class="fk-title">5초 체크</div>
-              <div class="fk-row"><span>브레이크·페달</span><span class="fk-pill ok">OK</span></div>
-              <div class="fk-row"><span>전조등·후진벨</span><span class="fk-pill ok">OK</span></div>
-              <div class="fk-row"><span>타이어·허브</span><span class="fk-pill ok">OK</span></div>
-              <div class="fk-row"><span>마스트·체인</span><span class="fk-pill na">확인</span></div>
-              <div class="fk-foot">완료 시 법정 기록 자동 저장</div>
+      <div class="feat-visual">
+        <div class="flow-pair">
+          <div class="browser-frame">
+            <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 작업근로자</div></div>
+            <div class="browser-content">
+              <div class="mock-side">
+                <div class="mock-side-item">대시보드</div>
+                <div class="mock-side-item on">작업근로자</div>
+                <div class="mock-side-item">문서관리</div>
+                <div class="mock-side-item">안전정보</div>
+              </div>
+              <div class="mock-body">
+                <div class="m-title">업무 배분 관리</div>
+                <div class="m-row" style="font-weight:800;border-bottom:2px solid #e2e8f0;"><span>의무 항목</span><span>담당자</span><span>주기</span><span>상태</span></div>
+                <div class="m-row"><span>소화기 점검</span><span>김현장 (2공장)</span><span>월 1회</span><span class="m-badge green">완료</span></div>
+                <div class="m-row"><span>지게차 일일점검</span><span>이반장 (3층)</span><span>매일</span><span class="m-badge orange">대기</span></div>
+                <div class="m-row"><span>안전교육 확인</span><span>박안전</span><span>분기</span><span class="m-badge blue">D-14</span></div>
+                <div class="m-row"><span>위험성평가</span><span>최기사</span><span>반기</span><span class="m-badge green">완료</span></div>
+                <div class="m-foot">의무 47건 중 42건 배정 완료</div>
+              </div>
             </div>
-            <div style="text-align:center;padding:6px 0 0;font-size:.68rem;font-weight:900;color:#15803d;">✓ 제출 완료 · 09:12</div>
           </div>
-        </div></div></div>
-      </div>
-      <div class="col-lg-6">
-        <span class="sp-feat-badge">기능 ②</span>
-        <div class="sp-feat-pair"><div class="fp-p">문제 · 현장에서 기록이 끊김</div><div class="fp-s">해결 · QR로 항목 로드, 즉시 저장</div></div>
-        <h3>장갑 낀 채로도<br><strong>점검이 끝납니다.</strong></h3>
-        <p>QR 한 번이면 해당 설비의 체크리스트가 열립니다. 카드형 UI로 빠르게 터치하고, 완료 즉시 타임스탬프가 붙습니다.</p>
-        <ul class="sp-bullets"><li><span class="dot">✓</span> 설비별 맞춤 항목</li><li><span class="dot">✓</span> 이상 시 사진 첨부</li><li><span class="dot">✓</span> 관리자 화면 실시간 반영</li></ul>
-      </div>
-    </div></div></div>
-
-    <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
-      <div class="col-lg-6 order-lg-1">
-        <span class="sp-feat-badge">기능 ③</span>
-        <div class="sp-feat-pair"><div class="fp-p">문제 · TBM 서명을 일일이 회수</div><div class="fp-s">해결 · 모바일 전자서명·자동 보관</div></div>
-        <h3>종이 들고<br><strong>돌아다니지 않습니다.</strong></h3>
-        <p>반장이 내용을 입력하고, 작업자는 각자 폰으로 서명합니다. 감독·감사 시에도 같은 클라우드에서 바로 펼칩니다.</p>
-        <ul class="sp-bullets"><li><span class="dot">✓</span> 참석·서명 이력 자동 연계</li><li><span class="dot">✓</span> 법정 보존 단위로 스냅샷</li></ul>
-      </div>
-      <div class="col-lg-6 order-lg-2">
-        <div class="sp-phone-wrap"><div class="sp-phone"><div class="sp-screen">
-          <div class="ps-head" style="background:var(--sp-blue);"><span class="ps-logo">TAI Safe</span><span class="ps-page">TBM</span></div>
-          <div class="ps-body">
-            <div style="font-size:.68rem;font-weight:800;color:#0f172a;margin-bottom:3px;">오늘의 TBM</div>
-            <div style="font-size:.61rem;color:#64748b;margin-bottom:8px;">2026-04-21 · 08:00 · 3공장 반장 김철수</div>
-            <div style="background:#f8fafc;border-radius:7px;padding:7px 9px;font-size:.64rem;color:#334155;line-height:1.55;margin-bottom:8px;">작업: 용접·고소 / 위험: 화기·추락<br>안전: 안전벨트·화기 감시</div>
-            <div style="font-size:.64rem;font-weight:800;color:#0f172a;margin-bottom:5px;">참석자 서명</div>
-            <div class="ps-signed"><span>✅</span><div><div class="sn">김철수 반장</div><div class="st">08:03 서명</div></div></div>
-            <div class="ps-signed"><span>✅</span><div><div class="sn">작업자 6명</div><div class="st">08:05 일괄 서명</div></div></div>
-            <div style="background:#f0fdf4;border-radius:7px;padding:6px 9px;margin-top:7px;font-size:.62rem;color:#15803d;font-weight:700;">TBM 기록 저장 완료</div>
-          </div>
-        </div></div></div>
-      </div>
-    </div></div></div>
-
-    <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <div class="sp-phone-wrap"><div class="sp-phone"><div class="sp-screen">
-          <div class="ps-head" style="background:#0f172a;"><span class="ps-logo">TAI Safe</span><span class="ps-page">법령 업데이트</span></div>
-          <div class="ps-body">
-            <div class="ps-notif nrm"><div class="ps-ni">📜</div><div><div class="ps-nt">산업안전보건법 시행규칙 개정</div><div class="ps-ns">적용일 2026-05-01 · 조문 12건 반영</div></div></div>
-            <div class="ps-notif nrm"><div class="ps-ni">⚡</div><div><div class="ps-nt">의무 템플릿 자동 갱신</div><div class="ps-ns">점검표 v2.1 배포됨</div></div></div>
-            <div class="ps-notif emg" style="border-left-color:#1A5FD4;background:#eff6ff;"><div class="ps-ni">✓</div><div><div class="ps-nt">사업장 맞춤 영향 분석</div><div class="ps-ns">귀사 적용 3건 · 확인 필요</div></div></div>
-            <div style="font-size:.6rem;color:#64748b;margin-top:8px;line-height:1.45;">법령 엔진이 수집·분류한 뒤, 사업장 유형에 맞춰 의무를 다시 계산합니다.</div>
-          </div>
-        </div></div></div>
-      </div>
-      <div class="col-lg-6">
-        <span class="sp-feat-badge">기능 ④</span>
-        <div class="sp-feat-pair"><div class="fp-p">문제 · 개정을 놓치면 곧바로 미이행</div><div class="fp-s">해결 · 엔진이 감지하고 의무를 갱신</div></div>
-        <h3>법이 바뀌어도<br><strong>뒤처지지 않습니다.</strong></h3>
-        <p>아래 법령 엔진 규모처럼 방대한 조문을 사람이 매일 훑기 어렵습니다. 변경이 감지되면 알림과 함께 해야 할 일이 다시 줄 섭니다.</p>
-        <ul class="sp-bullets"><li><span class="dot">✓</span> 개정·고시 수집 파이프라인</li><li><span class="dot">✓</span> 사업장 프로필 기준 매핑</li></ul>
-      </div>
-    </div></div></div>
-
-    <div class="sp-feat"><div class="container"><div class="row align-items-center g-5">
-      <div class="col-lg-6 order-lg-1">
-        <span class="sp-feat-badge">기능 ⑤</span>
-        <div class="sp-feat-pair"><div class="fp-p">문제 · 법정 작업중지, 현장이 늦게 알아챔</div><div class="fp-s">해결 · 기상·기준 자동 대조 + 권고·증빙</div></div>
-        <h3>날씨까지<br><strong>감시하고 있습니다.</strong></h3>
-        <p>기상청 API와 현장 좌표를 연결해 강풍·폭염·한파 등 법정 기준을 주기적으로 확인합니다. 기준이 넘으면 작업중지 권고와 이행 기록이 자동으로 남습니다.</p>
-        <ul class="sp-bullets"><li><span class="dot">✓</span> 30분 간격 자동 확인</li><li><span class="dot">✓</span> 구역·공종별 수신자 지정</li><li><span class="dot">✓</span> 중지·재개 이력 법적 증빙으로 축적</li></ul>
-      </div>
-      <div class="col-lg-6 order-lg-2">
-        <div class="sp-phone-wrap"><div class="sp-phone"><div class="sp-screen">
-          <div class="ps-head" style="background:#0369a1;"><span class="ps-logo">TAI Safe</span><span class="ps-page">기상 감시</span></div>
-          <div class="ps-body" style="padding-top:8px;">
-            <div style="background:#f0f9ff;border-radius:8px;padding:8px 10px;margin-bottom:8px;border:1px solid #bae6fd;">
-              <div style="font-size:.58rem;font-weight:800;color:#0369a1;margin-bottom:4px;">야외크레인 구역 · 기상청 연동</div>
-              <div style="font-size:.78rem;font-weight:900;color:#0c4a6e;">순간풍속 14.2 m/s</div>
-              <div style="font-size:.58rem;color:#64748b;margin-top:3px;">법정 작업중지 기준 14 m/s 근접</div>
+          <div class="flow-arrow">→<small>배분</small></div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-top">오늘의 업무</div>
+              <div style="padding:12px;">
+                <div class="m-card">📋 지게차 일일점검 <span class="m-badge orange">D-0</span><div class="m-btn-row"><span class="m-btn active">시작하기</span></div></div>
+                <div class="m-card">✅ 소화기 월간 점검 <div class="m-foot" style="margin:0;">완료 09:14</div></div>
+                <div class="m-card">🔔 안전교육 <span class="m-badge blue">D-14</span><div class="m-foot" style="margin:0;">미이수</div></div>
+                <div class="m-foot">완료 1 / 대기 2</div>
+              </div>
             </div>
-            <div class="ps-notif emg" style="border-left-color:#0369a1;background:#e0f2fe;"><div class="ps-ni">🌬️</div><div><div class="ps-nt">작업중지 권고 발송</div><div class="ps-ns">현장반장·안전관리자·소장</div></div></div>
-            <div class="ps-notif nrm"><div class="ps-ni">✅</div><div><div class="ps-nt">이행 확인 완료</div><div class="ps-ns">14:05 · 크레인 가동 중지 · 사진 2장</div></div></div>
-            <div style="font-size:.58rem;color:#64748b;line-height:1.45;margin-top:6px;">API 판정값·알림·현장 조치가 한 묶음으로 저장됩니다.</div>
           </div>
-        </div></div></div>
+        </div>
       </div>
-    </div></div></div>
+    </div>
+
+    <!-- 2 점검 → 서류 -->
+    <div class="container feat-pair">
+      <div class="feat-info">
+        <h3>현장에서 체크하면,
+서류는 자동으로 만들어집니다.</h3>
+        <p>작업자가 현장에서 5초 만에 점검 체크. 그 데이터가 법정 서식에 맞춰 자동으로 서류가 됩니다. 엑셀에 옮길 필요 없습니다. 감독관이 오면 PDF 즉시 출력.</p>
+        <div class="feat-check">설비별 맞춤 점검 항목 (법령 기반)</div>
+        <div class="feat-check">이상 발견 시 사진 첨부 + 관리자 자동 알림</div>
+        <div class="feat-check">완료 즉시 법정 서류 자동 생성 + 3년 보관</div>
+      </div>
+      <div class="feat-visual">
+        <div class="flow-pair">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-top">지게차 · 일일점검</div>
+              <div style="padding:10px;">
+                <div class="m-card">
+                  <div class="m-row" style="border:none;padding:0 0 6px;"><span><span class="m-badge gray">전도</span> <span class="m-badge red">필수</span></span></div>
+                  <div style="font-size:.72rem;margin-bottom:6px;">타이어 상태 이상 없음</div>
+                  <div class="m-btn-row"><span class="m-btn active">정상</span><span class="m-btn">이상</span><span class="m-btn">보류</span></div>
+                </div>
+                <div class="m-card">
+                  <div class="m-row" style="border:none;padding:0 0 6px;"><span><span class="m-badge gray">충돌</span> <span class="m-badge red">필수</span></span></div>
+                  <div style="font-size:.72rem;margin-bottom:6px;">브레이크 정상 작동</div>
+                  <div class="m-btn-row"><span class="m-btn active">정상</span><span class="m-btn">이상</span><span class="m-btn">보류</span></div>
+                </div>
+                <div class="m-card">
+                  <div class="m-row" style="border:none;padding:0 0 6px;"><span><span class="m-badge gray">협착</span> <span class="m-badge red">필수</span></span></div>
+                  <div style="font-size:.72rem;margin-bottom:6px;">포크 손상 또는 균열 없음</div>
+                  <div class="m-btn-row"><span class="m-btn">정상</span><span class="m-btn danger">이상</span><span class="m-btn">보류</span></div>
+                </div>
+                <div class="m-stat-row">
+                  <div class="m-stat"><span class="n">5</span><span class="l">완료</span></div>
+                  <div class="m-stat"><span class="n" style="color:#dc2626;">1</span><span class="l">이상</span></div>
+                  <div class="m-stat"><span class="n" style="color:#c2410c;">1</span><span class="l">경고</span></div>
+                </div>
+                <div class="m-btn active" style="display:block;text-align:center;width:100%;">점검 완료 저장</div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">→<small>자동 변환</small></div>
+          <div class="browser-frame">
+            <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 문서관리</div></div>
+            <div class="browser-content">
+              <div class="mock-side">
+                <div class="mock-side-item">대시보드</div>
+                <div class="mock-side-item on">문서관리</div>
+                <div class="mock-side-item">작업근로자</div>
+              </div>
+              <div class="mock-body">
+                <div class="m-title">문서 관리</div>
+                <div class="m-row"><span>📄 지게차 일일점검표</span><span>2026-04-21</span><span class="m-badge blue">자동생성</span><span>PDF</span></div>
+                <div class="m-row"><span>📄 소화기 점검 기록부</span><span>2026-04-20</span><span class="m-badge blue">자동생성</span><span>PDF</span></div>
+                <div class="m-row"><span>📋 TBM 기록 (4월)</span><span>2026-04-21</span><span class="m-badge green">서명완료</span><span>PDF</span></div>
+                <div class="m-row"><span>📊 월간 안전보고서</span><span>2026-03-31</span><span class="m-badge gray">리포트</span><span>PDF</span></div>
+                <div class="m-foot">법정 보존 3년 · 자동 보관</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 법령 개정 자동 반영 (웹만) -->
+    <div class="container feat-pair">
+      <div class="feat-info">
+        <h3>법이 바뀌어도
+뒤처지지 않습니다.</h3>
+        <p>법령 엔진이 개정·고시를 자동으로 수집하고, 귀사 사업장 유형에 맞춰 의무를 다시 계산합니다. 안전관리자가 매일 관보를 확인할 필요가 없습니다.</p>
+        <div class="feat-check">법령 개정 자동 감지 + 알림</div>
+        <div class="feat-check">사업장 프로필 기준 영향 분석</div>
+        <div class="feat-check">점검표·의무 템플릿 자동 갱신</div>
+      </div>
+      <div class="feat-visual">
+        <div class="browser-frame">
+          <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 안전정보</div></div>
+          <div class="browser-content">
+            <div class="mock-side">
+              <div class="mock-side-item">대시보드</div>
+              <div class="mock-side-item on">안전정보</div>
+              <div class="mock-side-item">문서관리</div>
+            </div>
+            <div class="mock-body">
+              <div class="m-title">법령 업데이트</div>
+              <div class="m-card hl">
+                <strong>📜 산업안전보건법 시행규칙 개정</strong>
+                <div class="m-foot">적용일: 2026-05-01 · 변경 조문 12건</div>
+                <hr style="border:none;border-top:1px solid #e2e8f0;margin:8px 0;">
+                <div class="m-foot" style="color:#1e40af;font-weight:700;">⚡ 의무 템플릿 자동 갱신 — 점검표 v2.1 배포됨</div>
+                <div class="m-foot">✓ 사업장 맞춤 영향 분석 — 귀사 적용 3건 · 확인 필요</div>
+                <div class="m-btn-row"><span class="m-btn active">상세보기</span></div>
+              </div>
+              <div class="m-card">
+                <strong>📜 건설기술 진흥법 시행령 일부개정</strong>
+                <div class="m-foot">적용일: 2026-06-01 · 변경 조문 4건</div>
+                <div class="m-foot">✓ 귀사 적용 1건</div>
+              </div>
+              <div class="m-foot">법령 엔진이 자동 수집 → 사업장 매핑 → 의무 갱신</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 기상 작업중지 -->
+    <div class="container feat-pair">
+      <div class="feat-info">
+        <h3>날씨까지
+감시하고 있습니다.</h3>
+        <p>기상청 API와 현장 좌표를 연결해 풍속·기온·강수량을 30분 간격으로 확인합니다. 법정 기준 초과 시 현장에 자동 알림 → 이행 확인까지 한 흐름.</p>
+        <div class="feat-check">기상청 연동 30분 자동 확인</div>
+        <div class="feat-check">법정 기준 초과 시 자동 작업중지 권고</div>
+        <div class="feat-check">중지·재개 이력 법적 증빙으로 축적</div>
+      </div>
+      <div class="feat-visual">
+        <div class="flow-pair">
+          <div class="browser-frame">
+            <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 전용대시보드</div></div>
+            <div class="browser-content">
+              <div class="mock-side">
+                <div class="mock-side-item on">전용대시보드</div>
+                <div class="mock-side-item">문서관리</div>
+              </div>
+              <div class="mock-body">
+                <div class="m-title">기상 감시</div>
+                <div class="m-card">
+                  <div class="m-row" style="border:none;"><span>🌬️ 풍속 14.2 m/s</span><span class="m-badge red">기준 초과</span></div>
+                  <div class="m-row" style="border:none;"><span>🌡️ 기온 35°C</span><span class="m-badge orange">폭염</span></div>
+                  <div class="m-row" style="border:none;"><span>☔ 강수량 0mm</span><span class="m-badge green">정상</span></div>
+                </div>
+                <div class="m-row"><span>04-21 14:05</span><span>크레인 작업중지</span><span>풍속 초과</span><span>✅ 이행</span></div>
+                <div class="m-row"><span>04-18 11:30</span><span>외부작업 중지</span><span>폭염</span><span>✅ 이행</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">→<small>자동 알림</small></div>
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-top alert">⚠ 작업중지 권고</div>
+              <div style="padding:12px;">
+                <div class="m-card">🌬️ 야외크레인 구역<div class="m-foot" style="margin-top:6px;">순간풍속 14.2 m/s<br>법정 기준 14 m/s 초과</div></div>
+                <div class="m-card">작업중지 조치 확인<div class="m-btn-row"><span class="m-btn">사진 첨부</span><span class="m-btn active">이행 확인</span></div></div>
+                <div class="m-foot">✅ 이행 확인 완료 14:05</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 사고 즉시 알림 -->
+    <div class="container feat-pair" style="border-bottom:none;">
+      <div class="feat-info">
+        <h3>사고 발생 1분 안에
+관계자 전원이 알게 됩니다.</h3>
+        <p>현장에서 긴급 신고가 접수되면, 안전관리자·소장·본사까지 즉시 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p>
+        <div class="feat-check">현장 1-tap 긴급 신고 (사진 + 위치)</div>
+        <div class="feat-check">관계자 전원 동시 푸시 알림</div>
+        <div class="feat-check">대응 이력 자동 기록 → 법적 증빙</div>
+      </div>
+      <div class="feat-visual">
+        <div class="flow-pair">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="phone-top alert">🚨 긴급 신고</div>
+              <div style="padding:12px;">
+                <div class="m-card">
+                  <div class="m-foot">발생 시각: 14:23</div>
+                  <div class="m-foot">장소: 2공장 B라인 프레스 #3</div>
+                  <div class="m-foot">상황: 작업자 부상</div>
+                  <div class="m-foot">사진 3장 첨부됨</div>
+                </div>
+                <div class="m-btn active" style="display:block;text-align:center;">신고 접수 완료 ✓</div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-arrow">→<small>1분 이내</small></div>
+          <div class="browser-frame">
+            <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 전용대시보드</div></div>
+            <div class="browser-content">
+              <div class="mock-side">
+                <div class="mock-side-item on">전용대시보드</div>
+                <div class="mock-side-item">문서관리</div>
+              </div>
+              <div class="mock-body">
+                <div class="m-banner">
+                  <div class="m-title" style="margin:0;">🚨 긴급 신고 접수 — 14:23</div>
+                  <div class="m-foot" style="color:#991b1b;">2공장 B라인 프레스 #3 — 작업자 부상 · 신고자: 이반장 · 사진 3장</div>
+                </div>
+                <div class="m-title">알림 발송 현황</div>
+                <div class="m-row"><span>📲 안전관리자</span><span>14:23 발송</span><span>✅ 14:24 확인</span></div>
+                <div class="m-row"><span>📲 소장</span><span>14:23 발송</span><span>✅ 14:25 확인</span></div>
+                <div class="m-row"><span>📲 본사 안전팀</span><span>14:24 발송</span><span class="m-badge orange">대기</span></div>
+                <div class="m-foot">사고 접수 → 전원 알림: 1분 이내</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- S5. 법령 엔진 규모 + 프로세스 -->
+  <!-- ④ 바뀌는 것 — 다이어그램 -->
+  <section style="background:#f8fafc; padding:80px 0;">
+    <div class="container text-center">
+      <h2 class="sp-h2" style="margin-bottom:12px;">혼자 하던 안전관리,<br>전 작업자가 함께합니다</h2>
+      <p style="color:#64748b; margin-bottom:40px; line-height:1.75;">
+        안전관리자 한 사람에게 집중되던 의무를,<br>
+        시스템이 쪼개서 현장과 담당자에게 배분합니다.
+      </p>
+      <div style="max-width:900px; margin:0 auto 24px; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
+        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-11.svg"
+             alt="업무분산 비포애프터" loading="lazy" style="width:100%;">
+      </div>
+      <div style="max-width:900px; margin:0 auto; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:20px;">
+        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-25.svg"
+             alt="TAI 분산 안전관리 구조도" loading="lazy" style="width:100%;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 법령 엔진 규모 -->
   <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="text-center mb-4">
@@ -519,12 +604,12 @@
         <div class="sp-law-nums">
           <div class="sp-law-num">
             <div class="ln-label">등록 법령</div>
-            <div class="ln-val"><span data-sp-count="473">0</span></div>
+            <div class="ln-val"><span data-sp-count="182">0</span></div>
             <div class="ln-sub">행정규칙·고시 연계 포함</div>
           </div>
           <div class="sp-law-num">
             <div class="ln-label">구조화 조문</div>
-            <div class="ln-val"><span data-sp-count="33845" data-sp-sep="1">0</span></div>
+            <div class="ln-val"><span data-sp-count="14935" data-sp-sep="true">0</span></div>
             <div class="ln-sub">의무 추출·버전 관리 단위</div>
           </div>
         </div>
@@ -555,52 +640,20 @@
     </div>
   </section>
 
-  <!-- S6. 처벌 경고 -->
-  <section class="sp-sec sp-sec-dark">
-    <div class="container">
-      <div class="text-center mb-5"><span class="sp-label">중대재해처벌법</span><h2 class="sp-h2">이게 안 되면 어떻게 되나요?</h2><p class="sp-desc">안전보건관리체계를 갖추지 않은 상태에서 중대재해가 발생하면 경영책임자 개인이 형사처벌을 받습니다.</p></div>
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-7"><div class="sp-diagram sp-diagram-dark"><img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-06.svg" alt="과태료·벌칙 구조" loading="lazy" style="filter:brightness(1.05);"><p class="sp-cap">미이행 시 과태료 및 형사처벌 구조</p></div></div>
-        <div class="col-lg-5">
-          <div class="sp-penalty">
-            <div class="sp-penalty-label">중대재해처벌법 제4조</div>
-            <div class="sp-penalty-title">경영책임자가 안전보건 의무를 다하지 않아 중대산업재해가 발생한 경우:</div>
-            <div class="sp-penalty-row"><div class="pr">경영책임자 (개인)</div><div class="pa">1년 이상 징역</div><div class="ps">또는 10억원 이하 벌금</div></div>
-            <div class="sp-penalty-row"><div class="pr">법인 (양벌규정)</div><div class="pa">50억원 이하 벌금</div></div>
-            <p class="sp-penalty-note">TAI Safe는 이 의무 이행의 증거를 자동으로 만듭니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- S7. 도입 4단계 — 하루 만에 -->
+  <!-- ⑥ 도입 절차 — 1일 세팅 강조 -->
   <section class="sp-sec sp-sec-gray">
     <div class="container">
-      <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;">가입·설정·배포까지를 하루 단위로 쪼갠 4단계입니다. 실제 일정은 사업장 규모에 따라 달라질 수 있습니다.</p></div>
-      <p class="sp-adopt-lead">하루 만에 "돌아가는" 최소 루프를 만듭니다</p>
+      <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;">가입·설정·배포까지를 하루 단위로 쪼갠 4단계입니다. <strong>1일 세팅</strong>으로 최소 루프를 돌릴 수 있습니다.</p></div>
+      <p class="sp-adopt-lead">하루 만에 &quot;돌아가는&quot; 최소 루프를 만듭니다</p>
       <div class="sp-adopt-grid mb-5">
         <div class="sp-adopt-card"><div class="ac-n">STEP 1</div><div class="ac-t">무료 법령진단<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">적용 법령·의무 스캔</span></div></div>
         <div class="sp-adopt-card"><div class="ac-n">STEP 2</div><div class="ac-t">사업장 프로필<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">시설·인력 반영</span></div></div>
         <div class="sp-adopt-card"><div class="ac-n">STEP 3</div><div class="ac-t">일정·담당 배치<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">알림 템플릿 켜기</span></div></div>
         <div class="sp-adopt-card"><div class="ac-n">STEP 4</div><div class="ac-t">현장 앱 배포<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">QR·점검 즉시</span></div></div>
       </div>
-      <div class="sp-diagram" style="max-width:640px;margin:0 auto;padding:0 8px 8px;">
-        <svg viewBox="0 0 560 220" width="100%" height="220" xmlns="http://www.w3.org/2000/svg" style="display:block;" role="img" aria-labelledby="spAdoptVisTitle">
-          <title id="spAdoptVisTitle">오늘과 내일 일정 시각화</title>
-          <rect width="560" height="220" rx="14" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
-          <text x="280" y="36" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="900" font-family="Noto Sans KR,sans-serif">캘린더 스냅샷</text>
-          <rect x="40" y="60" width="220" height="120" rx="10" fill="#fef2f2" stroke="#fecaca"/>
-          <text x="150" y="92" text-anchor="middle" fill="#991b1b" font-size="12" font-weight="800" font-family="Noto Sans KR,sans-serif">Day 0 · 오늘</text>
-          <text x="150" y="118" text-anchor="middle" fill="#64748b" font-size="10" font-family="Noto Sans KR,sans-serif">가입 · 진단 · 설정</text>
-          <path d="M290 118 L330 118" stroke="#1A5FD4" stroke-width="3" marker-end="url(#adm)"/>
-          <defs><marker id="adm" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#1A5FD4"/></marker></defs>
-          <rect x="340" y="60" width="180" height="120" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
-          <text x="430" y="92" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="800" font-family="Noto Sans KR,sans-serif">Day 1 · 내일</text>
-          <text x="430" y="118" text-anchor="middle" fill="#64748b" font-size="10" font-family="Noto Sans KR,sans-serif">첫 점검·알림 발송</text>
-          <text x="280" y="198" text-anchor="middle" fill="#1A5FD4" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">"내일 아침, 담당자 폰에 첫 할 일이 뜹니다"</text>
-        </svg>
-        <p class="sp-cap">가입 당일에 데이터가 들어오면, 다음 영업일부터 리마인더가 움직이기 시작합니다.</p>
+      <div style="max-width:800px; margin:32px auto;">
+        <img src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-24.svg"
+             alt="TAI Safe 도입 4단계" loading="lazy" style="width:100%;">
       </div>
       <div class="sp-setup-box">
         <span class="ss-ico" aria-hidden="true">🛠️</span>
