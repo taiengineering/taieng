@@ -396,10 +396,51 @@
   }
   .btn-outline-diag:hover { background: var(--navy); color: #fff; }
 
+  .diag-mid-cta { text-align: center; padding: 32px 16px; }
+  .diag-mid-cta a { color: #1565c0; font-weight: 800; font-size: .95rem; text-decoration: none; }
+  .diag-mid-cta a:hover { text-decoration: underline; }
+  .diag-pilot { background: #0f172a; padding: 48px 0; text-align: center; }
+  .diag-faq { padding: 72px 0; background: var(--gray-bg); border-top: 1px solid var(--border); }
+  .diag-faq .container { max-width: 720px; }
+  .diag-faq details {
+    border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; background: #fff;
+  }
+  .diag-faq summary { font-weight: 800; font-size: .95rem; color: var(--navy); cursor: pointer; list-style: none; }
+  .diag-faq summary::-webkit-details-marker { display: none; }
+  .diag-faq details p { margin: 12px 0 0; font-size: .88rem; color: #64748b; line-height: 1.7; }
+  .mock-context-badge {
+    display: inline-block; background: var(--navy); color: #fff; font-size: .72rem; font-weight: 800;
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; letter-spacing: .02em;
+  }
+  .mock-law-list.diag-law-full { list-style: none; padding: 0; margin: 0; }
+  .mock-law-list.diag-law-full li {
+    font-size: .78rem; color: #334155; padding: 8px 0; border-bottom: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
+  }
+  .diag-law-lock { font-size: .68rem; font-weight: 700; color: #94a3b8; white-space: nowrap; }
+  .diag-killer-wrap {
+    background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #93c5fd; border-radius: 18px; padding: 28px 24px 32px; margin-bottom: 28px;
+  }
+  .diag-killer-wrap h3 { font-size: 1.25rem; font-weight: 900; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
+  .diag-killer-wrap .lead { font-size: .9rem; color: #475569; line-height: 1.7; margin-bottom: 20px; }
+  .diag-killer-buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; margin-top: 20px; }
+  .diag-sample-btn {
+    display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--navy);
+    font-weight: 800; font-size: 1rem; padding: 16px 32px; border-radius: 12px; text-decoration: none;
+    border: 2px solid var(--navy); box-shadow: 0 4px 16px rgba(15,43,74,.12);
+  }
+  .diag-sample-btn:hover { background: var(--navy); color: #fff; }
+  .diag-value-small-grid .value-mini {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px 14px; height: 100%;
+  }
+  .diag-value-small-grid .value-mini h4 { font-size: .88rem; font-weight: 800; color: var(--navy); margin: 0 0 8px; }
+  .diag-value-small-grid .value-mini p { font-size: .78rem; color: #64748b; line-height: 1.55; margin: 0; }
+
   @media (max-width: 991px) {
     .diag-hero { padding: 70px 0 50px; }
     .before-section, .after-section, .merit-section, .why-section, .price-section, .final-section,
-    .mock-section, .saas-connect-section { padding: 64px 0; }
+    .mock-section, .saas-connect-section, .diag-faq, .diag-pilot { padding: 64px 0; }
     .after-result { margin-top: 24px; }
     .diag-flow-grid { flex-direction: column; align-items: stretch; }
     .diag-flow-tile { max-width: none; }
@@ -434,6 +475,11 @@
           <a href="../free-diagnosis.html" class="btn-hero">무료로 지금 확인하기 →</a>
           <a href="#paid-value" class="btn-hero-ghost">유료 진단 보기 ↓</a>
         </div>
+        <p style="color:rgba(255,255,255,.5);font-size:.82rem;margin-top:14px;margin-bottom:0;">
+          건물: 주소·면적·용도 등 8항목 &nbsp;|&nbsp;
+          산업: 주소·업종·인원수·면적 4항목 &nbsp;|&nbsp;
+          건설: 주소·공사금액 등 4항목
+        </p>
       </div>
       <div class="col-lg-6">
         <div class="diag-hero-img">
@@ -486,347 +532,7 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     S2. 3분 입력 → 즉시 결과
-══════════════════════════════════════ -->
-<section class="after-section" id="diag-flow">
-  <div class="container">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-9 text-center">
-        <span class="diag-label">흐름</span>
-        <h2 class="sec-title">3분 입력 → 즉시 결과</h2>
-        <p class="sec-desc">입력 → 분석 → 무료 결과 확인 → 필요 시 유료 리포트로 실행 가이드까지 이어집니다.</p>
-        <div class="diag-flow-stats">
-          <span>182개 법령</span> · <span>14,935개 조문</span> · <span>3,831개 규칙</span>
-        </div>
-      </div>
-    </div>
-    <div class="diag-flow-grid justify-content-center mb-4">
-      <div class="diag-flow-tile">
-        <div class="dft-num">1</div>
-        <div class="dft-title">입력<br><small style="font-weight:600;color:#64748b;">약 3분</small></div>
-        <p class="dft-desc">업종·규모·인원·설비를 선택형으로 입력합니다.</p>
-      </div>
-      <div class="diag-flow-join" aria-hidden="true">→</div>
-      <div class="diag-flow-tile">
-        <div class="dft-num">2</div>
-        <div class="dft-title">분석<br><small style="font-weight:600;color:#64748b;">즉시</small></div>
-        <p class="dft-desc">법령 엔진이 조문 단위로 해당 여부를 판단합니다.</p>
-      </div>
-      <div class="diag-flow-join" aria-hidden="true">→</div>
-      <div class="diag-flow-tile">
-        <div class="dft-num">3</div>
-        <div class="dft-title">결과<br><small style="font-weight:600;color:#64748b;">바로 확인</small></div>
-        <p class="dft-desc">적용 법령·선임·점검·조치 건수와 위험등급을 확인합니다.</p>
-      </div>
-      <div class="diag-flow-join" aria-hidden="true">→</div>
-      <div class="diag-flow-tile">
-        <div class="dft-num">4</div>
-        <div class="dft-title">유료<br><small style="font-weight:600;color:#1565c0;">업그레이드</small></div>
-        <p class="dft-desc">20페이지 넘는 실행 가이드·판례·과태료 합산 등 전체 리포트.</p>
-      </div>
-    </div>
-    <div class="row g-4 align-items-stretch justify-content-center">
-      <div class="col-lg-10">
-        <div class="after-result">
-          <h3>진단 후 달라지는 것</h3>
-          <ul>
-            <li>뭐가 적용되는지 더 이상 모르지 않습니다</li>
-            <li>감독관이 와도 당황하지 않습니다</li>
-            <li>법이 바뀌면 자동으로 알려줍니다</li>
-            <li>점검 항목이 자동 생성되어 빠뜨리지 않습니다</li>
-            <li>컨설팅보다 정확하고, 비용은 훨씬 저렴합니다</li>
-            <li>웹·PDF 리포트로 관리 의지와 근거를 남길 수 있습니다</li>
-          </ul>
-          <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
-            <a href="../free-diagnosis.html" class="btn btn-base" style="background:#fff;color:#0f2b4a;border-color:#fff;font-weight:800;padding:13px 24px;display:inline-flex;align-items:center;line-height:1.2;">지금 무료로 확인하기 →</a>
-            <a href="#free-sample" style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;text-decoration:underline;">무료 결과 샘플 보기</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S3. 무료 진단 결과 샘플
-══════════════════════════════════════ -->
-<section class="mock-section alt" id="free-sample">
-  <div class="container">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-8 text-center">
-        <span class="diag-label">무료 결과</span>
-        <h2 class="sec-title">무료로 이만큼 알 수 있습니다</h2>
-        <p class="sec-desc">3분 입력만으로 적용 법령, 선임 의무, 점검 항목, 위험등급까지. 회원가입 없이, 비용 없이, 바로 확인할 수 있습니다.</p>
-      </div>
-    </div>
-    <div class="browser-mock">
-      <div class="bm-bar">
-        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="bm-url">new.taieng.co.kr/diagnosis-result</div>
-      </div>
-      <div class="bm-body">
-        <span class="badge-high">위험등급: HIGH</span>
-        <div class="mock-summary-box">
-          <h4>종합 분석</h4>
-          <div class="mock-summary-grid">
-            <div>적용 법령 <strong style="color:var(--blue);font-size:1rem;">12개</strong></div>
-            <div>선임 의무 <strong style="color:var(--blue);font-size:1rem;">3건</strong></div>
-            <div>정기 점검 <strong style="color:var(--blue);font-size:1rem;">18건</strong></div>
-            <div>즉시 조치 <strong style="color:var(--blue);font-size:1rem;">15건</strong></div>
-          </div>
-        </div>
-        <p style="font-size:.8rem;font-weight:800;color:var(--navy);margin:0 0 8px;">적용 법령 목록</p>
-        <ul class="mock-law-list">
-          <li>산업안전보건법</li>
-          <li>중대재해처벌법</li>
-          <li>건설기술 진흥법</li>
-          <li>소방시설법</li>
-          <li style="color:#94a3b8;">… 외 8개</li>
-        </ul>
-        <div style="margin-top:18px;text-align:center;">
-          <a href="#paid-value" class="btn-outline-diag" style="font-size:.82rem;padding:10px 18px;">유료 진단으로 상세 분석 받기 →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S4. 유료 리포트의 가치
-══════════════════════════════════════ -->
-<section class="mock-section" id="paid-value">
-  <div class="container">
-    <div class="row justify-content-center mb-3">
-      <div class="col-lg-10 text-center">
-        <span class="diag-label">유료 리포트</span>
-        <h2 class="sec-title">유료를 선택하면 이렇게 받습니다</h2>
-        <p class="sec-desc">PDF 한 줄이 아니라, 20페이지가 넘는 실행 가이드와 웹 리포트입니다. 판례 연동, 과태료 합산, 법령 원문까지 한 화면에서 이어집니다.</p>
-      </div>
-    </div>
-    <div class="compare-wrap">
-      <div class="compare-head">무료와 유료의 차이</div>
-      <div class="compare-row">
-        <div class="compare-cell free"><strong>무료 결과</strong>적용 법령 목록 · 선임/점검/조치 건수 · 위험등급까지 즉시 확인합니다.</div>
-        <div class="compare-cell paid"><strong>유료 리포트</strong>의무별 실행 가이드 카드, 기한·서류·신고 시스템, 과태료 합산 총액, 점검 타임라인(월/분기/연), 관련 판례, 관공서 점검 대응 가이드, 출력용 체크리스트, 법령 조문 원문, 기안 PDF, 인터랙티브 웹 리포트까지 포함됩니다.</div>
-      </div>
-      <div class="compare-row" style="background:#f8fafc;">
-        <div class="compare-cell free" style="text-align:center;font-weight:800;padding:16px;">
-          <a href="../free-diagnosis.html" style="color:var(--navy);">무료 진단 시작 →</a>
-        </div>
-        <div class="compare-cell paid" style="text-align:center;font-weight:800;padding:16px;background:#dbeafe;">
-          <a href="#pricing" style="color:var(--navy);">유료로 업그레이드 (요금 보기) →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="value-detail-grid">
-      <div class="value-block">
-        <h4>① 의무별 실행 가이드 카드</h4>
-        <p class="vb-lead">“뭘 해야 하는지”가 아니라 “어떻게 하는지”까지. 빈 필드는 자동 숨김, 있는 정보만 보여줍니다. 다른 서비스는 법령 목록만 줍니다. TAI는 실행 가이드를 줍니다.</p>
-        <div class="exec-card-mock">
-          <div class="ec-head">
-            <span class="ec-title">안전관리자 선임</span>
-            <span class="ec-badge">선임</span>
-          </div>
-          <dl>
-            <dt>기한</dt><dd>사유 발생 후 14일 이내</dd>
-            <dt>수행</dt><dd>사업주</dd>
-            <dt>서류</dt><dd>기본안전보건대장</dd>
-            <dt>신고</dt><dd>산업안전보건공단 → 바로가기</dd>
-            <dt>보관</dt><dd>관할 기관 제출</dd>
-            <dt>과태료</dt><dd>5천만원 이하</dd>
-            <dt>근거</dt><dd>산업안전보건법 제17조</dd>
-          </dl>
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>② 관련 판례 <span style="font-size:.68rem;background:#fef3c7;color:#b45309;padding:2px 8px;border-radius:4px;">NEW</span></h4>
-        <p class="vb-lead">각 의무 항목에 실제 판례가 연결됩니다. “이 의무를 안 하면 실제로 이런 일이 생겼습니다.” 사장님 설득에 가장 강한 근거가 됩니다.</p>
-        <div style="font-size:.78rem;color:#334155;line-height:1.65;">
-          <p style="margin:0 0 10px;"><strong>대법원 2024다12345</strong><br>안전관리자 미선임 상태에서 작업자 사망 → 징역 1년 6월 / 벌금 5천만원 · 사망 1명 · 건설업</p>
-          <p style="margin:0;"><strong>서울고법 2023나67890</strong><br>점검 기록 미보관 → 감독관 적발 → 과태료 3천만원 확정</p>
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>③ 과태료 합산 총액</h4>
-        <p class="vb-lead">전 항목 미이행 시 예상 최대 과태료를 한 숫자로 보여줍니다. 중대재해법 벌금은 별도 안내합니다.</p>
-        <div style="text-align:center;padding:16px;background:#fff7ed;border-radius:10px;border:1px solid #fed7aa;">
-          <div style="font-size:.72rem;color:#9a3412;font-weight:700;">전 항목 미이행 시 예상 최대 과태료</div>
-          <div style="font-size:1.6rem;font-weight:900;color:#c2410c;margin-top:6px;">약 2억 3천만원</div>
-          <div style="font-size:.7rem;color:#94a3b8;margin-top:6px;">* 중대재해법 벌금 별도</div>
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>④ 점검 타임라인</h4>
-        <p class="vb-lead">연간 점검 계획이 자동으로 정리됩니다. SaaS에 연결하면 캘린더·알림까지 이어집니다.</p>
-        <div class="timeline-mock">
-          <div class="tl-row"><span class="tl-label">매월</span>가설구조물 점검 · 방호장치 기능점검</div>
-          <div class="tl-row"><span class="tl-label">분기</span>안전점검 (정기)</div>
-          <div class="tl-row"><span class="tl-label">반기</span>소방시설 자체점검</div>
-          <div class="tl-row"><span class="tl-label">연간</span>크레인 정기검사 · 전기설비 점검</div>
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>⑤ 관공서 점검 대응 가이드</h4>
-        <p class="vb-lead">“점검관이 이런 걸 확인합니다” — 선임·점검·조치별로 어떤 서류를 꺼내야 하는지 미리 정리합니다.</p>
-        <ul style="font-size:.78rem;color:#334155;margin:0;padding-left:1.1em;line-height:1.65;">
-          <li>선임 의무: 안전관리자 선임 신고서 사본이 있습니까?</li>
-          <li>점검 의무: 법정 점검 기록부가 최근 3년간 보관되어 있습니까?</li>
-          <li>조치 의무: 위험성평가 보고서가 작성되어 있습니까?</li>
-        </ul>
-      </div>
-      <div class="value-block">
-        <h4>⑥ 체크리스트 (출력용)</h4>
-        <p class="vb-lead">프린트해서 현장에 붙이고, 하나씩 체크하며 이행할 수 있습니다.</p>
-        <div class="checklist-mock">
-          ☐ 안전관리자 선임 (산안법 제17조) — 5천만원<br>
-          ☐ 가설구조물 점검 (산안기준규칙 제75조)<br>
-          ☐ 소방안전관리자 선임 (소방법 제24조)<br>
-          ☐ 위험성평가 실시 (산안법 제36조)<br>
-          <span style="color:#94a3b8;">… 이하 생략</span>
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>⑦ 법령 조문 원문 보기</h4>
-        <p class="vb-lead">182개 법령 · 14,935개 조문을 TAI 자체 DB에서 바로 열람합니다. law.go.kr을 뒤질 필요 없이 원문을 확인합니다.</p>
-        <div class="law-snippet">
-          <strong style="color:var(--navy);font-size:.75rem;">산업안전보건법 제17조 (안전관리자)</strong><br>
-          ① 사업주는 사업장에 … 안전에 관한 기술적인 사항에 관하여 안전관리자를 두어야 한다.<br>
-          ② 안전관리자를 두어야 하는 사업의 종류와…
-        </div>
-      </div>
-      <div class="value-block">
-        <h4>⑧ 기안 PDF (품의서 첨부용)</h4>
-        <p class="vb-lead">사장님께 “이것부터 해야 합니다”를 보고하는 문서입니다. 결재란 없이 순수 분석 보고서 형태로, 예산·품의 첨부 근거로 활용할 수 있습니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S5. 유료 리포트 화면 목업
-══════════════════════════════════════ -->
-<section class="mock-section alt">
-  <div class="container">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-9 text-center">
-        <span class="diag-label">화면</span>
-        <h2 class="sec-title">유료 진단 리포트는 이렇게 생겼습니다</h2>
-        <p class="sec-desc">20페이지가 넘는 인터랙티브 웹 리포트입니다. PDF도 다운로드할 수 있고, 웹에서 바로 펼쳐 보는 것이 더 강력합니다. 각 항목을 클릭하면 법령 원문과 판례까지 이어집니다.</p>
-        <p style="margin-top:14px;">
-          <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" class="btn-outline-diag">실제 유료 리포트 샘플 보기 →</a>
-        </p>
-      </div>
-    </div>
-    <div class="browser-mock" style="max-width:900px;">
-      <div class="bm-bar">
-        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div class="bm-url">new.taieng.co.kr/paid-diagnosis-result</div>
-      </div>
-      <div class="bm-body" style="padding:0;">
-        <div class="paid-app-mock" style="border:none;border-radius:0;min-height:320px;">
-          <div class="pam-side">
-            <div class="logo">TAI</div>
-            <div class="sub">○○건설 현장</div>
-            <ul>
-              <li class="on">종합 분석</li>
-              <li>실행 가이드</li>
-              <li>판례</li>
-              <li>체크리스트</li>
-            </ul>
-          </div>
-          <div class="pam-main">
-            <div class="pam-block">
-              <strong style="color:var(--navy);font-size:.8rem;">종합 분석</strong>
-              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">위험도 게이지 · 도넛 차트 · 과태료 합산 요약이 상단에 배치됩니다.</p>
-            </div>
-            <div class="pam-block">
-              <strong style="color:var(--navy);font-size:.8rem;">실행 가이드 카드</strong>
-              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">기한·수행주체·서류·신고·과태료·근거 조문이 카드 단위로 정리됩니다.</p>
-            </div>
-            <div class="pam-block">
-              <strong style="color:var(--navy);font-size:.8rem;">판례 · 체크리스트</strong>
-              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">의무와 연결된 실제 판결 요지와 출력용 체크리스트가 하단에 이어집니다.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S6. TAI 법령진단이 다른 이유
-══════════════════════════════════════ -->
-<section class="merit-section">
-  <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-8 text-center">
-        <span class="diag-label">장점</span>
-        <h2 class="sec-title">TAI 법령진단이 다른 이유</h2>
-        <p class="sec-desc">컨설턴트에게 맡기거나, 법령을 직접 읽거나, 아무것도 안 하는 것. 세 가지 중 가장 정확하고 저렴한 선택입니다.</p>
-      </div>
-    </div>
-    <div class="row g-4">
-      <div class="col-lg-3 col-md-6">
-        <div class="merit-card">
-          <span class="mc-icon">🎯</span>
-          <div class="mc-tag">정확성</div>
-          <h4>사람이 아닌 엔진이 판단합니다</h4>
-          <p>컨설턴트는 놓칠 수 있습니다. TAI 법령 엔진은 182개 법령 · 14,935개 조문 · 3,831개 규칙을 조문 단위로 매핑합니다.</p>
-          <div class="mc-stat">182<small> 법령</small></div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="merit-card" style="border-top-color:#16a34a;">
-          <span class="mc-icon">📄</span>
-          <div class="mc-tag" style="color:#16a34a;background:#dcfce7;">증거 문서</div>
-          <h4>감독관 대응용 리포트가 생성됩니다</h4>
-          <p>유료 진단 리포트는 단순한 결과물이 아닙니다. "우리는 법을 알고 관리하고 있다"를 보여주는 공식 증거 서류입니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="merit-card" style="border-top-color:#d97706;">
-          <span class="mc-icon">🔄</span>
-          <div class="mc-tag" style="color:#d97706;background:#fef3c7;">법 개정 대응</div>
-          <h4>법이 바뀌어도 자동으로 따라갑니다</h4>
-          <p>중대재해처벌법은 계속 바뀝니다. TAI는 법 개정을 감지해 의무 항목을 자동으로 갱신하고 알림을 보냅니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="merit-card" style="border-top-color:#7c3aed;">
-          <span class="mc-icon">💰</span>
-          <div class="mc-tag" style="color:#7c3aed;background:#ede9fe;">비용 효율</div>
-          <h4>컨설팅 비용의 수십 분의 일입니다</h4>
-          <p>안전 컨설팅은 1회 수백만 원입니다. TAI 유료 진단은 업종·규모에 따라 수만 원대로 같은 결과를 얻을 수 있습니다.</p>
-        </div>
-      </div>
-    </div>
-    <div class="row g-4 justify-content-center mt-1">
-      <div class="col-lg-6 col-md-6">
-        <div class="merit-card" style="border-top-color:#0ea5e9;">
-          <span class="mc-icon">⚖️</span>
-          <div class="mc-tag" style="color:#0369a1;background:#e0f2fe;">판례 연동</div>
-          <h4>법령만이 아니라, 실제 판결이 붙습니다</h4>
-          <p>그 법을 위반했을 때 실제로 어떤 판결이 나왔는지 — 사망·부상·벌금·징역 등 실제 사례를 의무 항목에 연결합니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-6 col-md-6">
-        <div class="merit-card" style="border-top-color:#059669;">
-          <span class="mc-icon">📱</span>
-          <div class="mc-tag" style="color:#047857;background:#d1fae5;">SaaS 자동 연동</div>
-          <h4>진단에서 운영으로 끊김 없이</h4>
-          <p>진단 결과가 TAI Safe에 바로 연결됩니다. 점검 일정 자동 생성 → 담당자 배정 → 알림 발송까지 이어집니다.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     S7. 중대재해법 · 처벌 경고
-══════════════════════════════════════ -->
+<!-- 처벌 경고 (겁 → 해결 순서) -->
 <section class="why-section">
   <div class="container">
     <div class="row justify-content-center mb-5">
@@ -843,7 +549,7 @@
             <div class="law-card">
               <div class="lc-label">중대재해처벌법</div>
               <h4>경영책임자가 직접 형사처벌을 받습니다</h4>
-              <p>안전보건관리체계를 갖추지 않은 상태에서 중대재해가 발생하면 대표이사 개인이 형사처벌 대상이 됩니다. 법인 벌금이 아닌 대표 개인 징역입니다.</p>
+              <p>안전보건관리체계를 갖추지 않은 상태에서 중대산업재해가 발생하면 대표이사 개인이 형사처벌 대상이 됩니다. 법인 벌금이 아닌 대표 개인 징역입니다.</p>
             </div>
           </div>
           <div class="col-md-6">
@@ -892,8 +598,201 @@
   </div>
 </section>
 
+<div class="diag-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
+
 <!-- ══════════════════════════════════════
-     S8. 산업별 가격표 + 결제
+     3분 입력 → 즉시 결과
+══════════════════════════════════════ -->
+<section class="after-section" id="diag-flow">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-9 text-center">
+        <span class="diag-label">흐름</span>
+        <h2 class="sec-title">3분 입력 → 즉시 결과</h2>
+        <p class="sec-desc">입력 → 분석 → 무료 결과 확인 → 필요 시 유료 리포트로 실행 가이드까지 이어집니다.</p>
+        <div class="diag-flow-stats">
+          <span>182개 법령</span> · <span>14,935개 조문</span> · <span>3,831개 규칙</span>
+        </div>
+      </div>
+    </div>
+    <div class="diag-flow-grid justify-content-center mb-4">
+      <div class="diag-flow-tile">
+        <div class="dft-num">1</div>
+        <div class="dft-title">입력<br><small style="font-weight:600;color:#64748b;">약 3분</small></div>
+        <p class="dft-desc">업종·규모·인원·설비를 선택형으로 입력합니다.</p>
+      </div>
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">2</div>
+        <div class="dft-title">분석<br><small style="font-weight:600;color:#64748b;">즉시</small></div>
+        <p class="dft-desc">법령 엔진이 조문 단위로 해당 여부를 판단합니다.</p>
+      </div>
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">3</div>
+        <div class="dft-title">결과<br><small style="font-weight:600;color:#64748b;">바로 확인</small></div>
+        <p class="dft-desc">적용 법령·선임·점검·조치 건수와 위험등급을 확인합니다.</p>
+      </div>
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">4</div>
+        <div class="dft-title">유료<br><small style="font-weight:600;color:#1565c0;">업그레이드</small></div>
+        <p class="dft-desc">20페이지 넘는 실행 가이드·판례·과태료 합산 등 전체 리포트.</p>
+      </div>
+    </div>
+    <div class="row g-4 align-items-stretch justify-content-center">
+      <div class="col-lg-10">
+        <div class="after-result">
+          <h3>진단 후 달라지는 것</h3>
+          <ul>
+            <li>뭐가 적용되는지 더 이상 모르지 않습니다</li>
+            <li>감독관이 와도 당황하지 않습니다</li>
+            <li>개정된 최신법 기준으로 진단합니다</li>
+            <li>점검 항목이 자동 생성되어 빠뜨리지 않습니다</li>
+            <li>컨설팅보다 정확하고, 비용은 훨씬 저렴합니다</li>
+            <li>웹·PDF 리포트로 관리 의지와 근거를 남길 수 있습니다</li>
+          </ul>
+          <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
+            <a href="../free-diagnosis.html" class="btn btn-base" style="background:#fff;color:#0f2b4a;border-color:#fff;font-weight:800;padding:13px 24px;display:inline-flex;align-items:center;line-height:1.2;">지금 무료로 확인하기 →</a>
+            <a href="#free-sample" style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;text-decoration:underline;">무료 결과 샘플 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S3. 무료 진단 결과 샘플
+══════════════════════════════════════ -->
+<section class="mock-section alt" id="free-sample">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8 text-center">
+        <span class="diag-label">무료 결과</span>
+        <h2 class="sec-title">무료로 이만큼 알 수 있습니다</h2>
+        <p class="sec-desc">3분 입력만으로 적용 법령, 선임 의무, 점검 항목, 위험등급까지. 회원가입 없이, 비용 없이, 바로 확인할 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="browser-mock">
+      <div class="bm-bar">
+        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="bm-url">new.taieng.co.kr/diagnosis-result</div>
+      </div>
+      <div class="bm-body">
+        <span class="badge-high">위험등급: HIGH</span>
+        <div class="mock-context-badge">제조업 · 50인 · 500㎡ 기준</div>
+        <div class="mock-summary-box">
+          <h4>종합 분석</h4>
+          <div class="mock-summary-grid">
+            <div>적용 법령 <strong style="color:var(--blue);font-size:1rem;">12개</strong></div>
+            <div>선임 의무 <strong style="color:var(--blue);font-size:1rem;">3건</strong></div>
+            <div>정기 점검 <strong style="color:var(--blue);font-size:1rem;">18건</strong></div>
+            <div>즉시 조치 <strong style="color:var(--blue);font-size:1rem;">15건</strong></div>
+          </div>
+        </div>
+        <p style="font-size:.8rem;font-weight:800;color:var(--navy);margin:0 0 8px;">적용 법령 목록 <span style="font-weight:600;color:#64748b;">(각 법령별 실행 가이드는 유료)</span></p>
+        <ul class="mock-law-list diag-law-full">
+          <li>산업안전보건법 <span class="diag-law-lock" aria-hidden="true">🔒 실행 가이드 → 유료</span></li>
+          <li>중대재해처벌법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>건설기술 진흥법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>소방시설법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>위험물안전관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>고압가스 안전관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>전기사업법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>산업안전보건기준에 관한 규칙 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>산업재해보상보험법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>화학물질관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>폐기물관리법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+          <li>대기환경보전법 <span class="diag-law-lock">🔒 실행 가이드 → 유료</span></li>
+        </ul>
+        <div style="margin-top:18px;text-align:center;">
+          <a href="#paid-value" class="btn-outline-diag" style="font-size:.82rem;padding:10px 18px;">유료 진단으로 상세 분석 받기 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S4. 유료 리포트의 가치
+══════════════════════════════════════ -->
+<section class="mock-section" id="paid-value">
+  <div class="container">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-10 text-center">
+        <span class="diag-label">유료 리포트</span>
+        <h2 class="sec-title">유료를 선택하면 이렇게 받습니다</h2>
+        <p class="sec-desc">“뭘 해야 하는지”를 넘어 “어떻게 하는지”까지. 판례·과태료·체크리스트·웹 리포트가 한 흐름으로 이어집니다.</p>
+      </div>
+    </div>
+    <div class="compare-wrap">
+      <div class="compare-head">무료와 유료의 차이</div>
+      <div class="compare-row">
+        <div class="compare-cell free"><strong>무료 결과</strong>적용 법령·의무 목록, 선임·점검·조치 건수, 위험등급을 바로 확인합니다. 법령별 실행 방법(가이드)은 유료 리포트에서 제공됩니다.</div>
+        <div class="compare-cell paid"><strong>유료 리포트</strong>의무별 실행 가이드 카드(기한·수행자·서류·신고·과태료), 관련 판례, 과태료 합산, 점검 타임라인, 출력용 체크리스트, 법령 조문 원문, 기안 PDF, 인터랙티브 웹 리포트까지 포함됩니다.</div>
+      </div>
+      <div class="compare-row" style="background:#f8fafc;">
+        <div class="compare-cell free" style="text-align:center;font-weight:800;padding:16px;">
+          <a href="../free-diagnosis.html" style="color:var(--navy);">무료 진단 시작 →</a>
+        </div>
+        <div class="compare-cell paid" style="text-align:center;font-weight:800;padding:16px;background:#dbeafe;">
+          <a href="#pricing" style="color:var(--navy);">유료로 업그레이드 (요금 보기) →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="diag-killer-wrap">
+      <div class="text-center mb-2" style="font-size:2rem;line-height:1;" aria-hidden="true">⚖️</div>
+      <h3 class="text-center" style="margin-top:0;">의무별 실행 가이드 + 관련 판례</h3>
+      <p class="lead text-center" style="max-width:640px;margin-left:auto;margin-right:auto;">“뭘 해야 하는지”가 아니라 “어떻게 하는지”까지.<br>그리고 “안 하면 어떻게 되는지” — 실제 판례까지.</p>
+      <div class="exec-card-mock" style="max-width:520px;margin:0 auto;">
+        <div class="ec-head">
+          <span class="ec-title">안전관리자 선임</span>
+          <span class="ec-badge">선임</span>
+        </div>
+        <dl>
+          <dt>기한</dt><dd>사유 발생 후 14일 이내</dd>
+          <dt>수행</dt><dd>사업주</dd>
+          <dt>서류</dt><dd>기본안전보건대장</dd>
+          <dt>신고</dt><dd>산업안전보건공단</dd>
+          <dt>과태료</dt><dd>5천만원 이하</dd>
+          <dt>판례</dt><dd>안전관리자 미선임 → 사망사고, 징역 1년 6월 · 벌금 5천만원 등 <em style="color:#64748b;font-size:.72rem;">(실제 판례 기반 — 상세 번호는 리포트에서 확인)</em></dd>
+        </dl>
+      </div>
+      <div class="diag-killer-buttons">
+        <a href="diagnosis-sample.html" class="diag-sample-btn">📄 유료 리포트 샘플 보기 →</a>
+        <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" class="btn-outline-diag">실제 인터랙티브 리포트 열기 →</a>
+      </div>
+    </div>
+
+    <div class="row g-3 diag-value-small-grid">
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>과태료 합산</h4><p>전 항목 미이행 시 예상 최대 과태료를 한 숫자로. 중대재해법 벌금은 별도 안내합니다.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>점검 타임라인</h4><p>월·분기·반기·연간 점검 일정을 자동으로 정리합니다.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>체크리스트 (출력용)</h4><p>프린트해서 현장에 붙이고 이행 여부를 체크할 수 있습니다.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>법령 원문</h4><p>TAI DB에서 조문 단위로 바로 열람합니다.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>기안 PDF</h4><p>품의서 첨부용 순수 분석 보고서입니다.</p></div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="value-mini"><h4>웹 인터랙티브 리포트</h4><p>클릭으로 의무·판례·근거 조문까지 연결되는 웹 리포트입니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="diag-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
+
+<!-- ══════════════════════════════════════
+     가격표 + 결제
 ══════════════════════════════════════ -->
 <section class="price-section" id="pricing">
   <div class="container">
@@ -901,7 +800,7 @@
       <div class="col-lg-8 text-center">
         <span class="diag-label">요금</span>
         <h2 class="sec-title">산업별 진단 요금</h2>
-        <p class="sec-desc">사업장 유형을 선택하면 해당 요금을 확인할 수 있습니다. 무료 진단은 업종 구분 없이 누구나 시작할 수 있습니다.</p>
+        <p class="sec-desc">사업장 유형을 선택하면 해당 요금을 확인할 수 있습니다. 각 업종에 맞는 입력 항목으로 진단합니다. 무료 진단도 섹터별 전용 폼입니다.</p>
       </div>
     </div>
 
@@ -915,7 +814,7 @@
     <div class="sector-panel active" id="panel-building">
       <div class="sector-note">
         <span>🏢</span>
-        <span><strong>건물·시설</strong> — 소방·전기·승강기·냉동기 등 건물 안전관리 의무를 대상으로 합니다. 면적 5,000㎡ 기준으로 요금이 자동 구분됩니다.</span>
+        <span><strong>건물·시설</strong> — 건물 면적에 따라 적용되는 법조항이 달라집니다. 연면적 5,000㎡를 기준으로 요금이 자동 구분됩니다.</span>
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-lg-4 col-md-6">
@@ -926,20 +825,21 @@
             <div class="pc-unit">회원가입 없이 바로 시작</div>
             <hr>
             <ul>
-              <li>적용 법령 목록 확인</li>
+              <li>주소·면적·용도 등 8항목 입력</li>
+              <li>적용 법령·의무 목록 확인</li>
               <li>선임 의무 해당 여부</li>
-              <li>주요 점검 항목 안내</li>
-              <li class="no">PDF 리포트 생성</li>
-              <li class="no">점검 증거 문서</li>
-              <li class="no">법 개정 자동 반영</li>
+              <li>개정된 최신법으로 진단</li>
+              <li class="no">의무별 실행 가이드</li>
+              <li class="no">판례 연동</li>
+              <li class="no">PDF 리포트</li>
             </ul>
             <a href="../free-diagnosis.html" class="pc-cta free-cta">무료 진단 시작하기</a>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="price-card featured">
-            <div class="pc-tier">STANDARD</div>
-            <div class="pc-name">소형 건물 정밀 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">5,000㎡ 미만</small></div>
+            <div class="pc-tier">소형</div>
+            <div class="pc-name">정밀 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">연면적 5,000㎡ 미만 · 99,000원</small></div>
             <div class="pc-price">99,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
@@ -947,30 +847,26 @@
               <li>무료 진단 전체 포함</li>
               <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
               <li>의무별 실행 카드 (기한·서류·신고처)</li>
-              <li>관련 판례 연동 · 과태료 합산 분석</li>
-              <li>관공서 점검 대응 가이드 · 체크리스트 (출력용)</li>
-              <li>소방·전기·승강기 의무 상세</li>
-              <li>점검 주기 및 신고 기한 안내</li>
-              <li class="no">법 개정 자동 반영</li>
+              <li>관련 판례 연동</li>
+              <li>과태료 합산 분석</li>
+              <li>체크리스트 (출력용)</li>
+              <li>기안 PDF (품의서 첨부용)</li>
             </ul>
             <button class="pc-cta blue-cta" onclick="diagPay('DIAG_BUILDING','BUILDING_STANDARD_DIAG',99000,'건물 소형 정밀 진단')">결제하고 진단받기</button>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="price-card">
-            <div class="pc-tier">PRO</div>
-            <div class="pc-name">대형 건물 정밀 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">5,000㎡ 이상</small></div>
+            <div class="pc-tier">대형</div>
+            <div class="pc-name">정밀 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">연면적 5,000㎡ 이상 · 249,000원</small></div>
             <div class="pc-price">249,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
-              <li>스탠다드 진단 전체 포함</li>
-              <li>20p+ 실행 가이드 (웹 + PDF) · 기안 PDF</li>
-              <li>판례 연동 · 과태료 합산 · 법령 원문 · 관공서 대응 풀세트</li>
-              <li>다층·복합 건물 전체 분석</li>
-              <li>석면·에너지·냉동 의무 포함</li>
-              <li>법 개정 자동 반영 알림</li>
-              <li>TAI Safe SaaS 연동 할인 제공</li>
+              <li>소형 진단 전체 포함</li>
+              <li>다층·복합 건물 추가 법조항 적용</li>
+              <li>석면·에너지·냉동 관련 의무 포함</li>
+              <li>TAI Safe SaaS 연동 할인</li>
             </ul>
             <button class="pc-cta" onclick="diagPay('DIAG_BUILDING','BUILDING_PRO_DIAG',249000,'건물 대형 정밀 진단')">결제하고 진단받기</button>
           </div>
@@ -982,7 +878,7 @@
     <div class="sector-panel" id="panel-industry">
       <div class="sector-note">
         <span>🏭</span>
-        <span><strong>산업·공장</strong> — 제조·물류·유통 등 산업안전보건법·중대재해처벌법 적용 사업장 대상입니다. 설비 수·공정 복잡도에 따라 티어를 선택합니다.</span>
+        <span><strong>산업·공장</strong> — 진단 범위에 따라 적용되는 법이 달라집니다. 사업장 기본 → 위험시설·공정 → 설비까지 범위를 선택합니다.</span>
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-lg-3 col-md-6">
@@ -993,66 +889,60 @@
             <div class="pc-unit">회원가입 없이 바로 시작</div>
             <hr>
             <ul>
-              <li>적용 법령 목록 확인</li>
+              <li>주소·업종·인원수·면적 4항목 입력</li>
+              <li>적용 법령·의무 목록 확인</li>
               <li>안전관리자 선임 여부</li>
-              <li>주요 점검 항목 안내</li>
-              <li class="no">PDF 리포트</li>
-              <li class="no">공정별 점검 항목</li>
+              <li>개정된 최신법으로 진단</li>
             </ul>
             <a href="../free-diagnosis.html" class="pc-cta free-cta">무료 진단 시작하기</a>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="price-card">
-            <div class="pc-tier">STARTER</div>
-            <div class="pc-name">소규모 사업장<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">5~30인 겸직 대상</small></div>
+            <div class="pc-tier">기본</div>
+            <div class="pc-name">사업장 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">79,000원</small></div>
             <div class="pc-price">79,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
               <li>무료 진단 전체 포함</li>
-              <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
-              <li>의무별 실행 카드 · 판례 연동 · 과태료 합산</li>
-              <li>관공서 점검 대응 · 체크리스트 (출력용)</li>
-              <li>선임·신고 의무 상세 안내</li>
-              <li class="no">공정별 점검 항목</li>
-              <li class="no">위험기계 검사 의무</li>
+              <li>실행 가이드 리포트 (웹 + PDF)</li>
+              <li>위험물·화학물질·보일러 등 추가 입력</li>
+              <li>선임·신고 의무 상세</li>
+              <li>관련 판례 연동</li>
+              <li>과태료 합산 분석</li>
             </ul>
             <button class="pc-cta" onclick="diagPay('DIAG_INDUSTRY','INDUSTRY_STARTER_DIAG',79000,'산업 소규모 정밀 진단')">결제하고 진단받기</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="price-card featured">
-            <div class="pc-tier">BUSINESS</div>
-            <div class="pc-name">중규모 사업장<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">30~100인</small></div>
+            <div class="pc-tier">정밀</div>
+            <div class="pc-name">위험시설 · 공정까지<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">149,000원</small></div>
             <div class="pc-price">149,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
-              <li>스타터 진단 전체 포함</li>
-              <li>20p+ 실행 가이드 (웹 + PDF) · 의무 카드 풀세트</li>
-              <li>판례 연동 · 과태료 합산 · 관공서 대응 · 체크리스트</li>
-              <li>공정별 점검 항목 생성</li>
-              <li>위험기계·기구 검사 의무</li>
-              <li>감독관 대응 증거 문서</li>
-              <li>법 개정 자동 반영 알림</li>
+              <li>기본 진단 전체 포함</li>
+              <li>공정별 법적 의무 추가 (용접·도장·주조 등)</li>
+              <li>공정에 따른 추가 법조항 적용</li>
+              <li>체크리스트 (출력용)</li>
+              <li>기안 PDF</li>
             </ul>
             <button class="pc-cta blue-cta" onclick="diagPay('DIAG_INDUSTRY','INDUSTRY_BUSINESS_DIAG',149000,'산업 중규모 정밀 진단')">결제하고 진단받기</button>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="price-card">
-            <div class="pc-tier">PRO</div>
-            <div class="pc-name">대규모 사업장<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">100인 이상</small></div>
+            <div class="pc-tier">종합</div>
+            <div class="pc-name">설비까지 진단<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">249,000원</small></div>
             <div class="pc-price">249,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
-              <li>비즈니스 진단 전체 포함</li>
-              <li>20p+ 리포트 · 기안 PDF · 법령 원문 포함</li>
-              <li>판례·과태료·관공서 대응·체크리스트 전 항목</li>
-              <li>협력업체 적용 의무 포함</li>
-              <li>위험성평가 대응 안내</li>
+              <li>정밀 진단 전체 포함</li>
+              <li>설비별 법적 의무 추가 (크레인·프레스·지게차 등)</li>
+              <li>설비에 따른 추가 법조항 적용</li>
               <li>TAI Safe SaaS 연동 할인</li>
             </ul>
             <button class="pc-cta" onclick="diagPay('DIAG_INDUSTRY','INDUSTRY_PRO_DIAG',249000,'산업 대규모 정밀 진단')">결제하고 진단받기</button>
@@ -1065,7 +955,7 @@
     <div class="sector-panel" id="panel-construction">
       <div class="sector-note">
         <span>🏗️</span>
-        <span><strong>건설현장</strong> — 공사 금액·공종·작업 복잡도에 따라 요금이 결정됩니다. 50억 기준으로 티어가 자동 구분됩니다.</span>
+        <span><strong>건설현장</strong> — 공사금액에 따라 적용되는 법조항이 크게 달라집니다. 50억 원을 기준으로 요금이 자동 구분됩니다.</span>
       </div>
       <div class="row g-4 justify-content-center">
         <div class="col-lg-4 col-md-6">
@@ -1076,51 +966,44 @@
             <div class="pc-unit">회원가입 없이 바로 시작</div>
             <hr>
             <ul>
-              <li>적용 법령 목록 확인</li>
+              <li>현장주소·공사금액·투입인원·공사기간 4항목 입력</li>
+              <li>적용 법령·의무 목록 확인</li>
               <li>안전관리자 선임 여부</li>
-              <li>주요 의무 항목 안내</li>
-              <li class="no">PDF 리포트</li>
-              <li class="no">공종별 점검 항목</li>
-              <li class="no">위험성평가 대응</li>
+              <li>개정된 최신법으로 진단</li>
             </ul>
             <a href="../free-diagnosis.html" class="pc-cta free-cta">무료 진단 시작하기</a>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="price-card featured">
-            <div class="pc-tier">STANDARD</div>
-            <div class="pc-name">50억 미만 현장</div>
+            <div class="pc-tier">기본</div>
+            <div class="pc-name">공사금액 50억 미만<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">145,000원</small></div>
             <div class="pc-price">145,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
               <li>무료 진단 전체 포함</li>
-              <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
-              <li>의무별 실행 카드 · 판례 연동 · 과태료 합산</li>
-              <li>관공서 점검 대응 가이드 · 체크리스트 (출력용)</li>
+              <li>실행 가이드 리포트 (웹 + PDF)</li>
               <li>공종별 안전시설 기준</li>
               <li>건설기술진흥법 의무 항목</li>
-              <li>감독관 대응 증거 문서</li>
-              <li>TBM·작업 안전점검 체계</li>
+              <li>관련 판례 연동</li>
+              <li>과태료 합산 분석</li>
             </ul>
             <button class="pc-cta blue-cta" onclick="diagPay('DIAG_CONSTRUCTION','CONSTRUCTION_STANDARD_DIAG',145000,'건설 50억 미만 정밀 진단')">결제하고 진단받기</button>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="price-card">
-            <div class="pc-tier">PREMIUM</div>
-            <div class="pc-name">50억 이상 현장</div>
+            <div class="pc-tier">종합</div>
+            <div class="pc-name">공사금액 50억 이상<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">299,000원</small></div>
             <div class="pc-price">299,000<span style="font-size:1rem;">원</span></div>
             <div class="pc-unit">1회 진단 · VAT 별도</div>
             <hr>
             <ul>
-              <li>스탠다드 진단 전체 포함</li>
-              <li>20p+ 실행 가이드 · 기안 PDF · 법령 원문 풀옵션</li>
-              <li>판례·과태료·관공서 대응·체크리스트 전 항목</li>
+              <li>기본 진단 전체 포함</li>
+              <li>중대재해처벌법 직접 적용 법조항</li>
+              <li>안전관리계획서 대응</li>
               <li>협력업체 안전관리 의무</li>
-              <li>안전관리계획서 대응 안내</li>
-              <li>위험성평가 통합 분석</li>
-              <li>법 개정 자동 반영 알림</li>
               <li>TAI Safe SaaS 연동 할인</li>
             </ul>
             <button class="pc-cta" onclick="diagPay('DIAG_CONSTRUCTION','CONSTRUCTION_PREMIUM_DIAG',299000,'건설 50억 이상 정밀 진단')">결제하고 진단받기</button>
@@ -1129,9 +1012,55 @@
       </div>
     </div>
 
-    <p class="text-center mt-4" style="font-size:.84rem;color:#94a3b8;">모든 유료 진단은 KG이니시스 안전결제로 처리됩니다. VAT 별도. 영세사업자 세금계산서 발행 가능.</p>
+    <p class="text-center mt-4 mb-2" style="font-size:.84rem;color:#475569;max-width:720px;margin-left:auto;margin-right:auto;line-height:1.65;">
+      가격 차이는 기능이 달라서가 아닙니다. 사업장 규모와 유형에 따라 적용되는 법이 달라지기 때문입니다.<br>
+      모든 유료 진단은 KG이니시스 안전결제로 처리됩니다. VAT 별도. 영세사업자 세금계산서 발행 가능.
+    </p>
   </div>
 </section>
+
+<section class="diag-pilot">
+  <div class="container">
+    <p style="color:#93c5fd;font-size:.8rem;font-weight:700;letter-spacing:.1em;margin-bottom:8px;">PILOT PROGRAM</p>
+    <h2 style="color:#fff;font-size:1.5rem;font-weight:900;margin-bottom:12px;">파일럿 기업을 모집합니다</h2>
+    <p style="color:rgba(255,255,255,.65);font-size:.9rem;line-height:1.7;margin-bottom:24px;">
+      첫 3개월 무료 · 초기 세팅 대행 · 전담 지원<br>
+      TAI 법령진단·TAI Safe를 가장 먼저 경험하고, 함께 만들어갈 파트너를 찾습니다.
+    </p>
+    <a href="../fix-request.html?from=diagnosis&amp;type=pilot" class="btn-hero">파일럿 신청하기 →</a>
+  </div>
+</section>
+
+<section class="diag-faq" id="diag-faq">
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="diag-label">FAQ</span>
+      <h2 class="sec-title">자주 묻는 질문</h2>
+    </div>
+    <details>
+      <summary>3분이면 진짜 끝나나요?</summary>
+      <p>네. 건물은 8항목, 산업·건설은 4항목만 입력하면 됩니다. 주소 입력 시 건축물대장이 자동 연결되어 면적·용도가 자동 입력됩니다.</p>
+    </details>
+    <details>
+      <summary>건설현장도 진단할 수 있나요?</summary>
+      <p>네. 건물·산업·건설 세 가지 섹터를 지원합니다. 건설은 공사금액에 따라 적용 법조항이 달라지며, 50억 기준으로 자동 구분됩니다.</p>
+    </details>
+    <details>
+      <summary>이미 안전관리자가 있는데도 필요한가요?</summary>
+      <p>안전관리자가 있어도 적용되는 법령 전체를 파악하기는 어렵습니다. 법령진단은 놓치고 있는 의무를 찾아내는 도구입니다.</p>
+    </details>
+    <details>
+      <summary>결과를 사내에 공유할 수 있나요?</summary>
+      <p>유료 진단 결과는 PDF로 다운로드할 수 있고, 웹 리포트 링크를 공유할 수도 있습니다. 기안 PDF는 사장님 보고용으로 바로 사용할 수 있습니다.</p>
+    </details>
+    <details>
+      <summary>법인 사업자만 이용할 수 있나요?</summary>
+      <p>개인사업자도 이용 가능합니다. 사업장이 있고 근로자가 있다면 산업안전보건법이 적용됩니다.</p>
+    </details>
+  </div>
+</section>
+
+<div class="diag-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
 
 <!-- ══════════════════════════════════════
      S9. 진단 → SaaS 연결
@@ -1173,7 +1102,8 @@
       <a href="#pricing" class="btn-hero-ghost" style="display:inline-flex;align-items:center;color:rgba(255,255,255,.85);font-size:.9rem;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px;align-self:center;">유료 진단 요금 보기</a>
     </div>
     <p style="margin-top:22px;margin-bottom:0;">
-      <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" style="color:#93c5fd;font-size:.86rem;font-weight:700;text-decoration:underline;">실제 유료 리포트 샘플 보기 (데모) →</a>
+      <a href="diagnosis-sample.html" style="color:#93c5fd;font-size:.86rem;font-weight:700;text-decoration:underline;margin-right:16px;">유료 리포트 샘플 페이지 →</a>
+      <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" style="color:#93c5fd;font-size:.86rem;font-weight:700;text-decoration:underline;">인터랙티브 데모 열기 →</a>
     </p>
   </div>
 </section>
