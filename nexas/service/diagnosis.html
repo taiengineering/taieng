@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 법령의무진단 — 내 사업장에 적용되는 법령을 3분 만에 확인. 몰라서 내는 벌금, 이제 끝냅니다.">
+  <meta name="description" content="TAI 법령의무진단 — 3분 무료 진단으로 적용 법령·의무를 확인하고, 유료 리포트로 실행 가이드·판례·과태료 합산·체크리스트까지 받습니다.">
   <title>법령의무진단 | TAI 엔지니어링</title>
   <link rel="icon" href="../assets/img/fevicon.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
   <link rel="stylesheet" href="../assets/css/tai-brand.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link rel="stylesheet" href="../assets/css/tai-hero-fix.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   :root {
@@ -244,10 +246,168 @@
   .final-arrow { font-size: 1.2rem; color: rgba(255,255,255,.3); }
   @media (max-width: 768px) { .final-arrow { display: none; } }
 
+  /* ── 무료/유료 목업 · 비교 · SaaS ── */
+  .diag-flow-stats {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px;
+    margin-bottom: 28px; font-size: .9rem; font-weight: 800; color: var(--navy);
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 14px 20px; box-shadow: 0 2px 10px rgba(0,0,0,.04);
+  }
+  .diag-flow-stats span { color: var(--blue); }
+  .diag-flow-grid {
+    display: flex; align-items: stretch; justify-content: center; gap: 0;
+    flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .diag-flow-tile {
+    flex: 1 1 140px; min-width: 130px; max-width: 200px;
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px 14px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,.04);
+  }
+  .diag-flow-tile .dft-num {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--navy);
+    color: #fff; font-weight: 900; font-size: .85rem; display: flex;
+    align-items: center; justify-content: center; margin: 0 auto 10px;
+  }
+  .diag-flow-tile .dft-title { font-size: .78rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; line-height: 1.3; }
+  .diag-flow-tile .dft-desc { font-size: .72rem; color: #64748b; line-height: 1.45; margin: 0; }
+  .diag-flow-join {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; font-weight: 700; color: #94a3b8; padding: 0 6px;
+    flex: 0 0 auto; align-self: center;
+  }
+  .mock-section { background: #fff; padding: 90px 0; border-top: 1px solid var(--border); }
+  .mock-section.alt { background: var(--gray-bg); }
+  .browser-mock {
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(15,43,74,.15), 0 0 0 1px var(--border);
+    background: #fff; max-width: 720px; margin: 0 auto;
+  }
+  .browser-mock .bm-bar {
+    background: #e2e8f0; padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid #cbd5e1;
+  }
+  .browser-mock .bm-dots { display: flex; gap: 6px; }
+  .browser-mock .bm-dots span { width: 10px; height: 10px; border-radius: 50%; background: #94a3b8; }
+  .browser-mock .bm-url {
+    flex: 1; background: #fff; border-radius: 6px; padding: 6px 12px;
+    font-size: .72rem; color: #475569; font-family: ui-monospace, monospace;
+    border: 1px solid #cbd5e1;
+  }
+  .browser-mock .bm-body { padding: 22px 20px 24px; background: #f8fafc; }
+  .badge-high {
+    display: inline-block; background: #fee2e2; color: #b91c1c;
+    font-size: .68rem; font-weight: 800; letter-spacing: .06em;
+    padding: 4px 10px; border-radius: 6px; margin-bottom: 14px;
+  }
+  .mock-summary-box {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 16px;
+  }
+  .mock-summary-box h4 { font-size: .85rem; font-weight: 900; color: var(--navy); margin: 0 0 12px; }
+  .mock-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; font-size: .78rem; color: #475569; }
+  .mock-law-list { font-size: .78rem; color: #334155; margin: 0; padding-left: 1.1em; }
+  .mock-law-list li { margin-bottom: 4px; }
+  .compare-wrap {
+    background: #fff; border: 1.5px solid var(--border); border-radius: 16px;
+    overflow: hidden; margin-top: 20px; box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  }
+  .compare-head {
+    background: var(--navy); color: #fff; font-size: .85rem; font-weight: 800;
+    padding: 14px 18px; text-align: center;
+  }
+  .compare-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-bottom: 1px solid var(--border); font-size: .8rem;
+  }
+  .compare-row:last-child { border-bottom: none; }
+  .compare-cell {
+    padding: 12px 16px; line-height: 1.55; color: #475569;
+  }
+  .compare-cell.free { background: #f8fafc; border-right: 1px solid var(--border); }
+  .compare-cell.paid { background: #eff6ff; }
+  .compare-cell strong { color: var(--navy); display: block; margin-bottom: 6px; font-size: .72rem; }
+  .value-detail-grid { display: grid; gap: 22px; margin-top: 28px; }
+  @media (min-width: 992px) { .value-detail-grid { grid-template-columns: 1fr 1fr; } }
+  .value-block {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 22px 20px; height: 100%;
+  }
+  .value-block h4 { font-size: .95rem; font-weight: 900; color: var(--navy); margin: 0 0 10px; }
+  .value-block p.vb-lead { font-size: .82rem; color: #64748b; line-height: 1.65; margin: 0 0 14px; }
+  .exec-card-mock {
+    background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px;
+    padding: 16px 16px 14px; font-size: .75rem;
+  }
+  .exec-card-mock .ec-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 12px; gap: 8px;
+  }
+  .exec-card-mock .ec-title { font-weight: 900; color: var(--navy); font-size: .82rem; }
+  .exec-card-mock .ec-badge {
+    font-size: .62rem; font-weight: 800; background: #dbeafe; color: #1e40af;
+    padding: 3px 8px; border-radius: 4px; white-space: nowrap;
+  }
+  .exec-card-mock dl { margin: 0; display: grid; gap: 6px; }
+  .exec-card-mock dt { color: #64748b; font-weight: 700; float: left; clear: left; width: 4.2em; }
+  .exec-card-mock dd { margin: 0 0 0 4.5em; color: #334155; }
+  .timeline-mock { font-size: .75rem; color: #334155; line-height: 1.7; }
+  .timeline-mock .tl-row { margin-bottom: 8px; }
+  .timeline-mock .tl-label { font-weight: 800; color: var(--blue); margin-right: 6px; }
+  .checklist-mock { font-size: .74rem; color: #334155; line-height: 1.65; }
+  .law-snippet {
+    font-size: .72rem; color: #475569; line-height: 1.65;
+    background: #fff; border: 1px dashed #cbd5e1; border-radius: 8px; padding: 12px;
+    margin-top: 8px;
+  }
+  .paid-app-mock {
+    display: flex; border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--border); min-height: 280px; font-size: .72rem;
+  }
+  .paid-app-mock .pam-side {
+    width: 28%; min-width: 100px; background: #0f172a; color: #e2e8f0;
+    padding: 14px 10px; flex-shrink: 0;
+  }
+  .paid-app-mock .pam-side .logo { font-weight: 900; color: #fff; margin-bottom: 12px; font-size: .78rem; }
+  .paid-app-mock .pam-side .sub { opacity: .75; margin-bottom: 14px; line-height: 1.4; }
+  .paid-app-mock .pam-side ul { margin: 0; padding: 0; list-style: none; opacity: .85; }
+  .paid-app-mock .pam-side li { margin-bottom: 6px; padding-left: 8px; border-left: 2px solid #334155; }
+  .paid-app-mock .pam-side li.on { border-left-color: #60a5fa; color: #fff; }
+  .paid-app-mock .pam-main {
+    flex: 1; background: #fff; padding: 14px 16px; color: #334155;
+  }
+  .paid-app-mock .pam-block { margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0; }
+  .paid-app-mock .pam-block:last-child { border-bottom: none; }
+  .saas-connect-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #e0e7ef 100%);
+    padding: 88px 0; border-top: 1px solid var(--border);
+  }
+  .saas-connect-section .saas-diag-inner {
+    max-width: 920px; margin: 0 auto; text-align: center;
+  }
+  .saas-connect-section img.diagram-24 {
+    max-width: 100%; height: auto; margin-top: 28px; border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(15,43,74,.12);
+  }
+  .btn-outline-diag {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 2px solid var(--navy); color: var(--navy); font-weight: 800;
+    font-size: .88rem; padding: 12px 22px; border-radius: 10px;
+    text-decoration: none; background: #fff; transition: background .15s, color .15s;
+  }
+  .btn-outline-diag:hover { background: var(--navy); color: #fff; }
+
   @media (max-width: 991px) {
     .diag-hero { padding: 70px 0 50px; }
-    .before-section, .after-section, .merit-section, .why-section, .price-section, .final-section { padding: 64px 0; }
+    .before-section, .after-section, .merit-section, .why-section, .price-section, .final-section,
+    .mock-section, .saas-connect-section { padding: 64px 0; }
     .after-result { margin-top: 24px; }
+    .diag-flow-grid { flex-direction: column; align-items: stretch; }
+    .diag-flow-tile { max-width: none; }
+    .diag-flow-join { transform: rotate(90deg); padding: 2px 0; font-size: 1rem; }
+    .compare-row { grid-template-columns: 1fr; }
+    .compare-cell.free { border-right: none; border-bottom: 1px solid var(--border); }
+    .paid-app-mock { flex-direction: column; }
+    .paid-app-mock .pam-side { width: 100%; min-width: 0; }
   }
   </style>
 </head>
@@ -264,15 +424,15 @@
   <div class="container">
     <div class="row align-items-center g-4">
       <div class="col-lg-6">
-        <span class="diag-eyebrow">📋 TAI 법령의무진단</span>
-        <h1>모르면 <em>벌금</em>,<br>알면 <em>안심</em>입니다.</h1>
+        <span class="diag-eyebrow">법령기반 산업안전 운영 플랫폼</span>
+        <h1>모르면 벌금,<br>알면 안심입니다.</h1>
         <p class="hero-sub">
           지금 이 순간에도 법령위반 중일 수 있습니다.<br>
           어떤 법이 적용되는지, 3분이면 알 수 있습니다.
         </p>
         <div class="d-flex gap-3 flex-wrap align-items-center">
           <a href="../free-diagnosis.html" class="btn-hero">무료로 지금 확인하기 →</a>
-          <a href="#pricing" class="btn-hero-ghost">유료 진단 보기</a>
+          <a href="#paid-value" class="btn-hero-ghost">유료 진단 보기 ↓</a>
         </div>
       </div>
       <div class="col-lg-6">
@@ -327,53 +487,47 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     S3. After — 진단하면 이렇게 달라집니다
+     S2. 3분 입력 → 즉시 결과
 ══════════════════════════════════════ -->
-<section class="after-section">
+<section class="after-section" id="diag-flow">
   <div class="container">
-    <div class="row justify-content-center mb-5">
-      <div class="col-lg-8 text-center">
-        <span class="diag-label">해소</span>
-        <h2 class="sec-title">진단 하나로 이 모든 게 해결됩니다</h2>
-        <p class="sec-desc">3분 입력, 즉시 결과. 더 이상 법령을 직접 뒤질 필요가 없습니다.</p>
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-9 text-center">
+        <span class="diag-label">흐름</span>
+        <h2 class="sec-title">3분 입력 → 즉시 결과</h2>
+        <p class="sec-desc">입력 → 분석 → 무료 결과 확인 → 필요 시 유료 리포트로 실행 가이드까지 이어집니다.</p>
+        <div class="diag-flow-stats">
+          <span>182개 법령</span> · <span>14,935개 조문</span> · <span>3,831개 규칙</span>
+        </div>
       </div>
     </div>
-    <div class="row g-4 align-items-stretch">
-      <div class="col-lg-7">
-        <div class="flow-step">
-          <div class="flow-num">1</div>
-          <div>
-            <div class="tag-ok">입력 — 3분</div>
-            <div class="ft">사업장 정보를 입력합니다</div>
-            <p class="fd">업종, 규모, 설비, 인원수. 질문에 답하듯 선택하면 끝납니다. 서류 준비 없이 화면에서 바로 완료됩니다.</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">2</div>
-          <div>
-            <div class="tag-ok">분석 — 즉시</div>
-            <div class="ft">2,080개 법령 규칙 엔진이 자동 판단합니다</div>
-            <p class="fd">사람이 하면 놓칠 수 있지만, TAI 엔진은 놓치지 않습니다. 해당·비해당 여부를 조문 단위로 정확히 구분합니다.</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">3</div>
-          <div>
-            <div class="tag-ok">결과 — 즉시 확인</div>
-            <div class="ft">내 사업장 적용 법령·의무 목록이 나옵니다</div>
-            <p class="fd">선임 의무, 점검 주기, 신고 항목을 한눈에 볼 수 있습니다. 무엇을, 언제, 어떻게 해야 하는지 명확하게 알 수 있습니다.</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">4</div>
-          <div>
-            <div class="tag-ok" style="background:#dbeafe;color:#1e40af;">유료 진단</div>
-            <div class="ft">PDF 리포트 + 점검 증거 문서까지</div>
-            <p class="fd">유료 진단을 선택하면 PDF 분석 보고서가 생성됩니다. 감독관이 방문했을 때 "우리는 이렇게 관리하고 있습니다"를 증명하는 공식 문서입니다.</p>
-          </div>
-        </div>
+    <div class="diag-flow-grid justify-content-center mb-4">
+      <div class="diag-flow-tile">
+        <div class="dft-num">1</div>
+        <div class="dft-title">입력<br><small style="font-weight:600;color:#64748b;">약 3분</small></div>
+        <p class="dft-desc">업종·규모·인원·설비를 선택형으로 입력합니다.</p>
       </div>
-      <div class="col-lg-5">
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">2</div>
+        <div class="dft-title">분석<br><small style="font-weight:600;color:#64748b;">즉시</small></div>
+        <p class="dft-desc">법령 엔진이 조문 단위로 해당 여부를 판단합니다.</p>
+      </div>
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">3</div>
+        <div class="dft-title">결과<br><small style="font-weight:600;color:#64748b;">바로 확인</small></div>
+        <p class="dft-desc">적용 법령·선임·점검·조치 건수와 위험등급을 확인합니다.</p>
+      </div>
+      <div class="diag-flow-join" aria-hidden="true">→</div>
+      <div class="diag-flow-tile">
+        <div class="dft-num">4</div>
+        <div class="dft-title">유료<br><small style="font-weight:600;color:#1565c0;">업그레이드</small></div>
+        <p class="dft-desc">20페이지 넘는 실행 가이드·판례·과태료 합산 등 전체 리포트.</p>
+      </div>
+    </div>
+    <div class="row g-4 align-items-stretch justify-content-center">
+      <div class="col-lg-10">
         <div class="after-result">
           <h3>진단 후 달라지는 것</h3>
           <ul>
@@ -382,10 +536,11 @@
             <li>법이 바뀌면 자동으로 알려줍니다</li>
             <li>점검 항목이 자동 생성되어 빠뜨리지 않습니다</li>
             <li>컨설팅보다 정확하고, 비용은 훨씬 저렴합니다</li>
-            <li>PDF 보고서로 관리 의지를 증명할 수 있습니다</li>
+            <li>웹·PDF 리포트로 관리 의지와 근거를 남길 수 있습니다</li>
           </ul>
-          <div style="margin-top:28px;">
+          <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;">
             <a href="../free-diagnosis.html" class="btn btn-base" style="background:#fff;color:#0f2b4a;border-color:#fff;font-weight:800;padding:13px 24px;display:inline-flex;align-items:center;line-height:1.2;">지금 무료로 확인하기 →</a>
+            <a href="#free-sample" style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;text-decoration:underline;">무료 결과 샘플 보기</a>
           </div>
         </div>
       </div>
@@ -394,7 +549,215 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     S4. 법령진단 4대 장점
+     S3. 무료 진단 결과 샘플
+══════════════════════════════════════ -->
+<section class="mock-section alt" id="free-sample">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-8 text-center">
+        <span class="diag-label">무료 결과</span>
+        <h2 class="sec-title">무료로 이만큼 알 수 있습니다</h2>
+        <p class="sec-desc">3분 입력만으로 적용 법령, 선임 의무, 점검 항목, 위험등급까지. 회원가입 없이, 비용 없이, 바로 확인할 수 있습니다.</p>
+      </div>
+    </div>
+    <div class="browser-mock">
+      <div class="bm-bar">
+        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="bm-url">new.taieng.co.kr/diagnosis-result</div>
+      </div>
+      <div class="bm-body">
+        <span class="badge-high">위험등급: HIGH</span>
+        <div class="mock-summary-box">
+          <h4>종합 분석</h4>
+          <div class="mock-summary-grid">
+            <div>적용 법령 <strong style="color:var(--blue);font-size:1rem;">12개</strong></div>
+            <div>선임 의무 <strong style="color:var(--blue);font-size:1rem;">3건</strong></div>
+            <div>정기 점검 <strong style="color:var(--blue);font-size:1rem;">18건</strong></div>
+            <div>즉시 조치 <strong style="color:var(--blue);font-size:1rem;">15건</strong></div>
+          </div>
+        </div>
+        <p style="font-size:.8rem;font-weight:800;color:var(--navy);margin:0 0 8px;">적용 법령 목록</p>
+        <ul class="mock-law-list">
+          <li>산업안전보건법</li>
+          <li>중대재해처벌법</li>
+          <li>건설기술 진흥법</li>
+          <li>소방시설법</li>
+          <li style="color:#94a3b8;">… 외 8개</li>
+        </ul>
+        <div style="margin-top:18px;text-align:center;">
+          <a href="#paid-value" class="btn-outline-diag" style="font-size:.82rem;padding:10px 18px;">유료 진단으로 상세 분석 받기 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S4. 유료 리포트의 가치
+══════════════════════════════════════ -->
+<section class="mock-section" id="paid-value">
+  <div class="container">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-10 text-center">
+        <span class="diag-label">유료 리포트</span>
+        <h2 class="sec-title">유료를 선택하면 이렇게 받습니다</h2>
+        <p class="sec-desc">PDF 한 줄이 아니라, 20페이지가 넘는 실행 가이드와 웹 리포트입니다. 판례 연동, 과태료 합산, 법령 원문까지 한 화면에서 이어집니다.</p>
+      </div>
+    </div>
+    <div class="compare-wrap">
+      <div class="compare-head">무료와 유료의 차이</div>
+      <div class="compare-row">
+        <div class="compare-cell free"><strong>무료 결과</strong>적용 법령 목록 · 선임/점검/조치 건수 · 위험등급까지 즉시 확인합니다.</div>
+        <div class="compare-cell paid"><strong>유료 리포트</strong>의무별 실행 가이드 카드, 기한·서류·신고 시스템, 과태료 합산 총액, 점검 타임라인(월/분기/연), 관련 판례, 관공서 점검 대응 가이드, 출력용 체크리스트, 법령 조문 원문, 기안 PDF, 인터랙티브 웹 리포트까지 포함됩니다.</div>
+      </div>
+      <div class="compare-row" style="background:#f8fafc;">
+        <div class="compare-cell free" style="text-align:center;font-weight:800;padding:16px;">
+          <a href="../free-diagnosis.html" style="color:var(--navy);">무료 진단 시작 →</a>
+        </div>
+        <div class="compare-cell paid" style="text-align:center;font-weight:800;padding:16px;background:#dbeafe;">
+          <a href="#pricing" style="color:var(--navy);">유료로 업그레이드 (요금 보기) →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="value-detail-grid">
+      <div class="value-block">
+        <h4>① 의무별 실행 가이드 카드</h4>
+        <p class="vb-lead">“뭘 해야 하는지”가 아니라 “어떻게 하는지”까지. 빈 필드는 자동 숨김, 있는 정보만 보여줍니다. 다른 서비스는 법령 목록만 줍니다. TAI는 실행 가이드를 줍니다.</p>
+        <div class="exec-card-mock">
+          <div class="ec-head">
+            <span class="ec-title">안전관리자 선임</span>
+            <span class="ec-badge">선임</span>
+          </div>
+          <dl>
+            <dt>기한</dt><dd>사유 발생 후 14일 이내</dd>
+            <dt>수행</dt><dd>사업주</dd>
+            <dt>서류</dt><dd>기본안전보건대장</dd>
+            <dt>신고</dt><dd>산업안전보건공단 → 바로가기</dd>
+            <dt>보관</dt><dd>관할 기관 제출</dd>
+            <dt>과태료</dt><dd>5천만원 이하</dd>
+            <dt>근거</dt><dd>산업안전보건법 제17조</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>② 관련 판례 <span style="font-size:.68rem;background:#fef3c7;color:#b45309;padding:2px 8px;border-radius:4px;">NEW</span></h4>
+        <p class="vb-lead">각 의무 항목에 실제 판례가 연결됩니다. “이 의무를 안 하면 실제로 이런 일이 생겼습니다.” 사장님 설득에 가장 강한 근거가 됩니다.</p>
+        <div style="font-size:.78rem;color:#334155;line-height:1.65;">
+          <p style="margin:0 0 10px;"><strong>대법원 2024다12345</strong><br>안전관리자 미선임 상태에서 작업자 사망 → 징역 1년 6월 / 벌금 5천만원 · 사망 1명 · 건설업</p>
+          <p style="margin:0;"><strong>서울고법 2023나67890</strong><br>점검 기록 미보관 → 감독관 적발 → 과태료 3천만원 확정</p>
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>③ 과태료 합산 총액</h4>
+        <p class="vb-lead">전 항목 미이행 시 예상 최대 과태료를 한 숫자로 보여줍니다. 중대재해법 벌금은 별도 안내합니다.</p>
+        <div style="text-align:center;padding:16px;background:#fff7ed;border-radius:10px;border:1px solid #fed7aa;">
+          <div style="font-size:.72rem;color:#9a3412;font-weight:700;">전 항목 미이행 시 예상 최대 과태료</div>
+          <div style="font-size:1.6rem;font-weight:900;color:#c2410c;margin-top:6px;">약 2억 3천만원</div>
+          <div style="font-size:.7rem;color:#94a3b8;margin-top:6px;">* 중대재해법 벌금 별도</div>
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>④ 점검 타임라인</h4>
+        <p class="vb-lead">연간 점검 계획이 자동으로 정리됩니다. SaaS에 연결하면 캘린더·알림까지 이어집니다.</p>
+        <div class="timeline-mock">
+          <div class="tl-row"><span class="tl-label">매월</span>가설구조물 점검 · 방호장치 기능점검</div>
+          <div class="tl-row"><span class="tl-label">분기</span>안전점검 (정기)</div>
+          <div class="tl-row"><span class="tl-label">반기</span>소방시설 자체점검</div>
+          <div class="tl-row"><span class="tl-label">연간</span>크레인 정기검사 · 전기설비 점검</div>
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>⑤ 관공서 점검 대응 가이드</h4>
+        <p class="vb-lead">“점검관이 이런 걸 확인합니다” — 선임·점검·조치별로 어떤 서류를 꺼내야 하는지 미리 정리합니다.</p>
+        <ul style="font-size:.78rem;color:#334155;margin:0;padding-left:1.1em;line-height:1.65;">
+          <li>선임 의무: 안전관리자 선임 신고서 사본이 있습니까?</li>
+          <li>점검 의무: 법정 점검 기록부가 최근 3년간 보관되어 있습니까?</li>
+          <li>조치 의무: 위험성평가 보고서가 작성되어 있습니까?</li>
+        </ul>
+      </div>
+      <div class="value-block">
+        <h4>⑥ 체크리스트 (출력용)</h4>
+        <p class="vb-lead">프린트해서 현장에 붙이고, 하나씩 체크하며 이행할 수 있습니다.</p>
+        <div class="checklist-mock">
+          ☐ 안전관리자 선임 (산안법 제17조) — 5천만원<br>
+          ☐ 가설구조물 점검 (산안기준규칙 제75조)<br>
+          ☐ 소방안전관리자 선임 (소방법 제24조)<br>
+          ☐ 위험성평가 실시 (산안법 제36조)<br>
+          <span style="color:#94a3b8;">… 이하 생략</span>
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>⑦ 법령 조문 원문 보기</h4>
+        <p class="vb-lead">182개 법령 · 14,935개 조문을 TAI 자체 DB에서 바로 열람합니다. law.go.kr을 뒤질 필요 없이 원문을 확인합니다.</p>
+        <div class="law-snippet">
+          <strong style="color:var(--navy);font-size:.75rem;">산업안전보건법 제17조 (안전관리자)</strong><br>
+          ① 사업주는 사업장에 … 안전에 관한 기술적인 사항에 관하여 안전관리자를 두어야 한다.<br>
+          ② 안전관리자를 두어야 하는 사업의 종류와…
+        </div>
+      </div>
+      <div class="value-block">
+        <h4>⑧ 기안 PDF (품의서 첨부용)</h4>
+        <p class="vb-lead">사장님께 “이것부터 해야 합니다”를 보고하는 문서입니다. 결재란 없이 순수 분석 보고서 형태로, 예산·품의 첨부 근거로 활용할 수 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S5. 유료 리포트 화면 목업
+══════════════════════════════════════ -->
+<section class="mock-section alt">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-9 text-center">
+        <span class="diag-label">화면</span>
+        <h2 class="sec-title">유료 진단 리포트는 이렇게 생겼습니다</h2>
+        <p class="sec-desc">20페이지가 넘는 인터랙티브 웹 리포트입니다. PDF도 다운로드할 수 있고, 웹에서 바로 펼쳐 보는 것이 더 강력합니다. 각 항목을 클릭하면 법령 원문과 판례까지 이어집니다.</p>
+        <p style="margin-top:14px;">
+          <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" class="btn-outline-diag">실제 유료 리포트 샘플 보기 →</a>
+        </p>
+      </div>
+    </div>
+    <div class="browser-mock" style="max-width:900px;">
+      <div class="bm-bar">
+        <div class="bm-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="bm-url">new.taieng.co.kr/paid-diagnosis-result</div>
+      </div>
+      <div class="bm-body" style="padding:0;">
+        <div class="paid-app-mock" style="border:none;border-radius:0;min-height:320px;">
+          <div class="pam-side">
+            <div class="logo">TAI</div>
+            <div class="sub">○○건설 현장</div>
+            <ul>
+              <li class="on">종합 분석</li>
+              <li>실행 가이드</li>
+              <li>판례</li>
+              <li>체크리스트</li>
+            </ul>
+          </div>
+          <div class="pam-main">
+            <div class="pam-block">
+              <strong style="color:var(--navy);font-size:.8rem;">종합 분석</strong>
+              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">위험도 게이지 · 도넛 차트 · 과태료 합산 요약이 상단에 배치됩니다.</p>
+            </div>
+            <div class="pam-block">
+              <strong style="color:var(--navy);font-size:.8rem;">실행 가이드 카드</strong>
+              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">기한·수행주체·서류·신고·과태료·근거 조문이 카드 단위로 정리됩니다.</p>
+            </div>
+            <div class="pam-block">
+              <strong style="color:var(--navy);font-size:.8rem;">판례 · 체크리스트</strong>
+              <p style="margin:8px 0 0;font-size:.74rem;color:#64748b;">의무와 연결된 실제 판결 요지와 출력용 체크리스트가 하단에 이어집니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S6. TAI 법령진단이 다른 이유
 ══════════════════════════════════════ -->
 <section class="merit-section">
   <div class="container">
@@ -411,8 +774,8 @@
           <span class="mc-icon">🎯</span>
           <div class="mc-tag">정확성</div>
           <h4>사람이 아닌 엔진이 판단합니다</h4>
-          <p>컨설턴트는 놓칠 수 있습니다. TAI 법령 엔진은 2,080개 이상의 규칙 DB를 조문 단위로 매핑합니다.</p>
-          <div class="mc-stat">2,080<small>+ 규칙</small></div>
+          <p>컨설턴트는 놓칠 수 있습니다. TAI 법령 엔진은 182개 법령 · 14,935개 조문 · 3,831개 규칙을 조문 단위로 매핑합니다.</p>
+          <div class="mc-stat">182<small> 법령</small></div>
         </div>
       </div>
       <div class="col-lg-3 col-md-6">
@@ -440,11 +803,29 @@
         </div>
       </div>
     </div>
+    <div class="row g-4 justify-content-center mt-1">
+      <div class="col-lg-6 col-md-6">
+        <div class="merit-card" style="border-top-color:#0ea5e9;">
+          <span class="mc-icon">⚖️</span>
+          <div class="mc-tag" style="color:#0369a1;background:#e0f2fe;">판례 연동</div>
+          <h4>법령만이 아니라, 실제 판결이 붙습니다</h4>
+          <p>그 법을 위반했을 때 실제로 어떤 판결이 나왔는지 — 사망·부상·벌금·징역 등 실제 사례를 의무 항목에 연결합니다.</p>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="merit-card" style="border-top-color:#059669;">
+          <span class="mc-icon">📱</span>
+          <div class="mc-tag" style="color:#047857;background:#d1fae5;">SaaS 자동 연동</div>
+          <h4>진단에서 운영으로 끊김 없이</h4>
+          <p>진단 결과가 TAI Safe에 바로 연결됩니다. 점검 일정 자동 생성 → 담당자 배정 → 알림 발송까지 이어집니다.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════
-     S5. 왜 지금 해야 하는가
+     S7. 중대재해법 · 처벌 경고
 ══════════════════════════════════════ -->
 <section class="why-section">
   <div class="container">
@@ -512,7 +893,7 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     S6. 산업별 가격표 + 결제
+     S8. 산업별 가격표 + 결제
 ══════════════════════════════════════ -->
 <section class="price-section" id="pricing">
   <div class="container">
@@ -564,8 +945,10 @@
             <hr>
             <ul>
               <li>무료 진단 전체 포함</li>
-              <li>PDF 분석 리포트 생성</li>
-              <li>감독관 대응용 증거 문서</li>
+              <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
+              <li>의무별 실행 카드 (기한·서류·신고처)</li>
+              <li>관련 판례 연동 · 과태료 합산 분석</li>
+              <li>관공서 점검 대응 가이드 · 체크리스트 (출력용)</li>
               <li>소방·전기·승강기 의무 상세</li>
               <li>점검 주기 및 신고 기한 안내</li>
               <li class="no">법 개정 자동 반영</li>
@@ -582,6 +965,8 @@
             <hr>
             <ul>
               <li>스탠다드 진단 전체 포함</li>
+              <li>20p+ 실행 가이드 (웹 + PDF) · 기안 PDF</li>
+              <li>판례 연동 · 과태료 합산 · 법령 원문 · 관공서 대응 풀세트</li>
               <li>다층·복합 건물 전체 분석</li>
               <li>석면·에너지·냉동 의무 포함</li>
               <li>법 개정 자동 반영 알림</li>
@@ -626,7 +1011,9 @@
             <hr>
             <ul>
               <li>무료 진단 전체 포함</li>
-              <li>PDF 분석 리포트</li>
+              <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
+              <li>의무별 실행 카드 · 판례 연동 · 과태료 합산</li>
+              <li>관공서 점검 대응 · 체크리스트 (출력용)</li>
               <li>선임·신고 의무 상세 안내</li>
               <li class="no">공정별 점검 항목</li>
               <li class="no">위험기계 검사 의무</li>
@@ -643,6 +1030,8 @@
             <hr>
             <ul>
               <li>스타터 진단 전체 포함</li>
+              <li>20p+ 실행 가이드 (웹 + PDF) · 의무 카드 풀세트</li>
+              <li>판례 연동 · 과태료 합산 · 관공서 대응 · 체크리스트</li>
               <li>공정별 점검 항목 생성</li>
               <li>위험기계·기구 검사 의무</li>
               <li>감독관 대응 증거 문서</li>
@@ -660,6 +1049,8 @@
             <hr>
             <ul>
               <li>비즈니스 진단 전체 포함</li>
+              <li>20p+ 리포트 · 기안 PDF · 법령 원문 포함</li>
+              <li>판례·과태료·관공서 대응·체크리스트 전 항목</li>
               <li>협력업체 적용 의무 포함</li>
               <li>위험성평가 대응 안내</li>
               <li>TAI Safe SaaS 연동 할인</li>
@@ -704,7 +1095,9 @@
             <hr>
             <ul>
               <li>무료 진단 전체 포함</li>
-              <li>PDF 분석 리포트</li>
+              <li>20p+ 실행 가이드 리포트 (웹 + PDF)</li>
+              <li>의무별 실행 카드 · 판례 연동 · 과태료 합산</li>
+              <li>관공서 점검 대응 가이드 · 체크리스트 (출력용)</li>
               <li>공종별 안전시설 기준</li>
               <li>건설기술진흥법 의무 항목</li>
               <li>감독관 대응 증거 문서</li>
@@ -722,6 +1115,8 @@
             <hr>
             <ul>
               <li>스탠다드 진단 전체 포함</li>
+              <li>20p+ 실행 가이드 · 기안 PDF · 법령 원문 풀옵션</li>
+              <li>판례·과태료·관공서 대응·체크리스트 전 항목</li>
               <li>협력업체 안전관리 의무</li>
               <li>안전관리계획서 대응 안내</li>
               <li>위험성평가 통합 분석</li>
@@ -739,7 +1134,26 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     S7. 최종 CTA
+     S9. 진단 → SaaS 연결
+══════════════════════════════════════ -->
+<section class="saas-connect-section" id="saas-from-diagnosis">
+  <div class="container saas-diag-inner">
+    <span class="diag-label">TAI Safe</span>
+    <h2 class="sec-title">진단 결과를 자동으로 관리하려면</h2>
+    <p class="sec-desc" style="max-width:640px;margin-left:auto;margin-right:auto;">
+      법령진단으로 파악한 의무를 TAI Safe에 연결하면, 점검 일정 자동 생성 → 담당자 배정 → 알림 → 증빙 보관까지 안전관리 전 과정이 자동으로 돌아갑니다.
+    </p>
+    <img class="diagram-24"
+         src="https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/diagram-24.svg"
+         alt="TAI Safe 도입 4단계 다이어그램" loading="lazy" width="920" height="400">
+    <p style="margin-top:28px;">
+      <a href="saas.html" class="btn-outline-diag">TAI Safe 자세히 보기 →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     S10. 최종 CTA
 ══════════════════════════════════════ -->
 <section class="final-section">
   <div class="container">
@@ -758,6 +1172,9 @@
       <a href="../free-diagnosis.html" class="btn-hero" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:#0f2b4a;font-weight:800;font-size:.95rem;padding:14px 28px;border-radius:10px;text-decoration:none;box-shadow:0 4px 20px rgba(0,0,0,.18);">무료 진단 지금 시작하기 →</a>
       <a href="#pricing" class="btn-hero-ghost" style="display:inline-flex;align-items:center;color:rgba(255,255,255,.85);font-size:.9rem;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px;align-self:center;">유료 진단 요금 보기</a>
     </div>
+    <p style="margin-top:22px;margin-bottom:0;">
+      <a href="https://new.taieng.co.kr/paid-diagnosis-result.html?token=DEMO-CON-2026" target="_blank" rel="noopener" style="color:#93c5fd;font-size:.86rem;font-weight:700;text-decoration:underline;">실제 유료 리포트 샘플 보기 (데모) →</a>
+    </p>
   </div>
 </section>
 
