@@ -165,7 +165,23 @@
   #saas-page .feat-pair .feat-info p { font-size: .92rem; color: #64748b; line-height: 1.7; margin-bottom: 18px; }
   #saas-page .feat-check { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: #0f172a; font-weight: 600; margin-bottom: 6px; }
   #saas-page .feat-check::before { content: '✓'; color: #1565c0; font-weight: 900; }
-  #saas-page .feat-visual { flex-shrink: 0; }
+  /* 목업 영역 너비 제한 — feat-info가 0으로 밀리는 문제 수정 */
+  #saas-page .feat-visual {
+    flex-shrink: 0;
+    max-width: 60%;
+  }
+  #saas-page .feat-pair .feat-info {
+    min-width: 280px;
+  }
+
+  /* flow-pair 내부 브라우저가 텍스트를 가리는 문제 */
+  #saas-page .flow-pair {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #saas-page .flow-pair .browser-frame {
+    max-width: 480px;
+  }
 
   #saas-page .m-card { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; margin-bottom:8px; }
   #saas-page .m-row { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-bottom:1px solid #f1f5f9; font-size:.7rem; gap:8px; flex-wrap:wrap; }
@@ -280,6 +296,8 @@
   #saas-page .sp-arrow { font-size:1.3rem; color:rgba(255,255,255,.35); }
 
   @media(max-width:991px) {
+    #saas-page .feat-visual { max-width: 100%; }
+    #saas-page .feat-pair .feat-info { min-width: 0; }
     #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 28px; }
     #saas-page .browser-frame { max-width: 100%; }
     #saas-page .mock-side { display: none; } #saas-page .mock-body { margin-left: 0; }
