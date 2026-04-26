@@ -1,11 +1,9 @@
 /**
  * TAI 브랜드 색상 (단일 관리)
  * ─────────────────────────
+ * v2.2.0 (2026-04-26): SVG 다이어그램 lazy loading 높이 보정
  * v2.1.0 (2026-04-26): 스크롤 고정 헤더 네이비로 변경
  * v2.0.0 (2026-04-25): 흰색 + 어두운 블루 톤으로 전환
- *   - 밝은 배경 + 깊은 네이비 조합
- *   - 히어로/CTA 배경을 거의 검정(#0b1324)에서 네이비(#0f2b4a)로
- *   - 브랜드 블루를 따뜻한 톤(#1565c0)으로
  *
  * 조정 시 주로 건드릴 값:
  *   --tai-primary / --tai-primary-dark / --tai-primary-rgb  … 브랜드 블루
@@ -126,6 +124,16 @@
 .footer-company-info p,
 .footer-company-info .small {
   font-size: inherit !important;
+}
+
+/* ─── SVG 다이어그램 lazy loading 보정 ───
+ * SVG가 viewBox만 있고 width/height 속성이 없으면
+ * <img loading="lazy">에서 높이 0으로 계산되어 영원히 로딩 안 됨.
+ * aspect-ratio + min-height로 placeholder 높이를 확보해 lazy 트리거.
+ */
+img[src*="diagram"][loading="lazy"] {
+  aspect-ratio: 800 / 420;
+  min-height: 120px;
 }
 
 /* 무료진단 결과 하단 — 다음 단계(B2B 톤, 쇼핑몰형 테이블 지양) */
