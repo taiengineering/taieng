@@ -1,8 +1,8 @@
 /**
  * TAI 공통 Header — assets/js/header.js
- * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+TAI텍스트)
+ * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
+ * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+텍스트)
  * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
- * v2.8.0 (2026-04-21): 로고 Supabase Storage URL 적용
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입
  *
  * ┌ 헤더 높이 기준 ─────────────────────────────────────────────────┐
@@ -53,16 +53,20 @@
       '.tai-logo-text {',
       '  font-family: "DM Sans", "Arial Black", Arial, sans-serif;',
       '  font-weight: 900;',
-      '  font-size: 1.5rem;',
-      '  letter-spacing: -.02em;',
+      '  font-size: 1.15rem;',
+      '  letter-spacing: -.01em;',
       '  color: #fff;',
-      '  line-height: 1;',
+      '  line-height: 1.1;',
       '  text-shadow: 0 1px 4px rgba(0,0,0,.2);',
+      '  white-space: nowrap;',
       '}',
       /* 스크롤 후 밝은 배경에서 텍스트 다크 */
       '.navbar-area.navbar-area-fixed .tai-logo-text {',
       '  color: #0f2b4a;',
       '  text-shadow: none;',
+      '}',
+      '@media(max-width:575px){',
+      '  .tai-logo-text { font-size: 1rem; }',
       '}',
     ].join('\n');
 
@@ -121,8 +125,8 @@
 
     '      <div class="logo">',
     '        <a class="tai-logo-combo" href="' + base + 'index.html">',
-    '          <img class="tai-logo-icon" src="' + ICON_URL + '" alt="TAI">',
-    '          <span class="tai-logo-text">TAI</span>',
+    '          <img class="tai-logo-icon" src="' + ICON_URL + '" alt="TAI Engineering">',
+    '          <span class="tai-logo-text">TAI Engineering</span>',
     '        </a>',
     '      </div>',
 
