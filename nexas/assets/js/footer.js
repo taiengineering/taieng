@@ -1,9 +1,7 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 + 특허 13건
- * v2.8.0 (2026-04-26): 특허 13건 반영
- * v2.7.0 (2026-04-23): 특허 출원번호 마스킹
- * v2.6.0 (2026-04-21): 로고 Supabase Storage URL 적용
  * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
  */
 (function () {
@@ -36,7 +34,7 @@
       '.tai-footer-logo { display:flex; align-items:center; gap:10px; text-decoration:none !important; }',
       '.tai-footer-logo:hover { text-decoration:none !important; }',
       '.tai-footer-logo img { width:36px; height:36px; border-radius:7px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,.3); }',
-      '.tai-footer-logo span { font-family:"DM Sans","Arial Black",Arial,sans-serif; font-weight:900; font-size:1.4rem; color:#fff; letter-spacing:-.02em; }',
+      '.tai-footer-logo span { font-family:"DM Sans","Arial Black",Arial,sans-serif; font-weight:900; font-size:1.1rem; color:#fff; letter-spacing:-.01em; white-space:nowrap; }',
     ].join('\n');
     var styleEl = document.createElement('style');
     styleEl.id = 'tai-footer-dark-theme';
@@ -87,8 +85,8 @@
     '      <div class="col-xl-4 col-lg-4 col-sm-6">' +
     '        <div class="footer-widget widget">' +
     '          <a class="tai-footer-logo" href="' + b + 'index.html">' +
-    '            <img src="' + ICON_URL + '" alt="TAI">' +
-    '            <span>TAI</span>' +
+    '            <img src="' + ICON_URL + '" alt="TAI Engineering">' +
+    '            <span>TAI Engineering</span>' +
     '          </a>' +
     '          <div class="footer-company-info" style="margin-top:16px;">' +
     '            <p style="margin-bottom:4px;"><span class="footer-company-name" style="font-weight:700;">TAI 엔지니어링</span>&nbsp;&nbsp;<span style="font-size:.85rem;">대표 심태왕</span></p>' +
