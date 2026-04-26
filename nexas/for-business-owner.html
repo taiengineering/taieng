@@ -21,13 +21,13 @@
     /* ── 히어로 ── */
     .owner-hero-section {
       background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
-      padding-top: 70px; /* fixed 헤더 높이 보정 */
+      /* padding-top 없음 — 이미지가 섹션 맨 위부터 시작 */
     }
     .owner-hero-left-col {
       display: flex;
       align-items: center;
-      padding: 50px 48px 50px 80px;
-      min-height: 420px;
+      padding: 120px 48px 50px 80px; /* 상단 120px = 네비 90px + 여백 30px */
+      min-height: 520px;
     }
     .owner-hero-eyebrow {
       display: inline-block; font-size: .72rem; font-weight: 700;
@@ -47,7 +47,7 @@
     .owner-hero-right-col {
       position: relative;
       overflow: hidden;
-      min-height: 420px;
+      min-height: 520px;
       padding: 0;
     }
     .owner-hero-right-col img {
@@ -63,13 +63,12 @@
       z-index: 1;
     }
     @media(max-width:991px) {
-      .owner-hero-section { padding-top: 64px; }
-      .owner-hero-left-col { min-height: auto; padding: 40px 24px; }
+      .owner-hero-left-col { min-height: auto; padding: 100px 24px 40px; }
       .owner-hero-right-col { min-height: 280px; }
       .owner-hero-right-col::before { display: none; }
     }
     @media(max-width:575px) {
-      .owner-hero-section { padding-top: 60px; }
+      .owner-hero-left-col { padding: 90px 20px 32px; }
       .owner-hero-right-col { min-height: 220px; }
     }
 
