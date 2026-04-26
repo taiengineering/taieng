@@ -1,10 +1,9 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+TAI텍스트)
  * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
  * v2.8.0 (2026-04-21): 로고 Supabase Storage URL 적용
- * v2.6.0 (2026-04-21): 전문가 세부 페이지 연결 (for-agency/repair/consultant/expert)
- * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입 + 풀뷰포트 레이아웃 자동 보정
- * v2.4.0 (2026-04-19): 역할별 링크 .html 제거
+ * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입
  *
  * ┌ 헤더 높이 기준 ─────────────────────────────────────────────────┐
  * │  실제 렌더링 높이: 90px                                           │
@@ -14,9 +13,9 @@
 (function () {
   'use strict';
 
-  var LOGO_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/diagrams/tai-logo.svg';
+  var ICON_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
 
-  /* ── 헤더 높이 CSS 변수 + 풀뷰포트 레이아웃 유틸 주입 ── */
+  /* ── 헤더 높이 CSS 변수 + 로고 스타일 주입 ── */
   (function injectNavCss() {
     if (document.getElementById('tai-nav-vars')) return;
     var css = [
@@ -37,6 +36,34 @@
       '  .full-vp-right { height: calc(100vh - 280px); min-height: 400px; }',
       '}',
       '.tai-page-top { padding-top: var(--tai-nav-h); }',
+      /* 로고 아이콘+텍스트 */
+      '.tai-logo-combo {',
+      '  display: flex !important;',
+      '  align-items: center;',
+      '  gap: 10px;',
+      '  text-decoration: none !important;',
+      '}',
+      '.tai-logo-combo:hover { text-decoration: none !important; }',
+      '.tai-logo-icon {',
+      '  width: 38px; height: 38px;',
+      '  border-radius: 8px;',
+      '  object-fit: cover;',
+      '  box-shadow: 0 2px 8px rgba(0,0,0,.15);',
+      '}',
+      '.tai-logo-text {',
+      '  font-family: "DM Sans", "Arial Black", Arial, sans-serif;',
+      '  font-weight: 900;',
+      '  font-size: 1.5rem;',
+      '  letter-spacing: -.02em;',
+      '  color: #fff;',
+      '  line-height: 1;',
+      '  text-shadow: 0 1px 4px rgba(0,0,0,.2);',
+      '}',
+      /* 스크롤 후 밝은 배경에서 텍스트 다크 */
+      '.navbar-area.navbar-area-fixed .tai-logo-text {',
+      '  color: #0f2b4a;',
+      '  text-shadow: none;',
+      '}',
     ].join('\n');
 
     var el = document.createElement('style');
@@ -93,8 +120,9 @@
     '      </div>',
 
     '      <div class="logo">',
-    '        <a class="main-logo" href="' + base + 'index.html">',
-    '          <img src="' + LOGO_URL + '" alt="TAI \uC5D4\uC9C0\uB2C8\uC5B4\uB9C1" height="40">',
+    '        <a class="tai-logo-combo" href="' + base + 'index.html">',
+    '          <img class="tai-logo-icon" src="' + ICON_URL + '" alt="TAI">',
+    '          <span class="tai-logo-text">TAI</span>',
     '        </a>',
     '      </div>',
 
