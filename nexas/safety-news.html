@@ -11,98 +11,267 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  body { font-family: 'Noto Sans KR', sans-serif; }
-  .news-hero { background:var(--navy); padding:100px 0 50px; }
-  .news-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
-  .news-hero p { color:rgba(255,255,255,.6); font-size:.95rem; }
-  .cat-filter { display:flex; gap:8px; flex-wrap:wrap; padding:28px 0; border-bottom:1px solid var(--border); margin-bottom:32px; }
-  .cat-btn { padding:7px 16px; border-radius:999px; font-size:.82rem; font-weight:600; cursor:pointer; border:1.5px solid var(--border); background:#fff; color:var(--sub); transition:all .15s; }
-  .cat-btn.active, .cat-btn:hover { background:var(--navy); color:#fff; border-color:var(--navy); }
-  .news-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.06); height:100%; transition:transform .2s; }
-  .news-card:hover { transform:translateY(-4px); }
-  .news-card-body { padding:20px; }
-  .news-tag { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; border-radius:4px; padding:3px 8px; margin-bottom:10px; }
-  .tag-law      { background:#fff0f0; color:var(--red); }
-  .tag-accident { background:#e8f4fd; color:#1a6fb5; }
-  .tag-inspect  { background:#f0fff4; color:#1a8f4b; }
-  .tag-guide    { background:#fdf6e8; color:#9a6b00; }
-  .news-card h5 { font-size:.95rem; font-weight:800; color:var(--navy); margin-bottom:8px; line-height:1.4; }
-  .news-card p { font-size:.82rem; color:var(--sub); margin:0; line-height:1.55; }
-  .news-meta { display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:14px; border-top:1px solid var(--border); font-size:.76rem; color:var(--sub); }
-  .notice-bar { background:#fffbeb; border:1px solid #fcd34d; border-radius:10px; padding:16px 20px; margin-bottom:24px; display:flex; gap:12px; align-items:center; }
-  .notice-bar .icon { color:#f59e0b; font-size:1.1rem; flex-shrink:0; }
-  .notice-bar p { margin:0; font-size:.88rem; color:#92400e; }
-  .prec-mini-card { background:#fff; border-radius:12px; padding:18px 16px; box-shadow:0 2px 12px rgba(0,0,0,.06); border-left:4px solid var(--navy); margin-bottom:12px; display:flex; gap:14px; align-items:flex-start; transition:transform .2s; text-decoration:none; }
-  .prec-mini-card:hover { transform:translateX(3px); }
-  .prec-mini-card.sanjae { border-left-color:#1a6fb5; }
-  .prec-mini-icon { width:36px; height:36px; border-radius:8px; background:#f0f4ff; color:#3b5bdb; display:flex; align-items:center; justify-content:center; font-size:.85rem; flex-shrink:0; }
-  .prec-mini-card.sanjae .prec-mini-icon { background:#e8f4fd; color:#1a6fb5; }
-  .prec-mini-card h6 { font-size:.9rem; font-weight:800; color:var(--navy); margin-bottom:4px; line-height:1.4; }
-  .prec-mini-card p { font-size:.8rem; color:var(--sub); margin:0; line-height:1.5; }
-  .prec-mini-meta { font-size:.74rem; color:var(--sub); margin-top:6px; }
-  .news-loading { text-align:center; padding:40px; color:var(--sub); }
-  .prec-loading { text-align:center; padding:24px; color:var(--sub); font-size:.88rem; }
+  body { font-family:'Noto Sans KR',sans-serif; }
+
+  /* ── 히어로 ── */
+  .sn-hero { background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%); padding:100px 0 48px; }
+  .sn-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
+  .sn-hero p  { color:rgba(255,255,255,.6); font-size:.95rem; }
+
+  /* ── 탭 네비 ── */
+  .sn-tabs { background:#fff; border-bottom:2px solid #e8eaed; position:sticky; top:0; z-index:100; }
+  .sn-tabs-inner { display:flex; gap:0; overflow-x:auto; scrollbar-width:none; }
+  .sn-tabs-inner::-webkit-scrollbar { display:none; }
+  .sn-tab { padding:16px 20px; font-size:.85rem; font-weight:700; color:#64748b; cursor:pointer;
+    border-bottom:3px solid transparent; white-space:nowrap; transition:all .15s; }
+  .sn-tab:hover  { color:#0d1b2a; }
+  .sn-tab.active { color:#0d1b2a; border-bottom-color:#0d1b2a; }
+
+  /* ── 섹션 공통 ── */
+  .sn-section { padding:40px 0 60px; }
+  .sn-section:nth-child(odd) { background:#f4f6f8; }
+  .sn-section:nth-child(even){ background:#fff; }
+  .sn-sec-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
+  .sn-sec-title  { font-size:1.25rem; font-weight:900; color:#0d1b2a; margin:0; }
+  .sn-sec-sub    { font-size:.82rem; color:#64748b; margin-top:4px; }
+  .sn-badge { display:inline-block; font-size:.68rem; font-weight:700; padding:3px 10px; border-radius:20px; margin-right:6px; }
+  .badge-kosha { background:#e0f2fe; color:#0369a1; }
+
+  /* ── 필터 칩 ── */
+  .sn-chips { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:20px; }
+  .sn-chip { padding:5px 14px; border:1.5px solid #e2e8f0; border-radius:999px; font-size:.78rem;
+    font-weight:600; color:#64748b; cursor:pointer; background:#fff; transition:all .15s; }
+  .sn-chip:hover,.sn-chip.active { background:#0d1b2a; color:#fff; border-color:#0d1b2a; }
+
+  /* ── 카드 ── */
+  .sn-card { background:#fff; border:1.5px solid #e8eaed; border-radius:14px; padding:20px;
+    margin-bottom:12px; transition:box-shadow .2s,border-color .2s; }
+  .sn-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.07); border-color:#cbd5e1; }
+  .sn-card-title { font-size:.95rem; font-weight:800; color:#0d1b2a; margin-bottom:6px; line-height:1.45; }
+  .sn-card-meta  { font-size:.75rem; color:#94a3b8; display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
+  .sn-card-desc  { font-size:.83rem; color:#475569; line-height:1.65; margin-top:6px; }
+  .sn-card-link  { display:inline-flex; align-items:center; gap:5px; margin-top:10px; font-size:.8rem;
+    font-weight:700; color:#0d1b2a; text-decoration:none; padding:6px 14px;
+    border:1.5px solid #e2e8f0; border-radius:8px; transition:all .15s; }
+  .sn-card-link:hover { background:#0d1b2a; color:#fff; border-color:#0d1b2a; }
+
+  /* ── 신호등 카드 ── */
+  .signal-card { border-radius:14px; padding:16px 20px; margin-bottom:10px; border:1.5px solid transparent; }
+  .signal-red    { background:#fef2f2; border-color:#fca5a5; }
+  .signal-yellow { background:#fffbeb; border-color:#fcd34d; }
+  .signal-green  { background:#f0fdf4; border-color:#86efac; }
+  .signal-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; margin-top:3px; }
+  .dot-red    { background:#ef4444; }
+  .dot-yellow { background:#f59e0b; }
+  .dot-green  { background:#22c55e; }
+  .signal-label { font-size:.68rem; font-weight:800; padding:2px 8px; border-radius:4px; }
+  .label-red    { background:#fee2e2; color:#b91c1c; }
+  .label-yellow { background:#fef3c7; color:#92400e; }
+  .label-green  { background:#dcfce7; color:#166534; }
+
+  /* ── 위험성평가 인정 ── */
+  .cert-card { background:#fff; border:1.5px solid #e8eaed; border-radius:12px; padding:16px 18px;
+    margin-bottom:10px; display:flex; align-items:center; gap:14px; }
+  .cert-badge { width:42px; height:42px; border-radius:10px; background:#ecfdf5;
+    color:#059669; display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; flex-shrink:0; }
+  .cert-name  { font-size:.9rem; font-weight:800; color:#0d1b2a; }
+  .cert-meta  { font-size:.75rem; color:#64748b; margin-top:3px; }
+  .cert-valid { font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; }
+  .valid-ok   { background:#dcfce7; color:#166534; }
+  .valid-soon { background:#fef3c7; color:#92400e; }
+
+  /* ── KOSHA GUIDE ── */
+  .guide-card { background:#fff; border:1.5px solid #e8eaed; border-radius:12px; padding:16px 18px;
+    margin-bottom:10px; display:flex; gap:14px; align-items:flex-start; transition:all .2s; }
+  .guide-card:hover { border-color:#7c3aed; box-shadow:0 4px 16px rgba(124,58,237,.08); }
+  .guide-cat { width:38px; height:38px; border-radius:8px; font-size:.75rem; font-weight:900;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .cat-G { background:#ede9fe; color:#7c3aed; }
+  .cat-M { background:#dbeafe; color:#2563eb; }
+  .cat-C { background:#fce7f3; color:#9d174d; }
+  .cat-B { background:#d1fae5; color:#065f46; }
+  .cat-H { background:#fef3c7; color:#92400e; }
+  .guide-no   { font-size:.72rem; font-weight:700; color:#94a3b8; margin-bottom:3px; }
+  .guide-title{ font-size:.88rem; font-weight:800; color:#0d1b2a; line-height:1.4; }
+
+  /* ── 안전보건자료 ── */
+  .media-type-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center;
+    justify-content:center; font-size:.85rem; flex-shrink:0; }
+  .type-book  { background:#ede9fe; color:#7c3aed; }
+  .type-video { background:#fce7f3; color:#be185d; }
+  .type-edu   { background:#dbeafe; color:#2563eb; }
+  .type-etc   { background:#f1f5f9; color:#475569; }
+
+  /* ── 로딩 / 빈값 ── */
+  .sn-loading { text-align:center; padding:48px 20px; color:#94a3b8; }
+  .sn-loading i { font-size:1.6rem; margin-bottom:10px; }
+  .sn-empty { text-align:center; padding:40px; color:#94a3b8; font-size:.88rem; }
+
+  /* ── 페이지네이션 ── */
+  .sn-more { text-align:center; margin-top:20px; }
+  .sn-more-btn { padding:10px 28px; border:1.5px solid #e2e8f0; border-radius:10px;
+    font-size:.85rem; font-weight:700; color:#0d1b2a; background:#fff; cursor:pointer; transition:all .15s; }
+  .sn-more-btn:hover { background:#0d1b2a; color:#fff; }
+
+  /* ── 반응형 ── */
+  @media(max-width:576px){
+    .sn-tab { padding:12px 14px; font-size:.78rem; }
+    .sn-section { padding:28px 0 40px; }
+  }
   </style>
 </head>
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
-<!-- HEADER -->
 <div id="tai-header"></div>
 
-<div class="news-hero">
+<!-- 히어로 -->
+<div class="sn-hero">
   <div class="sec-inner">
     <h1>안전정보</h1>
-    <p>산업안전 법령 개정 · 재해 사례 · 감독 동향을 확인하세요</p>
+    <p>KOSHA 공단이 제공하는 재해사례 · 안전자료 · 현장점검 현황을 한눈에 확인하세요</p>
   </div>
 </div>
 
-<div class="sec" style="background:var(--gray-bg); padding-top:40px;">
+<!-- 탭 네비 -->
+<div class="sn-tabs">
   <div class="sec-inner">
-    <div id="noticeBar" class="notice-bar" style="display:none;">
-      <div class="icon"><i class="fas fa-bullhorn"></i></div>
-      <p id="noticeText"></p>
-    </div>
-    <div class="cat-filter">
-      <button class="cat-btn active" onclick="loadNews('all',   this)">전체</button>
-      <button class="cat-btn"        onclick="loadNews('law',   this)">법령 개정</button>
-      <button class="cat-btn"        onclick="loadNews('accident',this)">재해 사례</button>
-      <button class="cat-btn"        onclick="loadNews('inspection',this)">감독 동향</button>
-    </div>
-    <div id="newsGrid" class="row g-4">
-      <div class="news-loading"><i class="fas fa-spinner fa-spin me-2"></i>뉴스를 불러오는 중...</div>
-    </div>
-    <div class="text-center mt-4" id="loadMoreWrap" style="display:none;">
-      <button class="btn-outline" style="padding:12px 36px;" onclick="loadMoreNews()">+ 더 보기</button>
+    <div class="sn-tabs-inner">
+      <div class="sn-tab active" data-tab="accident">국내 재해사례</div>
+      <div class="sn-tab" data-tab="signal">건설현장 신호등</div>
+      <div class="sn-tab" data-tab="materials">안전보건자료</div>
+      <div class="sn-tab" data-tab="const-accident">건설 중대재해</div>
+      <div class="sn-tab" data-tab="risk">위험성평가 인정</div>
+      <div class="sn-tab" data-tab="guide">KOSHA GUIDE</div>
     </div>
   </div>
 </div>
 
-<section class="sec" style="background:#fff;">
+<!-- ①  국내 재해사례 -->
+<div class="sn-section" id="sec-accident">
   <div class="sec-inner">
-    <div class="row align-items-center mb-4">
-      <div class="col">
-        <span class="sec-tag">주요 판례</span>
-        <h2 class="sec-h2" style="margin-bottom:6px;">이 판례, 알고 계셨나요?</h2>
-        <p style="color:var(--sub); font-size:.9rem;">현장에서 꼭 알아야 할 최신 산업안전·산재 판례를 요약합니다</p>
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">국내 재해사례 <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">업종별 산업재해 사례를 확인하세요</p>
       </div>
     </div>
-    <div class="row g-3">
-      <div class="col-lg-6">
-        <div style="font-size:.75rem; font-weight:800; color:var(--sub); text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid var(--border);">산업안전 판례</div>
-        <div id="precSafety"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
-      </div>
-      <div class="col-lg-6">
-        <div style="font-size:.75rem; font-weight:800; color:#1a6fb5; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #e8f4fd;">산재 전문 판례</div>
-        <div id="precSanjae"><div class="prec-loading"><i class="fas fa-spinner fa-spin me-2"></i>판례를 불러오는 중...</div></div>
-      </div>
+    <div class="sn-chips" id="accident-chips">
+      <div class="sn-chip active" data-val="">전체</div>
+      <div class="sn-chip" data-val="제조업">제조업</div>
+      <div class="sn-chip" data-val="건설업">건설업</div>
+      <div class="sn-chip" data-val="조선업">조선업</div>
+      <div class="sn-chip" data-val="서비스업">서비스업</div>
+      <div class="sn-chip" data-val="기타">기타</div>
     </div>
-    <div class="text-center mt-4">
-      <a href="faq.html" class="btn-red" style="display:inline-block;">더 많은 안전정보 보기 →</a>
+    <div id="accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="accident-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('accident')">더 보기</button>
     </div>
   </div>
-</section>
+</div>
+
+<!-- ② 건설현장 안전 신호등 -->
+<div class="sn-section" id="sec-signal" style="display:none">
+  <div class="sec-inner">
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">건설현장 안전 신호등 <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">중소규모 건설현장 기술지도 결과 — 최근 점검 기준</p>
+      </div>
+      <div class="sn-chips" id="signal-chips" style="margin:0">
+        <div class="sn-chip active" data-val="">전체</div>
+        <div class="sn-chip" data-val="적색" style="border-color:#fca5a5;color:#b91c1c">🔴 위험</div>
+        <div class="sn-chip" data-val="황색" style="border-color:#fcd34d;color:#92400e">🟡 주의</div>
+        <div class="sn-chip" data-val="녹색" style="border-color:#86efac;color:#166534">🟢 양호</div>
+      </div>
+    </div>
+    <div id="signal-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="signal-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('signal')">더 보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ③ 안전보건자료 -->
+<div class="sn-section" id="sec-materials" style="display:none">
+  <div class="sec-inner">
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">안전보건자료 <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">책자·교안·영상·OPS 등 안전보건 학습자료 링크</p>
+      </div>
+    </div>
+    <div class="sn-chips" id="materials-chips">
+      <div class="sn-chip active" data-val="">전체</div>
+      <div class="sn-chip" data-val="공통">공통</div>
+      <div class="sn-chip" data-val="제조">제조</div>
+      <div class="sn-chip" data-val="건설">건설</div>
+      <div class="sn-chip" data-val="서비스">서비스</div>
+    </div>
+    <div id="materials-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="materials-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('materials')">더 보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ④ 건설업 중대재해 -->
+<div class="sn-section" id="sec-const-accident" style="display:none">
+  <div class="sec-inner">
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">건설업 중대재해 현황 <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">작업공종·기인물·재해종류·위험성 감소대책 포함</p>
+      </div>
+    </div>
+    <div id="const-accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="const-accident-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('const-accident')">더 보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ⑤ 위험성평가 인정사업장 -->
+<div class="sn-section" id="sec-risk" style="display:none">
+  <div class="sec-inner">
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">위험성평가 인정사업장 <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">인정일로부터 3년간 유효 — 2021.10 이후 인정 사업장</p>
+      </div>
+    </div>
+    <div id="risk-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="risk-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('risk')">더 보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- ⑥ KOSHA GUIDE -->
+<div class="sn-section" id="sec-guide" style="display:none">
+  <div class="sec-inner">
+    <div class="sn-sec-header">
+      <div>
+        <p class="sn-sec-title">KOSHA GUIDE <span class="sn-badge badge-kosha">KOSHA</span></p>
+        <p class="sn-sec-sub">한국산업안전보건공단 기술지원규정 — 자율 안전보건 가이드</p>
+      </div>
+    </div>
+    <div class="sn-chips" id="guide-chips">
+      <div class="sn-chip active" data-val="">전체</div>
+      <div class="sn-chip" data-val="G">일반(G)</div>
+      <div class="sn-chip" data-val="M">기계(M)</div>
+      <div class="sn-chip" data-val="C">화공(C)</div>
+      <div class="sn-chip" data-val="B">건설(B)</div>
+      <div class="sn-chip" data-val="H">보건(H)</div>
+    </div>
+    <div id="guide-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
+    <div class="sn-more" id="guide-more" style="display:none">
+      <button class="sn-more-btn" onclick="loadMore('guide')">더 보기</button>
+    </div>
+  </div>
+</div>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
@@ -114,60 +283,298 @@
 <script src="assets/js/footer.js"></script>
 <script>
 const API = 'https://api.taieng.co.kr';
-const TAG_MAP = { 'law':{ label:'법령 개정', cls:'tag-law' }, 'accident':{ label:'재해 사례', cls:'tag-accident' }, 'inspection':{ label:'감독 동향', cls:'tag-inspect' }, 'guide':{ label:'실무 가이드',cls:'tag-guide' } };
-const IMG_FALLBACK = ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=70','https://images.unsplash.com/photo-1581092160562-40aa08c7880a?auto=format&fit=crop&w=600&q=70'];
-const SAMPLE_NEWS = [{id:'s1',post_type:'law',title:'산업안전보건법 시행규칙 개정 — 지게차 작업계획서 의무화',content:'2026년 3월부터 3톤 이상 지게차 작업 시 작업계획서 제출 의무화.',published_at:'2026-03-15',source:'TAI 법령팀'},{id:'s2',post_type:'accident',title:'끼임 사고 예방 — 프레스 작업 10대 안전수칙',content:'제조업 끼임 사고의 40%는 프레스 작업 중 발생합니다.',published_at:'2026-03-10',source:'TAI 안전팀'},{id:'s3',post_type:'inspection',title:'고용노동부 건설현장 기획감독 — 주요 적발 사례',content:'2026년 1분기 기획감독 결과 타워크레인·가설공사 위반이 집중적으로 적발.',published_at:'2026-03-05',source:'TAI 정보팀'},{id:'s4',post_type:'law',title:'중대재해처벌법 — 50인 미만 사업장 전면 적용',content:'2026년 1월부터 50인 미만 사업장도 적용 대상입니다.',published_at:'2026-02-20',source:'TAI 법령팀'},{id:'s5',post_type:'accident',title:'건설현장 추락사고 예방 — 작업발판 설치 기준',content:'추락사고는 건설현장 사망의 49%를 차지합니다.',published_at:'2026-02-10',source:'TAI 안전팀'},{id:'s6',post_type:'inspection',title:'화학공장 PSM 감독 강화 — 2026년 중점 점검 방향',content:'공정안전관리(PSM) 대상 사업장의 자체감사 이행 여부 집중 점검.',published_at:'2026-01-25',source:'TAI 정보팀'}];
-let _curType='all', _newsPage=1;
-const PAGE_SZ=6;
+const PAGE = 10;
+
+// ── 상태 ───────────────────────────────────────────────
+const state = {
+  accident:       { page:1, filter:'',       loaded:false },
+  signal:         { page:1, filter:'',       loaded:false },
+  materials:      { page:1, filter:'',       loaded:false },
+  'const-accident':{ page:1, filter:'',      loaded:false },
+  risk:           { page:1, filter:'',       loaded:false },
+  guide:          { page:1, filter:'',       loaded:false },
+};
+
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function fmtDate(d){ return String(d||'').slice(0,10).replace(/-/g,'.'); }
-async function loadNews(type, btn) {
-  if(btn){ document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }
-  _curType=type; _newsPage=1;
-  const grid=document.getElementById('newsGrid');
-  grid.innerHTML='<div class="news-loading"><i class="fas fa-spinner fa-spin me-2"></i>뉴스를 불러오는 중...</div>';
+
+// ── 탭 전환 ────────────────────────────────────────────
+document.querySelectorAll('.sn-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sn-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const key = tab.dataset.tab;
+    document.querySelectorAll('.sn-section').forEach(s => s.style.display = 'none');
+    document.getElementById('sec-' + key).style.display = '';
+    if (!state[key].loaded) initSection(key);
+  });
+});
+
+// ── 초기 섹션 ──────────────────────────────────────────
+function initSection(key) {
+  state[key].page = 1;
+  state[key].loaded = true;
+  fetchSection(key, true);
+}
+
+// ── 더 보기 ────────────────────────────────────────────
+function loadMore(key) {
+  state[key].page++;
+  fetchSection(key, false);
+}
+
+// ── 필터 칩 이벤트 ─────────────────────────────────────
+['accident','signal','materials','guide'].forEach(key => {
+  const chips = document.getElementById(key + '-chips');
+  if (!chips) return;
+  chips.addEventListener('click', e => {
+    const chip = e.target.closest('.sn-chip');
+    if (!chip) return;
+    chips.querySelectorAll('.sn-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    state[key].filter = chip.dataset.val;
+    state[key].page = 1;
+    document.getElementById(key === 'const-accident' ? key + '-list' : key + '-list').innerHTML =
+      '<div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div>';
+    fetchSection(key, true);
+  });
+});
+
+// ── 메인 패치 라우터 ───────────────────────────────────
+async function fetchSection(key, reset) {
+  const s = state[key];
+  const listEl = document.getElementById(key + '-list');
+  const moreEl = document.getElementById(key + '-more');
+
   try {
-    const params=type==='all'?'':`&post_type=${type}`;
-    const res=await fetch(`${API}/posts?size=${PAGE_SZ}${params}`);
-    const data=await res.json();
-    const posts=(data.data&&data.data.items)||data.data||[];
-    if(posts.length){ renderNews(posts); document.getElementById('loadMoreWrap').style.display=posts.length<PAGE_SZ?'none':''; return; }
-    throw new Error('empty');
-  } catch {
-    const filtered=type==='all'?SAMPLE_NEWS:SAMPLE_NEWS.filter(p=>p.post_type===type);
-    renderNews(filtered,true); document.getElementById('loadMoreWrap').style.display='none';
+    let url, items = [], total = 0;
+
+    if (key === 'accident') {
+      url = `${API}/kosha/accident-cases?num_of_rows=${PAGE}&page_no=${s.page}`;
+      if (s.filter) url += `&business=${encodeURIComponent(s.filter)}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderAccident(listEl, items, reset);
+    }
+    else if (key === 'signal') {
+      url = `${API}/kosha/construction-safety-light?num_of_rows=${PAGE}&page_no=${s.page}`;
+      if (s.filter) url += `&signal=${encodeURIComponent(s.filter)}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderSignal(listEl, items, reset);
+    }
+    else if (key === 'materials') {
+      url = `${API}/kosha/safety-materials?num_of_rows=${PAGE}&page_no=${s.page}`;
+      if (s.filter) url += `&industry=${encodeURIComponent(s.filter)}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderMaterials(listEl, items, reset);
+    }
+    else if (key === 'const-accident') {
+      url = `${API}/kosha/construction-accidents?num_of_rows=${PAGE}&page_no=${s.page}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderConstAccident(listEl, items, reset);
+    }
+    else if (key === 'risk') {
+      url = `${API}/kosha/risk-assessment-accredited?num_of_rows=${PAGE}&page_no=${s.page}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderRisk(listEl, items, reset);
+    }
+    else if (key === 'guide') {
+      url = `${API}/kosha/kosha-guide?num_of_rows=${PAGE}&page_no=${s.page}`;
+      if (s.filter) url += `&category=${encodeURIComponent(s.filter)}`;
+      const res = await fetch(url);
+      const d   = await res.json();
+      const body = d.data?.body || d.data || {};
+      items = body.items || [];
+      total = body.totalCount || 0;
+      renderGuide(listEl, items, reset);
+    }
+
+    if (moreEl) {
+      moreEl.style.display = (items.length === PAGE && s.page * PAGE < total) ? '' : 'none';
+    }
+  } catch(e) {
+    console.error(key, e);
+    listEl.innerHTML = `<div class="sn-empty"><i class="fas fa-exclamation-circle me-2"></i>데이터를 불러올 수 없습니다.<br><small style="color:#94a3b8">KOSHA API 응답을 확인하세요.</small></div>`;
+    if (moreEl) moreEl.style.display = 'none';
   }
 }
-function renderNews(posts) {
-  const grid=document.getElementById('newsGrid');
-  if(!posts.length){ grid.innerHTML='<p style="text-align:center;padding:40px;color:var(--sub);">게시물이 없습니다.</p>'; return; }
-  grid.innerHTML=posts.map((p,i)=>{ const tag=TAG_MAP[p.post_type]||{label:'정보',cls:'tag-guide'}; const img=p.thumbnail_url||IMG_FALLBACK[i%IMG_FALLBACK.length]; return `<div class="col-lg-4 col-md-6"><div class="news-card"><img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag ${tag.cls}">${esc(tag.label)}</span><h5>${esc(p.title)}</h5><p>${esc((p.content||'').slice(0,80))}${(p.content||'').length>80?'…':''}</p><div class="news-meta"><span>${fmtDate(p.published_at||p.created_at)}</span><span>${esc(p.source||'TAI')}</span></div></div></div></div>`; }).join('');
+
+// ── 렌더러: 재해사례 ───────────────────────────────────
+function renderAccident(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 재해사례가 없습니다.</div>'; return; }
+  const html = items.map(it => `
+    <div class="sn-card">
+      <div class="d-flex align-items-start justify-content-between gap-2">
+        <div class="sn-card-title">${esc(it.title||it.bbsTitle||it.subject||'(제목 없음)')}</div>
+        ${it.business?`<span class="sn-badge" style="background:#f1f5f9;color:#475569;white-space:nowrap">${esc(it.business)}</span>`:''}
+      </div>
+      ${it.content||it.bbsContent?`<p class="sn-card-desc">${esc((it.content||it.bbsContent||'').slice(0,120))}${(it.content||'').length>120?'…':''}</p>`:''}
+      <div class="sn-card-meta">
+        ${it.regDt||it.writeDate?`<span><i class="fas fa-calendar-alt me-1"></i>${esc(it.regDt||it.writeDate)}</span>`:''}
+        ${it.boardNo||it.bbsNo?`<span>No. ${esc(it.boardNo||it.bbsNo)}</span>`:''}
+      </div>
+      ${it.fileUrl||it.fileLink?`<a href="${esc(it.fileUrl||it.fileLink)}" target="_blank" class="sn-card-link"><i class="fas fa-file-pdf"></i> 원문 보기</a>`:''}
+    </div>`).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
 }
-async function loadMoreNews() {
-  _newsPage++;
-  try { const params=_curType==='all'?'':`&post_type=${_curType}`; const res=await fetch(`${API}/posts?size=${PAGE_SZ}&page=${_newsPage}${params}`); const data=await res.json(); const posts=(data.data&&data.data.items)||data.data||[]; if(!posts.length){ document.getElementById('loadMoreWrap').style.display='none'; return; } const grid=document.getElementById('newsGrid'); grid.insertAdjacentHTML('beforeend',posts.map((p,i)=>{ const tag=TAG_MAP[p.post_type]||{label:'정보',cls:'tag-guide'}; const img=p.thumbnail_url||IMG_FALLBACK[i%IMG_FALLBACK.length]; return `<div class="col-lg-4 col-md-6"><div class="news-card"><img src="${esc(img)}" alt="" style="width:100%;height:180px;object-fit:cover;"><div class="news-card-body"><span class="news-tag ${tag.cls}">${esc(tag.label)}</span><h5>${esc(p.title)}</h5><p>${esc((p.content||'').slice(0,80))}…</p><div class="news-meta"><span>${fmtDate(p.published_at)}</span><span>${esc(p.source||'TAI')}</span></div></div></div></div>`; }).join('')); if(posts.length<PAGE_SZ) document.getElementById('loadMoreWrap').style.display='none'; } catch {}
+
+// ── 렌더러: 안전 신호등 ────────────────────────────────
+function renderSignal(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 현장이 없습니다.</div>'; return; }
+  const html = items.map(it => {
+    const sig = it.signal || it.signalColor || '';
+    let cls = 'signal-green', dotCls = 'dot-green', labelCls = 'label-green', label = '양호';
+    if (sig.includes('적') || sig.toLowerCase().includes('red')) {
+      cls = 'signal-red'; dotCls = 'dot-red'; labelCls = 'label-red'; label = '위험';
+    } else if (sig.includes('황') || sig.toLowerCase().includes('yellow')) {
+      cls = 'signal-yellow'; dotCls = 'dot-yellow'; labelCls = 'label-yellow'; label = '주의';
+    }
+    return `
+    <div class="signal-card ${cls}">
+      <div class="d-flex align-items-start gap-3">
+        <div class="signal-dot ${dotCls} mt-1"></div>
+        <div class="flex-grow-1">
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <span class="signal-label ${labelCls}">${label}</span>
+            <span style="font-size:.9rem;font-weight:800;color:#0d1b2a">${esc(it.siteNm||it.siteName||it.companyNm||'현장명 없음')}</span>
+          </div>
+          <div style="font-size:.8rem;color:#64748b;display:flex;gap:14px;flex-wrap:wrap">
+            ${it.sido||it.sigungu?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc([it.sido,it.sigungu].filter(Boolean).join(' '))}</span>`:''}
+            ${it.guideDt||it.inspDate?`<span><i class="fas fa-calendar me-1"></i>점검일 ${esc(it.guideDt||it.inspDate)}</span>`:''}
+            ${it.guideOrg||it.orgName?`<span>${esc(it.guideOrg||it.orgName)}</span>`:''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
 }
-const PREC_SAMPLE_SAFETY=[{title:'지게차 충돌 사망 — 안전관리자 선임 의무 위반',판시사항:'안전관리자 미선임 상태 작업 → 사망. 산안법+중대재해법 병합 적용.',법원명:'대법원',선고일자:'2024.11.14',판례상세링크:''},{title:'프레스 방호장치 제거 → 손가락 절단',판시사항:'사업주가 방호장치 제거 지시. 손해배상 1억 2천만 원.',법원명:'서울고법',선고일자:'2024.09.03',판례상세링크:''},{title:'밀폐공간 산소농도 미측정 → 2명 질식 사망',판시사항:'맨홀 작업 전 측정 의무 미이행. 벌금 5,000만 원.',법원명:'대법원',선고일자:'2024.04.11',판례상세링크:''}];
-const PREC_SAMPLE_SANJAE=[{title:'출퇴근 재해 — 편의점 경유 후 교통사고, 산재 인정',판시사항:'통상 경로 소폭 이탈이라도 생활필수행위는 산재 인정.',법원명:'서울행법',선고일자:'2024.11.28',판례상세링크:''},{title:'과로 뇌출혈 — 12주 평균 주 60시간 초과 시 산재 추정',판시사항:'발병 12주 전 평균 주 60시간 이상 시 업무상 재해 강하게 추정.',법원명:'서울행법',선고일자:'2024.08.20',판례상세링크:''},{title:'직장 내 갑질 → 우울증 악화 → 자해, 업무상 재해',판시사항:'상사의 폭언·모욕으로 인한 정신질환 발병은 업무상 재해.',법원명:'부산고법',선고일자:'2024.06.14',판례상세링크:''}];
-function renderPrecList(containerId, items, isSanjae) {
-  const el=document.getElementById(containerId);
-  if(!items.length){ el.innerHTML='<p class="prec-loading">판례 데이터 없음</p>'; return; }
-  function esc2(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  el.innerHTML=items.slice(0,3).map(p=>{ const link=p.판례상세링크||''; const tag=isSanjae?'sanjae':''; const icon=isSanjae?'fa-file-medical':'fa-gavel'; const card=`<div class="prec-mini-card ${tag}"><div class="prec-mini-icon"><i class="fas ${icon}"></i></div><div><h6>${esc2(p.사건명||p.title||'')}</h6><p>${esc2((p.판시사항||p.판결요지||'').slice(0,70))}${(p.판시사항||'').length>70?'…':''}</p><div class="prec-mini-meta">${esc2(p.법원명||'')}${p.선고일자?' · '+esc2(p.선고일자):''}</div></div></div>`; return link?`<a href="${esc2(link)}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">${card}</a>`:card; }).join('');
+
+// ── 렌더러: 안전보건자료 ───────────────────────────────
+function renderMaterials(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 자료가 없습니다.</div>'; return; }
+  const html = items.map(it => {
+    const type = it.productType||'';
+    let iconCls = 'type-etc', icon = 'fa-file-alt';
+    if (type.includes('영상')) { iconCls='type-video'; icon='fa-play-circle'; }
+    else if (type.includes('교안')) { iconCls='type-edu'; icon='fa-chalkboard-teacher'; }
+    else if (type.includes('책자')||type.includes('포스터')) { iconCls='type-book'; icon='fa-book'; }
+    return `
+    <div class="sn-card d-flex gap-3 align-items-start">
+      <div class="media-type-icon ${iconCls}"><i class="fas ${icon}"></i></div>
+      <div class="flex-grow-1">
+        <div class="sn-card-title">${esc(it.title||it.mediaTitle||'(제목 없음)')}</div>
+        <div class="sn-card-meta">
+          ${type?`<span>${esc(type)}</span>`:''}
+          ${it.industry?`<span>${esc(it.industry)}</span>`:''}
+          ${it.accidentType?`<span>${esc(it.accidentType)}</span>`:''}
+        </div>
+        ${it.url||it.mediaUrl?`<a href="${esc(it.url||it.mediaUrl)}" target="_blank" rel="noopener" class="sn-card-link"><i class="fas fa-external-link-alt"></i> 자료 보기</a>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
 }
-async function loadPrecHighlights() {
-  try {
-    const [r1,r2]=await Promise.all([fetch(`${API}/precedents/search?query=산업안전보건&size=3`),fetch(`${API}/precedents/search?query=산재&source=sanjae&size=3`)]);
-    const [d1,d2]=await Promise.all([r1.json(),r2.json()]);
-    renderPrecList('precSafety',(d1.data&&d1.data.prec)||(d1.items)||[],false);
-    renderPrecList('precSanjae',(d2.data&&d2.data.prec)||(d2.items)||[],true);
-  } catch { renderPrecList('precSafety',PREC_SAMPLE_SAFETY,false); renderPrecList('precSanjae',PREC_SAMPLE_SANJAE,true); }
+
+// ── 렌더러: 건설업 중대재해 ────────────────────────────
+function renderConstAccident(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 중대재해 현황이 없습니다.</div>'; return; }
+  const html = items.map(it => `
+    <div class="sn-card">
+      <div class="d-flex align-items-start justify-content-between gap-2 mb-2">
+        <div>
+          <div class="sn-card-title">${esc(it.accidentType||it.dsstrKnd||'재해종류 미상')}</div>
+          <div class="sn-card-meta">
+            ${it.occurrenceDate||it.dsstrDt?`<span><i class="fas fa-calendar me-1"></i>${esc(it.occurrenceDate||it.dsstrDt)}</span>`:''}
+            ${it.workType||it.workKnd?`<span>공종: ${esc(it.workType||it.workKnd)}</span>`:''}
+            ${it.causative||it.crtrFtr?`<span>기인물: ${esc(it.causative||it.crtrFtr)}</span>`:''}
+          </div>
+        </div>
+      </div>
+      ${it.accidentSummary||it.dsstrOutl?`<p class="sn-card-desc">${esc((it.accidentSummary||it.dsstrOutl||'').slice(0,150))}…</p>`:''}
+      ${it.riskReduction||it.rskRdcMsr?`
+        <div style="background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:.82rem;color:#166534;">
+          <strong>위험성 감소대책</strong><br>${esc((it.riskReduction||it.rskRdcMsr||'').slice(0,200))}
+        </div>`:''}
+    </div>`).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
 }
-document.addEventListener('DOMContentLoaded',function(){
-  loadNews('all');
-  loadPrecHighlights();
-  document.getElementById('noticeBar').style.display='flex';
-  document.getElementById('noticeText').innerHTML='<strong>[공지]</strong> 중대재해처벌법 개정 시행령 2026년 1월 적용 — 50인 미만 사업장 주요 변경사항을 확인하세요.';
+
+// ── 렌더러: 위험성평가 인정 ────────────────────────────
+function renderRisk(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 인정사업장이 없습니다.</div>'; return; }
+  const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
+  const html = items.map(it => {
+    const expiry = it.expiryDate||it.vlddDt||'';
+    const isSoon = expiry && expiry < String(parseInt(today)+300); // 3개월 이내
+    const validCls = isSoon ? 'valid-soon' : 'valid-ok';
+    const validLabel = isSoon ? '만료 임박' : '유효';
+    return `
+    <div class="cert-card">
+      <div class="cert-badge"><i class="fas fa-check-circle"></i></div>
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center justify-content-between gap-2">
+          <div class="cert-name">${esc(it.companyNm||it.siteNm||it.bizNm||'사업장명 없음')}</div>
+          ${expiry?`<span class="cert-valid ${validCls}">${validLabel}</span>`:''}
+        </div>
+        <div class="cert-meta">
+          ${it.sido||it.sigungu?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc([it.sido,it.sigungu].filter(Boolean).join(' '))}</span>`:''}
+          ${it.certDate||it.acptDt?`<span>인정일 ${esc(it.certDate||it.acptDt)}</span>`:''}
+          ${expiry?`<span>만료일 ${esc(expiry)}</span>`:''}
+          ${it.laborOffice||it.labor_office?`<span>${esc(it.laborOffice||it.labor_office)}</span>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
+}
+
+// ── 렌더러: KOSHA GUIDE ────────────────────────────────
+const CAT_LABEL = { G:'일반', M:'기계', C:'화공', B:'건설', H:'보건' };
+function renderGuide(el, items, reset) {
+  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 KOSHA GUIDE가 없습니다.</div>'; return; }
+  const html = items.map(it => {
+    const cat = (it.category||it.guideCategory||'G').toUpperCase();
+    return `
+    <div class="guide-card">
+      <div class="guide-cat cat-${cat}">${CAT_LABEL[cat]||cat}</div>
+      <div class="flex-grow-1">
+        <div class="guide-no">${esc(it.guideNo||it.guide_no||'')} · ${esc(it.registDate||it.regDt||'')}</div>
+        <div class="guide-title">${esc(it.guideTitle||it.guideName||it.title||'(제목 없음)')}</div>
+        ${it.guideUrl||it.url?`<a href="${esc(it.guideUrl||it.url)}" target="_blank" rel="noopener" class="sn-card-link mt-2" style="font-size:.75rem;padding:4px 12px"><i class="fas fa-download"></i> 다운로드</a>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  if (reset) el.innerHTML = html;
+  else el.insertAdjacentHTML('beforeend', html);
+}
+
+// ── 초기 로드 ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initSection('accident');
 });
 </script>
 </body>
