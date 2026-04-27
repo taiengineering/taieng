@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
   body { font-family: 'Noto Sans KR', sans-serif; }
-  .lu-layout { min-height:calc(100vh - var(--tai-nav-h,90px)); display:grid; grid-template-columns:40% 60%; }
+  .lu-layout { padding-top:var(--tai-nav-h,90px); min-height:calc(100vh - var(--tai-nav-h,90px)); display:grid; grid-template-columns:40% 60%; }
   .lu-left { background:linear-gradient(160deg,#0d1b2a 0%,#1a3a5c 100%); padding:36px 28px; display:flex; flex-direction:column; align-items:center; color:#fff; position:sticky; top:var(--tai-nav-h,90px); height:calc(100vh - var(--tai-nav-h,90px)); overflow-y:auto; }
   .lu-left h2 { font-size:1.5rem; font-weight:900; line-height:1.35; margin:0 0 6px; text-align:center; }
   .lu-left h2 em { font-style:normal; color:#60a5fa; }
@@ -76,8 +76,6 @@
   .lu-detail-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
   .lu-detail-item .k { font-size:.7rem; color:var(--sub,#5a6476); font-weight:600; margin-bottom:3px; }
   .lu-detail-item .v { font-size:.82rem; font-weight:600; color:var(--navy,#0d1b2a); }
-
-  /* 개정 요약 박스 — 핵심 */
   .lu-change-summary {
     background:#fff;
     border:1.5px solid #e2e8f0;
@@ -99,19 +97,15 @@
     white-space:pre-line;
   }
   .lu-change-body strong { color:#0d1b2a; }
-
-  /* 조문 보기 버튼 */
   .lu-btn-source {
     display:inline-flex; align-items:center; gap:6px; padding:9px 18px; margin-top:10px;
     background:#0d1b2a; border:1.5px solid #0d1b2a; border-radius:10px;
     font-size:.82rem; font-weight:700; color:#fff; text-decoration:none; transition:background .15s;
   }
   .lu-btn-source:hover { background:#1a3a5c; color:#fff; }
-
   .lu-empty { text-align:center; padding:60px 20px; color:var(--sub,#5a6476); }
   .lu-empty .icon { font-size:2.8rem; margin-bottom:10px; }
   .lu-empty .msg { font-size:.95rem; font-weight:600; }
-
   @media(max-width:992px){
     .lu-layout{grid-template-columns:1fr;}
     .lu-left{position:static;height:auto;padding:28px 20px;}
@@ -293,7 +287,6 @@ function render(){
       const sb=d.status==='시행중'?'<span class="lu-badge badge-ok">시행중</span>':'<span class="lu-badge badge-wait">시행예정</span>';
       const ib=impactBadge(d.impact);
 
-      // 변경 조문 요약 박스 (body 필드 우선, 없으면 summary)
       let changeHtml='';
       if(d.body && d.body.trim()) {
         changeHtml='<div class="lu-change-summary">'
@@ -335,7 +328,6 @@ function render(){
   el.innerHTML=html;
 }
 
-// 이벤트
 document.getElementById('catGrid').addEventListener('click',function(e){
   const c=e.target.closest('.lu-cat-card');if(!c)return;
   this.querySelectorAll('.lu-cat-card').forEach(x=>x.classList.remove('active'));c.classList.add('active');
