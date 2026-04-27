@@ -1005,6 +1005,13 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
     }, { threshold: 0.2, rootMargin: '0px 0px -32px 0px' });
     scopes.forEach(function(s) { io.observe(s); });
     setTimeout(function() { scopes.forEach(fire); }, 5000);
+    setTimeout(() => {
+      document.querySelectorAll('[data-sp-count]').forEach(el => {
+        if (el.textContent === '0' || el.textContent === '') {
+          el.textContent = el.getAttribute('data-sp-count');
+        }
+      });
+    }, 5000);
   })();
   </script>
 
