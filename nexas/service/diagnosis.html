@@ -660,26 +660,30 @@
 
 /* KG이니시스 결제 */
 var DIAG_API = 'https://api.taieng.co.kr';
-var DIAG_RETURN = DIAG_API + '/payments/inicis/return';
-var DIAG_CLOSE  = DIAG_API + '/payments/result?resultCode=CLOSE';
+var DIAG_RETURN = 'https://new.taieng.co.kr/_api/payments/inicis/return';
+var DIAG_CLOSE  = 'https://new.taieng.co.kr/_api/payments/result?resultCode=CLOSE';
 
 function diagPay(productType, planCode, amount, goodname) {
   var token     = localStorage.getItem('access_token') || '';
   var userId    = localStorage.getItem('user_id') || '';
   var companyId = localStorage.getItem('company_id') || '';
 
-  // 비로그인 시 게스트 결제 허용 (법령진단은 일회성 구매)
-  if (!userId) userId = 'guest_' + Date.now();
+  // 로그인 없어도 결제 가능 (법령진단은 일회성 구매)
+  if (!userId) {
+    userId = 'guest_' + Date.now();
+  }
 
-  var hdrs = { 'Content-Type': 'application/json' };
-  if (token) hdrs['Authorization'] = 'Bearer ' + token;
+  var headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = 'Bearer ' + token;
+  }
 
   var payload = { user_id: userId, product_type: productType, amount: amount, goodname: goodname, plan_code: planCode, period_months: 1, payment_type: 'CARD', return_url: DIAG_RETURN, close_url: DIAG_CLOSE };
   if (companyId) payload.company_id = companyId;
 
   fetch(DIAG_API + '/payments/inicis/prepare', {
     method: 'POST',
-    headers: hdrs,
+    headers: headers,
     body: JSON.stringify(payload)
   })
   .then(function(r) { return r.json(); })
