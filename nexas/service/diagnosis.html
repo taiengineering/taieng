@@ -609,12 +609,12 @@
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
 <!-- KG이니시스 결제 폼 -->
-<form id="diag_inicis_form" method="POST" accept-charset="euc-kr" style="display:none">
+<form id="diag_inicis_form" method="POST" accept-charset="UTF-8" style="display:none">
   <input type="hidden" name="version" value="1.0">
   <input type="hidden" name="gopaymethod" value="Card">
   <input type="hidden" name="currency" value="WON">
   <input type="hidden" name="langtype" value="KO">
-  <input type="hidden" name="acceptmethod" value="CARDONLY:CARDPOINT:centerCd(Y)">
+  <input type="hidden" name="acceptmethod" value="centerCd(Y)">
   <input type="hidden" name="use_chkfake" value="Y">
   <input type="hidden" id="df_mid" name="mid">
   <input type="hidden" id="df_mKey" name="mKey">
@@ -639,6 +639,7 @@
 <script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
+<script src="../assets/js/inicis-fix.js"></script>
 <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 
 <script>
