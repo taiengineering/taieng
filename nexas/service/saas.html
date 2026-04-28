@@ -1063,7 +1063,7 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
     var userId = getCurrentUserId();
     if (!userId) {
       alert('로그인 후 결제해주세요.');
-      location.href = 'https://safe.taieng.co.kr/login?redirect=' + encodeURIComponent(location.href);
+      location.href = '/log-in?redirect=' + encodeURIComponent(location.href);
       return;
     }
     var url = SP_API + '/payments/billing/pay'
