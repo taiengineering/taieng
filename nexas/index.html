@@ -85,12 +85,12 @@
     @media (max-width: 767px) { .role-btn-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .role-banner-area { padding: 60px 0 50px; } .role-banner-img { margin: -4% 0; } }
     @media (max-width: 400px) { .role-btn-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
 
-    /* ═══ 앱 스크린 섹션 ═══ */
-    .app-screen-area { background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #1a0d3d 100%) !important; position: relative; overflow: hidden; padding: 90px 0 70px; }
+    /* ═══ 앱 스크린 섹션 — 보라 glow → 네이비 교체 ═══ */
+    .app-screen-area { background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #0a1628 100%) !important; position: relative; overflow: hidden; padding: 90px 0 70px; }
     .app-screen-area[style] { background-image: none !important; }
     .app-screen-area .bg-main-gradient { display: none !important; }
-    .app-screen-area::before { content: ''; position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, transparent 70%); pointer-events: none; }
-    .app-screen-area::after { content: ''; position: absolute; bottom: -80px; left: 8%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,0.10) 0%, transparent 70%); pointer-events: none; }
+    .app-screen-area::before { content: ''; position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(21,101,192,0.14) 0%, transparent 70%); pointer-events: none; }
+    .app-screen-area::after { content: ''; position: absolute; bottom: -80px; left: 8%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(15,43,74,0.22) 0%, transparent 70%); pointer-events: none; }
     .app-screen-area .section-title h2.title { font-size: 2rem; line-height: 1.35; }
     .app-screen-area .section-title p { opacity: .7; margin-top: 10px; }
     .app-screen-area .btn-area { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
@@ -99,7 +99,7 @@
     .app-screens-grid .app-screen-item.center-phone { flex: 1.12; max-width: 280px; transform: translateY(-10px); }
     .app-screens-grid .app-screen-item img { width: 100%; height: auto; max-height: min(52vh, 540px); object-fit: contain; display: block; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06); }
     .app-screen-label { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; letter-spacing: .05em; text-transform: uppercase; }
-    .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(148,130,255,.8); }
+    .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(147,197,253,.8); }
     @media (max-width: 767px) { .app-screens-grid { gap: 10px; flex-wrap: wrap; } .app-screens-grid .app-screen-item, .app-screens-grid .app-screen-item.center-phone { flex: 1 1 42%; max-width: none; transform: none; } .app-screen-area { padding: 60px 0 50px; } }
     </style>
 </head>

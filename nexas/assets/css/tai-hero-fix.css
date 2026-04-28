@@ -1,24 +1,58 @@
 /**
- * TAI hero fix v6
+ * TAI hero fix v7
+ * - v7: .hero-split padding-top 90px 추가 (fixed 헤더 가림 보정)
  */
+
+/* fixed 헤더(90px) 보정 — 히어로가 헤더 뒤로 숨지 않도록 */
+.hero-split {
+  padding-top: 90px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
 .hero-split .hero-left,
 .owner-hero-section .owner-hero-left-col,
 .manager-hero .manager-hero-left {
   padding-left: max(24px, calc((100vw - 1320px) / 2 + 12px));
 }
-.hero-split { width: 100%; max-width: 100%; overflow-x: hidden; box-sizing: border-box; }
+
 .owner-hero-left-col { min-height: 470px; }
 .owner-hero-left-inner { margin-left: 0 !important; max-width: 480px; }
+
 @media (max-width: 1399px) {
-  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: max(24px, calc((100vw - 1140px) / 2 + 12px)); }
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: max(24px, calc((100vw - 1140px) / 2 + 12px));
+  }
 }
 @media (max-width: 1199px) {
-  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: max(24px, calc((100vw - 960px) / 2 + 12px)); }
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: max(24px, calc((100vw - 960px) / 2 + 12px));
+  }
 }
 @media (max-width: 991px) {
-  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: 24px; }
+  .hero-split {
+    padding-top: 64px;
+  }
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: 24px;
+  }
   .owner-hero-left-col { min-height: auto; }
 }
 @media (max-width: 575px) {
-  .hero-split .hero-left, .owner-hero-section .owner-hero-left-col, .manager-hero .manager-hero-left { padding-left: 20px; }
+  .hero-split {
+    padding-top: 60px;
+  }
+  .hero-split .hero-left,
+  .owner-hero-section .owner-hero-left-col,
+  .manager-hero .manager-hero-left {
+    padding-left: 20px;
+  }
 }
