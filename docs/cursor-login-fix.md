@@ -1,57 +1,64 @@
-# Cursor 작업지시서: taieng.co.kr 로그인 페이지 수정
+# Cursor 작업지시서: taieng.co.kr 로그인 — 기존 auth API 연결
 
-> **레포**: `taiengineering/taieng`
-> **파일**: `nexas/log-in.html` (21KB)
-> **문제**: 로그인 버튼(`doLogin()`) 클릭 시 아무 반응 없음
-> **원인**: Supabase JS 라이브러리 미로드 (`createClient` 미정의)
+> **프론트 레포**: `taiengineering/taieng` → `nexas/log-in.html` (21KB)
+> **백엔드 레포**: `taiengineering/tai-api` → `routers/auth.py` (28KB, 기존)
+> **원칙**: 프론트에 Supabase anon key 노출하지 않음. 백엔드 API 경유.
 
 ---
 
-## 변경 1: Supabase JS CDN 추가
+## 현재 상태
 
-`</head>` 직전에 추가:
+- `log-in.html`에 `doLogin()` 함수 존재 (1055자)
+- 로그인 버튼: `onclick="doLogin()"`
+- 입력 필드: `#login-id` (이메일/휴대폰), `#login-pw` (비밀번호)
+- **문제**: Supabase JS 미로드 → 인증 호출 실패
 
-```html
-<!-- Supabase Auth -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-  var SUPABASE_URL = 'https://vwlahtguyggrhvslabax.supabase.co';
-  var SUPABASE_ANON_KEY = '여기에_anon_key_입력';
-  var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-</script>
+## 해결 방향
+
+`doLogin()`을 **기존 백엔드 auth API** (`taieng.co.kr/_api/auth/...`)를 호출하도록 수정.
+Supabase CDN 불필요 — 백엔드에서 처리.
+
+## STEP 1: 백엔드 auth.py 엔드포인트 확인
+
+```bash
+grep -n 'def \|@router\.' routers/auth.py | head -30
 ```
 
-> **anon key 확인**: Supabase Dashboard → Settings → API → Project API keys → `anon` `public`
+로그인 엔드포인트 확인 (예: `POST /auth/login`, `POST /auth/signin` 등).
+요청 형식과 응답 형식 파악.
 
-## 변경 2: doLogin() 함수 — Supabase signInWithPassword 연결
-
-현재 `doLogin()` 함수가 Supabase 클라이언트를 참조하는 방식을 확인 후, `_sb`로 연결:
+## STEP 2: doLogin() 함수 수정
 
 ```javascript
 async function doLogin() {
-  var email = document.getElementById('login-id').value.trim();
+  var loginId = document.getElementById('login-id').value.trim();
   var password = document.getElementById('login-pw').value;
-  
-  if (!email || !password) {
+
+  if (!loginId || !password) {
     alert('이메일과 비밀번호를 입력해주세요.');
     return;
   }
 
   try {
-    var { data, error } = await _sb.auth.signInWithPassword({
-      email: email,
-      password: password
+    // 백엔드 auth API 호출 (Cloudflare 프록시 경유)
+    var res = await fetch('https://taieng.co.kr/_api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: loginId, password: password })
     });
 
-    if (error) {
-      alert('로그인 실패: ' + error.message);
+    var data = await res.json();
+
+    if (data.status !== 'success' || !data.data) {
+      alert('로그인 실패: ' + (data.detail || data.message || '이메일/비밀번호를 확인해주세요.'));
       return;
     }
 
     // 로그인 성공 — localStorage에 사용자 정보 저장
-    localStorage.setItem('tai_user_id', data.user.id);
-    localStorage.setItem('tai_user_email', data.user.email);
-    localStorage.setItem('tai_access_token', data.session.access_token);
+    var user = data.data;
+    localStorage.setItem('tai_user_id', user.id || user.user_id);
+    localStorage.setItem('tai_user_email', user.email || loginId);
+    if (user.access_token) localStorage.setItem('tai_access_token', user.access_token);
 
     // redirect 파라미터가 있으면 해당 페이지로 이동
     var params = new URLSearchParams(window.location.search);
@@ -63,48 +70,50 @@ async function doLogin() {
 }
 ```
 
-## 변경 3: 회원가입 함수도 확인
+> **주의**: `fetch` URL과 요청 body 형식은 STEP 1에서 확인한 실제 auth.py 엔드포인트에 맞춰 조정.
 
-`#reg-name`, `#reg-email`, `#reg-phone`, `#reg-pw` 입력 필드가 있으므로, 회원가입 함수도 Supabase `_sb.auth.signUp()` 연결 필요.
+## STEP 3: 회원가입 함수도 동일 패턴
 
 ```javascript
 async function doRegister() {
-  var name = document.getElementById('reg-name').value.trim();
-  var email = document.getElementById('reg-email').value.trim();
-  var phone = document.getElementById('reg-phone').value.trim();
-  var pw = document.getElementById('reg-pw').value;
-  var pw2 = document.getElementById('reg-pw2').value;
-
-  if (pw !== pw2) { alert('비밀번호가 일치하지 않습니다.'); return; }
-  if (pw.length < 8) { alert('비밀번호는 8자 이상이어야 합니다.'); return; }
-
-  try {
-    var { data, error } = await _sb.auth.signUp({
-      email: email,
-      password: pw,
-      options: {
-        data: { name: name, phone: phone }
-      }
-    });
-
-    if (error) { alert('회원가입 실패: ' + error.message); return; }
-
-    alert('회원가입 완료! 이메일 인증 후 로그인해주세요.');
-  } catch (e) {
-    alert('회원가입 오류: ' + e.message);
-  }
+  // ... 입력값 검증 ...
+  var res = await fetch('https://taieng.co.kr/_api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password, name, phone })
+  });
+  // ... 응답 처리 ...
 }
+```
+
+## STEP 4 (필요시): auth.py에 로그인 엔드포인트 추가
+
+기존 auth.py에 `POST /auth/login` 엔드포인트가 없다면 추가:
+
+```python
+@router.post("/login")
+async def login(body: dict):
+    supabase = get_supabase()
+    try:
+        res = supabase.auth.sign_in_with_password({
+            "email": body["email"],
+            "password": body["password"]
+        })
+        return {
+            "status": "success",
+            "data": {
+                "id": res.user.id,
+                "email": res.user.email,
+                "access_token": res.session.access_token
+            }
+        }
+    except Exception as e:
+        raise HTTPException(400, str(e))
 ```
 
 ## 검증
 
 1. `taieng.co.kr/log-in` 접속
 2. 이메일/비밀번호 입력 → 로그인 클릭
-3. Supabase 인증 성공 → redirect URL로 이동
-4. 브라우저 콘솔에 에러 없음 확인
-
-## 참고
-
-- Supabase 서울 프로젝트: `vwlahtguyggrhvslabax`
-- safe.taieng.co.kr 로그인은 같은 Supabase 프로젝트 사용
-- anon key는 공개 키이므로 프론트엔드에 노출 가능
+3. `taieng.co.kr/_api/auth/login` API 호출 확인 (Network 탭)
+4. 로그인 성공 → redirect URL로 이동
