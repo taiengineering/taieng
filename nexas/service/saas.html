@@ -935,7 +935,7 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
 
   </div><!-- /#saas-page -->
 
-  <form id="sp_inicis_form" method="POST" accept-charset="euc-kr" style="display:none">
+  <form id="sp_inicis_form" method="POST" accept-charset="UTF-8" style="display:none">
     <input type="hidden" name="version" value="1.0">
     <input type="hidden" name="gopaymethod" value="Card">
     <input type="hidden" name="currency" value="WON">
@@ -967,7 +967,6 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
   <script src="../assets/js/header.js"></script>
   <script src="../assets/js/nav-auth.js"></script>
   <script src="../assets/js/footer.js"></script>
-  <script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
   <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 
   <script>
@@ -1052,76 +1051,33 @@ TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
 
   <script>
   'use strict';
-  var SP_API = 'https://api.taieng.co.kr';
+  var SP_API = 'https://taieng.co.kr/_api';
   var SP_RETURN  = SP_API + '/payments/inicis/return';
   var SP_CLOSE   = SP_API + '/payments/result?resultCode=CLOSE';
 
-  function spPay(e, productType, planCode, amount, goodname) {
-    e.preventDefault();
-    var token  = localStorage.getItem('access_token') || '';
-    var userId = localStorage.getItem('user_id') || '';
-    var companyId = localStorage.getItem('company_id') || '';
+  function getCurrentUserId() {
+    return localStorage.getItem('user_id') || '';
+  }
 
-    if (!token || !userId) {
+  function startBillingPayment(planCode, amount, goodname, productType) {
+    var userId = getCurrentUserId();
+    if (!userId) {
       alert('로그인 후 결제해주세요.');
       location.href = 'https://safe.taieng.co.kr/login?redirect=' + encodeURIComponent(location.href);
       return;
     }
+    var url = SP_API + '/payments/billing/pay'
+      + '?user_id=' + encodeURIComponent(userId)
+      + '&amount=' + encodeURIComponent(amount)
+      + '&product_type=' + encodeURIComponent(productType)
+      + '&goodname=' + encodeURIComponent(goodname)
+      + '&plan_code=' + encodeURIComponent(planCode);
+    window.location.href = url;
+  }
 
-    var btn = e.target;
-    btn.disabled = true;
-    btn.textContent = '처리 중...';
-
-    var payload = JSON.stringify({
-      user_id:       userId,
-      product_type:  productType,
-      amount:        amount,
-      goodname:      goodname,
-      plan_code:     planCode,
-      period_months: 1,
-      payment_type:  'CARD',
-      return_url:    SP_RETURN,
-      close_url:     SP_CLOSE
-    });
-    if (companyId) {
-      var p = JSON.parse(payload);
-      p.company_id = companyId;
-      payload = JSON.stringify(p);
-    }
-
-    fetch(SP_API + '/payments/inicis/prepare', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-      body: payload
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(res) {
-      if (!res || res.status !== 'success') {
-        throw new Error((res && (res.detail || res.message)) || '결제 준비 실패');
-      }
-      var d = res.data;
-      document.getElementById('sp_f_mid').value         = d.mid         || '';
-      document.getElementById('sp_f_mKey').value        = d.mKey        || '';
-      document.getElementById('sp_f_oid').value         = d.oid         || '';
-      document.getElementById('sp_f_price').value       = d.price       || String(amount);
-      document.getElementById('sp_f_goodname').value    = d.goodname    || goodname;
-      document.getElementById('sp_f_buyername').value   = d.buyername   || '고객';
-      document.getElementById('sp_f_buyertel').value    = d.buyertel    || '00000000000';
-      document.getElementById('sp_f_buyeremail').value  = d.buyeremail  || '';
-      document.getElementById('sp_f_timestamp').value   = d.timestamp   || '';
-      document.getElementById('sp_f_signature').value   = d.signature   || '';
-      document.getElementById('sp_f_verification').value = d.verification || '';
-      document.getElementById('sp_f_returnUrl').value   = SP_RETURN;
-      document.getElementById('sp_f_closeUrl').value    = SP_CLOSE;
-      INIStdPay.pay('sp_inicis_form');
-    })
-    .catch(function(err) {
-      alert('오류: ' + err.message);
-    })
-    .finally(function() {
-      btn.disabled = false;
-      btn.textContent = '결제하기';
-    });
+  function spPay(e, productType, planCode, amount, goodname) {
+    e.preventDefault();
+    startBillingPayment(planCode, amount, goodname, productType);
   }
   </script>
 </body>
