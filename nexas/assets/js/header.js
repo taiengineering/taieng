@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.2.0 (2026-04-28): 로그인전 로그인/회원가입, 로그인후 마이페이지/로그아웃
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+텍스트)
  * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
@@ -13,9 +14,10 @@
 (function () {
   'use strict';
 
+  var STORAGE_KEY = 'tai_session';
   var ICON_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
 
-  /* ── 헤더 높이 CSS 변수 + 로고 스타일 주입 ── */
+  /* ── 헤더 높이 CSS 변수 + 로고·우측메뉴 스타일 주입 ── */
   (function injectNavCss() {
     if (document.getElementById('tai-nav-vars')) return;
     var css = [
@@ -36,7 +38,7 @@
       '  .full-vp-right { height: calc(100vh - 280px); min-height: 400px; }',
       '}',
       '.tai-page-top { padding-top: var(--tai-nav-h); }',
-      /* 로고 아이콘+텍스트 */
+      /* 로고 */
       '.tai-logo-combo {',
       '  display: flex !important;',
       '  align-items: center;',
@@ -60,13 +62,84 @@
       '  text-shadow: 0 1px 4px rgba(0,0,0,.2);',
       '  white-space: nowrap;',
       '}',
-      /* 스크롤 후 밝은 배경에서 텍스트 다크 */
       '.navbar-area.navbar-area-fixed .tai-logo-text {',
       '  color: #0f2b4a;',
       '  text-shadow: none;',
       '}',
       '@media(max-width:575px){',
       '  .tai-logo-text { font-size: 1rem; }',
+      '}',
+      /* 우측 nav 버튼 공통 */
+      '.tai-nav-btn {',
+      '  display: inline-flex !important;',
+      '  align-items: center;',
+      '  justify-content: center;',
+      '  font-size: .82rem;',
+      '  font-weight: 700;',
+      '  border-radius: 8px;',
+      '  padding: 7px 14px;',
+      '  line-height: 1.2;',
+      '  text-decoration: none !important;',
+      '  transition: background .15s, color .15s, border-color .15s;',
+      '  white-space: nowrap;',
+      '}',
+      '.tai-nav-btn-outline {',
+      '  border: 1.5px solid rgba(255,255,255,.55);',
+      '  color: rgba(255,255,255,.9) !important;',
+      '  background: transparent;',
+      '}',
+      '.tai-nav-btn-outline:hover {',
+      '  border-color: #fff;',
+      '  color: #fff !important;',
+      '  background: rgba(255,255,255,.08);',
+      '}',
+      '.tai-nav-btn-solid {',
+      '  border: 1.5px solid rgba(255,255,255,.9);',
+      '  color: #0f2b4a !important;',
+      '  background: #fff;',
+      '}',
+      '.tai-nav-btn-solid:hover {',
+      '  background: #f0f6ff;',
+      '  border-color: #f0f6ff;',
+      '  color: #0f2b4a !important;',
+      '}',
+      /* 스크롤 후 고정 헤더에서 버튼 색 반전 */
+      '.navbar-area-fixed .tai-nav-btn-outline {',
+      '  border-color: rgba(15,43,74,.45);',
+      '  color: #0f2b4a !important;',
+      '}',
+      '.navbar-area-fixed .tai-nav-btn-outline:hover {',
+      '  border-color: #0f2b4a;',
+      '  background: rgba(15,43,74,.06);',
+      '}',
+      '.navbar-area-fixed .tai-nav-btn-solid {',
+      '  border-color: #0f2b4a;',
+      '  background: #0f2b4a;',
+      '  color: #fff !important;',
+      '}',
+      '.navbar-area-fixed .tai-nav-btn-solid:hover {',
+      '  background: #1565c0;',
+      '  border-color: #1565c0;',
+      '}',
+      /* 로그아웃 버튼 */
+      'button.tai-logout-btn {',
+      '  cursor: pointer;',
+      '  background: transparent;',
+      '  border: 1.5px solid rgba(255,255,255,.55);',
+      '  color: rgba(255,255,255,.9);',
+      '}',
+      'button.tai-logout-btn:hover {',
+      '  border-color: #fff;',
+      '  color: #fff;',
+      '  background: rgba(255,255,255,.08);',
+      '}',
+      '.navbar-area-fixed button.tai-logout-btn {',
+      '  border-color: rgba(15,43,74,.45);',
+      '  color: #0f2b4a;',
+      '}',
+      '.navbar-area-fixed button.tai-logout-btn:hover {',
+      '  border-color: #0f2b4a;',
+      '  background: rgba(15,43,74,.06);',
       '}',
     ].join('\n');
 
@@ -102,6 +175,7 @@
   var base = nexasRelBase();
   if (!base) base = legacyRelBase();
 
+  /* 로그인 redirect 파라미터 */
   var loginRedirectQs = '';
   try {
     var lp = window.location.pathname || '';
@@ -112,6 +186,81 @@
     }
   } catch (e) {}
 
+  /* ── 인증 헬퍼 ── */
+  function isLoggedIn() {
+    try {
+      return (
+        localStorage.getItem(STORAGE_KEY) === '1' ||
+        !!localStorage.getItem('access_token')
+      );
+    } catch (e) { return false; }
+  }
+
+  function clearAuthStorage() {
+    var keys = [
+      STORAGE_KEY, 'access_token', 'refresh_token', 'user_name',
+      'user_email', 'role_code', 'partner_role', 'tai_flags',
+      'user_id', 'company_id', 'factory_id', 'user'
+    ];
+    keys.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    try {
+      var all = Object.keys(localStorage);
+      for (var i = 0; i < all.length; i++) {
+        var k = all[i];
+        if (/^tai_/i.test(k) || /^sb-/i.test(k) || k.indexOf('supabase') === 0)
+          localStorage.removeItem(k);
+      }
+    } catch (e2) {}
+    try { [STORAGE_KEY, 'access_token'].forEach(function (k) { sessionStorage.removeItem(k); }); } catch (e3) {}
+  }
+
+  /* ── 우측 버튼 영역 HTML 생성 ── */
+  function buildNavRight() {
+    var logged = isLoggedIn();
+    if (logged) {
+      /* 로그인 상태: 마이페이지 + 로그아웃 */
+      return [
+        '<div class="nav-right-part nav-right-part-desktop">',
+        '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
+        '    <li>',
+        '      <a href="' + base + 'mypage/" class="tai-nav-btn tai-nav-btn-outline">마이페이지</a>',
+        '    </li>',
+        '    <li>',
+        '      <button class="tai-nav-btn tai-logout-btn" id="tai-header-logout">로그아웃</button>',
+        '    </li>',
+        '  </ul>',
+        '</div>',
+      ].join('\n');
+    } else {
+      /* 비로그인 상태: 로그인 + 회원가입 */
+      return [
+        '<div class="nav-right-part nav-right-part-desktop">',
+        '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
+        '    <li>',
+        '      <a href="' + base + 'log-in.html' + loginRedirectQs + '" class="tai-nav-btn tai-nav-btn-outline">로그인</a>',
+        '    </li>',
+        '    <li>',
+        '      <a href="' + base + 'sign-up.html" class="tai-nav-btn tai-nav-btn-solid">회원가입</a>',
+        '    </li>',
+        '  </ul>',
+        '</div>',
+      ].join('\n');
+    }
+  }
+
+  /* ── 로그아웃 핸들러 바인딩 ── */
+  function bindLogout() {
+    var btn = document.getElementById('tai-header-logout');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      clearAuthStorage();
+      /* 메인페이지로 이동 */
+      window.location.href = base + 'index.html';
+    });
+  }
+
+  /* ── HTML 조립 ── */
   var html = [
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
@@ -184,22 +333,15 @@
     '        </ul>',
     '      </div>',
 
-    '      <div class="nav-right-part nav-right-part-desktop">',
-    '        <ul>',
-    '          <li class="nav-auth-guest">',
-    '            <a href="' + base + 'log-in.html' + loginRedirectQs + '">\uB85C\uADF8\uC778</a>',
-    '          </li>',
-    '          <li class="nav-auth-user d-none">',
-    '            <a href="' + base + 'mypage/">\uB9C8\uC774\uD398\uC774\uC9C0</a>',
-    '          </li>',
-    '        </ul>',
-    '      </div>',
+    /* 우측 버튼 — 인라인 플레이스홀더 (inject 후 교체) */
+    '      <div id="tai-nav-right-placeholder"></div>',
 
     '    </div>',
     '  </nav>',
     '</header>',
   ].join('\n');
 
+  /* ── 주입 ── */
   function inject() {
     var ph = document.getElementById('tai-header');
     if (ph) {
@@ -212,17 +354,14 @@
         document.body.insertAdjacentHTML('afterbegin', html);
       }
     }
-    applyAuthState();
-  }
 
-  function applyAuthState() {
-    try {
-      var token = localStorage.getItem('access_token');
-      if (token) {
-        document.querySelectorAll('.nav-auth-guest').forEach(function (el) { el.classList.add('d-none'); });
-        document.querySelectorAll('.nav-auth-user').forEach(function (el) { el.classList.remove('d-none'); });
-      }
-    } catch (e) {}
+    /* 플레이스홀더를 인증 상태에 맞는 버튼으로 교체 */
+    var rightPh = document.getElementById('tai-nav-right-placeholder');
+    if (rightPh) {
+      rightPh.outerHTML = buildNavRight();
+    }
+
+    bindLogout();
   }
 
   if (document.readyState === 'loading') {
@@ -230,4 +369,21 @@
   } else {
     inject();
   }
+
+  /* pageshow (뒤로가기 캐시 복원 시에도 버튼 재렌더) */
+  window.addEventListener('pageshow', function (ev) {
+    if (ev && ev.persisted) {
+      var rightArea = document.querySelector('.nav-right-part.nav-right-part-desktop');
+      if (rightArea) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = buildNavRight();
+        rightArea.outerHTML = tmp.innerHTML;
+        bindLogout();
+      }
+    }
+  });
+
+  window.taiClearAuth = function () {
+    clearAuthStorage();
+  };
 })();
