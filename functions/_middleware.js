@@ -1,27 +1,33 @@
-// Cloudflare Pages Middleware
-// HTML 응답에서 new.taieng.co.kr → 현재 요청 도메인으로 동적 치환
-// 이니시스 V023 에러 방지: 결제페이지와 returnUrl 동일 도메인 보장
-
+/**
+ * Cloudflare Pages Middleware v2
+ * 1. Bootstrap .fade CSS가 이니시스 결제창을 opacity:0으로 숨기는 문제 해결
+ *    - 이니시스 기술지원 확인: "bootstrap css에서 fade 스타일을 입혀 결제창이 정상 노출되지 않음"
+ * 2. new.taieng.co.kr → 현재 도메인 동적 치환 (이니시스 V023 에러 방지)
+ */
 export async function onRequest(context) {
   const response = await context.next();
   const contentType = response.headers.get('content-type') || '';
 
-  // HTML 응답만 처리
   if (!contentType.includes('text/html')) {
-    return response;
-  }
-
-  const requestHost = new URL(context.request.url).host;
-
-  // taieng.co.kr에서 접속한 경우에만 치환 (new.taieng.co.kr에서는 불필요)
-  if (requestHost === 'new.taieng.co.kr') {
     return response;
   }
 
   let html = await response.text();
 
-  // new.taieng.co.kr → 현재 요청 도메인으로 치환
-  html = html.replaceAll('new.taieng.co.kr', requestHost);
+  // 1. new.taieng.co.kr → 현재 도메인 치환
+  const currentHost = new URL(context.request.url).hostname;
+  if (currentHost !== 'new.taieng.co.kr') {
+    html = html.replaceAll('new.taieng.co.kr', currentHost);
+  }
+
+  // 2. Bootstrap .fade CSS 충돌 해결 — 이니시스 결제창 opacity 강제 복원
+  const inicisCSS = `<style>
+/* [TAI] 이니시스 결제창 Bootstrap .fade 충돌 해결 */
+.fade { opacity: 1 !important; }
+.modal-backdrop.fade { opacity: 0.5 !important; }
+</style>`;
+
+  html = html.replace('</head>', inicisCSS + '\n</head>');
 
   return new Response(html, {
     status: response.status,
