@@ -84,7 +84,6 @@
   .form-select-tai{width:100%;border:1.5px solid var(--craft-line);border-radius:8px;padding:11px 14px;
     font-size:.9rem;font-family:inherit;color:var(--craft-ink);outline:none;background:#fff;}
   .form-select-tai:focus{border-color:var(--stamp-red);}
-  /* yn-grid: 기본 2컬럼, tri_state는 인라인 override로 3컬럼 */
   .yn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .yn-btn{border:2px solid var(--craft-line);border-radius:10px;padding:13px;text-align:center;
     cursor:pointer;font-size:.9rem;font-weight:700;color:var(--craft-sub);transition:all .15s;user-select:none;background:#fff;}
@@ -135,6 +134,14 @@
     padding:13px 15px;margin-bottom:16px;font-size:.87rem;color:#166534;font-weight:700;display:none;}
   .price-banner.show{display:block;}
   .price-banner.warn{background:#fffbeb;border-color:#fcd34d;color:#92400e;}
+  /* ★ 청약철회 고지 박스 */
+  .withdrawal-notice{background:#fff0f0;border:1.5px solid #fca5a5;border-radius:12px;padding:18px;margin-bottom:16px;}
+  .withdrawal-notice .wn-title{font-size:.82rem;font-weight:800;color:#7f1d1d;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .withdrawal-notice .wn-body{font-size:.83rem;color:#7f1d1d;line-height:1.75;margin-bottom:14px;}
+  .withdrawal-notice .wn-body strong{color:#991b1b;}
+  .withdrawal-notice .wn-check{display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:10px 12px;background:#fff5f5;border-radius:8px;border:1px solid #fca5a5;}
+  .withdrawal-notice .wn-check input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:#dc2626;cursor:pointer;}
+  .withdrawal-notice .wn-check label{font-size:.85rem;font-weight:700;color:#991b1b;cursor:pointer;line-height:1.5;}
   .btn-primary-tai{background:var(--stamp-red);color:#fff;font-weight:800;font-size:1rem;
     padding:15px;border-radius:10px;border:none;cursor:pointer;width:100%;margin-top:8px;
     transition:background .2s;box-shadow:0 3px 10px rgba(192,57,43,.3);}
@@ -298,7 +305,6 @@
       <p class="panel-title">무료 법령진단 결과</p>
       <p class="panel-sub" id="step3Sub"></p>
       <div id="freeResultArea"><div class="result-empty">진단 결과를 불러오는 중...</div></div>
-      <!-- BUG-4: <p> 제거, h5 문구 수정 -->
       <div class="paid-cta" id="paidCta" style="display:none;">
         <h5>현재 진단에서 확인할 수 없는 영역이 있습니다</h5>
         <ul class="paid-cta-items" id="paidCtaItems"></ul>
@@ -319,7 +325,25 @@
       <div id="paidFormArea"></div>
       <div id="paymentArea" style="display:none;">
         <div class="price-banner show" id="finalPriceBanner"></div>
-        <button class="btn-primary-tai" id="btnPay" onclick="startPayment()">결제 후 진단 시작 →</button>
+
+        <!-- ★ 청약철회 제한 고지 동의 (전자상거래법 제17조 제2항) -->
+        <div class="withdrawal-notice">
+          <div class="wn-title">⚠️ 청약철회 제한 고지 — 결제 전 필독</div>
+          <div class="wn-body">
+            법령진단 결과는 <strong>디지털 콘텐츠</strong>로 즉시 제공됩니다.<br>
+            결제 완료 후 <strong>결과 화면을 열람하는 즉시 서비스가 개시</strong>된 것으로 간주되며,<br>
+            이 경우 <strong>전자상거래 등에서의 소비자보호에 관한 법률 제17조 제2항</strong>에 따라 청약철회가 제한됩니다.<br><br>
+            • 결과 <strong>열람 전</strong> 결제일로부터 7일 이내 취소 요청 → <strong>전액 환불</strong><br>
+            • 결과 <strong>열람 후</strong> 취소 요청 → <strong>환불 불가</strong> (디지털 콘텐츠 제공 완료)<br>
+            • 환불 문의: tai@taieng.co.kr
+          </div>
+          <div class="wn-check">
+            <input type="checkbox" id="withdrawalConsentCheck" onchange="onWithdrawalConsentChange()">
+            <label for="withdrawalConsentCheck">위 청약철회 제한 고지 내용을 확인하였으며 동의합니다 <span class="req">*</span></label>
+          </div>
+        </div>
+
+        <button class="btn-primary-tai" id="btnPay" onclick="startPayment()" disabled>결제 후 진단 시작 →</button>
         <p style="text-align:center;font-size:.77rem;color:#9a8f80;margin-top:8px;">* KG이니시스 결제 시스템</p>
       </div>
       <button class="btn-secondary-tai" id="btnBackToResult" onclick="goStep(3)">← 무료 결과로 돌아가기</button>
@@ -456,7 +480,6 @@ function goStep(n) {
   updateProgress(n);
 }
 
-// EXTRA-2: 섹터 변경 시 free formValues 초기화
 function selectSector(val, el) {
   document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
@@ -520,7 +543,6 @@ async function onAuthSuccess(data) {
   goStep(1);
 }
 
-// EXTRA-3: optional chaining 추가
 function goToPaidDirect() {
   showPanelOnly('step1');
   updateProgress(1);
@@ -533,7 +555,6 @@ async function loadFreeForm() {
   document.getElementById('step2Title').textContent = titleMap[sector] || '기본 정보 입력';
   document.getElementById('step2Sub').textContent = '필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다';
   document.getElementById('dynFormArea').innerHTML = '<div style="text-align:center;padding:30px 0;color:#9a8f80;">입력 항목 불러오는 중...</div>';
-  // BUG-6: 섹터 로드 시 면책 동의 초기화
   document.getElementById('disclaimerCheck').checked = false;
   document.getElementById('btnSubmit').disabled = true;
   try {
@@ -547,6 +568,11 @@ async function loadFreeForm() {
 
 function onDisclaimerChange() {
   document.getElementById('btnSubmit').disabled = !document.getElementById('disclaimerCheck').checked;
+}
+
+// ★ 청약철회 동의 체크박스 핸들러
+function onWithdrawalConsentChange() {
+  document.getElementById('btnPay').disabled = !document.getElementById('withdrawalConsentCheck').checked;
 }
 
 window.__diagEquipOpts = null;
@@ -601,7 +627,6 @@ function rerenderOneTable(wrap) {
   const minRows = parseInt(wrap.dataset.minRows || '1', 10);
   let cols = [];
   try { cols = JSON.parse(decodeURIComponent(wrap.dataset.colsEnc || '%5B%5D')); } catch (e) { cols = []; }
-  const addLabel = wrap.dataset.addLabel || '행 추가';
   ensureFormTableRows(prefix, fieldCode, minRows);
   const bodyEl = wrap.querySelector('.diag-table-body');
   if (bodyEl) bodyEl.innerHTML = buildTableRowsHtml(prefix, fieldCode, cols, minRows);
@@ -698,7 +723,6 @@ function bindTableRowEvents(wrap, prefix, fieldCode, cols) {
       const obj = {};
       row.querySelectorAll('[data-tc]').forEach(el => {
         const k = el.dataset.tc;
-        const ri = parseInt(el.dataset.ri, 10);
         if (el.type === 'checkbox') obj[k] = el.checked;
         else if (el.tagName === 'SELECT' && el.multiple) {
           obj[k] = Array.from(el.selectedOptions).map(o => o.value);
@@ -817,12 +841,9 @@ function renderField(f, prefix) {
   const req = f.is_required ? '<span class="req">*</span>' : '';
   const help = f.help_text ? `<div class="form-help">${f.help_text}</div>` : '';
   let ctrl = '';
-
-  // BUG-1: project_address 조건 추가
   if (f.field_code === 'address' || f.field_code === 'project_address') {
-    // EXTRA-1: 건설 주소 필드코드를 addrKey로 보존해 selectAddr에서 올바른 키로 저장
     const ap = `${prefix}_addr`;
-    const addrKey = f.field_code; // 'address' or 'project_address'
+    const addrKey = f.field_code;
     ctrl = `<div class="addr-wrap" data-addr-key="${addrKey}">
       <div class="addr-search-row">
         <input type="text" class="form-input-tai" id="${ap}Input"
@@ -835,8 +856,6 @@ function renderField(f, prefix) {
       <div class="register-status" id="${ap}RegStatus"></div>
       <div class="asbestos-warn" id="${ap}AsbestosWarn">⚠️ 건축연도 기준 석면 사용 가능성 — 석면 조사가 필요할 수 있습니다.</div>
     </div>`;
-
-  // BUG-12: number 입력 — inputmode + pattern + 한글/특수문자 차단
   } else if (f.field_type === 'number') {
     ctrl = `<div class="num-wrap">
       <input type="number" class="form-input-tai" id="${id}"
@@ -847,14 +866,11 @@ function renderField(f, prefix) {
       ${f.unit ? `<span class="num-unit">${f.unit}</span>` : ''}
     </div>
     ${f.field_code === 'total_floor_area' ? `<div class="form-note-auto" id="${prefix}_areaNote" style="display:none;"></div>` : ''}`;
-
   } else if (f.field_type === 'boolean') {
     ctrl = `<div class="yn-grid">
       <div class="yn-btn" onclick="setYN('${f.field_code}',true,this,'${prefix}')">예</div>
       <div class="yn-btn" onclick="setYN('${f.field_code}',false,this,'${prefix}')">아니오</div>
     </div>`;
-
-  // BUG-11: tri_state 핸들러 추가 (예/아니오/모름)
   } else if (f.field_type === 'tri_state') {
     ctrl = `<div class="yn-grid" style="grid-template-columns:1fr 1fr 1fr;">
       <div class="yn-btn" onclick="setTriState('${f.field_code}','yes',this,'${prefix}')">예</div>
@@ -862,25 +878,21 @@ function renderField(f, prefix) {
       <div class="yn-btn" onclick="setTriState('${f.field_code}','unknown',this,'${prefix}')"
         style="font-size:.82rem;">모름</div>
     </div>`;
-
   } else if (f.field_type === 'select') {
     const opts = (f.input_options || []).map(o => `<option value="${o.value}">${o.label}</option>`).join('');
     ctrl = `<select class="form-select-tai" id="${id}" onchange="setVal('${f.field_code}',this.value,'${prefix}')">
       <option value="">선택해주세요</option>${opts}</select>`;
-
   } else if (f.field_type === 'multi_select') {
     const opts = (f.input_options || []).map(o =>
       `<div class="check-card" data-val="${o.value}" onclick="toggleMulti('${f.field_code}',this,'${prefix}')">
         <span>${o.label}</span><span class="ck-chk">✓</span>
       </div>`).join('');
     ctrl = `<div class="check-grid">${opts}</div>`;
-
   } else {
     ctrl = `<input type="text" class="form-input-tai" id="${id}"
       placeholder="${f.placeholder || ''}"
       oninput="setVal('${f.field_code}',this.value,'${prefix}')">`;
   }
-
   return `<div class="form-row"><label class="form-label-tai">${f.field_name} ${req}</label>${ctrl}${help}</div>`;
 }
 
@@ -895,7 +907,6 @@ function setYN(code, val, el, prefix) {
   el.className = 'yn-btn ' + (val ? 'sel-yes' : 'sel-no');
   setVal(code, val, prefix);
 }
-// BUG-11: setTriState 신규 추가
 function setTriState(code, val, el, prefix) {
   el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
   if (val === 'yes') el.className = 'yn-btn sel-yes';
@@ -926,7 +937,7 @@ async function fetchPriceTier(area, prefix) {
   } catch(e) {}
 }
 
-// ── 주소 검색 (배열 처리) ──
+// ── 주소 검색 ──
 async function searchAddr(prefix) {
   const query = document.getElementById(prefix + 'Input')?.value?.trim();
   if (!query || query.length < 2) return;
@@ -960,7 +971,6 @@ async function searchAddr(prefix) {
   }
 }
 
-// EXTRA-1: selectAddr — 건설 project_address 필드코드로 올바른 키 저장
 async function selectAddr(prefix, idx) {
   const items = window['_addrList_'+prefix] || [];
   const item = items[idx || 0];
@@ -973,7 +983,6 @@ async function selectAddr(prefix, idx) {
   if (dd) { dd.classList.remove('show'); dd.innerHTML = ''; }
   if (sel) { sel.textContent = '📍 ' + roadAddr; sel.classList.add('show'); }
   const diagPrefix = prefix.replace('_addr', '');
-  // EXTRA-1: 주소 wrap의 data-addr-key로 실제 필드코드(address|project_address) 저장
   const addrWrap = document.querySelector(`[data-addr-prefix="${prefix}"]`)?.closest('.addr-wrap');
   const addrKey = addrWrap?.dataset?.addrKey || 'address';
   setVal(addrKey, roadAddr, diagPrefix);
@@ -1019,7 +1028,6 @@ async function fetchBuildingRegister(addrPrefix, roadAddr, diagPrefix) {
 
 // ── FREE 진단 제출 ──
 async function submitFree() {
-  // BUG-2: 필수 필드 validation
   const freeData = formValues['free'] || {};
   const requiredFields = document.querySelectorAll('#dynFormArea .req');
   let missing = [];
@@ -1036,7 +1044,6 @@ async function submitFree() {
       missing.push(labelText);
     }
   });
-  // 주소 필드 별도 체크 (addr-selected 미표시 = 미입력)
   const addrSelected = document.querySelector('#dynFormArea .addr-selected.show');
   if (!addrSelected) {
     const hasAddrField = document.querySelector('#dynFormArea .addr-wrap');
@@ -1084,8 +1091,6 @@ async function submitFree() {
 function renderFreeResult(data) {
   document.getElementById('step3Sub').textContent = `${sectorLabel()} · 무료 법령진단 결과`;
   const area = document.getElementById('freeResultArea');
-
-  // BUG-3: 실패 시 명확한 오류 메시지 + paidCta 숨김
   if (!data) {
     area.innerHTML = `<div class="result-item">
       <div class="ri-title">진단을 실행할 수 없습니다</div>
@@ -1094,11 +1099,9 @@ function renderFreeResult(data) {
     document.getElementById('paidCta').style.display = 'none';
     return;
   }
-
   const items = data.obligations || data.results || data.items || [];
   const unconfirmed = data.unconfirmed || data.blind_spots || [];
   let html = '';
-
   if (items.length) {
     html += `<div class="result-section"><div class="result-section-title">적용 법령 의무 (${items.length}건)</div>`;
     items.forEach(it => {
@@ -1112,7 +1115,6 @@ function renderFreeResult(data) {
     html += `<div class="result-item"><div class="ri-title">분석 완료</div>
       <div class="ri-law">입력하신 정보를 기반으로 법령 분석을 완료했습니다.</div></div>`;
   }
-
   if (unconfirmed.length) {
     html += `<div class="result-section"><div class="result-section-title">확인하지 못한 영역</div>`;
     unconfirmed.forEach(u => {
@@ -1123,10 +1125,7 @@ function renderFreeResult(data) {
     });
     html += `</div>`;
   }
-
   area.innerHTML = html;
-
-  // BUG-9: CTA 문구 (BUG-4는 HTML에서 이미 수정)
   const paidCta = document.getElementById('paidCta');
   const ctaItems = document.getElementById('paidCtaItems');
   const paidItems = data.paid_preview || unconfirmed || [];
@@ -1152,6 +1151,11 @@ async function loadPaidFlow() {
   document.getElementById('tierSelectArea').innerHTML = '';
   document.getElementById('paidFormArea').innerHTML = '';
   document.getElementById('paymentArea').style.display = 'none';
+  // 동의 체크 초기화
+  const cc = document.getElementById('withdrawalConsentCheck');
+  if (cc) cc.checked = false;
+  const bp = document.getElementById('btnPay');
+  if (bp) bp.disabled = true;
   if (sector === 'INDUSTRY') {
     renderIndustryTierSelect();
   } else {
@@ -1209,12 +1213,16 @@ async function loadPaidForm(tierCode) {
   }
 }
 
-// BUG-10: 결제 전 최종 확인 다이얼로그
+// ★ 청약철회 동의 체크 후 결제 진행
 function startPayment() {
+  // 동의 체크박스 확인
+  if (!document.getElementById('withdrawalConsentCheck')?.checked) {
+    alert('청약철회 제한 고지에 동의해 주세요.');
+    return;
+  }
   const paidData = formValues['paid'] || {};
   const filledCount = Object.values(paidData).filter(v => v !== '' && v !== null && v !== undefined).length;
   const totalFields = document.querySelectorAll('#paidFormArea .form-row').length;
-
   const confirmed = confirm(
     `입력 내용을 확인해 주세요.\n\n` +
     `• 입력 완료: ${filledCount}건 / 전체: ${totalFields}건\n` +
@@ -1224,7 +1232,6 @@ function startPayment() {
   );
   if (!confirmed) return;
   if (!validateTables('paid')) return;
-
   const modal = new bootstrap.Modal(document.getElementById('payPrepModal'));
   modal.show();
 }
