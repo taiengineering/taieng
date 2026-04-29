@@ -1,21 +1,17 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.3.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.2.0 (2026-04-28): 로그인전 로그인/회원가입, 로그인후 마이페이지/로그아웃
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+텍스트)
  * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
  * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입
- *
- * ┌ 헤더 높이 기준 ─────────────────────────────────────────────────┐
- * │  실제 렌더링 높이: 90px                                           │
- * │  CSS 변수: --tai-nav-h (전 페이지에서 calc()에 사용 가능)         │
- * └──────────────────────────────────────────────────────────────────┘
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'tai_session';
-  var ICON_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
+  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
 
   /* ── 헤더 높이 CSS 변수 + 로고·우측메뉴 스타일 주입 ── */
   (function injectNavCss() {
@@ -103,7 +99,6 @@
       '  border-color: #f0f6ff;',
       '  color: #0f2b4a !important;',
       '}',
-      /* 스크롤 후 고정 헤더에서 버튼 색 반전 */
       '.navbar-area-fixed .tai-nav-btn-outline {',
       '  border-color: rgba(15,43,74,.45);',
       '  color: #0f2b4a !important;',
@@ -121,7 +116,6 @@
       '  background: #1565c0;',
       '  border-color: #1565c0;',
       '}',
-      /* 로그아웃 버튼 */
       'button.tai-logout-btn {',
       '  cursor: pointer;',
       '  background: transparent;',
@@ -163,7 +157,7 @@
 
   function legacyRelBase() {
     var path = window.location.pathname || '';
-    if (/\/(service|target)\//.test(path)) return '../';
+    if (/\/(service|target)\//. test(path)) return '../';
     var m = path.match(/\/mypage\/(.+)/);
     if (m) {
       var n = m[1].split('/').filter(Boolean).length;
@@ -218,7 +212,6 @@
   function buildNavRight() {
     var logged = isLoggedIn();
     if (logged) {
-      /* 로그인 상태: 마이페이지 + 로그아웃 */
       return [
         '<div class="nav-right-part nav-right-part-desktop">',
         '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
@@ -232,7 +225,6 @@
         '</div>',
       ].join('\n');
     } else {
-      /* 비로그인 상태: 로그인 + 회원가입 */
       return [
         '<div class="nav-right-part nav-right-part-desktop">',
         '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
@@ -255,7 +247,6 @@
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       clearAuthStorage();
-      /* 메인페이지로 이동 */
       window.location.href = base + 'index.html';
     });
   }
@@ -265,24 +256,19 @@
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
     '    <div class="container nav-container">',
-
     '      <div class="responsive-mobile-menu">',
     '        <button class="menu toggle-btn d-block d-lg-none" data-target="#tai_main_menu" aria-expanded="false" aria-label="\uBA54\uB274">',
     '          <span class="icon-left"></span><span class="icon-right"></span>',
     '        </button>',
     '      </div>',
-
     '      <div class="logo">',
     '        <a class="tai-logo-combo" href="' + base + 'index.html">',
     '          <img class="tai-logo-icon" src="' + ICON_URL + '" alt="TAI Engineering">',
     '          <span class="tai-logo-text">TAI Engineering</span>',
     '        </a>',
     '      </div>',
-
     '      <div class="collapse navbar-collapse" id="tai_main_menu">',
     '        <ul class="navbar-nav menu-open text-end">',
-
-    /* 서비스 */
     '          <li class="menu-item-has-children">',
     '            <a href="#">\uC11C\uBE44\uC2A4</a>',
     '            <ul class="sub-menu">',
@@ -299,8 +285,6 @@
     '              <li><a href="' + base + 'connect.html" style="color:#fbbf24;font-weight:700;">\uC5F0\uACB0\uC11C\uBE44\uC2A4 \uC0AC\uC804\uB4F1\uB85D</a></li>',
     '            </ul>',
     '          </li>',
-
-    /* 업종별 */
     '          <li class="menu-item-has-children">',
     '            <a href="#">\uC5C5\uC885\uBCC4</a>',
     '            <ul class="sub-menu">',
@@ -309,8 +293,6 @@
     '              <li><a href="' + base + 'target/construction.html">\uAC74\uC124\uD604\uC7A5</a></li>',
     '            </ul>',
     '          </li>',
-
-    /* 역할별 */
     '          <li class="menu-item-has-children">',
     '            <a href="#">\uC5ED\uD560\uBCC4</a>',
     '            <ul class="sub-menu">',
@@ -319,8 +301,6 @@
     '              <li><a href="' + base + 'for-expert">\uC804\uBB38\uAC00</a></li>',
     '            </ul>',
     '          </li>',
-
-    /* 안전정보 */
     '          <li class="menu-item-has-children">',
     '            <a href="#">\uC548\uC804\uC815\uBCF4</a>',
     '            <ul class="sub-menu">',
@@ -329,13 +309,9 @@
     '              <li><a href="' + base + 'law-updates.html">\uAC1C\uC815\uBC95\uB839</a></li>',
     '            </ul>',
     '          </li>',
-
     '        </ul>',
     '      </div>',
-
-    /* 우측 버튼 — 인라인 플레이스홀더 (inject 후 교체) */
     '      <div id="tai-nav-right-placeholder"></div>',
-
     '    </div>',
     '  </nav>',
     '</header>',
@@ -354,13 +330,10 @@
         document.body.insertAdjacentHTML('afterbegin', html);
       }
     }
-
-    /* 플레이스홀더를 인증 상태에 맞는 버튼으로 교체 */
     var rightPh = document.getElementById('tai-nav-right-placeholder');
     if (rightPh) {
       rightPh.outerHTML = buildNavRight();
     }
-
     bindLogout();
   }
 
@@ -370,7 +343,6 @@
     inject();
   }
 
-  /* pageshow (뒤로가기 캐시 복원 시에도 버튼 재렌더) */
   window.addEventListener('pageshow', function (ev) {
     if (ev && ev.persisted) {
       var rightArea = document.querySelector('.nav-right-part.nav-right-part-desktop');

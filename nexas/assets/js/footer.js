@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.2.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 + 특허 13건
  * v2.4.0: 풋터 다크 테마 (#0f172a) CSS 주입
@@ -7,7 +8,7 @@
 (function () {
   'use strict';
 
-  var ICON_URL = 'https://xntdkrjhgcscmqctdzyo.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
+  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
 
   function injectFooterDarkTheme() {
     if (document.getElementById('tai-footer-dark-theme')) return;
@@ -30,7 +31,6 @@
       '.footer-area.style-1 .footer-bottom p { color: rgba(255,255,255,.38) !important; }',
       '.footer-area.style-1 .footer-bottom p a { color: rgba(255,255,255,.38) !important; }',
       '.footer-area.style-1 .footer-bottom p a:hover { color: rgba(255,255,255,.65) !important; }',
-      /* 풋터 로고 */
       '.tai-footer-logo { display:flex; align-items:center; gap:10px; text-decoration:none !important; }',
       '.tai-footer-logo:hover { text-decoration:none !important; }',
       '.tai-footer-logo img { width:36px; height:36px; border-radius:7px; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,.3); }',
