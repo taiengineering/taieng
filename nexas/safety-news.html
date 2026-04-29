@@ -11,114 +11,70 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  body { font-family:'Noto Sans KR',sans-serif; }
-
-  /* ── 히어로 ── */
-  .sn-hero { background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%); padding:100px 0 48px; }
-  .sn-hero h1 { font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#fff; margin-bottom:10px; }
-  .sn-hero p  { color:rgba(255,255,255,.6); font-size:.95rem; }
-
-  /* ── 탭 네비 ── */
-  .sn-tabs { background:#fff; border-bottom:2px solid #e8eaed; position:sticky; top:0; z-index:100; }
-  .sn-tabs-inner { display:flex; gap:0; overflow-x:auto; scrollbar-width:none; }
-  .sn-tabs-inner::-webkit-scrollbar { display:none; }
-  .sn-tab { padding:16px 20px; font-size:.85rem; font-weight:700; color:#64748b; cursor:pointer;
-    border-bottom:3px solid transparent; white-space:nowrap; transition:all .15s; }
-  .sn-tab:hover  { color:#0d1b2a; }
-  .sn-tab.active { color:#0d1b2a; border-bottom-color:#0d1b2a; }
-
-  /* ── 섹션 공통 ── */
-  .sn-section { padding:40px 0 60px; }
-  .sn-section:nth-child(odd) { background:#f4f6f8; }
-  .sn-section:nth-child(even){ background:#fff; }
-  .sn-sec-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:12px; }
-  .sn-sec-title  { font-size:1.25rem; font-weight:900; color:#0d1b2a; margin:0; }
-  .sn-sec-sub    { font-size:.82rem; color:#64748b; margin-top:4px; }
-  .sn-badge { display:inline-block; font-size:.68rem; font-weight:700; padding:3px 10px; border-radius:20px; margin-right:6px; }
-  .badge-kosha { background:#e0f2fe; color:#0369a1; }
-
-  /* ── 필터 칩 ── */
-  .sn-chips { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:20px; }
-  .sn-chip { padding:5px 14px; border:1.5px solid #e2e8f0; border-radius:999px; font-size:.78rem;
-    font-weight:600; color:#64748b; cursor:pointer; background:#fff; transition:all .15s; }
-  .sn-chip:hover,.sn-chip.active { background:#0d1b2a; color:#fff; border-color:#0d1b2a; }
-
-  /* ── 카드 ── */
-  .sn-card { background:#fff; border:1.5px solid #e8eaed; border-radius:14px; padding:20px;
-    margin-bottom:12px; transition:box-shadow .2s,border-color .2s; }
-  .sn-card:hover { box-shadow:0 4px 16px rgba(0,0,0,.07); border-color:#cbd5e1; }
-  .sn-card-title { font-size:.95rem; font-weight:800; color:#0d1b2a; margin-bottom:6px; line-height:1.45; }
-  .sn-card-meta  { font-size:.75rem; color:#94a3b8; display:flex; gap:12px; flex-wrap:wrap; margin-top:8px; }
-  .sn-card-desc  { font-size:.83rem; color:#475569; line-height:1.65; margin-top:6px; }
-  .sn-card-link  { display:inline-flex; align-items:center; gap:5px; margin-top:10px; font-size:.8rem;
-    font-weight:700; color:#0d1b2a; text-decoration:none; padding:6px 14px;
-    border:1.5px solid #e2e8f0; border-radius:8px; transition:all .15s; }
-  .sn-card-link:hover { background:#0d1b2a; color:#fff; border-color:#0d1b2a; }
-
-  /* ── 신호등 카드 ── */
-  .signal-card { border-radius:14px; padding:16px 20px; margin-bottom:10px; border:1.5px solid transparent; }
-  .signal-red    { background:#fef2f2; border-color:#fca5a5; }
-  .signal-yellow { background:#fffbeb; border-color:#fcd34d; }
-  .signal-green  { background:#f0fdf4; border-color:#86efac; }
-  .signal-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; margin-top:3px; }
-  .dot-red    { background:#ef4444; }
-  .dot-yellow { background:#f59e0b; }
-  .dot-green  { background:#22c55e; }
-  .signal-label { font-size:.68rem; font-weight:800; padding:2px 8px; border-radius:4px; }
-  .label-red    { background:#fee2e2; color:#b91c1c; }
-  .label-yellow { background:#fef3c7; color:#92400e; }
-  .label-green  { background:#dcfce7; color:#166534; }
-
-  /* ── 위험성평가 인정 ── */
-  .cert-card { background:#fff; border:1.5px solid #e8eaed; border-radius:12px; padding:16px 18px;
-    margin-bottom:10px; display:flex; align-items:center; gap:14px; }
-  .cert-badge { width:42px; height:42px; border-radius:10px; background:#ecfdf5;
-    color:#059669; display:flex; align-items:center; justify-content:center;
-    font-size:1.1rem; flex-shrink:0; }
-  .cert-name  { font-size:.9rem; font-weight:800; color:#0d1b2a; }
-  .cert-meta  { font-size:.75rem; color:#64748b; margin-top:3px; }
-  .cert-valid { font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; }
-  .valid-ok   { background:#dcfce7; color:#166534; }
-  .valid-soon { background:#fef3c7; color:#92400e; }
-
-  /* ── KOSHA GUIDE ── */
-  .guide-card { background:#fff; border:1.5px solid #e8eaed; border-radius:12px; padding:16px 18px;
-    margin-bottom:10px; display:flex; gap:14px; align-items:flex-start; transition:all .2s; }
-  .guide-card:hover { border-color:#7c3aed; box-shadow:0 4px 16px rgba(124,58,237,.08); }
-  .guide-cat { width:38px; height:38px; border-radius:8px; font-size:.75rem; font-weight:900;
-    display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .cat-G { background:#ede9fe; color:#7c3aed; }
-  .cat-M { background:#dbeafe; color:#2563eb; }
-  .cat-C { background:#fce7f3; color:#9d174d; }
-  .cat-B { background:#d1fae5; color:#065f46; }
-  .cat-H { background:#fef3c7; color:#92400e; }
-  .guide-no   { font-size:.72rem; font-weight:700; color:#94a3b8; margin-bottom:3px; }
-  .guide-title{ font-size:.88rem; font-weight:800; color:#0d1b2a; line-height:1.4; }
-
-  /* ── 안전보건자료 ── */
-  .media-type-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center;
-    justify-content:center; font-size:.85rem; flex-shrink:0; }
-  .type-book  { background:#ede9fe; color:#7c3aed; }
-  .type-video { background:#fce7f3; color:#be185d; }
-  .type-edu   { background:#dbeafe; color:#2563eb; }
-  .type-etc   { background:#f1f5f9; color:#475569; }
-
-  /* ── 로딩 / 빈값 ── */
-  .sn-loading { text-align:center; padding:48px 20px; color:#94a3b8; }
-  .sn-loading i { font-size:1.6rem; margin-bottom:10px; }
-  .sn-empty { text-align:center; padding:40px; color:#94a3b8; font-size:.88rem; }
-
-  /* ── 페이지네이션 ── */
-  .sn-more { text-align:center; margin-top:20px; }
-  .sn-more-btn { padding:10px 28px; border:1.5px solid #e2e8f0; border-radius:10px;
-    font-size:.85rem; font-weight:700; color:#0d1b2a; background:#fff; cursor:pointer; transition:all .15s; }
-  .sn-more-btn:hover { background:#0d1b2a; color:#fff; }
-
-  /* ── 반응형 ── */
-  @media(max-width:576px){
-    .sn-tab { padding:12px 14px; font-size:.78rem; }
-    .sn-section { padding:28px 0 40px; }
-  }
+  body{font-family:'Noto Sans KR',sans-serif;}
+  .sn-hero{background:linear-gradient(135deg,#0d1b2a 0%,#1a3a5c 100%);padding:100px 0 48px;}
+  .sn-hero h1{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#fff;margin-bottom:10px;}
+  .sn-hero p{color:rgba(255,255,255,.6);font-size:.95rem;}
+  .sn-tabs{background:#fff;border-bottom:2px solid #e8eaed;position:sticky;top:0;z-index:100;}
+  .sn-tabs-inner{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;}
+  .sn-tabs-inner::-webkit-scrollbar{display:none;}
+  .sn-tab{padding:16px 20px;font-size:.85rem;font-weight:700;color:#64748b;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s;}
+  .sn-tab:hover{color:#0d1b2a;}
+  .sn-tab.active{color:#0d1b2a;border-bottom-color:#0d1b2a;}
+  .sn-section{padding:40px 0 60px;}
+  .sn-section:nth-child(odd){background:#f4f6f8;}
+  .sn-section:nth-child(even){background:#fff;}
+  .sn-sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;}
+  .sn-sec-title{font-size:1.25rem;font-weight:900;color:#0d1b2a;margin:0;}
+  .sn-sec-sub{font-size:.82rem;color:#64748b;margin-top:4px;}
+  .sn-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-right:6px;}
+  .badge-kosha{background:#e0f2fe;color:#0369a1;}
+  .sn-chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px;}
+  .sn-chip{padding:5px 14px;border:1.5px solid #e2e8f0;border-radius:999px;font-size:.78rem;font-weight:600;color:#64748b;cursor:pointer;background:#fff;transition:all .15s;}
+  .sn-chip:hover,.sn-chip.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a;}
+  .sn-card{background:#fff;border:1.5px solid #e8eaed;border-radius:14px;padding:20px;margin-bottom:12px;transition:box-shadow .2s,border-color .2s;}
+  .sn-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);border-color:#cbd5e1;}
+  .sn-card-title{font-size:.95rem;font-weight:800;color:#0d1b2a;margin-bottom:6px;line-height:1.45;}
+  .sn-card-meta{font-size:.75rem;color:#94a3b8;display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+  .sn-card-desc{font-size:.83rem;color:#475569;line-height:1.65;margin-top:6px;}
+  .sn-card-link{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:.8rem;font-weight:700;color:#0d1b2a;text-decoration:none;padding:6px 14px;border:1.5px solid #e2e8f0;border-radius:8px;transition:all .15s;}
+  .sn-card-link:hover{background:#0d1b2a;color:#fff;border-color:#0d1b2a;}
+  .signal-card{border-radius:14px;padding:16px 20px;margin-bottom:10px;border:1.5px solid transparent;}
+  .signal-red{background:#fef2f2;border-color:#fca5a5;}
+  .signal-yellow{background:#fffbeb;border-color:#fcd34d;}
+  .signal-green{background:#f0fdf4;border-color:#86efac;}
+  .signal-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+  .dot-red{background:#ef4444;}.dot-yellow{background:#f59e0b;}.dot-green{background:#22c55e;}
+  .signal-label{font-size:.68rem;font-weight:800;padding:2px 8px;border-radius:4px;}
+  .label-red{background:#fee2e2;color:#b91c1c;}
+  .label-yellow{background:#fef3c7;color:#92400e;}
+  .label-green{background:#dcfce7;color:#166534;}
+  .cert-card{background:#fff;border:1.5px solid #e8eaed;border-radius:12px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:14px;}
+  .cert-badge{width:42px;height:42px;border-radius:10px;background:#ecfdf5;color:#059669;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .cert-name{font-size:.9rem;font-weight:800;color:#0d1b2a;}
+  .cert-meta{font-size:.75rem;color:#64748b;margin-top:3px;}
+  .cert-valid{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:4px;}
+  .valid-ok{background:#dcfce7;color:#166534;}.valid-soon{background:#fef3c7;color:#92400e;}
+  .guide-card{background:#fff;border:1.5px solid #e8eaed;border-radius:12px;padding:16px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;transition:all .2s;}
+  .guide-card:hover{border-color:#7c3aed;box-shadow:0 4px 16px rgba(124,58,237,.08);}
+  .guide-cat{width:38px;height:38px;border-radius:8px;font-size:.75rem;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .cat-G{background:#ede9fe;color:#7c3aed;}.cat-M{background:#dbeafe;color:#2563eb;}
+  .cat-C{background:#fce7f3;color:#9d174d;}.cat-B{background:#d1fae5;color:#065f46;}
+  .cat-H{background:#fef3c7;color:#92400e;}
+  .guide-no{font-size:.72rem;font-weight:700;color:#94a3b8;margin-bottom:3px;}
+  .guide-title{font-size:.88rem;font-weight:800;color:#0d1b2a;line-height:1.4;}
+  .media-type-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;}
+  .type-book{background:#ede9fe;color:#7c3aed;}.type-video{background:#fce7f3;color:#be185d;}
+  .type-edu{background:#dbeafe;color:#2563eb;}.type-etc{background:#f1f5f9;color:#475569;}
+  .sn-loading{text-align:center;padding:60px 20px;color:#94a3b8;}
+  .sn-loading i{font-size:1.6rem;margin-bottom:10px;display:block;}
+  .sn-empty{text-align:center;padding:40px;color:#94a3b8;font-size:.88rem;}
+  .collect-notice{background:#fffbeb;border:1.5px solid #fcd34d;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:.84rem;color:#92400e;line-height:1.65;display:none;}
+  .collect-notice.show{display:block;}
+  .sn-more{text-align:center;margin-top:20px;}
+  .sn-more-btn{padding:10px 28px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.85rem;font-weight:700;color:#0d1b2a;background:#fff;cursor:pointer;transition:all .15s;}
+  .sn-more-btn:hover{background:#0d1b2a;color:#fff;}
+  @media(max-width:576px){.sn-tab{padding:12px 14px;font-size:.78rem;}.sn-section{padding:28px 0 40px;}}
   </style>
 </head>
 <body class="sc5">
@@ -126,152 +82,100 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- 히어로 -->
-<div class="sn-hero">
-  <div class="sec-inner">
-    <h1>안전정보</h1>
-    <p>KOSHA 공단이 제공하는 재해사례 · 안전자료 · 현장점검 현황을 한눈에 확인하세요</p>
-  </div>
-</div>
+<div class="sn-hero"><div class="sec-inner">
+  <h1>안전정보</h1>
+  <p>KOSHA 공단이 제공하는 재해사례 · 안전자료 · 현장점검 현황을 한눈에 확인하세요</p>
+</div></div>
 
-<!-- 탭 네비 -->
-<div class="sn-tabs">
-  <div class="sec-inner">
-    <div class="sn-tabs-inner">
-      <div class="sn-tab active" data-tab="accident">국내 재해사례</div>
-      <div class="sn-tab" data-tab="signal">건설현장 신호등</div>
-      <div class="sn-tab" data-tab="materials">안전보건자료</div>
-      <div class="sn-tab" data-tab="const-accident">건설 중대재해</div>
-      <div class="sn-tab" data-tab="risk">위험성평가 인정</div>
-      <div class="sn-tab" data-tab="guide">KOSHA GUIDE</div>
-    </div>
-  </div>
-</div>
+<div class="sn-tabs"><div class="sec-inner"><div class="sn-tabs-inner">
+  <div class="sn-tab active" data-tab="accident">국내 재해사례</div>
+  <div class="sn-tab" data-tab="signal">건설현장 신호등</div>
+  <div class="sn-tab" data-tab="materials">안전보건자료</div>
+  <div class="sn-tab" data-tab="const-accident">건설 중대재해</div>
+  <div class="sn-tab" data-tab="risk">위험성평가 인정</div>
+  <div class="sn-tab" data-tab="guide">KOSHA GUIDE</div>
+</div></div></div>
 
-<!-- ①  국내 재해사례 -->
-<div class="sn-section" id="sec-accident">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">국내 재해사례 <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">업종별 산업재해 사례를 확인하세요</p>
-      </div>
-    </div>
-    <div class="sn-chips" id="accident-chips">
+<!-- ① 재해사례 -->
+<div class="sn-section" id="sec-accident"><div class="sec-inner">
+  <div class="sn-sec-header"><div>
+    <p class="sn-sec-title">국내 재해사례 <span class="sn-badge badge-kosha">KOSHA</span></p>
+    <p class="sn-sec-sub">2024년 이후 업종별 산업재해 사례</p>
+  </div></div>
+  <div class="collect-notice" id="notice-accident">⏳ KOSHA 데이터를 수집 중입니다. 2024년 1월 이후 데이터부터 순차적으로 표시되며, 최초 수집에는 수 분이 소요될 수 있습니다.</div>
+  <div class="sn-chips" id="accident-chips">
+    <div class="sn-chip active" data-val="">전체</div>
+    <div class="sn-chip" data-val="제조업">제조업</div>
+    <div class="sn-chip" data-val="건설업">건설업</div>
+    <div class="sn-chip" data-val="조선업">조선업</div>
+    <div class="sn-chip" data-val="서비스업">서비스업</div>
+  </div>
+  <div id="accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="accident-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('accident')">더 보기</button></div>
+</div></div>
+
+<!-- ② 신호등 -->
+<div class="sn-section" id="sec-signal" style="display:none"><div class="sec-inner">
+  <div class="sn-sec-header">
+    <div><p class="sn-sec-title">건설현장 안전 신호등 <span class="sn-badge badge-kosha">KOSHA</span></p><p class="sn-sec-sub">중소규모 건설현장 기술지도 결과</p></div>
+    <div class="sn-chips" id="signal-chips" style="margin:0">
       <div class="sn-chip active" data-val="">전체</div>
-      <div class="sn-chip" data-val="제조업">제조업</div>
-      <div class="sn-chip" data-val="건설업">건설업</div>
-      <div class="sn-chip" data-val="조선업">조선업</div>
-      <div class="sn-chip" data-val="서비스업">서비스업</div>
-      <div class="sn-chip" data-val="기타">기타</div>
-    </div>
-    <div id="accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="accident-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('accident')">더 보기</button>
+      <div class="sn-chip" data-val="적색" style="border-color:#fca5a5;color:#b91c1c">🔴 위험</div>
+      <div class="sn-chip" data-val="황색" style="border-color:#fcd34d;color:#92400e">🟡 주의</div>
+      <div class="sn-chip" data-val="녹색" style="border-color:#86efac;color:#166534">🟢 양호</div>
     </div>
   </div>
-</div>
-
-<!-- ② 건설현장 안전 신호등 -->
-<div class="sn-section" id="sec-signal" style="display:none">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">건설현장 안전 신호등 <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">중소규모 건설현장 기술지도 결과 — 최근 점검 기준</p>
-      </div>
-      <div class="sn-chips" id="signal-chips" style="margin:0">
-        <div class="sn-chip active" data-val="">전체</div>
-        <div class="sn-chip" data-val="적색" style="border-color:#fca5a5;color:#b91c1c">🔴 위험</div>
-        <div class="sn-chip" data-val="황색" style="border-color:#fcd34d;color:#92400e">🟡 주의</div>
-        <div class="sn-chip" data-val="녹색" style="border-color:#86efac;color:#166534">🟢 양호</div>
-      </div>
-    </div>
-    <div id="signal-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="signal-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('signal')">더 보기</button>
-    </div>
-  </div>
-</div>
+  <div class="collect-notice" id="notice-signal"></div>
+  <div id="signal-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="signal-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('signal')">더 보기</button></div>
+</div></div>
 
 <!-- ③ 안전보건자료 -->
-<div class="sn-section" id="sec-materials" style="display:none">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">안전보건자료 <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">책자·교안·영상·OPS 등 안전보건 학습자료 링크</p>
-      </div>
-    </div>
-    <div class="sn-chips" id="materials-chips">
-      <div class="sn-chip active" data-val="">전체</div>
-      <div class="sn-chip" data-val="공통">공통</div>
-      <div class="sn-chip" data-val="제조">제조</div>
-      <div class="sn-chip" data-val="건설">건설</div>
-      <div class="sn-chip" data-val="서비스">서비스</div>
-    </div>
-    <div id="materials-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="materials-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('materials')">더 보기</button>
-    </div>
+<div class="sn-section" id="sec-materials" style="display:none"><div class="sec-inner">
+  <div class="sn-sec-header"><div><p class="sn-sec-title">안전보건자료 <span class="sn-badge badge-kosha">KOSHA</span></p><p class="sn-sec-sub">책자·교안·영상·OPS 학습자료</p></div></div>
+  <div class="collect-notice" id="notice-materials"></div>
+  <div class="sn-chips" id="materials-chips">
+    <div class="sn-chip active" data-val="">전체</div>
+    <div class="sn-chip" data-val="공통">공통</div>
+    <div class="sn-chip" data-val="제조">제조</div>
+    <div class="sn-chip" data-val="건설">건설</div>
+    <div class="sn-chip" data-val="서비스">서비스</div>
   </div>
-</div>
+  <div id="materials-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="materials-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('materials')">더 보기</button></div>
+</div></div>
 
-<!-- ④ 건설업 중대재해 -->
-<div class="sn-section" id="sec-const-accident" style="display:none">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">건설업 중대재해 현황 <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">작업공종·기인물·재해종류·위험성 감소대책 포함</p>
-      </div>
-    </div>
-    <div id="const-accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="const-accident-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('const-accident')">더 보기</button>
-    </div>
-  </div>
-</div>
+<!-- ④ 건설 중대재해 -->
+<div class="sn-section" id="sec-const-accident" style="display:none"><div class="sec-inner">
+  <div class="sn-sec-header"><div><p class="sn-sec-title">건설업 중대재해 현황 <span class="sn-badge badge-kosha">KOSHA</span></p><p class="sn-sec-sub">작업공종·기인물·재해종류·위험성 감소대책</p></div></div>
+  <div class="collect-notice" id="notice-const-accident"></div>
+  <div id="const-accident-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="const-accident-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('const-accident')">더 보기</button></div>
+</div></div>
 
-<!-- ⑤ 위험성평가 인정사업장 -->
-<div class="sn-section" id="sec-risk" style="display:none">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">위험성평가 인정사업장 <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">인정일로부터 3년간 유효 — 2021.10 이후 인정 사업장</p>
-      </div>
-    </div>
-    <div id="risk-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="risk-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('risk')">더 보기</button>
-    </div>
-  </div>
-</div>
+<!-- ⑤ 위험성평가 -->
+<div class="sn-section" id="sec-risk" style="display:none"><div class="sec-inner">
+  <div class="sn-sec-header"><div><p class="sn-sec-title">위험성평가 인정사업장 <span class="sn-badge badge-kosha">KOSHA</span></p><p class="sn-sec-sub">인정일로부터 3년간 유효 — 2024년 이후</p></div></div>
+  <div class="collect-notice" id="notice-risk"></div>
+  <div id="risk-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="risk-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('risk')">더 보기</button></div>
+</div></div>
 
 <!-- ⑥ KOSHA GUIDE -->
-<div class="sn-section" id="sec-guide" style="display:none">
-  <div class="sec-inner">
-    <div class="sn-sec-header">
-      <div>
-        <p class="sn-sec-title">KOSHA GUIDE <span class="sn-badge badge-kosha">KOSHA</span></p>
-        <p class="sn-sec-sub">한국산업안전보건공단 기술지원규정 — 자율 안전보건 가이드</p>
-      </div>
-    </div>
-    <div class="sn-chips" id="guide-chips">
-      <div class="sn-chip active" data-val="">전체</div>
-      <div class="sn-chip" data-val="G">일반(G)</div>
-      <div class="sn-chip" data-val="M">기계(M)</div>
-      <div class="sn-chip" data-val="C">화공(C)</div>
-      <div class="sn-chip" data-val="B">건설(B)</div>
-      <div class="sn-chip" data-val="H">보건(H)</div>
-    </div>
-    <div id="guide-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div></div>
-    <div class="sn-more" id="guide-more" style="display:none">
-      <button class="sn-more-btn" onclick="loadMore('guide')">더 보기</button>
-    </div>
+<div class="sn-section" id="sec-guide" style="display:none"><div class="sec-inner">
+  <div class="sn-sec-header"><div><p class="sn-sec-title">KOSHA GUIDE <span class="sn-badge badge-kosha">KOSHA</span></p><p class="sn-sec-sub">한국산업안전보건공단 기술지원규정</p></div></div>
+  <div class="collect-notice" id="notice-guide"></div>
+  <div class="sn-chips" id="guide-chips">
+    <div class="sn-chip active" data-val="">전체</div>
+    <div class="sn-chip" data-val="G">일반(G)</div>
+    <div class="sn-chip" data-val="M">기계(M)</div>
+    <div class="sn-chip" data-val="C">화공(C)</div>
+    <div class="sn-chip" data-val="B">건설(B)</div>
+    <div class="sn-chip" data-val="H">보건(H)</div>
   </div>
-</div>
+  <div id="guide-list"><div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div></div>
+  <div class="sn-more" id="guide-more" style="display:none"><button class="sn-more-btn" onclick="loadMore('guide')">더 보기</button></div>
+</div></div>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
@@ -282,300 +186,230 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-const API = 'https://api.taieng.co.kr';
-const PAGE = 10;
+// ── Supabase 직접 조회 (DB에 수집된 KOSHA 데이터)
+const SB  = 'https://vwlahtguyggrhvslabax.supabase.co/rest/v1';
+const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3bGFodGd1eWdncmh2c2xhYmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MTQyODMsImV4cCI6MjA2MTI5MDI4M30.rFzs5E4sNVPmZ6DxOqFgcJ0l3Y9p5Vd8w3jE6bkvUxA';
+const H   = {'apikey':KEY,'Authorization':'Bearer '+KEY,'Prefer':'count=exact'};
+const PG  = 20;
 
-// ── 상태 ───────────────────────────────────────────────
-const state = {
-  accident:       { page:1, filter:'',       loaded:false },
-  signal:         { page:1, filter:'',       loaded:false },
-  materials:      { page:1, filter:'',       loaded:false },
-  'const-accident':{ page:1, filter:'',      loaded:false },
-  risk:           { page:1, filter:'',       loaded:false },
-  guide:          { page:1, filter:'',       loaded:false },
+const state={
+  'accident':       {page:0,filter:'',loaded:false},
+  'signal':         {page:0,filter:'',loaded:false},
+  'materials':      {page:0,filter:'',loaded:false},
+  'const-accident': {page:0,filter:'',loaded:false},
+  'risk':           {page:0,filter:'',loaded:false},
+  'guide':          {page:0,filter:'',loaded:false},
 };
 
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-// ── 탭 전환 ────────────────────────────────────────────
-document.querySelectorAll('.sn-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.sn-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const key = tab.dataset.tab;
-    document.querySelectorAll('.sn-section').forEach(s => s.style.display = 'none');
-    document.getElementById('sec-' + key).style.display = '';
-    if (!state[key].loaded) initSection(key);
+document.querySelectorAll('.sn-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.sn-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    const k=t.dataset.tab;
+    document.querySelectorAll('.sn-section').forEach(s=>s.style.display='none');
+    document.getElementById('sec-'+k).style.display='';
+    if(!state[k].loaded){state[k].loaded=true;fetchSection(k,true);}
   });
 });
 
-// ── 초기 섹션 ──────────────────────────────────────────
-function initSection(key) {
-  state[key].page = 1;
-  state[key].loaded = true;
-  fetchSection(key, true);
-}
+function loadMore(k){state[k].page++;fetchSection(k,false);}
 
-// ── 더 보기 ────────────────────────────────────────────
-function loadMore(key) {
-  state[key].page++;
-  fetchSection(key, false);
-}
-
-// ── 필터 칩 이벤트 ─────────────────────────────────────
-['accident','signal','materials','guide'].forEach(key => {
-  const chips = document.getElementById(key + '-chips');
-  if (!chips) return;
-  chips.addEventListener('click', e => {
-    const chip = e.target.closest('.sn-chip');
-    if (!chip) return;
-    chips.querySelectorAll('.sn-chip').forEach(c => c.classList.remove('active'));
-    chip.classList.add('active');
-    state[key].filter = chip.dataset.val;
-    state[key].page = 1;
-    document.getElementById(key === 'const-accident' ? key + '-list' : key + '-list').innerHTML =
-      '<div class="sn-loading"><i class="fas fa-spinner fa-spin d-block"></i>불러오는 중...</div>';
-    fetchSection(key, true);
+['accident','signal','materials','guide'].forEach(k=>{
+  const el=document.getElementById(k+'-chips');
+  if(!el)return;
+  el.addEventListener('click',e=>{
+    const c=e.target.closest('.sn-chip');if(!c)return;
+    el.querySelectorAll('.sn-chip').forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    state[k].filter=c.dataset.val;
+    state[k].page=0;
+    document.getElementById(k+'-list').innerHTML='<div class="sn-loading"><i class="fas fa-spinner fa-spin"></i>불러오는 중...</div>';
+    fetchSection(k,true);
   });
 });
 
-// ── 메인 패치 라우터 ───────────────────────────────────
-async function fetchSection(key, reset) {
-  const s = state[key];
-  const listEl = document.getElementById(key + '-list');
-  const moreEl = document.getElementById(key + '-more');
+async function sbGet(table,cols,filter,order,offset){
+  let url=`${SB}/${table}?select=${cols}&order=${order}&limit=${PG}&offset=${offset}`;
+  if(filter) url+=filter;
+  const r=await fetch(url,{headers:H});
+  const total=parseInt(r.headers.get('content-range')?.split('/')[1]||'0');
+  return {items:await r.json(),total};
+}
 
-  try {
-    let url, items = [], total = 0;
-
-    if (key === 'accident') {
-      url = `${API}/kosha/accident-cases?num_of_rows=${PAGE}&page_no=${s.page}`;
-      if (s.filter) url += `&business=${encodeURIComponent(s.filter)}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderAccident(listEl, items, reset);
+async function fetchSection(k,reset){
+  const s=state[k];
+  const listEl=document.getElementById(k+'-list');
+  const moreEl=document.getElementById(k+'-more');
+  const noticeEl=document.getElementById('notice-'+k);
+  const offset=s.page*PG;
+  try{
+    let res;
+    if(k==='accident'){
+      res=await sbGet('kosha_accident_cases','id,title,business,content,reg_dt,file_url',
+        s.filter?`&business=ilike.*${encodeURIComponent(s.filter)}*`:'',
+        'reg_dt.desc',offset);
+      renderAccident(listEl,res.items,reset);
+    } else if(k==='signal'){
+      res=await sbGet('kosha_construction_safety_light','id,site_nm,sido,sigungu,signal,guide_dt,guide_org',
+        s.filter?`&signal=ilike.*${encodeURIComponent(s.filter)}*`:'',
+        'guide_dt.desc',offset);
+      renderSignal(listEl,res.items,reset);
+    } else if(k==='materials'){
+      res=await sbGet('kosha_safety_materials','id,title,product_type,industry,accident_type,url',
+        s.filter?`&industry=ilike.*${encodeURIComponent(s.filter)}*`:'',
+        'id.desc',offset);
+      renderMaterials(listEl,res.items,reset);
+    } else if(k==='const-accident'){
+      res=await sbGet('kosha_construction_accidents','id,accident_type,work_type,causative,occurrence_date,accident_summary,risk_reduction',
+        '','occurrence_date.desc',offset);
+      renderConstAccident(listEl,res.items,reset);
+    } else if(k==='risk'){
+      res=await sbGet('kosha_risk_assessment','id,company_nm,sido,cert_date,expiry_date,industry,labor_office',
+        '','cert_date.desc',offset);
+      renderRisk(listEl,res.items,reset);
+    } else if(k==='guide'){
+      res=await sbGet('kosha_guide','id,guide_no,guide_title,category,guide_url,regist_date',
+        s.filter?`&category=eq.${encodeURIComponent(s.filter)}`:'',
+        'regist_date.desc',offset);
+      renderGuide(listEl,res.items,reset);
     }
-    else if (key === 'signal') {
-      url = `${API}/kosha/construction-safety-light?num_of_rows=${PAGE}&page_no=${s.page}`;
-      if (s.filter) url += `&signal=${encodeURIComponent(s.filter)}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderSignal(listEl, items, reset);
+    // 수집 안내 배너
+    if(noticeEl){
+      if(!res||!res.items||!res.items.length&&offset===0){
+        noticeEl.classList.add('show');
+      } else {
+        noticeEl.classList.remove('show');
+      }
     }
-    else if (key === 'materials') {
-      url = `${API}/kosha/safety-materials?num_of_rows=${PAGE}&page_no=${s.page}`;
-      if (s.filter) url += `&industry=${encodeURIComponent(s.filter)}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderMaterials(listEl, items, reset);
+    // 더 보기
+    if(moreEl){
+      const loaded=(s.page+1)*PG;
+      moreEl.style.display=(res&&res.items&&res.items.length===PG&&loaded<res.total)?'':'none';
     }
-    else if (key === 'const-accident') {
-      url = `${API}/kosha/construction-accidents?num_of_rows=${PAGE}&page_no=${s.page}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderConstAccident(listEl, items, reset);
-    }
-    else if (key === 'risk') {
-      url = `${API}/kosha/risk-assessment-accredited?num_of_rows=${PAGE}&page_no=${s.page}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderRisk(listEl, items, reset);
-    }
-    else if (key === 'guide') {
-      url = `${API}/kosha/kosha-guide?num_of_rows=${PAGE}&page_no=${s.page}`;
-      if (s.filter) url += `&category=${encodeURIComponent(s.filter)}`;
-      const res = await fetch(url);
-      const d   = await res.json();
-      const body = d.data?.body || d.data || {};
-      items = body.items || [];
-      total = body.totalCount || 0;
-      renderGuide(listEl, items, reset);
-    }
-
-    if (moreEl) {
-      moreEl.style.display = (items.length === PAGE && s.page * PAGE < total) ? '' : 'none';
-    }
-  } catch(e) {
-    console.error(key, e);
-    listEl.innerHTML = `<div class="sn-empty"><i class="fas fa-exclamation-circle me-2"></i>데이터를 불러올 수 없습니다.<br><small style="color:#94a3b8">KOSHA API 응답을 확인하세요.</small></div>`;
-    if (moreEl) moreEl.style.display = 'none';
+  } catch(e){
+    console.error(k,e);
+    listEl.innerHTML='<div class="sn-empty"><i class="fas fa-exclamation-circle me-2"></i>데이터를 불러올 수 없습니다.</div>';
+    if(moreEl)moreEl.style.display='none';
   }
 }
 
-// ── 렌더러: 재해사례 ───────────────────────────────────
-function renderAccident(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 재해사례가 없습니다.</div>'; return; }
-  const html = items.map(it => `
-    <div class="sn-card">
-      <div class="d-flex align-items-start justify-content-between gap-2">
-        <div class="sn-card-title">${esc(it.title||it.bbsTitle||it.subject||'(제목 없음)')}</div>
-        ${it.business?`<span class="sn-badge" style="background:#f1f5f9;color:#475569;white-space:nowrap">${esc(it.business)}</span>`:''}
-      </div>
-      ${it.content||it.bbsContent?`<p class="sn-card-desc">${esc((it.content||it.bbsContent||'').slice(0,120))}${(it.content||'').length>120?'…':''}</p>`:''}
-      <div class="sn-card-meta">
-        ${it.regDt||it.writeDate?`<span><i class="fas fa-calendar-alt me-1"></i>${esc(it.regDt||it.writeDate)}</span>`:''}
-        ${it.boardNo||it.bbsNo?`<span>No. ${esc(it.boardNo||it.bbsNo)}</span>`:''}
-      </div>
-      ${it.fileUrl||it.fileLink?`<a href="${esc(it.fileUrl||it.fileLink)}" target="_blank" class="sn-card-link"><i class="fas fa-file-pdf"></i> 원문 보기</a>`:''}
-    </div>`).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
+function renderAccident(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 재해사례가 없습니다.</div>';return;}
+  const h=items.map(it=>`<div class="sn-card">
+    <div class="d-flex align-items-start justify-content-between gap-2">
+      <div class="sn-card-title">${esc(it.title||'(제목 없음)')}</div>
+      ${it.business?`<span class="sn-badge" style="background:#f1f5f9;color:#475569;white-space:nowrap">${esc(it.business)}</span>`:''}
+    </div>
+    ${it.content?`<p class="sn-card-desc">${esc((it.content||'').slice(0,120))}${(it.content||'').length>120?'…':''}</p>`:''}
+    <div class="sn-card-meta">
+      ${it.reg_dt?`<span><i class="fas fa-calendar-alt me-1"></i>${esc(it.reg_dt.slice(0,10))}</span>`:''}
+    </div>
+    ${it.file_url?`<a href="${esc(it.file_url)}" target="_blank" class="sn-card-link"><i class="fas fa-file-pdf"></i> 원문 보기</a>`:''}
+  </div>`).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
 }
 
-// ── 렌더러: 안전 신호등 ────────────────────────────────
-function renderSignal(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 현장이 없습니다.</div>'; return; }
-  const html = items.map(it => {
-    const sig = it.signal || it.signalColor || '';
-    let cls = 'signal-green', dotCls = 'dot-green', labelCls = 'label-green', label = '양호';
-    if (sig.includes('적') || sig.toLowerCase().includes('red')) {
-      cls = 'signal-red'; dotCls = 'dot-red'; labelCls = 'label-red'; label = '위험';
-    } else if (sig.includes('황') || sig.toLowerCase().includes('yellow')) {
-      cls = 'signal-yellow'; dotCls = 'dot-yellow'; labelCls = 'label-yellow'; label = '주의';
-    }
-    return `
-    <div class="signal-card ${cls}">
-      <div class="d-flex align-items-start gap-3">
-        <div class="signal-dot ${dotCls} mt-1"></div>
-        <div class="flex-grow-1">
-          <div class="d-flex align-items-center gap-2 mb-1">
-            <span class="signal-label ${labelCls}">${label}</span>
-            <span style="font-size:.9rem;font-weight:800;color:#0d1b2a">${esc(it.siteNm||it.siteName||it.companyNm||'현장명 없음')}</span>
-          </div>
-          <div style="font-size:.8rem;color:#64748b;display:flex;gap:14px;flex-wrap:wrap">
-            ${it.sido||it.sigungu?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc([it.sido,it.sigungu].filter(Boolean).join(' '))}</span>`:''}
-            ${it.guideDt||it.inspDate?`<span><i class="fas fa-calendar me-1"></i>점검일 ${esc(it.guideDt||it.inspDate)}</span>`:''}
-            ${it.guideOrg||it.orgName?`<span>${esc(it.guideOrg||it.orgName)}</span>`:''}
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
-}
-
-// ── 렌더러: 안전보건자료 ───────────────────────────────
-function renderMaterials(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 자료가 없습니다.</div>'; return; }
-  const html = items.map(it => {
-    const type = it.productType||'';
-    let iconCls = 'type-etc', icon = 'fa-file-alt';
-    if (type.includes('영상')) { iconCls='type-video'; icon='fa-play-circle'; }
-    else if (type.includes('교안')) { iconCls='type-edu'; icon='fa-chalkboard-teacher'; }
-    else if (type.includes('책자')||type.includes('포스터')) { iconCls='type-book'; icon='fa-book'; }
-    return `
-    <div class="sn-card d-flex gap-3 align-items-start">
-      <div class="media-type-icon ${iconCls}"><i class="fas ${icon}"></i></div>
+function renderSignal(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 현장이 없습니다.</div>';return;}
+  const h=items.map(it=>{
+    const sig=it.signal||'';
+    let cls='signal-green',dc='dot-green',lc='label-green',lb='양호';
+    if(sig.includes('적')||sig.toLowerCase().includes('red')){cls='signal-red';dc='dot-red';lc='label-red';lb='위험';}
+    else if(sig.includes('황')||sig.toLowerCase().includes('yellow')){cls='signal-yellow';dc='dot-yellow';lc='label-yellow';lb='주의';}
+    return `<div class="signal-card ${cls}"><div class="d-flex align-items-start gap-3">
+      <div class="signal-dot ${dc} mt-1"></div>
       <div class="flex-grow-1">
-        <div class="sn-card-title">${esc(it.title||it.mediaTitle||'(제목 없음)')}</div>
-        <div class="sn-card-meta">
-          ${type?`<span>${esc(type)}</span>`:''}
-          ${it.industry?`<span>${esc(it.industry)}</span>`:''}
-          ${it.accidentType?`<span>${esc(it.accidentType)}</span>`:''}
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <span class="signal-label ${lc}">${lb}</span>
+          <span style="font-size:.9rem;font-weight:800;color:#0d1b2a">${esc(it.site_nm||'현장명 없음')}</span>
         </div>
-        ${it.url||it.mediaUrl?`<a href="${esc(it.url||it.mediaUrl)}" target="_blank" rel="noopener" class="sn-card-link"><i class="fas fa-external-link-alt"></i> 자료 보기</a>`:''}
-      </div>
-    </div>`;
-  }).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
-}
-
-// ── 렌더러: 건설업 중대재해 ────────────────────────────
-function renderConstAccident(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 중대재해 현황이 없습니다.</div>'; return; }
-  const html = items.map(it => `
-    <div class="sn-card">
-      <div class="d-flex align-items-start justify-content-between gap-2 mb-2">
-        <div>
-          <div class="sn-card-title">${esc(it.accidentType||it.dsstrKnd||'재해종류 미상')}</div>
-          <div class="sn-card-meta">
-            ${it.occurrenceDate||it.dsstrDt?`<span><i class="fas fa-calendar me-1"></i>${esc(it.occurrenceDate||it.dsstrDt)}</span>`:''}
-            ${it.workType||it.workKnd?`<span>공종: ${esc(it.workType||it.workKnd)}</span>`:''}
-            ${it.causative||it.crtrFtr?`<span>기인물: ${esc(it.causative||it.crtrFtr)}</span>`:''}
-          </div>
+        <div style="font-size:.8rem;color:#64748b;display:flex;gap:14px;flex-wrap:wrap">
+          ${it.sido||it.sigungu?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc([it.sido,it.sigungu].filter(Boolean).join(' '))}</span>`:''}
+          ${it.guide_dt?`<span><i class="fas fa-calendar me-1"></i>점검일 ${esc(it.guide_dt.slice(0,10))}</span>`:''}
+          ${it.guide_org?`<span>${esc(it.guide_org)}</span>`:''}
         </div>
       </div>
-      ${it.accidentSummary||it.dsstrOutl?`<p class="sn-card-desc">${esc((it.accidentSummary||it.dsstrOutl||'').slice(0,150))}…</p>`:''}
-      ${it.riskReduction||it.rskRdcMsr?`
-        <div style="background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:.82rem;color:#166534;">
-          <strong>위험성 감소대책</strong><br>${esc((it.riskReduction||it.rskRdcMsr||'').slice(0,200))}
-        </div>`:''}
-    </div>`).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
+    </div></div>`;}).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
 }
 
-// ── 렌더러: 위험성평가 인정 ────────────────────────────
-function renderRisk(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 인정사업장이 없습니다.</div>'; return; }
-  const today = new Date().toISOString().slice(0,10).replace(/-/g,'');
-  const html = items.map(it => {
-    const expiry = it.expiryDate||it.vlddDt||'';
-    const isSoon = expiry && expiry < String(parseInt(today)+300); // 3개월 이내
-    const validCls = isSoon ? 'valid-soon' : 'valid-ok';
-    const validLabel = isSoon ? '만료 임박' : '유효';
-    return `
-    <div class="cert-card">
+function renderMaterials(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 자료가 없습니다.</div>';return;}
+  const h=items.map(it=>{
+    const t=it.product_type||'';
+    let ic='type-etc',ico='fa-file-alt';
+    if(t.includes('영상')){ic='type-video';ico='fa-play-circle';}
+    else if(t.includes('교안')){ic='type-edu';ico='fa-chalkboard-teacher';}
+    else if(t.includes('책자')||t.includes('포스터')){ic='type-book';ico='fa-book';}
+    return `<div class="sn-card d-flex gap-3 align-items-start">
+      <div class="media-type-icon ${ic}"><i class="fas ${ico}"></i></div>
+      <div class="flex-grow-1">
+        <div class="sn-card-title">${esc(it.title||'(제목 없음)')}</div>
+        <div class="sn-card-meta">${t?`<span>${esc(t)}</span>`:''}${it.industry?`<span>${esc(it.industry)}</span>`:''}</div>
+        ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener" class="sn-card-link"><i class="fas fa-external-link-alt"></i> 자료 보기</a>`:''}
+      </div>
+    </div>`;}).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
+}
+
+function renderConstAccident(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 중대재해 현황이 없습니다.</div>';return;}
+  const h=items.map(it=>`<div class="sn-card">
+    <div class="sn-card-title">${esc(it.accident_type||'재해종류 미상')}</div>
+    <div class="sn-card-meta">
+      ${it.occurrence_date?`<span><i class="fas fa-calendar me-1"></i>${esc(it.occurrence_date.slice(0,10))}</span>`:''}
+      ${it.work_type?`<span>공종: ${esc(it.work_type)}</span>`:''}
+      ${it.causative?`<span>기인물: ${esc(it.causative)}</span>`:''}
+    </div>
+    ${it.accident_summary?`<p class="sn-card-desc">${esc((it.accident_summary||'').slice(0,150))}…</p>`:''}
+    ${it.risk_reduction?`<div style="background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:10px 14px;margin-top:10px;font-size:.82rem;color:#166534;"><strong>위험성 감소대책</strong><br>${esc((it.risk_reduction||'').slice(0,200))}</div>`:''}
+  </div>`).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
+}
+
+function renderRisk(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 인정사업장이 없습니다.</div>';return;}
+  const today=new Date().toISOString().slice(0,7);
+  const h=items.map(it=>{
+    const exp=it.expiry_date||'';
+    const soon=exp&&exp.slice(0,7)<today;
+    return `<div class="cert-card">
       <div class="cert-badge"><i class="fas fa-check-circle"></i></div>
       <div class="flex-grow-1">
         <div class="d-flex align-items-center justify-content-between gap-2">
-          <div class="cert-name">${esc(it.companyNm||it.siteNm||it.bizNm||'사업장명 없음')}</div>
-          ${expiry?`<span class="cert-valid ${validCls}">${validLabel}</span>`:''}
+          <div class="cert-name">${esc(it.company_nm||'사업장명 없음')}</div>
+          ${exp?`<span class="cert-valid ${soon?'valid-soon':'valid-ok'}">${soon?'만료임박':'유효'}</span>`:''}
         </div>
         <div class="cert-meta">
-          ${it.sido||it.sigungu?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc([it.sido,it.sigungu].filter(Boolean).join(' '))}</span>`:''}
-          ${it.certDate||it.acptDt?`<span>인정일 ${esc(it.certDate||it.acptDt)}</span>`:''}
-          ${expiry?`<span>만료일 ${esc(expiry)}</span>`:''}
-          ${it.laborOffice||it.labor_office?`<span>${esc(it.laborOffice||it.labor_office)}</span>`:''}
+          ${it.sido?`<span><i class="fas fa-map-marker-alt me-1"></i>${esc(it.sido)}</span>`:''}
+          ${it.cert_date?`<span>인정일 ${esc(it.cert_date.slice(0,10))}</span>`:''}
+          ${exp?`<span>만료일 ${esc(exp.slice(0,10))}</span>`:''}
+          ${it.labor_office?`<span>${esc(it.labor_office)}</span>`:''}
         </div>
       </div>
-    </div>`;
-  }).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
+    </div>`;}).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
 }
 
-// ── 렌더러: KOSHA GUIDE ────────────────────────────────
-const CAT_LABEL = { G:'일반', M:'기계', C:'화공', B:'건설', H:'보건' };
-function renderGuide(el, items, reset) {
-  if (!items.length) { el.innerHTML = '<div class="sn-empty">조회된 KOSHA GUIDE가 없습니다.</div>'; return; }
-  const html = items.map(it => {
-    const cat = (it.category||it.guideCategory||'G').toUpperCase();
-    return `
-    <div class="guide-card">
-      <div class="guide-cat cat-${cat}">${CAT_LABEL[cat]||cat}</div>
+const CL={G:'일반',M:'기계',C:'화공',B:'건설',H:'보건'};
+function renderGuide(el,items,reset){
+  if(!items||!items.length){el.innerHTML='<div class="sn-empty">조회된 KOSHA GUIDE가 없습니다.</div>';return;}
+  const h=items.map(it=>{
+    const c=(it.category||'G').toUpperCase();
+    return `<div class="guide-card">
+      <div class="guide-cat cat-${c}">${CL[c]||c}</div>
       <div class="flex-grow-1">
-        <div class="guide-no">${esc(it.guideNo||it.guide_no||'')} · ${esc(it.registDate||it.regDt||'')}</div>
-        <div class="guide-title">${esc(it.guideTitle||it.guideName||it.title||'(제목 없음)')}</div>
-        ${it.guideUrl||it.url?`<a href="${esc(it.guideUrl||it.url)}" target="_blank" rel="noopener" class="sn-card-link mt-2" style="font-size:.75rem;padding:4px 12px"><i class="fas fa-download"></i> 다운로드</a>`:''}
+        <div class="guide-no">${esc(it.guide_no||'')} · ${esc(it.regist_date?it.regist_date.slice(0,10):'')}</div>
+        <div class="guide-title">${esc(it.guide_title||'(제목 없음)')}</div>
+        ${it.guide_url?`<a href="${esc(it.guide_url)}" target="_blank" rel="noopener" class="sn-card-link mt-2" style="font-size:.75rem;padding:4px 12px"><i class="fas fa-download"></i> 다운로드</a>`:''}
       </div>
-    </div>`;
-  }).join('');
-  if (reset) el.innerHTML = html;
-  else el.insertAdjacentHTML('beforeend', html);
+    </div>`;}).join('');
+  if(reset)el.innerHTML=h;else el.insertAdjacentHTML('beforeend',h);
 }
 
-// ── 초기 로드 ──────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  initSection('accident');
-});
+document.addEventListener('DOMContentLoaded',()=>fetchSection('accident',true));
 </script>
 </body>
 </html>
