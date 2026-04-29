@@ -24,6 +24,10 @@
   .faq-a { display:none; padding:16px 22px 20px; font-size:.88rem; color:var(--sub); line-height:1.7; border-top:1px solid var(--border); }
   .faq-a.open { display:block; }
   .faq-q.open .q-icon { transform:rotate(45deg); }
+  .faq-a .refund-table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.84rem; }
+  .faq-a .refund-table th { background:#f1f5f9; color:#0f172a; font-weight:700; padding:8px 12px; border:1px solid #e2e8f0; text-align:left; }
+  .faq-a .refund-table td { padding:8px 12px; border:1px solid #e2e8f0; color:#475569; vertical-align:top; }
+  .faq-a .notice { background:#fff8f0; border-left:3px solid #f59e0b; border-radius:0 8px 8px 0; padding:10px 14px; margin-top:10px; font-size:.85rem; color:#78350f; }
   .still-question { background:var(--navy); border-radius:16px; padding:36px; text-align:center; margin-top:40px; }
   .still-question h4 { color:#fff; font-weight:800; margin-bottom:8px; }
   .still-question p { color:rgba(255,255,255,.6); font-size:.88rem; margin-bottom:20px; }
@@ -32,8 +36,6 @@
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
-<!-- HEADER -->
 <div id="tai-header"></div>
 
 <div class="faq-hero"><div class="sec-inner"><h1>자주 묻는 질문</h1><p>TAI 서비스에 대해 가장 많이 묻는 질문들을 정리했습니다</p></div></div>
@@ -48,19 +50,107 @@
           <button class="faq-tab" onclick="filterFaq('saas',this)">TAI Safe SaaS</button>
           <button class="faq-tab" onclick="filterFaq('appointment',this)">선임</button>
           <button class="faq-tab" onclick="filterFaq('fix',this)">수선</button>
-          <button class="faq-tab" onclick="filterFaq('billing',this)">요금</button>
+          <button class="faq-tab" onclick="filterFaq('billing',this)">요금·취소·환불</button>
         </div>
         <div id="faqList">
-          <div class="faq-item" data-cat="diagnosis"><div class="faq-q" onclick="toggleFaq(this)">무료 법령 진단은 정말 무료인가요?<span class="q-icon">+</span></div><div class="faq-a">네, 시설 정보 기준 1차 분석은 완전 무료입니다. 로그인 없이도 이용 가능하며, 적용 법령·선임 의무·점검 항목·리스크 수준을 확인하실 수 있습니다.</div></div>
-          <div class="faq-item" data-cat="diagnosis"><div class="faq-q" onclick="toggleFaq(this)">진단 결과는 얼마나 정확한가요?<span class="q-icon">+</span></div><div class="faq-a">입력하신 시설 정보를 기반으로 적용 가능성이 높은 법령 의무를 자동 도출합니다. 특허 출원된 조건코드 기반 자동 판정 시스템(출원번호: 10-2026-0056330)을 활용합니다.</div></div>
-          <div class="faq-item" data-cat="saas"><div class="faq-q" onclick="toggleFaq(this)">TAI Safe SaaS를 사용하면 안전관리자가 없어도 되나요?<span class="q-icon">+</span></div><div class="faq-a">아닙니다. TAI Safe는 안전관리자의 업무를 자동화하는 도구이지, 안전관리자를 대체하는 시스템이 아닙니다. 법령상 선임 의무가 있는 경우 반드시 안전관리자를 선임하셔야 합니다.</div></div>
-          <div class="faq-item" data-cat="saas"><div class="faq-q" onclick="toggleFaq(this)">기존 안전 관리 시스템과 연동이 가능한가요?<span class="q-icon">+</span></div><div class="faq-a">현재는 독립 SaaS로 운영됩니다. Enterprise 플랜의 경우 API 연동을 지원하며, 기존 ERP·HR 시스템과의 연동은 별도 협의가 필요합니다.</div></div>
-          <div class="faq-item" data-cat="appointment"><div class="faq-q" onclick="toggleFaq(this)">선임 의무가 있는지 어떻게 확인하나요?<span class="q-icon">+</span></div><div class="faq-a">무료 법령 진단을 통해 3분 안에 확인하실 수 있습니다. 사업장 유형, 근로자 수, 설비 종류를 입력하면 선임 의무 여부와 해당 법령 근거를 자동 도출해드립니다.</div></div>
-          <div class="faq-item" data-cat="fix"><div class="faq-q" onclick="toggleFaq(this)">수선 전문업체는 어떻게 검증하나요?<span class="q-icon">+</span></div><div class="faq-a">사업자등록증, 해당 분야 면허·인증, 시공 실적 등을 기준으로 검토 후 등록합니다. 등록 완료된 업체만 플랫폼에 노출됩니다.</div></div>
-          <div class="faq-item" data-cat="billing"><div class="faq-q" onclick="toggleFaq(this)">구독을 언제든지 취소할 수 있나요?<span class="q-icon">+</span></div><div class="faq-a">네, 언제든지 취소 가능합니다. 월 단위 구독이며, 취소 시 다음 결제일부터 청구되지 않습니다. 위약금은 없습니다.</div></div>
-          <div class="faq-item" data-cat="billing"><div class="faq-q" onclick="toggleFaq(this)">세금계산서 발행이 가능한가요?<span class="q-icon">+</span></div><div class="faq-a">네, 일반과세자로 등록되어 있어 B2B 세금계산서 발행이 가능합니다.</div></div>
+
+          <!-- 법령진단 -->
+          <div class="faq-item" data-cat="diagnosis">
+            <div class="faq-q" onclick="toggleFaq(this)">무료 법령 진단은 정말 무료인가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, 시설 정보 기준 1차 분석은 완전 무료입니다. 로그인 없이도 이용 가능하며, 적용 법령·선임 의무·점검 항목·리스크 수준을 확인하실 수 있습니다.</div>
+          </div>
+          <div class="faq-item" data-cat="diagnosis">
+            <div class="faq-q" onclick="toggleFaq(this)">진단 결과는 얼마나 정확한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">입력하신 시설 정보를 기반으로 적용 가능성이 높은 법령 의무를 자동 도출합니다. 특허 출원된 조건코드 기반 자동 판정 시스템(출원번호: 10-2026-0056330)을 활용합니다.</div>
+          </div>
+
+          <!-- SaaS -->
+          <div class="faq-item" data-cat="saas">
+            <div class="faq-q" onclick="toggleFaq(this)">TAI Safe SaaS를 사용하면 안전관리자가 없어도 되나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">아닙니다. TAI Safe는 안전관리자의 업무를 자동화하는 도구이지, 안전관리자를 대체하는 시스템이 아닙니다. 법령상 선임 의무가 있는 경우 반드시 안전관리자를 선임하셔야 합니다.</div>
+          </div>
+          <div class="faq-item" data-cat="saas">
+            <div class="faq-q" onclick="toggleFaq(this)">기존 안전 관리 시스템과 연동이 가능한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">현재는 독립 SaaS로 운영됩니다. Enterprise 플랜의 경우 API 연동을 지원하며, 기존 ERP·HR 시스템과의 연동은 별도 협의가 필요합니다.</div>
+          </div>
+
+          <!-- 선임 -->
+          <div class="faq-item" data-cat="appointment">
+            <div class="faq-q" onclick="toggleFaq(this)">선임 의무가 있는지 어떻게 확인하나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">무료 법령 진단을 통해 3분 안에 확인하실 수 있습니다. 사업장 유형, 근로자 수, 설비 종류를 입력하면 선임 의무 여부와 해당 법령 근거를 자동 도출해드립니다.</div>
+          </div>
+
+          <!-- 수선 -->
+          <div class="faq-item" data-cat="fix">
+            <div class="faq-q" onclick="toggleFaq(this)">수선 전문업체는 어떻게 검증하나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">사업자등록증, 해당 분야 면허·인증, 시공 실적 등을 기준으로 검토 후 등록합니다. 등록 완료된 업체만 플랫폼에 노출됩니다.</div>
+          </div>
+
+          <!-- 요금·취소·환불 -->
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">서비스 취소는 어떻게 하나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">
+              서비스 종류에 따라 취소 방법이 다릅니다.
+              <ul style="margin-top:10px;padding-left:20px;">
+                <li style="margin-bottom:6px;"><strong>SaaS 구독:</strong> 마이페이지 → 구독 관리 → 구독 취소에서 직접 취소 가능합니다. 취소 후에는 다음 결제일부터 청구되지 않으며, 위약금은 없습니다.</li>
+                <li style="margin-bottom:6px;"><strong>법령진단 단건:</strong> 결과를 열람하지 않은 상태에서 결제일로부터 7일 이내라면 고객센터(tai@taieng.co.kr)로 취소 요청 가능합니다.</li>
+                <li><strong>기타 서비스:</strong> 고객센터(tai@taieng.co.kr 또는 070-8080-1858)로 문의해 주세요.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">환불 기준은 어떻게 되나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">
+              서비스별 환불 기준은 아래와 같습니다.
+              <table class="refund-table">
+                <thead>
+                  <tr><th>구분</th><th>상황</th><th>환불</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>법령진단</strong></td><td>결과 미열람 상태, 결제 후 7일 이내 취소</td><td>전액 환불</td></tr>
+                  <tr><td><strong>법령진단</strong></td><td>결과 열람 후 취소 요청</td><td>환불 불가<br><small>(디지털 콘텐츠 제공 완료)</small></td></tr>
+                  <tr><td><strong>SaaS 구독</strong></td><td>미사용, 결제 후 7일 이내 취소</td><td>전액 환불</td></tr>
+                  <tr><td><strong>SaaS 구독</strong></td><td>사용 후 취소</td><td>잔여 기간 일할 계산</td></tr>
+                  <tr><td><strong>회사 귀책</strong></td><td>서비스 제공 불가</td><td>전액 환불</td></tr>
+                </tbody>
+              </table>
+              <p style="margin-top:10px;">환불 처리 기간은 요청 접수일로부터 <strong>영업일 기준 3~5일</strong> 이내입니다. 신용카드 결제의 경우 카드사 정책에 따라 다를 수 있습니다.</p>
+              <p style="margin:0;">환불 문의: <a href="mailto:tai@taieng.co.kr">tai@taieng.co.kr</a></p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">청약철회(계약철회)가 가능한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">
+              네, 전자상거래 등에서의 소비자보호에 관한 법률 제17조에 따라 청약철회 권리가 보장됩니다.
+              <div class="notice">
+                ⚠️ <strong>법령진단 서비스 주의사항:</strong> 법령진단 결과는 디지털 콘텐츠로 제공됩니다. 결과 화면을 <strong>열람하는 즉시 서비스가 개시</strong>된 것으로 간주되며, 이후에는 전자상거래법 제17조 제2항에 따라 청약철회가 제한됩니다. 결제 시 이 사항에 대한 사전 동의를 받습니다.
+              </div>
+              <ul style="margin-top:12px;padding-left:20px;">
+                <li style="margin-bottom:6px;"><strong>철회 가능:</strong> 결제일로부터 7일 이내, 법령진단 결과 미열람 상태</li>
+                <li style="margin-bottom:6px;"><strong>철회 불가:</strong> 법령진단 결과 열람 후 / SaaS 서비스 실제 사용 후</li>
+                <li><strong>철회 방법:</strong> 고객센터(tai@taieng.co.kr)로 서면 또는 이메일로 의사 표시</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">구독을 언제든지 취소할 수 있나요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, 언제든지 취소 가능합니다. 월 단위 구독이며, 취소 시 다음 결제일부터 청구되지 않습니다. 위약금은 없습니다.</div>
+          </div>
+
+          <div class="faq-item" data-cat="billing">
+            <div class="faq-q" onclick="toggleFaq(this)">세금계산서 발행이 가능한가요?<span class="q-icon">+</span></div>
+            <div class="faq-a">네, 일반과세자로 등록되어 있어 B2B 세금계산서 발행이 가능합니다. 결제 시 사업자 정보를 입력해 주시면 자동 발행됩니다.</div>
+          </div>
+
         </div>
-        <div class="still-question"><h4>더 궁금한 점이 있으신가요?</h4><p>문의하시면 영업일 1일 이내 답변드립니다</p><a href="fix-request.html?from=faq&type=general" class="btn-red">문의하기</a></div>
+        <div class="still-question">
+          <h4>더 궁금한 점이 있으신가요?</h4>
+          <p>문의하시면 영업일 1일 이내 답변드립니다</p>
+          <a href="fix-request.html?from=faq&type=general" class="btn-red">문의하기</a>
+        </div>
       </div>
       <div class="col-lg-4">
         <div style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:80px;">
@@ -73,6 +163,13 @@
               <a href="service/saas.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI Safe SaaS</a>
               <a href="fix-request.html?from=faq&type=appointment" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 선임 연결</a>
               <a href="fix-request.html?from=faq&type=repair" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 수선 연결</a>
+            </div>
+          </div>
+          <div style="padding-top:16px;border-top:1px solid var(--border);margin-top:16px;">
+            <p style="font-size:.82rem;color:var(--sub);margin-bottom:12px;">약관·정책</p>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <a href="terms.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 이용약관 (환불규정 포함)</a>
+              <a href="privacy.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 개인정보처리방침</a>
             </div>
           </div>
         </div>

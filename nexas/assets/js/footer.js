@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.3.0 (2026-04-29): 풋터 요금제 링크 삭제 (이니시스 요청)
  * v3.2.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 + 특허 13건
@@ -133,7 +134,6 @@
     '          <h6 class="widget-title">시작하기</h6>' +
     '          <ul>' +
     '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
-    '            <li><a href="' + b + 'pricing.html"><i class="fas fa-angle-right"></i>요금제</a></li>' +
     '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
     '          </ul>' +
