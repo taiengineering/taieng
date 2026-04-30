@@ -17,62 +17,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
-
-    /* ── 히어로 ── */
-    .owner-hero-section {
-      background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
-      /* padding-top 없음 — 이미지가 섹션 맨 위부터 시작 */
-    }
-    .owner-hero-left-col {
-      display: flex;
-      align-items: center;
-      padding: 120px 48px 50px 80px; /* 상단 120px = 네비 90px + 여백 30px */
-      min-height: 520px;
-    }
-    .owner-hero-eyebrow {
-      display: inline-block; font-size: .72rem; font-weight: 700;
-      letter-spacing: .1em; color: rgba(255,255,255,.9);
-      border: 1.5px solid rgba(255,255,255,.4); border-radius: 6px;
-      padding: 5px 14px; margin-bottom: 22px;
-    }
-    .owner-hero-left-col h1 {
-      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-      font-weight: 900; color: #fff;
-      line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px;
-    }
-    .owner-hero-left-col .hero-sub {
-      font-size: .98rem; color: rgba(255,255,255,.82);
-      line-height: 1.7; margin-bottom: 32px;
-    }
-    .owner-hero-right-col {
-      position: relative;
-      overflow: hidden;
-      min-height: 520px;
-      padding: 0;
-    }
-    .owner-hero-right-col img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
-      display: block;
-      position: absolute; top: 0; left: 0;
-    }
-    .owner-hero-right-col::before {
-      content: ''; position: absolute;
-      top: 0; bottom: 0; left: 0; width: 100px;
-      background: linear-gradient(to right, rgba(15,43,74,.75), transparent);
-      z-index: 1;
-    }
-    @media(max-width:991px) {
-      .owner-hero-left-col { min-height: auto; padding: 100px 24px 40px; }
-      .owner-hero-right-col { min-height: 280px; }
-      .owner-hero-right-col::before { display: none; }
-    }
-    @media(max-width:575px) {
-      .owner-hero-left-col { padding: 90px 20px 32px; }
-      .owner-hero-right-col { min-height: 220px; }
-    }
-
-    /* ── 솔직한 공감 ── */
+    .owner-hero-section { background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%); }
+    .owner-hero-left-col { display: flex; align-items: center; padding: 120px 48px 50px 80px; min-height: 520px; }
+    .owner-hero-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.9); border: 1.5px solid rgba(255,255,255,.4); border-radius: 6px; padding: 5px 14px; margin-bottom: 22px; }
+    .owner-hero-left-col h1 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; color: #fff; line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px; }
+    .owner-hero-left-col .hero-sub { font-size: .98rem; color: rgba(255,255,255,.82); line-height: 1.7; margin-bottom: 32px; }
+    .owner-hero-right-col { position: relative; overflow: hidden; min-height: 520px; padding: 0; }
+    .owner-hero-right-col img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; position: absolute; top: 0; left: 0; }
+    .owner-hero-right-col::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 100px; background: linear-gradient(to right, rgba(15,43,74,.75), transparent); z-index: 1; }
+    @media(max-width:991px) { .owner-hero-left-col { min-height: auto; padding: 100px 24px 40px; } .owner-hero-right-col { min-height: 280px; } .owner-hero-right-col::before { display: none; } }
+    @media(max-width:575px) { .owner-hero-left-col { padding: 90px 20px 32px; } .owner-hero-right-col { min-height: 220px; } }
     .honest-sec { background: #fff; padding: 88px 0 72px; }
     .honest-list { max-width: 640px; margin: 0 auto; }
     .honest-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
@@ -82,8 +36,6 @@
     .honest-item.active p { color: #0f172a; font-weight: 700; font-size: 1.1rem; }
     .honest-conclusion { margin-top: 36px; padding: 28px 32px; background: #0f172a; border-radius: 14px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto; }
     .honest-conclusion p { color: #fff; font-size: 1.15rem; font-weight: 800; margin: 0; line-height: 1.5; }
-
-    /* ── 해결 카드 3개 ── */
     .solution-sec { background: #f8fafc; padding: 88px 0; }
     .sol-card { background: #fff; border-radius: 18px; padding: 40px 32px 34px; box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%; border-top: 4px solid #0f172a; transition: transform .2s, box-shadow .2s; }
     .sol-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
@@ -92,17 +44,24 @@
     .sol-card p { font-size: .9rem; color: #64748b; line-height: 1.7; margin: 0 0 14px; }
     .sol-card .sol-highlight { background: #f1f5f9; border-left: 3px solid #0f172a; padding: 12px 16px; border-radius: 0 10px 10px 0; font-size: .85rem; color: #334155; font-weight: 700; line-height: 1.6; }
 
-    /* ── 감독관 시나리오 ── */
+    /* ── 앱 프리뷰 섹션 ── */
+    .app-preview-sec { background: #0b0f14; padding: 80px 0; overflow: hidden; }
+    .app-preview-sec h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
+    .app-preview-sec .ap-sub { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.7; margin-bottom: 36px; }
+    .app-preview-grid { display: flex; gap: 20px; justify-content: center; align-items: flex-end; }
+    .app-preview-grid .ap-item { flex: 0 0 200px; }
+    .app-preview-grid .ap-item.featured { flex: 0 0 240px; transform: translateY(-8px); }
+    .app-preview-grid .ap-item img { width: 100%; border-radius: 20px; box-shadow: 0 16px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.05); display: block; }
+    .app-preview-grid .ap-label { text-align: center; font-size: .75rem; font-weight: 700; color: rgba(255,255,255,.5); margin-top: 10px; letter-spacing: .04em; text-transform: uppercase; }
+    .app-preview-grid .ap-item.featured .ap-label { color: rgba(147,197,253,.7); }
+    @media(max-width:767px) { .app-preview-grid { flex-wrap: wrap; } .app-preview-grid .ap-item, .app-preview-grid .ap-item.featured { flex: 1 1 45%; transform: none; } }
+
     .scenario-sec { background: #fff; padding: 80px 0; }
     .scenario-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.1); }
-
-    /* ── 안전 본질 ── */
     .safety-essence { background: #f8fafc; padding: 88px 0; text-align: center; }
     .safety-essence .essence-small { font-size: .9rem; color: #94a3b8; line-height: 1.7; margin-bottom: 32px; }
     .safety-essence h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 16px; letter-spacing: -.02em; }
     .safety-essence .essence-sub { font-size: 1.05rem; color: #64748b; line-height: 1.7; }
-
-    /* ── CTA ── */
     .owner-cta { background: #0f172a; padding: 80px 0; }
     .owner-cta h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 16px; }
     .owner-cta p { color: rgba(255,255,255,.7); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
@@ -182,6 +141,31 @@
           <h4>과태료 1건보다<br>쌉니다</h4>
           <p>TAI Safe는 월 7.9만원부터 시작합니다. 안전관리 관련 과태료 1건 평균 300만원. TAI를 3년 써도 과태료 1건보다 저렴합니다.</p>
           <div class="sol-highlight">과태료를 한 번이라도 맞아본 사업주는 이 비용이 보험이라는 걸 압니다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ③-1 앱 프리뷰 (신규) ══ -->
+<section class="app-preview-sec">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 align-self-center">
+        <h2>작업자가 이렇게<br>쉽게 씁니다</h2>
+        <p class="ap-sub">장갑 끼고 5초면 점검 끝. 이상 발견하면 1클릭 신고.<br>작업자가 귀찮아서 안 쓸 걱정이 없습니다.</p>
+        <a href="free-diagnosis.html" class="btn-navy" style="margin-top:8px;">무료 진단 시작</a>
+      </div>
+      <div class="col-lg-7">
+        <div class="app-preview-grid">
+          <div class="ap-item">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/01-home.png" alt="TAI Safe 홈 화면" loading="lazy">
+            <div class="ap-label">홈 화면</div>
+          </div>
+          <div class="ap-item featured">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect.png" alt="TAI Safe 점검 — 정상/이상 1클릭" loading="lazy">
+            <div class="ap-label">5초 점검</div>
+          </div>
         </div>
       </div>
     </div>
