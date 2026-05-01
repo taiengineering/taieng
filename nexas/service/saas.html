@@ -49,12 +49,15 @@
   #saas-page .pat-hero-image {
     background: linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
     position: relative; display: flex; flex-direction: column;
-    padding: calc(var(--tai-nav-h, 90px) + 24px) clamp(20px,2.5vw,36px) 28px;
+    /* 좌우 패딩 0 — 이미지가 패널 끝까지 가도록.
+       텍스트(topline/timeline)에는 각자 좌우 padding 부여 */
+    padding: calc(var(--tai-nav-h, 90px) + 20px) 0 24px;
     overflow: hidden;
   }
   #saas-page .pat-hero-topline {
     display: flex; align-items: center; justify-content: center;
-    gap: clamp(8px,1.5vw,18px); margin-bottom: 6px;
+    gap: clamp(8px,1.5vw,18px); margin-bottom: 4px;
+    padding: 0 clamp(20px,2.5vw,36px);
   }
   #saas-page .pat-hero-topline .label {
     font-size: clamp(.78rem,1.4vw,.98rem); font-weight: 800; white-space: nowrap;
@@ -71,32 +74,33 @@
     box-shadow: 0 6px 20px rgba(26,95,212,.35), 0 1px 3px rgba(0,0,0,.1);
   }
   #saas-page .pat-hero-image-wrap {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    min-height: 0; padding: 4px 0;
+    flex: 1; display: flex; align-items: stretch; justify-content: center;
+    min-height: 0; padding: 0;
   }
   #saas-page .pat-hero-image-wrap img {
-    width: 100%; height: 100%; max-height: 420px;
-    object-fit: contain; object-position: center;
+    width: 100%; height: 100%;
+    object-fit: contain; object-position: center bottom;
   }
   #saas-page .pat-hero-timeline {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
-    position: relative; padding-top: 18px;
+    position: relative; padding: 18px clamp(20px,2.5vw,36px) 0;
   }
   #saas-page .pat-hero-timeline::before {
-    content: ''; position: absolute; top: 7px; left: 10%; right: 10%;
+    content: ''; position: absolute; top: 25px;
+    left: clamp(20px,2.5vw,36px); right: clamp(20px,2.5vw,36px);
     height: 2px;
     background: linear-gradient(90deg,#cbd5e1 0%,#cbd5e1 55%,#1A5FD4 100%);
   }
   #saas-page .pat-hero-tl-item { text-align: center; position: relative; }
   #saas-page .pat-hero-tl-item::before {
-    content: ''; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
     width: 14px; height: 14px; background: #fff; border: 2px solid #94a3b8;
     border-radius: 50%; box-shadow: 0 0 0 3px #fff;
   }
   #saas-page .pat-hero-tl-item.future::before { border-color: #1A5FD4; background: #1A5FD4; }
   #saas-page .pat-hero-tl-year {
     font-size: clamp(.7rem,1.1vw,.82rem); font-weight: 800;
-    color: #0f172a; margin-bottom: 3px; margin-top: 4px;
+    color: #0f172a; margin-bottom: 3px; margin-top: 22px;
   }
   #saas-page .pat-hero-tl-item.future .pat-hero-tl-year { color: #1A5FD4; }
   #saas-page .pat-hero-tl-desc {
@@ -375,8 +379,12 @@
     #saas-page .pat-hero { min-height: auto; }
     #saas-page .pat-hero-grid { grid-template-columns: 1fr; min-height: auto; }
     #saas-page .pat-hero-text { padding: calc(var(--tai-nav-h, 90px) + 24px) 20px 32px; }
-    #saas-page .pat-hero-image { padding: 24px 16px 28px; }
-    #saas-page .pat-hero-image-wrap img { max-height: 240px; }
+    #saas-page .pat-hero-image { padding: 24px 0 28px; }
+    #saas-page .pat-hero-topline { padding: 0 16px; }
+    #saas-page .pat-hero-image-wrap { min-height: 280px; }
+    #saas-page .pat-hero-image-wrap img { max-height: 320px; }
+    #saas-page .pat-hero-timeline { padding: 18px 16px 0; }
+    #saas-page .pat-hero-timeline::before { left: 16px; right: 16px; }
     #saas-page .pat-hero-tl-desc { font-size: .56rem; }
     #saas-page .feat-visual { max-width: 100%; }
     #saas-page .feat-pair .feat-info { min-width: 0; }
@@ -399,7 +407,8 @@
     #saas-page .pat-hero-topline { flex-wrap: wrap; }
     #saas-page .pat-hero-tl-year { font-size: .65rem; }
     #saas-page .pat-hero-tl-desc { font-size: .52rem; }
-    #saas-page .pat-hero-image-wrap img { max-height: 180px; }
+    #saas-page .pat-hero-image-wrap { min-height: 220px; }
+    #saas-page .pat-hero-image-wrap img { max-height: 260px; }
   }
 
 
