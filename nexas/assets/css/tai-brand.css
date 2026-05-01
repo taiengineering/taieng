@@ -1,6 +1,7 @@
 /**
  * TAI 브랜드 색상 (단일 관리)
  * ─────────────────────────
+ * v2.3.0 (2026-05-01): fixed 헤더 텍스트 흰색 오버라이드 (다크 배경 대응)
  * v2.2.0 (2026-04-26): SVG 다이어그램 lazy loading 높이 보정
  * v2.1.0 (2026-04-26): 스크롤 고정 헤더 네이비로 변경
  * v2.0.0 (2026-04-25): 흰색 + 어두운 블루 톤으로 전환
@@ -48,11 +49,60 @@
 /* 스크롤 시 고정 헤더 — 네이비 배경 */
 .navbar-area-fixed {
   background: rgba(var(--tai-surface-dark-rgb), 0.92) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* home-6 전용 스티키 내비가 테마 보라색을 쓰지 않도록 */
 .home-6 .navbar-area-fixed {
   background: rgba(var(--tai-surface-dark-rgb), 0.92) !important;
+}
+
+/*
+ * ── v2.3.0 고정 헤더 텍스트 수정 ──────────────────────────────────────
+ * header.js v3.2 에서 fixed 상태 텍스트를 #0f2b4a(네이비)로 설정했으나
+ * tai-brand.css v2.1 에서 fixed 배경도 다크 네이비로 변경되어
+ * 텍스트가 배경에 묻히는 버그 발생 → 흰색으로 오버라이드
+ * ────────────────────────────────────────────────────────────────────── */
+
+/* 로고 텍스트 */
+.navbar-area-fixed .tai-logo-text {
+  color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0,0,0,.25) !important;
+}
+
+/* 아웃라인 버튼 (마이페이지, 로그인) */
+.navbar-area-fixed .tai-nav-btn-outline {
+  border-color: rgba(255,255,255,.45) !important;
+  color: rgba(255,255,255,.9) !important;
+}
+.navbar-area-fixed .tai-nav-btn-outline:hover {
+  border-color: rgba(255,255,255,.75) !important;
+  background: rgba(255,255,255,.1) !important;
+  color: #fff !important;
+}
+
+/* 솔리드 버튼 (회원가입) — 흰 배경 + 네이비 텍스트로 대비 */
+.navbar-area-fixed .tai-nav-btn-solid {
+  background: #fff !important;
+  color: #0f2b4a !important;
+  border-color: rgba(255,255,255,.95) !important;
+}
+.navbar-area-fixed .tai-nav-btn-solid:hover {
+  background: #1565c0 !important;
+  border-color: #1565c0 !important;
+  color: #fff !important;
+}
+
+/* 로그아웃 버튼 */
+.navbar-area-fixed button.tai-logout-btn {
+  border-color: rgba(255,255,255,.45) !important;
+  color: rgba(255,255,255,.9) !important;
+}
+.navbar-area-fixed button.tai-logout-btn:hover {
+  border-color: rgba(255,255,255,.75) !important;
+  background: rgba(255,255,255,.1) !important;
+  color: #fff !important;
 }
 
 /*
