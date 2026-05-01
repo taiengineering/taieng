@@ -14,149 +14,12 @@
   <link rel="stylesheet" href="../assets/css/slick-slide.min.css">
   <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/tai-brand.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <link rel="stylesheet" href="../assets/css/tai-brand.css">
+  <link rel="stylesheet" href="../assets/css/tai-main.css">
+  <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    /* ===== 히어로 (보라색 제거, 이미지 배경) ===== */
-    .tai-hero {
-      position: relative;
-      overflow: hidden;
-      background: #0a0f1a;
-    }
-
-    .tai-hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory.png');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.45;
-    }
-
-    .tai-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(10,15,26,0.97) 0%,
-        rgba(10,15,26,0.88) 40%,
-        rgba(10,15,26,0.35) 75%,
-        rgba(10,15,26,0.15) 100%
-      );
-    }
-
-    .tai-hero-eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      color: #60a5fa;
-      letter-spacing: 0.08em;
-      margin: 0 0 14px;
-      font-family: 'Noto Sans KR', sans-serif;
-    }
-
-    .tai-hero-title {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: clamp(1.6rem, 4.5vw, 2.5rem);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.25;
-      margin: 0 0 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .tai-hero-accent {
-      color: #60a5fa;
-    }
-
-    .tai-hero-sub {
-      font-family: 'Noto Sans KR', sans-serif;
-      font-size: clamp(0.92rem, 2vw, 1.05rem);
-      font-weight: 500;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.7;
-      max-width: 38ch;
-      margin: 0 0 16px;
-      border-left: 3px solid #60a5fa;
-      padding-left: 16px;
-    }
-
-    .tai-hero-micro {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.4);
-      max-width: 44ch;
-      line-height: 1.65;
-      margin: 0 0 24px;
-      font-family: 'Noto Sans KR', sans-serif;
-    }
-
-    .tai-hero-cta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tai-btn-pri {
-      display: inline-flex;
-      align-items: center;
-      padding: 13px 24px;
-      border-radius: 10px;
-      background: #1565c0;
-      color: #fff !important;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      font-family: 'Noto Sans KR', sans-serif;
-      transition: background 0.15s;
-    }
-    .tai-btn-pri:hover {
-      background: #0f4c91;
-      color: #fff !important;
-      text-decoration: none;
-    }
-
-    .tai-btn-sec {
-      display: inline-flex;
-      align-items: center;
-      padding: 13px 24px;
-      border-radius: 10px;
-      background: transparent;
-      color: rgba(255,255,255,0.85) !important;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.25);
-      font-family: 'Noto Sans KR', sans-serif;
-      transition: border-color 0.15s;
-    }
-    .tai-btn-sec:hover {
-      border-color: rgba(255,255,255,0.5);
-      color: #fff !important;
-      text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-      .tai-hero-bg {
-        background-position: top center;
-        opacity: 0.25;
-      }
-      .tai-hero-overlay {
-        background: linear-gradient(
-          180deg,
-          rgba(10,15,26,0.95) 0%,
-          rgba(10,15,26,0.88) 100%
-        );
-      }
-      .tai-hero-title {
-        font-size: 1.6rem;
-      }
-    }
-
-    /* Vuexy breadcrumb 보라색 완전 차단 */
-    .breadcrumb-area {
-      background: linear-gradient(160deg, #0a0f1a 0%, #0f172a 40%, #1e3a5f 100%) !important;
-    }
-
     body.sc5 {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -204,33 +67,28 @@
   <div id="tai-header"></div>
 
   <!-- 히어로 -->
-  <section class="tai-hero" id="factory-hero">
-    <div class="tai-hero-bg"></div>
-    <div class="tai-hero-overlay"></div>
-    <div class="container" style="position:relative;z-index:2;">
-      <div class="row align-items-center" style="min-height:420px;">
-        <div class="col-lg-6 py-5">
-          <p class="tai-hero-eyebrow">제조 · 산업현장</p>
-          <h1 class="tai-hero-title">
-            산업현장 안전관리<br>
-            <span class="tai-hero-accent">이제는 바뀌어야 합니다.</span>
-          </h1>
-          <p class="tai-hero-sub">
-            종이 체크리스트와 엑셀은 한계가 있습니다.<br>
-            TAI Safe가 법령 의무를 자동 파악하고,<br>
-            작업자에게 배정하고, 누락 없이 관리합니다.
-          </p>
-          <p class="tai-hero-micro">
-            산업안전보건법 · 중대재해처벌법 · 화학물질관리법<br>
-            우리 공장에 적용되는 법령, 3분이면 확인됩니다.
-          </p>
-          <div class="tai-hero-cta">
-            <a class="tai-btn-pri" href="../free-diagnosis.html">무료 법령진단 시작 →</a>
-            <a class="tai-btn-sec" href="../fix-request.html?from=target-factory&amp;type=general">도입 문의</a>
-          </div>
-        </div>
-        <div class="col-lg-6 d-none d-lg-block">
-          <!-- 오른쪽은 배경 이미지가 채움 -->
+  <section class="tai-hero tai-hero--image" id="factory-hero">
+    <div class="tai-hero__bg" style="background-image:url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory.png')"></div>
+    <div class="tai-hero__overlay tai-hero__overlay--left"></div>
+    <div class="container">
+      <div class="tai-hero__inner">
+        <p class="tai-hero__eyebrow">제조 · 산업현장</p>
+        <h1 class="tai-hero__title">
+          산업현장 안전관리<br>
+          <span class="accent">이제는 바뀌어야 합니다.</span>
+        </h1>
+        <p class="tai-hero__sub">
+          종이 체크리스트와 엑셀은 한계가 있습니다.<br>
+          TAI Safe가 법령 의무를 자동 파악하고,<br>
+          작업자에게 배정하고, 누락 없이 관리합니다.
+        </p>
+        <p class="tai-hero__micro">
+          산업안전보건법 · 중대재해처벌법 · 화학물질관리법<br>
+          우리 공장에 적용되는 법령, 3분이면 확인됩니다.
+        </p>
+        <div class="tai-hero__cta">
+          <a class="tai-btn-pri" href="../free-diagnosis.html">무료 법령진단 시작 →</a>
+          <a class="tai-btn-sec" href="../fix-request.html?from=target-factory&amp;type=general">도입 문의</a>
         </div>
       </div>
     </div>
