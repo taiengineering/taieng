@@ -9,7 +9,7 @@
 (function () {
   'use strict';
 
-  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
+  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon-96.png';
 
   function injectFooterDarkTheme() {
     if (document.getElementById('tai-footer-dark-theme')) return;
