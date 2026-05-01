@@ -190,6 +190,30 @@
   var base = nexasRelBase();
   if (!base) base = legacyRelBase();
 
+  function setFavicon(href) {
+    try {
+      var head = document.head || document.getElementsByTagName('head')[0];
+      if (!head) return;
+
+      var existing = head.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
+      for (var i = 0; i < existing.length; i++) {
+        existing[i].parentNode.removeChild(existing[i]);
+      }
+
+      var link = document.createElement('link');
+      link.rel = 'icon';
+      link.href = href;
+      head.appendChild(link);
+
+      var shortcut = document.createElement('link');
+      shortcut.rel = 'shortcut icon';
+      shortcut.href = href;
+      head.appendChild(shortcut);
+    } catch (e) {}
+  }
+
+  setFavicon(base + 'favicon.ico');
+
   var loginRedirectQs = '';
   try {
     var lp = window.location.pathname || '';
