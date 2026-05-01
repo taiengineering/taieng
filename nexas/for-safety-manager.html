@@ -141,8 +141,8 @@
     #fs2 .fs2-hero-bg {
       position: absolute; inset: 0;
       background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safety-staff.png');
-      background-size: auto 100%;
-      background-position: right center;
+      background-size: cover;
+      background-position: center center;
       background-repeat: no-repeat;
       z-index: 0;
     }
@@ -150,10 +150,8 @@
       position: absolute; inset: 0;
       background: linear-gradient(
         90deg,
-        rgba(8,15,28,0.96) 0%,
-        rgba(8,15,28,0.92) 30%,
-        rgba(8,15,28,0.40) 55%,
-        rgba(8,15,28,0) 75%
+        rgba(8,15,28,0.80) 0%,
+        rgba(8,15,28,0) 100%
       );
       z-index: 0;
     }
@@ -170,8 +168,6 @@
         padding-top: calc(var(--tai-nav-h, 90px) + 24px);
         padding-bottom: 48px;
       }
-      #fs2 #fs2-top .fs2-hero-bg { background-size: cover; background-position: right top; opacity: .35; }
-      #fs2 #fs2-top .fs2-hero-overlay { background: linear-gradient(180deg, rgba(8,15,28,0.85) 0%, rgba(8,15,28,0.92) 100%); }
     }
   </style>
 </head>
