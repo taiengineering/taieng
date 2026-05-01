@@ -49,8 +49,6 @@
   #saas-page .pat-hero-image {
     background: linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
     position: relative; display: flex; flex-direction: column;
-    /* 좌우 패딩 0 — 이미지가 패널 끝까지 가도록.
-       텍스트(topline/timeline)에는 각자 좌우 padding 부여 */
     padding: calc(var(--tai-nav-h, 90px) + 20px) 0 24px;
     overflow: hidden;
   }
@@ -73,17 +71,26 @@
     font-size: clamp(.78rem,1.3vw,.92rem); letter-spacing: .04em;
     box-shadow: 0 6px 20px rgba(26,95,212,.35), 0 1px 3px rgba(0,0,0,.1);
   }
+  /* ===== 인물 이미지: background-image 방식 =====
+     - <img> 대신 ::before layer로 깔아서 background-size/position 정밀 컨트롤
+     - 인물(7명) 이미지를 가로로 약간 확대하면(110%) 양 끝 흐릿한 인물이 잘려
+       타임라인 5점과 시각적으로 더 잘 매칭됩니다.
+     - object-position: bottom으로 인물 발이 타임라인 가까이 옴 */
   #saas-page .pat-hero-image-wrap {
-    flex: 1; display: flex; align-items: stretch; justify-content: center;
-    min-height: 0; padding: 0;
+    flex: 1; min-height: 0; position: relative;
   }
-  #saas-page .pat-hero-image-wrap img {
-    width: 100%; height: 100%;
-    object-fit: contain; object-position: center bottom;
+  #saas-page .pat-hero-image-wrap::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas4.png');
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 110% auto;
+    pointer-events: none;
   }
   #saas-page .pat-hero-timeline {
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
     position: relative; padding: 18px clamp(20px,2.5vw,36px) 0;
+    z-index: 2;
   }
   #saas-page .pat-hero-timeline::before {
     content: ''; position: absolute; top: 25px;
@@ -382,7 +389,7 @@
     #saas-page .pat-hero-image { padding: 24px 0 28px; }
     #saas-page .pat-hero-topline { padding: 0 16px; }
     #saas-page .pat-hero-image-wrap { min-height: 280px; }
-    #saas-page .pat-hero-image-wrap img { max-height: 320px; }
+    #saas-page .pat-hero-image-wrap::before { background-size: contain; }
     #saas-page .pat-hero-timeline { padding: 18px 16px 0; }
     #saas-page .pat-hero-timeline::before { left: 16px; right: 16px; }
     #saas-page .pat-hero-tl-desc { font-size: .56rem; }
@@ -408,7 +415,6 @@
     #saas-page .pat-hero-tl-year { font-size: .65rem; }
     #saas-page .pat-hero-tl-desc { font-size: .52rem; }
     #saas-page .pat-hero-image-wrap { min-height: 220px; }
-    #saas-page .pat-hero-image-wrap img { max-height: 260px; }
   }
 
 
@@ -497,18 +503,14 @@
           </div>
         </div>
       </div>
-      <!-- RIGHT: 이미지 + 타임라인 패널 (60%) -->
+      <!-- RIGHT: 이미지(배경) + 타임라인 패널 (60%) -->
       <div class="pat-hero-image">
         <div class="pat-hero-topline">
           <span class="label before">← TAI 도입 전</span>
           <div class="logo">TAI</div>
           <span class="label after">TAI 도입 후 →</span>
         </div>
-        <div class="pat-hero-image-wrap">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas4.png"
-               alt="TAI 도입 전후 — 안전관리의 진화"
-               loading="eager">
-        </div>
+        <div class="pat-hero-image-wrap" role="img" aria-label="TAI 도입 전후 — 안전관리의 진화 (조선시대부터 AI까지)"></div>
         <div class="pat-hero-timeline">
           <div class="pat-hero-tl-item">
             <div class="pat-hero-tl-year">조선시대</div>
