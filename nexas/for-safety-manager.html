@@ -32,13 +32,27 @@
     /* A 풀폭 다크 */
     #fs2 .fs2-a { background:linear-gradient(160deg,#0a0f1a 0%,#0f172a 40%,#1e3a5f 100%); color:#fff; position:relative; overflow:hidden; }
     #fs2 .fs2-a::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 50% at 70% 20%,rgba(26,95,212,.25),transparent); pointer-events:none; }
-    #fs2 .fs2-a .fs2-inner { position:relative; z-index:1; min-height:clamp(420px,72vh,760px); display:flex; flex-direction:column; justify-content:center; padding-top:48px; padding-bottom:56px; }
+    #fs2 .fs2-a .fs2-inner { position:relative; z-index:1; min-height:420px; display:flex; flex-direction:column; justify-content:center; padding-top:80px; padding-bottom:60px; }
     #fs2 .fs2-a h1 { font-size:clamp(1.75rem,5vw,3rem); font-weight:900; line-height:1.18; margin:0 0 18px; max-width:18ch; }
     #fs2 .fs2-a .lead { font-size:clamp(1rem,2.4vw,1.2rem); font-weight:700; color:rgba(255,255,255,.88); line-height:1.55; max-width:36ch; margin:0 0 28px; border-left:4px solid #60a5fa; padding-left:16px; }
     #fs2 .fs2-a .sub { font-size:.92rem; color:rgba(255,255,255,.55); max-width:42ch; line-height:1.65; margin:0; }
     #fs2 .fs2-scroll { margin-top:auto; padding-top:40px; text-align:center; font-size:.72rem; color:rgba(255,255,255,.38); }
     #fs2 .fs2-scroll i { display:block; margin-top:6px; animation:fs2b 2.2s ease-in-out infinite; }
     @keyframes fs2b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    @media(max-width:991px){
+      #fs2 .fs2-a .fs2-inner {
+        min-height:auto;
+        padding-top:calc(var(--tai-nav-h, 90px) + 24px);
+        padding-bottom:40px;
+      }
+    }
+    @media(max-width:575px){
+      #fs2 .fs2-a .fs2-inner {
+        padding-top:calc(var(--tai-nav-h, 90px) + 16px);
+        padding-bottom:32px;
+      }
+    }
 
     /* 배경 */
     #fs2 .bg-white { background:#fff; }

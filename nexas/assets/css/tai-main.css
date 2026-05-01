@@ -10,6 +10,7 @@
   --border: #e8eaed;
   --main-color: #0d1b2a !important;
   --main-color-opacity: 13, 27, 42 !important;
+  --tai-nav-h: 90px;
 }
 body { font-family: 'Noto Sans KR', sans-serif; color: var(--text); margin: 0; padding: 0; }
 a { text-decoration: none; }
@@ -128,3 +129,34 @@ html { scrollbar-color: #3d4555 #1a1a2e; scrollbar-width: thin; }
 ::placeholder { color: #b0b8c4 !important; opacity: 1 !important; }
 :-ms-input-placeholder { color: #b0b8c4; }
 ::-ms-input-placeholder { color: #b0b8c4; }
+
+/* ── 스크롤 시 탑 배경색 통일 (WORK_INSTRUCTION_HERO_HEIGHT) ── */
+.navbar-area.navbar-area-fixed {
+  background: rgba(15, 43, 74, 0.92) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.navbar-area.navbar-area-fixed .tai-logo-text {
+  color: #fff !important;
+  text-shadow: none;
+}
+
+.navbar-area.navbar-area-fixed .navbar-nav > li > a {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar-area.navbar-area-fixed .tai-nav-btn-outline {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.navbar-area.navbar-area-fixed .tai-nav-btn-solid {
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  color: #0f2b4a !important;
+  background: #fff !important;
+}
+.navbar-area.navbar-area-fixed button.tai-logout-btn {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}

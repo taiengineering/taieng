@@ -48,6 +48,29 @@
     .auto-block .ab-icon { font-size: 2rem; margin-bottom: 12px; }
     .auto-block h5 { font-size: 1rem; font-weight: 800; color: #78350f; margin-bottom: 8px; }
     .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
+
+    /* WORK_INSTRUCTION_HERO_HEIGHT — 건설 타깃 히어로 */
+    .tai-target-hero {
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+    .tai-target-hero .container { width: 100%; }
+    @media (max-width: 991px) {
+      .tai-target-hero {
+        min-height: auto;
+        padding-top: calc(var(--tai-nav-h, 90px) + 24px);
+        padding-bottom: 40px;
+      }
+    }
+    @media (max-width: 575px) {
+      .tai-target-hero {
+        padding-top: calc(var(--tai-nav-h, 90px) + 16px);
+        padding-bottom: 32px;
+      }
+    }
   </style>
 </head>
 <body class="sc5">
@@ -60,7 +83,7 @@
   <div id="tai-header"></div>
 
   <!-- 히어로 -->
-  <section class="breadcrumb-area text-center">
+  <section class="breadcrumb-area text-center tai-target-hero">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-9 align-self-center">

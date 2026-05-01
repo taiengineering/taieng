@@ -135,6 +135,25 @@
       text-decoration: none;
     }
 
+    .tai-hero .tai-hero-row {
+      min-height: 420px;
+      padding-top: 80px;
+      padding-bottom: 60px;
+    }
+    @media (max-width: 991px) {
+      .tai-hero .tai-hero-row {
+        min-height: auto;
+        padding-top: calc(var(--tai-nav-h, 90px) + 24px);
+        padding-bottom: 40px;
+      }
+    }
+    @media (max-width: 575px) {
+      .tai-hero .tai-hero-row {
+        padding-top: calc(var(--tai-nav-h, 90px) + 16px);
+        padding-bottom: 32px;
+      }
+    }
+
     @media (max-width: 768px) {
       .tai-hero-bg {
         background-position: top center;
@@ -208,8 +227,8 @@
     <div class="tai-hero-bg"></div>
     <div class="tai-hero-overlay"></div>
     <div class="container" style="position:relative;z-index:2;">
-      <div class="row align-items-center" style="min-height:420px;">
-        <div class="col-lg-6 py-5">
+      <div class="row tai-hero-row align-items-center">
+        <div class="col-lg-6">
           <p class="tai-hero-eyebrow">제조 · 산업현장</p>
           <h1 class="tai-hero-title">
             산업현장 안전관리<br>
