@@ -124,13 +124,15 @@
     }
 
     #fe2 .fe2-a-bubbles {
-      flex: 1;
+      flex: 0 0 280px;
       position: relative;
       min-height: 360px;
+      pointer-events: none;
     }
 
     #fe2 .fe2-bubble {
       position: absolute;
+      pointer-events: auto;
       background: rgba(15,23,42,0.72);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
@@ -161,10 +163,11 @@
       font-weight: 700;
     }
 
-    #fe2 .fe2-bubble-1 { right: 30px; top: 10px; animation: fe2Float 3s ease-in-out infinite; }
-    #fe2 .fe2-bubble-2 { right: 0;    top: 100px; animation: fe2Float 3s ease-in-out infinite 0.6s; }
-    #fe2 .fe2-bubble-3 { right: 40px; top: 190px; animation: fe2Float 3s ease-in-out infinite 1.2s; }
-    #fe2 .fe2-bubble-4 { right: 10px; top: 280px; animation: fe2Float 3s ease-in-out infinite 1.8s; }
+    /* 버블 위치 — 우상단에서 좌하단으로 대각선 계단 */
+    #fe2 .fe2-bubble-1 { right: -10px; top: 20px;  animation: fe2Float 3s ease-in-out infinite; }
+    #fe2 .fe2-bubble-2 { right: -40px; top: 120px; animation: fe2Float 3s ease-in-out infinite 0.6s; }
+    #fe2 .fe2-bubble-3 { right: -10px; top: 220px; animation: fe2Float 3s ease-in-out infinite 1.2s; }
+    #fe2 .fe2-bubble-4 { right: -50px; top: 310px; animation: fe2Float 3s ease-in-out infinite 1.8s; }
 
     @keyframes fe2Float {
       0%, 100% { opacity: 0.65; transform: translateY(0); }
@@ -182,6 +185,8 @@
       #fe2 .fe2-a-text { max-width: 100%; }
 
       #fe2 .fe2-a-bubbles {
+        flex: none;
+        width: 100%;
         position: relative;
         min-height: auto;
         display: flex;
@@ -191,7 +196,9 @@
       }
 
       #fe2 .fe2-bubble {
-        position: static;
+        position: static !important;
+        right: auto !important;
+        top: auto !important;
         animation: none !important;
         opacity: 0.85;
         white-space: normal;
