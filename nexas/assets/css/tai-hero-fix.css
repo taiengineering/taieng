@@ -1,6 +1,7 @@
 /**
- * TAI hero fix v7
+ * TAI hero fix v8
  * - v7: .hero-split padding-top 90px 추가 (fixed 헤더 가림 보정)
+ * - v8: .diag-hero padding-top 80px, min-height 450px
  */
 
 /* fixed 헤더(90px) 보정 — 히어로가 헤더 뒤로 숨지 않도록 */
@@ -20,6 +21,12 @@
 
 .owner-hero-left-col { min-height: 470px; }
 .owner-hero-left-inner { margin-left: 0 !important; max-width: 480px; }
+
+/* diag-hero 전용 보정 */
+.diag-hero {
+  min-height: 450px !important;
+  padding-top: 80px !important;
+}
 
 @media (max-width: 1399px) {
   .hero-split .hero-left,
@@ -45,6 +52,10 @@
     padding-left: 24px;
   }
   .owner-hero-left-col { min-height: auto; }
+  .diag-hero {
+    min-height: 380px !important;
+    padding-top: 70px !important;
+  }
 }
 @media (max-width: 575px) {
   .hero-split {
