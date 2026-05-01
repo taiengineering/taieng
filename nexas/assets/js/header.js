@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.0 (2026-05-01): 안전정보 메뉴 4섹션 재구성 + 모바일 로고 수정
  * v3.4.0 (2026-04-30): 로고 이미지 최적화 (1024px 263KB → 96px 21KB)
  * v3.3.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.2.0 (2026-04-28): 로그인전 로그인/회원가입, 로그인후 마이페이지/로그아웃
@@ -44,11 +45,20 @@
       '  text-decoration: none !important;',
       '}',
       '.tai-logo-combo:hover { text-decoration: none !important; }',
-      '.tai-logo-icon {',
-      '  width: 38px; height: 38px;',
+      '.tai-logo-icon,',
+      '.navbar-area .nav-container .logo a img.tai-logo-icon {',
+      '  width: 38px !important; height: 38px !important;',
+      '  max-width: 38px !important;',
       '  border-radius: 8px;',
       '  object-fit: cover;',
       '  box-shadow: 0 2px 8px rgba(0,0,0,.15);',
+      '}',
+      '@media(max-width:575px){',
+      '  .tai-logo-icon,',
+      '  .navbar-area .nav-container .logo a img.tai-logo-icon {',
+      '    width: 32px !important; height: 32px !important;',
+      '    max-width: 32px !important;',
+      '  }',
       '}',
       '.tai-logo-text {',
       '  font-family: "DM Sans", "Arial Black", Arial, sans-serif;',
@@ -306,9 +316,10 @@
     '          <li class="menu-item-has-children">',
     '            <a href="#">\uC548\uC804\uC815\uBCF4</a>',
     '            <ul class="sub-menu">',
-    '              <li><a href="' + base + 'precedent-search.html">\uD310\uB840 \uAC80\uC0C9</a></li>',
-    '              <li><a href="' + base + 'safety-news.html">\uC548\uC804\uC815\uBCF4</a></li>',
+    '              <li><a href="' + base + 'safety-news.html">\uC548\uC804\uC790\uB8CC</a></li>',
+    '              <li><a href="' + base + 'accident-cases.html">\uC7AC\uD574\uC0AC\uB840</a></li>',
     '              <li><a href="' + base + 'law-updates.html">\uAC1C\uC815\uBC95\uB839</a></li>',
+    '              <li><a href="' + base + 'precedent-search.html">\uD310\uB840\uAC80\uC0C9</a></li>',
     '            </ul>',
     '          </li>',
     '        </ul>',
