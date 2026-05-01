@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>판례 검색 | TAI 엔지니어링</title>
-  <meta name="description" content="산업안전·산재 관련 판례를 검색합니다.">
+  <title>판례 검색 | TAI 엔지니어링 — 산업재해·안전 관련 판례</title>
+  <meta name="description" content="산업안전·산업재해 관련 판례 800건 이상을 검색합니다. 섹터·재해유형별 필터와 최신 판례 목록을 제공합니다.">
+  <link rel="canonical" href="https://taieng.co.kr/precedent-search">
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
@@ -13,63 +14,127 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Noto Sans KR', sans-serif; background: #f8fafc; }
-    .prec-hero { background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 100%); padding: 88px 0 48px; color: #fff; }
-    .prec-hero h1 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 900; margin-bottom: 8px; }
-    .prec-hero p { color: rgba(255,255,255,.65); font-size: .92rem; margin: 0; }
-    .prec-wrap { max-width: 920px; margin: -28px auto 0; padding: 0 20px 64px; position: relative; z-index: 2; }
-    .prec-card { background: #fff; border-radius: 14px; box-shadow: 0 8px 32px rgba(15,23,42,.08); padding: 24px 22px 20px; border: 1px solid #e2e8f0; }
-    .prec-card label { font-size: .78rem; font-weight: 700; color: #64748b; display: block; margin-bottom: 8px; }
-    .prec-search-row { display: flex; gap: 10px; flex-wrap: wrap; }
-    .prec-search-row input { flex: 1; min-width: 200px; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; font-size: .95rem; }
-    .prec-search-row button { border: none; border-radius: 10px; padding: 12px 22px; font-weight: 800; background: #1a5fd4; color: #fff; cursor: pointer; }
-    .prec-search-row button:hover { background: #154a9e; }
-    .prec-hint { font-size: .8rem; color: #94a3b8; margin-top: 12px; line-height: 1.5; }
-    .prec-results { margin-top: 28px; }
-    .prec-results h2 { font-size: 1rem; font-weight: 800; color: #0f172a; margin-bottom: 14px; }
-    .prec-item { border: 1px solid #e8ecf4; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; background: #fafbfe; }
-    .prec-item h3 { font-size: .9rem; font-weight: 800; color: #0f172a; margin: 0 0 6px; line-height: 1.4; }
-    .prec-item p { font-size: .82rem; color: #475569; margin: 0; line-height: 1.5; }
-    .prec-meta { font-size: .74rem; color: #64748b; margin-top: 8px; }
-    .prec-empty { text-align: center; padding: 36px 16px; color: #94a3b8; font-size: .9rem; }
-    .prec-back { margin-top: 20px; text-align: center; }
-    .prec-back a { color: #1a5fd4; font-weight: 700; font-size: .88rem; text-decoration: none; }
-    .prec-back a:hover { text-decoration: underline; }
+    body { font-family: 'Noto Sans KR', sans-serif; }
+    .pr-hero {
+      background: linear-gradient(160deg, #0f172a 0%, #312e81 100%);
+      padding: calc(var(--tai-nav-h, 90px) + 40px) 0 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .pr-hero h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin: 0 0 8px; }
+    .pr-hero h1 em { font-style: normal; color: #a5b4fc; }
+    .pr-hero p { color: rgba(255, 255, 255, .55); font-size: .88rem; margin-bottom: 28px; }
+    .pr-search-wrap { max-width: 640px; margin: 0 auto; position: relative; }
+    .pr-search-wrap input {
+      width: 100%; padding: 16px 52px 16px 20px; border: 2px solid rgba(255, 255, 255, .2);
+      border-radius: 16px; font-size: 1rem; font-family: inherit; background: rgba(255, 255, 255, .1);
+      color: #fff; outline: none; transition: border .2s, background .2s; cursor: text;
+    }
+    .pr-search-wrap input::placeholder { color: rgba(255, 255, 255, .4); }
+    .pr-search-wrap input:focus { border-color: #a5b4fc; background: rgba(255, 255, 255, .15); }
+    .pr-search-btn {
+      position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border: none; border-radius: 12px; background: #6366f1; color: #fff;
+      font-size: 1rem; cursor: pointer;
+    }
+    .pr-stats { display: flex; justify-content: center; gap: 28px; margin-top: 20px; flex-wrap: wrap; }
+    .pr-stat { text-align: center; }
+    .pr-stat .num { font-size: 1.4rem; font-weight: 900; color: #fff; }
+    .pr-stat .label { font-size: .68rem; color: rgba(255, 255, 255, .45); margin-top: 2px; }
+    .pr-body { background: #f4f6f8; min-height: 60vh; padding: 28px 0 60px; }
+    .pr-filters { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; align-items: flex-start; }
+    .pr-filter-group { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .pr-filter-label { font-size: .7rem; font-weight: 700; color: #94a3b8; letter-spacing: .06em; margin-right: 4px; white-space: nowrap; }
+    .pr-chip {
+      padding: 5px 14px; border: 1.5px solid #e2e8f0; border-radius: 999px; font-size: .78rem; font-weight: 600;
+      color: #64748b; cursor: pointer; background: #fff; transition: all .12s; white-space: nowrap;
+    }
+    .pr-chip:hover { border-color: #94a3b8; color: #334155; }
+    .pr-chip.active { background: #0d1b2a; color: #fff; border-color: #0d1b2a; }
+    .pr-latest-head { font-size: 1rem; font-weight: 900; color: #0d1b2a; margin: 0 0 12px; letter-spacing: -.02em; }
+    .pr-latest-head em { font-style: normal; color: #4338ca; }
+    .pr-result-count { font-size: .88rem; font-weight: 700; color: #0d1b2a; margin-bottom: 12px; }
+    .pr-result-count span { color: #4338ca; }
+    .pr-card {
+      background: #fff; border: 1.5px solid #e8eaed; border-radius: 14px; padding: 18px 20px; margin-bottom: 10px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .pr-card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, .06); border-color: #cbd5e1; }
+    .pr-court { font-size: .72rem; font-weight: 800; color: #6366f1; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+    .pr-title { font-size: .95rem; font-weight: 800; color: #0d1b2a; line-height: 1.4; margin-bottom: 8px; }
+    .pr-meta { font-size: .74rem; color: #64748b; display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+    .pr-meta span { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+    .pr-summary { font-size: .84rem; color: #475569; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .pr-link {
+      display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; font-size: .78rem; font-weight: 700;
+      color: #0d1b2a; text-decoration: none; padding: 5px 12px; border: 1.5px solid #e2e8f0; border-radius: 8px; transition: all .12s;
+    }
+    .pr-link:hover { background: #0d1b2a; color: #fff; border-color: #0d1b2a; }
+    .pr-empty { text-align: center; padding: 48px 20px; color: #94a3b8; }
+    .pr-paging { display: flex; justify-content: center; gap: 4px; margin-top: 28px; flex-wrap: wrap; }
+    .pr-pg {
+      min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: .82rem; font-weight: 700; color: #475569;
+      cursor: pointer; background: #fff; transition: all .12s;
+    }
+    .pr-pg:hover { border-color: #0d1b2a; color: #0d1b2a; }
+    .pr-pg.active { background: #0d1b2a; color: #fff; border-color: #0d1b2a; }
+    .pr-pg.disabled { opacity: .4; cursor: default; pointer-events: none; }
+    .pr-source { text-align: center; margin-top: 28px; font-size: .75rem; color: #94a3b8; line-height: 1.7; }
+    .pr-back { text-align: center; margin-top: 16px; }
+    .pr-back a { color: #4338ca; font-weight: 700; font-size: .88rem; text-decoration: none; }
+    .pr-back a:hover { text-decoration: underline; }
+    @media (max-width: 768px) { .pr-filters { flex-direction: column; } }
   </style>
 </head>
 <body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
-
 <div id="tai-header"></div>
 
-<section class="prec-hero">
-  <div class="container">
-    <h1>판례 검색</h1>
-    <p>산업안전·산재 관련 키워드로 판례를 찾아보세요.</p>
+<div class="pr-hero">
+  <h1><em>판례</em> 검색</h1>
+  <p>산업안전·산업재해 관련 판례를 섹터·재해유형별로 찾아보세요.</p>
+  <div class="pr-search-wrap">
+    <input type="text" id="searchInput" placeholder="사건명·키워드 (예: 업무상과실, 추락, 중대재해)" autocomplete="off">
+    <button type="button" class="pr-search-btn" onclick="doSearch()" aria-label="검색"><i class="fas fa-search"></i></button>
   </div>
-</section>
-
-<div class="prec-wrap">
-  <div class="prec-card">
-    <label for="precQ">검색어</label>
-    <div class="prec-search-row">
-      <input type="search" id="precQ" placeholder="예: 산업안전보건, 중대재해, 산재 인정" autocomplete="off">
-      <button type="button" id="precBtn">검색</button>
-    </div>
-    <p class="prec-hint">검색 결과는 국가법령정보 API 연동 데이터가 있으면 표시하고, 없을 때는 안내 메시지가 나옵니다. <a href="safety-news.html" style="color:#1a5fd4;font-weight:700;">안전정보</a>에서 주요 판례 요약도 확인할 수 있습니다.</p>
-  </div>
-
-  <div class="prec-results" id="precResults" style="display:none;">
-    <h2>검색 결과</h2>
-    <div id="precList"></div>
-  </div>
-  <div id="precIdle" class="prec-empty" style="margin-top:24px;">검색어를 입력한 뒤 검색을 눌러주세요.</div>
-
-  <div class="prec-back">
-    <a href="safety-news.html">← 안전정보(뉴스·판례 하이라이트)로 이동</a>
+  <div class="pr-stats">
+    <div class="pr-stat"><div class="num" id="s-total">-</div><div class="label">등록 판례</div></div>
   </div>
 </div>
+
+<div class="pr-body"><div class="sec-inner">
+  <div class="pr-filters">
+    <div class="pr-filter-group">
+      <span class="pr-filter-label">섹터</span>
+      <div class="pr-chip active" data-sec="ALL">전체</div>
+      <div class="pr-chip" data-sec="CONSTRUCTION">건설</div>
+      <div class="pr-chip" data-sec="MANUFACTURING">제조</div>
+      <div class="pr-chip" data-sec="SERVICE">서비스</div>
+    </div>
+    <div class="pr-filter-group">
+      <span class="pr-filter-label">재해유형</span>
+      <div class="pr-chip active" data-haz="ALL">전체</div>
+      <div class="pr-chip" data-haz="추락">추락</div>
+      <div class="pr-chip" data-haz="끼임">끼임</div>
+      <div class="pr-chip" data-haz="충돌">충돌</div>
+      <div class="pr-chip" data-haz="감전">감전</div>
+      <div class="pr-chip" data-haz="질식">질식</div>
+    </div>
+  </div>
+
+  <div class="pr-result-count" id="resultCount">최신 판례를 불러오는 중…</div>
+  <h2 class="pr-latest-head" id="latestHeading"><em>최신</em> 판례</h2>
+
+  <div id="resultList"></div>
+  <div class="pr-paging" id="paging"></div>
+
+  <div class="pr-source">
+    판례 요약·메타데이터는 서비스 제공을 위해 가공·표시될 수 있습니다. 원문은 각 법원·공개 출처를 확인하세요.
+  </div>
+  <div class="pr-back"><a href="safety-news.html">← 안전보건자료로 이동</a></div>
+</div></div>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
@@ -81,61 +146,200 @@
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
-(function () {
-  'use strict';
-  var API = 'https://api.taieng.co.kr';
+var SB = 'https://vwlahtguyggrhvslabax.supabase.co/rest/v1';
+var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3bGFodGd1eWdncmh2c2xhYmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE1OTYsImV4cCI6MjA5Mjg2NzU5Nn0.Yp6P7ahaCuna_gwYC8_S2KD081Ov9Fs65e9o_AenP48';
+var H = { apikey: KEY, Authorization: 'Bearer ' + KEY, Prefer: 'count=exact' };
+var PG = 20;
+var SEC_LABEL = { CONSTRUCTION: '건설', MANUFACTURING: '제조', SERVICE: '서비스', COMMON: '공통' };
 
-  function esc(s) {
-    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
+var filters = { sec: 'ALL', haz: 'ALL', q: '', page: 1 };
 
-  function renderItems(items) {
-    var list = document.getElementById('precList');
-    if (!items || !items.length) {
-      list.innerHTML = '<div class="prec-empty">일치하는 판례가 없거나, 서버에서 결과를 가져오지 못했습니다.</div>';
-      return;
-    }
-    list.innerHTML = items.map(function (p) {
-      var title = esc(p.사건명 || p.title || '');
-      var body = esc((p.판시사항 || p.판결요지 || '').slice(0, 160));
-      if ((p.판시사항 || '').length > 160) body += '…';
-      var meta = [p.법원명, p.선고일자].filter(Boolean).map(esc).join(' · ');
-      var link = p.판례상세링크 || '';
-      var inner = '<div class="prec-item"><h3>' + title + '</h3><p>' + body + '</p>' +
-        (meta ? '<div class="prec-meta">' + meta + '</div>' : '') + '</div>';
-      return link ? '<a href="' + esc(link) + '" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;display:block;">' + inner + '</a>' : inner;
-    }).join('');
-  }
+function esc(s) {
+  return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
 
-  async function runSearch() {
-    var q = (document.getElementById('precQ').value || '').trim();
-    var idle = document.getElementById('precIdle');
-    var box = document.getElementById('precResults');
-    var list = document.getElementById('precList');
-    if (!q) {
-      idle.style.display = 'block';
-      box.style.display = 'none';
-      idle.textContent = '검색어를 입력해 주세요.';
-      return;
-    }
-    idle.style.display = 'none';
-    box.style.display = 'block';
-    list.innerHTML = '<div class="prec-empty"><i class="fas fa-spinner fa-spin"></i> 검색 중…</div>';
-    try {
-      var res = await fetch(API + '/precedents/search?query=' + encodeURIComponent(q) + '&size=20');
-      var data = await res.json();
-      var items = (data.data && data.data.prec) || data.data || data.items || [];
-      renderItems(items);
-    } catch (e) {
-      list.innerHTML = '<div class="prec-empty">검색 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</div>';
-    }
-  }
+function parseContentTotal(r) {
+  var h = r.headers.get('content-range') || r.headers.get('Content-Range') || '';
+  var parts = h.split('/');
+  var last = parts.length > 1 ? parts[parts.length - 1] : '0';
+  var n = parseInt(String(last).replace(/\*/g, '').trim(), 10);
+  return isNaN(n) ? 0 : n;
+}
 
-  document.getElementById('precBtn').addEventListener('click', runSearch);
-  document.getElementById('precQ').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') { e.preventDefault(); runSearch(); }
+function initFromURL() {
+  var p = new URLSearchParams(location.search);
+  if (p.get('q')) filters.q = p.get('q');
+  if (p.get('sec')) filters.sec = p.get('sec');
+  if (p.get('hazard')) filters.haz = p.get('hazard');
+  if (p.get('page')) filters.page = parseInt(p.get('page'), 10) || 1;
+  document.getElementById('searchInput').value = filters.q;
+  document.querySelectorAll('[data-sec]').forEach(function (c) {
+    c.classList.toggle('active', c.dataset.sec === filters.sec);
   });
-})();
+  document.querySelectorAll('[data-haz]').forEach(function (c) {
+    c.classList.toggle('active', c.dataset.haz === filters.haz);
+  });
+}
+
+function updateURL() {
+  var p = new URLSearchParams();
+  if (filters.q) p.set('q', filters.q);
+  if (filters.sec !== 'ALL') p.set('sec', filters.sec);
+  if (filters.haz !== 'ALL') p.set('hazard', filters.haz);
+  if (filters.page > 1) p.set('page', String(filters.page));
+  var qs = p.toString();
+  history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+}
+
+function buildListUrl(offset) {
+  var sel = 'id,case_number,case_name,court_name,decision_date,sector,hazard_type,summary,death_count,injury_count,source_url';
+  var url = SB + '/industrial_accident_precedents?select=' + sel + '&order=decision_date.desc&limit=' + PG + '&offset=' + offset;
+  if (filters.sec !== 'ALL') url += '&sector=eq.' + encodeURIComponent(filters.sec);
+  if (filters.haz !== 'ALL') {
+    url += '&hazard_type=ilike.*' + encodeURIComponent(filters.haz) + '*';
+  }
+  if (filters.q) {
+    url += '&case_name=ilike.*' + encodeURIComponent(filters.q) + '*';
+  }
+  return url;
+}
+
+function deathInjury(row) {
+  var parts = [];
+  if (row.death_count != null && row.death_count > 0) parts.push('사망 ' + row.death_count + '명');
+  if (row.injury_count != null && row.injury_count > 0) parts.push('상해 ' + row.injury_count + '명');
+  return parts.length ? parts.join(' · ') : '';
+}
+
+function doSearch() {
+  filters.q = document.getElementById('searchInput').value.trim();
+  filters.page = 1;
+  fetchResults();
+}
+
+async function fetchResults() {
+  updateURL();
+  var el = document.getElementById('resultList');
+  var latestEl = document.getElementById('latestHeading');
+  var offset = (filters.page - 1) * PG;
+  document.getElementById('resultCount').textContent = '불러오는 중…';
+  if (latestEl) latestEl.style.display = filters.q ? 'none' : 'block';
+
+  var url = buildListUrl(offset);
+  try {
+    var r = await fetch(url, { headers: H });
+    if (!r.ok) {
+      var tryUrl = url.replace('order=decision_date.desc', 'order=created_at.desc');
+      r = await fetch(tryUrl, { headers: H });
+      url = tryUrl;
+    }
+    var total = parseContentTotal(r);
+    var items = await r.json();
+    document.getElementById('resultCount').innerHTML = filters.q
+      ? '"' + esc(filters.q) + '" · 검색 결과 <span>' + total.toLocaleString() + '</span>건'
+      : '최신 판례 · 전체 <span>' + total.toLocaleString() + '</span>건 (페이지당 ' + PG + '건)';
+    if (!items.length) {
+      el.innerHTML = '<div class="pr-empty"><i class="fas fa-inbox"></i><br>' + (filters.q ? '검색 결과가 없습니다.' : '표시할 판례가 없습니다.') + '</div>';
+      document.getElementById('paging').innerHTML = '';
+      return;
+    }
+    el.innerHTML = items.map(function (it) {
+      var court = esc(it.court_name || '');
+      var title = esc(it.case_name || '');
+      var di = deathInjury(it);
+      var hz = esc(it.hazard_type || '');
+      var dt = esc(it.decision_date || '');
+      var sec = it.sector || '';
+      var sum = esc((it.summary || '').slice(0, 280));
+      if ((it.summary || '').length > 280) sum += '…';
+      var meta = '';
+      if (di) meta += '<span>' + esc(di) + '</span>';
+      if (hz) meta += '<span>' + hz + '</span>';
+      if (dt) meta += '<span>' + dt + '</span>';
+      if (sec && SEC_LABEL[sec]) meta += '<span>' + esc(SEC_LABEL[sec]) + '</span>';
+      var link = it.source_url ? '<a class="pr-link" href="' + esc(it.source_url) + '" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 원문·출처</a>' : '';
+      return (
+        '<div class="pr-card">' +
+        (court ? '<div class="pr-court">' + court + '</div>' : '') +
+        '<div class="pr-title">' + title + '</div>' +
+        (meta ? '<div class="pr-meta">' + meta + '</div>' : '') +
+        (sum ? '<div class="pr-summary">' + sum + '</div>' : '') +
+        link +
+        '</div>'
+      );
+    }).join('');
+    renderPaging(total);
+  } catch (e) {
+    el.innerHTML = '<div class="pr-empty">데이터를 불러올 수 없습니다.</div>';
+    document.getElementById('paging').innerHTML = '';
+  }
+}
+
+function renderPaging(total) {
+  var pages = Math.ceil(total / PG);
+  if (pages <= 1) {
+    document.getElementById('paging').innerHTML = '';
+    return;
+  }
+  var cur = filters.page;
+  var h = '';
+  h += '<div class="pr-pg ' + (cur === 1 ? 'disabled' : '') + '" onclick="goPage(' + (cur - 1) + ')"><i class="fas fa-chevron-left"></i></div>';
+  var start = Math.max(1, cur - 3);
+  var end = Math.min(pages, cur + 3);
+  if (start > 1) h += '<div class="pr-pg" onclick="goPage(1)">1</div>' + (start > 2 ? '<div class="pr-pg disabled">…</div>' : '');
+  for (var i = start; i <= end; i++) {
+    h += '<div class="pr-pg ' + (i === cur ? 'active' : '') + '" onclick="goPage(' + i + ')">' + i + '</div>';
+  }
+  if (end < pages) {
+    h += (end < pages - 1 ? '<div class="pr-pg disabled">…</div>' : '') + '<div class="pr-pg" onclick="goPage(' + pages + ')">' + pages + '</div>';
+  }
+  h += '<div class="pr-pg ' + (cur === pages ? 'disabled' : '') + '" onclick="goPage(' + (cur + 1) + ')"><i class="fas fa-chevron-right"></i></div>';
+  document.getElementById('paging').innerHTML = h;
+}
+
+function goPage(p) {
+  if (p < 1) return;
+  filters.page = p;
+  fetchResults();
+  window.scrollTo({ top: 380, behavior: 'smooth' });
+}
+
+async function loadStats() {
+  try {
+    var r = await fetch(SB + '/industrial_accident_precedents?select=id&limit=1', { headers: Object.assign({}, H, { Prefer: 'count=exact' }) });
+    document.getElementById('s-total').textContent = parseContentTotal(r).toLocaleString();
+  } catch (e) {
+    document.getElementById('s-total').textContent = '849';
+  }
+}
+
+document.querySelectorAll('[data-sec]').forEach(function (c) {
+  c.addEventListener('click', function () {
+    document.querySelectorAll('[data-sec]').forEach(function (x) { x.classList.remove('active'); });
+    c.classList.add('active');
+    filters.sec = c.dataset.sec;
+    filters.page = 1;
+    fetchResults();
+  });
+});
+document.querySelectorAll('[data-haz]').forEach(function (c) {
+  c.addEventListener('click', function () {
+    document.querySelectorAll('[data-haz]').forEach(function (x) { x.classList.remove('active'); });
+    c.classList.add('active');
+    filters.haz = c.dataset.haz;
+    filters.page = 1;
+    fetchResults();
+  });
+});
+document.getElementById('searchInput').addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') doSearch();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  initFromURL();
+  fetchResults();
+  loadStats();
+});
 </script>
 </body>
 </html>

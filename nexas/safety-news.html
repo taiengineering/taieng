@@ -23,7 +23,7 @@
   .sh-hero h1 em{font-style:normal;color:#60a5fa;}
   .sh-hero p{color:rgba(255,255,255,.55);font-size:.88rem;margin-bottom:28px;}
   .sh-search-wrap{max-width:640px;margin:0 auto;position:relative;}
-  .sh-search-wrap input{width:100%;padding:16px 52px 16px 20px;border:2px solid rgba(255,255,255,.2);border-radius:16px;font-size:1rem;font-family:inherit;background:rgba(255,255,255,.1);color:#fff;outline:none;transition:border .2s;}
+  .sh-search-wrap input{width:100%;padding:16px 52px 16px 20px;border:2px solid rgba(255,255,255,.2);border-radius:16px;font-size:1rem;font-family:inherit;background:rgba(255,255,255,.1);color:#fff;outline:none;transition:border .2s;cursor:text;}
   .sh-search-wrap input::placeholder{color:rgba(255,255,255,.4);}
   .sh-search-wrap input:focus{border-color:#60a5fa;background:rgba(255,255,255,.15);}
   .sh-search-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:42px;height:42px;border:none;border-radius:12px;background:#60a5fa;color:#fff;font-size:1rem;cursor:pointer;}
@@ -39,6 +39,8 @@
   .sh-chip:hover{border-color:#94a3b8;color:#334155;}
   .sh-chip.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a;}
   .sh-result-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;}
+  .sh-latest-head{font-size:1rem;font-weight:900;color:#0d1b2a;margin:0 0 12px;letter-spacing:-.02em;}
+  .sh-latest-head em{font-style:normal;color:#60a5fa;}
   .sh-result-count{font-size:.88rem;font-weight:700;color:#0d1b2a;}
   .sh-result-count span{color:#60a5fa;}
   .sh-sort{font-size:.78rem;color:#64748b;cursor:pointer;}
@@ -116,8 +118,9 @@
   </div>
 
   <div class="sh-result-bar">
-    <div class="sh-result-count" id="resultCount">검색 중...</div>
+    <div class="sh-result-count" id="resultCount">최신 자료를 불러오는 중…</div>
   </div>
+  <h2 class="sh-latest-head" id="latestHeading"><em>최신 등록</em> 자료</h2>
 
   <div id="resultList"></div>
   <div class="sh-paging" id="paging"></div>
@@ -148,6 +151,14 @@ const SEC_LABEL={CONSTRUCTION:'건설',MANUFACTURING:'제조',SERVICE:'서비스
 let filters={cat:'ALL',sec:'ALL',q:'',page:1};
 
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function parseContentTotal(r){
+  var h=r.headers.get('content-range')||r.headers.get('Content-Range')||'';
+  var parts=h.split('/');
+  var last=parts.length>1?parts[parts.length-1]:'0';
+  var n=parseInt(String(last).replace(/\*/g,'').trim(),10);
+  return isNaN(n)?0:n;
+}
 
 // URL 파라미터 초기화
 function initFromURL(){
@@ -199,20 +210,25 @@ function doSearch(){
 async function fetchResults(){
   updateURL();
   const el=document.getElementById('resultList');
+  const latestEl=document.getElementById('latestHeading');
   const offset=(filters.page-1)*PG;
   let url=`${SB}/kosha_safety_materials?select=id,title,url,category,sector&order=collected_at.desc&limit=${PG}&offset=${offset}`;
   if(filters.cat!=='ALL')url+=`&category=eq.${filters.cat}`;
   if(filters.sec!=='ALL')url+=`&sector=eq.${filters.sec}`;
   if(filters.q)url+=`&title=ilike.*${encodeURIComponent(filters.q)}*`;
+  document.getElementById('resultCount').textContent='불러오는 중…';
+  if(latestEl)latestEl.style.display=filters.q?'none':'block';
   try{
     const r=await fetch(url,{headers:H});
-    const total=parseInt(r.headers.get('content-range')?.split('/')[1]||'0');
+    const total=parseContentTotal(r);
     const items=await r.json();
     document.getElementById('resultCount').innerHTML=
       filters.q?`"<span>${esc(filters.q)}</span>" 검색 결과 <span>${total.toLocaleString()}</span>건`
-      :`전체 <span>${total.toLocaleString()}</span>건`;
+      :`최신 자료 · 전체 <span>${total.toLocaleString()}</span>건 (페이지당 ${PG}건)`;
     if(!items.length){
-      el.innerHTML='<div class="sh-empty"><div class="icon"><i class="fas fa-search"></i></div>검색 결과가 없습니다.<br>다른 키워드로 검색해보세요.</div>';
+      el.innerHTML=filters.q
+        ?'<div class="sh-empty"><div class="icon"><i class="fas fa-search"></i></div>검색 결과가 없습니다.<br>다른 키워드로 검색해보세요.</div>'
+        :'<div class="sh-empty"><div class="icon"><i class="fas fa-inbox"></i></div>표시할 자료가 없습니다.<br>잠시 후 다시 시도해 주세요.</div>';
       document.getElementById('paging').innerHTML='';
       return;
     }
@@ -255,13 +271,13 @@ function goPage(p){if(p<1)return;filters.page=p;fetchResults();window.scrollTo({
 async function loadStats(){
   try{
     const r=await fetch(`${SB}/kosha_safety_materials?select=category&limit=1`,{headers:{...H,'Prefer':'count=exact'}});
-    const total=parseInt(r.headers.get('content-range')?.split('/')[1]||'0');
+    const total=parseContentTotal(r);
     document.getElementById('s-total').textContent=total.toLocaleString();
     const cats=['EDUCATION','CASE_STUDY','GUIDE','POSTER'];
     const ids=['s-edu','s-case','s-guide','s-poster'];
     for(let i=0;i<cats.length;i++){
       const cr=await fetch(`${SB}/kosha_safety_materials?select=id&category=eq.${cats[i]}&limit=1`,{headers:{...H,'Prefer':'count=exact'}});
-      document.getElementById(ids[i]).textContent=parseInt(cr.headers.get('content-range')?.split('/')[1]||'0').toLocaleString();
+      document.getElementById(ids[i]).textContent=parseContentTotal(cr).toLocaleString();
     }
   }catch(e){}
 }
