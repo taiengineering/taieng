@@ -22,11 +22,31 @@
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
   #saas-page .pat-hero {
-    min-height: 420px; background: linear-gradient(135deg, #0f2b4a, #1565c0);
+    min-height: clamp(560px, 80vh, 720px);
+    background: #0f172a;
     position: relative; display: flex; align-items: center; overflow: hidden;
-    padding: 120px 0 60px;
+    padding: 0;
   }
-  #saas-page .pat-hero .container { position: relative; z-index: 2; }
+  #saas-page .pat-hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas1.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  #saas-page .pat-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(15,23,42,0.80) 0%,
+      rgba(15,23,42,0) 100%
+    );
+  }
+  #saas-page .pat-hero-inner {
+    position: relative; z-index: 2;
+    padding-top: calc(var(--tai-nav-h, 90px) + 44px);
+    padding-bottom: 68px;
+  }
   #saas-page .pat-eyebrow {
     display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
     color: rgba(255,255,255,.92); border-radius: 999px; padding: 6px 18px; font-size: .74rem; font-weight: 800;
@@ -296,6 +316,8 @@
   #saas-page .sp-arrow { font-size:1.3rem; color:rgba(255,255,255,.35); }
 
   @media(max-width:991px) {
+    #saas-page .pat-hero { min-height: auto; }
+    #saas-page .pat-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 24px); padding-bottom: 48px; }
     #saas-page .feat-visual { max-width: 100%; }
     #saas-page .feat-pair .feat-info { min-width: 0; }
     #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 28px; }
@@ -384,15 +406,21 @@
   <div id="saas-page">
   <!-- ① 히어로 -->
   <section class="pat-hero">
-    <div class="container">
-      <span class="pat-eyebrow">법령기반 산업안전 운영 플랫폼</span>
-      <h1>법령을 진단하면,
-운영이 시작됩니다.</h1>
-      <p class="pat-hero-sub">무료 법령진단으로 법적 의무를 확인하세요.
-TAI Safe가 점검·알림·증빙·보고까지 이어받습니다.</p>
-      <div class="sp-hero-btns">
-        <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작 →</a>
-        <a href="#screen-mocks" class="sp-btn-secondary">화면 둘러보기 ↓</a>
+    <div class="pat-hero-bg"></div>
+    <div class="pat-hero-overlay"></div>
+    <div class="container pat-hero-inner">
+      <div class="row">
+        <div class="col-lg-7 col-xl-6">
+          <span class="pat-eyebrow">법령기반 산업안전 운영 플랫폼</span>
+          <h1>TAI를 쓰기 전과 후,
+현장은 두 가지로 나뉩니다.</h1>
+          <p class="pat-hero-sub">한쪽은 사고가 나야 알 수 있고,
+한쪽은 사고 전에 막을 수 있습니다.</p>
+          <div class="sp-hero-btns">
+            <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작 →</a>
+            <a href="#screen-mocks" class="sp-btn-secondary">화면 둘러보기 ↓</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
