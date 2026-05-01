@@ -30,18 +30,16 @@
   #saas-page .pat-hero-bg {
     position: absolute; inset: 0;
     background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas1.png');
-    background-size: auto 100%;
-    background-position: right center;
+    background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
   }
   #saas-page .pat-hero-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(
       90deg,
-      rgba(15,23,42,0.96) 0%,
-      rgba(15,23,42,0.92) 30%,
-      rgba(15,23,42,0.40) 55%,
-      rgba(15,23,42,0) 75%
+      rgba(15,23,42,0.80) 0%,
+      rgba(15,23,42,0) 100%
     );
   }
   #saas-page .pat-hero-inner {
@@ -320,8 +318,6 @@
   @media(max-width:991px) {
     #saas-page .pat-hero { min-height: auto; }
     #saas-page .pat-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 24px); padding-bottom: 48px; }
-    #saas-page .pat-hero-bg { background-size: cover; background-position: right top; opacity: .35; }
-    #saas-page .pat-hero-overlay { background: linear-gradient(180deg, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.92) 100%); }
     #saas-page .feat-visual { max-width: 100%; }
     #saas-page .feat-pair .feat-info { min-width: 0; }
     #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 28px; }
