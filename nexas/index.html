@@ -17,60 +17,49 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link rel="stylesheet" href="assets/css/tai-brand.css">
-    <link rel="stylesheet" href="assets/css/tai-hero-fix.css">
+    <link rel="stylesheet" href="assets/css/tai-main.css">
+    <link rel="stylesheet" href="assets/css/tai-hero.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    .hero-split {
-        display: flex; align-items: stretch;
-        min-height: 420px;
-        background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
-        overflow: hidden; position: relative;
+    /* ── 인덱스 히어로 전용 오버라이드 ── */
+    #index-hero .tai-hero__bg {
+        background-position: right center;
+        filter: brightness(0.88) saturate(0.75) contrast(1.02);
     }
-    .hero-left {
-        flex: 0 0 40%; display: flex; align-items: center;
-        padding: 56px 48px 56px 80px; position: relative; z-index: 2;
+    #index-hero .tai-hero__inner {
+        max-width: 560px;
+        min-height: 500px;
     }
-    .hero-left::after {
-        content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 120px;
-        background: linear-gradient(to right, transparent 0%, rgba(21,101,192,.08) 60%, rgba(21,101,192,.18) 100%);
-        z-index: -1; pointer-events: none;
+    #index-hero .tai-hero__title {
+        font-size: clamp(2.2rem, 5vw, 3.4rem);
+        line-height: 1.16;
     }
-    .hero-left-inner { max-width: 520px; }
-    .hero-eyebrow {
-        display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .06em;
-        color: #fff; background: transparent;
-        border: 1.5px solid rgba(255,255,255,.55); border-radius: 8px;
-        padding: 7px 18px; margin-bottom: 18px;
+    .idx-hero-badge {
+        position: absolute;
+        bottom: 24px;
+        right: 20px;
+        z-index: 3;
+        background: rgba(10, 20, 40, .72);
+        border: 1px solid rgba(255,255,255,.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 8px 14px;
+        color: rgba(255,255,255,.75);
+        font-size: .72rem;
+        line-height: 1.5;
     }
-    .hero-h1 {
-        font-size: 3.2rem; font-weight: 900; line-height: 1.18;
-        color: #fff; margin-bottom: 20px;
-        letter-spacing: -.03em; text-shadow: 0 2px 16px rgba(0,0,0,.18);
+    .idx-hero-badge strong {
+        display: block;
+        color: #fca5a5;
+        font-size: .76rem;
+        margin-bottom: 2px;
     }
-    .hero-desc { font-size: .95rem; color: rgba(255,255,255,.88); line-height: 1.75; margin-bottom: 28px; }
-    .hero-btn-main {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: #fff; color: #0f2b4a;
-        font-size: .95rem; font-weight: 800;
-        padding: 14px 28px; border-radius: 10px; text-decoration: none;
-        transition: background .2s, transform .15s, box-shadow .2s;
-        box-shadow: 0 4px 20px rgba(0,0,0,.15);
+    @media (max-width: 575px) {
+        .idx-hero-badge { display: none; }
     }
-    .hero-btn-main:hover { background: #f0f6ff; color: #0a1f38; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.2); }
-    .hero-right { flex: 0 0 60%; position: relative; overflow: hidden; }
-    .hero-img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; filter: brightness(0.92) saturate(0.75) contrast(1.02); }
-    .hero-right::before {
-        content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-        background: linear-gradient(to right, rgba(10,25,50,0.52) 0%, rgba(15,43,74,0.30) 12%, rgba(21,101,192,0.12) 25%, rgba(21,101,192,0.04) 40%, transparent 60%);
-    }
-    .hero-right::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, transparent, rgba(15,43,74,.10)); }
-    .hero-badge { position: absolute; bottom: 20px; right: 16px; z-index: 2; background: rgba(10,20,40,.72); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(10px); border-radius: 10px; padding: 8px 14px; color: rgba(255,255,255,.75); font-size: .72rem; line-height: 1.5; }
-    .hero-badge strong { display: block; color: #fca5a5; font-size: .76rem; margin-bottom: 2px; }
-    @media (max-width: 1200px) { .hero-h1 { font-size: 2.6rem; } .hero-left { padding-top: 48px; padding-bottom: 48px; padding-right: 36px; } }
-    @media (max-width: 991px) { .hero-split { flex-direction: column; min-height: auto; } .hero-left { flex: none; } .hero-left::after { display: none; } .hero-right { flex: none; height: 280px; } .hero-h1 { font-size: 2.4rem; } }
-    @media (max-width: 575px) { .hero-h1 { font-size: 2.1rem; } }
 
     /* ═══ 역할 배너 섹션 ═══ */
     .role-banner-area { background: #f1f5f9; padding: 80px 0 70px; }
@@ -109,18 +98,21 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <section class="hero-split">
-        <div class="hero-left">
-            <div class="hero-left-inner">
-                <span class="hero-eyebrow">법령기반 산업안전 운영 플랫폼</span>
-                <h1 class="hero-h1">아직도 엑셀로<br>안전관리<br>하십니까?</h1>
-                <p class="hero-desc">종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>3분 무료 진단으로 지금 바로 시작할 수 있습니다.</p>
-                <a class="hero-btn-main" href="free-diagnosis.html">우리도 법령위반인지 확인하기 →</a>
+    <section class="tai-hero tai-hero--image" id="index-hero">
+        <div class="tai-hero__bg" style="background-image:url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png')"></div>
+        <div class="tai-hero__overlay tai-hero__overlay--left"></div>
+        <div class="container">
+            <div class="tai-hero__inner">
+                <span class="tai-hero__eyebrow">법령기반 산업안전 운영 플랫폼</span>
+                <h1 class="tai-hero__title">아직도 엑셀로<br>안전관리<br><span class="accent">하십니까?</span></h1>
+                <p class="tai-hero__sub">종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>3분 무료 진단으로 지금 바로 시작할 수 있습니다.</p>
+                <div class="tai-hero__cta">
+                    <a class="tai-btn-pri" href="free-diagnosis.html">우리도 법령위반인지 확인하기 →</a>
+                </div>
             </div>
         </div>
-        <div class="hero-right">
-            <img class="hero-img" src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png" alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습" loading="eager">
-            <div class="hero-badge"><strong>Before TAI Safe</strong>엑셀 + 종이서류로 혼자 버팀</div>
+        <div class="idx-hero-badge">
+            <strong>Before TAI Safe</strong>엑셀 + 종이서류로 혼자 버팀
         </div>
     </section>
 
