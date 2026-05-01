@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.3 (2026-05-01): 파비콘 전역 세팅 추가 (favicon.svg)
  * v3.5.2 (2026-05-01): fixed 헤더 텍스트/버튼 색상 수정 (다크 네이비 배경 대응)
  * v3.5.1 (2026-05-01): 마이페이지 경로 버그 수정 (/mypage/ trailing slash 처리)
  * v3.5.0 (2026-05-01): 안전정보 메뉴 4섹션 재구성 + 모바일 로고 수정
@@ -267,6 +268,20 @@
     });
   }
 
+  /* ── 파비콘 전역 세팅 (모든 페이지 적용) ── */
+  function setFavicon() {
+    try {
+      var favicon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
+      if (!favicon) {
+        favicon = document.createElement('link');
+        favicon.rel = 'icon';
+        document.head.appendChild(favicon);
+      }
+      favicon.type = 'image/svg+xml';
+      favicon.href = base + 'assets/img/favicon.svg';
+    } catch (e) {}
+  }
+
   var html = [
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
@@ -349,6 +364,7 @@
       rightPh.outerHTML = buildNavRight();
     }
     bindLogout();
+    setFavicon();
   }
 
   if (document.readyState === 'loading') {
