@@ -131,6 +131,44 @@
       #fs2 .fs2-flow-svg-d{display:none!important;}
       #fs2 .fs2-flow-svg-m{display:block!important;}
     }
+
+    /* 첫 히어로 전용 — 배경 이미지 방식 (다른 .fs2-a 섹션에는 영향 없음) */
+    #fs2 #fs2-top {
+      background: #080f1c;
+      padding: 0;
+    }
+    #fs2 #fs2-top::before { display: none; }
+    #fs2 .fs2-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safety-staff.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+    #fs2 .fs2-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(8,15,28,0.80) 0%,
+        rgba(8,15,28,0) 100%
+      );
+      z-index: 0;
+    }
+    #fs2 #fs2-top .fs2-inner {
+      min-height: clamp(560px, 80vh, 720px);
+      padding-top: calc(var(--tai-nav-h, 90px) + 44px);
+      padding-bottom: 68px;
+      position: relative;
+      z-index: 1;
+    }
+    @media(max-width:991px) {
+      #fs2 #fs2-top .fs2-inner {
+        min-height: auto;
+        padding-top: calc(var(--tai-nav-h, 90px) + 24px);
+        padding-bottom: 48px;
+      }
+    }
   </style>
 </head>
 <body class="sc5 home-2">
@@ -145,6 +183,8 @@
 
   <!-- 1 [A] -->
   <section class="fs2-sec fs2-a" id="fs2-top">
+    <div class="fs2-hero-bg"></div>
+    <div class="fs2-hero-overlay"></div>
     <div class="fs2-inner">
       <h1>안전관리,<br>혼자 다 하고 계시죠?</h1>
       <p class="lead">당신이 못해서가 아닙니다.<br>구조가 그렇게 되어 있는 겁니다.</p>
