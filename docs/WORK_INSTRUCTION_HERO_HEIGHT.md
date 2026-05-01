@@ -1,128 +1,173 @@
-# 작업지시서: 전체 페이지 히어로 높이 통일
+# 작업지시서: 히어로 높이 통일 + 탑 네비게이션 정비
 
-## 기준
+## 작업 범위 2가지
 
-`service/diagnosis.html`의 `.diag-hero` 섹션을 기준으로 통일합니다.
+### A. 히어로 높이 통일 (안전정보 4개 페이지 제외)
+### B. 스크롤 시 탑 배경색 통일 + 탑 없는 페이지에 탑 추가 (전체 페이지)
 
-### 기준 히어로 스펙 (diagnosis)
+---
+
+## A. 히어로 높이 통일
+
+### 기준: `service/diagnosis.html` (.diag-hero)
 ```css
-/* 기준값 */
 min-height: 420px;
-padding-top: 80px;     /* navbar 90px 고려 */
+padding-top: 80px;
 padding-bottom: 60px;
-/* 실제 렌더링 높이: ~617px */
+/* navbar 높이: --tai-nav-h: 90px */
 ```
 
-### navbar 높이
-```
---tai-nav-h: 90px;
-```
+### ⚠️ 제외 (현재 상태 유지)
+아래 4개 페이지는 히어로 높이를 수정하지 마세요:
+- `safety-news.html` — 검색 중심 페이지, 현재 높이 유지
+- `accident-cases.html` — 검색 중심 페이지, 현재 높이 유지
+- `law-updates.html` — 2칸 레이아웃, 현재 높이 유지
+- `precedent-search.html` — 검색 중심 페이지, 현재 높이 유지
 
-## 공통 CSS 클래스 추가 (`tai-main.css` 또는 인라인)
+### 수정 대상 페이지
 
-모든 페이지의 히어로에 아래 공통 스타일을 적용하세요:
+| # | 페이지 | 히어로 클래스 | 현재 min-height | 수정 |
+|---|---|---|---|---|
+| 1 | `index.html` | `.hero-split` | 420px | padding 확인만 |
+| 2 | `service/diagnosis.html` | `.diag-hero` | 420px | **수정 금지 (기준)** |
+| 3 | `service/saas.html` | `.pat-hero` | 420px | padding 확인 |
+| 4 | `for-business-owner.html` | `.owner-hero-section` | **520px** | → **420px** |
+| 5 | `for-safety-manager.html` | (인라인) | 없음 | → **420px 추가** |
+| 6 | `for-expert.html` | (인라인) | 420px | padding 확인 |
+| 7 | `for-repair.html` | 확인 필요 | - | → **420px** |
+| 8 | `for-agency.html` | 확인 필요 | - | → **420px** |
+| 9 | `for-consultant.html` | 확인 필요 | - | → **420px** |
+| 10 | `target/building.html` | 확인 필요 | - | → **420px** |
+| 11 | `target/factory.html` | 확인 필요 | - | → **420px** |
+| 12 | `target/construction.html` | 확인 필요 | - | → **420px** |
+| 13 | `pricing.html` | 확인 필요 | - | → **420px** |
 
+### 각 페이지에서 히어로 CSS를 찾아 아래 값으로 통일:
 ```css
-/* 히어로 통일 높이 420px, padding-top 80px (nav 90px 고려) */
-.tai-hero-standard {
-  min-height: 420px;
-  padding-top: 80px;
-  padding-bottom: 60px;
-}
+min-height: 420px;
+padding-top: 80px;
+padding-bottom: 60px;
+```
+
+### 모바일 반응형
+```css
 @media(max-width:991px) {
-  .tai-hero-standard {
-    min-height: auto;
-    padding-top: calc(var(--tai-nav-h, 90px) + 24px);
-    padding-bottom: 40px;
-  }
+  min-height: auto;
+  padding-top: calc(var(--tai-nav-h, 90px) + 24px);
+  padding-bottom: 40px;
 }
 @media(max-width:575px) {
-  .tai-hero-standard {
-    padding-top: calc(var(--tai-nav-h, 90px) + 16px);
-    padding-bottom: 32px;
-  }
+  padding-top: calc(var(--tai-nav-h, 90px) + 16px);
+  padding-bottom: 32px;
 }
 ```
 
-## 페이지별 수정 내역
+### 텍스트/이미지 조정
+- 히어로 높이가 줄어든 페이지(for-business-owner 520→420 등)는 h1 font-size나 간격 미세 조정
+- 이미지 컨테이너도 420px에 맞춤
 
-### 1. index.html (홈)
-- **현재:** `.hero-split` — min-height: 420px → 이미 맞음
-- **확인만:** padding-top이 80px인지 확인, 아니면 조정
+---
 
-### 2. service/diagnosis.html (법령진단) — 기준 페이지
-- **현재:** `.diag-hero` — min-height: 420px, padding: 80px 0 60px ✅
-- **수정 불필요** (기준)
+## B. 스크롤 시 탑 배경색 통일 (전체 페이지 대상)
 
-### 3. service/saas.html (SaaS)
-- **현재:** `.pat-hero` — min-height: 420px → 맞음
-- **확인:** padding-top 80px, padding-bottom 60px으로 조정
+### 현재 문제
+- `style.css`에서 `.navbar-area-fixed`의 배경: `rgba(var(--main-color-opacity), 0.8)`
+- 페이지마다 `--main-color-opacity` 값이 다르거나 미정의 → 배경이 투명하게 보이는 경우 발생
+- 스크롤 시 로고, 메뉴 텍스트가 콘텐츠와 겹쳐 안 보임
 
-### 4. for-business-owner.html (사업주)
-- **현재:** `.owner-hero-section` + `.owner-hero-left-col` — min-height: **520px** ❌
-- **수정:** min-height: **420px**, padding: 80px 48px 60px 80px
-- **우측 이미지:** `.owner-hero-right-col` min-height도 420px로 맞춤
-- **모바일:** min-height: auto, padding 조정
+### 통일 기준
+스크롤 시 navbar 고정 배경: **navy gradient** (diagnosis 페이지와 동일)
 
-### 5. for-safety-manager.html (안전관리자)
-- **현재:** 히어로 클래스명 없음 (Vuexy 템플릿 인라인 스타일 사용)
-- **수정:** 히어로 섹션에 min-height: 420px, padding-top: 80px, padding-bottom: 60px 적용
-- **주의:** body class에 `home-X` 같은 Vuexy 테마 클래스가 있으면 제거 (보라색 이슈 발생)
+### 수정 방법
 
-### 6. for-expert.html (전문가)
-- **현재:** min-height: 420px → 맞음
-- **확인:** padding-top 80px 맞추기
+`tai-main.css`에 아래 CSS를 추가하세요 (style.css의 변수 의존을 override):
 
-### 7. for-repair.html (수선연결)
-- **현재:** 확인 필요
-- **수정:** 히어로 섹션 min-height: 420px, padding-top: 80px, padding-bottom: 60px
+```css
+/* ── 스크롤 시 탑 배경색 통일 ── */
+.navbar-area.navbar-area-fixed {
+  background: rgba(15, 43, 74, 0.92) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
 
-### 8. for-agency.html (선임연결)
-- **현재:** 확인 필요
-- **수정:** 동일
+/* 고정 시 로고 텍스트 색상 — 흰색 배경이면 navy, navy 배경이면 흰색 */
+.navbar-area.navbar-area-fixed .tai-logo-text {
+  color: #fff !important;
+  text-shadow: none;
+}
 
-### 9. for-consultant.html (컨설팅)
-- **현재:** 확인 필요
-- **수정:** 동일
+/* 고정 시 메뉴 텍스트 색상 */
+.navbar-area.navbar-area-fixed .navbar-nav > li > a {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
 
-### 10. safety-news.html (안전자료)
-- **현재:** `.sh-hero` — padding: calc(var(--tai-nav-h,90px) + 40px) 0 48px
-- **수정:** min-height: 420px 추가, padding-top: 80px, padding-bottom: 60px
-- **검색바 위치:** 힅어로 내 아래쪽으로 자연스럽게 배치
+/* 고정 시 우측 버튼 */
+.navbar-area.navbar-area-fixed .tai-nav-btn-outline {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.navbar-area.navbar-area-fixed .tai-nav-btn-solid {
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  color: #0f2b4a !important;
+  background: #fff !important;
+}
+.navbar-area.navbar-area-fixed button.tai-logout-btn {
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+```
 
-### 11. accident-cases.html (재해사례)
-- **현재:** `.ac-hero` — padding: calc(var(--tai-nav-h,90px) + 40px) 0 48px
-- **수정:** min-height: 420px 추가, padding-top: 80px, padding-bottom: 60px
+### 적용 범위
+- 이 CSS는 `tai-main.css`에 한 번만 추가하면 **모든 페이지**에 자동 적용됩니다
+- 안전정보 4개 페이지 포함, 전체 사이트에 적용
 
-### 12. law-updates.html (개정법령)
-- **현재:** 2칸 스플릿 레이아웃, 좌측이 히어로 역할
-- **수정:** 좌측 패널의 상단 영역을 420px 높이에 맞춰 padding 조정
+---
 
-### 13. precedent-search.html (판례검색)
-- **현재:** 확인 필요
-- **수정:** min-height: 420px, padding-top: 80px, padding-bottom: 60px
+## C. 탑(네비게이션) 없는 페이지에 탑 추가
 
-### 14. target/building.html, target/factory.html, target/construction.html
-- **현재:** 확인 필요
-- **수정:** 동일
+### 확인 방법
+모든 HTML 파일에서 아래 2개가 있는지 확인:
+1. `<div id="tai-header"></div>` (body 시작 부분)
+2. `<script src="assets/js/header.js"></script>` (body 끝 부분)
 
-## 작업 방법
+### 없으면 추가
+```html
+<!-- body 시작 직후 -->
+<div class="preloader" id="preloader">...</div>
+<div class="body-overlay" id="body-overlay"></div>
+<div id="tai-header"></div>
 
-1. 각 페이지의 히어로 섹션을 열고
-2. 인라인 `<style>` 또는 CSS에서 히어로 관련 스타일 찾기
-3. 아래 값으로 통일:
-   ```
-   min-height: 420px;
-   padding-top: 80px;
-   padding-bottom: 60px;
-   ```
-4. 모바일 반응형은 각 페이지의 기존 브레이크포인트를 유지하되, padding-top은 `calc(var(--tai-nav-h, 90px) + 16px~24px)` 사용
-5. 텍스트가 쟘리거나 넘치는 경우 font-size 또는 h1 line-height 조정
-6. 이미지가 있는 히어로 (사업주, 진단 등)는 이미지 컨테이너도 420px에 맞춤
+<!-- body 종료 직전 -->
+<div id="tai-footer"></div>
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+```
+
+### 확인 대상 페이지
+아래 페이지들에서 `tai-header`가 없는지 확인:
+- `connect.html`
+- `faq.html`
+- `contact.html`
+- `privacy.html`
+- `terms.html`
+- `delete-account.html`
+- `patents.html`
+- `sign-up.html`
+- `log-in.html`
+- `about.html`
+- `showcase.html`
+
+---
 
 ## 주의사항
 
 - **diagnosis.html은 수정하지 마세요** (기준 페이지)
-- `tai-brand.css` body class `home-X`가 있으면 제거해야 보라색 이슈 안 남
+- **안전정보 4개 페이지 히어로 높이는 수정하지 마세요** (B의 탑 배경색만 적용)
+- `tai-brand.css` body class `home-X`가 있으면 제거 (보라색 이슈)
 - header.js, footer.js는 수정하지 마세요
 - git push origin main → Cloudflare 자동배포
