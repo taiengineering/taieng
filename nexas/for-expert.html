@@ -31,6 +31,7 @@
       overflow: hidden;
       background: #0a0f1a;
       color: #fff;
+      padding: 0; /* fe2-sec 패딩 오버라이드 — 섹션이 y=0부터 시작 */
     }
 
     #fe2 .fe2-a-bg {
@@ -59,9 +60,10 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      min-height: 420px;
-      padding-top: 56px;
-      padding-bottom: 56px;
+      min-height: clamp(560px, 80vh, 720px);
+      /* nav(90px) + 여백(44px) — 텍스트가 네비 아래 배치 */
+      padding-top: calc(var(--tai-nav-h, 90px) + 44px);
+      padding-bottom: 64px;
       gap: 40px;
     }
 
@@ -126,9 +128,9 @@
     }
 
     #fe2 .fe2-a-bubbles {
-      flex: 0 0 280px;
+      flex: 0 0 300px;
       position: relative;
-      min-height: 360px;
+      min-height: 460px;
       pointer-events: none;
     }
 
@@ -165,11 +167,11 @@
       font-weight: 700;
     }
 
-    /* 버블 위치 — 우상단에서 좌하단으로 대각선 계단 */
-    #fe2 .fe2-bubble-1 { right: -10px; top: 20px;  animation: fe2Float 3s ease-in-out infinite; }
-    #fe2 .fe2-bubble-2 { right: -40px; top: 120px; animation: fe2Float 3s ease-in-out infinite 0.6s; }
-    #fe2 .fe2-bubble-3 { right: -10px; top: 220px; animation: fe2Float 3s ease-in-out infinite 1.2s; }
-    #fe2 .fe2-bubble-4 { right: -50px; top: 310px; animation: fe2Float 3s ease-in-out infinite 1.8s; }
+    /* 버블 위치 — 460px 높이에 균등 배분 */
+    #fe2 .fe2-bubble-1 { right:  0px; top:  20px; animation: fe2Float 3s ease-in-out infinite; }
+    #fe2 .fe2-bubble-2 { right: -30px; top: 135px; animation: fe2Float 3s ease-in-out infinite 0.6s; }
+    #fe2 .fe2-bubble-3 { right:  0px; top: 250px; animation: fe2Float 3s ease-in-out infinite 1.2s; }
+    #fe2 .fe2-bubble-4 { right: -30px; top: 365px; animation: fe2Float 3s ease-in-out infinite 1.8s; }
 
     @keyframes fe2Float {
       0%, 100% { opacity: 0.65; transform: translateY(0); }
@@ -180,7 +182,7 @@
       #fe2 .fe2-a .fe2-inner.fe2-a-layout {
         flex-direction: column;
         min-height: auto;
-        padding-top: 44px;
+        padding-top: calc(var(--tai-nav-h, 90px) + 24px);
         padding-bottom: 36px;
       }
 
