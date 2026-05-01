@@ -21,39 +21,95 @@
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
+  /* ===== HERO — 4:6 split (text panel | image+timeline panel) ===== */
   #saas-page .pat-hero {
     min-height: clamp(560px, 80vh, 720px);
     background: #0f172a;
-    position: relative; display: flex; align-items: center; overflow: hidden;
+    position: relative; overflow: hidden;
     padding: 0;
   }
-  #saas-page .pat-hero-bg {
-    position: absolute; inset: 0;
-    background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas1.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+  #saas-page .pat-hero-grid {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    min-height: clamp(560px, 80vh, 720px);
+    width: 100%;
   }
-  #saas-page .pat-hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(
-      90deg,
-      rgba(15,23,42,0.80) 0%,
-      rgba(15,23,42,0) 100%
-    );
+  #saas-page .pat-hero-text {
+    background: linear-gradient(135deg,#0a0f1a 0%,#0f172a 50%,#1e293b 100%);
+    display: flex; align-items: center;
+    padding: calc(var(--tai-nav-h, 90px) + 44px) clamp(28px,4vw,64px) 68px;
+    position: relative;
   }
-  #saas-page .pat-hero-inner {
-    position: relative; z-index: 2;
-    padding-top: calc(var(--tai-nav-h, 90px) + 44px);
-    padding-bottom: 68px;
+  #saas-page .pat-hero-text::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 30% 20%, rgba(26,95,212,.20), transparent);
+    pointer-events: none;
   }
+  #saas-page .pat-hero-text-inner { position: relative; z-index: 2; width: 100%; }
+  #saas-page .pat-hero-image {
+    background: linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%);
+    position: relative; display: flex; flex-direction: column;
+    padding: calc(var(--tai-nav-h, 90px) + 24px) clamp(20px,2.5vw,36px) 28px;
+    overflow: hidden;
+  }
+  #saas-page .pat-hero-topline {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(8px,1.5vw,18px); margin-bottom: 6px;
+  }
+  #saas-page .pat-hero-topline .label {
+    font-size: clamp(.78rem,1.4vw,.98rem); font-weight: 800; white-space: nowrap;
+  }
+  #saas-page .pat-hero-topline .label.before { color: #64748b; }
+  #saas-page .pat-hero-topline .label.after { color: #1A5FD4; }
+  #saas-page .pat-hero-topline .logo {
+    width: clamp(40px,5vw,52px); height: clamp(40px,5vw,52px);
+    background: linear-gradient(135deg,#0f172a 0%,#1A5FD4 100%);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 900;
+    font-size: clamp(.78rem,1.3vw,.92rem); letter-spacing: .04em;
+    box-shadow: 0 6px 20px rgba(26,95,212,.35), 0 1px 3px rgba(0,0,0,.1);
+  }
+  #saas-page .pat-hero-image-wrap {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    min-height: 0; padding: 4px 0;
+  }
+  #saas-page .pat-hero-image-wrap img {
+    width: 100%; height: 100%; max-height: 420px;
+    object-fit: contain; object-position: center;
+  }
+  #saas-page .pat-hero-timeline {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+    position: relative; padding-top: 18px;
+  }
+  #saas-page .pat-hero-timeline::before {
+    content: ''; position: absolute; top: 7px; left: 10%; right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg,#cbd5e1 0%,#cbd5e1 55%,#1A5FD4 100%);
+  }
+  #saas-page .pat-hero-tl-item { text-align: center; position: relative; }
+  #saas-page .pat-hero-tl-item::before {
+    content: ''; position: absolute; top: -18px; left: 50%; transform: translateX(-50%);
+    width: 14px; height: 14px; background: #fff; border: 2px solid #94a3b8;
+    border-radius: 50%; box-shadow: 0 0 0 3px #fff;
+  }
+  #saas-page .pat-hero-tl-item.future::before { border-color: #1A5FD4; background: #1A5FD4; }
+  #saas-page .pat-hero-tl-year {
+    font-size: clamp(.7rem,1.1vw,.82rem); font-weight: 800;
+    color: #0f172a; margin-bottom: 3px; margin-top: 4px;
+  }
+  #saas-page .pat-hero-tl-item.future .pat-hero-tl-year { color: #1A5FD4; }
+  #saas-page .pat-hero-tl-desc {
+    font-size: clamp(.58rem,.9vw,.68rem); color: #64748b; line-height: 1.35;
+  }
+
   #saas-page .pat-eyebrow {
     display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
     color: rgba(255,255,255,.92); border-radius: 999px; padding: 6px 18px; font-size: .74rem; font-weight: 800;
     letter-spacing: .06em; margin-bottom: 18px;
   }
   #saas-page .pat-hero h1 {
-    font-size: clamp(2rem, 5vw, 3.35rem); font-weight: 900; color: #fff; line-height: 1.18; margin-bottom: 14px; letter-spacing: -.02em; white-space: pre-line;
+    font-size: clamp(1.85rem, 4.2vw, 3rem); font-weight: 900; color: #fff; line-height: 1.18; margin-bottom: 14px; letter-spacing: -.02em; white-space: pre-line;
   }
   #saas-page .pat-hero-sub { font-size: clamp(.9rem, 2vw, 1.05rem); color: rgba(255,255,255,.78); line-height: 1.75; margin-bottom: 28px; max-width: 560px; white-space: pre-line; }
   #saas-page .sp-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -317,7 +373,11 @@
 
   @media(max-width:991px) {
     #saas-page .pat-hero { min-height: auto; }
-    #saas-page .pat-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 24px); padding-bottom: 48px; }
+    #saas-page .pat-hero-grid { grid-template-columns: 1fr; min-height: auto; }
+    #saas-page .pat-hero-text { padding: calc(var(--tai-nav-h, 90px) + 24px) 20px 32px; }
+    #saas-page .pat-hero-image { padding: 24px 16px 28px; }
+    #saas-page .pat-hero-image-wrap img { max-height: 240px; }
+    #saas-page .pat-hero-tl-desc { font-size: .56rem; }
     #saas-page .feat-visual { max-width: 100%; }
     #saas-page .feat-pair .feat-info { min-width: 0; }
     #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 28px; }
@@ -333,6 +393,13 @@
   @media(max-width:768px) {
     #saas-page .sp-sec { padding: 64px 0; }
     #saas-page .feat-pair { padding: 52px 0; }
+  }
+  @media(max-width:575px) {
+    #saas-page .pat-hero-timeline { gap: 2px; }
+    #saas-page .pat-hero-topline { flex-wrap: wrap; }
+    #saas-page .pat-hero-tl-year { font-size: .65rem; }
+    #saas-page .pat-hero-tl-desc { font-size: .52rem; }
+    #saas-page .pat-hero-image-wrap img { max-height: 180px; }
   }
 
 
@@ -404,13 +471,12 @@
   <div id="tai-header"></div>
 
   <div id="saas-page">
-  <!-- ① 히어로 -->
+  <!-- ① 히어로 — 4:6 split (text | 인물진화 + 타임라인) -->
   <section class="pat-hero">
-    <div class="pat-hero-bg"></div>
-    <div class="pat-hero-overlay"></div>
-    <div class="container pat-hero-inner">
-      <div class="row">
-        <div class="col-lg-7 col-xl-6">
+    <div class="pat-hero-grid">
+      <!-- LEFT: 텍스트 패널 (40%) -->
+      <div class="pat-hero-text">
+        <div class="pat-hero-text-inner">
           <span class="pat-eyebrow">법령기반 산업안전 운영 플랫폼</span>
           <h1>TAI를 쓰기 전과 후,
 현장은 두 가지로 나뉩니다.</h1>
@@ -419,6 +485,41 @@
           <div class="sp-hero-btns">
             <a href="../free-diagnosis.html" class="sp-btn-primary">무료 법령진단 시작 →</a>
             <a href="#screen-mocks" class="sp-btn-secondary">화면 둘러보기 ↓</a>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT: 이미지 + 타임라인 패널 (60%) -->
+      <div class="pat-hero-image">
+        <div class="pat-hero-topline">
+          <span class="label before">← TAI 도입 전</span>
+          <div class="logo">TAI</div>
+          <span class="label after">TAI 도입 후 →</span>
+        </div>
+        <div class="pat-hero-image-wrap">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas4.png"
+               alt="TAI 도입 전후 — 안전관리의 진화"
+               loading="eager">
+        </div>
+        <div class="pat-hero-timeline">
+          <div class="pat-hero-tl-item">
+            <div class="pat-hero-tl-year">조선시대</div>
+            <div class="pat-hero-tl-desc">수기 중심<br>경험 의존</div>
+          </div>
+          <div class="pat-hero-tl-item">
+            <div class="pat-hero-tl-year">1950년대</div>
+            <div class="pat-hero-tl-desc">수기 기록<br>수동 관리</div>
+          </div>
+          <div class="pat-hero-tl-item">
+            <div class="pat-hero-tl-year">1980년대</div>
+            <div class="pat-hero-tl-desc">문서·장부<br>아날로그 관리</div>
+          </div>
+          <div class="pat-hero-tl-item future">
+            <div class="pat-hero-tl-year">2020년대</div>
+            <div class="pat-hero-tl-desc">전산화·디지털<br>분산된 관리</div>
+          </div>
+          <div class="pat-hero-tl-item future">
+            <div class="pat-hero-tl-year">2030년대</div>
+            <div class="pat-hero-tl-desc">AI·자동화<br>지능형 통합 관리</div>
           </div>
         </div>
       </div>
