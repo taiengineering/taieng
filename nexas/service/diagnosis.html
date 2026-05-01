@@ -41,16 +41,34 @@
   .sec-desc { font-size: .95rem; color: #64748b; line-height: 1.8; }
   .sec-desc.white { color: rgba(255,255,255,.78); }
 
-  /* ── S1. 히어로 ── */
+  /* ── S1. 히어로 — 배경 이미지 방식 ── */
   .diag-hero {
-    background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
-    min-height: 420px; display: flex; align-items: center;
-    padding: 130px 0 60px; position: relative; overflow: hidden;
+    background: #080f1c;
+    min-height: clamp(520px, 78vh, 700px);
+    display: flex; align-items: center;
+    padding: 0; position: relative; overflow: hidden;
   }
-  .diag-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 55% 80% at 10% 50%, rgba(255,255,255,.07) 0%, transparent 65%);
-    pointer-events: none;
+  .diag-hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/law-check2.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .diag-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(8,15,28,0.96) 0%,
+      rgba(8,15,28,0.88) 38%,
+      rgba(8,15,28,0.55) 65%,
+      rgba(8,15,28,0.08) 100%
+    );
+  }
+  .diag-hero-inner {
+    position: relative; z-index: 2;
+    padding-top: calc(var(--tai-nav-h, 90px) + 52px);
+    padding-bottom: 68px;
   }
   .diag-eyebrow {
     display: inline-block; font-size: .72rem; font-weight: 700;
@@ -79,12 +97,6 @@
     padding-bottom: 2px; transition: color .15s;
   }
   .diag-hero .btn-hero-ghost:hover { color: #fff; }
-  .diag-hero-img {
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 24px 60px rgba(10,20,40,.4), 0 0 0 1px rgba(255,255,255,.1);
-    aspect-ratio: 4/3;
-  }
-  .diag-hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* ── S2. Before 공감 ── */
   .before-section { background: #0d1117; padding: 90px 0; }
@@ -272,7 +284,8 @@
   .diag-value-small-grid .value-mini h4 { font-size: .88rem; font-weight: 800; color: var(--navy); margin: 0 0 8px; }
   .diag-value-small-grid .value-mini p { font-size: .78rem; color: #64748b; line-height: 1.55; margin: 0; }
   @media (max-width: 991px) {
-    .diag-hero { padding: 104px 0 50px; }
+    .diag-hero { min-height: auto; }
+    .diag-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 32px); padding-bottom: 48px; }
     .before-section, .after-section, .merit-section, .why-section, .price-section, .final-section, .mock-section, .saas-connect-section, .diag-faq, .diag-pilot { padding: 64px 0; }
     .after-result { margin-top: 24px; }
     .diag-flow-grid { flex-direction: column; align-items: stretch; }
@@ -292,9 +305,11 @@
 <div id="tai-header"></div>
 
 <section class="diag-hero">
-  <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-6">
+  <div class="diag-hero-bg"></div>
+  <div class="diag-hero-overlay"></div>
+  <div class="container diag-hero-inner">
+    <div class="row">
+      <div class="col-lg-7 col-xl-6">
         <span class="diag-eyebrow">법령기반 산업안전 운영 플랫폼</span>
         <h1>모르면 벌금,<br>알면 안심입니다.</h1>
         <p class="hero-sub">
@@ -305,16 +320,11 @@
           <a href="../free-diagnosis.html" class="btn-hero">무료로 지금 확인하기 →</a>
           <a href="#paid-value" class="btn-hero-ghost">유료 진단 보기 ↓</a>
         </div>
-        <p style="color:rgba(255,255,255,.5);font-size:.82rem;margin-top:14px;margin-bottom:0;">
+        <p style="color:rgba(255,255,255,.45);font-size:.82rem;margin-top:14px;margin-bottom:0;">
           건물: 주소·면적·용도 등 8항목 &nbsp;|&nbsp;
           산업: 주소·업종·인원수·면적 4항목 &nbsp;|&nbsp;
           건설: 주소·공사금액 등 4항목
         </p>
-      </div>
-      <div class="col-lg-6">
-        <div class="diag-hero-img">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/law-check2.png" alt="법령 체크리스트를 확인하는 안전관리자" loading="eager">
-        </div>
       </div>
     </div>
   </div>
