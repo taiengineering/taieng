@@ -1,0 +1,263 @@
+/**
+ * TAI Hero 표준 모듈 — tai-hero.css
+ * ───────────────────────────────────
+ * v1.0.0 (2026-05-01)
+ *
+ * 사용 방법:
+ *   <section class="tai-hero tai-hero--dark">
+ *     <div class="tai-hero__bg" style="background-image:url(이미지URL)"></div>
+ *     <div class="tai-hero__overlay tai-hero__overlay--left"></div>
+ *     <div class="container">
+ *       <div class="tai-hero__inner">
+ *         <p class="tai-hero__eyebrow">섹터명</p>
+ *         <h1 class="tai-hero__title">제목<br><span class="accent">강조</span></h1>
+ *         <p class="tai-hero__sub">서브카피</p>
+ *         <div class="tai-hero__cta">
+ *           <a href="..." class="tai-btn-pri">CTA →</a>
+ *           <a href="..." class="tai-btn-sec">도입 문의</a>
+ *         </div>
+ *       </div>
+ *     </div>
+ *   </section>
+ *
+ * 변형 클래스:
+ *   .tai-hero--dark       → 다크 그라디언트 (이미지 없이 사용 가능)
+ *   .tai-hero--image      → 배경 이미지형 (tai-hero__bg 필수)
+ *   .tai-hero__overlay--left   → 좌측 강조 오버레이
+ *   .tai-hero__overlay--center → 중앙 오버레이 (텍스트 중앙 정렬용)
+ *   .tai-hero--col2       → 좌우 2컬럼 (우측에 이미지 카드 등 배치)
+ */
+
+/* ═══════════════════════════════════════════
+   BASE: 섹션 구조
+   ─ section 자체는 padding 0, 탑에서 시작
+   ─ 내용물 패딩은 __inner에서만 처리
+   ═══════════════════════════════════════════ */
+.tai-hero {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* 배경 레이어 (이미지형에서 사용) */
+.tai-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+/* 오버레이 레이어 */
+.tai-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* container는 항상 z-index 2 */
+.tai-hero > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════
+   INNER: 실제 콘텐츠 영역
+   ─ padding-top = 네비 높이(90px) + 상단 여백(40px)
+   ─ section 배경은 0px부터, 텍스트는 130px부터
+   ═══════════════════════════════════════════ */
+.tai-hero__inner {
+  padding-top: calc(var(--tai-nav-h, 90px) + 40px);
+  padding-bottom: 60px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 2컬럼 레이아웃일 때 inner는 row로 */
+.tai-hero--col2 .tai-hero__inner {
+  flex-direction: row;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════
+   VARIANTS: 타입별 배경
+   ═══════════════════════════════════════════ */
+
+/* 타입1: 다크 그라디언트 (이미지 없이 단독 사용) */
+.tai-hero--dark {
+  background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
+}
+
+/* 타입2: 배경 이미지 (기본 어두운 베이스 + __bg 위에 오버레이) */
+.tai-hero--image {
+  background: #0a0f1a;
+}
+.tai-hero--image .tai-hero__bg {
+  opacity: 0.42;
+}
+
+/* ═══════════════════════════════════════════
+   OVERLAYS: 오버레이 스타일
+   ═══════════════════════════════════════════ */
+
+/* 좌측 텍스트 강조 (좌우 분할 레이아웃에서 사용) */
+.tai-hero__overlay--left {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 15, 26, 0.96) 0%,
+    rgba(10, 15, 26, 0.85) 40%,
+    rgba(10, 15, 26, 0.30) 75%,
+    rgba(10, 15, 26, 0.10) 100%
+  );
+}
+
+/* 전체 중앙 오버레이 (텍스트 중앙 정렬 페이지) */
+.tai-hero__overlay--center {
+  background: rgba(10, 15, 26, 0.65);
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY: 텍스트 요소
+   ═══════════════════════════════════════════ */
+
+/* 섹터/카테고리 라벨 */
+.tai-hero__eyebrow {
+  display: block;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #60a5fa;
+  margin: 0 0 14px;
+}
+
+/* 메인 헤드라인 */
+.tai-hero__title {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: clamp(1.75rem, 4.5vw, 3rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0 0 18px;
+  letter-spacing: -.02em;
+}
+
+/* 강조 색상 (헤드라인 내 <span class="accent">) */
+.tai-hero__title .accent {
+  color: #60a5fa;
+}
+
+/* 서브카피 (보더 라인 포함) */
+.tai-hero__sub {
+  font-size: clamp(.92rem, 2vw, 1.05rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, .82);
+  line-height: 1.75;
+  max-width: 38ch;
+  margin: 0 0 24px;
+  border-left: 3px solid #60a5fa;
+  padding-left: 16px;
+}
+
+/* 마이크로 카피 (선택) */
+.tai-hero__micro {
+  font-size: .82rem;
+  color: rgba(255, 255, 255, .45);
+  max-width: 44ch;
+  line-height: 1.65;
+  margin: 0 0 24px;
+}
+
+/* CTA 버튼 영역 */
+.tai-hero__cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════
+   BUTTONS: 히어로 내 CTA 버튼
+   (전역 .tai-btn-pri / .tai-btn-sec 와 동일)
+   ═══════════════════════════════════════════ */
+.tai-btn-pri {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  background: #1565c0;
+  color: #fff !important;
+  font-size: .9rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  border: none;
+  cursor: pointer;
+  transition: background .15s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.tai-btn-pri:hover {
+  background: #0f4c91;
+  color: #fff !important;
+}
+
+.tai-btn-sec {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 24px;
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255, 255, 255, .85) !important;
+  font-size: .9rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, .3);
+  cursor: pointer;
+  transition: border-color .15s;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.tai-btn-sec:hover {
+  border-color: rgba(255, 255, 255, .65);
+  color: #fff !important;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 991px) {
+  .tai-hero__inner {
+    padding-top: calc(var(--tai-nav-h, 90px) + 16px);
+    padding-bottom: 48px;
+    min-height: 380px;
+  }
+  .tai-hero__sub {
+    max-width: 100%;
+  }
+  .tai-hero--col2 .tai-hero__inner {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 575px) {
+  .tai-hero__inner {
+    min-height: 320px;
+  }
+  .tai-hero__title {
+    font-size: 1.65rem;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CLEANUP: Nexas 템플릿 잔재 제거
+   ─ .breadcrumb-area는 모든 페이지에서
+   ─ 물리적으로 HTML 삭제해야 하지만,
+   ─ 혹시 남아있을 경우 완전 숨김 처리
+   ═══════════════════════════════════════════ */
+.breadcrumb-area {
+  display: none !important;
+}
