@@ -288,7 +288,6 @@
     '              <li><a href="' + base + 'service/saas.html">SaaS \uAD6C\uB3C5</a></li>',
     '              <li><a href="' + base + 'service/education.html">\uAD50\uC721\uC0AC\uC5C5</a></li>',
     '              <li><a href="' + base + 'service/appointment.html">\uC804\uBB38\uAC00 \uB9E4\uCE6D</a></li>',
-    '              <li><a href="' + base + 'pricing.html">\uC694\uAE08\uC81C</a></li>',
     '              <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>',
     '              <li><a href="' + base + 'service/inapp.html">\uC778\uC571 \uC11C\uBE44\uC2A4</a></li>',
     '              <li><a href="' + base + 'for-repair.html">\uC218\uC120 \uC5F0\uACB0</a></li>',
