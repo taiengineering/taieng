@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe 요금제. 시설 1개 기준 SaaS 월 구독 149,000원부터(산업·건물·건설 V3). 관리자·작업자 무제한, 기능 동일. 법령진단 단건 요금은 유형별로 안내합니다.">
+  <meta name="description" content="TAI Safe 요금제. 건물·산업·건설 SaaS 구독(59,000원~)과 법령진단 단건(99,000원~). 과태료 리스크를 가장 저렴하게 해결합니다.">
   <title>요금제 | TAI 엔지니어링</title>
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/animate.min.css">
@@ -308,7 +308,8 @@
           <div class="p-row"><span class="p-label">플랜</span><span class="p-val" id="saas-modal-plan">—</span></div>
           <div class="p-row"><span class="p-label">섹터</span><span class="p-val" id="saas-modal-sector">—</span></div>
           <div class="p-row"><span class="p-label">월 요금 (VAT 별도)</span><span class="p-val p-total" id="saas-modal-price">—</span></div>
-          <div class="p-row"><span class="p-label">등록 인원</span><span class="p-val" id="saas-modal-members">무제한</span></div>
+          <div class="p-row"><span class="p-label">포함 인원</span><span class="p-val" id="saas-modal-members">10명</span></div>
+          <div class="p-row"><span class="p-label">초과 단가</span><span class="p-val">3,000원/명/월</span></div>
         </div>
         <div class="alert alert-info py-2 mb-3" style="font-size:.82rem;">
           <i class="fas fa-info-circle me-1"></i>
@@ -374,7 +375,7 @@
   <div class="container">
     <span class="price-eyebrow">💰 요금제</span>
     <h1>명확하고 <em>합리적인</em> 가격</h1>
-    <p>TAI Safe는 안전관리를 <strong style="color:#67e8f9;">직접 하게 해주는 도구</strong>입니다.<br><strong style="color:#e0f2fe;">시설 1개 기준 과금 · 관리자/작업자 무제한 · 기능 동일</strong> — 섹터별 V3 요금을 확인하세요.</p>
+    <p>TAI Safe는 안전관리를 <strong style="color:#67e8f9;">직접 하게 해주는 도구</strong>입니다.<br>건물·산업·건설 전 섹터 맞춤 요금제를 확인하세요.</p>
     <div class="price-hero-chips">
       <span class="price-hero-chip">✓ 법령 자동 적용</span>
       <span class="price-hero-chip">✓ 과태료 리스크 해소</span>
@@ -408,7 +409,7 @@
         <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
         <span class="billing-label" id="label-annual">연간 <span class="annual-badge">2개월 무료</span></span>
       </div>
-      <div class="billing-note">시설(현장) 1개당 월정액 · VAT 별도 · 등록 인원 무제한 · 기능은 모든 플랜 동일</div>
+      <div class="billing-note">사업장(시설/현장)당 월정액 · VAT 별도 · 포함 10명 초과 시 3,000원/명</div>
 
       <div class="sector-tabs">
         <button class="sector-tab-btn active" onclick="switchSectorTab('building', this)">
@@ -450,7 +451,7 @@
       <div class="price-notice mt-4">
         <h5>📌 SaaS 구독 안내</h5>
         <p>월 구독 기준이며, 연간 구독 시 2개월 무료 혜택이 제공됩니다. 구독은 언제든지 취소 가능하며 위약금이 없습니다.
-        관리자·작업자 등록은 무제한이며, 플랜 간 기능 차이는 없고 적용 법 범위(사업장 규모)에 따라 요금이 달라집니다. 세금계산서 발행이 가능합니다.</p>
+        포함 인원(10명) 초과 시 3,000원/명/월이 익월 자동 정산됩니다. 세금계산서 발행이 가능합니다.</p>
       </div>
     </div>
 
@@ -549,8 +550,8 @@
       <div class="faq-a">SaaS 구독은 결제 후 7일 이내 이용 내역이 없을 경우 전액 환불됩니다. 법령진단 단건은 리포트 발송 전 취소 시 전액 환불, 발송 후에는 환불이 불가합니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">인원이 늘어나면 요금이 오르나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">아니요. V3 요금은 시설(현장) 1개당 월정액이며, 관리자·작업자 등록은 무제한입니다. 가격 차이는 기능이 아니라 사업장 규모(연면적·종업원 수·공사금액 등)에 따라 적용되는 법 범위가 달라지기 때문입니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">포함 인원 초과 시 어떻게 되나요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">포함 인원(10명)을 초과하더라도 서비스는 중단 없이 계속됩니다. 초과 인원 1명당 3,000원/월이 익월 청구서에 합산되어 자동 정산됩니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">건물·산업·건설 섹터가 다른가요? <span class="faq-icon">+</span></div>
@@ -650,63 +651,63 @@ var _pendingSaasPlan = {};
 
 var SAAS_FALLBACK = {
   BUILDING: [
-    { plan_code:'BUILDING_PRECISION', plan_name:'정밀관리', sector:'BUILDING', price_monthly:149000, is_recommended:true,  is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'연면적 5,000㎡ 이하',
-      features:['법령 자동 판정','점검 일정 자동 생성','소방·전기·환경 법령','기록 자동화','D-3 알림','등록 인원 무제한'] },
-    { plan_code:'BUILDING_LARGE', plan_name:'대형건물', sector:'BUILDING', price_monthly:349000, is_recommended:false, is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'연면적 5,000㎡ 초과',
-      features:['정밀관리와 동일 기능','추가 면적 구간 법조항 반영','석면·에너지·냉동 관련 의무 포함','등록 인원 무제한'] },
-    { plan_code:'BUILDING_ENTERPRISE', plan_name:'Enterprise', sector:'BUILDING', price_monthly:0, is_recommended:false, is_custom:true,
-      included_members:999999, over_member_price:0,
-      target:'다수 시설·맞춤 계약',
-      features:['정밀·대형과 동일 기능','다수 건물 통합 관리','전담 매니저','맞춤 계약'] },
+    { plan_code:'BUILDING_BASIC',    plan_name:'BASIC',    sector:'BUILDING', price_monthly:59000,  is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'소규모 건물 (아파트, 상가)',
+      features:['법령 자동 판정','점검 일정 자동 생성','소방·전기·환경 법령','기록 자동화','D-3 알림'] },
+    { plan_code:'BUILDING_STANDARD', plan_name:'STANDARD', sector:'BUILDING', price_monthly:99000,  is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'중규모 건물 (오피스, 복합)',
+      features:['BASIC 전체 포함','서류 자동화','법령 변경 알림','경영진 대시보드','기록 무제한'] },
+    { plan_code:'BUILDING_CUSTOM',   plan_name:'CUSTOM',   sector:'BUILDING', price_monthly:0,      is_recommended:false, is_custom:true,
+      included_members:10, over_member_price:3000,
+      target:'대형 관리업체',
+      features:['STANDARD 전체 포함','다수 건물 통합 관리','전담 매니저','API 연동','맞춤 리포트'] },
   ],
   INDUSTRY: [
-    { plan_code:'INDUSTRY_STARTER_V2',  plan_name:'STARTER',  sector:'INDUSTRY', price_monthly:149000, is_recommended:false, is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'상시근로자 49인 이하',
-      features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정·D-3 알림','TBM 전자서명','등록 인원 무제한'] },
-    { plan_code:'INDUSTRY_BUSINESS_V2', plan_name:'BUSINESS', sector:'INDUSTRY', price_monthly:299000, is_recommended:true,  is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'상시근로자 50~299인',
-      features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','등록 인원 무제한'] },
-    { plan_code:'INDUSTRY_PRO',         plan_name:'PRO',      sector:'INDUSTRY', price_monthly:499000, is_recommended:false, is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'상시근로자 300~499인',
-      features:['BUSINESS 전체 포함','위험성평가 자동화','설비 수명주기 관리','멀티사이트 지원','등록 인원 무제한'] },
+    { plan_code:'INDUSTRY_STARTER_V2',  plan_name:'STARTER',  sector:'INDUSTRY', price_monthly:79000,  is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'5~30인 겸직 안전관리자',
+      features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정·D-3 알림','TBM 전자서명','기록 보관 6개월'] },
+    { plan_code:'INDUSTRY_BUSINESS_V2', plan_name:'BUSINESS', sector:'INDUSTRY', price_monthly:149000, is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'30~100인 사업장',
+      features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','기록 무제한'] },
+    { plan_code:'INDUSTRY_PRO',         plan_name:'PRO',      sector:'INDUSTRY', price_monthly:249000, is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'100인+ 전담 안전관리자',
+      features:['BUSINESS 전체 포함','위험성평가 자동화','설비 수명주기 관리','멀티사이트 지원','전담 온보딩'] },
     { plan_code:'INDUSTRY_CUSTOM_V2',   plan_name:'CUSTOM',   sector:'INDUSTRY', price_monthly:0,      is_recommended:false, is_custom:true,
-      included_members:999999, over_member_price:0,
-      target:'상시근로자 500인 이상 · 별도 협의',
-      features:['PRO 전체 포함','무제한 사업장','전담 매니저','맞춤 계약'] },
+      included_members:10, over_member_price:3000,
+      target:'대기업·다사업장',
+      features:['PRO 전체 포함','무제한 사업장','전담 매니저','ERP 연동','맞춤 계약'] },
   ],
   CONSTRUCTION: [
-    { plan_code:'CONSTRUCTION_STANDARD_V2', plan_name:'STANDARD', sector:'CONSTRUCTION', price_monthly:249000, is_recommended:true,  is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'공사금액 50억 미만',
-      features:['건설안전법 자동 판정','TBM 일지 자동화','위험작업 허가서','D-3 알림','등록 인원 무제한'] },
-    { plan_code:'CONSTRUCTION_PREMIUM_V2', plan_name:'PREMIUM',  sector:'CONSTRUCTION', price_monthly:499000, is_recommended:false, is_custom:false,
-      included_members:999999, over_member_price:0,
-      target:'공사금액 50억 이상',
-      features:['STANDARD 전체 포함','하도급 업체 관리','위험성평가 자동화','중대재해처벌법 대응','등록 인원 무제한'] },
+    { plan_code:'CONSTRUCTION_STANDARD_V2', plan_name:'STANDARD', sector:'CONSTRUCTION', price_monthly:199000, is_recommended:false, is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'50억 미만 현장',
+      features:['건설안전법 자동 판정','TBM 일지 자동화','위험작업 허가서','D-3 알림','기록 보관'] },
+    { plan_code:'CONSTRUCTION_PREMIUM_V2', plan_name:'PREMIUM',  sector:'CONSTRUCTION', price_monthly:399000, is_recommended:true,  is_custom:false,
+      included_members:10, over_member_price:3000,
+      target:'50억+ 현장',
+      features:['STANDARD 전체 포함','하도급 업체 관리','위험성평가 자동화','경영진 대시보드','서류 자동화'] },
     { plan_code:'CONSTRUCTION_CUSTOM_V2',  plan_name:'CUSTOM',   sector:'CONSTRUCTION', price_monthly:0,      is_recommended:false, is_custom:true,
-      included_members:999999, over_member_price:0,
-      target:'대형건설·맞춤 계약',
-      features:['PREMIUM 전체 포함','다현장 통합 관리','전담 매니저','맞춤 계약'] },
+      included_members:10, over_member_price:3000,
+      target:'대형건설사',
+      features:['PREMIUM 전체 포함','다현장 통합 관리','전담 매니저','API 연동','맞춤 계약'] },
   ],
 };
 
 var MAIN_CODES    = ['BUILDING_V2','BUILDING_LARGE_V2','INDUSTRY_V2','CONSTRUCTION'];
 var SPECIAL_CODES = ['HAZARD_LOW','HAZARD_MID','HAZARD_HIGH'];
 var DIAG_META = {
-  'BUILDING_V2':       { icon:'🏢', name:'소형건물',        sub:'5,000㎡ 미만',       fallbackPrice:149000, isRec:false, goodsName:'소형건물 법령진단',
+  'BUILDING_V2':       { icon:'🏢', name:'소형건물',        sub:'5,000㎡ 미만',       fallbackPrice:99000,  isRec:false, goodsName:'소형건물 법령진단',
     features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
-  'BUILDING_LARGE_V2': { icon:'🏛️', name:'대형건물',        sub:'5,000㎡ 이상',       fallbackPrice:349000, isRec:false, goodsName:'대형건물 법령진단',
+  'BUILDING_LARGE_V2': { icon:'🏛️', name:'대형건물',        sub:'5,000㎡ 이상',       fallbackPrice:249000, isRec:false, goodsName:'대형건물 법령진단',
     features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
   'INDUSTRY_V2':       { icon:'🏭', name:'제조·산업',       sub:'공장·산업시설',       fallbackPrice:249000, isRec:true,  recLabel:'⭐ 가장 많이 선택', goodsName:'제조·산업 법령진단',
     features:['PDF 법령진단 리포트','법령·설비·공정 통합 분석','과태료·벌칙 정보','12개월 재발행·조회','감사 대응 서류'] },
-  'CONSTRUCTION':      { icon:'🏗️', name:'건설현장',        sub:'공사 현장',           fallbackPrice:249000, isRec:false, goodsName:'건설현장 법령진단',
+  'CONSTRUCTION':      { icon:'🏗️', name:'건설현장',        sub:'공사 현장',           fallbackPrice:399000, isRec:false, goodsName:'건설현장 법령진단',
     features:['PDF 법령진단 리포트','공종별 법령·의무 도출','선임·신고·점검·작업 분석','과태료·벌칙 정보','12개월 재발행·조회'] },
   'HAZARD_LOW':        { icon:'⚠️',  name:'특수시설 일반형', sub:'1~2종 위험시설',      fallbackPrice:199000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (일반형)',
     features:['PDF 법령진단 리포트','위험물·유해화학물질 분석','선임·점검·신고 도출','12개월 재발행·조회'] },
@@ -811,8 +812,8 @@ function renderSaasCard(p){
       +'<div class="plan-vat">VAT 별도</div>';
 
   var quotaHtml = '<div class="plan-quota-box">'
-    +'<div class="q-row"><span class="q-label">👥 등록</span><span class="q-val">관리자·작업자 무제한</span></div>'
-    +'<div class="q-over">기능은 모든 플랜에서 동일합니다</div>'
+    +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+(p.included_members||10)+'명</span></div>'
+    +'<div class="q-over">초과 인원당 '+(p.over_member_price||3000).toLocaleString('ko-KR')+'원/명/월</div>'
     +'</div>';
 
   var featsHtml = (p.features||[]).map(function(f){ return '<li>'+f+'</li>'; }).join('');
