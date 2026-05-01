@@ -313,7 +313,7 @@
       </div>
       <div class="col-lg-6">
         <div class="diag-hero-img">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/service/hero-law-poster.jpg" alt="과태료 통지서를 확인하는 손" loading="eager">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/law-check2.png" alt="법령 체크리스트를 확인하는 안전관리자" loading="eager">
         </div>
       </div>
     </div>
@@ -669,7 +669,6 @@ function diagPay(productType, planCode, amount, goodname) {
   var userId    = localStorage.getItem('user_id') || '';
   var companyId = localStorage.getItem('company_id') || '';
 
-  // 로그인 없어도 결제 가능 (법령진단은 일회성 구매)
   if (!userId) {
     userId = 'guest_' + Date.now();
   }
