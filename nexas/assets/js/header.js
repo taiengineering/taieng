@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.4.0 (2026-04-30): 로고 이미지 최적화 (1024px 263KB → 96px 21KB)
  * v3.3.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.2.0 (2026-04-28): 로그인전 로그인/회원가입, 로그인후 마이페이지/로그아웃
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
@@ -11,7 +12,8 @@
   'use strict';
 
   var STORAGE_KEY = 'tai_session';
-  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon.png';
+  /* v3.4.0: 로고 최적화 — 96px PNG (21KB, 2x 레티나 대응) */
+  var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon-96.png';
 
   /* ── 헤더 높이 CSS 변수 + 로고·우측메뉴 스타일 주입 ── */
   (function injectNavCss() {
@@ -263,7 +265,7 @@
     '      </div>',
     '      <div class="logo">',
     '        <a class="tai-logo-combo" href="' + base + 'index.html">',
-    '          <img class="tai-logo-icon" src="' + ICON_URL + '" alt="TAI Engineering">',
+    '          <img class="tai-logo-icon" src="' + ICON_URL + '" width="38" height="38" alt="TAI Engineering" loading="eager">',
     '          <span class="tai-logo-text">TAI Engineering</span>',
     '        </a>',
     '      </div>',
