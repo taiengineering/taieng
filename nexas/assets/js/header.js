@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.2 (2026-05-01): fixed 헤더 텍스트/버튼 색상 수정 (다크 네이비 배경 대응)
  * v3.5.1 (2026-05-01): 마이페이지 경로 버그 수정 (/mypage/ trailing slash 처리)
  * v3.5.0 (2026-05-01): 안전정보 메뉴 4섹션 재구성 + 모바일 로고 수정
  * v3.4.0 (2026-04-30): 로고 이미지 최적화 (1024px 263KB → 96px 21KB)
@@ -66,9 +67,10 @@
       '  text-shadow: 0 1px 4px rgba(0,0,0,.2);',
       '  white-space: nowrap;',
       '}',
+      /* fixed 상태: 배경이 다크 네이비이므로 흰색 텍스트 유지 */
       '.navbar-area.navbar-area-fixed .tai-logo-text {',
-      '  color: #0f2b4a;',
-      '  text-shadow: none;',
+      '  color: #fff;',
+      '  text-shadow: 0 1px 4px rgba(0,0,0,.25);',
       '}',
       '@media(max-width:575px){',
       '  .tai-logo-text { font-size: 1rem; }',
@@ -86,6 +88,7 @@
       '  transition: background .15s, color .15s, border-color .15s;',
       '  white-space: nowrap;',
       '}',
+      /* 아웃라인 버튼 — 기본 (페이지 최상단, 다크 배경 위) */
       '.tai-nav-btn-outline {',
       '  border: 1.5px solid rgba(255,255,255,.55);',
       '  color: rgba(255,255,255,.9) !important;',
@@ -96,6 +99,17 @@
       '  color: #fff !important;',
       '  background: rgba(255,255,255,.08);',
       '}',
+      /* 아웃라인 버튼 — 스크롤 고정 (다크 네이비 배경 유지 → 흰색 텍스트) */
+      '.navbar-area-fixed .tai-nav-btn-outline {',
+      '  border-color: rgba(255,255,255,.5);',
+      '  color: rgba(255,255,255,.9) !important;',
+      '}',
+      '.navbar-area-fixed .tai-nav-btn-outline:hover {',
+      '  border-color: #fff;',
+      '  background: rgba(255,255,255,.12);',
+      '  color: #fff !important;',
+      '}',
+      /* 솔리드 버튼 — 기본 (다크 배경 위 흰 버튼) */
       '.tai-nav-btn-solid {',
       '  border: 1.5px solid rgba(255,255,255,.9);',
       '  color: #0f2b4a !important;',
@@ -106,23 +120,18 @@
       '  border-color: #f0f6ff;',
       '  color: #0f2b4a !important;',
       '}',
-      '.navbar-area-fixed .tai-nav-btn-outline {',
-      '  border-color: rgba(15,43,74,.45);',
-      '  color: #0f2b4a !important;',
-      '}',
-      '.navbar-area-fixed .tai-nav-btn-outline:hover {',
-      '  border-color: #0f2b4a;',
-      '  background: rgba(15,43,74,.06);',
-      '}',
+      /* 솔리드 버튼 — 스크롤 고정 (다크 배경 → 흰 버튼 유지) */
       '.navbar-area-fixed .tai-nav-btn-solid {',
-      '  border-color: #0f2b4a;',
-      '  background: #0f2b4a;',
-      '  color: #fff !important;',
+      '  border-color: rgba(255,255,255,.9);',
+      '  background: #fff;',
+      '  color: #0f2b4a !important;',
       '}',
       '.navbar-area-fixed .tai-nav-btn-solid:hover {',
       '  background: #1565c0;',
       '  border-color: #1565c0;',
+      '  color: #fff !important;',
       '}',
+      /* 로그아웃 버튼 — 기본 */
       'button.tai-logout-btn {',
       '  cursor: pointer;',
       '  background: transparent;',
@@ -134,13 +143,15 @@
       '  color: #fff;',
       '  background: rgba(255,255,255,.08);',
       '}',
+      /* 로그아웃 버튼 — 스크롤 고정 (흰색 텍스트 유지) */
       '.navbar-area-fixed button.tai-logout-btn {',
-      '  border-color: rgba(15,43,74,.45);',
-      '  color: #0f2b4a;',
+      '  border-color: rgba(255,255,255,.5);',
+      '  color: rgba(255,255,255,.9);',
       '}',
       '.navbar-area-fixed button.tai-logout-btn:hover {',
-      '  border-color: #0f2b4a;',
-      '  background: rgba(15,43,74,.06);',
+      '  border-color: #fff;',
+      '  background: rgba(255,255,255,.12);',
+      '  color: #fff;',
       '}',
     ].join('\n');
 
