@@ -18,7 +18,7 @@
   padding-left: max(24px, calc((100vw - 1320px) / 2 + 12px));
 }
 
-.owner-hero-left-col { min-height: 420px; }
+.owner-hero-left-col { min-height: 470px; }
 .owner-hero-left-inner { margin-left: 0 !important; max-width: 480px; }
 
 @media (max-width: 1399px) {
@@ -37,7 +37,7 @@
 }
 @media (max-width: 991px) {
   .hero-split {
-    padding-top: calc(var(--tai-nav-h, 90px) + 24px);
+    padding-top: 64px;
   }
   .hero-split .hero-left,
   .owner-hero-section .owner-hero-left-col,
@@ -48,7 +48,7 @@
 }
 @media (max-width: 575px) {
   .hero-split {
-    padding-top: calc(var(--tai-nav-h, 90px) + 16px);
+    padding-top: 60px;
   }
   .hero-split .hero-left,
   .owner-hero-section .owner-hero-left-col,
