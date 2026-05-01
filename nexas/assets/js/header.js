@@ -1,22 +1,19 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.1 (2026-05-01): 마이페이지 경로 버그 수정 (/mypage/ trailing slash 처리)
  * v3.5.0 (2026-05-01): 안전정보 메뉴 4섹션 재구성 + 모바일 로고 수정
  * v3.4.0 (2026-04-30): 로고 이미지 최적화 (1024px 263KB → 96px 21KB)
  * v3.3.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.2.0 (2026-04-28): 로그인전 로그인/회원가입, 로그인후 마이페이지/로그아웃
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
  * v3.0.0 (2026-04-26): 로고 아이콘+텍스트 방식 전환 (SVG→PNG+텍스트)
- * v2.9.0 (2026-04-25): 안전정보 > 개정법령 메뉴 추가
- * v2.5.0 (2026-04-20): --tai-nav-h CSS 변수 주입
  */
 (function () {
   'use strict';
 
   var STORAGE_KEY = 'tai_session';
-  /* v3.4.0: 로고 최적화 — 96px PNG (21KB, 2x 레티나 대응) */
   var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon-96.png';
 
-  /* ── 헤더 높이 CSS 변수 + 로고·우측메뉴 스타일 주입 ── */
   (function injectNavCss() {
     if (document.getElementById('tai-nav-vars')) return;
     var css = [
@@ -37,7 +34,6 @@
       '  .full-vp-right { height: calc(100vh - 280px); min-height: 400px; }',
       '}',
       '.tai-page-top { padding-top: var(--tai-nav-h); }',
-      /* 로고 */
       '.tai-logo-combo {',
       '  display: flex !important;',
       '  align-items: center;',
@@ -77,7 +73,6 @@
       '@media(max-width:575px){',
       '  .tai-logo-text { font-size: 1rem; }',
       '}',
-      /* 우측 nav 버튼 공통 */
       '.tai-nav-btn {',
       '  display: inline-flex !important;',
       '  align-items: center;',
@@ -169,11 +164,13 @@
 
   function legacyRelBase() {
     var path = window.location.pathname || '';
-    if (/\/(service|target)\//. test(path)) return '../';
-    var m = path.match(/\/mypage\/(.+)/);
-    if (m) {
-      var n = m[1].split('/').filter(Boolean).length;
-      return n >= 2 ? '../../' : '../';
+    if (/\/(service|target)\//.test(path)) return '../';
+    /* v3.5.1: /mypage/ (trailing slash만) + /mypage/xxx 모두 처리 */
+    if (/\/mypage(\/|$)/.test(path)) {
+      var after = path.replace(/.*\/mypage\/?/, '');
+      var n = after.split('/').filter(Boolean).length;
+      if (n >= 2) return '../../';
+      return '../';
     }
     return '';
   }
@@ -181,7 +178,6 @@
   var base = nexasRelBase();
   if (!base) base = legacyRelBase();
 
-  /* 로그인 redirect 파라미터 */
   var loginRedirectQs = '';
   try {
     var lp = window.location.pathname || '';
@@ -192,7 +188,6 @@
     }
   } catch (e) {}
 
-  /* ── 인증 헬퍼 ── */
   function isLoggedIn() {
     try {
       return (
@@ -220,7 +215,6 @@
     try { [STORAGE_KEY, 'access_token'].forEach(function (k) { sessionStorage.removeItem(k); }); } catch (e3) {}
   }
 
-  /* ── 우측 버튼 영역 HTML 생성 ── */
   function buildNavRight() {
     var logged = isLoggedIn();
     if (logged) {
@@ -252,7 +246,6 @@
     }
   }
 
-  /* ── 로그아웃 핸들러 바인딩 ── */
   function bindLogout() {
     var btn = document.getElementById('tai-header-logout');
     if (!btn) return;
@@ -263,7 +256,6 @@
     });
   }
 
-  /* ── HTML 조립 ── */
   var html = [
     '<header class="navbar-area">',
     '  <nav class="navbar navbar-expand-lg">',
@@ -329,7 +321,6 @@
     '</header>',
   ].join('\n');
 
-  /* ── 주입 ── */
   function inject() {
     var ph = document.getElementById('tai-header');
     if (ph) {
