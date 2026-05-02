@@ -26,27 +26,6 @@
   <style>
     body.sc5 { font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; }
 
-    /* ── 카드 ── */
-    .duty-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 28px 24px;
-      box-shadow: 0 4px 18px rgba(0,0,0,.07);
-      height: 100%;
-      border-left: 4px solid #1565c0;
-    }
-    .duty-card h5 { font-size: 1.02rem; font-weight: 800; color: #1e293b; margin-bottom: 10px; }
-    .duty-card p  { font-size: .9rem; color: #64748b; margin: 0; line-height: 1.65; }
-
-    .auto-block {
-      background: #eff6ff;
-      border-radius: 16px;
-      padding: 32px 28px;
-      height: 100%;
-    }
-    .auto-block h5 { font-size: 1.05rem; font-weight: 800; color: #0f2b4a; margin-bottom: 10px; }
-    .auto-block p  { font-size: .9rem; color: #374151; line-height: 1.65; margin: 0; }
-
     /* ── 이미지 박스 ── */
     .tai-image-box {
       border-radius: 20px;
@@ -56,64 +35,80 @@
     }
     .tai-image-box img { width: 100%; display: block; object-fit: cover; height: 400px; }
 
-    .tai-section-image {
+    /* ── 와이드 이미지 (100% 전체 너비, 여백 없음) ── */
+    .wide-image-wrap {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .wide-image-wrap img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── 흐름 이미지 (TAI Safe / 법령진단) ── */
+    .flow-image {
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 16px 40px rgba(15,23,42,.13);
       background: #e5e7eb;
-      margin-bottom: 48px;
     }
-    .tai-section-image img { width: 100%; display: block; object-fit: cover; height: 380px; }
+    .flow-image img { width: 100%; display: block; object-fit: cover; }
 
-    .tai-process-image {
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(15,23,42,.13);
-      background: #e5e7eb;
-    }
-    .tai-process-image img { width: 100%; display: block; object-fit: cover; height: 420px; }
-
-    /* ── Before / After 가로 한 줄 ── */
-    .ba-row {
+    /* ── 텍스트 리스트 (카드 대신) ── */
+    .text-list { margin: 0; padding: 0; list-style: none; }
+    .text-list li {
       display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: .97rem;
+      color: #334155;
+      line-height: 1.6;
+    }
+    .text-list li:last-child { border-bottom: none; }
+    .text-list .tl-label {
+      font-weight: 800;
+      color: #1e293b;
+      white-space: nowrap;
+      min-width: 110px;
+    }
+    .text-list .tl-last { color: #dc2626; font-weight: 700; }
+
+    /* ── 수선 이미지 ── */
+    .tai-repair-box {
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 16px 48px rgba(15,23,42,.22);
+      box-shadow: 0 16px 40px rgba(15,23,42,.13);
+      background: #e5e7eb;
     }
-    .ba-half { flex: 1; position: relative; }
-    .ba-half img { width: 100%; height: 380px; object-fit: cover; display: block; }
-    .ba-overlay {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 28px 28px 32px;
-    }
-    .ba-half--before .ba-overlay { background: linear-gradient(to top, rgba(15,23,42,.85) 0%, rgba(15,23,42,.1) 60%); }
-    .ba-half--after  .ba-overlay { background: linear-gradient(to top, rgba(21,101,192,.85) 0%, rgba(21,101,192,.1) 60%); }
-    .ba-tag {
-      display: inline-block; font-size: .75rem; font-weight: 800;
-      letter-spacing: .06em; padding: 4px 12px; border-radius: 20px;
-      margin-bottom: 12px; width: fit-content;
-    }
-    .ba-half--before .ba-tag { background: rgba(255,255,255,.15); color: #e2e8f0; }
-    .ba-half--after  .ba-tag { background: rgba(255,255,255,.2);  color: #fff; }
-    .ba-overlay h4 { color: #fff; font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; }
-    .ba-overlay ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.82); font-size: .88rem; line-height: 1.9; }
-    .ba-divider { width: 4px; flex-shrink: 0; background: linear-gradient(180deg, #93c5fd 0%, #1565c0 100%); }
+    .tai-repair-box img { width: 100%; display: block; object-fit: cover; height: 400px; }
 
     /* ── 강한 메시지 ── */
     .msg-section { padding: 100px 0; background: #1e293b; }
     .msg-section h2 { font-weight: 900; font-size: clamp(1.7rem, 3.5vw, 2.7rem); color: #fff; line-height: 1.45; }
     .msg-section p { color: #94a3b8; margin-top: 20px; font-size: 1.05rem; line-height: 1.8; }
 
+    /* ── 흐름 레이블 ── */
+    .flow-label {
+      display: inline-block;
+      background: #1565c0;
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
     /* ── 반응형 ── */
     @media (max-width: 991px) { .tai-image-box img { height: 300px; } }
     @media (max-width: 768px) {
-      .tai-image-box img     { height: 240px; }
-      .tai-section-image img { height: 240px; }
-      .tai-process-image img { height: 240px; }
-      .ba-row    { flex-direction: column; }
-      .ba-divider{ width: 100%; height: 4px; }
-      .ba-half img { height: 240px; }
+      .tai-image-box img   { height: 240px; }
+      .tai-repair-box img  { height: 240px; }
     }
   </style>
 </head>
@@ -185,44 +180,44 @@
     </div>
   </section>
 
-  <!-- ══ 문제 구조 — building2.png 이미지 포함 ══ -->
+  <!-- ══ 문제 구조 — building2.png 좌측 + 텍스트 우측 ══ -->
   <section style="padding: 90px 0; background: #f8fafc;">
     <div class="container">
-      <div class="section-title text-center" style="margin-bottom:44px;">
-        <h4 class="sub-title">문제</h4>
-        <h2 class="title">관리는 나뉘어 있지만<br>책임은 하나입니다</h2>
-      </div>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="tai-image-box">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building2.png"
+                 alt="소방, 전기, 승강기, 가스 각각 분리된 관리 구조">
+          </div>
+        </div>
 
-      <!-- building2.png — 소방/전기/승강기/가스 미니어처 이미지 -->
-      <div class="tai-section-image">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building2.png"
-             alt="소방, 전기, 승강기, 가스 각각 분리된 관리 구조">
-      </div>
+        <div class="col-lg-6">
+          <div class="section-title" style="margin-bottom:28px;">
+            <h4 class="sub-title">문제</h4>
+            <h2 class="title" style="line-height:1.4;">
+              관리는 나뉘어 있지만<br>
+              책임은 하나입니다
+            </h2>
+          </div>
 
-      <div class="row g-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>🔥 소방업체</h5>
-            <p>점검은 하지만 전체 관리 흐름은 모릅니다</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>⚡ 전기업체</h5>
-            <p>자신의 영역만 관리합니다</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>🛗 승강기 / 가스</h5>
-            <p>각각 따로 관리됩니다</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card" style="border-left-color:#dc2626;">
-            <h5>🏢 건물주 / 관리자</h5>
-            <p>모든 책임은 결국 여기로 돌아옵니다</p>
-          </div>
+          <ul class="text-list">
+            <li>
+              <span class="tl-label">🔥 소방업체</span>
+              <span>점검은 하지만 전체 관리 흐름은 모릅니다</span>
+            </li>
+            <li>
+              <span class="tl-label">⚡ 전기업체</span>
+              <span>자신의 영역만 관리합니다</span>
+            </li>
+            <li>
+              <span class="tl-label">🛗 승강기 / 가스</span>
+              <span>각각 따로 관리됩니다</span>
+            </li>
+            <li>
+              <span class="tl-label tl-last">🏢 건물주 / 관리자</span>
+              <span style="color:#dc2626;font-weight:600;">모든 책임은 결국 여기로 돌아옵니다</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -233,7 +228,7 @@
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-6 order-lg-1 order-2">
-          <div class="tai-image-box">
+          <div class="tai-repair-box">
             <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building3.png"
                  alt="건물 수리 및 유지보수 작업">
           </div>
@@ -259,93 +254,46 @@
     </div>
   </section>
 
-  <!-- ══ Before / After 가로 한 줄 — building4.png / building5.png ══ -->
-  <section style="padding: 90px 0; background: #0f172a;">
-    <div class="container">
-      <div class="section-title text-center" style="margin-bottom:44px;">
-        <h4 class="sub-title" style="color:#93c5fd;">Before / After</h4>
-        <h2 class="title" style="color:#fff;">같은 건물, 결과는 다릅니다</h2>
-        <p style="color:#94a3b8;margin-top:10px;font-size:.97rem;">
-          TAI 도입 전과 후, 안전관리 방식이 완전히 달라집니다.
-        </p>
-      </div>
+  <!-- ══ building4.png — 100% 와이드 ══ -->
+  <div class="wide-image-wrap">
+    <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
+         alt="건물 안전관리 비교">
+  </div>
 
-      <div class="ba-row">
-        <div class="ba-half ba-half--before">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
-               alt="기존 건물 안전관리">
-          <div class="ba-overlay">
-            <span class="ba-tag">BEFORE</span>
-            <h4>기존 관리</h4>
-            <ul>
-              <li>적용 법령 파악 안됨</li>
-              <li>업체별 분산 관리</li>
-              <li>수선·보수 기록 없음</li>
-              <li>점검 대응 시 서류 찾기 어려움</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="ba-divider"></div>
-
-        <div class="ba-half ba-half--after">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.png"
-               alt="TAI 도입 후 건물 안전관리">
-          <div class="ba-overlay">
-            <span class="ba-tag">AFTER</span>
-            <h4>TAI 이후</h4>
-            <ul>
-              <li>법령 자동 적용 및 안내</li>
-              <li>점검 일정 자동 생성·알림</li>
-              <li>수선 이력 자동 기록 보관</li>
-              <li>감사·점검 대응 즉시 제출 가능</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TAI Safe — building6.png ══ -->
+  <!-- ══ TAI Safe — building5 (법령진단 흐름) + building6 (TAI Safe 흐름) ══ -->
   <section style="padding: 100px 0;">
     <div class="container">
-      <div class="section-title text-center" style="margin-bottom:48px;">
+      <div class="section-title text-center" style="margin-bottom:60px;">
         <h4 class="sub-title">TAI Safe</h4>
         <h2 class="title">건물 안전관리를 하나로 묶습니다</h2>
         <p style="color:#64748b;margin-top:12px;font-size:.97rem;">
-          법령 확인부터 점검, 수선, 증빙까지 하나의 흐름으로 관리합니다.
+          법령진단에서 시작해 TAI Safe가 모든 흐름을 자동으로 연결합니다.
         </p>
       </div>
 
-      <div class="tai-process-image">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
-             alt="TAI Safe 건물 안전관리 흐름">
+      <!-- building5 — 법령진단 흐름 -->
+      <div style="margin-bottom:60px;">
+        <div style="margin-bottom:16px;">
+          <span class="flow-label">STEP 1</span>
+          <h4 style="font-weight:800;color:#1e293b;font-size:1.2rem;margin:0;">법령진단으로 의무 파악</h4>
+          <p style="color:#64748b;font-size:.9rem;margin-top:6px;">건물 조건을 입력하면 적용 법령과 점검 의무가 자동으로 정리됩니다.</p>
+        </div>
+        <div class="flow-image">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.png"
+               alt="법령진단으로 건물 안전관리 의무를 파악하는 흐름">
+        </div>
       </div>
 
-      <div class="row g-4 mt-5">
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <h5>⚖️ 법령 자동 판정</h5>
-            <p>건물 규모·용도·시설 조건을 입력하면 적용 법령을 자동으로 분석합니다.</p>
-          </div>
+      <!-- building6 — TAI Safe 관리 흐름 -->
+      <div>
+        <div style="margin-bottom:16px;">
+          <span class="flow-label" style="background:#059669;">STEP 2</span>
+          <h4 style="font-weight:800;color:#1e293b;font-size:1.2rem;margin:0;">TAI Safe로 전체 관리</h4>
+          <p style="color:#64748b;font-size:.9rem;margin-top:6px;">점검 일정, 수선 기록, 증빙 보관까지 하나의 시스템으로 운영합니다.</p>
         </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <h5>📅 점검 일정 자동 관리</h5>
-            <p>소방·전기·승강기·가스 점검 주기를 법령 기준으로 자동 생성합니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <h5>🔧 수선 기록 관리</h5>
-            <p>수리·교체·보수 이력을 자동으로 저장하고 언제든 조회할 수 있습니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <h5>🧾 증빙 즉시 보관</h5>
-            <p>감독관청 점검 시 필요한 서류를 즉시 출력·제출할 수 있습니다.</p>
-          </div>
+        <div class="flow-image">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
+               alt="TAI Safe로 건물 안전관리 전체를 운영하는 흐름">
         </div>
       </div>
     </div>
