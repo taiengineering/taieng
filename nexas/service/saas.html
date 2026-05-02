@@ -22,6 +22,12 @@
   <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
+  /* ── 갭 원인 요소 전부 숨김 (캐시 우회 인라인) ── */
+  .breadcrumb-area,
+  .breadcrumb-wrap,
+  .page-banner,
+  .page-header { display: none !important; }
+
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
@@ -36,116 +42,60 @@
   #saas-page .feat-card-hl h4 { font-size: .95rem; font-weight: 800; color: #0f2b4a; margin: 0 0 6px; }
   #saas-page .feat-card-hl p { font-size: .82rem; color: #475569; margin: 0; line-height: 1.5; }
   #saas-page .feat-grid-normal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  #saas-page .feat-card-nm {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; position: relative;
-  }
+  #saas-page .feat-card-nm { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; position: relative; }
   #saas-page .feat-card-nm .feat-icon { font-size: 1.5rem; margin-bottom: 8px; }
   #saas-page .feat-card-nm h4 { font-size: .85rem; font-weight: 700; color: #0f172a; margin: 0 0 4px; }
   #saas-page .feat-card-nm p { font-size: .75rem; color: #94a3b8; margin: 0; }
-  #saas-page .feat-card-nm.paid::after {
-    content: '유료'; position: absolute; top: 8px; right: 8px;
-    background: #fbbf24; color: #0f172a; font-size: .6rem; font-weight: 800;
-    padding: 2px 6px; border-radius: 999px;
-  }
+  #saas-page .feat-card-nm.paid::after { content: '유료'; position: absolute; top: 8px; right: 8px; background: #fbbf24; color: #0f172a; font-size: .6rem; font-weight: 800; padding: 2px 6px; border-radius: 999px; }
   @media(max-width:575px) {
     #saas-page .feat-grid-highlight { grid-template-columns: 1fr; }
     #saas-page .feat-grid-normal { grid-template-columns: repeat(2, 1fr); }
   }
 
-  #saas-page .browser-frame {
-    width: 100%; max-width: 540px;
-    background: #fff; border: 1px solid #d1d5db; border-radius: 12px;
-    overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.12); flex-shrink: 0;
-  }
-  #saas-page .browser-bar {
-    background: #f3f4f6; padding: 8px 12px;
-    display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e5e7eb;
-  }
+  #saas-page .browser-frame { width: 100%; max-width: 540px; background: #fff; border: 1px solid #d1d5db; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.12); flex-shrink: 0; }
+  #saas-page .browser-bar { background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e5e7eb; }
   #saas-page .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
   #saas-page .browser-dot.r { background: #ef4444; } #saas-page .browser-dot.y { background: #f59e0b; } #saas-page .browser-dot.g { background: #22c55e; }
-  #saas-page .browser-url {
-    flex: 1; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px;
-    padding: 4px 10px; font-size: .65rem; color: #9ca3af; margin-left: 8px;
-  }
+  #saas-page .browser-url { flex: 1; background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 4px 10px; font-size: .65rem; color: #9ca3af; margin-left: 8px; }
   #saas-page .browser-content { min-height: 340px; font-size: .75rem; color: #0f172a; overflow: hidden; }
   #saas-page .mock-side { width: 160px; background: #0f172a; color: rgba(255,255,255,.6); float: left; min-height: 340px; padding: 10px 0; }
   #saas-page .mock-side-item { padding: 7px 14px; font-size: .65rem; }
   #saas-page .mock-side-item.on { background: rgba(255,255,255,.1); color: #fff; font-weight: 700; }
   #saas-page .mock-body { margin-left: 160px; padding: 14px; background: #f8fafc; min-height: 340px; }
 
-  #saas-page .phone-frame {
-    width: 280px; background: #0f172a; border-radius: 32px;
-    padding: 10px; box-shadow: 0 16px 48px rgba(0,0,0,.2); flex-shrink: 0;
-  }
-  #saas-page .phone-frame::before {
-    content: ''; display: block; width: 70px; height: 20px;
-    background: #0f172a; border-radius: 0 0 12px 12px;
-    margin: 0 auto 0;
-  }
-  #saas-page .phone-screen {
-    background: #f8fafc; border-radius: 24px; overflow: hidden;
-    min-height: 440px; font-size: .75rem;
-  }
-  #saas-page .phone-frame.sp-phoneXL {
-    width: 100%; max-width: 340px; margin: 0 auto;
-  }
+  #saas-page .phone-frame { width: 280px; background: #0f172a; border-radius: 32px; padding: 10px; box-shadow: 0 16px 48px rgba(0,0,0,.2); flex-shrink: 0; }
+  #saas-page .phone-frame::before { content: ''; display: block; width: 70px; height: 20px; background: #0f172a; border-radius: 0 0 12px 12px; margin: 0 auto 0; }
+  #saas-page .phone-screen { background: #f8fafc; border-radius: 24px; overflow: hidden; min-height: 440px; font-size: .75rem; }
+  #saas-page .phone-frame.sp-phoneXL { width: 100%; max-width: 340px; margin: 0 auto; }
   #saas-page .phone-frame.sp-phoneXL .phone-screen { min-height: 480px; }
-  #saas-page .app-tab-bar {
-    display: flex; background: #0f172a; border-bottom: 1px solid #334155;
-  }
-  #saas-page .app-tab-bar span {
-    flex: 1; text-align: center; padding: 8px 4px; font-size: .68rem;
-    font-weight: 700; color: rgba(255,255,255,.55); cursor: default;
-  }
-  #saas-page .app-tab-bar span.on {
-    color: #fff; background: rgba(255,255,255,.08); border-bottom: 2px solid #60a5fa;
-  }
+  #saas-page .app-tab-bar { display: flex; background: #0f172a; border-bottom: 1px solid #334155; }
+  #saas-page .app-tab-bar span { flex: 1; text-align: center; padding: 8px 4px; font-size: .68rem; font-weight: 700; color: rgba(255,255,255,.55); cursor: default; }
+  #saas-page .app-tab-bar span.on { color: #fff; background: rgba(255,255,255,.08); border-bottom: 2px solid #60a5fa; }
   #saas-page .sp-mid-cta { text-align: center; padding: 32px 16px; }
   #saas-page .sp-mid-cta a { color: #1565c0; font-weight: 800; font-size: .95rem; text-decoration: none; }
   #saas-page .sp-mid-cta a:hover { text-decoration: underline; }
-  #saas-page .sp-faq details {
-    border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;
-    background: #fff;
-  }
-  #saas-page .sp-faq summary {
-    font-weight: 800; font-size: .95rem; color: #0f172a; cursor: pointer; list-style: none;
-  }
+  #saas-page .sp-faq details { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; background: #fff; }
+  #saas-page .sp-faq summary { font-weight: 800; font-size: .95rem; color: #0f172a; cursor: pointer; list-style: none; }
   #saas-page .sp-faq summary::-webkit-details-marker { display: none; }
-  #saas-page .sp-faq details p {
-    margin: 12px 0 0; font-size: .88rem; color: #64748b; line-height: 1.7;
-  }
-  #saas-page #sp-show-all-btn {
-    background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 12px 28px;
-    font-size: .9rem; font-weight: 700; color: #64748b; cursor: pointer;
-  }
+  #saas-page .sp-faq details p { margin: 12px 0 0; font-size: .88rem; color: #64748b; line-height: 1.7; }
+  #saas-page #sp-show-all-btn { background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 12px 28px; font-size: .9rem; font-weight: 700; color: #64748b; cursor: pointer; }
   #saas-page #sp-show-all-btn:hover { border-color: var(--sp-blue); color: var(--sp-blue); background: #f8fafc; }
   #saas-page .phone-top { background: #0f2b4a; color: #fff; padding: 10px 14px; font-size: .8rem; font-weight: 800; }
   #saas-page .phone-top.alert { background: #b91c1c; }
 
-  #saas-page .flow-pair { display: flex; align-items: center; gap: 24px; }
-  #saas-page .flow-arrow {
-    font-size: 1.5rem; color: #1565c0; font-weight: 900;
-    flex-shrink: 0; text-align: center;
-  }
+  #saas-page .flow-pair { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: center; }
+  #saas-page .flow-arrow { font-size: 1.5rem; color: #1565c0; font-weight: 900; flex-shrink: 0; text-align: center; }
   #saas-page .flow-arrow small { display: block; font-size: .6rem; color: #94a3b8; font-weight: 400; margin-top: 4px; }
+  #saas-page .flow-pair .browser-frame { max-width: 480px; }
 
-  #saas-page .feat-pair {
-    display: flex; align-items: center; gap: 48px; padding: 72px 0;
-    border-bottom: 1px solid #f1f5f9;
-  }
+  #saas-page .feat-pair { display: flex; align-items: center; gap: 48px; padding: 72px 0; border-bottom: 1px solid #f1f5f9; }
   #saas-page .feat-pair:nth-child(even) { flex-direction: row-reverse; }
-  #saas-page .feat-pair .feat-info { flex: 1; min-width: 0; }
-  #saas-page .feat-pair .feat-info h3 {
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 14px; white-space: pre-line;
-  }
+  #saas-page .feat-pair .feat-info { flex: 1; min-width: 280px; }
+  #saas-page .feat-pair .feat-info h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 14px; white-space: pre-line; }
   #saas-page .feat-pair .feat-info p { font-size: .92rem; color: #64748b; line-height: 1.7; margin-bottom: 18px; }
   #saas-page .feat-check { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: #0f172a; font-weight: 600; margin-bottom: 6px; }
   #saas-page .feat-check::before { content: '✓'; color: #1565c0; font-weight: 900; }
   #saas-page .feat-visual { flex-shrink: 0; max-width: 60%; }
-  #saas-page .feat-pair .feat-info { min-width: 280px; }
-  #saas-page .flow-pair { flex-wrap: wrap; justify-content: center; }
-  #saas-page .flow-pair .browser-frame { max-width: 480px; }
 
   #saas-page .m-card { background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:10px; margin-bottom:8px; }
   #saas-page .m-row { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-bottom:1px solid #f1f5f9; font-size:.7rem; gap:8px; flex-wrap:wrap; }
@@ -189,11 +139,7 @@
   #saas-page .sp-adopt-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:var(--sp-blue); }
   #saas-page .sp-adopt-card .ac-n { font-size:.65rem; font-weight:800; color:var(--sp-blue); letter-spacing:.08em; margin-bottom:6px; }
   #saas-page .sp-adopt-card .ac-t { font-size:.88rem; font-weight:800; color:var(--sp-dark); line-height:1.35; }
-  #saas-page .sp-setup-box {
-    max-width:720px; margin:32px auto 0; padding:18px 20px; border-radius:14px;
-    border:1.5px solid #bae6fd; background:linear-gradient(135deg,#f0f9ff,#eff6ff);
-    display:flex; gap:14px; align-items:flex-start;
-  }
+  #saas-page .sp-setup-box { max-width:720px; margin:32px auto 0; padding:18px 20px; border-radius:14px; border:1.5px solid #bae6fd; background:linear-gradient(135deg,#f0f9ff,#eff6ff); display:flex; gap:14px; align-items:flex-start; }
   #saas-page .sp-setup-box .ss-ico { font-size:1.4rem; flex-shrink:0; line-height:1; }
   #saas-page .sp-setup-box .ss-t { font-size:.9rem; font-weight:900; color:#0c4a6e; margin-bottom:6px; }
   #saas-page .sp-setup-box .ss-d { font-size:.84rem; color:#0369a1; line-height:1.65; margin:0; }
@@ -204,25 +150,13 @@
   #saas-page .sp-cap { text-align:center; font-size:.73rem; color:var(--sp-gray); margin-top:9px; }
 
   #saas-page .sp-sector-tabs { display:flex; justify-content:center; gap:10px; margin-bottom:40px; flex-wrap:wrap; }
-  #saas-page .sp-sector-btn {
-    background:#fff; border:2px solid var(--sp-border); color:var(--sp-gray);
-    border-radius:12px; padding:12px 28px; font-size:1rem; font-weight:800;
-    cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:7px;
-  }
+  #saas-page .sp-sector-btn { background:#fff; border:2px solid var(--sp-border); color:var(--sp-gray); border-radius:12px; padding:12px 28px; font-size:1rem; font-weight:800; cursor:pointer; transition:all .18s; display:flex; align-items:center; gap:7px; }
   #saas-page .sp-sector-btn:hover { border-color:var(--sp-blue); color:var(--sp-blue); background:#f0f6ff; }
-  #saas-page .sp-sector-btn.active {
-    background:var(--sp-dark); border-color:var(--sp-dark); color:#fff;
-    box-shadow:0 4px 16px rgba(15,23,42,.2);
-  }
+  #saas-page .sp-sector-btn.active { background:var(--sp-dark); border-color:var(--sp-dark); color:#fff; box-shadow:0 4px 16px rgba(15,23,42,.2); }
   #saas-page .sp-sector-btn .sb-icon { font-size:1.2rem; }
   #saas-page .sp-sector-panel { display:none; }
   #saas-page .sp-sector-panel.active { display:block; }
-  #saas-page .sp-price {
-    background:#fff; border:1.5px solid var(--sp-border); border-radius:18px;
-    padding:28px 22px; height:100%; position:relative;
-    transition:transform .15s,box-shadow .15s;
-    display:flex; flex-direction:column;
-  }
+  #saas-page .sp-price { background:#fff; border:1.5px solid var(--sp-border); border-radius:18px; padding:28px 22px; height:100%; position:relative; transition:transform .15s,box-shadow .15s; display:flex; flex-direction:column; }
   #saas-page .sp-price:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.1); }
   #saas-page .sp-price .tier { font-size:.68rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--sp-gray); margin-bottom:4px; }
   #saas-page .sp-price .plan-name { font-size:1.1rem; font-weight:900; color:var(--sp-dark); margin-bottom:16px; line-height:1.2; }
@@ -233,20 +167,11 @@
   #saas-page .sp-price ul { list-style:none; padding:0; margin:0; flex:1; display:flex; flex-direction:column; gap:9px; }
   #saas-page .sp-price ul li { display:flex; gap:8px; font-size:.84rem; color:#475569; line-height:1.45; align-items:flex-start; }
   #saas-page .sp-price ul li::before { content:'✓'; color:var(--sp-green); font-weight:900; flex-shrink:0; margin-top:1px; }
-  #saas-page .sp-price-cta {
-    display:block; background:var(--sp-blue); color:#fff; border-radius:10px;
-    padding:13px; text-align:center; font-weight:800; font-size:.9rem;
-    text-decoration:none; transition:background .15s; border:none; width:100%;
-    cursor:pointer; margin-top:22px;
-  }
+  #saas-page .sp-price-cta { display:block; background:var(--sp-blue); color:#fff; border-radius:10px; padding:13px; text-align:center; font-weight:800; font-size:.9rem; text-decoration:none; transition:background .15s; border:none; width:100%; cursor:pointer; margin-top:22px; }
   #saas-page .sp-price-cta:hover { background:#1248a8; color:#fff; }
   #saas-page .sp-price-cta.consult-cta { background:var(--sp-dark); }
   #saas-page .sp-price-cta.consult-cta:hover { background:#1e293b; color:#fff; }
-  #saas-page .sp-sector-note {
-    background:var(--sp-bg); border:1px solid var(--sp-border); border-radius:12px;
-    padding:14px 20px; margin-bottom:28px; font-size:.88rem; color:var(--sp-gray);
-    display:flex; align-items:center; gap:10px;
-  }
+  #saas-page .sp-sector-note { background:var(--sp-bg); border:1px solid var(--sp-border); border-radius:12px; padding:14px 20px; margin-bottom:28px; font-size:.88rem; color:var(--sp-gray); display:flex; align-items:center; gap:10px; }
   #saas-page .sp-sector-note .sn-icon { font-size:1.3rem; flex-shrink:0; }
   #saas-page .sp-sector-note strong { color:var(--sp-dark); }
 
@@ -259,15 +184,9 @@
   #saas-page .sp-step .st { font-size:.88rem; font-weight:700; color:#fff; }
   #saas-page .sp-arrow { font-size:1.3rem; color:rgba(255,255,255,.35); }
 
-  #saas-page .sp-btn-primary {
-    background: #fff; color: var(--sp-blue); border: none; border-radius: 10px; padding: 14px 28px; font-size: .95rem; font-weight: 800;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: transform .15s, box-shadow .15s;
-  }
+  #saas-page .sp-btn-primary { background: #fff; color: var(--sp-blue); border: none; border-radius: 10px; padding: 14px 28px; font-size: .95rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: transform .15s, box-shadow .15s; }
   #saas-page .sp-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); color: var(--sp-blue); }
-  #saas-page .sp-btn-secondary {
-    background: transparent; border: 2px solid rgba(255,255,255,.5); color: #fff; border-radius: 10px; padding: 12px 24px; font-size: .95rem; font-weight: 700;
-    text-decoration: none; display: inline-flex; align-items: center; transition: all .15s;
-  }
+  #saas-page .sp-btn-secondary { background: transparent; border: 2px solid rgba(255,255,255,.5); color: #fff; border-radius: 10px; padding: 12px 24px; font-size: .95rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; transition: all .15s; }
   #saas-page .sp-btn-secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.1); }
 
   @media(max-width:991px) {
@@ -290,21 +209,11 @@
 
   #saas-page .scroll-anchor { scroll-margin-top: 96px; }
   #saas-page a.sp-card { text-decoration: none; color: inherit; display: block; height: 100%; }
-  #saas-page .sp-card-patent {
-    background: #f0f6ff; border: 1px solid rgba(21,101,192,.15);
-    border-left: 4px solid #1565c0; border-radius: 14px; padding: 28px 24px; position: relative;
-  }
-  #saas-page .sp-card-patent .sp-badge-patent {
-    position: absolute; top: 12px; right: 12px;
-    background: #1565c0; color: #fff; font-size: .6rem; font-weight: 800;
-    padding: 3px 10px; border-radius: 999px; letter-spacing: .05em;
-  }
+  #saas-page .sp-card-patent { background: #f0f6ff; border: 1px solid rgba(21,101,192,.15); border-left: 4px solid #1565c0; border-radius: 14px; padding: 28px 24px; position: relative; }
+  #saas-page .sp-card-patent .sp-badge-patent { position: absolute; top: 12px; right: 12px; background: #1565c0; color: #fff; font-size: .6rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; letter-spacing: .05em; }
   #saas-page .sp-card-patent h4 { font-size: 1.05rem; font-weight: 900; color: #0f2b4a; margin: 0 0 8px; }
   #saas-page .sp-card-patent p { font-size: .85rem; color: #475569; line-height: 1.6; margin: 0; }
-  #saas-page .sp-card {
-    background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
-    padding: 24px 20px; transition: transform .2s, box-shadow .2s;
-  }
+  #saas-page .sp-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px 20px; transition: transform .2s, box-shadow .2s; }
   #saas-page .sp-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
   #saas-page .sp-card .sp-icon { font-size: 2rem; margin-bottom: 10px; }
   #saas-page .sp-card h4 { font-size: .95rem; font-weight: 800; color: #0f172a; margin: 0 0 6px; }
@@ -397,12 +306,7 @@
           <div class="browser-frame">
             <div class="browser-bar"><span class="browser-dot r"></span><span class="browser-dot y"></span><span class="browser-dot g"></span><div class="browser-url">safe.taieng.co.kr / 작업근로자</div></div>
             <div class="browser-content">
-              <div class="mock-side">
-                <div class="mock-side-item">대시보드</div>
-                <div class="mock-side-item on">작업근로자</div>
-                <div class="mock-side-item">문서관리</div>
-                <div class="mock-side-item">안전정보</div>
-              </div>
+              <div class="mock-side"><div class="mock-side-item">대시보드</div><div class="mock-side-item on">작업근로자</div><div class="mock-side-item">문서관리</div><div class="mock-side-item">안전정보</div></div>
               <div class="mock-body">
                 <div class="m-title">업무 배분 관리</div>
                 <div class="m-row" style="font-weight:800;border-bottom:2px solid #e2e8f0;"><span>의무 항목</span><span>담당자</span><span>주기</span><span>상태</span></div>
@@ -434,7 +338,7 @@
       <div class="feat-info">
         <h3>현장에서 체크하면,
 서류는 자동으로 만들어집니다.</h3>
-        <p>작업자가 5초 만에 점검 체크. 그 데이터가 법정 서식에 맞춰 서류가 됩니다. 감독관이 오면 PDF 즉시 출력. 엑셀에 옮기는 시대는 끝났습니다.</p>
+        <p>작업자가 5초 만에 점검 체크. 그 데이터가 법정 서식에 맞춰 서류가 됩니다. 감독관이 오면 PDF 즉시 출력.</p>
         <div class="feat-check">설비별 맞춤 점검 항목 (법령 기반)</div>
         <div class="feat-check">이상 발견 시 사진 첨부 + 관리자 자동 알림</div>
         <div class="feat-check">완료 즉시 법정 서류 자동 생성 + 3년 보관</div>
@@ -476,7 +380,7 @@
       <div class="feat-info">
         <h3>작업자는 앱 하나로
 점검·서명·보고·신고를 합니다.</h3>
-        <p>점검 체크, TBM 서명, 작업 지시 확인, 긴급 신고까지 하나의 앱에서 끝납니다. 작업자가 따로 배울 것이 없습니다.</p>
+        <p>점검 체크, TBM 서명, 작업 지시 확인, 긴급 신고까지 하나의 앱에서 끝납니다.</p>
         <div class="feat-check">QR 스캔으로 점검 항목 자동 로딩</div>
         <div class="feat-check">TBM 전자서명 (종이 불필요)</div>
         <div class="feat-check">작업 지시 수신 + 완료 보고</div>
@@ -507,7 +411,7 @@
       <div class="feat-info">
         <h3>사고 발생 1분 안에
 관계자 전원이 알게 됩니다.</h3>
-        <p>현장에서 긴급 신고 → 안전관리자·소장·본사까지 즉시 푸시 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다. 골든타임을 확보합니다.</p>
+        <p>현장에서 긴급 신고 → 안전관리자·소장·본사까지 즉시 푸시 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p>
         <div class="feat-check">현장 1-tap 긴급 신고 (사진 + 위치)</div>
         <div class="feat-check">관계자 전원 동시 푸시 알림</div>
         <div class="feat-check">대응 이력 자동 기록 → 법적 증빙</div>
@@ -546,7 +450,7 @@
       <div class="feat-info">
         <h3>로그인하면
 오늘 할 일이 바로 보입니다.</h3>
-        <p>완료·미처리·이행률·경고가 한 화면에. D-day 기반으로 긴급한 것이 위로 올라옵니다. 안전관리자는 &quot;무엇을 놓쳤는지&quot;를 1초 만에 알 수 있습니다.</p>
+        <p>완료·미처리·이행률·경고가 한 화면에. D-day 기반으로 긴급한 것이 위로 올라옵니다.</p>
         <div class="feat-check">담당자별 업무 이행 현황 실시간</div>
         <div class="feat-check">D-day 기반 자동 우선순위 정렬</div>
         <div class="feat-check">미이행 항목 즉시 파악 + 알림</div>
@@ -609,9 +513,9 @@
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">A. TAI 특허 기술</h3>
         <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-pat-01" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>1. 법령 자동 분석</h4><p>사업장 정보만 넣으면, 적용되는 법령과 의무를 자동으로 뽑아냅니다. 수십 개 법령, 수백 개 조문 — 사람이 하면 며칠, TAI는 3분.</p></div></a><a href="#feat-mock-dispatch" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>2. 안전업무 분산 배분</h4><p>안전관리자 혼자 떠안던 업무를, 작업자 전원이 나눠서 실행합니다. 배분·추적·알림이 자동. 안전관리자는 통제만.</p></div></a><a href="#feat-pat-03" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>3. 개정된 최신법으로 진단</h4><p>법령이 개정되면 엔진 기준이 갱신되어, 진단과 의무 산출에 최신 조문이 반영됩니다.</p></div></a><a href="#feat-mock-app" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>4. TAI Safe 앱 통합</h4><p>점검·TBM·작업 지시·긴급 신고를 하나의 앱에서 처리합니다. 작업자는 따로 배울 것이 없습니다.</p></div></a><a href="#feat-mock-check" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>5. 점검 → 서류 자동 변환</h4><p>현장에서 체크한 데이터가 법정 서식에 맞춰 서류가 됩니다. 엑셀에 옮길 필요 없습니다. 감독관이 오면 PDF 한 번에 출력.</p></div></a><a href="#feat-mock-emergency" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>6. 사고 즉시 알림</h4><p>현장에서 1-tap 신고 → 안전관리자·소장·본사까지 1분 내 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p></div></a></div>
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">B. SaaS 핵심 기능</h3>
-        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>7. 전용 안전 대시보드</h4><p>로그인하면 오늘 해야 할 일, 놓친 것, 이행률이 한눈에. D-day 기반 자동 정렬.</p></a><a href="#feat-08" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>8. 점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 캘린더에 자동으로 깔립니다.</p></a><a href="#feat-mock-check" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>9. 5초 현장 점검</h4><p>QR 찍고, 정상/이상 터치. 이상 시 관리자에게 즉시 알림.</p></a><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>10. D-day 알림</h4><p>점검 기한 3일 전, 7일 전 — 담당자에게 SMS 자동 발송.</p></a><a href="#feat-mock-dispatch" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>11. 담당자 세밀 배정</h4><p>법령 의무 하나하나에 담당자를 지정합니다.</p></a><a href="#feat-12" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>12. TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명.</p></a><a href="#feat-13" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>13. 안전회의 관리</h4><p>의사록 자동 생성. 참석·안건·결의 기록 보관.</p></a><a href="#feat-14" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>14. 교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적.</p></a><a href="#feat-15" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>15. 미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다.</p></a><a href="#feat-16" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>16. 설비 관리 + QR</h4><p>설비마다 QR을 붙이면, 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></a><a href="#feat-17" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>17. 공정 관리</h4><p>KSIC 기반으로 공정을 등록하면, 해당 공정의 법적 의무가 자동으로 연결됩니다.</p></a><a href="#feat-18" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>18. 작업 지시·요청</h4><p>작업 지시를 앱으로 내리면, 작업자가 받고, 완료 보고까지. 전화 불필요, 기록이 남음.</p></a><a href="#feat-19" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>19. 업무 일정</h4><p>안전관리자의 모든 업무가 일정으로. 날짜별·담당별 필터. 놓치는 것 없이.</p></a><a href="#feat-20" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>20. 작업자 관리</h4><p>근로자 명부·자격·교육이수·점검이력을 한 곳에서 관리. 감독관이 오면 즉시 출력.</p></a><a href="#feat-21" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>21. 권한 설정</h4><p>관리감독자·안전관리자·작업자 — 역할별 접근 권한을 세밀하게 설정.</p></a><a href="#feat-22" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>22. 하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서. 점검·서류·교육 통합 관리.</p></a><a href="#feat-23" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>23. 안전정보 피드</h4><p>산업안전 뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></a></div>
+        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>7. 전용 안전 대시보드</h4><p>로그인하면 오늘 해야 할 일, 놓친 것, 이행률이 한눈에. D-day 기반 자동 정렬.</p></a><a href="#feat-08" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>8. 점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 캘린더에 자동으로 깔립니다.</p></a><a href="#feat-mock-check" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>9. 5초 현장 점검</h4><p>QR 찍고, 정상/이상 터치. 이상 시 관리자에게 즉시 알림.</p></a><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>10. D-day 알림</h4><p>점검 기한 3일 전, 7일 전 — 담당자에게 SMS 자동 발송.</p></a><a href="#feat-mock-dispatch" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>11. 담당자 세밀 배정</h4><p>법령 의무 하나하나에 담당자를 지정합니다.</p></a><a href="#feat-12" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>12. TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명.</p></a><a href="#feat-13" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>13. 안전회의 관리</h4><p>의사록 자동 생성. 참석·안건·결의 기록 보관.</p></a><a href="#feat-14" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>14. 교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적.</p></a><a href="#feat-15" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>15. 미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다.</p></a><a href="#feat-16" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>16. 설비 관리 + QR</h4><p>QR 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></a><a href="#feat-17" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>17. 공정 관리</h4><p>KSIC 기반 공정 등록 → 법적 의무 자동 연결.</p></a><a href="#feat-18" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>18. 작업 지시·요청</h4><p>지시 → 수신 → 완료 보고. 전화 불필요, 기록이 남음.</p></a><a href="#feat-19" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>19. 업무 일정</h4><p>날짜별·담당별 필터. 놓치는 것 없이.</p></a><a href="#feat-20" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>20. 작업자 관리</h4><p>명부·자격·교육이수·점검이력 한 곳에서 관리.</p></a><a href="#feat-21" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>21. 권한 설정</h4><p>역할별 접근 권한을 세밀하게 설정.</p></a><a href="#feat-22" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>22. 하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서.</p></a><a href="#feat-23" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>23. 안전정보 피드</h4><p>뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></a></div>
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">C. 추가 서비스 · 유료 · 로드맵</h3>
-        <div class="sp-grid-4"><a href="#feat-24" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>24. 문서 보관함</h4><p>점검표·TBM·보고서 — 3년간 자동 보관. 감독관이 오면 즉시 출력.</p></a><a href="#feat-25" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>25. 보고서 자동 생성</h4><p>월간·분기 안전관리 보고서가 데이터 기반으로 자동 생성. 사장님에게 바로 보고.</p></a><a href="#feat-26" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>26. 일정 관리</h4><p>법령 엔진이 뽑아낸 의무가 일정으로 자동 변환. 수동 입력 불필요.</p></a><a href="#feat-27" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>27. 건설현장 전용</h4><p>현장등록·공정관리·근로자·업무·점검 — 건설 특화 메뉴를 별도로 제공합니다.</p></a><a href="#feat-28" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>28. 문서 자동 제출<span class="sp-badge-paid">유료</span></h4><p>안전관리자 선임신고, 점검결과 보고 — 관공서에 자동 전송. 직접 갈 필요 없습니다.</p></a><a href="#feat-29" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>29. 위험성평가<span class="sp-badge-review">유료 검토중</span></h4><p>위험성평가 작성부터 승인·서명까지 — 서식 자동 적용, 이력 자동 보관.</p></a><a href="#feat-30" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⏳</div><h4>30. 전문가 연결<span class="sp-badge-soon">2026 하반기 오픈 예정</span></h4><p>안전관리자 선임·컨설팅·수선 — 자격 검증된 전문가를 채팅으로 바로 연결합니다.</p></a><a href="#feat-31" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">🛡️</div><h4>31. 엔터프라이즈·SLA</h4><p>다사업장·다지역 통합, API, 전담 CS와 SLA까지 — 규모가 커져도 같은 엔진으로 갑니다.</p></a></div>
+        <div class="sp-grid-4"><a href="#feat-24" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>24. 문서 보관함</h4><p>3년간 자동 보관. 즉시 출력.</p></a><a href="#feat-25" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>25. 보고서 자동 생성</h4><p>데이터 기반 자동 생성.</p></a><a href="#feat-26" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>26. 일정 관리</h4><p>법령 의무 → 일정 자동 변환.</p></a><a href="#feat-27" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>27. 건설현장 전용</h4><p>건설 특화 메뉴 별도 제공.</p></a><a href="#feat-28" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>28. 문서 자동 제출<span class="sp-badge-paid">유료</span></h4><p>관공서에 자동 전송. 직접 갈 필요 없습니다.</p></a><a href="#feat-29" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>29. 위험성평가<span class="sp-badge-review">유료 검토중</span></h4><p>서식 자동 적용, 이력 자동 보관.</p></a><a href="#feat-30" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⏳</div><h4>30. 전문가 연결<span class="sp-badge-soon">2026 하반기 예정</span></h4><p>자격 검증된 전문가를 채팅으로 바로 연결.</p></a><a href="#feat-31" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">🛡️</div><h4>31. 엔터프라이즈·SLA</h4><p>다사업장·다지역 통합, API, 전담 CS.</p></a></div>
       </div>
     </div>
   </section>
@@ -634,7 +538,7 @@
       <div class="text-center mb-4">
         <span class="sp-label">법령 엔진</span>
         <h2 class="sp-h2">수만 조문을 사람이<br>매일 확인하기엔 너무 큽니다</h2>
-        <p class="sp-desc" style="max-width:620px;margin:0 auto;">엔진이 법령·조문을 구조화해 사업장에 맞는 의무로 변환합니다. 숫자는 엔진에 등록된 기준 규모입니다.</p>
+        <p class="sp-desc" style="max-width:620px;margin:0 auto;">엔진이 법령·조문을 구조화해 사업장에 맞는 의무로 변환합니다.</p>
       </div>
       <div class="sp-law sp-count-scope" id="sp-law-count-scope">
         <div class="sp-law-nums">
@@ -669,7 +573,7 @@
   <!-- ⑨ 도입 절차 -->
   <section class="sp-sec sp-sec-gray">
     <div class="container">
-      <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;">가입·설정·배포까지를 하루 단위로 쪼갠 4단계입니다. <strong>1일 세팅</strong>으로 최소 루프를 돌릴 수 있습니다.</p></div>
+      <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;"><strong>1일 세팅</strong>으로 최소 루프를 돌릴 수 있습니다.</p></div>
       <p class="sp-adopt-lead">하루 만에 &quot;돌아가는&quot; 최소 루프를 만듭니다</p>
       <div class="sp-adopt-grid mb-5">
         <div class="sp-adopt-card"><div class="ac-n">STEP 1</div><div class="ac-t">무료 법령진단<br><span style="font-weight:600;color:#64748b;font-size:.78rem;">적용 법령·의무 스캔 — 3분</span></div></div>
@@ -698,7 +602,7 @@
       <details><summary>직원이 스마트폰을 안 쓰면 어떻게 하나요?</summary><p>현장 QR 스캔은 스마트폰이 필요하지만, 관리자는 웹에서 직접 입력할 수 있습니다. 스마트폰이 없는 작업자는 관리감독자가 대리 입력하는 방식으로 운영 가능합니다.</p></details>
       <details><summary>법이 바뀌면 어떻게 반영되나요?</summary><p>엔진은 개정된 최신법 기준으로 진단·의무를 산출합니다. 법령이 바뀌면 서비스에 반영되며, 변경이 있는 경우 알림으로 안내드립니다.</p></details>
       <details><summary>최소 계약 기간이 있나요?</summary><p>월 단위 구독이며, 최소 계약 기간은 없습니다. 언제든지 해지할 수 있습니다.</p></details>
-      <details><summary>해지하면 데이터는 어떻게 되나요?</summary><p>해지 후 30일간 데이터를 보관하며, 그 기간 내에 PDF로 전체보내기가 가능합니다. 법정 보존 의무가 있는 서류는 보관 기간까지 유지됩니다.</p></details>
+      <details><summary>해지하면 데이터는 어떻게 되나요?</summary><p>해지 후 30일간 데이터를 보관하며, 그 기간 내에 PDF로 전체보내기가 가능합니다.</p></details>
     </div>
   </section>
 
@@ -915,20 +819,12 @@
   <script>
   'use strict';
   var SP_API = 'https://taieng.co.kr/_api';
-  var SP_RETURN  = SP_API + '/payments/inicis/return';
-  var SP_CLOSE   = SP_API + '/payments/result?resultCode=CLOSE';
 
-  function getCurrentUserId() {
-    return localStorage.getItem('user_id') || '';
-  }
+  function getCurrentUserId() { return localStorage.getItem('user_id') || ''; }
 
   function startBillingPayment(planCode, amount, goodname, productType) {
     var userId = getCurrentUserId();
-    if (!userId) {
-      alert('로그인 후 결제해주세요.');
-      location.href = '/log-in?redirect=' + encodeURIComponent(location.href);
-      return;
-    }
+    if (!userId) { alert('로그인 후 결제해주세요.'); location.href = '/log-in?redirect=' + encodeURIComponent(location.href); return; }
     var url = SP_API + '/payments/billing/pay'
       + '?user_id=' + encodeURIComponent(userId)
       + '&amount=' + encodeURIComponent(amount)
