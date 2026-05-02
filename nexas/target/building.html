@@ -27,32 +27,35 @@
     body.sc5 {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+
+    /* ── 카드 ── */
     .duty-card {
       background: #fff;
       border-radius: 14px;
-      padding: 24px 20px;
-      box-shadow: 0 3px 16px rgba(0,0,0,.07);
+      padding: 28px 24px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.07);
       height: 100%;
       border-left: 4px solid #1565c0;
     }
-    .duty-card h5 { font-size: 1rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-    .duty-card p { font-size: .88rem; color: #64748b; margin: 6px 0 0; line-height: 1.55; }
+    .duty-card h5 { font-size: 1.02rem; font-weight: 800; color: #1e293b; margin-bottom: 10px; }
+    .duty-card p  { font-size: .9rem; color: #64748b; margin: 0; line-height: 1.65; }
+
     .auto-block {
       background: #eff6ff;
-      border-radius: 14px;
-      padding: 28px 24px;
+      border-radius: 16px;
+      padding: 32px 28px;
       height: 100%;
     }
-    .auto-block h5 { font-size: 1rem; font-weight: 800; color: #0f2b4a; margin-bottom: 8px; }
-    .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
+    .auto-block h5 { font-size: 1.05rem; font-weight: 800; color: #0f2b4a; margin-bottom: 10px; }
+    .auto-block p  { font-size: .9rem; color: #374151; line-height: 1.65; margin: 0; }
 
-    /* 이미지 박스 */
+    /* ── 이미지 박스 ── */
     .tai-image-box,
     .tai-process-image,
     .compare-img {
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
+      box-shadow: 0 16px 40px rgba(15,23,42,.13);
       background: #e5e7eb;
     }
     .tai-image-box img,
@@ -62,23 +65,41 @@
       display: block;
       object-fit: cover;
     }
-    .tai-image-box img,
-    .tai-process-image img { height: 360px; }
+    .tai-image-box img    { height: 400px; }
+    .tai-process-image img{ height: 420px; }
+
+    /* ── Before/After ── */
     .compare-box {
       height: 100%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
       overflow: hidden;
     }
-    .compare-content { padding: 28px; }
-    .compare-content h4 { color: #fff; font-weight: 900; margin-bottom: 14px; }
-    .compare-content ul { margin: 0; padding-left: 18px; color: #d1d5db; line-height: 1.9; }
-    .compare-img img { height: 260px; }
+    .compare-img img   { height: 280px; }
+    .compare-content   { padding: 32px; }
+    .compare-content h4{ color: #fff; font-weight: 900; font-size: 1.2rem; margin-bottom: 16px; }
+    .compare-content ul{ margin: 0; padding-left: 20px; color: #d1d5db; line-height: 2.1; font-size: .95rem; }
+
+    /* ── 강한 메시지 ── */
+    .msg-section { padding: 100px 0; background: #1e293b; }
+    .msg-section h2 {
+      font-weight: 900;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      color: #fff;
+      line-height: 1.45;
+    }
+    .msg-section p { color: #94a3b8; margin-top: 20px; font-size: 1.05rem; line-height: 1.8; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 991px) {
+      .tai-image-box img { height: 320px; }
+    }
     @media (max-width: 768px) {
-      .tai-image-box img,
+      .tai-image-box img     { height: 240px; }
       .tai-process-image img { height: 240px; }
-      .compare-img img { height: 220px; }
+      .compare-img img       { height: 200px; }
+      .compare-content       { padding: 22px; }
     }
   </style>
 </head>
@@ -91,9 +112,10 @@
   <div class="body-overlay" id="body-overlay"></div>
   <div id="tai-header"></div>
 
-  <!-- 히어로 -->
+  <!-- ══ 히어로 — building1.png ══ -->
   <section class="tai-hero tai-hero--image" id="building-hero">
-    <div class="tai-hero__bg" style="background-image:url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building.png')"></div>
+    <div class="tai-hero__bg"
+         style="background-image:url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building1.png')"></div>
     <div class="tai-hero__overlay tai-hero__overlay--left"></div>
 
     <div class="container">
@@ -123,98 +145,100 @@
     </div>
   </section>
 
-  <!-- 현실 공감 + 이미지 -->
-  <section class="service-area default-pd-top pd-bottom-90">
+  <!-- ══ 현실 공감 — building2.png ══ -->
+  <section class="service-area" style="padding: 100px 0;">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-6">
           <div class="section-title">
             <h4 class="sub-title">건물 관리 현실</h4>
-            <h2 class="title">
+            <h2 class="title" style="line-height:1.4;">
               대부분의 건물은<br>
               정확히 무엇을 해야 하는지 모릅니다
             </h2>
-            <p>
+            <p style="font-size:.97rem;color:#475569;line-height:1.8;margin-top:16px;">
               관리사무소가 있고, 업체도 있고, 점검도 합니다.<br>
               하지만 어떤 법이 적용되는지, 어떤 의무가 있는지<br>
               정확히 알고 관리하는 경우는 많지 않습니다.
             </p>
-            <p>
-              그래서 관리가 아니라 "유지" 상태로 운영됩니다.
+            <p style="font-size:.97rem;color:#475569;line-height:1.8;margin-top:12px;">
+              그래서 관리가 아니라 <strong>"유지"</strong> 상태로 운영됩니다.
             </p>
           </div>
         </div>
 
         <div class="col-lg-6">
           <div class="tai-image-box">
-            <img src="../assets/img/building/building-manager-confused.jpg" alt="건물 관리자가 서류를 보며 고민하는 모습">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building2.png"
+                 alt="건물 관리자가 서류를 보며 고민하는 모습">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 문제 구조 -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
+  <!-- ══ 문제 구조 ══ -->
+  <section style="padding: 90px 0; background: #f8fafc;">
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title text-center" style="margin-bottom:48px;">
         <h4 class="sub-title">문제</h4>
-        <h2 class="title">관리는 나뉘어 있지만 책임은 하나입니다</h2>
+        <h2 class="title">관리는 나뉘어 있지만<br>책임은 하나입니다</h2>
       </div>
 
-      <div class="row g-4 mt-3">
+      <div class="row g-4">
         <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>소방업체</h5>
+            <h5>🔥 소방업체</h5>
             <p>점검은 하지만 전체 관리 흐름은 모릅니다</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>전기업체</h5>
+            <h5>⚡ 전기업체</h5>
             <p>자신의 영역만 관리합니다</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>승강기 / 가스</h5>
+            <h5>🛗 승강기 / 가스</h5>
             <p>각각 따로 관리됩니다</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>건물주 / 관리자</h5>
-            <p>전체 책임은 여기로 돌아옵니다</p>
+          <div class="duty-card" style="border-left-color:#dc2626;">
+            <h5>🏢 건물주 / 관리자</h5>
+            <p>모든 책임은 결국 여기로 돌아옵니다</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 수선 리스크 + 이미지 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
+  <!-- ══ 수선 리스크 — building3.png ══ -->
+  <section style="padding: 100px 0;">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-6 order-lg-1 order-2">
           <div class="tai-image-box">
-            <img src="../assets/img/building/building-repair.jpg" alt="건물 수리 작업 모습">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building3.png"
+                 alt="건물 수리 및 유지보수 작업">
           </div>
         </div>
 
         <div class="col-lg-6 order-lg-2 order-1">
           <div class="section-title">
             <h4 class="sub-title">가장 큰 리스크</h4>
-            <h2 class="title">
+            <h2 class="title" style="line-height:1.4;">
               수선 기록이 없으면<br>
               관리하지 않은 것으로 판단됩니다
             </h2>
-            <p>
+            <p style="font-size:.97rem;color:#475569;line-height:1.8;margin-top:16px;">
               전기 수리, 배관 교체, 소방 설비 교체.<br>
               대부분 기록 없이 진행됩니다.
             </p>
-            <p>
+            <p style="font-size:.97rem;color:#475569;line-height:1.8;margin-top:12px;">
               사고가 발생하면<br>
-              <strong>관리 책임 + 법적 책임</strong>으로 이어질 수 있습니다.
+              <strong style="color:#dc2626;">관리 책임 + 법적 책임</strong>으로 이어질 수 있습니다.
             </p>
           </div>
         </div>
@@ -222,44 +246,47 @@
     </div>
   </section>
 
-  <!-- Before / After -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#0f172a;color:#fff;">
+  <!-- ══ Before / After — building4.png / building5.png ══ -->
+  <section style="padding: 90px 0; background: #0f172a;">
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title text-center" style="margin-bottom:48px;">
         <h4 class="sub-title" style="color:#93c5fd;">Before / After</h4>
         <h2 class="title" style="color:#fff;">같은 건물, 결과는 다릅니다</h2>
+        <p style="color:#94a3b8;margin-top:10px;">TAI를 도입하기 전과 후, 안전관리 방식이 완전히 바뀝니다.</p>
       </div>
 
-      <div class="row g-4 mt-3">
+      <div class="row g-4">
         <div class="col-lg-6">
           <div class="compare-box">
             <div class="compare-img">
-              <img src="../assets/img/building/building-before.jpg" alt="기존 건물 안전관리">
+              <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
+                   alt="기존 건물 안전관리 방식">
             </div>
             <div class="compare-content">
               <h4>기존 관리</h4>
               <ul>
-                <li>법령 파악 안됨</li>
-                <li>업체별 분산 관리</li>
-                <li>수선 기록 없음</li>
-                <li>점검 대응 어려움</li>
+                <li>어떤 법이 적용되는지 파악 안됨</li>
+                <li>업체별로 분산 관리</li>
+                <li>수선·보수 기록 없음</li>
+                <li>점검 대응 때 서류 찾기 어려움</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="col-lg-6">
-          <div class="compare-box">
+          <div class="compare-box" style="border-color:rgba(99,179,237,.3);">
             <div class="compare-img">
-              <img src="../assets/img/building/building-after.jpg" alt="TAI 이후 건물 안전관리">
+              <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.png"
+                   alt="TAI 도입 후 건물 안전관리">
             </div>
             <div class="compare-content">
-              <h4>TAI 이후</h4>
-              <ul>
-                <li>법령 자동 적용</li>
-                <li>점검 일정 자동 관리</li>
-                <li>수선 이력 기록</li>
-                <li>증빙 즉시 제출</li>
+              <h4 style="color:#93c5fd;">TAI 이후</h4>
+              <ul style="color:#bfdbfe;">
+                <li>법령 자동 적용 및 안내</li>
+                <li>점검 일정 자동 생성 · 알림</li>
+                <li>수선 이력 자동 기록 보관</li>
+                <li>감사 · 점검 대응 즉시 제출 가능</li>
               </ul>
             </div>
           </div>
@@ -268,70 +295,78 @@
     </div>
   </section>
 
-  <!-- TAI Safe -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
+  <!-- ══ TAI Safe — building6.png ══ -->
+  <section style="padding: 100px 0;">
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title text-center" style="margin-bottom:48px;">
         <h4 class="sub-title">TAI Safe</h4>
         <h2 class="title">건물 안전관리를 하나로 묶습니다</h2>
+        <p style="color:#64748b;margin-top:12px;font-size:.97rem;">
+          법령 확인부터 점검, 수선, 증빙까지 하나의 흐름으로 관리합니다.
+        </p>
       </div>
 
-      <div class="tai-process-image mt-4">
-        <img src="../assets/img/building/building-flow.jpg" alt="건물 안전관리 흐름">
+      <div class="tai-process-image">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
+             alt="TAI Safe 건물 안전관리 흐름">
       </div>
 
-      <div class="row g-4 mt-4">
+      <div class="row g-4 mt-5">
         <div class="col-lg-3 col-md-6">
           <div class="auto-block">
-            <h5>법령 자동 판정</h5>
-            <p>건물 조건 기반 자동 분석</p>
+            <h5>⚖️ 법령 자동 판정</h5>
+            <p>건물 규모·용도·시설 조건을 입력하면 적용 법령을 자동으로 분석합니다.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="auto-block">
-            <h5>점검 자동 관리</h5>
-            <p>주기별 일정 생성</p>
+            <h5>📅 점검 일정 자동 관리</h5>
+            <p>소방·전기·승강기·가스 점검 주기를 법령 기준으로 자동 생성합니다.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="auto-block">
-            <h5>수선 기록 관리</h5>
-            <p>이력 자동 저장</p>
+            <h5>🔧 수선 기록 관리</h5>
+            <p>수리·교체·보수 이력을 자동으로 저장하고 언제든 조회할 수 있습니다.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
           <div class="auto-block">
-            <h5>증빙 보관</h5>
-            <p>감사 대응 가능</p>
+            <h5>🧾 증빙 즉시 보관</h5>
+            <p>감독관청 점검 시 필요한 서류를 즉시 출력·제출할 수 있습니다.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 강한 메시지 -->
-  <section class="pd-top-90 pd-bottom-90" style="background:#1e293b;color:#fff;">
+  <!-- ══ 강한 메시지 ══ -->
+  <div class="msg-section">
     <div class="container text-center">
-      <h2 style="font-weight:900;color:#fff;line-height:1.4;">
+      <h2>
         모르면 위반,<br>
         기록 없으면 책임입니다
       </h2>
+      <p>
+        건물 안전관리는 점검보다 먼저,<br>
+        "우리 건물에 어떤 의무가 있는지" 아는 것에서 시작합니다.
+      </p>
     </div>
-  </section>
+  </div>
 
-  <!-- 최종 CTA -->
+  <!-- ══ 최종 CTA ══ -->
   <section class="subscribe-area">
     <div class="container">
       <div class="subscribe-inner">
         <div class="row align-items-center">
           <div class="col-lg-5">
             <h2>내 건물, 지금 안전한가요?</h2>
-            <p class="pe-4">3분이면 확인할 수 있습니다</p>
+            <p class="pe-4">3분 무료 법령진단으로 적용 법령과 점검 의무를 바로 확인할 수 있습니다.</p>
           </div>
           <div class="col-lg-6 offset-lg-1">
             <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
-              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단</a>
-              <a href="../fix-request.html?from=target-building&type=general" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
+              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:14px 30px;font-size:1rem;">무료 법령진단 시작</a>
+              <a href="../fix-request.html?from=target-building&type=general" class="btn btn-border-white" style="padding:14px 26px;font-size:1rem;">도입 문의</a>
             </div>
           </div>
         </div>
