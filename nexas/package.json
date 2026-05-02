@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Nexas template — SCSS build for TAI public site",
   "scripts": {
-    "build": "sass assets/sass/style.scss assets/css/style.css --style=expanded",
+    "build": "sass assets/sass/style.scss assets/css/style.css --style=expanded && node scripts/check-sitemaps.js",
     "build:min": "sass assets/sass/style.scss assets/css/style.css --style=compressed --no-source-map",
     "start": "serve . -l tcp://0.0.0.0:${PORT:-3000}"
   },

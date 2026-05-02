@@ -2,6 +2,8 @@
 """
 Supabase에서 ID를 조회해 섹션별 사이트맵 + sitemap_index.xml 생성.
 
+뉴스(sitemap_news_N) 분할 개수가 바뀌면 nexas/_redirects 의 동일 목록도 수정하세요.
+
 섹션별 파일:
   sitemap_marketing.xml
   sitemap_news[_N].xml       — kosha_safety_materials
