@@ -27,7 +27,6 @@
     body.sc5 {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-
     .law-card {
       background: #fff;
       border-radius: 12px;
@@ -47,8 +46,6 @@
       border-left: 4px solid #059669;
     }
     .duty-card h5 { font-size: 1rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-    .duty-card .duty-cycle { font-size: .82rem; font-weight: 700; color: #059669; margin-bottom: 6px; }
-    .duty-card .duty-fine { font-size: .8rem; color: #dc2626; font-weight: 700; }
     .duty-card p { font-size: .88rem; color: #64748b; margin: 6px 0 0; line-height: 1.55; }
     .auto-block {
       background: #f0fdf4;
@@ -59,6 +56,41 @@
     .auto-block .ab-icon { font-size: 2rem; margin-bottom: 12px; }
     .auto-block h5 { font-size: 1rem; font-weight: 800; color: #14532d; margin-bottom: 8px; }
     .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
+
+    /* 이미지 박스 */
+    .tai-image-box,
+    .tai-process-image,
+    .compare-img {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
+      background: #e5e7eb;
+    }
+    .tai-image-box img,
+    .tai-process-image img,
+    .compare-img img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .tai-image-box img { height: 360px; }
+    .tai-process-image img { height: 360px; }
+    .compare-box {
+      height: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .compare-content { padding: 28px; }
+    .compare-content h4 { color: #fff; font-weight: 900; margin-bottom: 14px; }
+    .compare-content ul { margin: 0; padding-left: 18px; color: #d1d5db; line-height: 1.9; }
+    .compare-img img { height: 260px; }
+    @media (max-width: 768px) {
+      .tai-image-box img,
+      .tai-process-image img { height: 240px; }
+      .compare-img img { height: 220px; }
+    }
   </style>
 </head>
 <body class="sc5">
@@ -74,183 +106,260 @@
   <section class="tai-hero tai-hero--image" id="factory-hero">
     <div class="tai-hero__bg" style="background-image:url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory.png')"></div>
     <div class="tai-hero__overlay tai-hero__overlay--left"></div>
+
     <div class="container">
       <div class="tai-hero__inner">
-        <p class="tai-hero__eyebrow">제조 · 산업현장</p>
+        <p class="tai-hero__eyebrow">제조 · 산업현장 안전관리</p>
+
         <h1 class="tai-hero__title">
-          산업현장 안전관리<br>
-          <span class="accent">이제는 바뀌어야 합니다.</span>
+          안전관리자 혼자서는<br>
+          <span class="accent">이 구조를 감당할 수 없습니다</span>
         </h1>
+
         <p class="tai-hero__sub">
-          종이 체크리스트와 엑셀은 한계가 있습니다.<br>
-          TAI Safe가 법령 의무를 자동 파악하고,<br>
-          작업자에게 배정하고, 누락 없이 관리합니다.
+          수십 개 공정, 수백 개 설비, 수많은 작업자.<br>
+          문제는 사람이 아니라 구조입니다.
         </p>
+
         <p class="tai-hero__micro">
-          산업안전보건법 · 중대재해처벌법 · 화학물질관리법<br>
-          우리 공장에 적용되는 법령, 3분이면 확인됩니다.
+          TAI Safe는 법령 진단부터 점검 배정, 이상 보고, 증빙 보관까지<br>
+          안전관리 업무를 현장 전체가 함께 수행하는 구조로 바꿉니다.
         </p>
+
         <div class="tai-hero__cta">
           <a class="tai-btn-pri" href="../free-diagnosis.html">무료 법령진단 시작 →</a>
-          <a class="tai-btn-sec" href="../fix-request.html?from=target-factory&amp;type=general">도입 문의</a>
+          <a class="tai-btn-sec" href="../fix-request.html?from=target-factory&type=general">도입 문의</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 적용 법령 -->
+  <!-- 현실 공감 + 이미지 -->
   <section class="service-area default-pd-top pd-bottom-90">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">적용 법령</h4>
-            <h2 class="title">제조공장에 적용되는 주요 법령</h2>
-            <p>공장 규모와 업종에 따라 적용 법령이 달라집니다. TAI가 자동으로 파악합니다.</p>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="section-title">
+            <h4 class="sub-title">현장의 현실</h4>
+            <h2 class="title">
+              안전관리는 하고 있지만,<br>
+              제대로 돌아가고 있지는 않습니다
+            </h2>
+            <p>
+              대부분의 제조현장은 점검표도 있고, 담당자도 있고, 서류도 있습니다.
+              하지만 실제 현장에서는 안전관리자 1~2명이 모든 공정과 설비,
+              작업자를 직접 관리하기 어렵습니다.
+            </p>
+            <p>
+              그래서 결국 "안 걸릴 정도"의 관리가 되고,
+              이상은 늦게 보고되고, 기록은 흩어지고, 조치는 연결되지 않습니다.
+            </p>
           </div>
         </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-lg-2 col-md-4 col-6">
-          <div class="law-card">
-            <div class="law-icon">🏭</div>
-            <h5>산업안전보건법</h5>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-6">
-          <div class="law-card">
-            <div class="law-icon">⚖️</div>
-            <h5>중대재해처벌법</h5>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-6">
-          <div class="law-card">
-            <div class="law-icon">🧪</div>
-            <h5>화학물질관리법</h5>
-          </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-6">
-          <div class="law-card">
-            <div class="law-icon">💨</div>
-            <h5>고압가스 안전관리법</h5>
+
+        <div class="col-lg-6">
+          <div class="tai-image-box">
+            <img src="../assets/img/factory/factory-overload.jpg" alt="안전관리자가 많은 업무를 혼자 처리하는 모습">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 주요 점검 의무 -->
+  <!-- 문제 구조 -->
   <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">점검 의무</h4>
-            <h2 class="title">주요 법정 점검 의무</h2>
-            <p>매일·매월·수시로 발생하는 점검 의무를 빠뜨리면 즉시 과태료 대상입니다.</p>
-          </div>
-        </div>
+      <div class="section-title text-center">
+        <h4 class="sub-title">구조적 문제</h4>
+        <h2 class="title">사고는 몰라서가 아니라, 놓쳐서 발생합니다</h2>
+        <p>현장의 문제는 대부분 개인 역량이 아니라 관리 구조에서 시작됩니다.</p>
       </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-lg-4 col-md-6">
+
+      <div class="row g-4 mt-3">
+        <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>작업 시작 전 점검</h5>
-            <div class="duty-cycle">📅 매일 작업 전</div>
-            <div class="duty-fine">⚠️ 미이행 시 과태료</div>
-            <p>기계·설비·공구 등의 이상 유무를 작업 시작 전 반드시 확인해야 합니다. TAI 앱으로 1분 내 완료합니다.</p>
+            <h5>공정은 많은데</h5>
+            <p>안전관리자가 모든 공정을 직접 볼 수 없습니다.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>정기 안전점검</h5>
-            <div class="duty-cycle">📅 월 1회 이상</div>
-            <div class="duty-fine">⚠️ 점검 기록 보관 의무</div>
-            <p>사업장 전반의 안전 상태를 정기적으로 점검하고 결과를 기록해야 합니다. 과거 기록은 감사 때 중요한 증거가 됩니다.</p>
+            <h5>설비는 많은데</h5>
+            <p>설비별 점검 주기와 법정 의무가 서로 다릅니다.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>위험성평가</h5>
-            <div class="duty-cycle">📅 최초 + 정기 + 수시</div>
-            <div class="duty-fine">⚠️ 중대재해처벌법 핵심 의무</div>
-            <p>새로운 공정 도입, 설비 변경, 사고 발생 시 수시로 실시해야 합니다. 결과서 작성과 보존이 필수입니다.</p>
+            <h5>작업자는 많은데</h5>
+            <p>작업자가 안전관리 흐름에 참여하지 않습니다.</p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-3 col-md-6">
           <div class="duty-card">
-            <h5>MSDS 비치·교육</h5>
-            <div class="duty-cycle">📅 상시 비치 + 연간 교육</div>
-            <div class="duty-fine">⚠️ 미비치 시 과태료 최대 500만 원</div>
-            <p>화학물질을 취급하는 작업장은 MSDS를 반드시 비치하고, 작업자에게 내용을 교육해야 합니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="duty-card">
-            <h5>안전관리자 선임</h5>
-            <div class="duty-cycle">📅 50인 이상 사업장 의무</div>
-            <div class="duty-fine">⚠️ 미선임 시 과태료 500만 원</div>
-            <p>상시 근로자 50인 이상 사업장은 안전관리자를 반드시 선임해야 합니다. 자격 기준과 선임 기한을 지켜야 합니다.</p>
+            <h5>기록은 있는데</h5>
+            <p>이상, 조치, 증빙이 하나로 연결되지 않습니다.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TAI 자동화 -->
+  <!-- 위험성평가 + 이미지 -->
   <section class="featured-area pd-top-110 pd-bottom-110">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="section-title text-center">
-            <h4 class="sub-title">TAI Safe</h4>
-            <h2 class="title">TAI가 자동화하는 것들</h2>
-            <p>안전관리자 혼자 다 하던 구조에서, 작업자가 함께 참여하는 구조로.</p>
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 order-lg-1 order-2">
+          <div class="tai-image-box">
+            <img src="../assets/img/factory/risk-assessment-workers.jpg" alt="작업자가 참여하는 위험성평가">
           </div>
         </div>
-      </div>
-      <div class="row justify-content-center g-4 mt-2">
-        <div class="col-lg-4 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">⚙️</div>
-            <h5>설비별 점검 일정 자동 관리</h5>
-            <p>설비 종류와 법령 주기를 입력하면 연간 점검 일정이 자동 생성됩니다. 담당자 배정과 D-3 알림까지 자동입니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">📱</div>
-            <h5>작업자 모바일 체크 + 이상 알림</h5>
-            <p>작업자가 현장에서 모바일로 직접 점검 결과를 입력합니다. 이상이 발생하면 안전관리자에게 즉시 알림이 발송됩니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">🧪</div>
-            <h5>화학물질 라벨·MSDS 자동 연동</h5>
-            <p>취급 화학물질 정보를 입력하면 경고 라벨과 MSDS가 자동 연동됩니다. 교육 이력도 함께 관리됩니다.</p>
+
+        <div class="col-lg-6 order-lg-2 order-1">
+          <div class="section-title">
+            <h4 class="sub-title">위험성평가</h4>
+            <h2 class="title">
+              위험성평가는 이제<br>
+              안전관리자 혼자 만드는 문서가 아닙니다
+            </h2>
+            <p>
+              작업자 참여 없는 위험성평가, 현장이 반영되지 않은 평가,
+              기록만 있는 평가는 사고 발생 시 형식적 평가로 판단될 수 있습니다.
+            </p>
+            <p>
+              현장의 위험은 작업자가 가장 먼저 압니다.
+              TAI Safe는 작업자가 직접 위험요인 확인과 점검에 참여하도록 구조를 바꿉니다.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- Before / After -->
+  <section class="service-area pd-top-90 pd-bottom-90" style="background:#0f172a;color:#fff;">
+    <div class="container">
+      <div class="section-title text-center">
+        <h4 class="sub-title" style="color:#93c5fd;">Before / After</h4>
+        <h2 class="title" style="color:#fff;">같은 현장, 결과는 완전히 다릅니다</h2>
+        <p style="color:#cbd5e1;">TAI를 쓰기 전과 후, 안전관리 방식은 두 가지로 나뉩니다.</p>
+      </div>
+
+      <div class="row g-4 mt-3 align-items-stretch">
+        <div class="col-lg-6">
+          <div class="compare-box compare-box--before">
+            <div class="compare-img">
+              <img src="../assets/img/factory/before-paper-safety.jpg" alt="종이와 엑셀로 관리하는 기존 안전관리">
+            </div>
+            <div class="compare-content">
+              <h4>TAI 이전</h4>
+              <ul>
+                <li>안전관리자 중심</li>
+                <li>종이 점검표와 엑셀 관리</li>
+                <li>이상 보고 지연</li>
+                <li>기록과 조치 분리</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="compare-box compare-box--after">
+            <div class="compare-img">
+              <img src="../assets/img/factory/after-digital-safety.jpg" alt="TAI로 전산화된 안전관리">
+            </div>
+            <div class="compare-content">
+              <h4>TAI 이후</h4>
+              <ul>
+                <li>작업자 참여형 점검</li>
+                <li>담당자 자동 배정</li>
+                <li>이상 즉시 알림</li>
+                <li>증빙 자동 저장</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAI 해결 구조 -->
+  <section class="featured-area pd-top-110 pd-bottom-110">
+    <div class="container">
+      <div class="section-title text-center">
+        <h4 class="sub-title">TAI Safe</h4>
+        <h2 class="title">안전관리를 분산하고, 전산화합니다</h2>
+        <p>안전관리자는 모든 일을 직접 하는 사람이 아니라, 현장 전체를 운영하는 사람이 되어야 합니다.</p>
+      </div>
+
+      <div class="tai-process-image mt-4">
+        <img src="../assets/img/factory/tai-safety-flow.jpg" alt="법령 진단부터 점검 배정, 이상 보고, 증빙 저장까지 이어지는 TAI Safe 흐름">
+      </div>
+
+      <div class="row g-4 mt-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">⚖️</div>
+            <h5>법령 자동 판정</h5>
+            <p>업종, 인원, 설비 조건에 따라 적용 법령과 의무 항목을 자동으로 정리합니다.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">👷</div>
+            <h5>작업자 점검 배정</h5>
+            <p>안전관리자가 혼자 하는 점검을 작업자와 조장에게 분산합니다.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">🔔</div>
+            <h5>이상 즉시 알림</h5>
+            <p>현장에서 이상이 입력되면 관리자에게 즉시 전달됩니다.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <div class="auto-block">
+            <div class="ab-icon">🧾</div>
+            <h5>증빙 자동 저장</h5>
+            <p>누가, 언제, 무엇을 확인했는지 기록과 보고서로 남습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 강한 메시지 -->
+  <section class="pd-top-90 pd-bottom-90" style="background:#064e3b;color:#fff;">
+    <div class="container text-center">
+      <h2 style="font-weight:900;color:#fff;line-height:1.45;">
+        문제는 사람이 아니라 구조입니다.<br>
+        안전관리도 이제 시스템으로 운영해야 합니다.
+      </h2>
+      <p style="color:#d1fae5;margin-top:18px;">
+        법령에서 시작해 점검, 조치, 증빙까지.<br>
+        TAI Safe가 현장 안전관리의 흐름을 바꿉니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 최종 CTA -->
   <section class="subscribe-area">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="subscribe-inner">
-            <div class="row align-items-center">
-              <div class="col-lg-5">
-                <h2>내 공장에 적용되는 법령을 확인하세요</h2>
-                <p class="pe-4">업종·규모·설비를 입력하면 적용 법령과 의무 항목을 3분 내에 확인할 수 있습니다.</p>
-              </div>
-              <div class="col-lg-6 offset-lg-1">
-                <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
-                  <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단 시작</a>
-                  <a href="../fix-request.html?from=target-factory&type=general" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
-                </div>
-              </div>
+      <div class="subscribe-inner">
+        <div class="row align-items-center">
+          <div class="col-lg-5">
+            <h2>우리 공장, 지금 구조로 안전관리가 가능할까요?</h2>
+            <p class="pe-4">
+              업종, 인원, 설비를 입력하면 적용 법령과 의무 항목을 3분 내에 확인할 수 있습니다.
+            </p>
+          </div>
+          <div class="col-lg-6 offset-lg-1">
+            <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
+              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단 시작</a>
+              <a href="../fix-request.html?from=target-factory&type=general" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
             </div>
           </div>
         </div>
@@ -268,6 +377,7 @@
   <script src="../assets/js/wow.min.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/header.js"></script>
+  <script src="../assets/js/nav-auth.js"></script>
   <script src="../assets/js/footer.js"></script>
   <script>if (typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
