@@ -13,7 +13,6 @@ import json
 import os
 import re
 import sys
-import urllib.parse
 from datetime import datetime, timezone
 from typing import Any
 
