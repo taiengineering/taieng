@@ -26,10 +26,14 @@
 
   function filterLegalCopy(s) {
     var t = String(s || "");
+    t = t.replace(/법률\s*상담/g, "시스템 가이드");
     t = t.replace(/법적\s*판단/g, "조건코드 기반 자동 판정");
-    t = t.replace(/대행/g, "시스템 자동화·지원");
+    t = t.replace(/대행/g, "시스템 가이드");
     return normalizeSpaces(removePriceLike(t));
   }
+
+  var OG_IMAGE_DEFAULT = "https://taieng.co.kr/assets/img/og-image.png";
+  var OG_TITLE_SUFFIX = " | 산업안전 가이드 TAI Safe";
 
   function clip(s, max) {
     var t = String(s || "");
@@ -85,8 +89,10 @@
     var desc = body + " 3분 무료 법령진단 가능.";
     document.title = title + " | TAI Safe";
     ensureMeta("description", desc);
-    ensureOg("og:title", title + " | TAI Safe");
+    ensureOg("og:type", "website");
+    ensureOg("og:title", title + OG_TITLE_SUFFIX);
     ensureOg("og:description", desc);
+    ensureOg("og:image", OG_IMAGE_DEFAULT);
     setCanonicalAbsolute();
   }
 
