@@ -165,7 +165,7 @@ main 브랜치 커밋.
 
 **프롬프트:**
 ```
-https://new.taieng.co.kr/provider-register.html 열고:
+https://taieng.co.kr/provider-register.html 열고:
 
 1. Step 1: 회사명 입력, 주소 검색("테헤란로") → 드롭다운 확인 → 선택
 2. Step 2: 인허가 탭에서 "전기공사" 검색→선택. 인력 탭에서 "전기기사" 검색→선택→3명
@@ -180,7 +180,7 @@ https://new.taieng.co.kr/provider-register.html 열고:
 
 **프롬프트:**
 ```
-https://new.taieng.co.kr/fix-request.html 열고:
+https://taieng.co.kr/fix-request.html 열고:
 
 1. Step 1: 회사명, 주소 검색, 담당자 정보 입력
 2. Step 2: 전기 탭 선택, "분전반에서 타는 냄새가 난다" 입력, 긴급 선택

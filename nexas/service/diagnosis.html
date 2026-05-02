@@ -455,7 +455,7 @@
       </div>
     </div>
     <div class="fd-free-browser">
-      <div class="fd-bar"><span class="fd-dot r"></span><span class="fd-dot y"></span><span class="fd-dot g"></span><div class="fd-url">new.taieng.co.kr/free-diagnosis-result</div></div>
+      <div class="fd-bar"><span class="fd-dot r"></span><span class="fd-dot y"></span><span class="fd-dot g"></span><div class="fd-url">taieng.co.kr/free-diagnosis-result</div></div>
       <div style="background:#fff;padding:20px;font-size:.75rem;">
         <div style="display:inline-block;background:#f1f5f9;border-radius:999px;padding:4px 12px;font-size:.65rem;color:#64748b;font-weight:700;margin-bottom:12px;">건물 · 제조업 · 50인 · 500㎡ 기준</div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;"><span style="background:#dc2626;color:#fff;font-weight:900;font-size:.8rem;padding:6px 14px;border-radius:8px;">HIGH RISK</span><span style="font-size:.85rem;font-weight:800;color:#0f172a;">205건의 법적 의무가 확인되었습니다</span></div>
@@ -673,8 +673,8 @@
 
 /* KG이니시스 결제 */
 var DIAG_API = 'https://api.taieng.co.kr';
-var DIAG_RETURN = 'https://new.taieng.co.kr/_api/payments/inicis/return';
-var DIAG_CLOSE  = 'https://new.taieng.co.kr/_api/payments/result?resultCode=CLOSE';
+var DIAG_RETURN = 'https://taieng.co.kr/_api/payments/inicis/return';
+var DIAG_CLOSE  = 'https://taieng.co.kr/_api/payments/result?resultCode=CLOSE';
 
 function diagPay(productType, planCode, amount, goodname) {
   var token     = localStorage.getItem('access_token') || '';

@@ -1,4 +1,4 @@
-// Cloudflare Worker — new.taieng.co.kr/_api/* -> api.taieng.co.kr/*
+// Cloudflare Worker — taieng.co.kr/_api/* -> api.taieng.co.kr/* (레거시 호스트 동일)
 export default {
   async fetch(request) {
     const url = new URL(request.url);

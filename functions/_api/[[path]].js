@@ -1,6 +1,6 @@
 /**
  * Cloudflare Pages Function — /_api/* 프록시
- * new.taieng.co.kr/_api/payments/inicis/return
+ * taieng.co.kr/_api/payments/inicis/return (레거시: new.taieng.co.kr 동일 경로)
  *   → api.taieng.co.kr/payments/inicis/return
  *
  * 목적: 이니시스 V023 에러 방지 (결제요청 페이지와 returnUrl 도메인 일치)
