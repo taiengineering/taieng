@@ -75,36 +75,34 @@
       margin: 0; padding-left: 16px; color: rgba(255,255,255,.85); font-size: .82rem; line-height: 1.9;
     }
 
-    /* ── SVG 흐름 이미지 — 어두운 배경 ── */
-    .flow-image {
-      border-radius: 20px;
+    /* ── SVG 소형 이미지 (1/4 크기) ── */
+    .svg-thumb {
+      border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 16px 40px rgba(15,23,42,.25);
       background: #0f172a;
-      padding: 40px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.2);
     }
-    .flow-image img {
+    .svg-thumb.green { background: #0c1f14; }
+    .svg-thumb img {
       width: 100%;
       display: block;
       height: auto;
-      min-height: 200px;
       object-fit: contain;
     }
-
-    .flow-label {
-      display: inline-block; background: #1565c0; color: #fff;
-      font-size: .8rem; font-weight: 800; letter-spacing: .05em;
-      padding: 5px 14px; border-radius: 20px; margin-bottom: 12px;
+    .svg-thumb-label {
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      padding: 3px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 8px;
     }
-
-    .msg-section { padding: 100px 0; background: #1e293b; }
-    .msg-section h2 { font-weight: 900; font-size: clamp(1.7rem, 3.5vw, 2.7rem); color: #fff; line-height: 1.45; }
-    .msg-section p { color: #94a3b8; margin-top: 20px; font-size: 1.05rem; line-height: 1.8; }
 
     @media (max-width: 991px) { .tai-image-box img, .tai-repair-box img { height: 300px; } }
     @media (max-width: 768px) {
       .tai-image-box img, .tai-repair-box img { height: 240px; }
-      .flow-image { padding: 24px; }
       .ba-overlay-left ul, .ba-overlay-right ul { font-size: .76rem; }
     }
   </style>
@@ -286,90 +284,57 @@
     </div>
   </section>
 
-  <!-- ══ TAI Safe — building5.svg / building6.svg ══ -->
-  <section style="padding: 100px 0;">
+  <!-- ══ 마무리 — SVG 소형 이미지(좌) + 메시지·CTA(우) ══ -->
+  <section style="padding: 100px 0; background: #f8fafc;">
     <div class="container">
-      <div class="section-title text-center" style="margin-bottom:60px;">
-        <h4 class="sub-title">TAI Safe</h4>
-        <h2 class="title">건물 안전관리를 하나로 묶습니다</h2>
-        <p style="color:#64748b;margin-top:12px;font-size:.97rem;">
-          법령진단에서 시작해 TAI Safe가 모든 흐름을 자동으로 연결합니다.
-        </p>
-      </div>
+      <div class="row align-items-center g-5">
 
-      <!-- STEP 1 — building5.svg -->
-      <div style="margin-bottom:56px;">
-        <div style="margin-bottom:16px;">
-          <span class="flow-label">STEP 1</span>
-          <h4 style="font-weight:800;color:#1e293b;font-size:1.2rem;margin:0;">법령진단으로 의무 파악</h4>
-          <p style="color:#64748b;font-size:.9rem;margin-top:6px;">건물 조건을 입력하면 적용 법령과 점검 의무가 자동으로 정리됩니다.</p>
-        </div>
-        <div class="flow-image">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.svg"
-               alt="법령진단으로 건물 안전관리 의무를 파악하는 흐름">
-        </div>
-        <div class="text-center mt-4">
-          <a href="../free-diagnosis.html"
-             class="btn btn-primary"
-             style="padding:13px 32px;font-size:1rem;background:#1565c0;border-color:#1565c0;border-radius:8px;">
-            무료 법령진단 시작 →
-          </a>
-        </div>
-      </div>
-
-      <!-- STEP 2 — building6.svg -->
-      <div>
-        <div style="margin-bottom:16px;">
-          <span class="flow-label" style="background:#059669;">STEP 2</span>
-          <h4 style="font-weight:800;color:#1e293b;font-size:1.2rem;margin:0;">TAI Safe로 전체 관리</h4>
-          <p style="color:#64748b;font-size:.9rem;margin-top:6px;">점검 일정, 수선 기록, 증빙 보관까지 하나의 시스템으로 운영합니다.</p>
-        </div>
-        <div class="flow-image" style="background:#0c1f14;">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.svg"
-               alt="TAI Safe로 건물 안전관리 전체를 운영하는 흐름">
-        </div>
-        <div class="text-center mt-4">
-          <a href="https://safe.taieng.co.kr"
-             class="btn btn-success"
-             style="padding:13px 32px;font-size:1rem;background:#059669;border-color:#059669;border-radius:8px;"
-             target="_blank">
-            TAI Safe 서비스 보기 →
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ 강한 메시지 ══ -->
-  <div class="msg-section">
-    <div class="container text-center">
-      <h2>
-        모르면 위반,<br>
-        기록 없으면 책임입니다
-      </h2>
-      <p>
-        건물 안전관리는 점검보다 먼저,<br>
-        "우리 건물에 어떤 의무가 있는지" 아는 것에서 시작합니다.
-      </p>
-    </div>
-  </div>
-
-  <!-- ══ 최종 CTA ══ -->
-  <section class="subscribe-area">
-    <div class="container">
-      <div class="subscribe-inner">
-        <div class="row align-items-center">
-          <div class="col-lg-5">
-            <h2>내 건물, 지금 안전한가요?</h2>
-            <p class="pe-4">3분 무료 법령진단으로 적용 법령과 점검 의무를 바로 확인할 수 있습니다.</p>
+        <!-- 좌측: building5/6 소형 이미지 2개 -->
+        <div class="col-lg-5">
+          <div class="mb-3">
+            <span class="svg-thumb-label" style="background:#1565c0;color:#fff;">STEP 1 · 법령진단</span>
+            <div class="svg-thumb">
+              <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.svg"
+                   alt="법령진단 흐름">
+            </div>
           </div>
-          <div class="col-lg-6 offset-lg-1">
-            <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
-              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:14px 30px;font-size:1rem;">무료 법령진단 시작</a>
-              <a href="../fix-request.html?from=target-building&type=general" class="btn btn-border-white" style="padding:14px 26px;font-size:1rem;">도입 문의</a>
+          <div>
+            <span class="svg-thumb-label" style="background:#059669;color:#fff;">STEP 2 · TAI Safe</span>
+            <div class="svg-thumb green">
+              <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.svg"
+                   alt="TAI Safe 관리 흐름">
             </div>
           </div>
         </div>
+
+        <!-- 우측: 메시지 + CTA -->
+        <div class="col-lg-7">
+          <h2 style="font-weight:900;color:#0f172a;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.35;margin-bottom:16px;">
+            내 건물, 지금 안전한가요?
+          </h2>
+          <p style="font-weight:900;color:#1e293b;font-size:clamp(1.1rem,2vw,1.5rem);line-height:1.45;margin-bottom:20px;">
+            모르면 위반,<br>기록 없으면 책임입니다
+          </p>
+          <p style="font-size:.97rem;color:#475569;line-height:1.8;margin-bottom:36px;">
+            건물 안전관리는 점검보다 먼저,<br>
+            "우리 건물에 어떤 의무가 있는지" 아는 것에서 시작합니다.<br>
+            3분 무료 법령진단으로 지금 바로 확인하세요.
+          </p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="../free-diagnosis.html"
+               class="btn btn-primary"
+               style="padding:14px 32px;font-size:1rem;background:#1565c0;border-color:#1565c0;border-radius:8px;font-weight:700;">
+              무료 법령진단 시작 →
+            </a>
+            <a href="https://safe.taieng.co.kr"
+               class="btn btn-outline-success"
+               style="padding:14px 28px;font-size:1rem;border-radius:8px;font-weight:700;color:#059669;border-color:#059669;"
+               target="_blank">
+              TAI Safe 서비스 보기
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
