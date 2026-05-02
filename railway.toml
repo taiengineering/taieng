@@ -1,0 +1,12 @@
+# Railway Config-as-Code
+# Cron 스케줄은 UTC 기준입니다.
+# KST 09:00 = UTC 00:00 → 매일 00:00 UTC 에 모니터링 실행
+#
+# https://docs.railway.com/reference/cron-jobs
+
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python naver_monitor.py"
+cronSchedule = "0 0 * * *"
