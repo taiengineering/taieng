@@ -54,18 +54,24 @@
       box-shadow: 0 16px 40px rgba(15,23,42,.13);
       background: #e5e7eb;
     }
-    .tai-image-box img {
-      width: 100%; display: block; object-fit: cover; height: 400px;
+    .tai-image-box img { width: 100%; display: block; object-fit: cover; height: 400px; }
+
+    .tai-section-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(15,23,42,.13);
+      background: #e5e7eb;
+      margin-bottom: 48px;
     }
+    .tai-section-image img { width: 100%; display: block; object-fit: cover; height: 380px; }
+
     .tai-process-image {
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 16px 40px rgba(15,23,42,.13);
       background: #e5e7eb;
     }
-    .tai-process-image img {
-      width: 100%; display: block; object-fit: cover; height: 420px;
-    }
+    .tai-process-image img { width: 100%; display: block; object-fit: cover; height: 420px; }
 
     /* ── Before / After 가로 한 줄 ── */
     .ba-row {
@@ -74,62 +80,37 @@
       overflow: hidden;
       box-shadow: 0 16px 48px rgba(15,23,42,.22);
     }
-    .ba-half {
-      flex: 1;
-      position: relative;
-    }
-    .ba-half img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      display: block;
-    }
+    .ba-half { flex: 1; position: relative; }
+    .ba-half img { width: 100%; height: 380px; object-fit: cover; display: block; }
     .ba-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
       padding: 28px 28px 32px;
     }
     .ba-half--before .ba-overlay { background: linear-gradient(to top, rgba(15,23,42,.85) 0%, rgba(15,23,42,.1) 60%); }
     .ba-half--after  .ba-overlay { background: linear-gradient(to top, rgba(21,101,192,.85) 0%, rgba(21,101,192,.1) 60%); }
     .ba-tag {
-      display: inline-block;
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .06em;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 12px;
-      width: fit-content;
+      display: inline-block; font-size: .75rem; font-weight: 800;
+      letter-spacing: .06em; padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 12px; width: fit-content;
     }
     .ba-half--before .ba-tag { background: rgba(255,255,255,.15); color: #e2e8f0; }
     .ba-half--after  .ba-tag { background: rgba(255,255,255,.2);  color: #fff; }
     .ba-overlay h4 { color: #fff; font-weight: 900; font-size: 1.1rem; margin-bottom: 10px; }
-    .ba-overlay ul  { margin: 0; padding-left: 18px; color: rgba(255,255,255,.82); font-size: .88rem; line-height: 1.9; }
-    .ba-divider {
-      width: 4px;
-      flex-shrink: 0;
-      background: linear-gradient(180deg, #93c5fd 0%, #1565c0 100%);
-    }
+    .ba-overlay ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.82); font-size: .88rem; line-height: 1.9; }
+    .ba-divider { width: 4px; flex-shrink: 0; background: linear-gradient(180deg, #93c5fd 0%, #1565c0 100%); }
 
     /* ── 강한 메시지 ── */
     .msg-section { padding: 100px 0; background: #1e293b; }
-    .msg-section h2 {
-      font-weight: 900;
-      font-size: clamp(1.7rem, 3.5vw, 2.7rem);
-      color: #fff; line-height: 1.45;
-    }
+    .msg-section h2 { font-weight: 900; font-size: clamp(1.7rem, 3.5vw, 2.7rem); color: #fff; line-height: 1.45; }
     .msg-section p { color: #94a3b8; margin-top: 20px; font-size: 1.05rem; line-height: 1.8; }
 
     /* ── 반응형 ── */
-    @media (max-width: 991px) {
-      .tai-image-box img { height: 300px; }
-    }
+    @media (max-width: 991px) { .tai-image-box img { height: 300px; } }
     @media (max-width: 768px) {
-      .tai-image-box img      { height: 240px; }
-      .tai-process-image img  { height: 240px; }
+      .tai-image-box img     { height: 240px; }
+      .tai-section-image img { height: 240px; }
+      .tai-process-image img { height: 240px; }
       .ba-row    { flex-direction: column; }
       .ba-divider{ width: 100%; height: 4px; }
       .ba-half img { height: 240px; }
@@ -197,20 +178,27 @@
         <div class="col-lg-6">
           <div class="tai-image-box">
             <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building1.png"
-                 alt="건물 관리자가 서류를 보며 고민하는 모습">
+                 alt="건물 관리자 모습">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ 문제 구조 ══ -->
+  <!-- ══ 문제 구조 — building2.png 이미지 포함 ══ -->
   <section style="padding: 90px 0; background: #f8fafc;">
     <div class="container">
-      <div class="section-title text-center" style="margin-bottom:48px;">
+      <div class="section-title text-center" style="margin-bottom:44px;">
         <h4 class="sub-title">문제</h4>
         <h2 class="title">관리는 나뉘어 있지만<br>책임은 하나입니다</h2>
       </div>
+
+      <!-- building2.png — 소방/전기/승강기/가스 미니어처 이미지 -->
+      <div class="tai-section-image">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building2.png"
+             alt="소방, 전기, 승강기, 가스 각각 분리된 관리 구조">
+      </div>
+
       <div class="row g-4">
         <div class="col-lg-3 col-md-6">
           <div class="duty-card">
@@ -240,13 +228,13 @@
     </div>
   </section>
 
-  <!-- ══ 수선 리스크 — building2.png ══ -->
+  <!-- ══ 수선 리스크 — building3.png ══ -->
   <section style="padding: 100px 0;">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-6 order-lg-1 order-2">
           <div class="tai-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building2.png"
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building3.png"
                  alt="건물 수리 및 유지보수 작업">
           </div>
         </div>
@@ -271,7 +259,7 @@
     </div>
   </section>
 
-  <!-- ══ Before / After 가로 한 줄 — building3.png / building4.png ══ -->
+  <!-- ══ Before / After 가로 한 줄 — building4.png / building5.png ══ -->
   <section style="padding: 90px 0; background: #0f172a;">
     <div class="container">
       <div class="section-title text-center" style="margin-bottom:44px;">
@@ -283,9 +271,8 @@
       </div>
 
       <div class="ba-row">
-        <!-- Before -->
         <div class="ba-half ba-half--before">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building3.png"
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
                alt="기존 건물 안전관리">
           <div class="ba-overlay">
             <span class="ba-tag">BEFORE</span>
@@ -299,12 +286,10 @@
           </div>
         </div>
 
-        <!-- 구분선 -->
         <div class="ba-divider"></div>
 
-        <!-- After -->
         <div class="ba-half ba-half--after">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.png"
                alt="TAI 도입 후 건물 안전관리">
           <div class="ba-overlay">
             <span class="ba-tag">AFTER</span>
@@ -321,7 +306,7 @@
     </div>
   </section>
 
-  <!-- ══ TAI Safe — building5.png + building6.png ══ -->
+  <!-- ══ TAI Safe — building6.png ══ -->
   <section style="padding: 100px 0;">
     <div class="container">
       <div class="section-title text-center" style="margin-bottom:48px;">
@@ -333,7 +318,7 @@
       </div>
 
       <div class="tai-process-image">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building5.png"
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
              alt="TAI Safe 건물 안전관리 흐름">
       </div>
 
@@ -362,11 +347,6 @@
             <p>감독관청 점검 시 필요한 서류를 즉시 출력·제출할 수 있습니다.</p>
           </div>
         </div>
-      </div>
-
-      <div class="tai-process-image mt-5">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
-             alt="TAI Safe 대시보드">
       </div>
     </div>
   </section>
