@@ -22,38 +22,18 @@
   <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  /*
-   * ── 히어로 천장 갭 방지 ──────────────────────────────────────────────
-   * home-2 body class 의 background: #f9fbfe(밝은 회색)이
-   * 투명 navbar 뒤로 비쳐 보이는 문제 해결.
-   * body 배경을 히어로 배경색과 동일하게 설정 → 갭이 있어도 눈에 보이지 않음.
-   * 각 섹션은 고유한 배경을 가지므로 나머지 페이지에 영향 없음.
-   * ────────────────────────────────────────────────────────────────────── */
   html, body { background: #0f172a !important; }
 
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
   #saas-page .feat-grid-highlight { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
-  @media (min-width: 992px) {
-    #saas-page .feat-grid-highlight { grid-template-columns: repeat(5, 1fr); }
-  }
-  #saas-page .feat-card-hl {
-    background: #f0f6ff; border: 1px solid rgba(21,101,192,.15); border-left: 4px solid #1565c0; border-radius: 12px; padding: 24px 20px;
-  }
+  @media (min-width: 992px) { #saas-page .feat-grid-highlight { grid-template-columns: repeat(5, 1fr); } }
+  #saas-page .feat-card-hl { background: #f0f6ff; border: 1px solid rgba(21,101,192,.15); border-left: 4px solid #1565c0; border-radius: 12px; padding: 24px 20px; }
   #saas-page .feat-card-hl .feat-icon { font-size: 1.8rem; margin-bottom: 10px; }
   #saas-page .feat-card-hl h4 { font-size: .95rem; font-weight: 800; color: #0f2b4a; margin: 0 0 6px; }
   #saas-page .feat-card-hl p { font-size: .82rem; color: #475569; margin: 0; line-height: 1.5; }
-  #saas-page .feat-grid-normal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  #saas-page .feat-card-nm { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; position: relative; }
-  #saas-page .feat-card-nm .feat-icon { font-size: 1.5rem; margin-bottom: 8px; }
-  #saas-page .feat-card-nm h4 { font-size: .85rem; font-weight: 700; color: #0f172a; margin: 0 0 4px; }
-  #saas-page .feat-card-nm p { font-size: .75rem; color: #94a3b8; margin: 0; }
-  #saas-page .feat-card-nm.paid::after { content: '유료'; position: absolute; top: 8px; right: 8px; background: #fbbf24; color: #0f172a; font-size: .6rem; font-weight: 800; padding: 2px 6px; border-radius: 999px; }
-  @media(max-width:575px) {
-    #saas-page .feat-grid-highlight { grid-template-columns: 1fr; }
-    #saas-page .feat-grid-normal { grid-template-columns: repeat(2, 1fr); }
-  }
+  @media(max-width:575px) { #saas-page .feat-grid-highlight { grid-template-columns: 1fr; } }
 
   #saas-page .browser-frame { width: 100%; max-width: 540px; background: #fff; border: 1px solid #d1d5db; border-radius: 12px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,.12); flex-shrink: 0; }
   #saas-page .browser-bar { background: #f3f4f6; padding: 8px 12px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #e5e7eb; }
@@ -243,6 +223,13 @@
     #saas-page .sp-grid-3 { grid-template-columns: 1fr; }
     #saas-page .sp-grid-4 { grid-template-columns: 1fr; }
   }
+
+  /* ── 히어로 하단 기능 섹션 ── */
+  #saas-page .feat-group { margin-bottom: 32px; }
+  #saas-page .feat-group-title { font-size: .9rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
+  #saas-page .feat-grid-lite { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  #saas-page .feat-lite { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; font-size: .78rem; font-weight: 600; text-align: center; color: #0f172a; }
+  @media(max-width:768px) { #saas-page .feat-grid-lite { grid-template-columns: repeat(2, 1fr); } }
   </style>
 </head>
 <body class="sc5 home-2">
@@ -255,26 +242,95 @@
 
   <div id="saas-page">
 
-  <!-- ① 히어로 — saas7.png 단일 이미지
-       position:relative + z-index:1 로 navbar 아래 레이어 명시.
-       body background:#0f172a 와 일치하므로 픽셀 갭이 있어도 시각적으로 완전 자연스러움. -->
+  <!-- ① 히어로 -->
   <section style="position:relative;z-index:1;margin:0;padding:0;line-height:0;background:#0f172a;">
     <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png"
          alt="TAI Safe — 스마트 산업안전관리 플랫폼"
          style="width:100%;display:block;">
   </section>
 
-  <!-- ② 겸직 안전관리자 타겟 -->
-  <section style="background:#fff; padding:40px 0; text-align:center;">
-    <div class="container">
-      <p style="font-size:1.15rem; color:#0f172a; font-weight:800; margin:0;">
-        총무팀장인데 안전관리자도 맡고 있으신가요?<br>
-        <span style="font-weight:400; color:#64748b; font-size:.95rem;">혼자 다 하고 있는 당신을 위한 플랫폼입니다.</span>
-      </p>
+  <!-- ② 핵심 기능 요약 -->
+  <section class="sp-sec sp-sec-white" id="saas-core-simple">
+    <div class="container text-center">
+      <span class="sp-label">핵심 기능</span>
+      <h2 class="sp-h2">TAI SAFE가 실제로 하는 일</h2>
+      <p class="sp-desc" style="max-width:620px;margin:0 auto 32px;">안전관리를 구성하는 핵심 기능만 정리했습니다</p>
+      <div class="sp-grid-3" style="max-width:900px;margin:0 auto;">
+        <div class="sp-card"><div class="sp-icon">📜</div><h4>법령 기반 의무 생성</h4><p>사업장 조건에 맞는 법적 의무 자동 도출</p></div>
+        <div class="sp-card"><div class="sp-icon">🧩</div><h4>업무 자동 분산</h4><p>담당자 지정 및 자동 배분 (선택 가능)</p></div>
+        <div class="sp-card"><div class="sp-icon">📱</div><h4>현장 실행</h4><p>점검 · 서명 · 작업 · 신고 앱으로 수행</p></div>
+        <div class="sp-card"><div class="sp-icon">🗂</div><h4>기록 자동 축적</h4><p>모든 실행 이력 자동 저장</p></div>
+        <div class="sp-card"><div class="sp-icon">📄</div><h4>문서 자동 생성</h4><p>법정 문서 및 보고서 자동 생성</p></div>
+      </div>
     </div>
   </section>
 
-  <!-- ③ 핵심 가치 — 분산 구조도 -->
+  <!-- ③ 전체 기능 카드 -->
+  <section class="sp-sec sp-sec-gray" id="saas-all-features-lite">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="sp-label">전체 기능</span>
+        <h2 class="sp-h2">필요한 기능은 모두 들어 있습니다</h2>
+        <p class="sp-desc" style="max-width:620px;margin:0 auto;">따로 만들 필요 없습니다. 현장에서 필요한 기능은 이미 준비되어 있습니다.</p>
+      </div>
+      <div class="feat-group">
+        <h4 class="feat-group-title">운영 관리</h4>
+        <div class="feat-grid-lite">
+          <div class="feat-lite">👷 작업자 관리</div>
+          <div class="feat-lite">🔐 권한 설정</div>
+          <div class="feat-lite">📅 일정 관리</div>
+          <div class="feat-lite">🧩 업무 배정</div>
+        </div>
+      </div>
+      <div class="feat-group">
+        <h4 class="feat-group-title">점검 / 실행</h4>
+        <div class="feat-grid-lite">
+          <div class="feat-lite">📋 점검 체크</div>
+          <div class="feat-lite">📱 QR 점검</div>
+          <div class="feat-lite">✍️ TBM 서명</div>
+          <div class="feat-lite">📨 작업 지시</div>
+        </div>
+      </div>
+      <div class="feat-group">
+        <h4 class="feat-group-title">문서 / 보고</h4>
+        <div class="feat-grid-lite">
+          <div class="feat-lite">📄 문서 자동 생성</div>
+          <div class="feat-lite">📊 보고서 생성</div>
+          <div class="feat-lite">🗂 이력 관리</div>
+          <div class="feat-lite">📦 자동 보관</div>
+        </div>
+      </div>
+      <div class="feat-group" style="margin-bottom:0;">
+        <h4 class="feat-group-title">확장 기능</h4>
+        <div class="feat-grid-lite">
+          <div class="feat-lite">🏗 하도급 관리</div>
+          <div class="feat-lite">📰 안전정보 피드</div>
+          <div class="feat-lite">⚠ 위험성 평가 <span class="sp-badge-soon">예정</span></div>
+          <div class="feat-lite">🤝 전문가 매칭 <span class="sp-badge-soon">예정</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 유연한 운영 -->
+  <section class="sp-sec sp-sec-white" id="saas-flex">
+    <div class="container text-center">
+      <span class="sp-label">운영 방식</span>
+      <h2 class="sp-h2">혼자 시작하고,<br>필요할 때 나눌 수 있습니다</h2>
+      <p class="sp-desc" style="max-width:640px;margin:0 auto;">
+        TAI SAFE는 모든 업무를 혼자서도 운영할 수 있습니다.<br><br>
+        조직을 한 번에 바꿀 필요 없습니다.<br>
+        지금처럼 안전관리자가 직접 수행하면서 시작할 수 있습니다.<br><br>
+        필요할 때 일부 업무만 나누고,<br>
+        조직이 준비되면 그때 확장하면 됩니다.
+      </p>
+      <div style="margin-top:32px;">
+        <a href="../free-diagnosis.html" class="sp-btn-primary" style="background:#1565c0;color:#fff;">무료 법령진단으로 시작하기 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 핵심 가치 — 분산 구조도 -->
   <section class="sp-sec sp-sec-gray" id="saas-distributed">
     <div class="container text-center">
       <span class="sp-label">핵심</span>
@@ -289,7 +345,7 @@
     </div>
   </section>
 
-  <!-- ③ 기능 상세 목업 5개 -->
+  <!-- ⑥ 기능 상세 목업 5개 -->
   <div class="sp-sec-gray" id="screen-mocks">
     <div class="container text-center" style="padding-top:56px;padding-bottom:8px;">
       <span class="sp-label">화면</span>
@@ -481,7 +537,7 @@
 
   <div class="sp-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
 
-  <!-- ⑤ 과태료 ROI -->
+  <!-- 과태료 ROI -->
   <section class="sp-sec sp-sec-white" id="saas-roi">
     <div class="container text-center">
       <span class="sp-label">비용</span>
@@ -496,7 +552,7 @@
 
   <div class="sp-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
 
-  <!-- ⑥ 핵심 5개 + 전체 기능 접기 -->
+  <!-- 기능 상세 접기 -->
   <section class="sp-sec sp-sec-white" id="saas-core-features">
     <div class="container">
       <div class="text-center mb-4">
@@ -516,11 +572,11 @@
       </div>
       <div id="sp-all-features" style="display:none;margin-top:24px;">
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">A. TAI 특허 기술</h3>
-        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-pat-01" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>1. 법령 자동 분석</h4><p>사업장 정보만 넣으면, 적용되는 법령과 의무를 자동으로 뽑아냅니다. 수십 개 법령, 수백 개 조문 — 사람이 하면 며칠, TAI는 3분.</p></div></a><a href="#feat-mock-dispatch" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>2. 안전업무 분산 배분</h4><p>안전관리자 혼자 떠안던 업무를, 작업자 전원이 나눠서 실행합니다. 배분·추적·알림이 자동. 안전관리자는 통제만.</p></div></a><a href="#feat-pat-03" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>3. 개정된 최신법으로 진단</h4><p>법령이 개정되면 엔진 기준이 갱신되어, 진단과 의무 산출에 최신 조문이 반영됩니다.</p></div></a><a href="#feat-mock-app" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>4. TAI Safe 앱 통합</h4><p>점검·TBM·작업 지시·긴급 신고를 하나의 앱에서 처리합니다. 작업자는 따로 배울 것이 없습니다.</p></div></a><a href="#feat-mock-check" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>5. 점검 → 서류 자동 변환</h4><p>현장에서 체크한 데이터가 법정 서식에 맞춰 서류가 됩니다. 엑셀에 옮길 필요 없습니다. 감독관이 오면 PDF 한 번에 출력.</p></div></a><a href="#feat-mock-emergency" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>6. 사고 즉시 알림</h4><p>현장에서 1-tap 신고 → 안전관리자·소장·본사까지 1분 내 알림. 대응 이력이 자동 기록되어 법적 증빙이 됩니다.</p></div></a></div>
+        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-pat-01" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>1. 법령 자동 분석</h4><p>사업장 정보만 넣으면, 적용되는 법령과 의무를 자동으로 뽑아냅니다.</p></div></a><a href="#feat-mock-dispatch" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>2. 안전업무 분산 배분</h4><p>안전관리자 혼자 떠안던 업무를, 작업자 전원이 나눠서 실행합니다.</p></div></a><a href="#feat-pat-03" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>3. 개정된 최신법으로 진단</h4><p>법령이 개정되면 엔진 기준이 갱신되어 최신 조문이 반영됩니다.</p></div></a><a href="#feat-mock-app" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>4. TAI Safe 앱 통합</h4><p>점검·TBM·작업 지시·긴급 신고를 하나의 앱에서 처리합니다.</p></div></a><a href="#feat-mock-check" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>5. 점검 → 서류 자동 변환</h4><p>현장에서 체크한 데이터가 법정 서식에 맞춰 서류가 됩니다.</p></div></a><a href="#feat-mock-emergency" class="scroll-anchor" style="text-decoration:none;color:inherit;"><div class="sp-card-patent"><span class="sp-badge-patent">특허</span><h4>6. 사고 즉시 알림</h4><p>현장에서 1-tap 신고 → 관계자 전원 1분 내 알림.</p></div></a></div>
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">B. SaaS 핵심 기능</h3>
-        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>7. 전용 안전 대시보드</h4><p>로그인하면 오늘 해야 할 일, 놓친 것, 이행률이 한눈에. D-day 기반 자동 정렬.</p></a><a href="#feat-08" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>8. 점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 캘린더에 자동으로 깔립니다.</p></a><a href="#feat-mock-check" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>9. 5초 현장 점검</h4><p>QR 찍고, 정상/이상 터치. 이상 시 관리자에게 즉시 알림.</p></a><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>10. D-day 알림</h4><p>점검 기한 3일 전, 7일 전 — 담당자에게 SMS 자동 발송.</p></a><a href="#feat-mock-dispatch" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>11. 담당자 세밀 배정</h4><p>법령 의무 하나하나에 담당자를 지정합니다.</p></a><a href="#feat-12" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>12. TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명.</p></a><a href="#feat-13" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>13. 안전회의 관리</h4><p>의사록 자동 생성. 참석·안건·결의 기록 보관.</p></a><a href="#feat-14" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>14. 교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적.</p></a><a href="#feat-15" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>15. 미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다.</p></a><a href="#feat-16" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>16. 설비 관리 + QR</h4><p>QR 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></a><a href="#feat-17" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>17. 공정 관리</h4><p>KSIC 기반 공정 등록 → 법적 의무 자동 연결.</p></a><a href="#feat-18" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>18. 작업 지시·요청</h4><p>지시 → 수신 → 완료 보고. 전화 불필요, 기록이 남음.</p></a><a href="#feat-19" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>19. 업무 일정</h4><p>날짜별·담당별 필터. 놓치는 것 없이.</p></a><a href="#feat-20" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>20. 작업자 관리</h4><p>명부·자격·교육이수·점검이력 한 곳에서 관리.</p></a><a href="#feat-21" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>21. 권한 설정</h4><p>역할별 접근 권한을 세밀하게 설정.</p></a><a href="#feat-22" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>22. 하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서.</p></a><a href="#feat-23" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>23. 안전정보 피드</h4><p>뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></a></div>
+        <div class="sp-grid-3" style="margin-bottom:36px;"><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>7. 전용 안전 대시보드</h4><p>로그인하면 오늘 해야 할 일, 놓친 것, 이행률이 한눈에.</p></a><a href="#feat-08" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>8. 점검 캘린더</h4><p>월·분기·반기·연간 — 모든 법정 점검이 자동으로 깔립니다.</p></a><a href="#feat-mock-check" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>9. 5초 현장 점검</h4><p>QR 찍고, 정상/이상 터치. 이상 시 즉시 알림.</p></a><a href="#feat-mock-dashboard" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>10. D-day 알림</h4><p>점검 기한 전 담당자에게 SMS 자동 발송.</p></a><a href="#feat-mock-dispatch" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>11. 담당자 세밀 배정</h4><p>법령 의무 하나하나에 담당자를 지정합니다.</p></a><a href="#feat-12" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>12. TBM 전자서명</h4><p>종이 TBM 끝. 반장이 입력하면 작업자가 앱에서 서명.</p></a><a href="#feat-13" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>13. 안전회의 관리</h4><p>의사록 자동 생성. 참석·안건·결의 기록 보관.</p></a><a href="#feat-14" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>14. 교육 관리</h4><p>법정 안전교육 — 누가 들었고 누가 안 들었는지 자동 추적.</p></a><a href="#feat-15" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>15. 미이행 관리</h4><p>기한이 넘은 항목만 모아서 보여줍니다.</p></a><a href="#feat-16" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>16. 설비 관리 + QR</h4><p>QR 스캔만으로 이력·점검·정비 전체 기록이 열립니다.</p></a><a href="#feat-17" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>17. 공정 관리</h4><p>KSIC 기반 공정 등록 → 법적 의무 자동 연결.</p></a><a href="#feat-18" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>18. 작업 지시·요청</h4><p>지시 → 수신 → 완료 보고. 전화 불필요, 기록이 남음.</p></a><a href="#feat-19" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>19. 업무 일정</h4><p>날짜별·담당별 필터. 놓치는 것 없이.</p></a><a href="#feat-20" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>20. 작업자 관리</h4><p>명부·자격·교육이수·점검이력 한 곳에서 관리.</p></a><a href="#feat-21" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>21. 권한 설정</h4><p>역할별 접근 권한을 세밀하게 설정.</p></a><a href="#feat-22" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>22. 하도급 관리</h4><p>협력업체 안전관리까지 한 시스템에서.</p></a><a href="#feat-23" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⭐</div><h4>23. 안전정보 피드</h4><p>뉴스·판례·법령 개정 — 알아야 할 것만 모아서 제공.</p></a></div>
         <h3 class="sp-h2" style="font-size:1.15rem;margin-bottom:14px;">C. 추가 서비스 · 유료 · 로드맵</h3>
-        <div class="sp-grid-4"><a href="#feat-24" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>24. 문서 보관함</h4><p>3년간 자동 보관. 즉시 출력.</p></a><a href="#feat-25" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>25. 보고서 자동 생성</h4><p>데이터 기반 자동 생성.</p></a><a href="#feat-26" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>26. 일정 관리</h4><p>법령 의무 → 일정 자동 변환.</p></a><a href="#feat-27" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>27. 건설현장 전용</h4><p>건설 특화 메뉴 별도 제공.</p></a><a href="#feat-28" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>28. 문서 자동 제출<span class="sp-badge-paid">유료</span></h4><p>관공서에 자동 전송. 직접 갈 필요 없습니다.</p></a><a href="#feat-29" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>29. 위험성평가<span class="sp-badge-review">유료 검토중</span></h4><p>서식 자동 적용, 이력 자동 보관.</p></a><a href="#feat-30" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⏳</div><h4>30. 전문가 연결<span class="sp-badge-soon">2026 하반기 예정</span></h4><p>자격 검증된 전문가를 채팅으로 바로 연결.</p></a><a href="#feat-31" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">🛡️</div><h4>31. 엔터프라이즈·SLA</h4><p>다사업장·다지역 통합, API, 전담 CS.</p></a></div>
+        <div class="sp-grid-4"><a href="#feat-24" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>24. 문서 보관함</h4><p>3년간 자동 보관. 즉시 출력.</p></a><a href="#feat-25" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>25. 보고서 자동 생성</h4><p>데이터 기반 자동 생성.</p></a><a href="#feat-26" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>26. 일정 관리</h4><p>법령 의무 → 일정 자동 변환.</p></a><a href="#feat-27" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">📄</div><h4>27. 건설현장 전용</h4><p>건설 특화 메뉴 별도 제공.</p></a><a href="#feat-28" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>28. 문서 자동 제출<span class="sp-badge-paid">유료</span></h4><p>관공서에 자동 전송.</p></a><a href="#feat-29" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">💰</div><h4>29. 위험성평가<span class="sp-badge-review">유료 검토중</span></h4><p>서식 자동 적용, 이력 자동 보관.</p></a><a href="#feat-30" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">⏳</div><h4>30. 전문가 연결<span class="sp-badge-soon">2026 하반기 예정</span></h4><p>자격 검증된 전문가를 채팅으로 바로 연결.</p></a><a href="#feat-31" class="scroll-anchor sp-card"><div class="sp-icon" aria-hidden="true">🛡️</div><h4>31. 엔터프라이즈·SLA</h4><p>다사업장·다지역 통합, API, 전담 CS.</p></a></div>
       </div>
     </div>
   </section>
@@ -537,7 +593,7 @@
     </div>
   </section>
 
-  <!-- ⑧ 법령 엔진 규모 -->
+  <!-- 법령 엔진 규모 -->
   <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="text-center mb-4">
@@ -575,7 +631,7 @@
     </div>
   </section>
 
-  <!-- ⑨ 도입 절차 -->
+  <!-- 도입 절차 -->
   <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="text-center mb-2"><span class="sp-label">도입</span><h2 class="sp-h2">오늘 가입하면<br>내일 점검을 시작할 수 있습니다</h2><p class="sp-desc" style="max-width:600px;margin:0 auto;"><strong>1일 세팅</strong>으로 최소 루프를 돌릴 수 있습니다.</p></div>
@@ -603,9 +659,9 @@
   <section class="sp-sec sp-sec-gray" id="faq">
     <div class="container sp-faq" style="max-width:720px;">
       <div class="text-center mb-4"><span class="sp-label">FAQ</span><h2 class="sp-h2">자주 묻는 질문</h2></div>
-      <details><summary>기존 엑셀로 하던 데이터는 어떻게 옮기나요?</summary><p>TAI Safe는 법령 엔진이 점검 항목을 자동 생성하므로, 기존 엑셀 데이터를 옮길 필요가 없습니다. 과거 기록 보관이 필요하시면 문서 보관함에 PDF로 업로드할 수 있습니다.</p></details>
-      <details><summary>직원이 스마트폰을 안 쓰면 어떻게 하나요?</summary><p>현장 QR 스캔은 스마트폰이 필요하지만, 관리자는 웹에서 직접 입력할 수 있습니다. 스마트폰이 없는 작업자는 관리감독자가 대리 입력하는 방식으로 운영 가능합니다.</p></details>
-      <details><summary>법이 바뀌면 어떻게 반영되나요?</summary><p>엔진은 개정된 최신법 기준으로 진단·의무를 산출합니다. 법령이 바뀌면 서비스에 반영되며, 변경이 있는 경우 알림으로 안내드립니다.</p></details>
+      <details><summary>기존 엑셀로 하던 데이터는 어떻게 옮기나요?</summary><p>TAI Safe는 법령 엔진이 점검 항목을 자동 생성하므로, 기존 엑셀 데이터를 옮길 필요가 없습니다.</p></details>
+      <details><summary>직원이 스마트폰을 안 쓰면 어떻게 하나요?</summary><p>현장 QR 스캔은 스마트폰이 필요하지만, 관리자는 웹에서 직접 입력할 수 있습니다.</p></details>
+      <details><summary>법이 바뀌면 어떻게 반영되나요?</summary><p>엔진은 개정된 최신법 기준으로 진단·의무를 산출합니다. 법령이 바뀌면 서비스에 반영되며 알림으로 안내드립니다.</p></details>
       <details><summary>최소 계약 기간이 있나요?</summary><p>월 단위 구독이며, 최소 계약 기간은 없습니다. 언제든지 해지할 수 있습니다.</p></details>
       <details><summary>해지하면 데이터는 어떻게 되나요?</summary><p>해지 후 30일간 데이터를 보관하며, 그 기간 내에 PDF로 전체보내기가 가능합니다.</p></details>
     </div>
@@ -613,13 +669,13 @@
 
   <div class="sp-mid-cta"><a href="../free-diagnosis.html">→ 지금 무료 진단 해보기</a></div>
 
-  <!-- S8. 가격 -->
+  <!-- 가격 -->
   <section class="sp-sec sp-sec-white" id="pricing">
     <div class="container">
       <div class="text-center mb-4">
         <span class="sp-label">요금제</span>
         <h2 class="sp-h2">과태료 1건보다 저렴합니다</h2>
-        <p class="sp-desc">시설 유형을 선택하면 해당 요금제를 확인할 수 있습니다.<br><strong>시설 1개 기준 과금 · 관리자/작업자 등록 무제한</strong><br>기능은 모든 플랜에서 동일합니다.</p>
+        <p class="sp-desc">시설 유형을 선택하면 해당 요금제를 확인할 수 있습니다.<br><strong>시설 1개 기준 과금 · 관리자/작업자 등록 무제한</strong></p>
       </div>
       <div class="sp-sector-tabs" role="tablist">
         <button class="sp-sector-btn active" data-sector="building" role="tab" aria-selected="true"><span class="sb-icon">🏢</span> 건물</button>
@@ -628,16 +684,16 @@
       </div>
 
       <div class="sp-sector-panel active" id="panel-building">
-        <div class="sp-sector-note"><span class="sn-icon">🏢</span><span><strong>건물</strong> — 건물 1개 기준 · 관리자/작업자 무제한<br>면적 5,000㎡ 기준으로 적용되는 법조항이 달라집니다. 기능은 동일합니다.</span></div>
+        <div class="sp-sector-note"><span class="sn-icon">🏢</span><span><strong>건물</strong> — 건물 1개 기준 · 관리자/작업자 무제한<br>면적 5,000㎡ 기준으로 적용되는 법조항이 달라집니다.</span></div>
         <div class="row g-4 justify-content-center">
           <div class="col-xl-4 col-md-6"><div class="sp-price"><div class="tier">STANDARD</div><div class="plan-name">정밀관리<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">5,000㎡ 이하</small></div><div class="amt">145,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>건물 전체 정보 등록 → 법적 의무 자동 산출</li><li>점검 일정 + D-day 알림 (SMS)</li><li>점검 기록 자동 보관 + 서류 자동 생성</li><li>안전관리자 대시보드</li><li>보고서 자동 생성</li><li>개정된 최신법으로 진단</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_BASIC',145000,'TAI Safe 건물 정밀관리')">결제하기</button></div></div>
           <div class="col-xl-4 col-md-6"><div class="sp-price"><div class="tier">PREMIUM</div><div class="plan-name">대형건물<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">5,000㎡ 초과</small></div><div class="amt">249,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>정밀관리와 동일 기능</li><li>5,000㎡ 초과 추가 법조항 반영</li><li>석면·에너지·냉동 관련 의무 포함</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_BUILDING','BUILDING_STANDARD',249000,'TAI Safe 건물 대형')">결제하기</button></div></div>
-          <div class="col-xl-4 col-md-6"><div class="sp-price"><div class="tier">ENTERPRISE</div><div class="plan-name">Enterprise</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li><li>다동·복합 시설 특수 구성</li><li>도입 문의 후 범위 협의</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
+          <div class="col-xl-4 col-md-6"><div class="sp-price"><div class="tier">ENTERPRISE</div><div class="plan-name">Enterprise</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li><li>다동·복합 시설 특수 구성</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
       <div class="sp-sector-panel" id="panel-industry">
-        <div class="sp-sector-note"><span class="sn-icon">🏭</span><span><strong>산업</strong> — 시설 1개 기준 · 관리자/작업자 무제한<br>등록 범위가 넓을수록 적용되는 법이 많아집니다. 기능은 동일합니다.</span></div>
+        <div class="sp-sector-note"><span class="sn-icon">🏭</span><span><strong>산업</strong> — 시설 1개 기준 · 관리자/작업자 무제한<br>등록 범위가 넓을수록 적용되는 법이 많아집니다.</span></div>
         <div style="max-width:600px;margin:0 auto 40px;text-align:center;">
           <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:.8rem;">
             <div style="background:#f0f6ff;border:1px solid #93c5fd;border-radius:10px;padding:10px 16px;"><div style="font-weight:900;color:#1565c0;">STARTER</div><div style="color:#64748b;">건물+설비 → 의무 47건</div></div>
@@ -649,27 +705,25 @@
           <p style="font-size:.78rem;color:#dc2626;margin-top:12px;font-weight:600;">빠뜨린 45건이 과태료입니다.</p>
         </div>
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">STARTER</div><div class="plan-name">건물과 특수설비만 있는 사업장</div><div class="amt">79,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>건물 + 특수설비 등록 → 기본 법적 의무 산출</li><li>점검 일정 + D-day 알림</li><li>점검 기록 자동 보관</li><li>안전관리자 대시보드</li><li>개정된 최신법으로 진단</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_STARTER_V2',79000,'TAI Safe 산업 STARTER')">결제하기</button></div></div>
-          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">BUSINESS</div><div class="plan-name">용접·도장·주조 등 공정이 있다면</div><div class="amt">149,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>STARTER 전체 포함</li><li>공정 등록 → 공정별 추가 법적 의무 산출</li><li>현장 QR 점검 앱 + TBM 전자서명</li><li>보고서 자동 생성</li><li>세팅 대행 (유료)</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_BUSINESS_V2',149000,'TAI Safe 산업 BUSINESS')">결제하기</button></div></div>
-          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">PRO</div><div class="plan-name">크레인·프레스·지게차까지 있다면</div><div class="amt">249,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>BUSINESS 전체 포함</li><li>설비 등록 → 설비별 추가 법적 의무 산출</li><li>설비 QR 관리</li><li>세팅 대행 (유료)</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_PRO',249000,'TAI Safe 산업 PRO')">결제하기</button></div></div>
-          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">산업 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li><li>도입 문의 후 범위 협의</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">STARTER</div><div class="plan-name">건물과 특수설비만 있는 사업장</div><div class="amt">79,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>건물 + 특수설비 등록 → 기본 법적 의무 산출</li><li>점검 일정 + D-day 알림</li><li>안전관리자 대시보드</li><li>개정된 최신법으로 진단</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_STARTER_V2',79000,'TAI Safe 산업 STARTER')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">BUSINESS</div><div class="plan-name">용접·도장·주조 등 공정이 있다면</div><div class="amt">149,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>STARTER 전체 포함</li><li>공정 등록 → 공정별 추가 법적 의무 산출</li><li>현장 QR 점검 앱 + TBM 전자서명</li><li>보고서 자동 생성</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_BUSINESS_V2',149000,'TAI Safe 산업 BUSINESS')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">PRO</div><div class="plan-name">크레인·프레스·지게차까지 있다면</div><div class="amt">249,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>BUSINESS 전체 포함</li><li>설비 등록 → 설비별 추가 법적 의무 산출</li><li>설비 QR 관리</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_FACILITY','INDUSTRY_PRO',249000,'TAI Safe 산업 PRO')">결제하기</button></div></div>
+          <div class="col-lg-3 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">산업 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
       <div class="sp-sector-panel" id="panel-construction">
-        <div class="sp-sector-note"><span class="sn-icon">🏗️</span><span><strong>건설</strong> — 공사장 1개 기준 · 관리자/작업자 무제한<br>공사금액에 따라 적용 법조항이 달라집니다. 기능은 동일합니다.<br>하도급 관리는 모든 플랜에서 제공됩니다.</span></div>
+        <div class="sp-sector-note"><span class="sn-icon">🏗️</span><span><strong>건설</strong> — 공사장 1개 기준 · 관리자/작업자 무제한<br>공사금액에 따라 적용 법조항이 달라집니다. 하도급 관리는 모든 플랜에서 제공됩니다.</span></div>
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">STANDARD</div><div class="plan-name">공사금액 50억 미만</div><div class="amt">145,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>공사장 법령 의무 자동 산출</li><li>점검 일정 + D-day 알림</li><li>현장 QR 점검 앱 + TBM 전자서명</li><li>하도급 관리</li><li>보고서 자동 생성</li><li>개정된 최신법으로 진단</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_STANDARD_V2',145000,'TAI Safe 건설 STANDARD')">결제하기</button></div></div>
-          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">PREMIUM</div><div class="plan-name">공사금액 50억 이상</div><div class="amt">385,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>STANDARD와 동일 기능</li><li>50억 이상 추가 법조항 반영</li><li>중대재해처벌법 직접 적용</li><li>안전관리계획서 대응</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_PREMIUM_V2',385000,'TAI Safe 건설 PREMIUM')">결제하기</button></div></div>
-          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">건설 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li><li>도입 문의 후 범위 협의</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">STANDARD</div><div class="plan-name">공사금액 50억 미만</div><div class="amt">145,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>공사장 법령 의무 자동 산출</li><li>점검 일정 + D-day 알림</li><li>현장 QR 점검 앱 + TBM 전자서명</li><li>하도급 관리</li><li>보고서 자동 생성</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_STANDARD_V2',145000,'TAI Safe 건설 STANDARD')">결제하기</button></div></div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">PREMIUM</div><div class="plan-name">공사금액 50억 이상</div><div class="amt">385,000<span style="font-size:1rem;">원</span></div><div class="unit">/월 · VAT 별도</div><hr><ul><li>STANDARD와 동일 기능</li><li>50억 이상 추가 법조항 반영</li><li>중대재해처벌법 직접 적용</li></ul><button class="sp-price-cta" onclick="spPay(event,'SAAS_CONSTRUCTION','CONSTRUCTION_PREMIUM_V2',385000,'TAI Safe 건설 PREMIUM')">결제하기</button></div></div>
+          <div class="col-lg-4 col-md-6"><div class="sp-price"><div class="tier">CUSTOM</div><div class="plan-name">건설 CUSTOM</div><div class="amt consult">별도 협의</div><div class="unit">커스터마이징 · 범위 협의</div><hr><ul><li>별도 커스터마이징이 필요한 경우</li></ul><a href="../fix-request.html?from=saas&amp;type=general" class="sp-price-cta consult-cta">도입 문의</a></div></div>
         </div>
       </div>
 
       <div class="text-center mt-5" style="max-width:640px;margin-left:auto;margin-right:auto;">
         <p class="sp-desc" style="margin-bottom:0;font-size:.88rem;line-height:1.75;">
           모든 플랜의 기능은 동일합니다.<br>
-          등록하는 정보의 범위에 따라 적용되는 법이 달라지고,<br>
-          그에 따라 해야 할 일이 다르게 산출됩니다.<br>
           관리자·작업자 등록은 무제한입니다.<br><br>
           모든 요금은 VAT 별도 · KG이니시스 안전결제
         </p>
@@ -677,21 +731,9 @@
     </div>
   </section>
 
-  <!-- S9. 최종 CTA -->
+  <!-- 최종 CTA -->
   <div class="sp-final">
     <div class="container">
-      <div style="max-width:520px;margin:0 auto 20px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.2);">
-        <svg viewBox="0 0 480 140" width="100%" height="140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:block;background:rgba(15,23,42,.35);">
-          <defs><linearGradient id="ctaG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#38bdf8" offset="0"/><stop stop-color="#1A5FD4" offset="1"/></linearGradient></defs>
-          <circle cx="120" cy="70" r="44" fill="none" stroke="url(#ctaG)" stroke-width="6" stroke-dasharray="70 110" transform="rotate(-90 120 70)"/>
-          <text x="120" y="76" text-anchor="middle" fill="#fff" font-size="20" font-weight="900" font-family="Noto Sans KR,sans-serif">3′</text>
-          <text x="120" y="118" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700" font-family="Noto Sans KR,sans-serif">진단</text>
-          <path d="M170 70 H290" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
-          <rect x="300" y="38" width="140" height="64" rx="10" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.25)"/>
-          <text x="370" y="68" text-anchor="middle" fill="#e2e8f0" font-size="11" font-weight="800" font-family="Noto Sans KR,sans-serif">의무 리스트</text>
-          <text x="370" y="88" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Noto Sans KR,sans-serif">즉시 생성</text>
-        </svg>
-      </div>
       <h2>무료 법령진단으로 시작하세요</h2>
       <p>몇 분이면 적용 법령과 조문이 정리됩니다. 그다음은 TAI Safe가 이어받습니다.</p>
       <div class="sp-steps">
@@ -824,9 +866,7 @@
   <script>
   'use strict';
   var SP_API = 'https://taieng.co.kr/_api';
-
   function getCurrentUserId() { return localStorage.getItem('user_id') || ''; }
-
   function startBillingPayment(planCode, amount, goodname, productType) {
     var userId = getCurrentUserId();
     if (!userId) { alert('로그인 후 결제해주세요.'); location.href = '/log-in?redirect=' + encodeURIComponent(location.href); return; }
@@ -838,7 +878,6 @@
       + '&plan_code=' + encodeURIComponent(planCode);
     window.location.href = url;
   }
-
   function spPay(e, productType, planCode, amount, goodname) {
     e.preventDefault();
     startBillingPayment(planCode, amount, goodname, productType);
