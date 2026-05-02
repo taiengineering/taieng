@@ -26,7 +26,6 @@
   <style>
     body.sc5 { font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif; }
 
-    /* ── 일반 이미지 박스 ── */
     .tai-image-box {
       border-radius: 20px; overflow: hidden;
       box-shadow: 0 16px 40px rgba(15,23,42,.13); background: #e5e7eb;
@@ -39,7 +38,6 @@
     }
     .tai-repair-box img { width: 100%; display: block; object-fit: cover; height: 400px; }
 
-    /* ── 텍스트 리스트 ── */
     .text-list { margin: 0; padding: 0; list-style: none; }
     .text-list li {
       display: flex; align-items: flex-start; gap: 14px;
@@ -52,28 +50,18 @@
     /* ── Before/After 박스 ── */
     .ba-container {
       border-radius: 20px; overflow: hidden;
-      box-shadow: 0 20px 50px rgba(15,23,42,.18);
-      position: relative;
+      box-shadow: 0 20px 50px rgba(15,23,42,.18); position: relative;
     }
-    .ba-container img {
-      width: 100%; display: block;
-      min-height: 360px; object-fit: cover;
-    }
-    /* 좌측 반투명 오버레이 */
+    .ba-container img { width: 100%; display: block; min-height: 360px; object-fit: cover; }
     .ba-overlay-left {
-      position: absolute; top: 0; left: 0;
-      width: 50%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 50%; height: 100%;
       background: linear-gradient(to bottom, rgba(15,23,42,.55) 0%, rgba(15,23,42,.35) 100%);
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 28px 24px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 28px 24px;
     }
-    /* 우측 반투명 오버레이 */
     .ba-overlay-right {
-      position: absolute; top: 0; right: 0;
-      width: 50%; height: 100%;
+      position: absolute; top: 0; right: 0; width: 50%; height: 100%;
       background: linear-gradient(to bottom, rgba(21,101,192,.5) 0%, rgba(21,101,192,.3) 100%);
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 28px 24px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 28px 24px;
     }
     .ba-badge {
       display: inline-block; font-size: .72rem; font-weight: 800;
@@ -82,42 +70,41 @@
     }
     .ba-badge--before { background: rgba(255,255,255,.2); color: #f1f5f9; }
     .ba-badge--after  { background: rgba(255,255,255,.25); color: #fff; }
-    .ba-overlay-left h5,
-    .ba-overlay-right h5 { color: #fff; font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
-    .ba-overlay-left ul,
-    .ba-overlay-right ul {
-      margin: 0; padding-left: 16px;
-      color: rgba(255,255,255,.85); font-size: .82rem; line-height: 1.9;
+    .ba-overlay-left h5, .ba-overlay-right h5 { color: #fff; font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+    .ba-overlay-left ul, .ba-overlay-right ul {
+      margin: 0; padding-left: 16px; color: rgba(255,255,255,.85); font-size: .82rem; line-height: 1.9;
     }
 
-    /* ── 흐름 이미지 ── */
+    /* ── 흐름 이미지 — SVG용 어두운 배경 ── */
     .flow-image {
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 16px 40px rgba(15,23,42,.13); background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(15,23,42,.25);
+      background: #0f172a;          /* 어두운 네이비 배경 */
+      padding: 40px;                /* SVG 여백 */
     }
     .flow-image img {
-      width: 100%; display: block;
-      height: 460px; object-fit: cover;
-      object-position: top;
+      width: 100%;
+      display: block;
+      height: auto;
+      min-height: 260px;
+      object-fit: contain;          /* cover → contain (SVG 잘림 방지) */
     }
 
-    /* ── 흐름 레이블 ── */
     .flow-label {
       display: inline-block; background: #1565c0; color: #fff;
       font-size: .8rem; font-weight: 800; letter-spacing: .05em;
       padding: 5px 14px; border-radius: 20px; margin-bottom: 12px;
     }
 
-    /* ── 강한 메시지 ── */
     .msg-section { padding: 100px 0; background: #1e293b; }
     .msg-section h2 { font-weight: 900; font-size: clamp(1.7rem, 3.5vw, 2.7rem); color: #fff; line-height: 1.45; }
     .msg-section p { color: #94a3b8; margin-top: 20px; font-size: 1.05rem; line-height: 1.8; }
 
-    /* ── 반응형 ── */
     @media (max-width: 991px) { .tai-image-box img, .tai-repair-box img { height: 300px; } }
     @media (max-width: 768px) {
       .tai-image-box img, .tai-repair-box img { height: 240px; }
-      .flow-image img { height: 280px; }
+      .flow-image { padding: 24px; }
       .ba-overlay-left ul, .ba-overlay-right ul { font-size: .76rem; }
     }
   </style>
@@ -262,7 +249,7 @@
     </div>
   </section>
 
-  <!-- ══ Before / After — building4 (박스 + 타이틀 + 반투명 오버레이) ══ -->
+  <!-- ══ Before / After — building4 ══ -->
   <section style="padding: 90px 0; background: #0f172a;">
     <div class="container">
       <div class="section-title text-center" style="margin-bottom:40px;">
@@ -272,12 +259,9 @@
           관리 방식 하나가 법적 책임의 차이를 만듭니다.
         </p>
       </div>
-
       <div class="ba-container">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building4.png"
              alt="TAI 도입 전후 비교">
-
-        <!-- 좌측 오버레이 — TAI 이전 -->
         <div class="ba-overlay-left">
           <span class="ba-badge ba-badge--before">BEFORE · TAI 도입 전</span>
           <h5>기존 관리</h5>
@@ -288,8 +272,6 @@
             <li>서류 대응 어려움</li>
           </ul>
         </div>
-
-        <!-- 우측 오버레이 — TAI 이후 -->
         <div class="ba-overlay-right">
           <span class="ba-badge ba-badge--after">AFTER · TAI 도입 후</span>
           <h5>TAI Safe 관리</h5>
@@ -304,7 +286,7 @@
     </div>
   </section>
 
-  <!-- ══ TAI Safe — building5 / building6 ══ -->
+  <!-- ══ TAI Safe — building5 / building6 (SVG, 어두운 배경) ══ -->
   <section style="padding: 100px 0;">
     <div class="container">
       <div class="section-title text-center" style="margin-bottom:60px;">
@@ -342,7 +324,7 @@
           <h4 style="font-weight:800;color:#1e293b;font-size:1.2rem;margin:0;">TAI Safe로 전체 관리</h4>
           <p style="color:#64748b;font-size:.9rem;margin-top:6px;">점검 일정, 수선 기록, 증빙 보관까지 하나의 시스템으로 운영합니다.</p>
         </div>
-        <div class="flow-image">
+        <div class="flow-image" style="background:#0c1f14;">
           <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/building6.png"
                alt="TAI Safe로 건물 안전관리 전체를 운영하는 흐름">
         </div>
