@@ -75,8 +75,9 @@
     .pr-pg {
       min-width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
       border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: .82rem; font-weight: 700; color: #475569;
-      cursor: pointer; background: #fff; transition: all .12s;
+      cursor: pointer; background: #fff; transition: all .12s; text-decoration: none; box-sizing: border-box;
     }
+    a.pr-pg { color: #475569; }
     .pr-pg:hover { border-color: #0d1b2a; color: #0d1b2a; }
     .pr-pg.active { background: #0d1b2a; color: #fff; border-color: #0d1b2a; }
     .pr-pg.disabled { opacity: .4; cursor: default; pointer-events: none; }
@@ -257,11 +258,16 @@ async function fetchResults() {
       if (hz) meta += '<span>' + hz + '</span>';
       if (dt) meta += '<span>' + dt + '</span>';
       if (sec && SEC_LABEL[sec]) meta += '<span>' + esc(SEC_LABEL[sec]) + '</span>';
-      var link = it.source_url ? '<a class="pr-link" href="' + esc(it.source_url) + '" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 원문·출처</a>' : '';
+      var detailHref = 'precedent-detail.html?id=' + encodeURIComponent(it.id);
+      var link =
+        '<a class="pr-link" href="' + detailHref + '"><i class="fas fa-file-alt"></i> 상세 페이지</a>' +
+        (it.source_url
+          ? ' <a class="pr-link" href="' + esc(it.source_url) + '" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> 원문·출처</a>'
+          : '');
       return (
         '<div class="pr-card">' +
         (court ? '<div class="pr-court">' + court + '</div>' : '') +
-        '<div class="pr-title">' + title + '</div>' +
+        '<div class="pr-title"><a href="' + detailHref + '" style="color:inherit;text-decoration:none;">' + title + '</a></div>' +
         (meta ? '<div class="pr-meta">' + meta + '</div>' : '') +
         (sum ? '<div class="pr-summary">' + sum + '</div>' : '') +
         link +
@@ -275,6 +281,16 @@ async function fetchResults() {
   }
 }
 
+function listQueryForPage(pageNum) {
+  var p = new URLSearchParams();
+  if (filters.q) p.set('q', filters.q);
+  if (filters.sec !== 'ALL') p.set('sec', filters.sec);
+  if (filters.haz !== 'ALL') p.set('hazard', filters.haz);
+  if (pageNum > 1) p.set('page', String(pageNum));
+  var qs = p.toString();
+  return qs ? '?' + qs : '';
+}
+
 function renderPaging(total) {
   var pages = Math.ceil(total / PG);
   if (pages <= 1) {
@@ -283,25 +299,43 @@ function renderPaging(total) {
   }
   var cur = filters.page;
   var h = '';
-  h += '<div class="pr-pg ' + (cur === 1 ? 'disabled' : '') + '" onclick="goPage(' + (cur - 1) + ')"><i class="fas fa-chevron-left"></i></div>';
+  if (cur > 1) {
+    h +=
+      '<a class="pr-pg" href="' +
+      listQueryForPage(cur - 1) +
+      '" rel="prev" aria-label="이전 페이지"><i class="fas fa-chevron-left"></i></a>';
+  } else {
+    h += '<span class="pr-pg disabled" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>';
+  }
   var start = Math.max(1, cur - 3);
   var end = Math.min(pages, cur + 3);
-  if (start > 1) h += '<div class="pr-pg" onclick="goPage(1)">1</div>' + (start > 2 ? '<div class="pr-pg disabled">…</div>' : '');
+  if (start > 1) {
+    h += '<a class="pr-pg" href="' + listQueryForPage(1) + '">1</a>';
+    if (start > 2) h += '<span class="pr-pg disabled">…</span>';
+  }
   for (var i = start; i <= end; i++) {
-    h += '<div class="pr-pg ' + (i === cur ? 'active' : '') + '" onclick="goPage(' + i + ')">' + i + '</div>';
+    h +=
+      '<a class="pr-pg ' +
+      (i === cur ? 'active' : '') +
+      '" href="' +
+      listQueryForPage(i) +
+      '">' +
+      i +
+      '</a>';
   }
   if (end < pages) {
-    h += (end < pages - 1 ? '<div class="pr-pg disabled">…</div>' : '') + '<div class="pr-pg" onclick="goPage(' + pages + ')">' + pages + '</div>';
+    if (end < pages - 1) h += '<span class="pr-pg disabled">…</span>';
+    h += '<a class="pr-pg" href="' + listQueryForPage(pages) + '">' + pages + '</a>';
   }
-  h += '<div class="pr-pg ' + (cur === pages ? 'disabled' : '') + '" onclick="goPage(' + (cur + 1) + ')"><i class="fas fa-chevron-right"></i></div>';
+  if (cur < pages) {
+    h +=
+      '<a class="pr-pg" href="' +
+      listQueryForPage(cur + 1) +
+      '" rel="next" aria-label="다음 페이지"><i class="fas fa-chevron-right"></i></a>';
+  } else {
+    h += '<span class="pr-pg disabled" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>';
+  }
   document.getElementById('paging').innerHTML = h;
-}
-
-function goPage(p) {
-  if (p < 1) return;
-  filters.page = p;
-  fetchResults();
-  window.scrollTo({ top: 380, behavior: 'smooth' });
 }
 
 async function loadStats() {

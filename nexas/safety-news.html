@@ -65,7 +65,8 @@
   .sh-empty{text-align:center;padding:60px 20px;color:#94a3b8;}
   .sh-empty .icon{font-size:2.5rem;margin-bottom:10px;}
   .sh-paging{display:flex;justify-content:center;gap:4px;margin-top:28px;flex-wrap:wrap;}
-  .sh-pg{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.82rem;font-weight:700;color:#475569;cursor:pointer;background:#fff;transition:all .12s;}
+  .sh-pg{min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.82rem;font-weight:700;color:#475569;cursor:pointer;background:#fff;transition:all .12s;text-decoration:none;box-sizing:border-box;}
+  a.sh-pg{color:#475569;}
   .sh-pg:hover{border-color:#0d1b2a;color:#0d1b2a;}
   .sh-pg.active{background:#0d1b2a;color:#fff;border-color:#0d1b2a;}
   .sh-pg.disabled{opacity:.4;cursor:default;pointer-events:none;}
@@ -236,6 +237,7 @@ async function fetchResults(){
     el.innerHTML=items.map(it=>{
       const cat=it.category||'OTHER';
       const sec=it.sector||'COMMON';
+      const detailHref='safety-news-detail.html?id='+encodeURIComponent(it.id);
       return `<div class="sh-card">
         <div class="sh-icon ic-${cat}"><i class="fas ${CAT_ICON[cat]||'fa-file-alt'}"></i></div>
         <div style="flex:1;min-width:0">
@@ -244,7 +246,10 @@ async function fetchResults(){
             <span class="sh-cat-badge">${CAT_LABEL[cat]||cat}</span>
             <span class="sh-sector-badge sec-${sec}">${SEC_LABEL[sec]||sec}</span>
           </div>
-          ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener" class="sh-link"><i class="fas fa-external-link-alt"></i> 자료 보기</a>`:''}
+          <div class="d-flex flex-wrap gap-2 mt-2">
+            <a href="${detailHref}" class="sh-link"><i class="fas fa-file-alt"></i> 상세 페이지</a>
+            ${it.url?`<a href="${esc(it.url)}" target="_blank" rel="noopener" class="sh-link"><i class="fas fa-external-link-alt"></i> 원문(KOSHA)</a>`:''}
+          </div>
         </div>
       </div>`;
     }).join('');
@@ -254,20 +259,36 @@ async function fetchResults(){
   }
 }
 
+function listQueryForPage(pageNum){
+  const p=new URLSearchParams();
+  if(filters.q)p.set('q',filters.q);
+  if(filters.cat!=='ALL')p.set('cat',filters.cat);
+  if(filters.sec!=='ALL')p.set('sec',filters.sec);
+  if(pageNum>1)p.set('page',String(pageNum));
+  const qs=p.toString();
+  return qs?'?'+qs:'';
+}
 function renderPaging(total){
   const pages=Math.ceil(total/PG);
   if(pages<=1){document.getElementById('paging').innerHTML='';return;}
   const cur=filters.page;
   let h='';
-  h+=`<div class="sh-pg ${cur===1?'disabled':''}" onclick="goPage(${cur-1})"><i class="fas fa-chevron-left"></i></div>`;
+  if(cur>1)h+=`<a class="sh-pg" href="${listQueryForPage(cur-1)}" rel="prev" aria-label="이전 페이지"><i class="fas fa-chevron-left"></i></a>`;
+  else h+=`<span class="sh-pg disabled" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>`;
   let start=Math.max(1,cur-3),end=Math.min(pages,cur+3);
-  if(start>1)h+=`<div class="sh-pg" onclick="goPage(1)">1</div>${start>2?'<div class="sh-pg disabled">…</div>':''}`;
-  for(let i=start;i<=end;i++)h+=`<div class="sh-pg ${i===cur?'active':''}" onclick="goPage(${i})">${i}</div>`;
-  if(end<pages)h+=`${end<pages-1?'<div class="sh-pg disabled">…</div>':''}<div class="sh-pg" onclick="goPage(${pages})">${pages}</div>`;
-  h+=`<div class="sh-pg ${cur===pages?'disabled':''}" onclick="goPage(${cur+1})"><i class="fas fa-chevron-right"></i></div>`;
+  if(start>1){
+    h+=`<a class="sh-pg" href="${listQueryForPage(1)}">1</a>`;
+    if(start>2)h+='<span class="sh-pg disabled">…</span>';
+  }
+  for(let i=start;i<=end;i++)h+=`<a class="sh-pg ${i===cur?'active':''}" href="${listQueryForPage(i)}">${i}</a>`;
+  if(end<pages){
+    if(end<pages-1)h+='<span class="sh-pg disabled">…</span>';
+    h+=`<a class="sh-pg" href="${listQueryForPage(pages)}">${pages}</a>`;
+  }
+  if(cur<pages)h+=`<a class="sh-pg" href="${listQueryForPage(cur+1)}" rel="next" aria-label="다음 페이지"><i class="fas fa-chevron-right"></i></a>`;
+  else h+=`<span class="sh-pg disabled" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>`;
   document.getElementById('paging').innerHTML=h;
 }
-function goPage(p){if(p<1)return;filters.page=p;fetchResults();window.scrollTo({top:400,behavior:'smooth'});}
 
 async function loadStats(){
   try{

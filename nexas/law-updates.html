@@ -192,12 +192,13 @@ let filters = { sector:'ALL', year:'2026', type:'ALL', impact:'ALL', status:'ALL
 async function loadData() {
   try {
     const res = await fetch(
-      SB_URL + '/rest/v1/law_revision_board?is_public=eq.true&status=eq.PUBLISHED&order=revision_date.desc&select=law_name,law_type,revision_type,revision_date,enforcement_date,summary,body,affected_sectors,impact_level,source_url',
+      SB_URL + '/rest/v1/law_revision_board?is_public=eq.true&status=eq.PUBLISHED&order=revision_date.desc&select=id,law_name,law_type,revision_type,revision_date,enforcement_date,summary,body,affected_sectors,impact_level,source_url',
       { headers: H }
     );
     const rows = await res.json();
     const today = new Date().toISOString().slice(0,10);
     allData = (rows||[]).map(r => ({
+      id:         r.id,
       law_name:   r.law_name||'',
       law_type:   r.law_type||'-',
       rev:        r.revision_type||'',
@@ -281,6 +282,7 @@ function render(){
           +'</div>';
       }
 
+      const detailHtml=d.id!=null&&d.id!==''?'<a href="law-update-detail.html?id='+encodeURIComponent(d.id)+'" class="lu-btn-source" style="margin-right:10px;background:#1e3a5c;border-color:#1e3a5c;"><i class="fas fa-file-alt"></i> 상세 페이지</a>':'';
       const btnHtml=d.src?'<a href="'+esc(d.src)+'" class="lu-btn-source"><i class="fas fa-book-open"></i> 조문 전체 보기</a>':'';
       const st=(d.sectors||[]).map(s=>SL[s]||s).join(' · ');
 
@@ -301,7 +303,7 @@ function render(){
       html+='<div class="lu-detail-item"><div class="k">영향도</div><div class="v">'+ib+'</div></div>';
       html+='</div>';
       html+=changeHtml;
-      html+=btnHtml;
+      html+=detailHtml+btnHtml;
       html+='</div></div>';
     });
     html+='</div>';

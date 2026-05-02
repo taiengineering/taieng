@@ -59,7 +59,16 @@
 
       if (titleEl) {
         titleEl.textContent = d.title || "";
-        document.title = (d.title || "안전정보") + " | TAI Engineering";
+      }
+      if (typeof TAIDetailMeta !== "undefined" && TAIDetailMeta.setDetailMeta) {
+        var sum =
+          d.summary ||
+          (d.content ? TAIDetailMeta.stripHtml(d.content).slice(0, 400) : "") ||
+          d.title ||
+          "";
+        TAIDetailMeta.setDetailMeta(d.title || "안전정보", sum);
+      } else {
+        document.title = (d.title || "안전정보") + " | TAI Safe";
       }
       if (metaEl) {
         metaEl.innerHTML =
@@ -91,7 +100,7 @@
         var parts = [];
         if (prev && prev.id) {
           parts.push(
-            '<a href="safety-news-detail.html?id=' +
+            '<a href="safety-post-detail.html?id=' +
               encodeURIComponent(prev.id) +
               '" class="btn btn-border btn-sm">' +
               "이전글 · " +
@@ -102,7 +111,7 @@
         }
         if (next && next.id) {
           parts.push(
-            '<a href="safety-news-detail.html?id=' +
+            '<a href="safety-post-detail.html?id=' +
               encodeURIComponent(next.id) +
               '" class="btn btn-border btn-sm">' +
               "다음글 · " +

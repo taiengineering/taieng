@@ -132,7 +132,7 @@
             "</p>"
           : "";
         var href =
-          "safety-news-detail.html?id=" + encodeURIComponent(p.id);
+          "safety-post-detail.html?id=" + encodeURIComponent(p.id);
         return (
           '<div class="col-md-6 col-lg-4">' +
           '<a href="' +

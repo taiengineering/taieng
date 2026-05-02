@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>안전보건자료 | TAI Safe</title>
-  <meta name="description" content="자료를 불러오는 중입니다.">
+  <title>개정법령 | TAI Safe</title>
+  <meta name="description" content="법령 정보를 불러오는 중입니다.">
   <link rel="icon" href="assets/img/fevicon.png">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/fontawesome.min.css">
@@ -15,9 +15,10 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
     .tai-detail-article { max-width: 820px; margin: 0 auto; }
-    .tai-detail-body { line-height: 1.75; }
+    .tai-detail-body { line-height: 1.75; white-space: pre-wrap; }
     .tai-detail-cta { border-radius: 14px; }
-    .tai-src-badge { font-size: .72rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: #f1f5f9; color: #475569; }
+    .lu-box { background: #fafbfd; border: 1px solid #e8eaed; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; }
+    .lu-k { font-size: .72rem; color: #64748b; font-weight: 700; margin-bottom: 4px; }
   </style>
 </head>
 <body class="sc5">
@@ -30,7 +31,7 @@
     <nav aria-label="breadcrumb" class="mb-4">
       <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item"><a href="index.html">홈</a></li>
-        <li class="breadcrumb-item"><a href="safety-news.html">안전보건자료</a></li>
+        <li class="breadcrumb-item"><a href="law-updates.html">개정법령</a></li>
         <li class="breadcrumb-item active" aria-current="page">상세</li>
       </ol>
     </nav>
@@ -38,13 +39,14 @@
       <p class="text-danger small mb-3" id="tai-detail-error"></p>
       <h1 class="title mb-3" id="tai-detail-title">불러오는 중…</h1>
       <p class="text-muted small mb-4" id="tai-detail-meta"></p>
+      <div id="tai-detail-grids"></div>
       <div class="tai-detail-body" id="tai-detail-body"></div>
       <div class="tai-detail-cta mt-5 p-4" style="background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;">
         <h3 class="h5 mb-2 fw-bold">3분 무료 법령진단</h3>
         <p class="small mb-3" style="opacity:.85;">비로그인으로 우리 사업장 의무를 빠르게 확인해 보세요.</p>
         <a href="free-diagnosis.html" class="btn btn-light btn-sm fw-bold">무료 법령진단 시작 →</a>
       </div>
-      <div class="mt-4"><a href="safety-news.html" class="btn btn-border btn-sm">← 목록으로</a></div>
+      <div class="mt-4"><a href="law-updates.html" class="btn btn-border btn-sm">← 목록으로</a></div>
     </div>
   </div>
 </section>
@@ -61,11 +63,9 @@
 <script src="assets/js/tai-detail-meta.js"></script>
 <script>
 (function () {
-  var SB = 'https://vwlahtguyggrhvslabax.supabase.co/rest/v1';
-  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3bGFodGd1eWdncmh2c2xhYmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE1OTYsImV4cCI6MjA5Mjg2NzU5Nn0.Yp6P7ahaCuna_gwYC8_S2KD081Ov9Fs65e9o_AenP48';
-  var H = { apikey: KEY, Authorization: 'Bearer ' + KEY };
-  var CAT_LABEL = { EDUCATION:'교육자료', CASE_STUDY:'사고사례', GUIDE:'가이드', POSTER:'포스터·홍보', VIDEO_VR:'영상·VR', HEALTH:'보건·건강', RESEARCH:'연구·보고서', CHECKLIST:'체크리스트', FOREIGN:'외국인자료', REGULATION:'법령', OTHER:'기타' };
-  var SEC_LABEL = { CONSTRUCTION:'건설', MANUFACTURING:'제조', SERVICE:'서비스', COMMON:'공통' };
+  var SB_URL = 'https://vwlahtguyggrhvslabax.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3bGFodGd1eWdncmh2c2xhYmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE1OTYsImV4cCI6MjA5Mjg2NzU5Nn0.Yp6P7ahaCuna_gwYC8_S2KD081Ov9Fs65e9o_AenP48';
+  var H = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
 
   function esc(s) {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -77,41 +77,36 @@
     var titleEl = document.getElementById('tai-detail-title');
     var metaEl = document.getElementById('tai-detail-meta');
     var bodyEl = document.getElementById('tai-detail-body');
+    var grids = document.getElementById('tai-detail-grids');
     if (!id) {
       if (errEl) errEl.textContent = '잘못된 링크입니다.';
       return;
     }
     try {
-      var res = await fetch(SB + '/kosha_safety_materials?id=eq.' + encodeURIComponent(id) + '&select=*', { headers: H });
+      var res = await fetch(
+        SB_URL + '/rest/v1/law_revision_board?id=eq.' + encodeURIComponent(id) + '&is_public=eq.true&select=*',
+        { headers: H }
+      );
       var rows = await res.json();
-      if ((!rows || !rows.length) && res.ok) {
-        window.location.replace('safety-post-detail.html' + location.search);
-        return;
-      }
-      if (!res.ok || !rows || !rows.length) throw new Error('자료를 찾을 수 없습니다.');
-      var d = rows[0];
-      var title = d.title || '안전보건자료';
-      var cat = CAT_LABEL[d.category] || d.category || '';
-      var sec = SEC_LABEL[d.sector] || d.sector || '';
+      if (!res.ok || !rows || !rows.length) throw new Error('법령 정보를 찾을 수 없습니다.');
+      var r = rows[0];
+      var title = r.law_name || '개정 법령';
+      var sum = r.summary || (r.body ? String(r.body).slice(0, 500) : '') || title;
+      if (typeof TAIDetailMeta !== 'undefined') TAIDetailMeta.setDetailMeta(title, sum);
       if (titleEl) titleEl.textContent = title;
-      var summarySrc = d.summary || d.description || d.excerpt || title;
-      if (typeof TAIDetailMeta !== 'undefined') TAIDetailMeta.setDetailMeta(title, summarySrc);
-      if (metaEl) {
-        metaEl.innerHTML =
-          '<span class="me-2 tai-src-badge">' + esc(cat) + '</span>' +
-          '<span class="me-2 tai-src-badge">' + esc(sec) + '</span>';
-      }
+      if (metaEl) metaEl.textContent = [r.law_type, r.revision_type, r.enforcement_date].filter(Boolean).join(' · ');
+      var g = '';
+      g += '<div class="row g-2 mb-3">';
+      [['공포일', r.revision_date], ['시행일', r.enforcement_date], ['유형', r.law_type]].forEach(function (x) {
+        g += '<div class="col-md-4"><div class="lu-box"><div class="lu-k">' + esc(x[0]) + '</div><div class="fw-bold">' + esc(x[1] || '-') + '</div></div></div>';
+      });
+      g += '</div>';
+      if (grids) grids.innerHTML = g;
       var inner = '';
-      if (d.summary || d.description || d.excerpt) {
-        var raw = d.summary || d.description || d.excerpt;
-        inner += '<div class="mb-4">' + String(raw) + '</div>';
-      }
-      if (d.url) {
-        inner += '<p><a class="btn btn-base btn-sm" href="' + esc(d.url) + '" target="_blank" rel="noopener">원문 자료 보기 (KOSHA) →</a></p>';
-      } else {
-        inner += '<p class="text-muted small">원문 링크가 없습니다.</p>';
-      }
-      if (bodyEl) bodyEl.innerHTML = inner || '<p class="text-muted">표시할 본문이 없습니다.</p>';
+      if (r.body && String(r.body).trim()) inner += '<div class="lu-box tai-detail-body">' + esc(r.body) + '</div>';
+      else if (r.summary && String(r.summary).trim()) inner += '<div class="lu-box tai-detail-body">' + esc(r.summary) + '</div>';
+      if (r.source_url) inner += '<p><a class="btn btn-base btn-sm" href="' + esc(r.source_url) + '" target="_blank" rel="noopener">조문·출처 보기 →</a></p>';
+      if (bodyEl) bodyEl.innerHTML = inner || '<p class="text-muted">본문이 없습니다.</p>';
     } catch (e) {
       if (errEl) errEl.textContent = e.message || '오류가 발생했습니다.';
       if (bodyEl) bodyEl.innerHTML = '';
