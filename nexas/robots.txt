@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-Allow: /free-diagnosis.html
-Disallow: /service/
-Disallow: /target/
 Sitemap: https://taieng.co.kr/sitemap.xml
