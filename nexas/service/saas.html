@@ -22,12 +22,6 @@
   <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  /* ── 갭 원인 요소 전부 숨김 (캐시 우회 인라인) ── */
-  .breadcrumb-area,
-  .breadcrumb-wrap,
-  .page-banner,
-  .page-header { display: none !important; }
-
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
@@ -242,7 +236,7 @@
   }
   </style>
 </head>
-<body class="sc5">
+<body class="sc5 home-2">
 
   <div class="preloader" id="preloader">
     <div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div>
@@ -252,8 +246,8 @@
 
   <div id="saas-page">
 
-  <!-- ① 히어로 — saas7.png 단일 이미지 (천장부터 시작) -->
-  <section style="margin-top:0;line-height:0;background:#0f172a;">
+  <!-- ① 히어로 — saas7.png 단일 이미지 (home-2 overlay navbar → 천장부터 시작) -->
+  <section style="line-height:0;background:#0f172a;">
     <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png"
          alt="TAI Safe — 스마트 산업안전관리 플랫폼"
          style="width:100%;display:block;">
