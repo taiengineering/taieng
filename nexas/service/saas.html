@@ -22,11 +22,11 @@
 </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="법령기반 산업안전 운영 플랫폼 TAI Safe — 무료 법령진단으로 의무를 확인하고, 점검·알림·증빙·보고까지 이어집니다.">
-  <title>TAI Safe SaaS | TAI 엔지니어링</title>
+  <meta name="description" content="산업안전관리 SaaS TAI Safe. 법령 기반으로 안전관리 의무를 자동 생성하고 점검·알림·문서·증빙까지 시스템으로 운영합니다.">
+  <title>산업안전관리 SaaS | TAI Safe — 법령기반 자동 안전관리 시스템</title>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="TAI Safe | 엑셀 없는 스마트 산업안전관리 플랫폼">
-  <meta property="og:description" content="과태료 리스크 3분 만에 진단하세요. 1인 집중에서 전원 참여로 바꾸는 법령 기반 안전관리 시스템.">
+  <meta property="og:title" content="TAI Safe | 법령기반 산업안전관리 SaaS">
+  <meta property="og:description" content="법령에서 의무를 만들고, 업무로 배분하고, 현장에서 실행되게 만드는 안전관리 운영 시스템.">
   <meta property="og:image" content="https://taieng.co.kr/assets/img/og-image.png">
   <link rel="stylesheet" href="../assets/css/animate.min.css">
   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
@@ -40,19 +40,82 @@
   <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  html, body { background: #0f172a !important; }
+  /* ============ HERO 천장 강제 고정 — 글로벌 CSS override ============ */
+  html, body { margin: 0 !important; padding: 0 !important; background: #0f172a !important; }
+  body.sc5, body.home-2 { margin: 0 !important; padding: 0 !important; }
+  body > .preloader, body > #preloader { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; pointer-events: none; z-index: 999999; margin: 0 !important; padding: 0 !important; }
+  body > .body-overlay, body > #body-overlay { position: fixed !important; top: 0 !important; left: 0 !important; margin: 0 !important; padding: 0 !important; }
+  #tai-header:not(.navbar-area) { display: block; height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: visible; }
+  /* 헤더 — saas7.png(흰 일러스트) 위에서 메뉴/로그인 가독성 확보 (다크 반투명 그라데이션 + 블러) */
+  body header.navbar-area, body .navbar-area {
+    background: linear-gradient(180deg, rgba(15,23,42,.82) 0%, rgba(15,23,42,.55) 55%, rgba(15,23,42,0) 100%) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  /* 스크롤 후 — 단단한 다크 배경 (히어로 지나면 페이지 콘텐츠와 자연스러운 분리) */
+  body .navbar-area.navbar-area-fixed {
+    background: rgba(15,23,42,.92) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+  #saas-page { margin: 0 !important; padding: 0 !important; }
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
-  .saas-hero { background:#0f172a; margin:0; padding:0; line-height:0; }
-  .saas-hero img { width:100%; display:block; }
+  body > #saas-page > .saas-hero,
+  .saas-hero {
+    position: relative !important;
+    background: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+    width: 100% !important;
+    overflow: hidden;
+  }
+  .saas-hero img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    vertical-align: top !important;
+  }
+  /* ============ 결정 페이지 섹션 스타일 ============ */
   .sp-image-box { background:#fff; border:1px solid #e2e8f0; border-radius:18px; padding:18px; box-shadow:0 12px 36px rgba(15,23,42,.08); overflow:hidden; }
   .sp-image-box img { width:100%; display:block; border-radius:12px; }
   #saas-page .sp-sec { padding: 90px 0; }
+  #saas-page .sp-sec-tight { padding: 64px 0; }
   #saas-page .sp-sec-gray { background: var(--sp-bg); }
   #saas-page .sp-sec-white { background: #fff; }
+  #saas-page .sp-sec-dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; }
   #saas-page .sp-label { font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--sp-blue); display: block; margin-bottom: 8px; }
-  #saas-page .sp-h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 900; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 14px; color: var(--sp-dark); }
+  #saas-page .sp-sec-dark .sp-label { color: #93c5fd; }
+  #saas-page .sp-h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 900; line-height: 1.3; letter-spacing: -.02em; margin-bottom: 14px; color: var(--sp-dark); }
+  #saas-page .sp-sec-dark .sp-h2 { color: #fff; }
   #saas-page .sp-desc { font-size: .95rem; color: var(--sp-gray); line-height: 1.75; margin-bottom: 0; }
+  #saas-page .sp-sec-dark .sp-desc { color: rgba(255,255,255,.75); }
+  /* 그룹 헤더 (얇은 구분선 라벨) */
+  #saas-page .sp-group-line { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px; }
+  #saas-page .sp-group-line::before, #saas-page .sp-group-line::after { content: ''; flex: 0 1 60px; height: 1px; background: #cbd5e1; }
+  #saas-page .sp-group-line span { font-size: .68rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--sp-blue); }
+  /* 선언형 H3 (각 기능 섹션) */
+  #saas-page .sp-claim { font-size: clamp(1.4rem, 2.8vw, 1.85rem); font-weight: 900; color: #0f172a; line-height: 1.3; letter-spacing: -.02em; margin-bottom: 14px; }
+  #saas-page .sp-claim-sub { font-size: .95rem; color: #475569; line-height: 1.7; margin-bottom: 0; }
+  /* 확신 블록 — 3카드 */
+  #saas-page .sp-conv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  @media(max-width:768px) { #saas-page .sp-conv-grid { grid-template-columns: 1fr; gap: 14px; } }
+  #saas-page .sp-conv-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; padding: 28px 22px; text-align: left; }
+  #saas-page .sp-conv-card .ck { font-size: .65rem; font-weight: 800; letter-spacing: .14em; color: #93c5fd; margin-bottom: 10px; text-transform: uppercase; }
+  #saas-page .sp-conv-card .ct { font-size: 1.15rem; font-weight: 900; color: #fff; line-height: 1.4; margin-bottom: 8px; }
+  #saas-page .sp-conv-card .cd { font-size: .88rem; color: rgba(255,255,255,.72); line-height: 1.65; margin: 0; }
+  /* 결정 블록 — 가격 위 */
+  #saas-page .sp-decide { background: linear-gradient(135deg, #0f172a 0%, #1A5FD4 100%); padding: 80px 0; text-align: center; color: #fff; }
+  #saas-page .sp-decide h2 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); font-weight: 900; color: #fff; line-height: 1.35; margin-bottom: 22px; letter-spacing: -.02em; }
+  #saas-page .sp-decide p { font-size: 1rem; color: rgba(255,255,255,.85); line-height: 1.85; margin: 0 auto 16px; max-width: 560px; }
+  #saas-page .sp-decide .sd-cue { font-size: .82rem; color: rgba(255,255,255,.55); margin-top: 28px; letter-spacing: .04em; }
+  /* 스크롤 유도 (외부 CTA 대신) */
+  #saas-page .sp-scroll-cue { font-size: .82rem; color: var(--sp-gray); letter-spacing: .04em; margin: 0; }
+  /* 가격/요금제/결제 영역 — 기존 스타일 그대로 보존 */
   #saas-page .sp-grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 32px; }
   @media(max-width:991px) { #saas-page .sp-grid-5 { grid-template-columns: repeat(2, 1fr); } }
   @media(max-width:575px) { #saas-page .sp-grid-5 { grid-template-columns: 1fr; } }
@@ -61,28 +124,6 @@
   #saas-page .sp-card .sp-icon { font-size: 2rem; margin-bottom: 10px; }
   #saas-page .sp-card h4 { font-size: .95rem; font-weight: 800; color: #0f172a; margin: 0 0 4px; }
   #saas-page .sp-card p { font-size: .82rem; color: #64748b; line-height: 1.5; margin: 0; }
-  #saas-page .feat-pair { display: flex; align-items: center; gap: 48px; padding: 64px 0; border-bottom: 1px solid #f1f5f9; }
-  #saas-page .feat-pair:nth-child(even) { flex-direction: row-reverse; }
-  #saas-page .feat-pair .feat-info { flex: 1; min-width: 240px; }
-  #saas-page .feat-pair .feat-info h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 12px; }
-  #saas-page .feat-pair .feat-info p { font-size: .92rem; color: #64748b; line-height: 1.7; margin-bottom: 0; }
-  #saas-page .feat-visual { flex: 1; min-width: 0; }
-  @media(max-width:991px) { #saas-page .feat-pair, #saas-page .feat-pair:nth-child(even) { flex-direction: column; gap: 24px; } }
-  .feature-details { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 22px; margin-top: 24px; }
-  .feature-details summary { cursor: pointer; font-weight: 900; font-size: 1rem; color: #0f172a; text-align: center; list-style: none; padding: 8px 0; }
-  .feature-details summary::-webkit-details-marker { display: none; }
-  .feature-details[open] summary { margin-bottom: 28px; border-bottom: 1px solid #f1f5f9; padding-bottom: 20px; }
-  #saas-page .feat-group { margin-bottom: 28px; }
-  #saas-page .feat-group-title { font-size: .85rem; font-weight: 800; color: #0f172a; margin-bottom: 10px; }
-  #saas-page .feat-grid-lite { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-  #saas-page .feat-lite { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px; font-size: .78rem; font-weight: 600; text-align: center; color: #0f172a; }
-  @media(max-width:768px) { #saas-page .feat-grid-lite { grid-template-columns: repeat(2, 1fr); } }
-  #saas-page .sp-adopt-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; max-width: 900px; margin: 0 auto; }
-  #saas-page .sp-adopt-card { background: #fff; border: 1.5px solid var(--sp-border); border-radius: 14px; padding: 18px 14px; text-align: center; position: relative; overflow: hidden; }
-  #saas-page .sp-adopt-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--sp-blue); }
-  #saas-page .sp-adopt-card .ac-n { font-size: .65rem; font-weight: 800; color: var(--sp-blue); letter-spacing: .08em; margin-bottom: 6px; }
-  #saas-page .sp-adopt-card .ac-t { font-size: .88rem; font-weight: 800; color: var(--sp-dark); line-height: 1.35; }
-  @media(max-width:767px) { #saas-page .sp-adopt-grid { grid-template-columns: repeat(2, 1fr); } }
   #saas-page .sp-sector-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
   #saas-page .sp-sector-btn { background: #fff; border: 2px solid var(--sp-border); color: var(--sp-gray); border-radius: 12px; padding: 12px 28px; font-size: 1rem; font-weight: 800; cursor: pointer; transition: all .18s; display: flex; align-items: center; gap: 7px; }
   #saas-page .sp-sector-btn:hover { border-color: var(--sp-blue); color: var(--sp-blue); background: #f0f6ff; }
@@ -108,9 +149,6 @@
   #saas-page .sp-sector-note { background: var(--sp-bg); border: 1px solid var(--sp-border); border-radius: 12px; padding: 14px 20px; margin-bottom: 28px; font-size: .88rem; color: var(--sp-gray); display: flex; align-items: center; gap: 10px; }
   #saas-page .sp-sector-note .sn-icon { font-size: 1.3rem; flex-shrink: 0; }
   #saas-page .sp-sector-note strong { color: var(--sp-dark); }
-  #saas-page .sp-badge-paid { display: inline-block; background: #fbbf24; color: #0f172a; font-size: .6rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
-  #saas-page .sp-badge-soon { display: inline-block; background: #f97316; color: #fff; font-size: .6rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
-  #saas-page .sp-badge-review { display: inline-block; background: #94a3b8; color: #fff; font-size: .55rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
   #saas-page .sp-final { background: linear-gradient(135deg, #0f172a, #1A5FD4); padding: 96px 0; text-align: center; }
   #saas-page .sp-final h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 900; color: #fff; line-height: 1.25; margin-bottom: 14px; }
   #saas-page .sp-final p { color: rgba(255,255,255,.7); font-size: .95rem; line-height: 1.75; margin-bottom: 36px; }
@@ -123,37 +161,46 @@
   #saas-page .sp-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); color: var(--sp-blue); }
   #saas-page .sp-btn-secondary { background: transparent; border: 2px solid rgba(255,255,255,.5); color: #fff; border-radius: 10px; padding: 12px 24px; font-size: .95rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; transition: all .15s; }
   #saas-page .sp-btn-secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.1); }
-  @media(max-width:768px) { #saas-page .sp-sec { padding: 64px 0; } }
+  @media(max-width:768px) { #saas-page .sp-sec { padding: 64px 0; } #saas-page .sp-sec-tight { padding: 48px 0; } }
   </style>
 </head>
-<body class="sc5 home-2">
+<body class="sc5 home-2" style="margin:0;padding:0;">
   <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
   <div class="body-overlay" id="body-overlay"></div>
   <div id="tai-header"></div>
-  <div id="saas-page">
+  <div id="saas-page" style="margin:0;padding:0;">
 
-  <!-- ① HERO -->
-  <section class="saas-hero">
-    <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png" alt="TAI Safe — 안전관리가 시스템으로 돌아갑니다">
+  <!-- ① HERO — 천장 강제 고정 -->
+  <section class="saas-hero" style="margin:0;padding:0;line-height:0;background:#0f172a;width:100%;">
+    <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png" alt="TAI Safe — 안전관리가 시스템으로 돌아갑니다" style="width:100%;display:block;margin:0;padding:0;border:0;vertical-align:top;">
   </section>
 
-  <!-- ② 인트로 -->
+  <!-- ② 인트로 (강화) -->
   <section class="sp-sec sp-sec-white text-center">
     <div class="container">
       <span class="sp-label">TAI SAFE</span>
       <h2 class="sp-h2">한 번만 설정하면<br>안전관리가 시스템으로 돌아갑니다</h2>
-      <p class="sp-desc">법령, 의무, 일정, 담당자, 실행, 기록, 문서까지 하나의 흐름으로 연결됩니다.</p>
+      <p class="sp-desc" style="max-width:640px;margin:0 auto;">TAI Safe는 안전관리자가 해야 할 일을 대신 말해주는 도구가 아닙니다.<br>법령에서 의무를 만들고, 업무로 배분하고, 현장에서 실행되게 만드는 운영 시스템입니다.</p>
+    </div>
+  </section>
+
+  <!-- ③ 그룹 A 정의 블록 — 제품의 본질 -->
+  <section class="sp-sec-tight sp-sec-gray text-center">
+    <div class="container">
+      <div class="sp-group-line"><span>GROUP A — 제품의 본질</span></div>
+      <h2 class="sp-h2" style="margin-bottom:12px;">안전관리는 지식의 문제가 아니라<br>운영 구조의 문제입니다</h2>
+      <p class="sp-desc" style="max-width:600px;margin:0 auto;">TAI Safe는 법령을 읽는 시스템이 아닙니다. 법령을 실행 가능한 업무로 바꾸는 시스템입니다.</p>
     </div>
   </section>
 
   <!-- saas01: 통합 운영 -->
-  <section class="sp-sec sp-sec-gray">
+  <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-5">
           <span class="sp-label">통합 운영</span>
-          <h2 class="sp-h2">법령부터 문서까지<br>하나의 화면에서</h2>
-          <p class="sp-desc">사람이 챙기던 안전관리 업무를 시스템 흐름으로 만듭니다. 법령·일정·점검·기록이 하나의 화면에서 이어집니다.</p>
+          <h3 class="sp-claim">안전관리를 더 이상<br>흩어놓지 않습니다</h3>
+          <p class="sp-claim-sub">법령, 일정, 담당자, 점검, 기록, 문서. 하나의 흐름으로 연결됩니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
@@ -165,13 +212,13 @@
   </section>
 
   <!-- saas02: 법령 자동 분석 -->
-  <section class="sp-sec sp-sec-white">
+  <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="row align-items-center g-5 flex-row-reverse">
         <div class="col-lg-5">
           <span class="sp-label">법령 분석</span>
-          <h2 class="sp-h2">시설 정보만 입력하면<br>적용 법령이 자동 정리됩니다</h2>
-          <p class="sp-desc">업종·면적·인원·공정만 입력하면 산업안전보건법, 소방법, 고압가스법 등 해당 법령을 즉시 매칭합니다. 빠뜨릴 의무가 없습니다.</p>
+          <h3 class="sp-claim">법령을 찾지 않습니다.<br>자동으로 나옵니다.</h3>
+          <p class="sp-claim-sub">업종·면적·인원·공정 정보를 입력하면 적용 법령과 의무가 자동 산출됩니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
@@ -182,54 +229,85 @@
     </div>
   </section>
 
-  <!-- saas03: 점검 일정 -->
-  <section class="sp-sec sp-sec-gray">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-5">
-          <span class="sp-label">일정 관리</span>
-          <h2 class="sp-h2">법정 점검 일정을<br>캘린더로 한눈에</h2>
-          <p class="sp-desc">소방·전기·가스·승강기 등 모든 법정 점검 주기를 자동 계산하고, 기한 전 알림을 보내드립니다.</p>
-        </div>
-        <div class="col-lg-7">
-          <div class="sp-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas03.png" alt="점검 일정 캘린더" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- saas04: 선임 요건 -->
-  <section class="sp-sec sp-sec-white">
-    <div class="container">
-      <div class="row align-items-center g-5 flex-row-reverse">
-        <div class="col-lg-5">
-          <span class="sp-label">선임 관리</span>
-          <h2 class="sp-h2">안전관리자 선임 의무<br>자동으로 판정합니다</h2>
-          <p class="sp-desc">안전관리자, 보건관리자, 소방안전관리자 등 법령별 선임 의무를 시설 규모에 맞춰 정확히 산출합니다.</p>
-        </div>
-        <div class="col-lg-7">
-          <div class="sp-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas04.png" alt="선임 요건 판정" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- saas05: 업무 배분 -->
-  <section class="sp-sec sp-sec-gray">
+  <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-5">
           <span class="sp-label">업무 배분</span>
-          <h2 class="sp-h2">담당자별 업무를<br>체계적으로 나눕니다</h2>
-          <p class="sp-desc">점검·교육·신고 업무를 담당자에게 자동 배분하고 진행 현황을 실시간으로 추적합니다.</p>
+          <h3 class="sp-claim">혼자 하지 않습니다.<br>시스템이 나눕니다.</h3>
+          <p class="sp-claim-sub">점검·교육·신고는 담당자에게 자동 배분되고, 진행 현황은 실시간으로 추적됩니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
             <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas05.png" alt="업무 배분" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- saas12: 그룹 A 통합 풀배너 -->
+  <section class="sp-sec sp-sec-gray">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:36px;">
+        <span class="sp-label">올인원 운영</span>
+        <h3 class="sp-claim" style="margin-bottom:8px;">안전관리 전체가<br>하나의 시스템으로 돌아갑니다</h3>
+        <p class="sp-claim-sub" style="max-width:560px;margin:0 auto;">법령진단부터 점검·교육·문서·보고까지. 별도 도구 없이 한 곳에서 운영됩니다.</p>
+      </div>
+      <div class="sp-image-box" style="padding:0;max-width:1200px;margin:0 auto;">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas12.png" alt="TAI Safe 전체 운영 구조" loading="lazy" style="border-radius:12px;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ 확신 블록 (다크) — 그룹 A → B 사이 -->
+  <section class="sp-sec sp-sec-dark">
+    <div class="container text-center">
+      <span class="sp-label">왜 시스템이어야 하는가</span>
+      <h2 class="sp-h2">사람이 하면 빠집니다.<br>엑셀로 하면 늦습니다.<br>종이로 하면 남지 않습니다.</h2>
+      <p class="sp-desc" style="max-width:560px;margin:0 auto;">TAI Safe는 빠지지 않게 만들고, 늦지 않게 알리고, 남아야 할 것은 자동으로 남깁니다.</p>
+      <div class="sp-conv-grid">
+        <div class="sp-conv-card">
+          <div class="ck">01 · 누락 방지</div>
+          <div class="ct">의무가 일정·업무로 변환됩니다</div>
+          <p class="cd">법령에서 도출된 의무가 사람의 기억이 아니라 일정·담당자·업무로 자동 등록됩니다.</p>
+        </div>
+        <div class="sp-conv-card">
+          <div class="ck">02 · 지연 방지</div>
+          <div class="ct">기한 전 알림이 담당자에게 도달합니다</div>
+          <p class="cd">D-day 알림이 SMS·앱으로 발송되어 점검과 교육이 기한을 넘기지 않습니다.</p>
+        </div>
+        <div class="sp-conv-card">
+          <div class="ck">03 · 증빙 자동화</div>
+          <div class="ct">점검 입력이 그대로 문서가 됩니다</div>
+          <p class="cd">현장 입력은 즉시 기록으로 남고, 기록은 보고서·증빙 문서로 자동 정리됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ 그룹 B 헤더 -->
+  <section class="sp-sec-tight sp-sec-white text-center">
+    <div class="container">
+      <div class="sp-group-line"><span>GROUP B — 현장 실행</span></div>
+      <h2 class="sp-h2" style="margin-bottom:12px;">설계는 시스템이,<br>실행은 현장에서</h2>
+      <p class="sp-desc" style="max-width:560px;margin:0 auto;">관리자가 만든 의무는 작업자의 모바일 앱으로 그대로 전달됩니다.</p>
+    </div>
+  </section>
+
+  <!-- saas09: 모바일 -->
+  <section class="sp-sec sp-sec-gray">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <span class="sp-label">모바일</span>
+          <h3 class="sp-claim">현장은 앱에서<br>바로 실행합니다</h3>
+          <p class="sp-claim-sub">관리자도 작업자도 모바일에서 점검·TBM·업무를 처리합니다. PC 앞으로 돌아올 필요가 없습니다.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="sp-image-box">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas09.png" alt="모바일 앱" loading="lazy">
           </div>
         </div>
       </div>
@@ -241,9 +319,9 @@
     <div class="container">
       <div class="row align-items-center g-5 flex-row-reverse">
         <div class="col-lg-5">
-          <span class="sp-label">현장 실행</span>
-          <h2 class="sp-h2">TBM·위험성평가를<br>현장에서 바로 작성</h2>
-          <p class="sp-desc">건설현장 매일 필수인 TBM과 위험성평가를 모바일에서 간편하게 작성하고 관리합니다.</p>
+          <span class="sp-label">TBM · 위험성평가</span>
+          <h3 class="sp-claim">매일의 TBM이<br>매일 누적됩니다</h3>
+          <p class="sp-claim-sub">모바일에서 작성한 TBM과 위험성평가가 그대로 기록·문서로 남습니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
@@ -254,14 +332,69 @@
     </div>
   </section>
 
+  <!-- saas03: 점검 일정 -->
+  <section class="sp-sec sp-sec-gray">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5">
+          <span class="sp-label">점검 일정</span>
+          <h3 class="sp-claim">점검일은<br>사람이 기억할 일이 아닙니다</h3>
+          <p class="sp-claim-sub">소방·전기·가스·승강기. 모든 법정 점검 주기를 시스템이 관리합니다.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="sp-image-box">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas03.png" alt="점검 일정 캘린더" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- saas10: 기상 연동 -->
+  <section class="sp-sec sp-sec-white">
+    <div class="container">
+      <div class="row align-items-center g-5 flex-row-reverse">
+        <div class="col-lg-5">
+          <span class="sp-label">기상 연동</span>
+          <h3 class="sp-claim">기상특보 시<br>작업중지가 자동 발송됩니다</h3>
+          <p class="sp-claim-sub">폭염·한파·강풍·폭우. 위험 기상이 발생하면 해당 현장에 즉시 도달합니다.</p>
+        </div>
+        <div class="col-lg-7">
+          <div class="sp-image-box">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas10.png" alt="기상 정보" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ 운영 방식 블록 — 그룹 B → C 사이 -->
+  <section class="sp-sec sp-sec-dark text-center">
+    <div class="container" style="max-width:760px;">
+      <span class="sp-label">조직 확장</span>
+      <h2 class="sp-h2">조직 전체를<br>한 번에 바꾸지 않습니다</h2>
+      <p class="sp-desc">처음부터 전 직원이 움직일 필요는 없습니다.<br>안전관리자 혼자 시작하고, 필요한 업무부터 하나씩 나누면 됩니다.</p>
+      <p class="sp-desc" style="margin-top:14px;">TAI Safe는 강제로 조직을 바꾸는 시스템이 아니라,<br>조직이 준비되는 만큼 확장되는 시스템입니다.</p>
+    </div>
+  </section>
+
+  <!-- ⑦ 그룹 C 헤더 -->
+  <section class="sp-sec-tight sp-sec-white text-center">
+    <div class="container">
+      <div class="sp-group-line"><span>GROUP C — 관리 · 증빙 · 리스크</span></div>
+      <h2 class="sp-h2" style="margin-bottom:12px;">기록은 자동으로,<br>리스크는 사전에</h2>
+      <p class="sp-desc" style="max-width:560px;margin:0 auto;">실행된 결과가 그대로 증빙이 되고, 빠진 것은 시스템이 보여줍니다.</p>
+    </div>
+  </section>
+
   <!-- saas07: 교육 관리 -->
   <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-5">
           <span class="sp-label">교육 관리</span>
-          <h2 class="sp-h2">안전보건 교육을<br>빠짐없이 관리합니다</h2>
-          <p class="sp-desc">법정 필수 교육 이수 현황을 한눈에 파악하고, 미이수자에게 자동 알림을 보냅니다.</p>
+          <h3 class="sp-claim">법정 교육 이수가<br>자동으로 추적됩니다</h3>
+          <p class="sp-claim-sub">미이수자는 시스템이 알리고, 이수 기록은 즉시 증빙으로 남습니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
@@ -278,8 +411,8 @@
       <div class="row align-items-center g-5 flex-row-reverse">
         <div class="col-lg-5">
           <span class="sp-label">리포트</span>
-          <h2 class="sp-h2">진단 결과를<br>전문 보고서로 출력</h2>
-          <p class="sp-desc">법령 진단 결과·점검 현황·선임 상태를 보고서로 출력하여 내부 보고 및 기관 제출에 활용합니다.</p>
+          <h3 class="sp-claim">점검하면 기록이 남고,<br>기록은 문서가 됩니다</h3>
+          <p class="sp-claim-sub">법령진단·점검·선임 결과가 그대로 보고서로 출력됩니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
@@ -290,80 +423,58 @@
     </div>
   </section>
 
-  <!-- saas09: 모바일 -->
+  <!-- saas04: 선임 관리 -->
   <section class="sp-sec sp-sec-gray">
     <div class="container">
       <div class="row align-items-center g-5">
         <div class="col-lg-5">
-          <span class="sp-label">모바일</span>
-          <h2 class="sp-h2">현장에서도 모바일로<br>즉시 확인·처리</h2>
-          <p class="sp-desc">안전관리자와 작업자 모두 모바일 앱에서 점검·TBM·업무 확인을 바로 처리합니다.</p>
+          <span class="sp-label">선임 관리</span>
+          <h3 class="sp-claim">선임 의무가<br>시설 규모에 맞춰 산출됩니다</h3>
+          <p class="sp-claim-sub">안전관리자, 보건관리자, 소방안전관리자. 누구를 선임해야 하는지 시스템이 판정합니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas09.png" alt="모바일 앱" loading="lazy">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas04.png" alt="선임 요건 판정" loading="lazy">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- saas10: 기상 연동 -->
+  <!-- saas11: 위반·처벌 (사전 가시화) -->
   <section class="sp-sec sp-sec-white">
     <div class="container">
       <div class="row align-items-center g-5 flex-row-reverse">
         <div class="col-lg-5">
-          <span class="sp-label">기상 연동</span>
-          <h2 class="sp-h2">기상 정보 기반<br>작업중지 자동 알림</h2>
-          <p class="sp-desc">폭염·한파·강풍·폭우 등 기상특보 발생 시 해당 현장에 작업중지 권고를 자동 발송합니다.</p>
+          <span class="sp-label">리스크 가시화</span>
+          <h3 class="sp-claim">리스크가<br>사전에 보입니다</h3>
+          <p class="sp-claim-sub">의무 미이행 시 발생할 수 있는 과태료·벌금·영업정지 수준이 사전에 표시됩니다.</p>
         </div>
         <div class="col-lg-7">
           <div class="sp-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas10.png" alt="기상 정보" loading="lazy">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas11.png" alt="위반 처벌 사전 가시화" loading="lazy">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- saas11: 위반·처벌 -->
-  <section class="sp-sec sp-sec-gray">
+  <!-- ⑧ 결정 블록 — 가격 바로 위 -->
+  <section class="sp-decide">
     <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-5">
-          <span class="sp-label">리스크 관리</span>
-          <h2 class="sp-h2">위반 시 과태료·처벌<br>사전에 확인하세요</h2>
-          <p class="sp-desc">각 법정 의무 미이행 시 예상되는 과태료·벌금·영업정지 수준을 사전에 안내하여 리스크를 최소화합니다.</p>
-        </div>
-        <div class="col-lg-7">
-          <div class="sp-image-box">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas11.png" alt="위반 처벌" loading="lazy">
-          </div>
-        </div>
-      </div>
+      <h2>이걸 쓰는 이유는<br>단순합니다</h2>
+      <p>법을 몰라서만 문제가 생기는 것이 아닙니다.<br>관리 방식이 수동이라서, 해야 할 일이 빠지고, 기한이 지나고, 증빙이 남지 않습니다.</p>
+      <p style="margin-top:18px;"><strong style="color:#fff;font-weight:900;">TAI Safe는 안전관리의 기억, 실행, 기록을<br>시스템으로 바꿉니다.</strong></p>
+      <div class="sd-cue">↓ 가격은 아래에서 확인할 수 있습니다</div>
     </div>
   </section>
 
-  <!-- saas12: 통합 풀배너 -->
-  <section class="sp-sec sp-sec-white">
-    <div class="container">
-      <div class="text-center" style="margin-bottom: 40px;">
-        <span class="sp-label">올인원 플랫폼</span>
-        <h2 class="sp-h2">하나의 플랫폼에서<br>안전관리 전체를 해결합니다</h2>
-        <p class="sp-desc">법령진단부터 점검·교육·보고서까지 — 모든 안전관리 업무가 TAI Safe 하나로 연결됩니다.</p>
-      </div>
-      <div class="sp-image-box" style="padding:0; max-width:1200px; margin:0 auto;">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas12.png" alt="TAI Safe 전체 화면" loading="lazy" style="border-radius:12px;">
-      </div>
-    </div>
-  </section>
-
-  <!-- 가격 -->
+  <!-- ⑨ 가격 — 제목만 부드럽게 조정, 결제 로직 보존 -->
   <section class="sp-sec sp-sec-white" id="pricing">
     <div class="container">
       <div class="text-center mb-4">
         <span class="sp-label">요금제</span>
-        <h2 class="sp-h2">과태료 1건보다 저렴합니다</h2>
+        <h2 class="sp-h2">우리 현장에 맞는 방식으로<br>시작하세요</h2>
         <p class="sp-desc">시설 유형을 선택하면 해당 요금제를 확인할 수 있습니다.<br><strong>시설 1개 기준 과금 · 관리자/작업자 등록 무제한</strong></p>
       </div>
       <div class="sp-sector-tabs" role="tablist">
@@ -401,7 +512,7 @@
     </div>
   </section>
 
-  <!-- 최종 CTA -->
+  <!-- 최종 CTA — 기존 유지 -->
   <div class="sp-final">
     <div class="container">
       <h2>무료 법령진단으로 시작하세요</h2>
