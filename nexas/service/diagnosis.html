@@ -230,6 +230,48 @@
     max-width: 640px; margin: 0 auto;
   }
 
+  /* ── 앱 프리뷰 섹션 (신규) ── */
+  .diag-app-preview {
+    background: var(--gray-bg); padding: 80px 0;
+    border-top: 1px solid var(--border);
+  }
+  .diag-app-preview .ap-eyebrow {
+    font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--blue); display: block; margin-bottom: 10px;
+  }
+  .diag-app-preview h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900;
+    color: var(--navy); line-height: 1.3; margin-bottom: 12px;
+  }
+  .diag-app-preview .ap-desc {
+    font-size: .92rem; color: #64748b; line-height: 1.8; margin-bottom: 28px;
+  }
+  .diag-app-img-wrap {
+    display: flex; justify-content: center; align-items: flex-end; gap: 16px;
+  }
+  .diag-app-img-wrap .ap-phone {
+    flex: 0 0 200px; max-width: 200px;
+  }
+  .diag-app-img-wrap .ap-phone.featured {
+    flex: 0 0 240px; max-width: 240px; transform: translateY(-10px);
+  }
+  .diag-app-img-wrap .ap-phone img {
+    width: 100%; height: auto; display: block;
+    border-radius: 20px;
+    box-shadow: 0 16px 48px rgba(15,43,74,.15), 0 0 0 1px rgba(15,43,74,.06);
+  }
+  .diag-app-img-wrap .ap-phone .ap-label {
+    text-align: center; font-size: .72rem; font-weight: 700;
+    color: #94a3b8; margin-top: 10px; letter-spacing: .05em; text-transform: uppercase;
+  }
+  .diag-app-img-wrap .ap-phone.featured .ap-label { color: var(--blue); }
+  @media(max-width:767px) {
+    .diag-app-img-wrap { flex-wrap: wrap; }
+    .diag-app-img-wrap .ap-phone,
+    .diag-app-img-wrap .ap-phone.featured { flex: 1 1 45%; max-width: none; transform: none; }
+    .diag-app-preview { padding: 56px 0; }
+  }
+
   /* ── 가격 (보호 영역) ── */
   .price-section { background: var(--gray-bg); padding: 90px 0; }
   .sector-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 44px; flex-wrap: wrap; }
@@ -511,6 +553,36 @@
 <section class="trust-section">
   <div class="container">
     <p>최신 법령 기준으로 분석됩니다<br>실제 법령 기반으로 구성됩니다<br>지속적으로 업데이트됩니다</p>
+  </div>
+</section>
+
+<!-- ⑦-1 앱 프리뷰 — 진단 후 TAI Safe로 바로 관리 -->
+<section class="diag-app-preview">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <span class="ap-eyebrow">진단 후 바로 시작</span>
+        <h2>진단 결과로<br>바로 관리합니다</h2>
+        <p class="ap-desc">
+          법령진단으로 의무 항목이 정리되면,<br>
+          TAI Safe 앱으로 현장에서 바로 점검하고 기록합니다.<br>
+          작업자가 5초 만에 체크하고, 이상이 생기면 즉시 신고됩니다.
+        </p>
+        <a href="../service/saas.html" style="display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:800;color:var(--blue);text-decoration:none;border-bottom:2px solid var(--blue);padding-bottom:2px;">TAI Safe 앱 자세히 보기 →</a>
+      </div>
+      <div class="col-lg-7">
+        <div class="diag-app-img-wrap">
+          <div class="ap-phone">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/01-home-light-light.png" alt="TAI Safe 홈 화면 — 오늘 점검 현황" loading="lazy">
+            <div class="ap-label">홈 화면</div>
+          </div>
+          <div class="ap-phone featured">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect-light-light.png" alt="TAI Safe 점검 — 정상/이상 1클릭" loading="lazy">
+            <div class="ap-label">5초 점검</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
