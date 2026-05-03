@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.4.0 (2026-05-03): 풋터 상단/하단 패딩 축소 (footer-inner 80px+ → 36px)
  * v3.3.0 (2026-04-29): 풋터 요금제 링크 삭제 (이니시스 요청)
  * v3.2.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
  * v3.1.0 (2026-04-26): 로고 텍스트 TAI → TAI Engineering
@@ -15,15 +16,18 @@
     if (document.getElementById('tai-footer-dark-theme')) return;
     var css = [
       '.footer-area.style-1 { background: #0f172a !important; }',
-      '.footer-area.style-1 .footer-inner { background: transparent !important; }',
-      '.footer-area.style-1 .footer-bottom { background: rgba(255,255,255,.04) !important; border-top: 1px solid rgba(255,255,255,.08) !important; }',
+      '.footer-area.style-1 .footer-inner { background: transparent !important; padding: 36px 0 32px !important; }',
+      '.footer-area.style-1 .footer-bottom { background: rgba(255,255,255,.04) !important; border-top: 1px solid rgba(255,255,255,.08) !important; padding: 14px 0 !important; }',
       '.footer-area.style-1 .footer-patent-bar { background: rgba(255,255,255,.05) !important; border-bottom: 1px solid rgba(255,255,255,.06) !important; }',
       '.footer-area.style-1 .footer-patent-bar p { color: rgba(255,255,255,.45) !important; }',
       '.footer-area.style-1 .footer-patent-bar a { color: rgba(255,255,255,.35) !important; }',
       '.footer-area.style-1 .footer-patent-bar a:hover { color: rgba(255,255,255,.65) !important; }',
-      '.footer-area.style-1 .widget-title, .footer-area.style-1 h6.widget-title { color: #fff !important; font-size:.82rem !important; letter-spacing:.08em !important; }',
+      '.footer-area.style-1 .widget-title, .footer-area.style-1 h6.widget-title { color: #fff !important; font-size:.82rem !important; letter-spacing:.08em !important; margin-bottom:14px !important; }',
+      '.footer-area.style-1 .footer-widget { margin-bottom: 0 !important; }',
       '.footer-area.style-1 .footer-widget p, .footer-area.style-1 .footer-company-info p { color: rgba(255,255,255,.58) !important; }',
       '.footer-area.style-1 .footer-company-name { color: rgba(255,255,255,.9) !important; }',
+      '.footer-area.style-1 .widget_link ul { margin-bottom: 0 !important; }',
+      '.footer-area.style-1 .widget_link ul li { margin-bottom: 6px !important; }',
       '.footer-area.style-1 .widget_link ul li a { color: rgba(255,255,255,.58) !important; transition: color .15s !important; }',
       '.footer-area.style-1 .widget_link ul li a:hover { color: #93c5fd !important; }',
       '.footer-area.style-1 .widget_link ul li a i { color: rgba(255,255,255,.3) !important; }',
