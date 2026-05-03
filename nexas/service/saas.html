@@ -40,11 +40,42 @@
   <link rel="stylesheet" href="../assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-  html, body { background: #0f172a !important; }
+  /* ============ HERO 천장 강제 고정 — 글로벌 CSS override ============ */
+  /* 진단: 헤더(.navbar-area)는 position:fixed라 자리를 차지하지 않아야 정상이지만,
+     preloader / body-overlay / tai-header placeholder / 글로벌 wrapper padding 등이
+     히어로 위에 빈 공간을 만들 수 있음. 모든 가능성을 한 번에 차단. */
+  html, body { margin: 0 !important; padding: 0 !important; background: #0f172a !important; }
+  body.sc5, body.home-2 { margin: 0 !important; padding: 0 !important; }
+  /* preloader는 화면을 덮는 fixed 오버레이여야 함 (자리 차지 방지) */
+  body > .preloader, body > #preloader { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; pointer-events: none; z-index: 999999; margin: 0 !important; padding: 0 !important; }
+  body > .body-overlay, body > #body-overlay { position: fixed !important; top: 0 !important; left: 0 !important; margin: 0 !important; padding: 0 !important; }
+  /* tai-header placeholder가 inject 전 자리 차지 방지 (inject 후 .navbar-area는 fixed라 자동 OK) */
+  #tai-header:not(.navbar-area) { display: block; height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: visible; }
+  /* saas-page wrapper의 모든 margin/padding 제거 */
+  #saas-page { margin: 0 !important; padding: 0 !important; }
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
-  .saas-hero { background:#0f172a; margin:0; padding:0; line-height:0; }
-  .saas-hero img { width:100%; display:block; }
+  /* HERO를 viewport 천장(0px)에 강제 — 헤더는 fixed로 위에 떠있고 히어로는 그 뒤로 풀폭 시작 */
+  body > #saas-page > .saas-hero,
+  .saas-hero {
+    position: relative !important;
+    background: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 0 !important;
+    width: 100% !important;
+    overflow: hidden;
+  }
+  .saas-hero img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    vertical-align: top !important;
+  }
+  /* ============ 이하 기존 페이지 스타일 (변경 없음) ============ */
   .sp-image-box { background:#fff; border:1px solid #e2e8f0; border-radius:18px; padding:18px; box-shadow:0 12px 36px rgba(15,23,42,.08); overflow:hidden; }
   .sp-image-box img { width:100%; display:block; border-radius:12px; }
   #saas-page .sp-sec { padding: 90px 0; }
@@ -126,15 +157,15 @@
   @media(max-width:768px) { #saas-page .sp-sec { padding: 64px 0; } }
   </style>
 </head>
-<body class="sc5 home-2">
+<body class="sc5 home-2" style="margin:0;padding:0;">
   <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
   <div class="body-overlay" id="body-overlay"></div>
   <div id="tai-header"></div>
-  <div id="saas-page">
+  <div id="saas-page" style="margin:0;padding:0;">
 
-  <!-- ① HERO -->
-  <section class="saas-hero">
-    <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png" alt="TAI Safe — 안전관리가 시스템으로 돌아갑니다">
+  <!-- ① HERO — 천장 강제 고정 (inline + CSS 이중 보장) -->
+  <section class="saas-hero" style="margin:0;padding:0;line-height:0;background:#0f172a;width:100%;">
+    <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas7.png" alt="TAI Safe — 안전관리가 시스템으로 돌아갑니다" style="width:100%;display:block;margin:0;padding:0;border:0;vertical-align:top;">
   </section>
 
   <!-- ② 인트로 -->
