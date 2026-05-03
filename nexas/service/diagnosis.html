@@ -113,123 +113,6 @@
   }
   .diag-hero .btn-hero-ghost:hover { color: #fff; }
 
-  /* ── S2. 문제 정의 — 4 카드 가로 ── */
-  .problem-section { background: var(--gray-bg); padding: 90px 0; }
-  .problem-card {
-    background: #fff; border: 1px solid var(--border); border-radius: 14px;
-    padding: 30px 24px; height: 100%;
-    border-top: 3px solid var(--navy);
-    transition: transform .15s, box-shadow .15s;
-  }
-  .problem-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.08); }
-  .problem-card .pn { font-size: 1.6rem; font-weight: 900; color: var(--blue); margin-bottom: 14px; line-height: 1; letter-spacing: -.02em; }
-  .problem-card .pt { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; line-height: 1.4; }
-  .problem-card .pd { font-size: .85rem; color: #64748b; line-height: 1.7; margin: 0; }
-
-  /* ── S3. 해결 방식 — 좌:이미지(다이어그램), 우:텍스트 ── */
-  .solution-section { background: #fff; padding: 90px 0; }
-  .solution-flow {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    border-radius: 18px; padding: 56px 32px;
-    display: flex; align-items: center; justify-content: space-around;
-    flex-wrap: wrap; gap: 14px; min-height: 320px;
-    border: 1px solid #cbd5e1;
-  }
-  .sf-node {
-    background: #fff; border-radius: 14px; padding: 22px 18px;
-    min-width: 130px; text-align: center;
-    box-shadow: 0 8px 24px rgba(15,43,74,.08); border: 1px solid var(--border);
-    flex: 0 1 auto;
-  }
-  .sf-node .sf-num {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: var(--navy); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 12px; font-weight: 900; font-size: .95rem;
-  }
-  .sf-node .sf-t { font-size: .92rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
-  .sf-node .sf-d { font-size: .72rem; color: #64748b; line-height: 1.5; margin: 0; }
-  .sf-arrow { font-size: 1.6rem; color: var(--blue); font-weight: 700; flex: 0 0 auto; }
-  @media(max-width:768px) {
-    .solution-flow { flex-direction: column; padding: 36px 24px; }
-    .sf-arrow { transform: rotate(90deg); padding: 4px 0; }
-  }
-
-  /* ── S4. 결과물 — 상:텍스트, 하:대형 이미지(리포트 mock) ── */
-  .result-section { background: var(--gray-bg); padding: 90px 0; }
-  .result-mock {
-    max-width: 920px; margin: 40px auto 0;
-    background: #fff; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 24px 60px rgba(15,43,74,.18), 0 0 0 1px var(--border);
-  }
-  .rm-header {
-    background: var(--navy); color: #fff;
-    padding: 20px 28px; display: flex; align-items: center; gap: 14px;
-  }
-  .rm-header .rm-ico { width: 36px; height: 36px; background: rgba(255,255,255,.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; }
-  .rm-header .rm-t { font-size: 1rem; font-weight: 800; }
-  .rm-header .rm-st { font-size: .8rem; color: rgba(255,255,255,.7); margin-top: 2px; }
-  .rm-body { padding: 28px 32px; }
-  .rm-block { padding: 20px 0; border-bottom: 1px solid var(--border); }
-  .rm-block:first-child { padding-top: 4px; }
-  .rm-block:last-child { border-bottom: none; padding-bottom: 4px; }
-  .rm-block .rms-label { font-size: .68rem; font-weight: 800; letter-spacing: .14em; color: var(--blue); margin-bottom: 12px; text-transform: uppercase; }
-  .rm-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  @media(max-width:575px) { .rm-stat-row { grid-template-columns: repeat(2, 1fr); } }
-  .rm-stat { background: #f8fafc; border-radius: 10px; padding: 16px 12px; text-align: center; border: 1px solid var(--border); }
-  .rm-stat .rms-n { font-size: 1.5rem; font-weight: 900; color: var(--navy); line-height: 1; }
-  .rm-stat .rms-l { font-size: .72rem; color: #64748b; margin-top: 6px; }
-  .rm-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: .88rem; color: #475569; }
-  .rm-list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.55; padding: 10px 14px; background: #f8fafc; border-radius: 8px; border-left: 3px solid var(--blue); }
-  .rm-list li::before { content: '✓'; color: var(--green); font-weight: 900; flex-shrink: 0; }
-  .rm-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .rm-tag { background: #dbeafe; color: #1e40af; font-size: .72rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
-
-  /* ── S5. 비교 ── */
-  .compare-section { background: #fff; padding: 90px 0; }
-  .compare-block {
-    border-radius: 16px; padding: 36px 32px; height: 100%;
-    border: 1.5px solid var(--border);
-  }
-  .compare-block.old { background: #f8fafc; }
-  .compare-block.new { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-color: #93c5fd; }
-  .compare-block h3 {
-    font-size: 1.25rem; font-weight: 900; margin-bottom: 24px;
-    padding-bottom: 14px; border-bottom: 2px solid var(--border);
-    color: #64748b;
-  }
-  .compare-block.new h3 { color: var(--blue); border-bottom-color: #93c5fd; }
-  .compare-block ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
-  .compare-block li {
-    font-size: .92rem; padding: 12px 16px;
-    background: #fff; border-radius: 10px; border-left: 3px solid #cbd5e1;
-    color: #64748b; font-weight: 500;
-  }
-  .compare-block.new li { border-left-color: var(--blue); color: var(--navy); font-weight: 700; }
-
-  /* ── S6. 사용 시나리오 ── */
-  .scenario-section { background: var(--gray-bg); padding: 90px 0; }
-  .scenario-card {
-    background: #fff; border: 1px solid var(--border); border-radius: 14px;
-    padding: 36px 28px; height: 100%; text-align: center;
-    border-top: 3px solid var(--blue);
-    transition: transform .15s, box-shadow .15s;
-  }
-  .scenario-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,0,0,.08); }
-  .scenario-card .sn { font-size: 1.4rem; font-weight: 900; color: var(--blue); line-height: 1; margin-bottom: 16px; letter-spacing: -.02em; }
-  .scenario-card .sct { font-size: 1.05rem; font-weight: 900; color: var(--navy); margin-bottom: 12px; }
-  .scenario-card p { font-size: .88rem; color: #64748b; line-height: 1.7; margin: 0; }
-
-  /* ── S7. 신뢰 ── */
-  .trust-section {
-    background: var(--navy); padding: 80px 0; text-align: center;
-  }
-  .trust-section p {
-    font-size: 1.05rem; color: rgba(255,255,255,.88);
-    line-height: 2.2; margin: 0; font-weight: 500;
-    max-width: 640px; margin: 0 auto;
-  }
-
   /* ── 앱 프리뷰 섹션 (신규) ── */
   .diag-app-preview {
     background: var(--gray-bg); padding: 80px 0;
@@ -272,41 +155,27 @@
     .diag-app-preview { padding: 56px 0; }
   }
 
-  /* ── 가격 (보호 영역) ── */
+  /* ── 본문 섹션 공통 (좌:라벨+제목 / 우:일러스트) — 요금 블록 .diag-label 과 충돌 방지를 위해 .diag-section 하위로 한정 */
+  .diag-section { padding: 80px 0; background: #fff; border-top: 1px solid var(--border); }
+  .diag-section.alt { background: var(--gray-bg); }
+  .diag-section .diag-side { padding-top: 4px; }
+  .diag-section .diag-label {
+    display: inline-block; font-size: .82rem; font-weight: 800;
+    color: var(--blue); letter-spacing: -.005em; margin-bottom: 14px;
+    text-transform: none;
+  }
+  .diag-section .diag-title {
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem); font-weight: 900;
+    color: var(--navy); line-height: 1.4; letter-spacing: -.02em; margin: 0;
+  }
+  .diag-section .diag-aside { font-size: .9rem; color: #475569; line-height: 1.85; margin: 0; }
+  .diag-section .diag-illust-img { width: 100%; height: auto; display: block; border-radius: 8px; }
+  @media (max-width: 991px) {
+    .diag-section { padding: 56px 0; }
+    .diag-section .diag-side { padding-top: 0; margin-bottom: 24px; }
+  }
 
-  /* ⑦-2 가격 직전 알림 — WORKORDER_diagnosis_page_alert_section_20260503 */
-  .diag-preprice-alert {
-    background: linear-gradient(180deg, #0a1424 0%, #0f2b4a 100%);
-    padding: 88px 0;
-  }
-  .diag-preprice-alert .diag-label.white { color: #93c5fd; }
-  .diag-preprice-alert .sec-title.white { color: #fff; }
-  .diag-preprice-alert .sec-desc.white { color: rgba(255,255,255,.82); }
-  .diag-preprice-alert .diag-alert-card {
-    background: #fff;
-    border-radius: 18px;
-    padding: 28px 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.22);
-    border: 1px solid rgba(255,255,255,.14);
-  }
-  .diag-preprice-alert .diag-alert-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .diag-preprice-alert .diag-alert-grid img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: #f1f5f9;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-  }
-  @media (max-width: 575px) {
-    .diag-preprice-alert .diag-alert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  }
+  /* ── 가격 (보호 영역) ── */
 
   .price-section { background: var(--gray-bg); padding: 90px 0; }
   .sector-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 44px; flex-wrap: wrap; }
@@ -364,7 +233,7 @@
   @media (max-width: 991px) {
     .diag-hero { min-height: auto; }
     .diag-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 24px); padding-bottom: 48px; }
-    .problem-section, .solution-section, .result-section, .compare-section, .scenario-section, .trust-section, .diag-preprice-alert, .price-section, .final-cta-section { padding: 64px 0; }
+    .diag-section, .diag-app-preview, .price-section, .final-cta-section { padding: 64px 0; }
   }
   </style>
 </head>
@@ -401,193 +270,108 @@
   </div>
 </section>
 
-<!-- ② 문제 정의 — 4 카드 가로 정렬 -->
-<section class="problem-section">
+<!-- ② 문제 정의 — diagnosis1.png -->
+<section class="diag-section">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <div class="problem-card">
-          <div class="pn">01</div>
-          <div class="pt">법령을 직접 찾아야 합니다</div>
-          <p class="pd">어떤 법이 적용되는지부터 확인해야 합니다</p>
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <span class="diag-label">문제 정의</span>
+          <h2 class="diag-title">아직도 이런 방식으로<br>관리하고 계신가요?</h2>
         </div>
       </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="problem-card">
-          <div class="pn">02</div>
-          <div class="pt">엑셀로 정리합니다</div>
-          <p class="pd">법령과 의무를 직접 정리해야 합니다</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="problem-card">
-          <div class="pn">03</div>
-          <div class="pt">빠지는 항목이 생깁니다</div>
-          <p class="pd">모든 의무를 빠짐없이 확인하기 어렵습니다</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="problem-card">
-          <div class="pn">04</div>
-          <div class="pt">점검 대응이 불안합니다</div>
-          <p class="pd">준비가 되어 있는지 확신하기 어렵습니다</p>
-        </div>
+      <div class="col-lg-9">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis1.png" alt="법령을 직접 찾아야 합니다 / 엑셀로 정리합니다 / 빠지는 항목이 생깁니다 / 점검 대응이 불안합니다" class="diag-illust-img" loading="lazy">
       </div>
     </div>
   </div>
 </section>
 
-<!-- ③ 해결 방식 — 좌:이미지(다이어그램), 우:텍스트 -->
-<section class="solution-section">
+<!-- ③ 해결 방식 — diagnosis2.png -->
+<section class="diag-section alt">
   <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6 order-lg-1">
-        <div class="solution-flow">
-          <div class="sf-node">
-            <div class="sf-num">1</div>
-            <div class="sf-t">입력</div>
-            <p class="sf-d">사업장 정보</p>
-          </div>
-          <div class="sf-arrow" aria-hidden="true">→</div>
-          <div class="sf-node">
-            <div class="sf-num">2</div>
-            <div class="sf-t">분석</div>
-            <p class="sf-d">법령 매칭</p>
-          </div>
-          <div class="sf-arrow" aria-hidden="true">→</div>
-          <div class="sf-node">
-            <div class="sf-num">3</div>
-            <div class="sf-t">결과</div>
-            <p class="sf-d">의무 구조화</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 order-lg-2">
-        <h2 class="sec-title">법령진단은 결과를<br>만들어냅니다</h2>
-        <p class="sec-desc">사업장 정보를 입력하면 적용 법령과 의무가 구조화되어 정리됩니다.<br>단순한 법령 목록이 아니라 실제 관리해야 할 의무 기준으로 제공합니다.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ④ 결과물 — 상:텍스트, 하:대형 이미지(리포트 mock) -->
-<section class="result-section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-9 text-center">
-        <h2 class="sec-title">결과는 바로 사용할 수 있습니다</h2>
-        <p class="sec-desc">적용 법령, 의무 리스트, 점검 항목, 리스크가 하나의 구조로 정리됩니다.<br>이 결과는 그대로 점검 대응 자료로 사용할 수 있습니다.</p>
-      </div>
-    </div>
-    <div class="result-mock">
-      <div class="rm-header">
-        <div class="rm-ico">📋</div>
-        <div>
-          <div class="rm-t">법령의무진단 리포트</div>
-          <div class="rm-st">건물 · 제조업 · 50인 · 500㎡ 기준</div>
-        </div>
-      </div>
-      <div class="rm-body">
-        <div class="rm-block">
-          <div class="rms-label">의무 구조</div>
-          <div class="rm-stat-row">
-            <div class="rm-stat"><div class="rms-n">8</div><div class="rms-l">선임 의무</div></div>
-            <div class="rm-stat"><div class="rms-n">37</div><div class="rms-l">점검·검사</div></div>
-            <div class="rm-stat"><div class="rms-n">129</div><div class="rms-l">조치 의무</div></div>
-            <div class="rm-stat"><div class="rms-n">31</div><div class="rms-l">보고·신고</div></div>
-          </div>
-        </div>
-        <div class="rm-block">
-          <div class="rms-label">적용 법령</div>
-          <div class="rm-tags">
-            <span class="rm-tag">산업안전보건법</span>
-            <span class="rm-tag">중대재해처벌법</span>
-            <span class="rm-tag">건축법</span>
-            <span class="rm-tag">소방시설법</span>
-            <span class="rm-tag">화재예방법</span>
-            <span class="rm-tag">전기안전관리법</span>
-            <span class="rm-tag">승강기안전관리법</span>
-            <span class="rm-tag">외 11개</span>
-          </div>
-        </div>
-        <div class="rm-block">
-          <div class="rms-label">의무 리스트</div>
-          <ul class="rm-list">
-            <li>안전관리자 선임</li>
-            <li>건축물 정기점검</li>
-            <li>소방안전관리자 선임</li>
-            <li>안전보건관리체계 구축</li>
-            <li>법정 교육 이수</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑤ 비교 — 좌:기존 방식, 우:법령진단 -->
-<section class="compare-section">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-6">
-        <div class="compare-block old">
-          <h3>기존 방식</h3>
-          <ul>
-            <li>엑셀 정리</li>
-            <li>수기 관리</li>
-            <li>법령 누락</li>
-            <li>점검 준비 불확실</li>
-          </ul>
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <span class="diag-label">해결 방식</span>
+          <h2 class="diag-title">법령진단은 결과를<br>만들어냅니다</h2>
         </div>
       </div>
       <div class="col-lg-6">
-        <div class="compare-block new">
-          <h3>법령진단</h3>
-          <ul>
-            <li>자동 구조화</li>
-            <li>의무 기준 정리</li>
-            <li>누락 없음</li>
-            <li>점검 대응 가능</li>
-          </ul>
-        </div>
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis2.png" alt="입력 → 분석 → 결과 흐름" class="diag-illust-img" loading="lazy">
+      </div>
+      <div class="col-lg-3">
+        <p class="diag-aside">사업장 정보를 입력하면 적용 법령과 의무가 구조화되어 정리됩니다.<br><br>단순한 법령 목록이 아니라 실제 관리해야 할 의무 기준으로 제공합니다.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ⑥ 사용 시나리오 — 3 카드 -->
-<section class="scenario-section">
+<!-- ④ 결과 예시 — diagnosis3.png -->
+<section class="diag-section">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="scenario-card">
-          <div class="sn">01</div>
-          <div class="sct">점검 준비</div>
-          <p>점검 전에 필요한 의무를 정리합니다</p>
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <span class="diag-label">결과 예시</span>
+          <h2 class="diag-title">결과는 바로<br>사용할 수 있습니다</h2>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="scenario-card">
-          <div class="sn">02</div>
-          <div class="sct">내부 점검 계획</div>
-          <p>점검 기준을 기반으로 계획을 세웁니다</p>
-        </div>
+      <div class="col-lg-6">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis3.png" alt="법령의무진단 리포트 예시" class="diag-illust-img" loading="lazy">
       </div>
-      <div class="col-md-4">
-        <div class="scenario-card">
-          <div class="sn">03</div>
-          <div class="sct">초기 안전관리 구축</div>
-          <p>처음부터 기준을 잡고 시작합니다</p>
-        </div>
+      <div class="col-lg-3">
+        <p class="diag-aside">적용 법령, 의무 리스트, 점검 항목, 리스크가 하나의 구조로 정리됩니다.<br><br>이 결과는 단순 정리가 아닙니다. 점검 대응 자료로 그대로 사용할 수 있는 상태입니다.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ⑦ 신뢰 -->
-<section class="trust-section">
+<!-- ⑤ 비교 — diagnosis4.png -->
+<section class="diag-section alt">
   <div class="container">
-    <p>최신 법령 기준으로 분석됩니다<br>실제 법령 기반으로 구성됩니다<br>지속적으로 업데이트됩니다</p>
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <h2 class="diag-title">비교해보세요</h2>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis4.png" alt="기존 방식(엑셀·수기 관리) vs 법령진단(체계적 진단 리포트)" class="diag-illust-img" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 이럴 때 사용하세요 — diagnosis5.png -->
+<section class="diag-section">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <h2 class="diag-title">이럴 때<br>사용하세요</h2>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis5.png" alt="점검 준비 / 내부 점검 계획 / 초기 안전관리 구축" class="diag-illust-img" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ 신뢰할 수 있는 법령진단 — diagnosis6.png -->
+<section class="diag-section alt">
+  <div class="container">
+    <div class="row align-items-start g-4">
+      <div class="col-lg-3">
+        <div class="diag-side">
+          <h2 class="diag-title">신뢰할 수 있는<br>법령진단</h2>
+        </div>
+      </div>
+      <div class="col-lg-9">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis6.png" alt="최신 법령 기준으로 분석 / 실제 법령 기반 구성 / 지속적으로 업데이트" class="diag-illust-img" loading="lazy">
+      </div>
+    </div>
   </div>
 </section>
 
@@ -614,39 +398,6 @@
           <div class="ap-phone featured">
             <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect-light-light.png" alt="TAI Safe 점검 — 정상/이상 1클릭" loading="lazy">
             <div class="ap-label">5초 점검</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ⑦-2 가격 직전 알림 — WORKORDER_diagnosis_page_alert_section_20260503 -->
-<section class="diag-preprice-alert" id="diag-preprice-alert" aria-labelledby="diag-preprice-alert-title">
-  <div class="container">
-    <div class="row justify-content-center mb-4">
-      <div class="col-lg-10 text-center">
-        <span class="diag-label white">⑦-2</span>
-        <h2 id="diag-preprice-alert-title" class="sec-title white" style="margin-bottom:14px;">
-          사고는 준비되지 않은 순간에 발생합니다<br>
-          그래서 미리 확인해야 합니다
-        </h2>
-        <p class="sec-desc white" style="margin-bottom:0;max-width:640px;margin-left:auto;margin-right:auto;">
-          지금 상태를 모른 채 운영하는 것이 가장 위험합니다<br>
-          법령진단은 현재 상태를 기준으로 보여줍니다
-        </p>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="diag-alert-card">
-          <div class="diag-alert-grid">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis1.png" alt="법령진단 1" loading="lazy" width="400" height="250">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis2.png" alt="법령진단 2" loading="lazy" width="400" height="250">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis3.png" alt="법령진단 3" loading="lazy" width="400" height="250">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis4.png" alt="법령진단 4" loading="lazy" width="400" height="250">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis5.png" alt="법령진단 5" loading="lazy" width="400" height="250">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis6.png" alt="법령진단 6" loading="lazy" width="400" height="250">
           </div>
         </div>
       </div>
