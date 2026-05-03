@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.4 (2026-05-03): 파비콘은 HTML head 의 절대경로(/favicon.ico 등)만 사용 — JS에서 덮어쓰기 제거
  * v3.5.3 (2026-05-01): 파비콘 전역 세팅 추가 (favicon.svg)
  * v3.5.2 (2026-05-01): fixed 헤더 텍스트/버튼 색상 수정 (다크 네이비 배경 대응)
  * v3.5.1 (2026-05-01): 마이페이지 경로 버그 수정 (/mypage/ trailing slash 처리)
@@ -190,30 +191,6 @@
   var base = nexasRelBase();
   if (!base) base = legacyRelBase();
 
-  function setFavicon(href) {
-    try {
-      var head = document.head || document.getElementsByTagName('head')[0];
-      if (!head) return;
-
-      var existing = head.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]');
-      for (var i = 0; i < existing.length; i++) {
-        existing[i].parentNode.removeChild(existing[i]);
-      }
-
-      var link = document.createElement('link');
-      link.rel = 'icon';
-      link.href = href;
-      head.appendChild(link);
-
-      var shortcut = document.createElement('link');
-      shortcut.rel = 'shortcut icon';
-      shortcut.href = href;
-      head.appendChild(shortcut);
-    } catch (e) {}
-  }
-
-  setFavicon(base + 'favicon.ico');
-
   var loginRedirectQs = '';
   try {
     var lp = window.location.pathname || '';
@@ -290,20 +267,6 @@
       clearAuthStorage();
       window.location.href = base + 'index.html';
     });
-  }
-
-  /* ── 파비콘 전역 세팅 (모든 페이지 적용) ── */
-  function setFavicon() {
-    try {
-      var favicon = document.querySelector('link[rel="icon"], link[rel="shortcut icon"]');
-      if (!favicon) {
-        favicon = document.createElement('link');
-        favicon.rel = 'icon';
-        document.head.appendChild(favicon);
-      }
-      favicon.type = 'image/svg+xml';
-      favicon.href = base + 'assets/img/favicon.svg';
-    } catch (e) {}
   }
 
   var html = [
@@ -388,7 +351,6 @@
       rightPh.outerHTML = buildNavRight();
     }
     bindLogout();
-    setFavicon();
   }
 
   if (document.readyState === 'loading') {
