@@ -273,6 +273,41 @@
   }
 
   /* ── 가격 (보호 영역) ── */
+
+  /* ⑦-2 가격 직전 알림 — WORKORDER_diagnosis_page_alert_section_20260503 */
+  .diag-preprice-alert {
+    background: linear-gradient(180deg, #0a1424 0%, #0f2b4a 100%);
+    padding: 88px 0;
+  }
+  .diag-preprice-alert .diag-label.white { color: #93c5fd; }
+  .diag-preprice-alert .sec-title.white { color: #fff; }
+  .diag-preprice-alert .sec-desc.white { color: rgba(255,255,255,.82); }
+  .diag-preprice-alert .diag-alert-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px 24px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,.14);
+  }
+  .diag-preprice-alert .diag-alert-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .diag-preprice-alert .diag-alert-grid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #f1f5f9;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  @media (max-width: 575px) {
+    .diag-preprice-alert .diag-alert-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  }
+
   .price-section { background: var(--gray-bg); padding: 90px 0; }
   .sector-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 44px; flex-wrap: wrap; }
   .sector-btn { background: #fff; border: 2px solid var(--border); color: #64748b; border-radius: 12px; padding: 11px 26px; font-size: .95rem; font-weight: 800; cursor: pointer; transition: all .18s; display: flex; align-items: center; gap: 7px; }
@@ -329,7 +364,7 @@
   @media (max-width: 991px) {
     .diag-hero { min-height: auto; }
     .diag-hero-inner { padding-top: calc(var(--tai-nav-h, 90px) + 24px); padding-bottom: 48px; }
-    .problem-section, .solution-section, .result-section, .compare-section, .scenario-section, .trust-section, .price-section, .final-cta-section { padding: 64px 0; }
+    .problem-section, .solution-section, .result-section, .compare-section, .scenario-section, .trust-section, .diag-preprice-alert, .price-section, .final-cta-section { padding: 64px 0; }
   }
   </style>
 </head>
@@ -579,6 +614,39 @@
           <div class="ap-phone featured">
             <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect-light-light.png" alt="TAI Safe 점검 — 정상/이상 1클릭" loading="lazy">
             <div class="ap-label">5초 점검</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦-2 가격 직전 알림 — WORKORDER_diagnosis_page_alert_section_20260503 -->
+<section class="diag-preprice-alert" id="diag-preprice-alert" aria-labelledby="diag-preprice-alert-title">
+  <div class="container">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-10 text-center">
+        <span class="diag-label white">⑦-2</span>
+        <h2 id="diag-preprice-alert-title" class="sec-title white" style="margin-bottom:14px;">
+          사고는 준비되지 않은 순간에 발생합니다<br>
+          그래서 미리 확인해야 합니다
+        </h2>
+        <p class="sec-desc white" style="margin-bottom:0;max-width:640px;margin-left:auto;margin-right:auto;">
+          지금 상태를 모른 채 운영하는 것이 가장 위험합니다<br>
+          법령진단은 현재 상태를 기준으로 보여줍니다
+        </p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="diag-alert-card">
+          <div class="diag-alert-grid">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-01.png" alt="법령진단 1" loading="lazy" width="400" height="250">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-02.png" alt="법령진단 2" loading="lazy" width="400" height="250">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-03.png" alt="법령진단 3" loading="lazy" width="400" height="250">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-04.png" alt="법령진단 4" loading="lazy" width="400" height="250">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-05.png" alt="법령진단 5" loading="lazy" width="400" height="250">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis-page-alert-06.png" alt="법령진단 6" loading="lazy" width="400" height="250">
           </div>
         </div>
       </div>
