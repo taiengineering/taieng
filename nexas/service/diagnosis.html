@@ -219,46 +219,6 @@
     .compare-vs { transform: rotate(90deg); margin: 0 auto; }
   }
 
-  /* ⑥ 시나리오 3카드 — 풀가로 */
-  .scenario-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .scenario-card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 26px;
-    border-top: 3px solid var(--blue);
-    transition: transform .15s, box-shadow .15s;
-  }
-  .scenario-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(15,43,74,.08);
-  }
-  .scenario-card .sc-num {
-    font-size: .82rem; font-weight: 800;
-    color: var(--blue);
-    letter-spacing: -.005em;
-    margin-bottom: 12px;
-  }
-  .scenario-card .sc-title {
-    font-size: 1.1rem; font-weight: 800;
-    color: var(--navy);
-    margin: 0 0 12px;
-    letter-spacing: -.015em;
-  }
-  .scenario-card .sc-desc {
-    font-size: .88rem;
-    color: #64748b;
-    line-height: 1.75;
-    margin: 0;
-  }
-  @media (max-width: 767px) {
-    .scenario-grid { grid-template-columns: 1fr; gap: 14px; }
-  }
-
   /* ⑦ 통계 4카드 + 하단 메시지 밴드 */
   .stat-grid {
     display: grid;
@@ -578,7 +538,7 @@
   </div>
 </section>
 
-<!-- ⑥ 시나리오 3카드 — 풀가로 -->
+<!-- ⑥ diagnosis5.png — 사용 시점 -->
 <section class="diag-section">
   <div class="container">
     <div class="row align-items-start g-4">
@@ -589,23 +549,7 @@
         </div>
       </div>
       <div class="col-lg-9">
-        <div class="scenario-grid">
-          <div class="scenario-card">
-            <div class="sc-num">01</div>
-            <h3 class="sc-title">점검 준비</h3>
-            <p class="sc-desc">관할 안전감독·소방·환경 점검 전, 적용 법령과 의무 이행 상태를 사전 진단합니다. 누락 항목을 미리 파악해 점검 대응 시간을 단축합니다.</p>
-          </div>
-          <div class="scenario-card">
-            <div class="sc-num">02</div>
-            <h3 class="sc-title">내부 점검 계획</h3>
-            <p class="sc-desc">법령 기준으로 정리된 의무 항목과 주기를 토대로 자체 점검 계획을 수립합니다. 분기별·연도별 점검 일정의 누락 위험을 제거합니다.</p>
-          </div>
-          <div class="scenario-card">
-            <div class="sc-num">03</div>
-            <h3 class="sc-title">초기 안전관리 구축</h3>
-            <p class="sc-desc">신규 사업장의 안전관리 체계 수립 단계에서 적용 법령부터 의무 항목까지 한 번에 도출합니다. 시행착오 없이 처음부터 기준대로 시작합니다.</p>
-          </div>
-        </div>
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis5.png" alt="점검 준비 / 내부 점검 계획 / 초기 안전관리 구축" class="diag-illust-img" loading="lazy">
       </div>
     </div>
   </div>
@@ -789,7 +733,7 @@
   }
   function animate(el) {
     var target = parseInt(el.dataset.target, 10) || 0;
-    var duration = target > 1000 ? 2000 : 1500;
+    var duration = target > 1000 ? 2800 : 2200;
     var start = performance.now();
     function step(now) {
       var p = Math.min((now - start) / duration, 1);
