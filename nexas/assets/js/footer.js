@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.5.0 (2026-05-04): Phase 5 — "💬 TAI에 바란다" 링크 + inquiry-form.js 비동기 로드
  * v3.4.0 (2026-05-03): 풋터 상단/하단 패딩 축소 (footer-inner 80px+ → 36px)
  * v3.3.0 (2026-04-29): 풋터 요금제 링크 삭제 (이니시스 요청)
  * v3.2.0 (2026-04-29): Supabase 신규 프로젝트(서울) URL로 교체
@@ -140,6 +141,7 @@
     '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
     '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
+    '            <li><a href="#" id="tai-footer-feedback-open"><i class="fas fa-angle-right"></i>💬 TAI에 바란다</a></li>' +
     '          </ul>' +
     '          <h6 class="widget-title" style="margin-top:20px;">안전정보</h6>' +
     '          <ul>' +
@@ -183,6 +185,15 @@
     '</div>' +
     '</footer>';
 
+  function loadInquiryFormScript() {
+    if (document.querySelector('script[data-tai-inquiry-form]')) return;
+    var s = document.createElement('script');
+    s.src = b + 'scripts/inquiry-form.js';
+    s.async = true;
+    s.setAttribute('data-tai-inquiry-form', '1');
+    document.head.appendChild(s);
+  }
+
   function inject() {
     var el = document.getElementById('tai-footer');
     if (el) { el.outerHTML = html; }
@@ -191,6 +202,7 @@
       if (existing) { existing.outerHTML = html; }
       else { document.body.insertAdjacentHTML('beforeend', html); }
     }
+    loadInquiryFormScript();
   }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', inject); }
   else { inject(); }
