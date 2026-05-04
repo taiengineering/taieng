@@ -170,19 +170,27 @@
       line-height: 1.7;
     }
 
-    .problem-card .thumb img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      background: #e2e8f0;
+    /* ① 문제 공감 — 좌이미지 + 우 4줄 카피 (v2026-05-05) */
+    .problem-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
-    .problem-card h4 {
-      font-size: .95rem;
-      font-weight: 800;
+    .problem-list li {
+      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+      font-weight: 700;
+      line-height: 1.5;
       color: #0f172a;
-      line-height: 1.45;
+      padding: 16px 0;
+      border-bottom: 1px solid #e2e8f0;
+      letter-spacing: -0.01em;
+    }
+    .problem-list li:last-child {
+      border-bottom: 0;
+      padding-top: 22px;
+      font-weight: 900;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      color: #0f172a;
     }
 
     .compare-section img,
@@ -278,37 +286,27 @@
          법령진단 메인 구조 (히어로 아래)
     ========================= -->
 
-    <!-- ① 문제 공감 -->
+    <!-- ① 문제 공감 — 좌이미지 + 우 카피 4줄 -->
     <section class="problem-section">
       <div class="container">
-        <div class="row g-4">
+        <div class="row align-items-center g-5">
 
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card">
-              <div class="thumb"><img src="assets/img/diag/p1.jpg" alt="무슨 법이 적용되는지 모르는 상황"></div>
-              <h4>무슨 법이 적용되는지 모릅니다</h4>
-            </div>
+          <div class="col-lg-6">
+            <img
+              src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/p1.png"
+              class="img-fluid rounded"
+              alt="안전관리 현장의 4가지 불안 — 법령·실행·결과·심리"
+              loading="lazy"
+            >
           </div>
 
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card">
-              <div class="thumb"><img src="assets/img/diag/p2.jpg" alt="엑셀과 종이로 관리하는 상황"></div>
-              <h4>엑셀과 종이로 관리합니다</h4>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card">
-              <div class="thumb"><img src="assets/img/diag/p3.jpg" alt="빠지는 항목이 생기는 상황"></div>
-              <h4>빠지는 항목이 생깁니다</h4>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card">
-              <div class="thumb"><img src="assets/img/diag/p4.jpg" alt="점검이 불안한 상황"></div>
-              <h4>점검이 항상 불안합니다</h4>
-            </div>
+          <div class="col-lg-6">
+            <ul class="problem-list">
+              <li>무슨 법이 적용되는지 모르겠습니다.</li>
+              <li>무엇을 해야 하는지 모르겠습니다.</li>
+              <li>하긴 했는데 맞는지 모르겠습니다.</li>
+              <li>그래서 항상 불안합니다.</li>
+            </ul>
           </div>
 
         </div>
