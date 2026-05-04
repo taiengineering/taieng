@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.6.0 (2026-05-04): 풋터 정리 — 교육사업·수선연결·컨설팅·선임연결·전문가 미노출 (헤더 메뉴 정리와 동기화)
  * v3.5.0 (2026-05-04): Phase 5 — "💬 TAI에 바란다" 링크 + inquiry-form.js 비동기 로드
  * v3.4.0 (2026-05-03): 풋터 상단/하단 패딩 축소 (footer-inner 80px+ → 36px)
  * v3.3.0 (2026-04-29): 풋터 요금제 링크 삭제 (이니시스 요청)
@@ -108,13 +109,9 @@
     '        <div class="footer-widget widget widget_link">' +
     '          <h6 class="widget-title">서비스</h6>' +
     '          <ul>' +
-    '            <li><a href="' + b + 'service/education.html"><i class="fas fa-angle-right"></i>교육사업</a></li>' +
-    '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
-    '            <li><a href="' + b + 'fix-request.html?from=footer&type=repair"><i class="fas fa-angle-right"></i>수선 연결</a></li>' +
-    '            <li><a href="' + b + 'fix-request.html?from=footer&type=consulting"><i class="fas fa-angle-right"></i>컨설팅</a></li>' +
-    '            <li><a href="' + b + 'fix-request.html?from=footer&type=appointment"><i class="fas fa-angle-right"></i>선임 연결</a></li>' +
-    '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
     '            <li><a href="' + b + 'service/diagnosis.html"><i class="fas fa-angle-right"></i>법령진단</a></li>' +
+    '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
+    '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
@@ -130,7 +127,6 @@
     '          <ul>' +
     '            <li><a href="' + b + 'for-safety-manager"><i class="fas fa-angle-right"></i>안전관리자</a></li>' +
     '            <li><a href="' + b + 'for-business-owner"><i class="fas fa-angle-right"></i>사업주</a></li>' +
-    '            <li><a href="' + b + 'provider-register"><i class="fas fa-angle-right"></i>전문가</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +

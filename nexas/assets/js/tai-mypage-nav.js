@@ -1,5 +1,6 @@
 /**
  * 마이페이지 사이드 네비게이션 렌더
+ * v2026-05-04: 전문가 등록 메뉴 + 활성 전문가 유형별 섹션 미노출
  * 각 페이지: body.tai-mypage-body, body[data-tai-active], window.TAI_NEXAS_ROOT
  * 로그인 가드는 각 HTML head의 인라인 스크립트에서 처리
  */
@@ -10,23 +11,6 @@
   }
 
   function navHtml(activeId) {
-    var st = w.TaiMypageState ? w.TaiMypageState.load() : {};
-
-    /* 전문가 활성화 여부 — getExpertStatus 우선, 구 partnerStatus 폴백 */
-    var hasActiveExpert = false;
-    var activeTypes = [];
-    if (w.TaiMypageState && typeof w.TaiMypageState.getExpertStatus === 'function') {
-      ['safety', 'fix', 'consult'].forEach(function (t) {
-        if (w.TaiMypageState.getExpertStatus(t) === 'active') {
-          hasActiveExpert = true;
-          activeTypes.push(t);
-        }
-      });
-    } else {
-      /* 구버전 폴백 */
-      hasActiveExpert = st.partnerStatus === 'APPROVED';
-    }
-
     function item(id, path, label, icon) {
       var isActive = activeId === id;
       return (
@@ -50,24 +34,6 @@
     html += item('contracts',  'mypage/contracts/',  '계약 관리',   'fa-file-contract');
     html += item('payments',   'mypage/payments/',   '결제 내역',   'fa-credit-card');
     html += item('diagnosis',  'mypage/diagnosis/',  '법령진단',    'fa-clipboard-check');
-    /* 전문가 등록 — 구 파트너 신청 대체 */
-    html += item('expert-application', 'mypage/expert-intro.html', '전문가 등록', 'fa-user-tie');
-
-    /* 활성화된 전문가 유형별 전용 메뉴 */
-    if (hasActiveExpert) {
-      html += '<div class="tai-mypage-nav-head mt-4 mb-3 pt-3 border-top"><span class="small text-uppercase text-muted fw-bold">전문가</span></div>';
-
-      var EXPERT_LABELS = {
-        safety:  { label: '안전관리 대행', icon: 'fa-shield-alt' },
-        fix:     { label: '시공·수선',     icon: 'fa-tools' },
-        consult: { label: '진단·컨설팅',   icon: 'fa-clipboard-list' }
-      };
-
-      activeTypes.forEach(function (t) {
-        var info = EXPERT_LABELS[t] || { label: t, icon: 'fa-star' };
-        html += item('expert-' + t, 'mypage/expert/' + t + '/', info.label, info.icon);
-      });
-    }
 
     return html;
   }

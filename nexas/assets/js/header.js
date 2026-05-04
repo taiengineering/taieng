@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.5 (2026-05-04): 메뉴 정리 — 교육사업·전문가매칭·수선연결·컨설팅·선임연결·연결서비스 사전등록·전문가(역할별) 미노출
  * v3.5.4 (2026-05-03): 파비콘은 HTML head 의 절대경로(/favicon.ico 등)만 사용 — JS에서 덮어쓰기 제거
  * v3.5.3 (2026-05-01): 파비콘 전역 세팅 추가 (favicon.svg)
  * v3.5.2 (2026-05-01): fixed 헤더 텍스트/버튼 색상 수정 (다크 네이비 배경 대응)
@@ -291,14 +292,7 @@
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'service/diagnosis.html">\uBC95\uB839\uC9C4\uB2E8</a></li>',
     '              <li><a href="' + base + 'service/saas.html">SaaS \uAD6C\uB3C5</a></li>',
-    '              <li><a href="' + base + 'service/education.html">\uAD50\uC721\uC0AC\uC5C5</a></li>',
-    '              <li><a href="' + base + 'service/appointment.html">\uC804\uBB38\uAC00 \uB9E4\uCE6D</a></li>',
-    '              <li style="border-top:1px solid rgba(255,255,255,.15);margin:4px 0;padding:0;"></li>',
     '              <li><a href="' + base + 'service/inapp.html">\uC778\uC571 \uC11C\uBE44\uC2A4</a></li>',
-    '              <li><a href="' + base + 'for-repair.html">\uC218\uC120 \uC5F0\uACB0</a></li>',
-    '              <li><a href="' + base + 'for-consultant.html">\uCEE8\uC124\uD305</a></li>',
-    '              <li><a href="' + base + 'for-agency.html">\uC120\uC784 \uC5F0\uACB0</a></li>',
-    '              <li><a href="' + base + 'connect.html" style="color:#fbbf24;font-weight:700;">\uC5F0\uACB0\uC11C\uBE44\uC2A4 \uC0AC\uC804\uB4F1\uB85D</a></li>',
     '            </ul>',
     '          </li>',
     '          <li class="menu-item-has-children">',
@@ -314,7 +308,6 @@
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'for-safety-manager">\uC548\uC804\uAD00\uB9AC\uC790</a></li>',
     '              <li><a href="' + base + 'for-business-owner">\uC0AC\uC5C5\uC8FC</a></li>',
-    '              <li><a href="' + base + 'for-expert">\uC804\uBB38\uAC00</a></li>',
     '            </ul>',
     '          </li>',
     '          <li class="menu-item-has-children">',

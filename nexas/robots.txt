@@ -1,3 +1,17 @@
 User-agent: *
 Allow: /
+
+# 미노출 페이지 — 메뉴 정리에 따라 검색 수집 차단 (2026-05-04)
+Disallow: /service/education.html
+Disallow: /service/appointment.html
+Disallow: /for-repair.html
+Disallow: /for-consultant.html
+Disallow: /for-agency.html
+Disallow: /connect.html
+Disallow: /for-expert.html
+Disallow: /provider-register.html
+Disallow: /mypage/expert-intro.html
+Disallow: /mypage/expert-terms.html
+Disallow: /mypage/expert-application/
+
 Sitemap: https://taieng.co.kr/sitemap.xml
