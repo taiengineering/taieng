@@ -45,19 +45,21 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══ index 히어로 (v2026-05-04 리뉴얼 + 텍스트 오버레이) ═══ */
+    /* ═══ index 히어로 (v2026-05-04 — service/diagnosis와 동일 높이) ═══ */
     .idx-hero-new {
       position: relative;
       width: 100%;
-      height: 540px;
+      min-height: clamp(560px, 80vh, 720px);
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: #0f172a;
     }
     .idx-hero-new-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      height: 540px;
+      height: 100%;
       display: block;
       object-fit: cover;
       object-position: center center;
@@ -140,10 +142,10 @@
       transform: translateX(4px);
     }
 
-    /* 모바일 — 텍스트 하단 배치 + 위→아래 그라데이션 */
-    @media (max-width: 768px) {
-      .idx-hero-new { height: 520px; }
-      .idx-hero-new-img { height: 520px; object-position: 35% center; }
+    /* 모바일/태블릿 — 텍스트 하단 배치 + 위→아래 그라데이션 */
+    @media (max-width: 991px) {
+      .idx-hero-new { min-height: 520px; }
+      .idx-hero-new-img { object-position: 35% center; }
       .idx-hero-new-overlay {
         align-items: flex-end;
         background: linear-gradient(to bottom,
@@ -200,7 +202,7 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- 히어로: 540px 고정 / 천장부터 시작 + 텍스트 오버레이 (v2026-05-04) -->
+    <!-- 히어로: service/diagnosis와 동일 높이 clamp(560px, 80vh, 720px) + 텍스트 오버레이 (v2026-05-04) -->
     <section class="idx-hero-new">
       <img
         src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/hero-diagnosis-main.png"
