@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-    <!-- TAI global favicon, manifest, Organization -->
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -71,36 +70,87 @@
     }
     @media (max-width: 400px) { .idx-hero-new-title { font-size: 1.65rem; } }
 
-    /* ═══ 법령진단 메인 구조 (히어로 아래 7섹션, v2026-05-05c) ═══ */
+    /* ═══ 법령진단 메인 구조 (v2026-05-05d — 카드 통합형) ═══ */
     .problem-section, .solution-section, .result-section, .compare-section, .scenario-section { padding: 90px 0; }
+    .problem-section { background: #f8fafc; }
     .trust-section { padding: 90px 0; background: #0f172a; color: #fff; }
     .trust-section .sec-title.white { color: #fff; }
     .trust-section .sec-desc.white { color: rgba(255,255,255,0.85); }
     .sec-title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 900; line-height: 1.35; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 18px; }
     .sec-desc { color: #475569; font-size: 1rem; line-height: 1.7; }
 
-    /* ① 문제 공감 — 4카드 (p1.png 가로 1×4를 background-position으로 분할 표시) */
-    .problem-card { text-align: center; }
-    .problem-card .thumb {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/p1.png');
-      background-size: 400% 100%;
-      background-repeat: no-repeat;
-      background-color: #fff;
-      margin-bottom: 16px;
+    /* ① 문제 공감 — 4카드 통합형 (상단 번호+카피, 하단 이미지) */
+    .problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    @media (max-width: 991px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 575px) { .problem-grid { grid-template-columns: 1fr; } }
+
+    .problem-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .problem-card[data-pos="1"] .thumb { background-position:   0% 50%; }
-    .problem-card[data-pos="2"] .thumb { background-position: 33.333% 50%; }
-    .problem-card[data-pos="3"] .thumb { background-position: 66.667% 50%; }
-    .problem-card[data-pos="4"] .thumb { background-position: 100% 50%; }
-    .problem-card h4 {
-      margin: 0;
-      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+    .problem-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.14);
+    }
+
+    .problem-head {
+      padding: 22px 22px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .problem-num {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #0f172a;
+      color: #fff;
       font-weight: 800;
-      line-height: 1.5;
+      font-size: 0.82rem;
+      font-family: 'Lato', 'Noto Sans KR', sans-serif;
+      letter-spacing: 0;
+    }
+
+    .problem-text {
+      margin: 0;
+      flex: 1;
+      font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+      font-weight: 800;
+      line-height: 1.45;
       letter-spacing: -0.01em;
       color: #0f172a;
+      word-break: keep-all;
+    }
+
+    /* 이미지 영역: p1.png를 1/4씩 보이게. height 고정, background-size: 400% auto로 비율 유지 + 위아래 자동 잘람 */
+    .problem-thumb {
+      width: 100%;
+      height: 280px;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/p1.png');
+      background-size: 400% auto;
+      background-repeat: no-repeat;
+      background-color: #f1f5f9;
+    }
+    .problem-card[data-pos="1"] .problem-thumb { background-position:   0% 50%; }
+    .problem-card[data-pos="2"] .problem-thumb { background-position: 33.333% 50%; }
+    .problem-card[data-pos="3"] .problem-thumb { background-position: 66.667% 50%; }
+    .problem-card[data-pos="4"] .problem-thumb { background-position: 100% 50%; }
+
+    @media (max-width: 991px) {
+      .problem-thumb { height: 260px; }
+    }
+    @media (max-width: 575px) {
+      .problem-thumb { height: 320px; }
     }
 
     .compare-section img, .solution-section img, .result-section img, .scenario-section img { background: #e2e8f0; min-height: 200px; }
@@ -141,34 +191,43 @@
       </div>
     </section>
 
-    <!-- ① 문제 공감 — 4카드 (p1.png 1/4 분할) -->
+    <!-- ① 문제 공감 — 카드 통합형 (상단: 번호배지+카피 / 하단: 이미지) -->
     <section class="problem-section">
       <div class="container">
-        <div class="row g-4">
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card" data-pos="1">
-              <div class="thumb" role="img" aria-label="법전과 노트북 앞에서 고민하는 작업자"></div>
-              <h4>무슨 법이 적용되는지 모르겠습니다.</h4>
+        <div class="problem-grid">
+
+          <div class="problem-card" data-pos="1">
+            <div class="problem-head">
+              <span class="problem-num">01</span>
+              <h4 class="problem-text">무슨 법이 적용되는지<br>모르겠습니다.</h4>
             </div>
+            <div class="problem-thumb" role="img" aria-label="법전과 노트북 앞에서 고민하는 작업자"></div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card" data-pos="2">
-              <div class="thumb" role="img" aria-label="서류 더미 앞에서 고민하는 작업자"></div>
-              <h4>무엇을 해야 하는지 모르겠습니다.</h4>
+
+          <div class="problem-card" data-pos="2">
+            <div class="problem-head">
+              <span class="problem-num">02</span>
+              <h4 class="problem-text">무엇을 해야 하는지<br>모르겠습니다.</h4>
             </div>
+            <div class="problem-thumb" role="img" aria-label="서류 더미 앞에서 고민하는 작업자"></div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card" data-pos="3">
-              <div class="thumb" role="img" aria-label="모니터 점검표를 보며 의문을 갖는 작업자"></div>
-              <h4>하긴 했는데 맞는지 모르겠습니다.</h4>
+
+          <div class="problem-card" data-pos="3">
+            <div class="problem-head">
+              <span class="problem-num">03</span>
+              <h4 class="problem-text">하긴 했는데 맞는지<br>모르겠습니다.</h4>
             </div>
+            <div class="problem-thumb" role="img" aria-label="모니터 점검표를 보며 의문을 갖는 작업자"></div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="problem-card" data-pos="4">
-              <div class="thumb" role="img" aria-label="창고에서 전화하며 불안해하는 안전관리자"></div>
-              <h4>그래서 항상 불안합니다</h4>
+
+          <div class="problem-card" data-pos="4">
+            <div class="problem-head">
+              <span class="problem-num">04</span>
+              <h4 class="problem-text">그래서<br>항상 불안합니다</h4>
             </div>
+            <div class="problem-thumb" role="img" aria-label="창고에서 전화하며 불안해하는 안전관리자"></div>
           </div>
+
         </div>
       </div>
     </section>
