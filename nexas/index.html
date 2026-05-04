@@ -45,156 +45,29 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══ 인덱스 히어로: 2컬럼 스플릿 (탑부터 시작) ═══ */
-    .idx-hero {
-        display: flex;
-        align-items: stretch;
-        min-height: 520px;
-        background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%);
-        overflow: hidden;
-        position: relative;
-        /* section 자체는 y=0 시작, 네비 뒤까지 채워짐 */
+    /* ═══ index 히어로 (v2026-05-04 리뉴얼) ═══ */
+    .idx-hero-new {
+      position: relative;
+      width: 100%;
+      height: 540px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #0f172a;
     }
-
-    /* 좌: 텍스트 영역 — padding-top으로 네비 높이 보정 */
-    .idx-hero-left {
-        flex: 0 0 42%;
-        display: flex;
-        align-items: center;
-        /* 네비(90px) + 여백(44px) = 134px 상단, 하단 60px */
-        padding: calc(var(--tai-nav-h, 90px) + 44px) 48px 60px 80px;
-        position: relative;
-        z-index: 2;
+    .idx-hero-new-img {
+      width: 100%;
+      height: 540px;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+      margin: 0;
+      padding: 0;
+      border: 0;
     }
-    .idx-hero-left::after {
-        content: '';
-        position: absolute;
-        top: 0; bottom: 0; right: 0;
-        width: 120px;
-        background: linear-gradient(to right,
-            transparent 0%,
-            rgba(21,101,192,.06) 60%,
-            rgba(21,101,192,.14) 100%
-        );
-        z-index: -1;
-        pointer-events: none;
-    }
-    .idx-hero-inner { max-width: 520px; }
-
-    .idx-hero-eyebrow {
-        display: inline-block;
-        font-size: .78rem; font-weight: 700; letter-spacing: .06em;
-        color: #fff;
-        border: 1.5px solid rgba(255,255,255,.5);
-        border-radius: 8px;
-        padding: 7px 18px;
-        margin-bottom: 20px;
-    }
-    .idx-hero-h1 {
-        font-size: clamp(2.2rem, 4vw, 3.2rem);
-        font-weight: 900;
-        line-height: 1.18;
-        color: #fff;
-        margin-bottom: 20px;
-        letter-spacing: -.03em;
-        text-shadow: 0 2px 16px rgba(0,0,0,.18);
-    }
-    .idx-hero-desc {
-        font-size: .95rem;
-        color: rgba(255,255,255,.88);
-        line-height: 1.75;
-        margin-bottom: 28px;
-    }
-    .idx-hero-btn {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: #fff; color: #0f2b4a;
-        font-size: .95rem; font-weight: 800;
-        padding: 14px 28px; border-radius: 10px;
-        text-decoration: none;
-        transition: background .2s, transform .15s, box-shadow .2s;
-        box-shadow: 0 4px 20px rgba(0,0,0,.15);
-    }
-    .idx-hero-btn:hover {
-        background: #f0f6ff; color: #0a1f38;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 28px rgba(0,0,0,.2);
-    }
-
-    /* 우: 이미지 영역 — 탑(y=0)부터 전체 높이 채움, 패딩 없음 */
-    .idx-hero-right {
-        flex: 0 0 58%;
-        position: relative;
-        overflow: hidden;
-    }
-    .idx-hero-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center center;
-        display: block;
-        filter: brightness(0.92) saturate(0.75) contrast(1.02);
-    }
-    /* 좌우 경계 블렌딩 */
-    .idx-hero-right::before {
-        content: '';
-        position: absolute; inset: 0; z-index: 1;
-        pointer-events: none;
-        background: linear-gradient(to right,
-            rgba(10,25,50,.52) 0%,
-            rgba(15,43,74,.30) 12%,
-            rgba(21,101,192,.12) 25%,
-            rgba(21,101,192,.04) 40%,
-            transparent 60%
-        );
-    }
-    .idx-hero-right::after {
-        content: '';
-        position: absolute; bottom: 0; left: 0; right: 0;
-        height: 80px; z-index: 1; pointer-events: none;
-        background: linear-gradient(to bottom, transparent, rgba(15,43,74,.1));
-    }
-    .idx-hero-badge {
-        position: absolute; bottom: 20px; right: 16px;
-        z-index: 2;
-        background: rgba(10,20,40,.72);
-        border: 1px solid rgba(255,255,255,.18);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border-radius: 10px;
-        padding: 8px 14px;
-        color: rgba(255,255,255,.75);
-        font-size: .72rem; line-height: 1.5;
-    }
-    .idx-hero-badge strong {
-        display: block; color: #fca5a5;
-        font-size: .76rem; margin-bottom: 2px;
-    }
-
-    /* 반응형 */
-    @media (max-width: 1200px) {
-        .idx-hero-h1 { font-size: 2.6rem; }
-        .idx-hero-left { padding-right: 36px; }
-    }
-    @media (max-width: 991px) {
-        .idx-hero {
-            flex-direction: column;
-            min-height: auto;
-        }
-        .idx-hero-left {
-            flex: none;
-            padding: calc(var(--tai-nav-h, 90px) + 24px) 32px 44px 32px;
-        }
-        .idx-hero-left::after { display: none; }
-        .idx-hero-right {
-            flex: none;
-            height: 280px;
-        }
-        .idx-hero-h1 { font-size: 2.2rem; }
-        .idx-hero-badge { display: none; }
-    }
-    @media (max-width: 575px) {
-        .idx-hero-h1 { font-size: 1.9rem; }
-        .idx-hero-left { padding-left: 20px; padding-right: 20px; }
+    @media (max-width: 768px) {
+      .idx-hero-new { height: 520px; }
+      .idx-hero-new-img { height: 520px; object-position: center center; }
     }
 
     /* ═══ 역할 배너 섹션 ═══ */
@@ -234,27 +107,13 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- 히어로: 좌측 텍스트 + 우측 이미지, 탑(y=0)부터 시작 -->
-    <section class="idx-hero">
-        <!-- 좌: 텍스트. padding-top으로 네비 아래 배치 -->
-        <div class="idx-hero-left">
-            <div class="idx-hero-inner">
-                <span class="idx-hero-eyebrow">법령기반 산업안전 운영 플랫폼</span>
-                <h1 class="idx-hero-h1">아직도 엑셀로<br>안전관리<br>하십니까?</h1>
-                <p class="idx-hero-desc">종이 서류와 엑셀로 혼자 버텨온 안전관리,<br>이제 법령 기반 자동 일정·점검·기록으로 바꾸세요.<br>3분 무료 진단으로 지금 바로 시작할 수 있습니다.</p>
-                <a class="idx-hero-btn" href="free-diagnosis.html">우리도 법령위반인지 확인하기 →</a>
-            </div>
-        </div>
-        <!-- 우: 이미지. 탑(y=0)부터 전체 높이 채움, 패딩 없음 -->
-        <div class="idx-hero-right">
-            <img class="idx-hero-img"
-                src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/service/hero-main.png"
-                alt="안전관리자가 쌓인 서류와 엑셀 화면 앞에서 지쳐있는 모습"
-                loading="eager">
-            <div class="idx-hero-badge">
-                <strong>Before TAI Safe</strong>엑셀 + 종이서류로 혼자 버팀
-            </div>
-        </div>
+    <!-- 히어로: 540px 고정 / 천장부터 시작 (v2026-05-04 리뉴얼) -->
+    <section class="idx-hero-new">
+      <img
+        src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/hero-diagnosis-main.png"
+        alt="사고는 준비되지 않은 순간에 발생합니다"
+        class="idx-hero-new-img"
+      >
     </section>
 
     <section class="service-area default-pd-top">
