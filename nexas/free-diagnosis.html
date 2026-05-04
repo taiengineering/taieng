@@ -39,7 +39,7 @@
     --craft-bg:#f5f0e8;--craft-card:#fdfaf4;--craft-line:#d4c9b0;
     --craft-ink:#1a1a2e;--stamp-red:#c0392b;--stamp-red-light:#fdf0ef;--craft-sub:#7a6e5f;
   }
-  .diag-layout{min-height:calc(100vh - var(--tai-nav-h, 90px));display:grid;grid-template-columns:420px 1fr;}
+  .diag-layout{margin-top:var(--tai-nav-h, 90px);min-height:calc(100vh - var(--tai-nav-h, 90px));display:grid;grid-template-columns:420px 1fr;}
   @media(max-width:960px){.diag-layout{grid-template-columns:1fr}.diag-left{display:none}}
   .diag-left{background:linear-gradient(160deg,#1a1a2e 0%,#2c1810 100%);padding:64px 44px;
     display:flex;flex-direction:column;justify-content:center;color:#fff;
