@@ -45,7 +45,7 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══ index 히어로 (v2026-05-04 리뉴얼) ═══ */
+    /* ═══ index 히어로 (v2026-05-04 리뉴얼 + 텍스트 오버레이) ═══ */
     .idx-hero-new {
       position: relative;
       width: 100%;
@@ -65,9 +65,102 @@
       padding: 0;
       border: 0;
     }
+    /* 좌→우 그라데이션 — 좌측 텍스트 가독성 보장 */
+    .idx-hero-new-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(to right,
+        rgba(0,0,0,0.78) 0%,
+        rgba(0,0,0,0.62) 22%,
+        rgba(0,0,0,0.32) 42%,
+        rgba(0,0,0,0) 60%);
+      pointer-events: none;
+    }
+    .idx-hero-new-overlay .container {
+      width: 100%;
+    }
+    .idx-hero-new-content {
+      max-width: 620px;
+      pointer-events: auto;
+    }
+    .idx-hero-new-title {
+      margin: 0 0 18px;
+      font-family: 'Noto Sans KR', 'Pretendard', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+    }
+    .idx-hero-new-title .line-w,
+    .idx-hero-new-title .line-o {
+      display: block;
+    }
+    .idx-hero-new-title .line-o {
+      color: #f59e0b;
+    }
+    .idx-hero-new-sub {
+      margin: 0 0 28px;
+      color: rgba(255,255,255,0.92);
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    }
+    .idx-hero-new-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #f59e0b;
+      color: #0f172a !important;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none !important;
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .idx-hero-new-cta:hover {
+      background: #fbbf24;
+      color: #0f172a !important;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5);
+      text-decoration: none !important;
+    }
+    .idx-hero-new-cta .arrow {
+      font-size: 1.15em;
+      line-height: 1;
+      transition: transform .2s;
+    }
+    .idx-hero-new-cta:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    /* 모바일 — 텍스트 하단 배치 + 위→아래 그라데이션 */
     @media (max-width: 768px) {
       .idx-hero-new { height: 520px; }
-      .idx-hero-new-img { height: 520px; object-position: center center; }
+      .idx-hero-new-img { height: 520px; object-position: 35% center; }
+      .idx-hero-new-overlay {
+        align-items: flex-end;
+        background: linear-gradient(to bottom,
+          rgba(0,0,0,0.35) 0%,
+          rgba(0,0,0,0.62) 50%,
+          rgba(0,0,0,0.86) 100%);
+      }
+      .idx-hero-new-content {
+        max-width: 100%;
+        padding-bottom: 36px;
+      }
+      .idx-hero-new-title { font-size: 1.85rem; }
+      .idx-hero-new-sub { font-size: 0.95rem; margin-bottom: 22px; }
+      .idx-hero-new-cta { padding: 12px 22px; font-size: 0.95rem; }
+    }
+    @media (max-width: 400px) {
+      .idx-hero-new-title { font-size: 1.65rem; }
     }
 
     /* ═══ 역할 배너 섹션 ═══ */
@@ -107,19 +200,34 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- 히어로: 540px 고정 / 천장부터 시작 (v2026-05-04 리뉴얼) -->
+    <!-- 히어로: 540px 고정 / 천장부터 시작 + 텍스트 오버레이 (v2026-05-04) -->
     <section class="idx-hero-new">
       <img
         src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/hero-diagnosis-main.png"
-        alt="사고는 준비되지 않은 순간에 발생합니다"
+        alt="공장 내부에서 건설현장을 바라보는 작업자 — 사고는 준비되지 않은 순간에 발생합니다"
         class="idx-hero-new-img"
       >
+      <div class="idx-hero-new-overlay">
+        <div class="container">
+          <div class="idx-hero-new-content">
+            <h1 class="idx-hero-new-title">
+              <span class="line-w">사고는</span>
+              <span class="line-o">준비되지 않은 순간에</span>
+              <span class="line-o">발생합니다</span>
+            </h1>
+            <p class="idx-hero-new-sub">그래서 확인해야 합니다</p>
+            <a href="free-diagnosis.html" class="idx-hero-new-cta">
+              즉시 무료로 법령진단하기 <span class="arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="service-area default-pd-top">
         <div class="container"><div class="row justify-content-center"><div class="col-lg-8"><div class="section-title text-center"><h4 class="sub-title">현실 공감</h4><h2 class="title">안전관리, 이런 상황 아닙니까?</h2></div></div></div>
             <div class="row justify-content-center">
-                <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/1.jpg" alt="엑셀로 쌓인 서류와 점검 일정표"></div><h4>점검 일정을 엑셀로 관리합니다</h4><p>작업자한테 일일이 전화하고, 누락되면 과태료 맞습니다. 마땅한 프로그램이 없어서 그랬을 겁니다.</p></div></div>
+                <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/1.jpg" alt="엑셀로 쌓인 서류와 점검 일정표"></div><h4>점검 일정을 엑셀로 관리합니다</h4><p>작업자한테 일일이 전화하고, 누락되면 과태료 맞습니다. 마땅한 프로그램이 없어서 그러을 겁니다.</p></div></div>
                 <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/2.jpg" alt="법전과 규정집을 펼쳐놓고 고민하는 모습"></div><h4>무슨 법이 적용되는지 모릅니다</h4><p>몰라서 벌금 맞았습니다. 법이 바뀌어도 알 방법이 없었습니다.</p></div></div>
                 <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/3.jpg" alt="서류 작성에 몰두하는 안전관리자"></div><h4>서류 쓰느라 안전관리를 못합니다</h4><p>겸직까지 하면 더 요식행위를 하게 됩니다. 서류가 아니라 안전이 목적이어야 합니다.</p></div></div>
             </div>
