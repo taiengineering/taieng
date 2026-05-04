@@ -45,209 +45,74 @@
     <style>
     body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
 
-    /* ═══ index 히어로 (v2026-05-04 — service/diagnosis와 동일 높이) ═══ */
-    .idx-hero-new {
-      position: relative;
-      width: 100%;
-      min-height: clamp(560px, 80vh, 720px);
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #0f172a;
-    }
-    .idx-hero-new-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center center;
-      margin: 0;
-      padding: 0;
-      border: 0;
-    }
-    .idx-hero-new-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(to right,
-        rgba(0,0,0,0.78) 0%,
-        rgba(0,0,0,0.62) 22%,
-        rgba(0,0,0,0.32) 42%,
-        rgba(0,0,0,0) 60%);
-      pointer-events: none;
-    }
+    /* ═══ index 히어로 (v2026-05-04) ═══ */
+    .idx-hero-new { position: relative; width: 100%; min-height: clamp(560px, 80vh, 720px); margin: 0; padding: 0; overflow: hidden; background: #0f172a; }
+    .idx-hero-new-img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center center; margin: 0; padding: 0; border: 0; }
+    .idx-hero-new-overlay { position: absolute; inset: 0; display: flex; align-items: center; background: linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.62) 22%, rgba(0,0,0,0.32) 42%, rgba(0,0,0,0) 60%); pointer-events: none; }
     .idx-hero-new-overlay .container { width: 100%; }
     .idx-hero-new-content { max-width: 620px; pointer-events: auto; }
-    .idx-hero-new-title {
-      margin: 0 0 18px;
-      font-family: 'Noto Sans KR', 'Pretendard', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2rem, 4.2vw, 3.4rem);
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: #fff;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
-    }
-    .idx-hero-new-title .line-w,
-    .idx-hero-new-title .line-o { display: block; }
+    .idx-hero-new-title { margin: 0 0 18px; font-family: 'Noto Sans KR', 'Pretendard', sans-serif; font-weight: 900; font-size: clamp(2rem, 4.2vw, 3.4rem); line-height: 1.18; letter-spacing: -0.02em; color: #fff; text-shadow: 0 2px 14px rgba(0,0,0,0.5); }
+    .idx-hero-new-title .line-w, .idx-hero-new-title .line-o { display: block; }
     .idx-hero-new-title .line-o { color: #f59e0b; }
-    .idx-hero-new-sub {
-      margin: 0 0 28px;
-      color: rgba(255,255,255,0.92);
-      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-      font-weight: 500;
-      letter-spacing: -0.005em;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.45);
-    }
-    .idx-hero-new-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #f59e0b;
-      color: #0f172a !important;
-      font-size: 1rem;
-      font-weight: 800;
-      padding: 14px 28px;
-      border-radius: 12px;
-      text-decoration: none !important;
-      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38);
-      transition: background .2s, transform .15s, box-shadow .2s;
-    }
-    .idx-hero-new-cta:hover {
-      background: #fbbf24;
-      color: #0f172a !important;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5);
-      text-decoration: none !important;
-    }
+    .idx-hero-new-sub { margin: 0 0 28px; color: rgba(255,255,255,0.92); font-size: clamp(0.95rem, 1.4vw, 1.1rem); font-weight: 500; letter-spacing: -0.005em; text-shadow: 0 1px 8px rgba(0,0,0,0.45); }
+    .idx-hero-new-cta { display: inline-flex; align-items: center; gap: 10px; background: #f59e0b; color: #0f172a !important; font-size: 1rem; font-weight: 800; padding: 14px 28px; border-radius: 12px; text-decoration: none !important; box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38); transition: background .2s, transform .15s, box-shadow .2s; }
+    .idx-hero-new-cta:hover { background: #fbbf24; color: #0f172a !important; transform: translateY(-1px); box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5); text-decoration: none !important; }
     .idx-hero-new-cta .arrow { font-size: 1.15em; line-height: 1; transition: transform .2s; }
     .idx-hero-new-cta:hover .arrow { transform: translateX(4px); }
 
     @media (max-width: 991px) {
       .idx-hero-new { min-height: 520px; }
       .idx-hero-new-img { object-position: 35% center; }
-      .idx-hero-new-overlay {
-        align-items: flex-end;
-        background: linear-gradient(to bottom,
-          rgba(0,0,0,0.35) 0%,
-          rgba(0,0,0,0.62) 50%,
-          rgba(0,0,0,0.86) 100%);
-      }
+      .idx-hero-new-overlay { align-items: flex-end; background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.62) 50%, rgba(0,0,0,0.86) 100%); }
       .idx-hero-new-content { max-width: 100%; padding-bottom: 36px; }
       .idx-hero-new-title { font-size: 1.85rem; }
       .idx-hero-new-sub { font-size: 0.95rem; margin-bottom: 22px; }
       .idx-hero-new-cta { padding: 12px 22px; font-size: 0.95rem; }
     }
-    @media (max-width: 400px) {
-      .idx-hero-new-title { font-size: 1.65rem; }
-    }
+    @media (max-width: 400px) { .idx-hero-new-title { font-size: 1.65rem; } }
 
-    /* ═══ 법령진단 메인 구조 (히어로 아래 7섹션, v2026-05-05) ═══ */
-    .problem-section,
-    .solution-section,
-    .result-section,
-    .compare-section,
-    .scenario-section { padding: 90px 0; }
-
+    /* ═══ 법령진단 메인 구조 (히어로 아래 7섹션, v2026-05-05c) ═══ */
+    .problem-section, .solution-section, .result-section, .compare-section, .scenario-section { padding: 90px 0; }
     .trust-section { padding: 90px 0; background: #0f172a; color: #fff; }
     .trust-section .sec-title.white { color: #fff; }
     .trust-section .sec-desc.white { color: rgba(255,255,255,0.85); }
+    .sec-title { font-size: clamp(1.6rem, 2.6vw, 2.2rem); font-weight: 900; line-height: 1.35; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 18px; }
+    .sec-desc { color: #475569; font-size: 1rem; line-height: 1.7; }
 
-    .sec-title {
-      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-      font-weight: 900;
-      line-height: 1.35;
-      letter-spacing: -0.02em;
-      color: #0f172a;
-      margin-bottom: 18px;
+    /* ① 문제 공감 — 4카드 (p1.png 가로 1×4를 background-position으로 분할 표시) */
+    .problem-card { text-align: center; }
+    .problem-card .thumb {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/p1.png');
+      background-size: 400% 100%;
+      background-repeat: no-repeat;
+      background-color: #fff;
+      margin-bottom: 16px;
     }
-    .sec-desc {
-      color: #475569;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    /* ① 문제 공감 — 좌이미지 + 우 4줄 카피 (v2026-05-05) */
-    .problem-list {
-      list-style: none;
-      padding: 0;
+    .problem-card[data-pos="1"] .thumb { background-position:   0% 50%; }
+    .problem-card[data-pos="2"] .thumb { background-position: 33.333% 50%; }
+    .problem-card[data-pos="3"] .thumb { background-position: 66.667% 50%; }
+    .problem-card[data-pos="4"] .thumb { background-position: 100% 50%; }
+    .problem-card h4 {
       margin: 0;
-    }
-    .problem-list li {
-      font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-      font-weight: 700;
-      line-height: 1.5;
-      color: #0f172a;
-      padding: 16px 0;
-      border-bottom: 1px solid #e2e8f0;
-      letter-spacing: -0.01em;
-    }
-    .problem-list li:last-child {
-      border-bottom: 0;
-      padding-top: 22px;
-      font-weight: 900;
-      font-size: clamp(1.2rem, 2vw, 1.55rem);
-      color: #0f172a;
-    }
-
-    .compare-section img,
-    .solution-section img,
-    .result-section img,
-    .scenario-section img {
-      background: #e2e8f0;
-      min-height: 200px;
-    }
-
-    .final-trigger {
-      padding: 110px 0;
-      background: #fff;
-    }
-    .final-trigger h2 {
-      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-      font-weight: 900;
-      line-height: 1.55;
-      letter-spacing: -0.02em;
-      color: #0f172a;
-      margin-bottom: 22px;
-    }
-    .final-trigger p {
-      font-size: 1.05rem;
-      color: #475569;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-    .final-trigger-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #f59e0b;
-      color: #0f172a !important;
-      font-size: 1rem;
+      font-size: clamp(0.95rem, 1.3vw, 1.05rem);
       font-weight: 800;
-      padding: 14px 28px;
-      border-radius: 12px;
-      text-decoration: none !important;
-      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38);
-      transition: background .2s, transform .15s, box-shadow .2s;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: #0f172a;
     }
-    .final-trigger-cta:hover {
-      background: #fbbf24;
-      color: #0f172a !important;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5);
-      text-decoration: none !important;
-    }
+
+    .compare-section img, .solution-section img, .result-section img, .scenario-section img { background: #e2e8f0; min-height: 200px; }
+
+    .final-trigger { padding: 110px 0; background: #fff; }
+    .final-trigger h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 900; line-height: 1.55; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 22px; }
+    .final-trigger p { font-size: 1.05rem; color: #475569; line-height: 1.7; margin-bottom: 32px; }
+    .final-trigger-cta { display: inline-flex; align-items: center; gap: 10px; background: #f59e0b; color: #0f172a !important; font-size: 1rem; font-weight: 800; padding: 14px 28px; border-radius: 12px; text-decoration: none !important; box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38); transition: background .2s, transform .15s, box-shadow .2s; }
+    .final-trigger-cta:hover { background: #fbbf24; color: #0f172a !important; transform: translateY(-1px); box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5); text-decoration: none !important; }
 
     @media (max-width: 767px) {
-      .problem-section,
-      .solution-section,
-      .result-section,
-      .compare-section,
-      .scenario-section,
-      .trust-section { padding: 60px 0; }
+      .problem-section, .solution-section, .result-section, .compare-section, .scenario-section, .trust-section { padding: 60px 0; }
       .final-trigger { padding: 70px 0; }
     }
     </style>
@@ -258,13 +123,9 @@
     <div class="search-popup" id="search-popup"><form action="index.html" class="search-form"><div class="form-group"><input type="text" class="form-control" placeholder="검색어 입력..."></div><button type="submit" class="submit-btn"><i class="fa fa-search"></i></button></form></div>
     <div id="tai-header"></div>
 
-    <!-- 히어로: service/diagnosis와 동일 높이 clamp(560px, 80vh, 720px) + 텍스트 오버레이 (v2026-05-04) -->
+    <!-- 히어로 -->
     <section class="idx-hero-new">
-      <img
-        src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/hero-diagnosis-main.png"
-        alt="공장 내부에서 건설현장을 바라보는 작업자 — 사고는 준비되지 않은 순간에 발생합니다"
-        class="idx-hero-new-img"
-      >
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/hero-diagnosis-main.png" alt="공장 내부에서 건설현장을 바라보는 작업자 — 사고는 준비되지 않은 순간에 발생합니다" class="idx-hero-new-img">
       <div class="idx-hero-new-overlay">
         <div class="container">
           <div class="idx-hero-new-content">
@@ -274,41 +135,40 @@
               <span class="line-o">발생합니다</span>
             </h1>
             <p class="idx-hero-new-sub">그래서 확인해야 합니다</p>
-            <a href="free-diagnosis.html" class="idx-hero-new-cta">
-              즉시 무료로 법령진단하기 <span class="arrow" aria-hidden="true">→</span>
-            </a>
+            <a href="free-diagnosis.html" class="idx-hero-new-cta">즉시 무료로 법령진단하기 <span class="arrow" aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- =========================
-         법령진단 메인 구조 (히어로 아래)
-    ========================= -->
-
-    <!-- ① 문제 공감 — 좌이미지 + 우 카피 4줄 -->
+    <!-- ① 문제 공감 — 4카드 (p1.png 1/4 분할) -->
     <section class="problem-section">
       <div class="container">
-        <div class="row align-items-center g-5">
-
-          <div class="col-lg-6">
-            <img
-              src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/p1.png"
-              class="img-fluid rounded"
-              alt="안전관리 현장의 4가지 불안 — 법령·실행·결과·심리"
-              loading="lazy"
-            >
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card" data-pos="1">
+              <div class="thumb" role="img" aria-label="법전과 노트북 앞에서 고민하는 작업자"></div>
+              <h4>무슨 법이 적용되는지 모르겠습니다.</h4>
+            </div>
           </div>
-
-          <div class="col-lg-6">
-            <ul class="problem-list">
-              <li>무슨 법이 적용되는지 모르겠습니다.</li>
-              <li>무엇을 해야 하는지 모르겠습니다.</li>
-              <li>하긴 했는데 맞는지 모르겠습니다.</li>
-              <li>그래서 항상 불안합니다.</li>
-            </ul>
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card" data-pos="2">
+              <div class="thumb" role="img" aria-label="서류 더미 앞에서 고민하는 작업자"></div>
+              <h4>무엇을 해야 하는지 모르겠습니다.</h4>
+            </div>
           </div>
-
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card" data-pos="3">
+              <div class="thumb" role="img" aria-label="모니터 점검표를 보며 의문을 갖는 작업자"></div>
+              <h4>하긴 했는데 맞는지 모르겠습니다.</h4>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card" data-pos="4">
+              <div class="thumb" role="img" aria-label="창고에서 전화하며 불안해하는 안전관리자"></div>
+              <h4>그래서 항상 불안합니다</h4>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -317,21 +177,13 @@
     <section class="solution-section">
       <div class="container">
         <div class="row align-items-center g-5">
-
           <div class="col-lg-6">
             <img src="assets/img/diag/flow.jpg" class="img-fluid rounded" alt="법령진단 해결 방식">
           </div>
-
           <div class="col-lg-6">
-            <h2 class="sec-title">
-              법령진단은<br>복잡한 법을 구조로 바꿉니다
-            </h2>
-            <p class="sec-desc">
-              사업장 정보를 입력하면<br>
-              적용 법령과 의무가 자동으로 정리됩니다
-            </p>
+            <h2 class="sec-title">법령진단은<br>복잡한 법을 구조로 바꿉니다</h2>
+            <p class="sec-desc">사업장 정보를 입력하면<br>적용 법령과 의무가 자동으로 정리됩니다</p>
           </div>
-
         </div>
       </div>
     </section>
@@ -340,21 +192,13 @@
     <section class="result-section">
       <div class="container">
         <div class="row align-items-center g-5">
-
           <div class="col-lg-5">
-            <h2 class="sec-title">
-              결과는 바로 사용됩니다
-            </h2>
-            <p class="sec-desc">
-              법령, 의무, 점검 항목이 하나의 구조로 정리됩니다<br><br>
-              이 문서는 그대로 점검 대응 자료가 됩니다
-            </p>
+            <h2 class="sec-title">결과는 바로 사용됩니다</h2>
+            <p class="sec-desc">법령, 의무, 점검 항목이 하나의 구조로 정리됩니다<br><br>이 문서는 그대로 점검 대응 자료가 됩니다</p>
           </div>
-
           <div class="col-lg-7">
             <img src="assets/img/diag/report.jpg" class="img-fluid shadow" alt="법령진단 리포트 결과물">
           </div>
-
         </div>
       </div>
     </section>
@@ -363,15 +207,8 @@
     <section class="compare-section">
       <div class="container">
         <div class="row g-4">
-
-          <div class="col-lg-6">
-            <img src="assets/img/diag/old.jpg" class="img-fluid rounded" alt="기존 관리 방식">
-          </div>
-
-          <div class="col-lg-6">
-            <img src="assets/img/diag/new.jpg" class="img-fluid rounded" alt="법령진단 방식">
-          </div>
-
+          <div class="col-lg-6"><img src="assets/img/diag/old.jpg" class="img-fluid rounded" alt="기존 관리 방식"></div>
+          <div class="col-lg-6"><img src="assets/img/diag/new.jpg" class="img-fluid rounded" alt="법령진단 방식"></div>
         </div>
       </div>
     </section>
@@ -380,22 +217,9 @@
     <section class="scenario-section">
       <div class="container">
         <div class="row g-4 text-center">
-
-          <div class="col-md-4">
-            <img src="assets/img/diag/s1.jpg" class="img-fluid rounded mb-2" alt="점검 전에 확인할 때">
-            <p>점검 전에 확인할 때</p>
-          </div>
-
-          <div class="col-md-4">
-            <img src="assets/img/diag/s2.jpg" class="img-fluid rounded mb-2" alt="처음 안전관리 시작할 때">
-            <p>처음 안전관리 시작할 때</p>
-          </div>
-
-          <div class="col-md-4">
-            <img src="assets/img/diag/s3.jpg" class="img-fluid rounded mb-2" alt="기준 없이 운영할 때">
-            <p>기준 없이 운영할 때</p>
-          </div>
-
+          <div class="col-md-4"><img src="assets/img/diag/s1.jpg" class="img-fluid rounded mb-2" alt="점검 전에 확인할 때"><p>점검 전에 확인할 때</p></div>
+          <div class="col-md-4"><img src="assets/img/diag/s2.jpg" class="img-fluid rounded mb-2" alt="처음 안전관리 시작할 때"><p>처음 안전관리 시작할 때</p></div>
+          <div class="col-md-4"><img src="assets/img/diag/s3.jpg" class="img-fluid rounded mb-2" alt="기준 없이 운영할 때"><p>기준 없이 운영할 때</p></div>
         </div>
       </div>
     </section>
@@ -403,38 +227,17 @@
     <!-- ⑥ 신뢰 -->
     <section class="trust-section text-center">
       <div class="container">
-
-        <h2 class="sec-title white">
-          이 범위는 사람이 관리할 수 없습니다
-        </h2>
-
-        <p class="sec-desc white">
-          산업안전보건법 외 법령 752개 · 조문 32,808개<br>
-          의무 항목 2,677개 · 35개 부처 기준 반영
-        </p>
-
+        <h2 class="sec-title white">이 범위는 사람이 관리할 수 없습니다</h2>
+        <p class="sec-desc white">산업안전보건법 외 법령 752개 · 조문 32,808개<br>의무 항목 2,677개 · 35개 부처 기준 반영</p>
       </div>
     </section>
 
     <!-- ⑦ 마지막 트리거 -->
     <section class="final-trigger text-center">
       <div class="container">
-
-        <h2>
-          사고는 준비되지 않은 순간에 발생합니다<br><br>
-          그래서<br>
-          미리 확인합니다
-        </h2>
-
-        <p>
-          법령을 아는 것이 아니라<br>
-          대응할 수 있어야 합니다
-        </p>
-
-        <a href="free-diagnosis.html" class="final-trigger-cta">
-          무료 법령진단 시작하기 <span aria-hidden="true">→</span>
-        </a>
-
+        <h2>사고는 준비되지 않은 순간에 발생합니다<br><br>그래서<br>미리 확인합니다</h2>
+        <p>법령을 아는 것이 아니라<br>대응할 수 있어야 합니다</p>
+        <a href="free-diagnosis.html" class="final-trigger-cta">무료 법령진단 시작하기 <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
