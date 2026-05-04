@@ -67,7 +67,6 @@
       padding: 0;
       border: 0;
     }
-    /* 좌→우 그라데이션 — 좌측 텍스트 가독성 보장 */
     .idx-hero-new-overlay {
       position: absolute;
       inset: 0;
@@ -80,13 +79,8 @@
         rgba(0,0,0,0) 60%);
       pointer-events: none;
     }
-    .idx-hero-new-overlay .container {
-      width: 100%;
-    }
-    .idx-hero-new-content {
-      max-width: 620px;
-      pointer-events: auto;
-    }
+    .idx-hero-new-overlay .container { width: 100%; }
+    .idx-hero-new-content { max-width: 620px; pointer-events: auto; }
     .idx-hero-new-title {
       margin: 0 0 18px;
       font-family: 'Noto Sans KR', 'Pretendard', sans-serif;
@@ -98,12 +92,8 @@
       text-shadow: 0 2px 14px rgba(0,0,0,0.5);
     }
     .idx-hero-new-title .line-w,
-    .idx-hero-new-title .line-o {
-      display: block;
-    }
-    .idx-hero-new-title .line-o {
-      color: #f59e0b;
-    }
+    .idx-hero-new-title .line-o { display: block; }
+    .idx-hero-new-title .line-o { color: #f59e0b; }
     .idx-hero-new-sub {
       margin: 0 0 28px;
       color: rgba(255,255,255,0.92);
@@ -133,16 +123,9 @@
       box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5);
       text-decoration: none !important;
     }
-    .idx-hero-new-cta .arrow {
-      font-size: 1.15em;
-      line-height: 1;
-      transition: transform .2s;
-    }
-    .idx-hero-new-cta:hover .arrow {
-      transform: translateX(4px);
-    }
+    .idx-hero-new-cta .arrow { font-size: 1.15em; line-height: 1; transition: transform .2s; }
+    .idx-hero-new-cta:hover .arrow { transform: translateX(4px); }
 
-    /* 모바일/태블릿 — 텍스트 하단 배치 + 위→아래 그라데이션 */
     @media (max-width: 991px) {
       .idx-hero-new { min-height: 520px; }
       .idx-hero-new-img { object-position: 35% center; }
@@ -153,10 +136,7 @@
           rgba(0,0,0,0.62) 50%,
           rgba(0,0,0,0.86) 100%);
       }
-      .idx-hero-new-content {
-        max-width: 100%;
-        padding-bottom: 36px;
-      }
+      .idx-hero-new-content { max-width: 100%; padding-bottom: 36px; }
       .idx-hero-new-title { font-size: 1.85rem; }
       .idx-hero-new-sub { font-size: 0.95rem; margin-bottom: 22px; }
       .idx-hero-new-cta { padding: 12px 22px; font-size: 0.95rem; }
@@ -165,35 +145,103 @@
       .idx-hero-new-title { font-size: 1.65rem; }
     }
 
-    /* ═══ 역할 배너 섹션 ═══ */
-    .role-banner-area { background: #f1f5f9; padding: 80px 0 70px; }
-    .role-banner-area .section-title { margin-bottom: 36px; }
-    .role-banner-wrap { position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 12px 48px rgba(0,0,0,.10); margin-bottom: 32px; cursor: pointer; }
-    .role-banner-img { width: 100%; display: block; margin: -6% 0; }
-    .role-banner-links { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
-    .role-banner-link { display: block; height: 100%; background: transparent; transition: background .2s; }
-    .role-banner-link:hover { background: rgba(0,0,0,0.06); }
-    .role-btn-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-    .role-btn-grid .btn { width: 100%; text-align: center; font-weight: 700; font-size: .92rem; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 52px; padding: 0 12px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    @media (max-width: 767px) { .role-btn-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } .role-banner-area { padding: 60px 0 50px; } .role-banner-img { margin: -4% 0; } }
-    @media (max-width: 400px) { .role-btn-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+    /* ═══ 법령진단 메인 구조 (히어로 아래 7섹션, v2026-05-05) ═══ */
+    .problem-section,
+    .solution-section,
+    .result-section,
+    .compare-section,
+    .scenario-section { padding: 90px 0; }
 
-    /* ═══ 앱 스크린 섹션 ═══ */
-    .app-screen-area { background: linear-gradient(160deg, #0d1117 0%, #0f172a 40%, #0a1628 100%) !important; position: relative; overflow: hidden; padding: 90px 0 70px; }
-    .app-screen-area[style] { background-image: none !important; }
-    .app-screen-area .bg-main-gradient { display: none !important; }
-    .app-screen-area::before { content: ''; position: absolute; top: -100px; right: -100px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(21,101,192,0.14) 0%, transparent 70%); pointer-events: none; }
-    .app-screen-area::after { content: ''; position: absolute; bottom: -80px; left: 8%; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(15,43,74,0.22) 0%, transparent 70%); pointer-events: none; }
-    .app-screen-area .section-title h2.title { font-size: 2rem; line-height: 1.35; }
-    .app-screen-area .section-title p { opacity: .7; margin-top: 10px; }
-    .app-screen-area .btn-area { margin-top: 32px; display: flex; gap: 10px; flex-wrap: wrap; }
-    .app-screens-grid { display: flex; gap: 14px; align-items: flex-end; justify-content: center; }
-    .app-screens-grid .app-screen-item { flex: 1; max-width: 240px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .app-screens-grid .app-screen-item.center-phone { flex: 1.12; max-width: 280px; transform: translateY(-10px); }
-    .app-screens-grid .app-screen-item img { width: 100%; height: auto; max-height: min(52vh, 540px); object-fit: contain; display: block; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06); }
-    .app-screen-label { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; letter-spacing: .05em; text-transform: uppercase; }
-    .app-screens-grid .app-screen-item.center-phone .app-screen-label { color: rgba(147,197,253,.8); }
-    @media (max-width: 767px) { .app-screens-grid { gap: 10px; flex-wrap: wrap; } .app-screens-grid .app-screen-item, .app-screens-grid .app-screen-item.center-phone { flex: 1 1 42%; max-width: none; transform: none; } .app-screen-area { padding: 60px 0 50px; } }
+    .trust-section { padding: 90px 0; background: #0f172a; color: #fff; }
+    .trust-section .sec-title.white { color: #fff; }
+    .trust-section .sec-desc.white { color: rgba(255,255,255,0.85); }
+
+    .sec-title {
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      margin-bottom: 18px;
+    }
+    .sec-desc {
+      color: #475569;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .problem-card .thumb img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #e2e8f0;
+    }
+    .problem-card h4 {
+      font-size: .95rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.45;
+    }
+
+    .compare-section img,
+    .solution-section img,
+    .result-section img,
+    .scenario-section img {
+      background: #e2e8f0;
+      min-height: 200px;
+    }
+
+    .final-trigger {
+      padding: 110px 0;
+      background: #fff;
+    }
+    .final-trigger h2 {
+      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.55;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      margin-bottom: 22px;
+    }
+    .final-trigger p {
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .final-trigger-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #f59e0b;
+      color: #0f172a !important;
+      font-size: 1rem;
+      font-weight: 800;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none !important;
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.38);
+      transition: background .2s, transform .15s, box-shadow .2s;
+    }
+    .final-trigger-cta:hover {
+      background: #fbbf24;
+      color: #0f172a !important;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.5);
+      text-decoration: none !important;
+    }
+
+    @media (max-width: 767px) {
+      .problem-section,
+      .solution-section,
+      .result-section,
+      .compare-section,
+      .scenario-section,
+      .trust-section { padding: 60px 0; }
+      .final-trigger { padding: 70px 0; }
+    }
     </style>
 </head>
 <body class="sc5">
@@ -226,107 +274,170 @@
       </div>
     </section>
 
-    <section class="service-area default-pd-top">
-        <div class="container"><div class="row justify-content-center"><div class="col-lg-8"><div class="section-title text-center"><h4 class="sub-title">현실 공감</h4><h2 class="title">안전관리, 이런 상황 아닙니까?</h2></div></div></div>
-            <div class="row justify-content-center">
-                <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/1.jpg" alt="엑셀로 쌓인 서류와 점검 일정표"></div><h4>점검 일정을 엑셀로 관리합니다</h4><p>작업자한테 일일이 전화하고, 누락되면 과태료 맞습니다. 마땅한 프로그램이 없어서 그러을 겁니다.</p></div></div>
-                <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/2.jpg" alt="법전과 규정집을 펼쳐놓고 고민하는 모습"></div><h4>무슨 법이 적용되는지 모릅니다</h4><p>몰라서 벌금 맞았습니다. 법이 바뀌어도 알 방법이 없었습니다.</p></div></div>
-                <div class="col-xl-4 col-md-6"><div class="single-service-inner"><div class="thumb"><img src="assets/img/service/3.jpg" alt="서류 작성에 몰두하는 안전관리자"></div><h4>서류 쓰느라 안전관리를 못합니다</h4><p>겸직까지 하면 더 요식행위를 하게 됩니다. 서류가 아니라 안전이 목적이어야 합니다.</p></div></div>
+    <!-- =========================
+         법령진단 메인 구조 (히어로 아래)
+    ========================= -->
+
+    <!-- ① 문제 공감 -->
+    <section class="problem-section">
+      <div class="container">
+        <div class="row g-4">
+
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card">
+              <div class="thumb"><img src="assets/img/diag/p1.jpg" alt="무슨 법이 적용되는지 모르는 상황"></div>
+              <h4>무슨 법이 적용되는지 모릅니다</h4>
             </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card">
+              <div class="thumb"><img src="assets/img/diag/p2.jpg" alt="엑셀과 종이로 관리하는 상황"></div>
+              <h4>엑셀과 종이로 관리합니다</h4>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card">
+              <div class="thumb"><img src="assets/img/diag/p3.jpg" alt="빠지는 항목이 생기는 상황"></div>
+              <h4>빠지는 항목이 생깁니다</h4>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="problem-card">
+              <div class="thumb"><img src="assets/img/diag/p4.jpg" alt="점검이 불안한 상황"></div>
+              <h4>점검이 항상 불안합니다</h4>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <section class="role-banner-area pd-top-110">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8 col-md-10">
-                    <div class="section-title text-center">
-                        <h4 class="sub-title">나에게 맞는 서비스</h4>
-                        <h2 class="title">나는 어디에 해당하나요?</h2>
-                        <p>내 상황에 맞는 서비스를 선택하세요</p>
-                    </div>
-                </div>
-            </div>
-            <div class="role-banner-wrap">
-                <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/diagrams/tai_four_cards_banner.svg" alt="TAI Safe 역할별 서비스" class="role-banner-img" loading="lazy">
-                <div class="role-banner-links">
-                    <a href="for-business-owner.html" class="role-banner-link" aria-label="경영자 / 총무 페이지로 이동"></a>
-                    <a href="for-safety-manager.html" class="role-banner-link" aria-label="안전관리자 페이지로 이동"></a>
-                    <a href="fix-request.html?from=landing&type=consulting" class="role-banner-link" aria-label="대행 필요 사업장 페이지로 이동"></a>
-                    <a href="service/appointment.html" class="role-banner-link" aria-label="안전 전문가 페이지로 이동"></a>
-                </div>
-            </div>
-            <div class="role-btn-grid">
-                <a href="for-business-owner.html" class="btn btn-border">경영자 / 총무</a>
-                <a href="for-safety-manager.html" class="btn btn-border">안전관리자</a>
-                <a href="fix-request.html?from=landing&type=consulting" class="btn btn-border">대행 필요 사업장</a>
-                <a href="service/appointment.html" class="btn btn-border">안전 전문가</a>
-            </div>
+    <!-- ② 해결 방식 -->
+    <section class="solution-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
+
+          <div class="col-lg-6">
+            <img src="assets/img/diag/flow.jpg" class="img-fluid rounded" alt="법령진단 해결 방식">
+          </div>
+
+          <div class="col-lg-6">
+            <h2 class="sec-title">
+              법령진단은<br>복잡한 법을 구조로 바꿉니다
+            </h2>
+            <p class="sec-desc">
+              사업장 정보를 입력하면<br>
+              적용 법령과 의무가 자동으로 정리됩니다
+            </p>
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <section class="management-area pd-top-110">
-        <div class="container"><div class="row justify-content-center">
-            <div class="col-lg-6 align-self-center"><div class="thumb mb-lg-0 mb-5"><img src="assets/img/other/1.png" alt="TAI Safe 일정 캘린더 화면"></div></div>
-            <div class="col-xl-5 col-lg-6 col-md-10 offset-xl-1 align-self-center"><div class="section-title mb-0"><h4 class="sub-title">서비스 작동 방식</h4><h2 class="title">TAI는 이렇게 작동합니다</h2>
-                <ul class="nx-inner mt-4">
-                    <li><i class="far fa-check-circle"></i><strong>법령 자동 판정</strong> — 내 사업장에 해당하는 법규를 다 확인하고 대응할 수 있습니다</li>
-                    <li><i class="far fa-check-circle"></i><strong>스케줄 한번 세팅</strong> — 일정을 놓치지 않고, 제대로 된 안전관리를 할 수 있습니다</li>
-                    <li><i class="far fa-check-circle"></i><strong>비상 즉시 알림</strong> — 골든타임을 놓치지 않게 즉시 안전관리자에게 통보됩니다</li>
-                </ul>
-                <a class="btn btn-border" href="free-diagnosis.html">무료 진단 시작</a>
-            </div></div>
-        </div></div>
-    </section>
+    <!-- ③ 결과물 -->
+    <section class="result-section">
+      <div class="container">
+        <div class="row align-items-center g-5">
 
-    <section class="counter-area pd-top-110 pd-bottom-120">
-        <div class="container"><div class="row justify-content-center"><div class="col-lg-8"><div class="section-title text-center"><h4 class="sub-title">숫자로 보는 TAI</h4><h2 class="title">법령기반 산업안전 운영 플랫폼</h2></div></div></div>
-            <div class="row g-4 justify-content-center text-center">
-                <div class="col-lg-3 col-md-6"><div class="single-counter-inner"><h2 class="counter">2080</h2><span class="counter-plus">+</span><p>법령 규칙 엔진<br>의무 항목 DB</p></div></div>
-                <div class="col-lg-3 col-md-6"><div class="single-counter-inner"><h2 class="counter">13</h2><p>특허 출원 완료<br>(Patent Pending)</p></div></div>
-                <div class="col-lg-3 col-md-6"><div class="single-counter-inner"><h2 class="counter">3</h2><p>산업·건설·건물<br>전 섹터 지원</p></div></div>
-                <div class="col-lg-3 col-md-6"><div class="single-counter-inner"><h2 class="counter">0</h2><p>1차 법령진단<br>완전 무료 (원)</p></div></div>
-            </div>
+          <div class="col-lg-5">
+            <h2 class="sec-title">
+              결과는 바로 사용됩니다
+            </h2>
+            <p class="sec-desc">
+              법령, 의무, 점검 항목이 하나의 구조로 정리됩니다<br><br>
+              이 문서는 그대로 점검 대응 자료가 됩니다
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            <img src="assets/img/diag/report.jpg" class="img-fluid shadow" alt="법령진단 리포트 결과물">
+          </div>
+
         </div>
+      </div>
     </section>
 
-    <section class="app-screen-area">
-        <div class="bg-main-gradient"></div>
-        <div class="container"><div class="row justify-content-center align-items-center">
-            <div class="col-xl-4 col-lg-5 align-self-center">
-                <div class="section-title mb-0 pb-4">
-                    <h2 class="title text-white">직접 보시면<br>바로 아십니다</h2>
-                    <p class="text-white">현장에서 1분 이내에 점검 가능한 현장용 앱</p>
-                </div>
-                <div class="btn-area">
-                    <a class="btn btn-white" href="free-diagnosis.html">무료 진단 시작</a>
-                    <a class="btn btn-border-white" href="fix-request.html?from=landing&type=general">도입 문의</a>
-                </div>
-            </div>
-            <div class="col-xl-8 col-lg-7">
-                <div class="app-screens-grid">
-                    <div class="app-screen-item">
-                        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/01-home-light-light.png" alt="TAI Safe 홈 화면 — 오늘 점검 현황과 빠른 액션" loading="lazy">
-                        <div class="app-screen-label">홈 화면</div>
-                    </div>
-                    <div class="app-screen-item center-phone">
-                        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect-light-light.png" alt="TAI Safe 점검 화면 — 정상/이상/보류 1클릭 체크" loading="lazy">
-                        <div class="app-screen-label">5초 점검</div>
-                    </div>
-                    <div class="app-screen-item">
-                        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/04-emergency-light-light.png" alt="TAI Safe 긴급 신고 — SOS + 119/112 즉시 연결" loading="lazy">
-                        <div class="app-screen-label">긴급 신고</div>
-                    </div>
-                </div>
-            </div>
-        </div></div>
+    <!-- ④ 비교 -->
+    <section class="compare-section">
+      <div class="container">
+        <div class="row g-4">
+
+          <div class="col-lg-6">
+            <img src="assets/img/diag/old.jpg" class="img-fluid rounded" alt="기존 관리 방식">
+          </div>
+
+          <div class="col-lg-6">
+            <img src="assets/img/diag/new.jpg" class="img-fluid rounded" alt="법령진단 방식">
+          </div>
+
+        </div>
+      </div>
     </section>
 
-    <section class="subscribe-area">
-        <div class="container"><div class="row"><div class="col-lg-12"><div class="subscribe-inner"><div class="row no-gutters">
-            <div class="col-xl-5 col-lg-6"><h2>3분이면 법령 위반 여부를 알 수 있습니다</h2><p class="pe-5">완전 무료입니다. 이메일 하나로 내 사업장의 안전 의무 항목을 지금 바로 확인하세요.</p></div>
-            <div class="col-lg-6 offset-xl-1 align-self-center"><div class="single-input-wrap"><input type="text" placeholder="이메일 주소를 입력하세요"><button class="btn btn-base" onclick="location.href='free-diagnosis.html'">무료 진단 시작</button></div></div>
-        </div></div></div></div></div>
+    <!-- ⑤ 사용 상황 -->
+    <section class="scenario-section">
+      <div class="container">
+        <div class="row g-4 text-center">
+
+          <div class="col-md-4">
+            <img src="assets/img/diag/s1.jpg" class="img-fluid rounded mb-2" alt="점검 전에 확인할 때">
+            <p>점검 전에 확인할 때</p>
+          </div>
+
+          <div class="col-md-4">
+            <img src="assets/img/diag/s2.jpg" class="img-fluid rounded mb-2" alt="처음 안전관리 시작할 때">
+            <p>처음 안전관리 시작할 때</p>
+          </div>
+
+          <div class="col-md-4">
+            <img src="assets/img/diag/s3.jpg" class="img-fluid rounded mb-2" alt="기준 없이 운영할 때">
+            <p>기준 없이 운영할 때</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ 신뢰 -->
+    <section class="trust-section text-center">
+      <div class="container">
+
+        <h2 class="sec-title white">
+          이 범위는 사람이 관리할 수 없습니다
+        </h2>
+
+        <p class="sec-desc white">
+          산업안전보건법 외 법령 752개 · 조문 32,808개<br>
+          의무 항목 2,677개 · 35개 부처 기준 반영
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ⑦ 마지막 트리거 -->
+    <section class="final-trigger text-center">
+      <div class="container">
+
+        <h2>
+          사고는 준비되지 않은 순간에 발생합니다<br><br>
+          그래서<br>
+          미리 확인합니다
+        </h2>
+
+        <p>
+          법령을 아는 것이 아니라<br>
+          대응할 수 있어야 합니다
+        </p>
+
+        <a href="free-diagnosis.html" class="final-trigger-cta">
+          무료 법령진단 시작하기 <span aria-hidden="true">→</span>
+        </a>
+
+      </div>
     </section>
 
     <div id="tai-footer"></div>
