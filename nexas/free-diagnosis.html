@@ -39,10 +39,11 @@
     --craft-bg:#f5f0e8;--craft-card:#fdfaf4;--craft-line:#d4c9b0;
     --craft-ink:#1a1a2e;--stamp-red:#c0392b;--stamp-red-light:#fdf0ef;--craft-sub:#7a6e5f;
   }
-  .diag-layout{min-height:100vh;display:grid;grid-template-columns:420px 1fr;}
+  .diag-layout{min-height:calc(100vh - var(--tai-nav-h, 90px));display:grid;grid-template-columns:420px 1fr;}
   @media(max-width:960px){.diag-layout{grid-template-columns:1fr}.diag-left{display:none}}
   .diag-left{background:linear-gradient(160deg,#1a1a2e 0%,#2c1810 100%);padding:64px 44px;
-    display:flex;flex-direction:column;justify-content:center;color:#fff;position:sticky;top:0;height:100vh;}
+    display:flex;flex-direction:column;justify-content:center;color:#fff;
+    position:sticky;top:var(--tai-nav-h, 90px);height:calc(100vh - var(--tai-nav-h, 90px));}
   .diag-left .dl-tag{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
     color:rgba(255,255,255,.45);margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px;}
   .diag-left h2{font-family:'Noto Serif KR',serif;font-size:2.1rem;font-weight:700;line-height:1.3;margin-bottom:18px;color:#fff;}
@@ -229,6 +230,8 @@
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
 
+<div id="tai-header"></div>
+
 <div class="diag-layout">
   <div class="diag-left">
     <div class="dl-tag">법령진단 · 사업장 정보 보호</div>
@@ -404,9 +407,14 @@
   </div>
 </div>
 
+<div id="tai-footer"></div>
+
 <script src="assets/js/jquery.3.6.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
 <script>
 const API = 'https://api.taieng.co.kr';
 
