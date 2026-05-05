@@ -141,6 +141,67 @@
     border-radius: 8px;
   }
 
+  /* ── ④ diagnosis3 — 풀폭 + 좌측 텍스트 오버레이 (v2026-05-05) ── */
+  .diag-bgtext {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: #fff;
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .diag-bgtext-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .diag-bgtext-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+  .diag-bgtext-overlay > .container {
+    width: 100%;
+    pointer-events: none;
+  }
+  .diag-bgtext-box {
+    pointer-events: auto;
+    max-width: 400px;
+    padding-right: 16px;
+  }
+  .diag-bgtext-box .bgtext-title {
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.45;
+    letter-spacing: -.02em;
+    margin: 0 0 18px;
+  }
+  .diag-bgtext-box .bgtext-desc {
+    font-size: .94rem;
+    color: #475569;
+    line-height: 1.95;
+    margin: 0;
+  }
+  @media (max-width: 991px) {
+    .diag-bgtext-overlay {
+      position: static;
+      padding: 36px 0 44px;
+      background: var(--gray-bg);
+    }
+    .diag-bgtext-overlay > .container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .diag-bgtext-box {
+      max-width: 100% !important;
+      padding-right: 0;
+    }
+    .diag-bgtext-box .bgtext-title { font-size: 1.5rem; }
+  }
+
   /* ⑤ 비교 카드 (기존 vs TAI) — 풀가로 2카드 + 가운데 VS */
   .compare-pair {
     display: grid;
@@ -478,18 +539,14 @@
   </div>
 </section>
 
-<!-- ④ diagnosis3.png — 결과 리포트 -->
-<section class="diag-section">
-  <div class="container">
-    <div class="row align-items-start g-4">
-      <div class="col-lg-3">
-        <div class="diag-side">
-          <h2 class="diag-title">단순 목록이 아닌<br>실행 가능한 결과</h2>
-          <p class="diag-aside">의무 구조, 적용 법령, 점검 항목, 리스크 분석이 하나의 리포트로 정리됩니다. 점검 대응 자료로 그대로 사용할 수 있는 형태입니다.</p>
-        </div>
-      </div>
-      <div class="col-lg-9">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis3.png" alt="법령의무진단 리포트 — 의무 구조, 적용 법령, 점검 항목, 의무 리스트, 리스크 분석" class="diag-illust-img" loading="lazy">
+<!-- ④ diagnosis3.png — 결과 리포트 (풀폭 + 좌측 텍스트 오버레이) -->
+<section class="diag-bgtext">
+  <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis3.png" alt="법령의무진단 리포트 — 의무 구조, 적용 법령, 점검 항목, 의무 리스트, 리스크 분석" class="diag-bgtext-img" loading="lazy">
+  <div class="diag-bgtext-overlay">
+    <div class="container">
+      <div class="diag-bgtext-box">
+        <h2 class="bgtext-title">단순 목록이 아닌<br>실행 가능한 결과</h2>
+        <p class="bgtext-desc">의무 구조, 적용 법령, 점검 항목, 리스크 분석이 하나의 리포트로 정리됩니다. 점검 대응 자료로 그대로 사용할 수 있는 형태입니다.</p>
       </div>
     </div>
   </div>
