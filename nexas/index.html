@@ -194,7 +194,7 @@
     .solution-value { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--idx-ink); }
     .solution-value .value-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--idx-accent-soft); color: var(--idx-accent); font-size: 0.95rem; flex-shrink: 0; }
 
-    /* ═══ ⑥ wrong-tries ═══ */
+    /* ═══ wrong-tries ═══ */
     .wrong-tries-section .idx-section-img { margin: 30px 0 24px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12); }
     .wrong-tries-conclusion { padding: 26px 28px; background: #fff8e6; border: 1px solid #fcd34d; border-radius: 14px; display: flex; gap: 16px; align-items: flex-start; }
     .wrong-tries-conclusion-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--idx-orange); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; }
@@ -202,12 +202,12 @@
     .wrong-tries-conclusion-title { font-size: 1.05rem; font-weight: 900; color: #92400e; margin: 0 0 6px; line-height: 1.5; }
     .wrong-tries-conclusion-desc { font-size: 0.92rem; color: #b45309; line-height: 1.65; margin: 0; word-break: keep-all; }
 
-    /* ═══ ⑦ versatile — main07 ═══ */
+    /* ═══ versatile — main07 ═══ */
     .versatile-section { padding: 90px 0; background: var(--idx-soft); }
     .versatile-img { margin: 24px 0 0; }
     @media (max-width: 767px) { .versatile-section { padding: 60px 0; } }
 
-    /* ═══ ⑧ trust ═══ */
+    /* ═══ trust ═══ */
     .trust-section { padding: 100px 0; background: #0f172a; color: #fff; }
     .trust-section .idx-title { color: #fff; }
     .trust-section .idx-desc { color: rgba(255,255,255,0.78); }
@@ -218,7 +218,7 @@
     .trust-stat-label { font-size: 0.84rem; color: rgba(255,255,255,0.72); line-height: 1.4; word-break: keep-all; }
     @media (max-width: 767px) { .trust-section { padding: 70px 0; } }
 
-    /* ═══ ⑨ action — main06 (통합 카드, v2026-05-05i) ═══ */
+    /* ═══ action — main06 (통합 카드) ═══ */
     .action-card {
       background: #fff;
       border: 1px solid var(--idx-line);
@@ -227,73 +227,15 @@
       overflow: hidden;
       margin: 36px 0 0;
     }
-    .action-card-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 0;
-    }
-    .action-card-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--idx-line);
-      background: #fff;
-    }
-    .action-step {
-      padding: 26px 22px;
-      border-right: 1px solid var(--idx-line);
-    }
+    .action-card-img { width: 100%; height: auto; display: block; border-radius: 0; }
+    .action-card-steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--idx-line); background: #fff; }
+    .action-step { padding: 26px 22px; border-right: 1px solid var(--idx-line); }
     .action-step:last-child { border-right: none; }
-    .action-step-num {
-      font-size: 0.78rem;
-      font-weight: 800;
-      color: var(--idx-accent);
-      letter-spacing: 0.05em;
-      font-family: 'Lato', sans-serif;
-      margin-bottom: 8px;
-    }
-    .action-step-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--idx-ink);
-      margin: 0 0 6px;
-      line-height: 1.4;
-      word-break: keep-all;
-    }
-    .action-step-desc {
-      font-size: 0.85rem;
-      color: var(--idx-sub);
-      line-height: 1.55;
-      margin: 0;
-      word-break: keep-all;
-    }
-    .action-card-final {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 22px 24px;
-      background: var(--idx-accent);
-      color: #fff;
-      font-size: 1.02rem;
-      font-weight: 700;
-      text-align: center;
-      word-break: keep-all;
-      line-height: 1.5;
-    }
-    .action-card-final-check {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 800;
-      flex-shrink: 0;
-    }
+    .action-step-num { font-size: 0.78rem; font-weight: 800; color: var(--idx-accent); letter-spacing: 0.05em; font-family: 'Lato', sans-serif; margin-bottom: 8px; }
+    .action-step-title { font-size: 1rem; font-weight: 800; color: var(--idx-ink); margin: 0 0 6px; line-height: 1.4; word-break: keep-all; }
+    .action-step-desc { font-size: 0.85rem; color: var(--idx-sub); line-height: 1.55; margin: 0; word-break: keep-all; }
+    .action-card-final { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 22px 24px; background: var(--idx-accent); color: #fff; font-size: 1.02rem; font-weight: 700; text-align: center; word-break: keep-all; line-height: 1.5; }
+    .action-card-final-check { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.22); color: #fff; font-size: 0.85rem; font-weight: 800; flex-shrink: 0; }
     @media (max-width: 767px) {
       .action-card-steps { grid-template-columns: repeat(2, 1fr); }
       .action-step { padding: 22px 18px; }
@@ -308,7 +250,7 @@
       .action-step:last-child { border-bottom: none; }
     }
 
-    /* ═══ ⑩ final-trigger ═══ */
+    /* ═══ final-trigger ═══ */
     .final-trigger { padding: 120px 0; background: #fff; text-align: center; }
     .final-trigger h2 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 900; line-height: 1.55; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 22px; word-break: keep-all; }
     .final-trigger p { font-size: 1.05rem; color: #475569; line-height: 1.7; margin-bottom: 32px; word-break: keep-all; }
@@ -466,107 +408,7 @@
       </div>
     </section>
 
-    <!-- ④' result-cta — 다크 배경 CTA 한 줄 -->
-    <section class="result-cta">
-      <div class="container">
-        <div class="result-cta-row">
-          <a href="free-diagnosis.html" class="result-cta-btn primary">바로 무료 법령진단 하기 <span class="arrow" aria-hidden="true">→</span></a>
-          <a href="service/diagnosis.html" class="result-cta-btn secondary">법령진단 자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑤ illusion — main10 -->
-    <section class="bgtext illusion text-left alt-bg">
-      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main10.png" alt="확인 결과를 받았지만 여전히 안전관리 업무로 고민하는 안전관리자" class="bgtext-img" loading="lazy">
-      <div class="bgtext-overlay">
-        <div class="container">
-          <div class="bgtext-box">
-            <span class="idx-eyebrow">중요한 차이</span>
-            <div class="illusion-block">
-              <div class="illusion-badge ok">✓</div>
-              <h3 class="illusion-block-title">확인으로 <em>안심은 됩니다</em></h3>
-              <p class="illusion-block-desc">법령을 확인하고, 우리 사업장의 위험 요소를 알았다면 일단 안심할 수 있습니다.</p>
-            </div>
-            <div class="illusion-block">
-              <div class="illusion-badge warn">!</div>
-              <h3 class="illusion-block-title">하지만,<br>관리는 별개의 문제입니다</h3>
-              <p class="illusion-block-desc">알고 있는 것과, 제대로 관리하고 실행하는 것은 전혀 다른 일입니다.</p>
-              <div class="illusion-tags">
-                <div class="illusion-tag">해야 할 일<br>정리</div>
-                <div class="illusion-tag">담당자 지정 및<br>업무 분배</div>
-                <div class="illusion-tag">기한 관리 및<br>실행</div>
-                <div class="illusion-tag">기록 및<br>지속 관리</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑥ wrong-tries — main08 -->
-    <section class="idx-section wrong-tries-section">
-      <div class="container">
-        <div class="text-center" style="margin-bottom: 24px;">
-          <span class="idx-eyebrow">현실의 시도</span>
-          <h2 class="idx-title center">이렇게 <em>해결하려고</em> 합니다</h2>
-          <p class="idx-desc center">더 나은 방법을 찾기 위해 많은 노력을 기울입니다</p>
-        </div>
-
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main08.png" alt="안전관리 잘못된 시도 4가지 — 담당자 늘리기, 엑셀 정교화, 외주, 결국 혼자 챙기기" class="idx-section-img" loading="lazy">
-
-        <div class="wrong-tries-conclusion">
-          <span class="wrong-tries-conclusion-icon">!</span>
-          <div class="wrong-tries-conclusion-body">
-            <h4 class="wrong-tries-conclusion-title">사람을 늘리거나, 외주를 맡기거나, 엑셀을 정교하게 만들어도</h4>
-            <p class="wrong-tries-conclusion-desc">결국 안전관리의 모든 책임과 시간 부담은 안전관리자에게 돌아옵니다.<br>TAI Safe는 사람을 대체하지 않고, <strong>업무를 분산하고 자동화</strong>합니다.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑦ versatile — main07 -->
-    <section class="versatile-section">
-      <div class="container">
-        <div class="text-center">
-          <span class="idx-eyebrow">현장</span>
-          <h2 class="idx-title center">사무실에서, 현장에서, 모바일에서<br><em>모든 환경</em>에서 작동합니다</h2>
-        </div>
-        <div class="versatile-img">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main07.png" alt="다양한 환경에서 사용되는 TAI Safe — 데스크톱, 현장 모바일, 태블릿, 회의, 대시보드" class="idx-section-img" loading="lazy">
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑧ trust -->
-    <section class="trust-section text-center">
-      <div class="container">
-        <span class="idx-eyebrow" style="background: rgba(245, 158, 11, 0.15); color: var(--idx-orange);">규모</span>
-        <h2 class="idx-title">이 범위는<br>사람이 관리할 수 없습니다</h2>
-        <p class="idx-desc">TAI는 35개 부처 기준을 자동으로 반영합니다</p>
-
-        <div class="trust-stats">
-          <div class="trust-stat">
-            <div class="trust-stat-num">752<span style="font-size:0.6em;">개</span></div>
-            <div class="trust-stat-label">산업안전보건법 외<br>적용 법령</div>
-          </div>
-          <div class="trust-stat">
-            <div class="trust-stat-num">32,808<span style="font-size:0.6em;">개</span></div>
-            <div class="trust-stat-label">총 조문<br>분석 완료</div>
-          </div>
-          <div class="trust-stat">
-            <div class="trust-stat-num">2,677<span style="font-size:0.6em;">개</span></div>
-            <div class="trust-stat-label">의무·점검<br>항목 DB</div>
-          </div>
-          <div class="trust-stat">
-            <div class="trust-stat-num">35<span style="font-size:0.6em;">개</span></div>
-            <div class="trust-stat-label">관계 부처<br>기준 반영</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑨ action — main06 (final-trigger 직전, 통합 카드) -->
+    <!-- ⑤ action — main06 (result 직후, 통합 카드) -->
     <section class="idx-section alt">
       <div class="container">
         <div class="text-center" style="margin-bottom: 24px;">
@@ -604,6 +446,106 @@
           <div class="action-card-final">
             <span class="action-card-final-check">✓</span>
             <span>리포트 한 장으로, 우리 사업장의 안전 관리가 체계적으로 시작됩니다.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤' result-cta — 다크 배경 CTA 한 줄 -->
+    <section class="result-cta">
+      <div class="container">
+        <div class="result-cta-row">
+          <a href="free-diagnosis.html" class="result-cta-btn primary">바로 무료 법령진단 하기 <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="service/diagnosis.html" class="result-cta-btn secondary">법령진단 자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑥ illusion — main10 -->
+    <section class="bgtext illusion text-left alt-bg">
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main10.png" alt="확인 결과를 받았지만 여전히 안전관리 업무로 고민하는 안전관리자" class="bgtext-img" loading="lazy">
+      <div class="bgtext-overlay">
+        <div class="container">
+          <div class="bgtext-box">
+            <span class="idx-eyebrow">중요한 차이</span>
+            <div class="illusion-block">
+              <div class="illusion-badge ok">✓</div>
+              <h3 class="illusion-block-title">확인으로 <em>안심은 됩니다</em></h3>
+              <p class="illusion-block-desc">법령을 확인하고, 우리 사업장의 위험 요소를 알았다면 일단 안심할 수 있습니다.</p>
+            </div>
+            <div class="illusion-block">
+              <div class="illusion-badge warn">!</div>
+              <h3 class="illusion-block-title">하지만,<br>관리는 별개의 문제입니다</h3>
+              <p class="illusion-block-desc">알고 있는 것과, 제대로 관리하고 실행하는 것은 전혀 다른 일입니다.</p>
+              <div class="illusion-tags">
+                <div class="illusion-tag">해야 할 일<br>정리</div>
+                <div class="illusion-tag">담당자 지정 및<br>업무 분배</div>
+                <div class="illusion-tag">기한 관리 및<br>실행</div>
+                <div class="illusion-tag">기록 및<br>지속 관리</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑦ wrong-tries — main08 -->
+    <section class="idx-section wrong-tries-section">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 24px;">
+          <span class="idx-eyebrow">현실의 시도</span>
+          <h2 class="idx-title center">이렇게 <em>해결하려고</em> 합니다</h2>
+          <p class="idx-desc center">더 나은 방법을 찾기 위해 많은 노력을 기울입니다</p>
+        </div>
+
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main08.png" alt="안전관리 잘못된 시도 4가지 — 담당자 늘리기, 엑셀 정교화, 외주, 결국 혼자 챙기기" class="idx-section-img" loading="lazy">
+
+        <div class="wrong-tries-conclusion">
+          <span class="wrong-tries-conclusion-icon">!</span>
+          <div class="wrong-tries-conclusion-body">
+            <h4 class="wrong-tries-conclusion-title">사람을 늘리거나, 외주를 맡기거나, 엑셀을 정교하게 만들어도</h4>
+            <p class="wrong-tries-conclusion-desc">결국 안전관리의 모든 책임과 시간 부담은 안전관리자에게 돌아옵니다.<br>TAI Safe는 사람을 대체하지 않고, <strong>업무를 분산하고 자동화</strong>합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑧ versatile — main07 -->
+    <section class="versatile-section">
+      <div class="container">
+        <div class="text-center">
+          <span class="idx-eyebrow">현장</span>
+          <h2 class="idx-title center">사무실에서, 현장에서, 모바일에서<br><em>모든 환경</em>에서 작동합니다</h2>
+        </div>
+        <div class="versatile-img">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main07.png" alt="다양한 환경에서 사용되는 TAI Safe — 데스크톱, 현장 모바일, 태블릿, 회의, 대시보드" class="idx-section-img" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑨ trust -->
+    <section class="trust-section text-center">
+      <div class="container">
+        <span class="idx-eyebrow" style="background: rgba(245, 158, 11, 0.15); color: var(--idx-orange);">규모</span>
+        <h2 class="idx-title">이 범위는<br>사람이 관리할 수 없습니다</h2>
+        <p class="idx-desc">TAI는 35개 부처 기준을 자동으로 반영합니다</p>
+
+        <div class="trust-stats">
+          <div class="trust-stat">
+            <div class="trust-stat-num">752<span style="font-size:0.6em;">개</span></div>
+            <div class="trust-stat-label">산업안전보건법 외<br>적용 법령</div>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-num">32,808<span style="font-size:0.6em;">개</span></div>
+            <div class="trust-stat-label">총 조문<br>분석 완료</div>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-num">2,677<span style="font-size:0.6em;">개</span></div>
+            <div class="trust-stat-label">의무·점검<br>항목 DB</div>
+          </div>
+          <div class="trust-stat">
+            <div class="trust-stat-num">35<span style="font-size:0.6em;">개</span></div>
+            <div class="trust-stat-label">관계 부처<br>기준 반영</div>
           </div>
         </div>
       </div>
