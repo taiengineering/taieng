@@ -165,12 +165,10 @@
       .illusion-tags { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* ═══ result-cta — result 섹션 직후 CTA 한 줄 (v2026-05-05g) ═══ */
+    /* ═══ result-cta — result 섹션 직후 CTA 한 줄 (v2026-05-05h — 다크 배경) ═══ */
     .result-cta {
       padding: 36px 0;
-      background: #fff;
-      border-top: 1px solid var(--idx-line);
-      border-bottom: 1px solid var(--idx-line);
+      background: #0f172a;
     }
     .result-cta-row {
       display: flex;
@@ -178,13 +176,6 @@
       align-items: center;
       justify-content: center;
       gap: 14px;
-    }
-    .result-cta-msg {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--idx-ink);
-      margin: 0 8px 0 0;
-      word-break: keep-all;
     }
     .result-cta-btn {
       display: inline-flex;
@@ -202,30 +193,30 @@
     .result-cta-btn.primary {
       background: var(--idx-orange);
       color: #0f172a !important;
-      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.32);
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.35);
     }
     .result-cta-btn.primary:hover {
       background: #fbbf24;
       color: #0f172a !important;
       transform: translateY(-1px);
-      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.45);
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
     }
     .result-cta-btn.primary:hover .arrow { transform: translateX(4px); }
     .result-cta-btn.secondary {
-      background: #fff;
-      color: var(--idx-accent) !important;
-      border: 2px solid var(--idx-accent);
+      background: transparent;
+      color: #fff !important;
+      border: 2px solid rgba(255,255,255,0.4);
     }
     .result-cta-btn.secondary:hover {
-      background: var(--idx-accent);
-      color: #fff !important;
+      background: #fff;
+      color: #0f172a !important;
+      border-color: #fff;
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(21, 101, 192, 0.25);
+      box-shadow: 0 10px 24px rgba(255,255,255,0.15);
     }
     .result-cta-btn.secondary:hover .arrow { transform: translateX(4px); }
     @media (max-width: 575px) {
       .result-cta { padding: 28px 0; }
-      .result-cta-msg { width: 100%; text-align: center; margin-bottom: 4px; }
       .result-cta-row { gap: 10px; }
       .result-cta-btn { padding: 12px 18px; font-size: 0.92rem; flex: 1 1 calc(50% - 5px); justify-content: center; }
     }
@@ -435,11 +426,10 @@
       </div>
     </section>
 
-    <!-- ④' result-cta — 결과 섹션 직후 CTA 한 줄 -->
+    <!-- ④' result-cta — 다크 배경 CTA 한 줄 -->
     <section class="result-cta">
       <div class="container">
         <div class="result-cta-row">
-          <p class="result-cta-msg">지금 바로 시작하거나, 자세히 알아보세요</p>
           <a href="free-diagnosis.html" class="result-cta-btn primary">바로 무료 법령진단 하기 <span class="arrow" aria-hidden="true">→</span></a>
           <a href="service/diagnosis.html" class="result-cta-btn secondary">법령진단 자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
         </div>
