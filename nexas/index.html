@@ -70,7 +70,7 @@
     }
     @media (max-width: 400px) { .idx-hero-new-title { font-size: 1.65rem; } }
 
-    /* ═══ 공통 토큰 (v2026-05-05f) ═══ */
+    /* ═══ 공통 토큰 ═══ */
     :root {
       --idx-ink: #0f172a;
       --idx-sub: #475569;
@@ -116,7 +116,7 @@
     @media (max-width: 575px) { .problem-thumb { height: 320px; } }
     @media (max-width: 767px) { .problem-section { padding: 64px 0; } }
 
-    /* ═══ 풀폭 텍스트 오버레이 패턴 (v2026-05-05f) ═══ */
+    /* ═══ 풀폭 텍스트 오버레이 패턴 ═══ */
     .bgtext { position: relative; width: 100%; background: #fff; }
     .bgtext.alt-bg { background: var(--idx-soft); }
     .bgtext-img { width: 100%; height: auto; display: block; }
@@ -165,55 +165,16 @@
       .illusion-tags { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* ═══ result-cta — result 섹션 직후 CTA 한 줄 (v2026-05-05h — 다크 배경) ═══ */
-    .result-cta {
-      padding: 36px 0;
-      background: #0f172a;
-    }
-    .result-cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-    }
-    .result-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 0.96rem;
-      text-decoration: none !important;
-      transition: background .2s, transform .15s, box-shadow .2s, border-color .2s, color .2s;
-      white-space: nowrap;
-    }
+    /* ═══ result-cta — 다크 배경 CTA 한 줄 ═══ */
+    .result-cta { padding: 36px 0; background: #0f172a; }
+    .result-cta-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+    .result-cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: 12px; font-weight: 800; font-size: 0.96rem; text-decoration: none !important; transition: background .2s, transform .15s, box-shadow .2s, border-color .2s, color .2s; white-space: nowrap; }
     .result-cta-btn .arrow { font-size: 1.1em; transition: transform .2s; }
-    .result-cta-btn.primary {
-      background: var(--idx-orange);
-      color: #0f172a !important;
-      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.35);
-    }
-    .result-cta-btn.primary:hover {
-      background: #fbbf24;
-      color: #0f172a !important;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5);
-    }
+    .result-cta-btn.primary { background: var(--idx-orange); color: #0f172a !important; box-shadow: 0 6px 22px rgba(245, 158, 11, 0.35); }
+    .result-cta-btn.primary:hover { background: #fbbf24; color: #0f172a !important; transform: translateY(-1px); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5); }
     .result-cta-btn.primary:hover .arrow { transform: translateX(4px); }
-    .result-cta-btn.secondary {
-      background: transparent;
-      color: #fff !important;
-      border: 2px solid rgba(255,255,255,0.4);
-    }
-    .result-cta-btn.secondary:hover {
-      background: #fff;
-      color: #0f172a !important;
-      border-color: #fff;
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(255,255,255,0.15);
-    }
+    .result-cta-btn.secondary { background: transparent; color: #fff !important; border: 2px solid rgba(255,255,255,0.4); }
+    .result-cta-btn.secondary:hover { background: #fff; color: #0f172a !important; border-color: #fff; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(255,255,255,0.15); }
     .result-cta-btn.secondary:hover .arrow { transform: translateX(4px); }
     @media (max-width: 575px) {
       .result-cta { padding: 28px 0; }
@@ -241,23 +202,12 @@
     .wrong-tries-conclusion-title { font-size: 1.05rem; font-weight: 900; color: #92400e; margin: 0 0 6px; line-height: 1.5; }
     .wrong-tries-conclusion-desc { font-size: 0.92rem; color: #b45309; line-height: 1.65; margin: 0; word-break: keep-all; }
 
-    /* ═══ ⑦ action — main06 ═══ */
-    .action-flow-img { margin: 36px 0 30px; }
-    .action-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 30px; }
-    @media (max-width: 767px) { .action-steps { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
-    .action-step { padding: 18px 16px; background: #fff; border: 1px solid var(--idx-line); border-radius: 12px; }
-    .action-step-num { font-size: 0.78rem; font-weight: 800; color: var(--idx-accent); letter-spacing: 0.05em; font-family: 'Lato', sans-serif; margin-bottom: 8px; }
-    .action-step-title { font-size: 1rem; font-weight: 800; color: var(--idx-ink); margin: 0 0 6px; line-height: 1.4; word-break: keep-all; }
-    .action-step-desc { font-size: 0.85rem; color: var(--idx-sub); line-height: 1.55; margin: 0; word-break: keep-all; }
-    .action-final { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 22px; background: var(--idx-accent-soft); border-radius: 12px; font-size: 1.02rem; font-weight: 700; color: var(--idx-accent); text-align: center; word-break: keep-all; }
-    .action-final-check { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--idx-accent); color: #fff; font-size: 0.85rem; flex-shrink: 0; }
-
-    /* ═══ ⑧ versatile — main07 ═══ */
+    /* ═══ ⑦ versatile — main07 ═══ */
     .versatile-section { padding: 90px 0; background: var(--idx-soft); }
     .versatile-img { margin: 24px 0 0; }
     @media (max-width: 767px) { .versatile-section { padding: 60px 0; } }
 
-    /* ═══ ⑨ trust ═══ */
+    /* ═══ ⑧ trust ═══ */
     .trust-section { padding: 100px 0; background: #0f172a; color: #fff; }
     .trust-section .idx-title { color: #fff; }
     .trust-section .idx-desc { color: rgba(255,255,255,0.78); }
@@ -267,6 +217,96 @@
     .trust-stat-num { font-size: clamp(1.7rem, 2.5vw, 2.2rem); font-weight: 900; color: var(--idx-orange); line-height: 1; margin-bottom: 8px; font-family: 'Lato', 'Noto Sans KR', sans-serif; }
     .trust-stat-label { font-size: 0.84rem; color: rgba(255,255,255,0.72); line-height: 1.4; word-break: keep-all; }
     @media (max-width: 767px) { .trust-section { padding: 70px 0; } }
+
+    /* ═══ ⑨ action — main06 (통합 카드, v2026-05-05i) ═══ */
+    .action-card {
+      background: #fff;
+      border: 1px solid var(--idx-line);
+      border-radius: 20px;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
+      overflow: hidden;
+      margin: 36px 0 0;
+    }
+    .action-card-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0;
+    }
+    .action-card-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--idx-line);
+      background: #fff;
+    }
+    .action-step {
+      padding: 26px 22px;
+      border-right: 1px solid var(--idx-line);
+    }
+    .action-step:last-child { border-right: none; }
+    .action-step-num {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--idx-accent);
+      letter-spacing: 0.05em;
+      font-family: 'Lato', sans-serif;
+      margin-bottom: 8px;
+    }
+    .action-step-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--idx-ink);
+      margin: 0 0 6px;
+      line-height: 1.4;
+      word-break: keep-all;
+    }
+    .action-step-desc {
+      font-size: 0.85rem;
+      color: var(--idx-sub);
+      line-height: 1.55;
+      margin: 0;
+      word-break: keep-all;
+    }
+    .action-card-final {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 22px 24px;
+      background: var(--idx-accent);
+      color: #fff;
+      font-size: 1.02rem;
+      font-weight: 700;
+      text-align: center;
+      word-break: keep-all;
+      line-height: 1.5;
+    }
+    .action-card-final-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    @media (max-width: 767px) {
+      .action-card-steps { grid-template-columns: repeat(2, 1fr); }
+      .action-step { padding: 22px 18px; }
+      .action-step:nth-child(odd) { border-right: 1px solid var(--idx-line); }
+      .action-step:nth-child(even) { border-right: none; }
+      .action-step:nth-child(-n+2) { border-bottom: 1px solid var(--idx-line); }
+      .action-card-final { padding: 18px 20px; font-size: 0.95rem; }
+    }
+    @media (max-width: 480px) {
+      .action-card-steps { grid-template-columns: 1fr; }
+      .action-step { border-right: none !important; border-bottom: 1px solid var(--idx-line); }
+      .action-step:last-child { border-bottom: none; }
+    }
 
     /* ═══ ⑩ final-trigger ═══ */
     .final-trigger { padding: 120px 0; background: #fff; text-align: center; }
@@ -485,50 +525,7 @@
       </div>
     </section>
 
-    <!-- ⑦ action — main06 -->
-    <section class="idx-section alt">
-      <div class="container">
-        <div class="text-center" style="margin-bottom: 24px;">
-          <span class="idx-eyebrow">행동</span>
-          <h2 class="idx-title center">리포트는,<br><em>행동을 만듭니다</em></h2>
-          <p class="idx-desc center">확인하고, 정리하고, 실행하여<br>안전한 사업장을 만듭니다</p>
-        </div>
-
-        <div class="action-flow-img">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main06.png" alt="리포트 확인 → 현재 상태 점검 → 해야 할 일 정리 → 실행 및 관리" class="idx-section-img shadowed" loading="lazy">
-        </div>
-
-        <div class="action-steps">
-          <div class="action-step">
-            <div class="action-step-num">STEP 01</div>
-            <h4 class="action-step-title">리포트 확인</h4>
-            <p class="action-step-desc">적용 법령과 의무사항, 리스크 수준을 한눈에 확인합니다.</p>
-          </div>
-          <div class="action-step">
-            <div class="action-step-num">STEP 02</div>
-            <h4 class="action-step-title">현재 상태 점검</h4>
-            <p class="action-step-desc">우리 사업장의 현재 상태를 점검하고 우선순위를 확인합니다.</p>
-          </div>
-          <div class="action-step">
-            <div class="action-step-num">STEP 03</div>
-            <h4 class="action-step-title">해야 할 일 정리 및 지시</h4>
-            <p class="action-step-desc">필요한 조치를 정리하고 담당자를 지정하여 실행을 지시합니다.</p>
-          </div>
-          <div class="action-step">
-            <div class="action-step-num">STEP 04</div>
-            <h4 class="action-step-title">실행 및 관리</h4>
-            <p class="action-step-desc">현장에서 실행하고 기록하여 지속적으로 관리합니다.</p>
-          </div>
-        </div>
-
-        <div class="action-final">
-          <span class="action-final-check">✓</span>
-          <span>리포트 한 장으로, 우리 사업장의 안전 관리가 체계적으로 시작됩니다.</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ⑧ versatile — main07 -->
+    <!-- ⑦ versatile — main07 -->
     <section class="versatile-section">
       <div class="container">
         <div class="text-center">
@@ -541,7 +538,7 @@
       </div>
     </section>
 
-    <!-- ⑨ trust -->
+    <!-- ⑧ trust -->
     <section class="trust-section text-center">
       <div class="container">
         <span class="idx-eyebrow" style="background: rgba(245, 158, 11, 0.15); color: var(--idx-orange);">규모</span>
@@ -564,6 +561,49 @@
           <div class="trust-stat">
             <div class="trust-stat-num">35<span style="font-size:0.6em;">개</span></div>
             <div class="trust-stat-label">관계 부처<br>기준 반영</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑨ action — main06 (final-trigger 직전, 통합 카드) -->
+    <section class="idx-section alt">
+      <div class="container">
+        <div class="text-center" style="margin-bottom: 24px;">
+          <span class="idx-eyebrow">행동</span>
+          <h2 class="idx-title center">리포트는,<br><em>행동을 만듭니다</em></h2>
+          <p class="idx-desc center">확인하고, 정리하고, 실행하여<br>안전한 사업장을 만듭니다</p>
+        </div>
+
+        <div class="action-card">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main06.png" alt="리포트 확인 → 현재 상태 점검 → 해야 할 일 정리 → 실행 및 관리" class="action-card-img" loading="lazy">
+
+          <div class="action-card-steps">
+            <div class="action-step">
+              <div class="action-step-num">STEP 01</div>
+              <h4 class="action-step-title">리포트 확인</h4>
+              <p class="action-step-desc">적용 법령과 의무사항, 리스크 수준을 한눈에 확인합니다.</p>
+            </div>
+            <div class="action-step">
+              <div class="action-step-num">STEP 02</div>
+              <h4 class="action-step-title">현재 상태 점검</h4>
+              <p class="action-step-desc">우리 사업장의 현재 상태를 점검하고 우선순위를 확인합니다.</p>
+            </div>
+            <div class="action-step">
+              <div class="action-step-num">STEP 03</div>
+              <h4 class="action-step-title">해야 할 일 정리 및 지시</h4>
+              <p class="action-step-desc">필요한 조치를 정리하고 담당자를 지정하여 실행을 지시합니다.</p>
+            </div>
+            <div class="action-step">
+              <div class="action-step-num">STEP 04</div>
+              <h4 class="action-step-title">실행 및 관리</h4>
+              <p class="action-step-desc">현장에서 실행하고 기록하여 지속적으로 관리합니다.</p>
+            </div>
+          </div>
+
+          <div class="action-card-final">
+            <span class="action-card-final-check">✓</span>
+            <span>리포트 한 장으로, 우리 사업장의 안전 관리가 체계적으로 시작됩니다.</span>
           </div>
         </div>
       </div>
