@@ -110,13 +110,113 @@
       .compare-img img { height: 220px; }
     }
 
-    /* 풀폭 와이드 이미지 (factory2.png 등) */
+    /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) */
     .tai-wide-image {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 18px;
       box-shadow: 0 14px 36px rgba(15, 23, 42, 0.10);
+    }
+
+    /* "그래서 이렇게 해결하려고 합니다" 섹션 (factory3.png + 4 불릿 + 결론) */
+    .factory-options { padding: 96px 0; background: #f9f9f9; }
+    .factory-options .section-title { margin-bottom: 28px; }
+    .factory-options .tai-wide-image { margin-bottom: 20px; box-shadow: none; border-radius: 14px; }
+    .factory-bullet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .factory-bullet-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .factory-bullet-card .bc-icon {
+      font-size: 1.5rem;
+      color: #059669;
+      line-height: 1;
+    }
+    .factory-bullet-card ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .factory-bullet-card ul li {
+      display: flex;
+      gap: 7px;
+      font-size: .86rem;
+      color: #475569;
+      line-height: 1.55;
+      align-items: flex-start;
+      word-break: keep-all;
+    }
+    .factory-bullet-card ul li::before {
+      content: '·';
+      color: #059669;
+      font-weight: 900;
+      font-size: 1.1rem;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+    .factory-arrow-wrap { text-align: center; margin: 36px 0 28px; }
+    .factory-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      color: #059669;
+      font-size: 1.2rem;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(15,23,42,.06);
+    }
+    .factory-conclusion {
+      background: #fff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 26px 32px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      max-width: 920px;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(15,23,42,.04);
+    }
+    .factory-conclusion .fc-icon {
+      font-size: 2.2rem;
+      color: #059669;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .factory-conclusion h4 {
+      font-size: 1.18rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 6px;
+      letter-spacing: -.01em;
+    }
+    .factory-conclusion p {
+      font-size: .9rem; color: #64748b;
+      margin: 0; line-height: 1.55;
+    }
+    @media (max-width: 991px) {
+      .factory-options { padding: 64px 0; }
+      .factory-bullet-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 575px) {
+      .factory-bullet-grid { grid-template-columns: 1fr; }
+      .factory-conclusion { flex-direction: column; align-items: flex-start; padding: 22px 24px; gap: 14px; }
     }
   </style>
 </head>
@@ -199,6 +299,68 @@
            alt="사고는 몰라서가 아니라, 놓쳐서 발생합니다 — 공정·설비·작업자·기록 4가지 구조적 문제"
            class="tai-wide-image"
            loading="lazy">
+    </div>
+  </section>
+
+  <!-- 그래서 이렇게 해결하려고 합니다 (factory3.png + 4 불릿 + 결론) -->
+  <section class="factory-options">
+    <div class="container">
+      <div class="section-title text-center">
+        <h2 class="title">그래서 이렇게 해결하려고 합니다</h2>
+        <p>현장에서는 다양한 방법을 시도하지만, 근본적인 해결에는 한계가 있습니다.</p>
+      </div>
+
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory/factory3.png"
+           alt="01 엑셀로 더 관리해보고 / 02 인력을 더 투입해보고 / 03 외부 컨설팅을 받아보고 / 04 결국 내가 다시 챙기게 됩니다"
+           class="tai-wide-image"
+           loading="lazy">
+
+      <div class="factory-bullet-grid">
+        <div class="factory-bullet-card">
+          <div class="bc-icon">📊</div>
+          <ul>
+            <li>점검표와 현황을 엑셀로 관리</li>
+            <li>수식과 파일이 복잡해짐</li>
+            <li>공유와 실시간 관리가 어려움</li>
+          </ul>
+        </div>
+        <div class="factory-bullet-card">
+          <div class="bc-icon">👥</div>
+          <ul>
+            <li>담당자를 늘리고 역할 분담</li>
+            <li>교육과 인수인계에 시간 소요</li>
+            <li>담당자 변경 시 관리 공백 발생</li>
+          </ul>
+        </div>
+        <div class="factory-bullet-card">
+          <div class="bc-icon">💼</div>
+          <ul>
+            <li>진단과 보고서는 받지만</li>
+            <li>현장에 적용하기 어려움</li>
+            <li>지속적인 관리와 연계가 안 됨</li>
+          </ul>
+        </div>
+        <div class="factory-bullet-card">
+          <div class="bc-icon">😞</div>
+          <ul>
+            <li>이상 발생 시 직접 확인</li>
+            <li>보고서와 기록을 다시 정리</li>
+            <li>문제는 반복되고, 시간은 부족</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="factory-arrow-wrap">
+        <div class="factory-arrow">↓</div>
+      </div>
+
+      <div class="factory-conclusion">
+        <span class="fc-icon">📋</span>
+        <div>
+          <h4>방법은 바뀌어도, 구조는 그대로입니다.</h4>
+          <p>근본적인 해결을 위해서는 관리 방식의 전환이 필요합니다.</p>
+        </div>
+      </div>
     </div>
   </section>
 
