@@ -70,7 +70,7 @@
     }
     @media (max-width: 400px) { .idx-hero-new-title { font-size: 1.65rem; } }
 
-    /* ═══ 공통 토큰 (v2026-05-05e) ═══ */
+    /* ═══ 공통 토큰 (v2026-05-05f) ═══ */
     :root {
       --idx-ink: #0f172a;
       --idx-sub: #475569;
@@ -116,13 +116,67 @@
     @media (max-width: 575px) { .problem-thumb { height: 320px; } }
     @media (max-width: 767px) { .problem-section { padding: 64px 0; } }
 
-    /* ═══ ② awakening — main03 (좌이미지/우텍스트) ═══ */
-    .awakening-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 56px; align-items: center; }
-    @media (max-width: 991px) { .awakening-grid { grid-template-columns: 1fr; gap: 36px; } }
-    .awakening-img-wrap { position: relative; }
-    .awakening-img-wrap img { width: 100%; height: auto; display: block; border-radius: 18px; }
-    .awakening-text .idx-title em { color: var(--idx-accent); }
-    .awakening-divider { width: 60px; height: 3px; background: var(--idx-accent); border-radius: 2px; margin: 18px 0 22px; }
+    /* ═══ 풀폭 텍스트 오버레이 패턴 (v2026-05-05f) ═══
+       이미지는 width:100%로 깔고, absolute 텍스트 박스를 이미지의 빈 영역 위에 배치.
+       모바일(≤991px)에서는 absolute 해제, 이미지 위 + 텍스트 아래 stacked. */
+    .bgtext { position: relative; width: 100%; background: #fff; }
+    .bgtext.alt-bg { background: var(--idx-soft); }
+    .bgtext-img { width: 100%; height: auto; display: block; }
+    .bgtext-overlay { position: absolute; inset: 0; display: flex; align-items: center; pointer-events: none; }
+    .bgtext-overlay > .container { width: 100%; pointer-events: none; }
+    .bgtext-box { pointer-events: auto; max-width: 480px; }
+    .bgtext.text-right .bgtext-box { margin-left: auto; }
+    .bgtext.text-left .bgtext-box { margin-right: auto; }
+
+    /* awakening (main03) — 가로 4:1 배너, 우측 텍스트 */
+    .bgtext.awakening .bgtext-box { max-width: 460px; padding-right: 16px; }
+    .bgtext.awakening .idx-title { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 12px; }
+    .bgtext.awakening .idx-desc { font-size: 0.95rem; line-height: 1.7; }
+    .bgtext-divider { width: 56px; height: 3px; background: var(--idx-accent); border-radius: 2px; margin: 14px 0 18px; }
+
+    /* result (main05) — 가로 5:3, 좌측 텍스트 + 4 포인트 */
+    .bgtext.result .bgtext-box { max-width: 500px; padding-left: 12px; }
+    .bgtext.result .idx-title { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
+    .result-points { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
+    .result-point { display: flex; align-items: flex-start; gap: 12px; }
+    .result-point-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; background: var(--idx-accent-soft); color: var(--idx-accent); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+    .result-point-body { flex: 1; }
+    .result-point-title { font-size: 0.96rem; font-weight: 800; color: var(--idx-ink); margin: 0 0 2px; }
+    .result-point-desc { font-size: 0.84rem; color: var(--idx-sub); line-height: 1.55; margin: 0; word-break: keep-all; }
+
+    /* illusion (main10) — 가로 16:8.4, 좌측 텍스트 + 4 태그 */
+    .bgtext.illusion .bgtext-box { max-width: 520px; padding-left: 12px; }
+    .illusion-block { padding: 0; }
+    .illusion-block + .illusion-block { border-top: 1px solid var(--idx-line); margin-top: 18px; padding-top: 18px; }
+    .illusion-badge { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; font-size: 1.2rem; margin-bottom: 10px; font-weight: 800; }
+    .illusion-badge.ok { background: var(--idx-ok-soft); color: var(--idx-ok); }
+    .illusion-badge.warn { background: var(--idx-warn-soft); color: var(--idx-warn); }
+    .illusion-block-title { font-size: clamp(1.2rem, 1.8vw, 1.5rem); font-weight: 900; line-height: 1.35; letter-spacing: -0.02em; color: var(--idx-ink); margin: 0 0 6px; word-break: keep-all; }
+    .illusion-block-title em { font-style: normal; color: var(--idx-accent); }
+    .illusion-block-desc { color: var(--idx-sub); font-size: 0.92rem; line-height: 1.65; word-break: keep-all; margin: 0; }
+    .illusion-tags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+    .illusion-tag { padding: 12px 8px; background: #fff; border: 1px solid var(--idx-line); border-radius: 10px; text-align: center; font-size: 0.78rem; font-weight: 700; color: var(--idx-ink); line-height: 1.4; word-break: keep-all; }
+
+    /* 모바일 — 풀폭 오버레이 해제 */
+    @media (max-width: 991px) {
+      .bgtext-overlay {
+        position: static;
+        padding: 36px 0 56px;
+      }
+      .bgtext-overlay > .container { padding-left: 20px; padding-right: 20px; }
+      .bgtext-box {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .bgtext.awakening .idx-title,
+      .bgtext.result .idx-title,
+      .bgtext.illusion .illusion-block-title { font-size: 1.5rem; }
+      .illusion-tags { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 575px) {
+      .illusion-tags { grid-template-columns: repeat(2, 1fr); }
+    }
 
     /* ═══ ③ solution — main04 (풀폭 이미지 + 4단계 + 4가치) ═══ */
     .solution-flow-img { margin: 36px 0 30px; }
@@ -135,31 +189,6 @@
     @media (max-width: 767px) { .solution-values { grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 20px 16px; } }
     .solution-value { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--idx-ink); }
     .solution-value .value-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--idx-accent-soft); color: var(--idx-accent); font-size: 0.95rem; flex-shrink: 0; }
-
-    /* ═══ ④ result — main05 (좌텍스트/우이미지) ═══ */
-    .result-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; }
-    @media (max-width: 991px) { .result-grid { grid-template-columns: 1fr; gap: 36px; } }
-    .result-points { list-style: none; padding: 0; margin: 26px 0 0; display: grid; gap: 14px; }
-    .result-point { display: flex; align-items: flex-start; gap: 14px; }
-    .result-point-icon { flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px; background: var(--idx-accent-soft); color: var(--idx-accent); display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
-    .result-point-body { flex: 1; }
-    .result-point-title { font-size: 1rem; font-weight: 800; color: var(--idx-ink); margin: 0 0 3px; }
-    .result-point-desc { font-size: 0.9rem; color: var(--idx-sub); line-height: 1.55; margin: 0; word-break: keep-all; }
-
-    /* ═══ ⑤ illusion — main10 (좌텍스트/우이미지, 두 영역) ═══ */
-    .illusion-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; }
-    @media (max-width: 991px) { .illusion-grid { grid-template-columns: 1fr; gap: 28px; } }
-    .illusion-block { padding: 24px 0; }
-    .illusion-block + .illusion-block { border-top: 1px solid var(--idx-line); margin-top: 8px; }
-    .illusion-badge { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; font-size: 1.4rem; margin-bottom: 14px; }
-    .illusion-badge.ok { background: var(--idx-ok-soft); color: var(--idx-ok); }
-    .illusion-badge.warn { background: var(--idx-warn-soft); color: var(--idx-warn); }
-    .illusion-block-title { font-size: clamp(1.3rem, 1.9vw, 1.6rem); font-weight: 900; line-height: 1.35; letter-spacing: -0.02em; color: var(--idx-ink); margin: 0 0 8px; word-break: keep-all; }
-    .illusion-block-title em { font-style: normal; color: var(--idx-accent); }
-    .illusion-block-desc { color: var(--idx-sub); font-size: 0.96rem; line-height: 1.7; word-break: keep-all; margin: 0; }
-    .illusion-tags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
-    @media (max-width: 575px) { .illusion-tags { grid-template-columns: repeat(2, 1fr); } }
-    .illusion-tag { padding: 14px 10px; background: #fff; border: 1px solid var(--idx-line); border-radius: 10px; text-align: center; font-size: 0.82rem; font-weight: 700; color: var(--idx-ink); line-height: 1.4; word-break: keep-all; }
 
     /* ═══ ⑥ wrong-tries — main08 (텍스트 박힌 풀폭 이미지) ═══ */
     .wrong-tries-section .idx-section-img { margin: 30px 0 24px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12); }
@@ -265,17 +294,15 @@
       </div>
     </section>
 
-    <!-- ② awakening — main03 -->
-    <section class="idx-section">
-      <div class="container">
-        <div class="awakening-grid">
-          <div class="awakening-img-wrap">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main03.png" alt="법령 앞에서 고민하는 안전관리자 — 그래서 확인해야 합니다" class="idx-section-img" loading="lazy">
-          </div>
-          <div class="awakening-text">
+    <!-- ② awakening — main03 풀폭 + 우측 텍스트 오버레이 -->
+    <section class="bgtext awakening text-right">
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main03.png" alt="법령 앞에서 고민하는 안전관리자 — 그래서 확인해야 합니다" class="bgtext-img" loading="lazy">
+      <div class="bgtext-overlay">
+        <div class="container">
+          <div class="bgtext-box">
             <span class="idx-eyebrow">현실</span>
             <h2 class="idx-title">그래서,<br><em>확인해야 합니다</em></h2>
-            <div class="awakening-divider"></div>
+            <div class="bgtext-divider"></div>
             <p class="idx-desc">법은 모른다고 피해가지 않습니다.<br>하지만 확인하면, 대비할 수 있습니다.<br><br>TAI 법령진단은 사업장 정보 한 번으로 적용 법령을 자동 정리합니다.</p>
           </div>
         </div>
@@ -323,11 +350,12 @@
       </div>
     </section>
 
-    <!-- ④ result — main05 -->
-    <section class="idx-section">
-      <div class="container">
-        <div class="result-grid">
-          <div>
+    <!-- ④ result — main05 풀폭 + 좌측 텍스트 오버레이 -->
+    <section class="bgtext result text-left">
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main05.png" alt="법령의무진단 리포트 샘플 — 선임·점검·조치·보고 의무 + 리스크 분포" class="bgtext-img" loading="lazy">
+      <div class="bgtext-overlay">
+        <div class="container">
+          <div class="bgtext-box">
             <span class="idx-eyebrow">리포트</span>
             <h2 class="idx-title">결과는<br><em>바로 사용할 수 있습니다</em></h2>
             <p class="idx-desc">복잡한 법령과 의무사항을 체계적으로 정리해<br>실무에 바로 활용할 수 있는 리포트로 제공합니다.</p>
@@ -363,18 +391,16 @@
               </li>
             </ul>
           </div>
-          <div>
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main05.png" alt="법령의무진단 리포트 샘플 — 선임·점검·조치·보고 의무 + 리스크 분포" class="idx-section-img shadowed" loading="lazy">
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- ⑤ illusion — main10 -->
-    <section class="idx-section alt">
-      <div class="container">
-        <div class="illusion-grid">
-          <div>
+    <!-- ⑤ illusion — main10 풀폭 + 좌측 텍스트 오버레이 -->
+    <section class="bgtext illusion text-left alt-bg">
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main10.png" alt="확인 결과를 받았지만 여전히 안전관리 업무로 고민하는 안전관리자" class="bgtext-img" loading="lazy">
+      <div class="bgtext-overlay">
+        <div class="container">
+          <div class="bgtext-box">
             <span class="idx-eyebrow">중요한 차이</span>
             <div class="illusion-block">
               <div class="illusion-badge ok">✓</div>
@@ -392,9 +418,6 @@
                 <div class="illusion-tag">기록 및<br>지속 관리</div>
               </div>
             </div>
-          </div>
-          <div>
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main10.png" alt="확인 결과를 받았지만 여전히 안전관리 업무로 고민하는 안전관리자" class="idx-section-img" loading="lazy">
           </div>
         </div>
       </div>
