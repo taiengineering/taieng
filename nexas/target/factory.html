@@ -109,6 +109,15 @@
       .tai-process-image img { height: 240px; }
       .compare-img img { height: 220px; }
     }
+
+    /* 풀폭 와이드 이미지 (factory2.png 등) */
+    .tai-wide-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.10);
+    }
   </style>
 </head>
 <body class="sc5">
@@ -186,37 +195,15 @@
   <!-- 문제 구조 -->
   <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
     <div class="container">
-      <div class="section-title text-center">
+      <div class="section-title text-center mb-4">
         <h2 class="title">사고는 몰라서가 아니라, 놓쳐서 발생합니다</h2>
         <p>현장의 문제는 대부분 개인 역량이 아니라 관리 구조에서 시작됩니다.</p>
       </div>
 
-      <div class="row g-4 mt-3">
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>공정은 많은데</h5>
-            <p>안전관리자가 모든 공정을 직접 볼 수 없습니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>설비는 많은데</h5>
-            <p>설비별 점검 주기와 법정 의무가 서로 다릅니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>작업자는 많은데</h5>
-            <p>작업자가 안전관리 흐름에 참여하지 않습니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>기록은 있는데</h5>
-            <p>이상, 조치, 증빙이 하나로 연결되지 않습니다.</p>
-          </div>
-        </div>
-      </div>
+      <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory/factory2.png"
+           alt="공정은 많은데 안전관리자가 모든 공정을 직접 볼 수 없습니다 / 설비는 많은데 점검 주기와 법정 의무가 다릅니다 / 작업자는 많은데 안전관리 흐름에 참여하지 않습니다 / 기록은 있는데 이상·조치·증빙이 하나로 연결되지 않습니다"
+           class="tai-wide-image"
+           loading="lazy">
     </div>
   </section>
 
