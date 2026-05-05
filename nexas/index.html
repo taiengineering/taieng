@@ -87,7 +87,6 @@
     .idx-section { padding: 100px 0; }
     .idx-section.alt { background: var(--idx-soft); }
     .idx-section.dark { background: #0f172a; color: #fff; }
-    .idx-eyebrow { display: inline-block; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.18em; color: var(--idx-accent); text-transform: uppercase; margin-bottom: 14px; padding: 5px 12px; background: var(--idx-accent-soft); border-radius: 999px; }
     .idx-title { font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 900; line-height: 1.32; letter-spacing: -0.025em; color: var(--idx-ink); margin: 0 0 18px; word-break: keep-all; }
     .idx-title em { font-style: normal; color: var(--idx-accent); }
     .idx-title.center { text-align: center; }
@@ -129,7 +128,7 @@
     .bgtext.awakening .bgtext-box { max-width: 460px; padding-right: 16px; }
     .bgtext.awakening .idx-title { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 12px; }
     .bgtext.awakening .idx-desc { font-size: 0.95rem; line-height: 1.7; }
-    .bgtext-divider { width: 56px; height: 3px; background: var(--idx-accent); border-radius: 2px; margin: 14px 0 18px; }
+    .bgtext-divider { width: 56px; height: 3px; background: var(--idx-accent); border-radius: 2px; margin: 0 0 18px; }
 
     .bgtext.result .bgtext-box { max-width: 500px; padding-left: 12px; }
     .bgtext.result .idx-title { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
@@ -183,7 +182,7 @@
     }
 
     /* ═══ ③ solution — main04 ═══ */
-    .solution-flow-img { margin: 36px 0 30px; }
+    .solution-flow-img { margin: 0 0 30px; }
     .solution-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
     @media (max-width: 767px) { .solution-steps { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
     .solution-step { text-align: center; padding: 18px 12px; }
@@ -194,13 +193,55 @@
     .solution-value { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--idx-ink); }
     .solution-value .value-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--idx-accent-soft); color: var(--idx-accent); font-size: 0.95rem; flex-shrink: 0; }
 
-    /* ═══ wrong-tries ═══ */
-    .wrong-tries-section .idx-section-img { margin: 30px 0 24px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12); }
-    .wrong-tries-conclusion { padding: 26px 28px; background: #fff8e6; border: 1px solid #fcd34d; border-radius: 14px; display: flex; gap: 16px; align-items: flex-start; }
-    .wrong-tries-conclusion-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--idx-orange); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; }
-    .wrong-tries-conclusion-body { flex: 1; }
-    .wrong-tries-conclusion-title { font-size: 1.05rem; font-weight: 900; color: #92400e; margin: 0 0 6px; line-height: 1.5; }
-    .wrong-tries-conclusion-desc { font-size: 0.92rem; color: #b45309; line-height: 1.65; margin: 0; word-break: keep-all; }
+    /* ═══ wrong-tries — 다크 임팩트 결론 (v2026-05-05j) ═══ */
+    .wrong-tries-section .idx-section-img { margin: 0 0 30px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12); }
+    .wrong-tries-conclusion {
+      padding: clamp(36px, 5vw, 56px) clamp(24px, 4vw, 48px);
+      background: #0f172a;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .wrong-tries-conclusion::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 4px;
+      background: var(--idx-orange);
+      border-radius: 0 0 4px 4px;
+    }
+    .wrong-tries-conclusion-headline {
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+      margin: 0 0 18px;
+      word-break: keep-all;
+    }
+    .wrong-tries-conclusion-headline em {
+      color: var(--idx-orange);
+      font-style: normal;
+    }
+    .wrong-tries-conclusion-body {
+      font-size: clamp(0.92rem, 1.05vw, 1rem);
+      color: rgba(255,255,255,0.78);
+      line-height: 1.8;
+      max-width: 760px;
+      margin: 0 auto;
+      word-break: keep-all;
+    }
+    .wrong-tries-conclusion-body strong {
+      color: #fff;
+      font-weight: 700;
+    }
+    @media (max-width: 575px) {
+      .wrong-tries-conclusion-headline { font-size: 1.45rem; }
+    }
 
     /* ═══ versatile — main07 ═══ */
     .versatile-section { padding: 90px 0; background: var(--idx-soft); }
@@ -225,7 +266,7 @@
       border-radius: 20px;
       box-shadow: 0 18px 50px rgba(15, 23, 42, 0.10);
       overflow: hidden;
-      margin: 36px 0 0;
+      margin: 0 0 0;
     }
     .action-card-img { width: 100%; height: auto; display: block; border-radius: 0; }
     .action-card-steps { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--idx-line); background: #fff; }
@@ -325,7 +366,6 @@
       <div class="bgtext-overlay">
         <div class="container">
           <div class="bgtext-box">
-            <span class="idx-eyebrow">현실</span>
             <h2 class="idx-title">그래서,<br><em>확인해야 합니다</em></h2>
             <div class="bgtext-divider"></div>
             <p class="idx-desc">법은 모른다고 피해가지 않습니다.<br>하지만 확인하면, 대비할 수 있습니다.<br><br>TAI 법령진단은 사업장 정보 한 번으로 적용 법령을 자동 정리합니다.</p>
@@ -337,8 +377,7 @@
     <!-- ③ solution — main04 -->
     <section class="idx-section alt">
       <div class="container">
-        <div class="text-center" style="margin-bottom: 24px;">
-          <span class="idx-eyebrow">TAI 작동 방식</span>
+        <div class="text-center" style="margin-bottom: 36px;">
           <h2 class="idx-title center">그래서, 우리는<br><em>이렇게 해결합니다</em></h2>
           <p class="idx-desc center">정보 입력부터 보고서 완성까지<br>법령 분석을 자동으로 처리합니다</p>
         </div>
@@ -369,7 +408,6 @@
       <div class="bgtext-overlay">
         <div class="container">
           <div class="bgtext-box">
-            <span class="idx-eyebrow">리포트</span>
             <h2 class="idx-title">결과는<br><em>바로 사용할 수 있습니다</em></h2>
             <p class="idx-desc">복잡한 법령과 의무사항을 체계적으로 정리해<br>실무에 바로 활용할 수 있는 리포트로 제공합니다.</p>
 
@@ -411,8 +449,7 @@
     <!-- ⑤ action — main06 (result 직후, 통합 카드) -->
     <section class="idx-section alt">
       <div class="container">
-        <div class="text-center" style="margin-bottom: 24px;">
-          <span class="idx-eyebrow">행동</span>
+        <div class="text-center" style="margin-bottom: 36px;">
           <h2 class="idx-title center">리포트는,<br><em>행동을 만듭니다</em></h2>
           <p class="idx-desc center">확인하고, 정리하고, 실행하여<br>안전한 사업장을 만듭니다</p>
         </div>
@@ -467,7 +504,6 @@
       <div class="bgtext-overlay">
         <div class="container">
           <div class="bgtext-box">
-            <span class="idx-eyebrow">중요한 차이</span>
             <div class="illusion-block">
               <div class="illusion-badge ok">✓</div>
               <h3 class="illusion-block-title">확인으로 <em>안심은 됩니다</em></h3>
@@ -489,11 +525,10 @@
       </div>
     </section>
 
-    <!-- ⑦ wrong-tries — main08 -->
+    <!-- ⑦ wrong-tries — main08 + 다크 임팩트 결론 -->
     <section class="idx-section wrong-tries-section">
       <div class="container">
-        <div class="text-center" style="margin-bottom: 24px;">
-          <span class="idx-eyebrow">현실의 시도</span>
+        <div class="text-center" style="margin-bottom: 36px;">
           <h2 class="idx-title center">이렇게 <em>해결하려고</em> 합니다</h2>
           <p class="idx-desc center">더 나은 방법을 찾기 위해 많은 노력을 기울입니다</p>
         </div>
@@ -501,11 +536,8 @@
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main08.png" alt="안전관리 잘못된 시도 4가지 — 담당자 늘리기, 엑셀 정교화, 외주, 결국 혼자 챙기기" class="idx-section-img" loading="lazy">
 
         <div class="wrong-tries-conclusion">
-          <span class="wrong-tries-conclusion-icon">!</span>
-          <div class="wrong-tries-conclusion-body">
-            <h4 class="wrong-tries-conclusion-title">사람을 늘리거나, 외주를 맡기거나, 엑셀을 정교하게 만들어도</h4>
-            <p class="wrong-tries-conclusion-desc">결국 안전관리의 모든 책임과 시간 부담은 안전관리자에게 돌아옵니다.<br>TAI Safe는 사람을 대체하지 않고, <strong>업무를 분산하고 자동화</strong>합니다.</p>
-          </div>
+          <h3 class="wrong-tries-conclusion-headline">그래서, <em>TAI SAFE</em>를 만들었습니다</h3>
+          <p class="wrong-tries-conclusion-body">사람을 늘리거나, 외주를 맡기거나, 엑셀을 정교하게 만들어도<br>결국 안전관리의 모든 책임과 시간 부담은 안전관리자에게 돌아옵니다.<br>TAI Safe는 사람을 대체하지 않고, <strong>업무를 분산하고 자동화</strong>합니다.</p>
         </div>
       </div>
     </section>
@@ -514,7 +546,6 @@
     <section class="versatile-section">
       <div class="container">
         <div class="text-center">
-          <span class="idx-eyebrow">현장</span>
           <h2 class="idx-title center">사무실에서, 현장에서, 모바일에서<br><em>모든 환경</em>에서 작동합니다</h2>
         </div>
         <div class="versatile-img">
@@ -526,7 +557,6 @@
     <!-- ⑨ trust -->
     <section class="trust-section text-center">
       <div class="container">
-        <span class="idx-eyebrow" style="background: rgba(245, 158, 11, 0.15); color: var(--idx-orange);">규모</span>
         <h2 class="idx-title">이 범위는<br>사람이 관리할 수 없습니다</h2>
         <p class="idx-desc">TAI는 35개 부처 기준을 자동으로 반영합니다</p>
 
