@@ -113,13 +113,12 @@
   }
   .diag-hero .btn-hero-ghost:hover { color: #fff; }
 
-  /* ── 본문 섹션 공통 (좌:콘티+설명 / 우:일러스트) ── */
+  /* ── 본문 섹션 공통 (좌:콘티+설명 col-4 / 우:일러스트 col-8 — v2026-05-05) ── */
   .diag-section { padding: 96px 0; background: #fff; border-top: 1px solid var(--border); }
   .diag-section.alt { background: var(--gray-bg); }
   .diag-section .diag-side {
-    padding-top: 4px;
     padding-left: 24px;
-    padding-right: 12px;
+    padding-right: 28px;
   }
   .diag-section .diag-title {
     font-size: clamp(1.35rem, 2.5vw, 1.8rem);
@@ -288,7 +287,6 @@
   @media (max-width: 991px) {
     .diag-section { padding: 64px 0; }
     .diag-section .diag-side {
-      padding-top: 0;
       padding-left: 0;
       padding-right: 0;
       margin-bottom: 28px;
@@ -434,14 +432,14 @@
 <!-- ② diagnosis1.png — 4가지 답답한 현실 -->
 <section class="diag-section">
   <div class="container">
-    <div class="row align-items-start g-4">
-      <div class="col-lg-3">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
         <div class="diag-side">
           <h2 class="diag-title">안전관리는 늘<br>같은 자리에 멈춰 있습니다</h2>
           <p class="diag-aside">법령은 매년 개정되고 점검 대상은 계속 늘어납니다. 그러나 현장의 관리는 여전히 사람의 기억과 엑셀에 의존하고 있습니다.</p>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis1.png" alt="법령을 직접 찾아야 하고, 엑셀로 정리하며, 빠지는 항목이 생기고, 점검 대응이 불안한 현실" class="diag-illust-img" loading="lazy">
       </div>
     </div>
@@ -451,14 +449,14 @@
 <!-- ③ diagnosis2.png — 입력 → 분석 → 결과 -->
 <section class="diag-section alt">
   <div class="container">
-    <div class="row align-items-start g-4">
-      <div class="col-lg-3">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
         <div class="diag-side">
           <h2 class="diag-title">사업장 정보 하나로<br>의무가 정리됩니다</h2>
           <p class="diag-aside">TAI 법령엔진은 입력값을 기준으로 적용 법령을 자동 매칭하고, 사업장이 실제 이행해야 할 의무를 구조화된 형태로 도출합니다.</p>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis2.png" alt="1. 정보 입력 → 2. 법령 분석 → 3. 결과 제공" class="diag-illust-img" loading="lazy">
       </div>
     </div>
@@ -494,14 +492,14 @@
 <!-- ⑥ diagnosis5.png — 사용 시점 -->
 <section class="diag-section">
   <div class="container">
-    <div class="row align-items-start g-4">
-      <div class="col-lg-3">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
         <div class="diag-side">
           <h2 class="diag-title">이런 분들이<br>사용합니다</h2>
           <p class="diag-aside">관할 점검을 앞둔 안전관리자, 내부 점검 계획을 세우는 담당자, 신규 사업장의 안전관리 체계를 처음부터 잡으려는 경영진.</p>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/diagnosis/diagnosis5.png" alt="점검 준비 / 내부 점검 계획 / 초기 안전관리 구축" class="diag-illust-img" loading="lazy">
       </div>
     </div>
@@ -511,14 +509,14 @@
 <!-- ⑦ 통계 4카드 + 카운트업 + 하단 메시지 밴드 -->
 <section class="diag-section alt">
   <div class="container">
-    <div class="row align-items-start g-4">
-      <div class="col-lg-3">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-4">
         <div class="diag-side">
           <h2 class="diag-title">분석 기준은<br>법령 그 자체입니다</h2>
           <p class="diag-aside">임의로 만든 체크리스트가 아닙니다. 실제 시행 중인 산업안전보건법·중대재해처벌법·건축법 등 관련 법령을 직접 매핑한 결과입니다. 법령이 개정되면 진단 기준도 함께 업데이트됩니다.</p>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-8">
         <div class="stat-grid">
           <div class="stat-card">
             <div class="sc-eyebrow">산업안전보건법 외</div>
