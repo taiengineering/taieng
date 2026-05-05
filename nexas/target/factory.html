@@ -110,11 +110,13 @@
       .compare-img img { height: 220px; }
     }
 
-    /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) */
+    /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) — max-width 1040px 가운데 정렬 (좌우 여백 확보) */
     .tai-wide-image {
       width: 100%;
+      max-width: 1040px;
       height: auto;
       display: block;
+      margin: 0 auto;
       border-radius: 18px;
       box-shadow: 0 14px 36px rgba(15, 23, 42, 0.10);
     }
@@ -127,6 +129,8 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
+      max-width: 1040px;
+      margin: 0 auto;
     }
     .factory-bullet-card {
       background: #fff;
