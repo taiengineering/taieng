@@ -116,9 +116,7 @@
     @media (max-width: 575px) { .problem-thumb { height: 320px; } }
     @media (max-width: 767px) { .problem-section { padding: 64px 0; } }
 
-    /* ═══ 풀폭 텍스트 오버레이 패턴 (v2026-05-05f) ═══
-       이미지는 width:100%로 깔고, absolute 텍스트 박스를 이미지의 빈 영역 위에 배치.
-       모바일(≤991px)에서는 absolute 해제, 이미지 위 + 텍스트 아래 stacked. */
+    /* ═══ 풀폭 텍스트 오버레이 패턴 (v2026-05-05f) ═══ */
     .bgtext { position: relative; width: 100%; background: #fff; }
     .bgtext.alt-bg { background: var(--idx-soft); }
     .bgtext-img { width: 100%; height: auto; display: block; }
@@ -128,13 +126,11 @@
     .bgtext.text-right .bgtext-box { margin-left: auto; }
     .bgtext.text-left .bgtext-box { margin-right: auto; }
 
-    /* awakening (main03) — 가로 4:1 배너, 우측 텍스트 */
     .bgtext.awakening .bgtext-box { max-width: 460px; padding-right: 16px; }
     .bgtext.awakening .idx-title { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 12px; }
     .bgtext.awakening .idx-desc { font-size: 0.95rem; line-height: 1.7; }
     .bgtext-divider { width: 56px; height: 3px; background: var(--idx-accent); border-radius: 2px; margin: 14px 0 18px; }
 
-    /* result (main05) — 가로 5:3, 좌측 텍스트 + 4 포인트 */
     .bgtext.result .bgtext-box { max-width: 500px; padding-left: 12px; }
     .bgtext.result .idx-title { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
     .result-points { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 12px; }
@@ -144,7 +140,6 @@
     .result-point-title { font-size: 0.96rem; font-weight: 800; color: var(--idx-ink); margin: 0 0 2px; }
     .result-point-desc { font-size: 0.84rem; color: var(--idx-sub); line-height: 1.55; margin: 0; word-break: keep-all; }
 
-    /* illusion (main10) — 가로 16:8.4, 좌측 텍스트 + 4 태그 */
     .bgtext.illusion .bgtext-box { max-width: 520px; padding-left: 12px; }
     .illusion-block { padding: 0; }
     .illusion-block + .illusion-block { border-top: 1px solid var(--idx-line); margin-top: 18px; padding-top: 18px; }
@@ -157,18 +152,10 @@
     .illusion-tags { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
     .illusion-tag { padding: 12px 8px; background: #fff; border: 1px solid var(--idx-line); border-radius: 10px; text-align: center; font-size: 0.78rem; font-weight: 700; color: var(--idx-ink); line-height: 1.4; word-break: keep-all; }
 
-    /* 모바일 — 풀폭 오버레이 해제 */
     @media (max-width: 991px) {
-      .bgtext-overlay {
-        position: static;
-        padding: 36px 0 56px;
-      }
+      .bgtext-overlay { position: static; padding: 36px 0 56px; }
       .bgtext-overlay > .container { padding-left: 20px; padding-right: 20px; }
-      .bgtext-box {
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
+      .bgtext-box { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
       .bgtext.awakening .idx-title,
       .bgtext.result .idx-title,
       .bgtext.illusion .illusion-block-title { font-size: 1.5rem; }
@@ -178,7 +165,72 @@
       .illusion-tags { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* ═══ ③ solution — main04 (풀폭 이미지 + 4단계 + 4가치) ═══ */
+    /* ═══ result-cta — result 섹션 직후 CTA 한 줄 (v2026-05-05g) ═══ */
+    .result-cta {
+      padding: 36px 0;
+      background: #fff;
+      border-top: 1px solid var(--idx-line);
+      border-bottom: 1px solid var(--idx-line);
+    }
+    .result-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .result-cta-msg {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--idx-ink);
+      margin: 0 8px 0 0;
+      word-break: keep-all;
+    }
+    .result-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      text-decoration: none !important;
+      transition: background .2s, transform .15s, box-shadow .2s, border-color .2s, color .2s;
+      white-space: nowrap;
+    }
+    .result-cta-btn .arrow { font-size: 1.1em; transition: transform .2s; }
+    .result-cta-btn.primary {
+      background: var(--idx-orange);
+      color: #0f172a !important;
+      box-shadow: 0 6px 22px rgba(245, 158, 11, 0.32);
+    }
+    .result-cta-btn.primary:hover {
+      background: #fbbf24;
+      color: #0f172a !important;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(245, 158, 11, 0.45);
+    }
+    .result-cta-btn.primary:hover .arrow { transform: translateX(4px); }
+    .result-cta-btn.secondary {
+      background: #fff;
+      color: var(--idx-accent) !important;
+      border: 2px solid var(--idx-accent);
+    }
+    .result-cta-btn.secondary:hover {
+      background: var(--idx-accent);
+      color: #fff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(21, 101, 192, 0.25);
+    }
+    .result-cta-btn.secondary:hover .arrow { transform: translateX(4px); }
+    @media (max-width: 575px) {
+      .result-cta { padding: 28px 0; }
+      .result-cta-msg { width: 100%; text-align: center; margin-bottom: 4px; }
+      .result-cta-row { gap: 10px; }
+      .result-cta-btn { padding: 12px 18px; font-size: 0.92rem; flex: 1 1 calc(50% - 5px); justify-content: center; }
+    }
+
+    /* ═══ ③ solution — main04 ═══ */
     .solution-flow-img { margin: 36px 0 30px; }
     .solution-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 36px; }
     @media (max-width: 767px) { .solution-steps { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
@@ -190,7 +242,7 @@
     .solution-value { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 700; color: var(--idx-ink); }
     .solution-value .value-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; background: var(--idx-accent-soft); color: var(--idx-accent); font-size: 0.95rem; flex-shrink: 0; }
 
-    /* ═══ ⑥ wrong-tries — main08 (텍스트 박힌 풀폭 이미지) ═══ */
+    /* ═══ ⑥ wrong-tries ═══ */
     .wrong-tries-section .idx-section-img { margin: 30px 0 24px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.12); }
     .wrong-tries-conclusion { padding: 26px 28px; background: #fff8e6; border: 1px solid #fcd34d; border-radius: 14px; display: flex; gap: 16px; align-items: flex-start; }
     .wrong-tries-conclusion-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: var(--idx-orange); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; }
@@ -198,7 +250,7 @@
     .wrong-tries-conclusion-title { font-size: 1.05rem; font-weight: 900; color: #92400e; margin: 0 0 6px; line-height: 1.5; }
     .wrong-tries-conclusion-desc { font-size: 0.92rem; color: #b45309; line-height: 1.65; margin: 0; word-break: keep-all; }
 
-    /* ═══ ⑦ action — main06 (헤더 + 풀폭 이미지 + 4단계) ═══ */
+    /* ═══ ⑦ action — main06 ═══ */
     .action-flow-img { margin: 36px 0 30px; }
     .action-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 30px; }
     @media (max-width: 767px) { .action-steps { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
@@ -209,12 +261,12 @@
     .action-final { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 22px; background: var(--idx-accent-soft); border-radius: 12px; font-size: 1.02rem; font-weight: 700; color: var(--idx-accent); text-align: center; word-break: keep-all; }
     .action-final-check { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--idx-accent); color: #fff; font-size: 0.85rem; flex-shrink: 0; }
 
-    /* ═══ ⑧ versatile — main07 (사선 5컷, 짧게) ═══ */
+    /* ═══ ⑧ versatile — main07 ═══ */
     .versatile-section { padding: 90px 0; background: var(--idx-soft); }
     .versatile-img { margin: 24px 0 0; }
     @media (max-width: 767px) { .versatile-section { padding: 60px 0; } }
 
-    /* ═══ ⑨ trust — 다크 통계 ═══ */
+    /* ═══ ⑨ trust ═══ */
     .trust-section { padding: 100px 0; background: #0f172a; color: #fff; }
     .trust-section .idx-title { color: #fff; }
     .trust-section .idx-desc { color: rgba(255,255,255,0.78); }
@@ -258,7 +310,7 @@
       </div>
     </section>
 
-    <!-- ① 문제 공감 — 4카드 (p1.png 1/4 분할) -->
+    <!-- ① 문제 공감 -->
     <section class="problem-section">
       <div class="container">
         <div class="problem-grid">
@@ -294,7 +346,7 @@
       </div>
     </section>
 
-    <!-- ② awakening — main03 풀폭 + 우측 텍스트 오버레이 -->
+    <!-- ② awakening — main03 -->
     <section class="bgtext awakening text-right">
       <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main03.png" alt="법령 앞에서 고민하는 안전관리자 — 그래서 확인해야 합니다" class="bgtext-img" loading="lazy">
       <div class="bgtext-overlay">
@@ -323,22 +375,10 @@
         </div>
 
         <div class="solution-steps">
-          <div class="solution-step">
-            <div class="step-dot">1</div>
-            <div class="step-label">정보 입력</div>
-          </div>
-          <div class="solution-step">
-            <div class="step-dot">2</div>
-            <div class="step-label">법령 자동 분석</div>
-          </div>
-          <div class="solution-step">
-            <div class="step-dot">3</div>
-            <div class="step-label">의무·점검 항목 구조화</div>
-          </div>
-          <div class="solution-step">
-            <div class="step-dot">4</div>
-            <div class="step-label">보고서 및 관리 체계 완성</div>
-          </div>
+          <div class="solution-step"><div class="step-dot">1</div><div class="step-label">정보 입력</div></div>
+          <div class="solution-step"><div class="step-dot">2</div><div class="step-label">법령 자동 분석</div></div>
+          <div class="solution-step"><div class="step-dot">3</div><div class="step-label">의무·점검 항목 구조화</div></div>
+          <div class="solution-step"><div class="step-dot">4</div><div class="step-label">보고서 및 관리 체계 완성</div></div>
         </div>
 
         <div class="solution-values">
@@ -350,7 +390,7 @@
       </div>
     </section>
 
-    <!-- ④ result — main05 풀폭 + 좌측 텍스트 오버레이 -->
+    <!-- ④ result — main05 -->
     <section class="bgtext result text-left">
       <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main05.png" alt="법령의무진단 리포트 샘플 — 선임·점검·조치·보고 의무 + 리스크 분포" class="bgtext-img" loading="lazy">
       <div class="bgtext-overlay">
@@ -395,7 +435,18 @@
       </div>
     </section>
 
-    <!-- ⑤ illusion — main10 풀폭 + 좌측 텍스트 오버레이 -->
+    <!-- ④' result-cta — 결과 섹션 직후 CTA 한 줄 -->
+    <section class="result-cta">
+      <div class="container">
+        <div class="result-cta-row">
+          <p class="result-cta-msg">지금 바로 시작하거나, 자세히 알아보세요</p>
+          <a href="free-diagnosis.html" class="result-cta-btn primary">바로 무료 법령진단 하기 <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="service/diagnosis.html" class="result-cta-btn secondary">법령진단 자세히 보기 <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⑤ illusion — main10 -->
     <section class="bgtext illusion text-left alt-bg">
       <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/main/main10.png" alt="확인 결과를 받았지만 여전히 안전관리 업무로 고민하는 안전관리자" class="bgtext-img" loading="lazy">
       <div class="bgtext-overlay">
@@ -423,7 +474,7 @@
       </div>
     </section>
 
-    <!-- ⑥ wrong-tries — main08 (텍스트 박힌 이미지) -->
+    <!-- ⑥ wrong-tries — main08 -->
     <section class="idx-section wrong-tries-section">
       <div class="container">
         <div class="text-center" style="margin-bottom: 24px;">
@@ -500,7 +551,7 @@
       </div>
     </section>
 
-    <!-- ⑨ trust — 다크 통계 -->
+    <!-- ⑨ trust -->
     <section class="trust-section text-center">
       <div class="container">
         <span class="idx-eyebrow" style="background: rgba(245, 158, 11, 0.15); color: var(--idx-orange);">규모</span>
