@@ -110,27 +110,30 @@
       .compare-img img { height: 220px; }
     }
 
-    /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) — max-width 1040px 가운데 정렬 (좌우 여백 확보) */
+    /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) */
     .tai-wide-image {
       width: 100%;
-      max-width: 1040px;
       height: auto;
       display: block;
-      margin: 0 auto;
       border-radius: 18px;
       box-shadow: 0 14px 36px rgba(15, 23, 42, 0.10);
     }
 
     /* "그래서 이렇게 해결하려고 합니다" 섹션 (factory3.png + 4 불릿 + 결론) */
-    .factory-options { padding: 96px 0; background: #f9f9f9; }
+    /* 상하 여백 130px (이전 96px → 130px) */
+    .factory-options { padding: 130px 0; background: #f9f9f9; }
     .factory-options .section-title { margin-bottom: 28px; }
-    .factory-options .tai-wide-image { margin-bottom: 20px; box-shadow: none; border-radius: 14px; }
+    /* factory3.png 상단 잘림 방지 — border-radius 0, padding 0, overflow visible */
+    .factory-options .tai-wide-image {
+      margin-bottom: 20px;
+      box-shadow: none;
+      border-radius: 0;
+      overflow: visible;
+    }
     .factory-bullet-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      max-width: 1040px;
-      margin: 0 auto;
     }
     .factory-bullet-card {
       background: #fff;
@@ -215,7 +218,7 @@
       margin: 0; line-height: 1.55;
     }
     @media (max-width: 991px) {
-      .factory-options { padding: 64px 0; }
+      .factory-options { padding: 80px 0; }
       .factory-bullet-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 575px) {
@@ -296,8 +299,8 @@
     </div>
   </section>
 
-  <!-- 문제 구조 (factory2.png 통합 이미지 — 헤드라인·sub·4컬럼 일러스트 포함) -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
+  <!-- 문제 구조 (factory2.png) — 상하 130px 여백 -->
+  <section class="service-area" style="background:#f9f9f9; padding: 130px 0;">
     <div class="container">
       <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/factory/factory2.png"
            alt="사고는 몰라서가 아니라, 놓쳐서 발생합니다 — 공정·설비·작업자·기록 4가지 구조적 문제"
