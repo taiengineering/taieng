@@ -1,5 +1,7 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.7.0 (2026-05-05): 풋터 재구성 — 시작하기 섹션 삭제, 무료 법령진단/도입 문의/FAQ → 서비스로 편입,
+ *                      TAI에 바란다 → 회사의 TAI 기술력 직후로 이동, 안전정보 → 헤더와 동기화 (4개 항목)
  * v3.6.0 (2026-05-04): 풋터 정리 — 교육사업·수선연결·컨설팅·선임연결·전문가 미노출 (헤더 메뉴 정리와 동기화)
  * v3.5.0 (2026-05-04): Phase 5 — "💬 TAI에 바란다" 링크 + inquiry-form.js 비동기 로드
  * v3.4.0 (2026-05-03): 풋터 상단/하단 패딩 축소 (footer-inner 80px+ → 36px)
@@ -112,6 +114,9 @@
     '            <li><a href="' + b + 'service/diagnosis.html"><i class="fas fa-angle-right"></i>법령진단</a></li>' +
     '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
     '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
+    '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
+    '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
+    '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
@@ -132,17 +137,12 @@
     '      </div>' +
     '      <div class="col-xl-2 col-lg-2 col-6">' +
     '        <div class="footer-widget widget widget_link">' +
-    '          <h6 class="widget-title">시작하기</h6>' +
+    '          <h6 class="widget-title">안전정보</h6>' +
     '          <ul>' +
-    '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
-    '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
-    '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
-    '            <li><a href="#" id="tai-footer-feedback-open"><i class="fas fa-angle-right"></i>💬 TAI에 바란다</a></li>' +
-    '          </ul>' +
-    '          <h6 class="widget-title" style="margin-top:20px;">안전정보</h6>' +
-    '          <ul>' +
+    '            <li><a href="' + b + 'safety-news.html"><i class="fas fa-angle-right"></i>안전자료</a></li>' +
+    '            <li><a href="' + b + 'accident-cases.html"><i class="fas fa-angle-right"></i>재해사례</a></li>' +
+    '            <li><a href="' + b + 'law-updates.html"><i class="fas fa-angle-right"></i>개정법령</a></li>' +
     '            <li><a href="' + b + 'precedent-search.html"><i class="fas fa-angle-right"></i>판례 검색</a></li>' +
-    '            <li><a href="' + b + 'safety-news.html"><i class="fas fa-angle-right"></i>안전정보</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
@@ -152,6 +152,7 @@
     '          <ul>' +
     '            <li><a href="' + b + 'about.html"><i class="fas fa-angle-right"></i>회사소개</a></li>' +
     '            <li><a href="' + b + 'patents.html"><i class="fas fa-angle-right"></i>TAI 기술력</a></li>' +
+    '            <li><a href="#" id="tai-footer-feedback-open"><i class="fas fa-angle-right"></i>💬 TAI에 바란다</a></li>' +
     '            <li><a href="' + b + 'terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>' +
     '            <li><a href="' + b + 'privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>' +
     '          </ul>' +
