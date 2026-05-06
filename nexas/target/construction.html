@@ -45,69 +45,126 @@
     body.sc5 {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    .law-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: center;
-      box-shadow: 0 3px 14px rgba(0,0,0,.07);
-      height: 100%;
-    }
-    .law-card .law-icon { font-size: 2rem; margin-bottom: 10px; }
-    .law-card h5 { font-size: .92rem; font-weight: 800; color: #1e293b; margin: 0; line-height: 1.4; }
-    .duty-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 24px 20px;
-      box-shadow: 0 3px 16px rgba(0,0,0,.07);
-      height: 100%;
-      border-left: 4px solid #b45309;
-    }
-    .duty-card h5 { font-size: 1rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-    .duty-card p { font-size: .88rem; color: #64748b; margin: 6px 0 0; line-height: 1.55; }
-    .auto-block {
-      background: #fffbeb;
-      border-radius: 14px;
-      padding: 28px 24px;
-      height: 100%;
-    }
-    .auto-block .ab-icon { font-size: 2rem; margin-bottom: 12px; }
-    .auto-block h5 { font-size: 1rem; font-weight: 800; color: #78350f; margin-bottom: 8px; }
-    .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
 
-    /* 이미지 박스 */
+    /* 이미지 박스 (현실 공감 / 감정 압축) + 프로세스 이미지 (대응 / 흐름) */
     .tai-image-box,
-    .tai-process-image,
-    .compare-img {
-      border-radius: 18px;
+    .tai-process-image {
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
       background: #e5e7eb;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, .12);
     }
-    .tai-image-box img,
-    .tai-process-image img,
-    .compare-img img {
+    .tai-image-box img {
       width: 100%;
-      display: block;
+      height: 420px;
       object-fit: cover;
+      display: block;
     }
-    .tai-image-box img,
-    .tai-process-image img { height: 360px; }
-    .compare-box {
+    .slash-image img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+    .process-image img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* 핵심 메시지 */
+    .impact-title {
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1.35;
+      color: #0f172a;
+    }
+    .impact-title span {
+      color: #b45309;
+    }
+    .impact-sub {
+      margin-top: 20px;
+      color: #64748b;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* 전환 박스 */
+    .transition-box {
+      max-width: 1020px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 24px;
+      padding: 42px 48px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 14px 36px rgba(15, 23, 42, .06);
+    }
+    .transition-box h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .transition-box p {
+      color: #64748b;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    /* CTA */
+    .cta-main-title {
+      color: #fff;
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+    .cta-main-sub {
+      color: #cbd5e1;
+      margin-top: 18px;
+      line-height: 1.8;
+    }
+    .construction-cta-card {
       height: 100%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      overflow: hidden;
+      background: linear-gradient(135deg, #111827 0%, #1e293b 100%);
+      border-radius: 24px;
+      padding: 42px;
+      border: 1px solid rgba(255, 255, 255, .08);
     }
-    .compare-content { padding: 28px; }
-    .compare-content h4 { color: #fff; font-weight: 900; margin-bottom: 14px; }
-    .compare-content ul { margin: 0; padding-left: 18px; color: #d1d5db; line-height: 1.9; }
-    .compare-img img { height: 260px; }
+    .construction-cta-card--orange {
+      background: linear-gradient(135deg, #78350f 0%, #c2410c 100%);
+    }
+    .cta-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+    .construction-cta-card h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    .construction-cta-card p {
+      color: rgba(255, 255, 255, .78);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
     @media (max-width: 768px) {
-      .tai-image-box img,
-      .tai-process-image img { height: 240px; }
-      .compare-img img { height: 220px; }
+      .impact-title { font-size: 2rem; }
+      .tai-image-box img { height: 260px; }
+      .slash-image img { height: 220px; }
+      .process-image img { height: 220px; }
+      .transition-box { padding: 30px 24px; }
+      .transition-box h3 { font-size: 1.5rem; }
+      .construction-cta-card { padding: 30px 24px; }
     }
   </style>
 </head>
@@ -146,269 +203,204 @@
 
         <div class="tai-hero__cta">
           <a class="tai-btn-pri" href="../free-diagnosis.html">무료 법령진단 시작 →</a>
-          <a class="tai-btn-sec" href="../fix-request.html?from=target-construction&type=general">도입 문의</a>
+          <a class="tai-btn-sec" href="../contact.html">도입 문의</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 현실 공감 + 이미지 -->
-  <section class="service-area default-pd-top pd-bottom-90">
+  <!-- 1. 현실 공감 -->
+  <section class="service-area default-pd-top pd-bottom-100">
     <div class="container">
       <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="section-title">
+        <div class="col-lg-5">
+          <div class="section-title mb-0">
             <h4 class="sub-title">현장의 현실</h4>
             <h2 class="title">
               건설현장 안전관리,<br>
               실제로는 이렇게 돌아갑니다
             </h2>
             <p>
-              TBM은 합니다. 위험성평가도 있습니다. 안전관리계획서도 작성합니다.
-              하지만 작업자가 내용을 모르고, 현장 행동으로 이어지지 않으면
+              TBM도 합니다. 위험성평가도 있습니다.
+              안전관리계획서도 작성합니다.
+            </p>
+            <p>
+              하지만 작업자가 내용을 모르고,
+              현장 행동으로 이어지지 않으면
               안전관리는 서류에서 끝납니다.
             </p>
             <p>
-              안전관리자가 아무리 강조해도 작업자가 움직이지 않으면
-              현장은 바뀌지 않습니다.
+              안전관리자가 아무리 강조해도,
+              전달되지 않으면 현장은 바뀌지 않습니다.
             </p>
           </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-7">
           <div class="tai-image-box">
-            <img src="../assets/img/construction/construction-paperwork.jpg" alt="서류에 치이는 건설현장 안전관리자">
+            <img src="../assets/img/construction/construction-reality.jpg" alt="">
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 핵심 문제 -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="section-title text-center">
-        <h4 class="sub-title">구조적 문제</h4>
-        <h2 class="title">안전은 작성이 아니라 실행입니다</h2>
-        <p>건설현장의 사고는 대부분 "모름"보다 "전달되지 않음"에서 시작됩니다.</p>
-      </div>
-
-      <div class="row g-4 mt-3">
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>TBM은 하지만</h5>
-            <p>작업자가 실제 위험요인을 기억하지 못합니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>위험성평가는 있지만</h5>
-            <p>현장 상황과 작업자 의견이 반영되지 않습니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>서류는 있지만</h5>
-            <p>점검, 교육, 조치 기록이 서로 연결되지 않습니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="duty-card">
-            <h5>안전관리자는 있지만</h5>
-            <p>모든 작업자와 공종을 실시간으로 통제할 수 없습니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 위험성평가 + 이미지 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6 order-lg-1 order-2">
-          <div class="tai-image-box">
-            <img src="../assets/img/construction/worker-risk-assessment.jpg" alt="작업자가 참여하는 위험성평가">
-          </div>
-        </div>
-
-        <div class="col-lg-6 order-lg-2 order-1">
-          <div class="section-title">
-            <h4 class="sub-title">위험성평가</h4>
-            <h2 class="title">
-              형식적인 위험성평가는<br>
-              인정되지 않을 수 있습니다
-            </h2>
-            <p>
-              작업자 참여 없이 작성된 평가, 현장이 반영되지 않은 평가,
-              서류만 존재하는 평가는 사고 발생 시 형식적 관리로 판단될 수 있습니다.
-            </p>
-            <p>
-              현장의 위험은 작업자가 가장 먼저 압니다.
-              TAI Safe는 작업자가 TBM, 위험성평가, 점검에 직접 참여하도록 만듭니다.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Before / After -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#0f172a;color:#fff;">
-    <div class="container">
-      <div class="section-title text-center">
-        <h4 class="sub-title" style="color:#fbbf24;">Before / After</h4>
-        <h2 class="title" style="color:#fff;">같은 현장, 결과는 완전히 다릅니다</h2>
-        <p style="color:#cbd5e1;">TAI를 쓰기 전과 후, 안전관리 방식은 두 가지로 나뉩니다.</p>
-      </div>
-
-      <div class="row g-4 mt-3">
-        <div class="col-lg-6">
-          <div class="compare-box compare-box--before">
-            <div class="compare-img">
-              <img src="../assets/img/construction/before-site-paper.jpg" alt="종이와 서류 중심의 건설 안전관리">
-            </div>
-            <div class="compare-content">
-              <h4>TAI 이전</h4>
-              <ul>
-                <li>서류 중심 관리</li>
-                <li>안전관리자 중심 전달</li>
-                <li>작업자는 수동 참여</li>
-                <li>이상 보고와 조치가 분리</li>
-                <li>점검 대응 때마다 서류 찾기</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="compare-box compare-box--after">
-            <div class="compare-img">
-              <img src="../assets/img/construction/after-digital-site.jpg" alt="TAI로 전산화된 건설현장 안전관리">
-            </div>
-            <div class="compare-content">
-              <h4>TAI 이후</h4>
-              <ul>
-                <li>작업자 참여형 TBM</li>
-                <li>전자서명 자동 저장</li>
-                <li>공종별 위험성평가 연결</li>
-                <li>이상 발생 즉시 알림</li>
-                <li>감독관청 제출자료 즉시 출력</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TAI 해결 구조 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
-    <div class="container">
-      <div class="section-title text-center">
-        <h4 class="sub-title">TAI Safe</h4>
-        <h2 class="title">TAI는 전달되지 않는 안전을 바꿉니다</h2>
-        <p>법령에서 시작해 TBM, 위험성평가, 서명, 조치, 증빙까지 하나의 흐름으로 연결합니다.</p>
-      </div>
-
-      <div class="tai-process-image mt-4">
-        <img src="../assets/img/construction/tai-construction-flow.jpg" alt="건설현장 안전관리 흐름">
-      </div>
-
-      <div class="row g-4 mt-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">📱</div>
-            <h5>TBM 전자서명</h5>
-            <p>작업자가 모바일로 참석 확인과 서명을 남깁니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">⚠️</div>
-            <h5>공종별 위험성평가</h5>
-            <p>공종별 위험요인과 조치사항을 현장에 배포합니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">🌦️</div>
-            <h5>작업중지 경고</h5>
-            <p>기상, 위험 상황, 현장 이상을 즉시 알립니다.</p>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">🧾</div>
-            <h5>증빙 자동 보관</h5>
-            <p>TBM, 교육, 위험성평가, 조치 이력을 자동으로 남깁니다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 안전관리비 -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#f9f9f9;">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="section-title">
-            <h4 class="sub-title">안전관리비</h4>
-            <h2 class="title">
-              안전관리비를 쓰고도,<br>
-              안전이 남지 않으면 의미가 없습니다
-            </h2>
-            <p>
-              건설현장은 안전관리비를 별도로 편성할 만큼 안전이 중요한 업종입니다.
-              하지만 비용을 쓰는 것과 실제 안전이 작동하는 것은 다릅니다.
-            </p>
-            <p>
-              TAI Safe는 안전관리비가 서류와 물품으로 끝나지 않고,
-              현장 실행과 증빙으로 남도록 돕습니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="tai-image-box">
-            <img src="../assets/img/construction/safety-cost-management.jpg" alt="건설현장 안전관리비와 증빙 관리">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 강한 메시지 -->
-  <section class="pd-top-90 pd-bottom-90" style="background:#78350f;color:#fff;">
+  <!-- 2. 핵심 메시지 -->
+  <section class="pd-top-90 pd-bottom-90" style="background:#f8fafc;">
     <div class="container text-center">
-      <h2 style="font-weight:900;color:#fff;line-height:1.45;">
-        전달되지 않는 안전은<br>
-        존재하지 않는 것과 같습니다.
+      <h2 class="impact-title">
+        안전은 작성이 아니라 <span>실행</span>입니다
       </h2>
-      <p style="color:#fde68a;margin-top:18px;">
-        TAI는 안전을 문서에 남기는 것이 아니라,<br>
-        현장에 각인시키는 시스템입니다.
+      <p class="impact-sub">
+        건설현장의 사고는 대부분 "모름"보다<br>
+        "전달되지 않음"에서 시작됩니다
       </p>
     </div>
   </section>
 
-  <!-- 최종 CTA -->
-  <section class="subscribe-area">
+  <!-- 3. 현실 대응 -->
+  <section class="pd-top-100 pd-bottom-100">
     <div class="container">
-      <div class="subscribe-inner">
-        <div class="row align-items-center">
-          <div class="col-lg-5">
-            <h2>지금 구조로 사고를 막을 수 있을까요?</h2>
-            <p class="pe-4">
-              공종, 규모, 작업 조건을 입력하면 적용 법령과 의무 항목을 3분 내에 확인할 수 있습니다.
+      <div class="row align-items-center g-5">
+        <div class="col-lg-4">
+          <div class="section-title mb-0">
+            <h4 class="sub-title">그래서 현장에서는</h4>
+            <h2 class="title">이렇게 대응하려고 합니다</h2>
+            <p>
+              서류를 더 만들고,<br>
+              무전으로 다시 전달하고,<br>
+              단톡방에 공유하고,<br>
+              결국 안전관리자가 다시 확인합니다.
             </p>
           </div>
-          <div class="col-lg-6 offset-lg-1">
-            <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
-              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단 시작</a>
-              <a href="../fix-request.html?from=target-construction&type=general" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
-            </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="tai-process-image slash-image">
+            <img src="../assets/img/construction/construction-response-slash.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 감정 압축 -->
+  <section class="pd-top-100 pd-bottom-100" style="background:#fff7ed;">
+    <div class="container">
+      <div class="row align-items-center g-5 flex-row-reverse">
+        <div class="col-lg-5">
+          <div class="section-title mb-0">
+            <h4 class="sub-title">반복되는 현실</h4>
+            <h2 class="title">
+              결국 다시<br>
+              안전관리자가 직접 챙깁니다
+            </h2>
+            <p>
+              작업 전에는 TBM을 확인하고,<br>
+              작업 중에는 위험요인을 확인하고,<br>
+              작업 후에는 기록과 서류를 다시 정리합니다.
+            </p>
+            <p>
+              현장이 많아질수록,<br>
+              공종이 복잡해질수록,<br>
+              부담은 다시 안전관리자에게 돌아옵니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="tai-image-box">
+            <img src="../assets/img/construction/safety-manager-overload.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 전환 메시지 -->
+  <section class="pd-top-80 pd-bottom-80" style="background:#f8fafc;">
+    <div class="container">
+      <div class="transition-box">
+        <h3>방법은 바뀌어도, 구조는 그대로입니다.</h3>
+        <p>
+          근본적인 해결을 위해서는
+          전달 방식이 아니라
+          관리 방식의 전환이 필요합니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 방향 제시 -->
+  <section class="pd-top-110 pd-bottom-110">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-4">
+          <div class="section-title mb-0">
+            <h4 class="sub-title">관리 방식의 전환</h4>
+            <h2 class="title">
+              그래서 관리 방식이<br>
+              바뀌어야 합니다
+            </h2>
+            <p>
+              사람이 기억하고 전달하는 구조가 아니라,<br>
+              법령부터 TBM, 위험성평가, 이상 보고,<br>
+              조치, 기록까지 하나의 흐름으로<br>
+              연결되는 구조가 필요합니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="tai-process-image process-image">
+            <img src="../assets/img/construction/construction-flow-process.jpg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CTA -->
+  <section class="pd-top-100 pd-bottom-110" style="background:#0f172a;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="cta-main-title">
+          지금 필요한 것을 선택하세요
+        </h2>
+        <p class="cta-main-sub">
+          우리 현장의 법령 상태를 먼저 확인하거나,<br>
+          실제 운영 방식을 확인할 수 있습니다
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="construction-cta-card">
+            <div class="cta-icon">📋</div>
+            <h3>우리 현장 법령 상태 확인</h3>
+            <p>
+              공사금액, 현장 조건,
+              작업 정보를 기준으로
+              적용 법령과 의무 항목을 확인합니다.
+            </p>
+            <a href="../free-diagnosis.html" class="btn btn-white">
+              무료 법령진단 시작 →
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="construction-cta-card construction-cta-card--orange">
+            <div class="cta-icon">🖥️</div>
+            <h3>실제 현장 운영 방식 보기</h3>
+            <p>
+              TBM, 위험성평가,
+              이상 보고, 조치, 기록이
+              어떻게 연결되는지 확인합니다.
+            </p>
+            <a href="../service/saas.html" class="btn btn-border-white">
+              TAI SAFE 자세히 보기 →
+            </a>
           </div>
         </div>
       </div>
