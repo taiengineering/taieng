@@ -67,7 +67,7 @@
       display: block;
     }
 
-    /* 3번 현실 대응 — 풀폭 이미지 + 좌측 빈공간에 텍스트 직접 오버레이 (박스 없음) */
+    /* 3번 현실 대응 — 풀폭 이미지 + 좌측 상단 빈공간에 텍스트 직접 오버레이 (박스 없음) */
     .response-wrapper {
       position: relative;
       width: 100%;
@@ -85,7 +85,8 @@
       position: absolute;
       inset: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      padding-top: clamp(40px, 6%, 80px);
       padding-left: clamp(36px, 6%, 80px);
       pointer-events: none;
     }
@@ -112,6 +113,7 @@
     }
     @media (max-width: 991px) {
       .response-overlay {
+        padding-top: 5%;
         padding-left: 5%;
       }
       .response-text-box {
@@ -318,7 +320,7 @@
     </div>
   </section>
 
-  <!-- 3. 현실 대응 — 풀폭 이미지 + 좌측 빈공간에 텍스트 직접 오버레이 -->
+  <!-- 3. 현실 대응 — 풀폭 이미지 + 좌측 상단 빈공간에 텍스트 직접 오버레이 -->
   <section class="pd-top-110 pd-bottom-110">
     <div class="container">
       <div class="response-wrapper">
