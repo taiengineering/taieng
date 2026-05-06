@@ -22,7 +22,7 @@
 </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="안전관리자의 속마음에 답하는 한 페이지. 법령·일정·기록·TBM·허가·기상까지, 스크롤할수록 이어지는 흐름.">
+  <meta name="description" content="안전관리자가 혼자 다 짊어지는 구조에서, 법령 확인부터 점검·보고·기록까지 하나의 흐름으로 연결되는 구조로. TAI Safe.">
   <title>안전관리자를 위한 TAI | TAI 엔지니어링</title>
   <meta property="og:type" content="website">
   <meta property="og:title" content="TAI Safe | 엑셀 없는 스마트 산업안전관리 플랫폼">
@@ -35,165 +35,238 @@
   <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/tai-brand.css">
   <link rel="stylesheet" href="assets/css/tai-main.css">
-  <link rel="stylesheet" href="assets/css/tai-hero.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    .badge-coming { background: #f59e0b; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
-
-    #fs2 { --b:#1A5FD4; --d:#0f172a; --g:#64748b; --bd:#e2e8f0; --muted:#f1f5f9; font-family:'Noto Sans KR',sans-serif; }
-    #fs2 * { box-sizing: border-box; }
-
-    #fs2 .fs2-inner { width:100%; max-width:1120px; margin:0 auto; padding:0 20px; }
-    #fs2 .fs2-sec { padding:clamp(56px,10vw,100px) 0; }
-    #fs2 .fs2-mind { font-size:clamp(1.15rem,3.2vw,1.65rem); font-weight:900; color:var(--d); line-height:1.45; margin:0 0 16px; }
-    #fs2 .fs2-mind q { quotes:'"' '"'; color:#334155; }
-    #fs2 .fs2-solve { font-size:.95rem; color:var(--g); line-height:1.75; max-width:520px; }
-    #fs2 .fs2-solve strong { color:#0f172a; font-weight:800; }
-    #fs2 .fs2-kicker { font-size:.68rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:var(--b); margin-bottom:10px; display:block; }
-    #fs2 .fs2-sec-dark .fs2-kicker { color:#93c5fd; }
-    #fs2 .fs2-h2 { font-size:clamp(1.5rem,4vw,2.35rem); font-weight:900; letter-spacing:-.02em; line-height:1.2; margin:0 0 14px; color:var(--d); }
-    #fs2 .fs2-sec-dark .fs2-h2 { color:#fff; }
-
-    /* A 풀폭 다크 */
-    #fs2 .fs2-a { background:linear-gradient(160deg,#0a0f1a 0%,#0f172a 40%,#1e3a5f 100%); color:#fff; position:relative; overflow:hidden; }
-    #fs2 .fs2-a::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 50% at 70% 20%,rgba(26,95,212,.25),transparent); pointer-events:none; }
-    #fs2 .fs2-a .fs2-inner { position:relative; z-index:1; min-height:clamp(420px,72vh,760px); display:flex; flex-direction:column; justify-content:center; padding-top:48px; padding-bottom:56px; }
-    #fs2 .fs2-a h1 { font-size:clamp(1.75rem,5vw,3rem); font-weight:900; line-height:1.18; margin:0 0 18px; max-width:18ch; }
-    #fs2 .fs2-a .lead { font-size:clamp(1rem,2.4vw,1.2rem); font-weight:700; color:rgba(255,255,255,.88); line-height:1.55; max-width:36ch; margin:0 0 28px; border-left:4px solid #60a5fa; padding-left:16px; }
-    #fs2 .fs2-a .sub { font-size:.92rem; color:rgba(255,255,255,.55); max-width:42ch; line-height:1.65; margin:0; }
-    #fs2 .fs2-scroll { margin-top:auto; padding-top:40px; text-align:center; font-size:.72rem; color:rgba(255,255,255,.38); }
-    #fs2 .fs2-scroll i { display:block; margin-top:6px; animation:fs2b 2.2s ease-in-out infinite; }
-    @keyframes fs2b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
-
-    /* 배경 */
-    #fs2 .bg-white { background:#fff; }
-    #fs2 .bg-muted { background:var(--muted); }
-
-    /* B/C 공통 2컬럼 */
-    #fs2 .fs2-split { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
-    @media(max-width:991px){ #fs2 .fs2-split { grid-template-columns:1fr; } #fs2 .fs2-split.fs2-split--rev .fs2-col-text{order:1;} #fs2 .fs2-split.fs2-split--rev .fs2-col-vis{order:2;} }
-    #fs2 .fs2-split--rev .fs2-col-text { order:2; }
-    #fs2 .fs2-split--rev .fs2-col-vis { order:1; }
-    @media(max-width:991px){ #fs2 .fs2-split--rev .fs2-col-text{order:1;} #fs2 .fs2-split--rev .fs2-col-vis{order:2;} }
-
-    /* 모바일 디바이스 프레임 (작업지시서 스펙) */
-    #fs2 .fs2-device {
-      width:260px; height:520px; border-radius:40px; border:8px solid #1e293b; overflow:hidden;
-      box-shadow:0 25px 50px rgba(0,0,0,0.12); background:#fff; position:relative; margin:0 auto;
-      flex-shrink:0;
-    }
-    #fs2 .fs2-device::before {
-      content:''; position:absolute; top:10px; left:50%; transform:translateX(-50%); width:88px; height:26px;
-      background:#0f172a; border-radius:0 0 16px 16px; z-index:3; pointer-events:none;
-    }
-    #fs2 .fs2-device-inner { height:100%; overflow-y:auto; padding:38px 12px 16px; -webkit-overflow-scrolling:touch; }
-    #fs2 .fs2-device--sm { width:200px; height:400px; border-radius:32px; }
-    #fs2 .fs2-device--sm::before { width:72px; height:22px; top:8px; border-radius:0 0 12px 12px; }
-    #fs2 .fs2-device--card { width:100%; max-width:240px; height:340px; margin:0 auto 12px; border-radius:32px; }
-    #fs2 .fs2-device--card::before { width:68px; height:20px; top:8px; }
-    #fs2 .fs2-device--card .fs2-device-inner { padding-top:34px; }
-
-    /* 레거시 목업 헤더/바디 (프레임 안 공용) */
-    #fs2 .fs2-df-h { padding:10px 12px; display:flex; justify-content:space-between; align-items:center; font-size:.65rem; font-weight:900; color:#fff; }
-    #fs2 .fs2-df-b { padding:10px 12px 14px; font-size:.62rem; color:#334155; line-height:1.45; }
-
-    #fs2 .fs2-sec2-split { display:grid; grid-template-columns:1fr auto; gap:clamp(24px,4vw,48px); align-items:start; }
-    @media(max-width:991px){ #fs2 .fs2-sec2-split { grid-template-columns:1fr; justify-items:center; text-align:center; } #fs2 .fs2-sec2-split .fs2-solve{margin-left:auto;margin-right:auto;} }
-    #fs2 .fs2-vis-stack { display:flex; flex-direction:column; align-items:center; gap:22px; }
-
-    /* D 숫자 */
-    #fs2 .fs2-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:28px 0 24px; }
-    @media(max-width:640px){ #fs2 .fs2-stats { grid-template-columns:1fr; } }
-    #fs2 .fs2-stat { background:var(--muted); border:1px solid var(--bd); border-radius:14px; padding:18px 14px; text-align:center; }
-    #fs2 .fs2-stat .num { font-size:clamp(1.6rem,4vw,2.1rem); font-weight:900; color:var(--b); font-variant-numeric:tabular-nums; line-height:1.1; }
-    #fs2 .fs2-stat .lbl { font-size:.72rem; color:var(--g); margin-top:6px; font-weight:700; }
-    #fs2 .fs2-btn { display:inline-flex; align-items:center; justify-content:center; padding:14px 26px; border-radius:12px; font-weight:900; font-size:.92rem; text-decoration:none; border:none; cursor:pointer; transition:.15s; }
-    #fs2 .fs2-btn-pri { background:var(--b); color:#fff; }
-    #fs2 .fs2-btn-pri:hover { background:#1248a8; color:#fff; }
-    #fs2 .fs2-btn-ghost { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.45); }
-    #fs2 .fs2-btn-ghost:hover { background:rgba(255,255,255,.08); color:#fff; }
-    #fs2 .fs2-btn-sec { background:#fff; color:var(--b); border:2px solid var(--bd); font-weight:800; }
-    #fs2 .fs2-btn-sec:hover { border-color:var(--b); color:#1248a8; }
-    #fs2 .fs2-btn-warn { background:#fff; color:#c2410c; border:2px solid #fdba74; font-weight:800; font-size:.84rem; padding:10px 18px; border-radius:10px; text-decoration:none; display:inline-block; }
-    #fs2 .fs2-btn-warn:hover { background:#fff7ed; }
-
-    /* E 그리드 */
-    #fs2 .fs2-grid { display:grid; gap:16px; }
-    #fs2 .fs2-grid--3 { grid-template-columns:repeat(3,1fr); }
-    #fs2 .fs2-grid--2 { grid-template-columns:repeat(2,1fr); }
-    @media(max-width:768px){ #fs2 .fs2-grid--3,#fs2 .fs2-grid--2 { grid-template-columns:1fr; } }
-    #fs2 .fs2-card { border:1px solid var(--bd); border-radius:16px; padding:22px 18px; background:#fff; height:100%; display:flex; flex-direction:column; }
-    #fs2 .fs2-card--soon { opacity:.92; position:relative; }
-    #fs2 .fs2-card--soon .bc-top { position:absolute; top:12px; right:12px; }
-
-    /* F 다크 SVG 구역 */
-    #fs2 .fs2-flow { background:linear-gradient(180deg,#0f172a,#111827); color:#e2e8f0; }
-    #fs2 .fs2-flow .fs2-h2 { color:#fff; text-align:center; max-width:20ch; margin-left:auto; margin-right:auto; }
-    #fs2 .fs2-svg-cap { text-align:center; font-size:.78rem; color:#94a3b8; margin-top:14px; }
-    #fs2 .fs2-patent-note { text-align:center; font-size:.78rem; color:#64748b; margin-top:20px; }
-    #fs2 .fs2-patent-note a { color:#93c5fd; font-weight:800; }
-
-    /* S6 듀얼 미니폰 */
-    #fs2 .fs2-duo { display:flex; flex-wrap:wrap; justify-content:center; gap:20px 32px; margin-top:28px; align-items:flex-end; }
-    #fs2 .fs2-duo-arr { font-size:1.6rem; color:rgba(255,255,255,.25); align-self:center; }
-
-    /* 캘린더·날씨 등 미니 UI */
-    #fs2 .ui-cal { background:#f8fafc; border-radius:10px; padding:8px; font-size:.58rem; }
-    #fs2 .ui-cal .d { display:grid; grid-template-columns:repeat(7,1fr); gap:3px; text-align:center; color:#64748b; margin-bottom:4px; }
-    #fs2 .ui-cal .c { aspect-ratio:1; display:flex; align-items:center; justify-content:center; border-radius:6px; background:#fff; border:1px solid #e2e8f0; font-weight:800; color:#334155; }
-    #fs2 .ui-cal .c.hot { background:#fee2e2; border-color:#fecaca; color:#b91c1c; }
-    #fs2 .ui-pill { display:inline-block; background:#dbeafe; color:#1e40af; font-size:.55rem; font-weight:800; padding:3px 8px; border-radius:999px; margin-top:6px; }
-
-    #fs2 .fk-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid #f1f5f9; font-size:.62rem; }
-    #fs2 .fk-pill { border-radius:999px; padding:2px 7px; font-size:.52rem; font-weight:800; background:#dcfce7; color:#15803d; }
-    #fs2 .fk-foot { margin-top:8px; text-align:center; font-size:.58rem; font-weight:800; color:var(--b); background:#eff6ff; border-radius:8px; padding:6px; }
-
-    #fs2 .fs2-cta-row { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:22px; }
-    @media(max-width:768px){
-      #fs2 .fs2-flow-svg-d{display:none!important;}
-      #fs2 .fs2-flow-svg-m{display:block!important;}
+    /* ================= 안전관리자 페이지 리뉴얼 ================= */
+    .sm-page {
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #0f172a;
     }
 
-    /* 첫 히어로 전용 — 배경 이미지 방식 (다른 .fs2-a 섹션에는 영향 없음) */
-    #fs2 #fs2-top {
-      background: #080f1c;
-      padding: 0;
+    .sm-section {
+      padding: 90px 0;
     }
-    #fs2 #fs2-top::before { display: none; }
-    #fs2 .fs2-hero-bg {
-      position: absolute; inset: 0;
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safety-staff.png');
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      z-index: 0;
+
+    .sm-container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    #fs2 .fs2-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        90deg,
-        rgba(8,15,28,0.80) 0%,
-        rgba(8,15,28,0) 100%
-      );
-      z-index: 0;
+
+    .sm-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 56px;
+      align-items: center;
     }
-    #fs2 #fs2-top .fs2-inner {
-      min-height: clamp(560px, 80vh, 720px);
-      padding-top: calc(var(--tai-nav-h, 90px) + 44px);
-      padding-bottom: 68px;
-      position: relative;
-      z-index: 1;
+
+    .sm-grid.reverse {
+      grid-template-columns: 1.05fr 0.95fr;
     }
-    @media(max-width:991px) {
-      #fs2 #fs2-top .fs2-inner {
+
+    .sm-kicker {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: #1A5FD4;
+      letter-spacing: .08em;
+      margin-bottom: 14px;
+    }
+
+    .sm-title {
+      font-size: clamp(2rem, 4.8vw, 3.7rem);
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+    }
+
+    .sm-title span {
+      color: #1A5FD4;
+    }
+
+    .sm-desc {
+      font-size: 1.02rem;
+      line-height: 1.85;
+      color: #475569;
+      margin-bottom: 0;
+    }
+
+    .sm-hero {
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(120deg, #f8fafc 0%, #ffffff 55%, #eef5ff 100%);
+      padding-top: calc(var(--tai-nav-h, 90px) + 40px);
+      padding-bottom: 70px;
+      overflow: hidden;
+    }
+
+    .sm-hero-img {
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(15,23,42,.18);
+      background: #e5e7eb;
+    }
+
+    .sm-hero-img img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sm-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .sm-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 900;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .sm-btn.primary {
+      background: #1A5FD4;
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(26,95,212,.28);
+    }
+
+    .sm-btn.primary:hover {
+      background: #1248a8;
+      color: #fff;
+    }
+
+    .sm-btn.secondary {
+      background: #fff;
+      color: #1A5FD4;
+      border: 1px solid #cbd5e1;
+    }
+
+    .sm-btn.secondary:hover {
+      border-color: #1A5FD4;
+      color: #1248a8;
+    }
+
+    .sm-message {
+      background: #0f172a;
+      color: #fff;
+      text-align: center;
+      padding: 86px 20px;
+    }
+
+    .sm-message h2 {
+      color: #fff;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 18px;
+    }
+
+    .sm-message p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .sm-image-box {
+      border-radius: 26px;
+      overflow: hidden;
+      background: #e5e7eb;
+      box-shadow: 0 20px 54px rgba(15,23,42,.14);
+    }
+
+    .sm-image-box img {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sm-flow-img img {
+      height: 320px;
+    }
+
+    .sm-quote-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      padding: 38px 42px;
+      box-shadow: 0 16px 40px rgba(15,23,42,.06);
+    }
+
+    .sm-quote-box h3 {
+      font-size: clamp(1.45rem, 3vw, 2.1rem);
+      font-weight: 900;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+
+    .sm-quote-box p {
+      color: #64748b;
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .sm-choice {
+      background: #f8fafc;
+    }
+
+    .sm-choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .sm-choice-card {
+      background: #fff;
+      border-radius: 26px;
+      padding: 40px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 18px 44px rgba(15,23,42,.08);
+    }
+
+    .sm-choice-card h3 {
+      font-size: 1.45rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .sm-choice-card p {
+      color: #64748b;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 991px) {
+      .sm-grid,
+      .sm-grid.reverse,
+      .sm-choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sm-hero {
         min-height: auto;
-        padding-top: calc(var(--tai-nav-h, 90px) + 24px);
-        padding-bottom: 48px;
+      }
+
+      .sm-hero-img img,
+      .sm-image-box img,
+      .sm-flow-img img {
+        height: 280px;
       }
     }
   </style>
 </head>
-<body class="sc5 home-2">
+<body class="sc5">
 
   <div class="preloader" id="preloader">
     <div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div>
@@ -201,371 +274,213 @@
   <div class="body-overlay" id="body-overlay"></div>
   <div id="tai-header"></div>
 
-  <main id="fs2">
+  <main class="sm-page">
 
-  <!-- 1 [A] -->
-  <section class="fs2-sec fs2-a" id="fs2-top">
-    <div class="fs2-hero-bg"></div>
-    <div class="fs2-hero-overlay"></div>
-    <div class="fs2-inner">
-      <h1>안전관리,<br>혼자 다 하고 계시죠?</h1>
-      <p class="lead">당신이 못해서가 아닙니다.<br>구조가 그렇게 되어 있는 겁니다.</p>
-      <p class="sub">아래로 내려가면, 속으로만 말하던 것들에 하나씩 답이 붙습니다.</p>
-      <div class="fs2-scroll">스크롤<i class="fas fa-chevron-down"></i></div>
-    </div>
-  </section>
+    <!-- 1. 히어로 -->
+    <section class="sm-hero">
+      <div class="sm-container">
+        <div class="sm-grid">
 
-  <!-- 2 [D] -->
-  <section class="fs2-sec bg-white">
-    <div class="fs2-inner fs2-count-scope fs2-sec2-split">
-      <div>
-        <span class="fs2-kicker">속마음</span>
-        <p class="fs2-mind"><q>우리 사업장에 뭐가 적용되는지도 모르겠어요</q></p>
-        <div class="fs2-stats">
-          <div class="fs2-stat"><div class="num"><span data-target="473">0</span></div><div class="lbl">개 법령</div></div>
-          <div class="fs2-stat"><div class="num"><span data-target="33845" data-fs2-comma="1">0</span></div><div class="lbl">개 조문</div></div>
-          <div class="fs2-stat"><div class="num"><span data-target="54925" data-fs2-comma="1">0</span></div><div class="lbl">개 항</div></div>
-        </div>
-        <p class="fs2-solve" style="max-width:560px;"><strong>해결</strong> — 3분이면 입력한 조건만으로 적용 법령과 의무가 정리됩니다. 비용 없이 먼저 확인해 보세요.</p>
-        <a class="fs2-btn fs2-btn-pri" href="free-diagnosis.html">무료 법령진단 시작 →</a>
-      </div>
-      <div class="fs2-device" aria-hidden="true">
-        <div class="fs2-device-inner">
-          <div class="fs2-df-h" style="background:var(--b);border-radius:10px;margin-bottom:8px;"><span>적용 요약</span><span>방금</span></div>
-          <div style="font-size:.58rem;font-weight:800;color:#64748b;margin-bottom:6px;">입력 반영 · 2026.04.21</div>
-          <div style="background:#f8fafc;border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:6px;font-size:.58rem;"><strong style="color:#0f172a;">의무</strong> 54건 · 점검 38 · 서류 12</div>
-          <div style="background:#eff6ff;border-radius:8px;padding:7px;font-size:.55rem;color:#1e40af;font-weight:700;">다음 · 소방 자체점검 D-12</div>
-          <div style="margin-top:10px;font-size:.52rem;color:#94a3b8;line-height:1.5;">숫자는 전체 규모 예시이며, 오른쪽 요약은 입력 결과 예시 목업입니다.</div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <!-- 좌 텍스트 -->
+          <div>
+            <span class="sm-kicker">FOR SAFETY MANAGER</span>
 
-  <!-- 3 [B] -->
-  <section class="fs2-sec bg-muted">
-    <div class="fs2-inner fs2-split">
-      <div class="fs2-col-text">
-        <span class="fs2-kicker">일정 지옥</span>
-        <p class="fs2-mind"><q>점검 일정 엑셀로 관리하는데 법령마다 주기가 달라 미치겠어</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 연간·월간 일정이 한 번에 깔리고, 마감 며칠 전에 담당자 폰으로 미리 뜹니다.</p>
-      </div>
-      <div class="fs2-col-vis">
-        <div class="fs2-device">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:var(--b);border-radius:10px;margin-bottom:8px;"><span>오늘</span><span>알림</span></div>
-            <div class="fs2-df-b" style="padding:0 0 8px;">
-              <div style="font-weight:900;color:#0f172a;margin-bottom:6px;">4월 점검 캘린더</div>
-              <div class="ui-cal">
-                <div class="d"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div>
-                <div class="d"><span class="c">1</span><span class="c">2</span><span class="c hot">3</span><span class="c">4</span><span class="c">5</span><span class="c">6</span><span class="c">7</span></div>
-              </div>
-              <span class="ui-pill">D-3 · 승강기 검사 · SMS 발송됨</span>
+            <h1 class="sm-title">
+              안전관리,<br>
+              아직도 <span>혼자</span><br>
+              다 하고 계십니까?
+            </h1>
+
+            <p class="sm-desc">
+              점검 일정도, 법령 확인도, TBM도, 보고서도<br>
+              결국 안전관리자 한 사람에게 돌아옵니다.<br><br>
+              문제는 당신이 부족해서가 아닙니다.<br>
+              구조가 그렇게 되어 있기 때문입니다.
+            </p>
+
+            <div class="sm-cta-row">
+              <a href="free-diagnosis.html" class="sm-btn primary">무료 법령진단 시작 →</a>
+              <a href="service/saas.html" class="sm-btn secondary">TAI SAFE 자세히 보기 →</a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 4 [C] -->
-  <section class="fs2-sec bg-white">
-    <div class="fs2-inner fs2-split fs2-split--rev">
-      <div class="fs2-col-vis">
-        <div class="fs2-device">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>현장</span><span>점검</span></div>
-            <div class="fs2-df-b" style="padding:0;">
-              <div style="font-weight:900;font-size:.72rem;margin-bottom:6px;">지게차 #2 일일점검</div>
-              <div class="fk-row"><span>브레이크</span><span class="fk-pill">OK</span></div>
-              <div class="fk-row"><span>후진경보</span><span class="fk-pill">OK</span></div>
-              <div class="fk-row"><span>마스트</span><span class="fk-pill">OK</span></div>
-              <div class="fk-foot">완료 0분 47초 · 서버 저장됨</div>
-            </div>
+          <!-- 우 이미지 -->
+          <div class="sm-hero-img">
+            <img src="assets/img/safety-manager/hero-safety-manager.jpg"
+                 alt="많은 서류와 현장 업무를 혼자 처리하는 안전관리자">
           </div>
-        </div>
-      </div>
-      <div class="fs2-col-text">
-        <span class="fs2-kicker">기록 공백</span>
-        <p class="fs2-mind"><q>점검은 했는데 기록이 없대. 나만 손해</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 코드 한 번이면 체크리스트가 열리고, 끝나면 시간·담당·결과가 통째로 올라갑니다.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- 5 [B] -->
-  <section class="fs2-sec bg-muted">
-    <div class="fs2-inner fs2-split">
-      <div class="fs2-col-text">
-        <span class="fs2-kicker">TBM 아침</span>
-        <p class="fs2-mind"><q>매일 아침 종이 들고 현장 돌아요. 반장님 어디 계세요</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 오늘 작업 내용은 폰으로 공유되고, 참석자는 각자 서명합니다. 필요한 기간만큼 안전하게 보관됩니다.</p>
-      </div>
-      <div class="fs2-col-vis">
-        <div class="fs2-device">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:var(--b);border-radius:10px;margin-bottom:8px;"><span>TBM</span><span>4/21</span></div>
-            <div class="fs2-df-b" style="padding:0;">
-              <div style="background:#f8fafc;border-radius:8px;padding:7px;font-size:.58rem;margin-bottom:8px;">고소·용접 / 안전대 착용</div>
-              <div style="background:#f0fdf4;border-radius:8px;padding:6px 8px;margin-bottom:5px;font-size:.58rem;font-weight:800;color:#15803d;">반장 서명 07:58</div>
-              <div style="background:#f0fdf4;border-radius:8px;padding:6px 8px;font-size:.58rem;font-weight:800;color:#15803d;">작업자 6명 서명 08:01</div>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 6 [A] -->
-  <section class="fs2-sec fs2-a">
-    <div class="fs2-inner" style="min-height:auto;padding-top:20px;padding-bottom:20px;">
-      <span class="fs2-kicker">작업 허가</span>
-      <h2 class="fs2-h2" style="max-width:22ch;">고소작업 허가 받으려면<br>사무실까지 올라가야 해요</h2>
-      <p class="fs2-solve" style="color:rgba(255,255,255,.65);max-width:42ch;"><strong style="color:rgba(255,255,255,.88);">해결</strong> — 현장에서 요청하고, 관리자는 폰에서 승인합니다. 왕복 없이 끝나는 쪽으로 바꿉니다.</p>
-      <div class="fs2-duo">
-        <div>
-          <div class="fs2-device fs2-device--sm" aria-hidden="true">
-            <div class="fs2-device-inner">
-              <div class="fs2-df-h" style="background:#334155;border-radius:8px;margin-bottom:8px;"><span>요청</span></div>
-              <div class="fs2-df-b" style="padding:0;font-size:.55rem;">고소 14:00<br>3공장 동측<span class="ui-pill" style="margin-top:6px;">전송</span></div>
-            </div>
-          </div>
-        </div>
-        <span class="fs2-duo-arr">↔</span>
-        <div>
-          <div class="fs2-device fs2-device--sm" aria-hidden="true">
-            <div class="fs2-device-inner">
-              <div class="fs2-df-h" style="background:var(--b);border-radius:8px;margin-bottom:8px;"><span>승인</span></div>
-              <div class="fs2-df-b" style="padding:0;font-size:.55rem;">2분 만에 승인<br><span style="color:#15803d;font-weight:900;">완료 09:04</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 7 [C] -->
-  <section class="fs2-sec bg-white">
-    <div class="fs2-inner fs2-split fs2-split--rev">
-      <div class="fs2-col-vis">
-        <div class="fs2-vis-stack">
-        <svg viewBox="0 0 360 200" width="100%" style="max-width:400px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <defs><linearGradient id="g7" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#1A5FD4"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
-          <rect x="8" y="70" width="72" height="52" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-          <text x="44" y="92" text-anchor="middle" fill="#475569" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">수집</text>
-          <text x="44" y="108" text-anchor="middle" fill="#0f172a" font-size="9" font-weight="900" font-family="Noto Sans KR,sans-serif">법령·고시</text>
-          <path d="M88 96 H108" stroke="url(#g7)" stroke-width="2"/><polygon points="108,96 118,96 113,91 113,101" fill="#38bdf8"/>
-          <rect x="122" y="70" width="72" height="52" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-          <text x="158" y="92" text-anchor="middle" fill="#475569" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">분석</text>
-          <text x="158" y="108" text-anchor="middle" fill="#0f172a" font-size="9" font-weight="900" font-family="Noto Sans KR,sans-serif">AI 매핑</text>
-          <path d="M202 96 H222" stroke="url(#g7)" stroke-width="2"/><polygon points="222,96 232,96 227,91 227,101" fill="#38bdf8"/>
-          <rect x="236" y="70" width="72" height="52" rx="8" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
-          <text x="272" y="92" text-anchor="middle" fill="#475569" font-size="8" font-weight="800" font-family="Noto Sans KR,sans-serif">반영</text>
-          <text x="272" y="108" text-anchor="middle" fill="#0f172a" font-size="9" font-weight="900" font-family="Noto Sans KR,sans-serif">의무·알림</text>
-          <text x="180" y="38" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans KR,sans-serif">개정이 들어오면 같은 줄로 다시 돕니다</text>
-        </svg>
-        <div class="fs2-device" aria-hidden="true">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:#0f172a;border-radius:10px;margin-bottom:8px;"><span>알림</span><span>법령</span></div>
-            <div class="fs2-df-b" style="padding:0;">
-              <div style="background:#fef3c7;border-left:3px solid #f59e0b;padding:8px;border-radius:6px;margin-bottom:8px;font-size:.58rem;font-weight:800;color:#92400e;">시행규칙 개정 · 5/1 적용</div>
-              <div style="font-size:.55rem;color:#64748b;">의무 템플릿 v2.1 배포 · 점검 3건 재계산</div>
-            </div>
-          </div>
-        </div>
-        </div>
+    <!-- 2. 핵심 공감 메시지 -->
+    <section class="sm-message">
+      <div class="sm-container">
+        <h2>
+          안전관리자는<br>
+          일을 못하는 사람이 아닙니다
+        </h2>
+        <p>
+          법령은 계속 바뀌고, 점검은 반복되고, 기록은 남겨야 합니다.<br>
+          그런데 그 모든 흐름이 아직도 한 사람에게 집중되어 있습니다.
+        </p>
       </div>
-      <div class="fs2-col-text">
-        <span class="fs2-kicker">법 개정</span>
-        <p class="fs2-mind"><q>법이 바뀌었는지도 모르고 감사에서 걸렸어요</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 수백 건의 법령을 계속 훑어서, 바뀐 조문이 우리 일정에 어떻게 닿는지까지 이어 줍니다.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 8 [B] -->
-  <section class="fs2-sec bg-muted">
-    <div class="fs2-inner fs2-split">
-      <div class="fs2-col-text">
-        <span class="fs2-kicker">기상</span>
-        <p class="fs2-mind"><q>폭염특보인데 작업 계속해야 하나? 눈치만 보여</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 기상 데이터를 짧은 주기로 읽고, 법에서 정한 기준과 맞춰 본 뒤 멈출지 알려줍니다.</p>
-      </div>
-      <div class="fs2-col-vis">
-        <div class="fs2-device">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:#0369a1;border-radius:10px;margin-bottom:8px;"><span>현장 기상</span><span>API</span></div>
-            <div class="fs2-df-b" style="padding:0;">
-              <div style="font-size:1.4rem;font-weight:900;color:#ea580c;">36°C</div>
-              <div style="font-size:.58rem;color:#b45309;font-weight:800;">폭염주의보</div>
-              <div style="margin-top:10px;background:#fff7ed;border:1px solid #fdba74;border-radius:10px;padding:8px;font-size:.58rem;font-weight:800;color:#9a3412;">작업중지 권고 · 야외크레인</div>
-              <div style="font-size:.52rem;color:#64748b;margin-top:6px;">30분마다 자동 갱신</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 9 [E] -->
-  <section class="fs2-sec bg-white">
-    <div class="fs2-inner">
-      <span class="fs2-kicker">신고 서류</span>
-      <p class="fs2-mind" style="max-width:36ch;"><q>신고서류 작성하는 데만 반나절이야</q></p>
-      <div class="fs2-grid fs2-grid--3 mt-3">
-        <div class="fs2-card fs2-card--soon">
-          <span class="bc-top badge-coming">준비 중</span>
-          <div style="font-size:2rem;margin-bottom:8px;">📤</div>
-          <strong style="font-size:.95rem;display:block;margin-bottom:10px;">자동 신고 흐름</strong>
-          <div class="fs2-device fs2-device--card" aria-hidden="true">
-            <div class="fs2-device-inner">
-              <div class="fs2-df-h" style="background:#475569;border-radius:8px;margin-bottom:6px;font-size:.55rem;"><span>신고</span><span>초안</span></div>
-              <div style="font-size:.52rem;color:#64748b;">제출 항목 6/8 자동 채움</div>
-            </div>
-          </div>
-          <p class="fs2-solve" style="flex:1;font-size:.84rem;">데이터가 모이면 제출 형태까지 이어지게 만들 예정입니다.</p>
-          <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=autofiling">사전등록</a>
-        </div>
-        <div class="fs2-card fs2-card--soon">
-          <span class="bc-top badge-coming">준비 중</span>
-          <div style="font-size:2rem;margin-bottom:8px;">📄</div>
-          <strong style="font-size:.95rem;display:block;margin-bottom:10px;">문서 서식</strong>
-          <div class="fs2-device fs2-device--card" aria-hidden="true">
-            <div class="fs2-device-inner">
-              <div class="fs2-df-h" style="background:#334155;border-radius:8px;margin-bottom:6px;font-size:.55rem;"><span>서식</span><span>미리보기</span></div>
-              <div style="height:4px;background:#e2e8f0;border-radius:2px;margin:4px 0;"></div>
-              <div style="height:4px;background:#e2e8f0;border-radius:2px;width:80%;"></div>
-            </div>
-          </div>
-          <p class="fs2-solve" style="flex:1;font-size:.84rem;">항목만 채우면 양식이 맞춰 나오게 할 예정입니다.</p>
-          <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=doc-forms">사전등록</a>
-        </div>
-        <div class="fs2-card fs2-card--soon">
-          <span class="bc-top badge-coming">준비 중</span>
-          <div style="font-size:2rem;margin-bottom:8px;">🏷️</div>
-          <strong style="font-size:.95rem;display:block;margin-bottom:10px;">라벨·출력</strong>
-          <div class="fs2-device fs2-device--card" aria-hidden="true">
-            <div class="fs2-device-inner">
-              <div class="fs2-df-h" style="background:#7c3aed;border-radius:8px;margin-bottom:6px;font-size:.55rem;"><span>라벨</span><span>출력</span></div>
-              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;"><span style="background:#ede9fe;padding:4px 8px;border-radius:6px;font-size:.5rem;font-weight:800;color:#5b21b6;">A구역</span><span style="background:#ede9fe;padding:4px 8px;border-radius:6px;font-size:.5rem;font-weight:800;color:#5b21b6;">D-2</span></div>
-            </div>
-          </div>
-          <p class="fs2-solve" style="flex:1;font-size:.84rem;">현장에 붙일 것까지 한 번에 뽑는 쪽으로 연결합니다.</p>
-          <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=labels">사전등록</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- 3. 현실 장면 -->
+    <section class="sm-section">
+      <div class="sm-container">
+        <div class="sm-grid reverse">
 
-  <!-- 10 [C on muted] -->
-  <section class="fs2-sec bg-muted">
-    <div class="fs2-inner fs2-split fs2-split--rev">
-      <div class="fs2-col-vis">
-        <div class="fs2-device">
-          <div class="fs2-device-inner">
-            <div class="fs2-df-h" style="background:#0d9488;border-radius:10px;margin-bottom:8px;"><span>채팅</span><span>접수</span></div>
-            <div class="fs2-df-b" style="padding:0;">
-              <div style="background:#334155;color:#e2e8f0;border-radius:10px;padding:8px;margin-bottom:6px;font-size:.58rem;">어떤 증상인가요?</div>
-              <div style="background:#3b82f6;color:#fff;border-radius:10px;padding:8px;margin-left:12px;font-size:.58rem;">지게차 유압 누유…</div>
-              <div style="background:#334155;color:#e2e8f0;border-radius:10px;padding:8px;margin-top:6px;font-size:.58rem;">자격 조건 맞는 업체 2곳 찾았어요.</div>
-            </div>
+          <!-- 우 텍스트 -->
+          <div>
+            <span class="sm-kicker">현장의 현실</span>
+            <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
+              점검은 했는데,<br>
+              기록이 없다고 합니다
+            </h2>
+            <p class="sm-desc">
+              작업자는 확인했다고 말하고,<br>
+              관리자는 기록을 찾고,<br>
+              사고가 나면 결국 안전관리자가 설명해야 합니다.<br><br>
+              점검보다 힘든 건,<br>
+              점검했다는 것을 증명하는 일입니다.
+            </p>
           </div>
+
+          <!-- 좌 이미지 -->
+          <div class="sm-image-box">
+            <img src="assets/img/safety-manager/record-missing.jpg"
+                 alt="점검 기록을 찾지 못해 난감한 안전관리자">
+          </div>
+
         </div>
       </div>
-      <div class="fs2-col-text">
-        <span class="badge-coming" style="margin-bottom:10px;display:inline-block;">준비 중</span>
-        <p class="fs2-mind"><q>설비 고장났는데 업체를 모르겠어요. 누가 믿을지도</q></p>
-        <p class="fs2-solve"><strong>해결</strong> — 증상을 던지면 필요한 서류·자격을 걸러서 업체를 좁혀 줄 예정입니다.</p>
-        <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=fix-chat">사전등록</a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 11 [E] -->
-  <section class="fs2-sec bg-white">
-    <div class="fs2-inner">
-      <span class="fs2-kicker">사람이 필요할 때</span>
-      <p class="fs2-mind" style="max-width:34ch;"><q>전임 안전관리자 어디서 구해요. 소개만 받고 끝나면 어쩌고</q></p>
-      <div class="fs2-grid fs2-grid--2 mt-3">
-        <div class="fs2-card fs2-card--soon">
-          <span class="bc-top badge-coming">준비 중</span>
-          <strong style="font-size:1.05rem;display:block;margin-bottom:8px;">선임·검사 연결</strong>
-          <p class="fs2-solve" style="flex:1;font-size:.86rem;">의무가 생겼을 때 필요한 사람을 데이터로 묶어서 이어 줄 예정입니다.</p>
-          <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=appoint">사전등록</a>
+
+    <!-- 4. 구조 문제 -->
+    <section class="sm-section" style="background:#f8fafc;">
+      <div class="sm-container">
+        <div class="sm-grid">
+
+          <!-- 좌 텍스트 -->
+          <div>
+            <span class="sm-kicker">구조의 문제</span>
+            <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
+              엑셀을 잘 만들어도,<br>
+              구조는 그대로입니다
+            </h2>
+            <p class="sm-desc">
+              엑셀을 정리하고, 담당자를 나누고,<br>
+              단톡방에 다시 공유해도 문제는 반복됩니다.<br><br>
+              사람이 기억하고 챙기는 방식으로는<br>
+              현장의 모든 의무와 일정을 놓치지 않기 어렵습니다.
+            </p>
+          </div>
+
+          <!-- 우 이미지 -->
+          <div class="sm-image-box">
+            <img src="assets/img/safety-manager/excel-overload.jpg"
+                 alt="엑셀과 서류로 안전관리 업무를 처리하는 모습">
+          </div>
+
         </div>
-        <div class="fs2-card fs2-card--soon">
-          <span class="bc-top badge-coming">준비 중</span>
-          <strong style="font-size:1.05rem;display:block;margin-bottom:8px;">현장 컨설팅</strong>
-          <p class="fs2-solve" style="flex:1;font-size:.86rem;">시스템만으로 부족한 구간은 사람이 들어가는 자리를 만들 예정입니다.</p>
-          <a class="fs2-btn-warn mt-2" href="fix-request.html?from=for-safety-manager&amp;type=general&amp;interest=consult">사전등록</a>
+      </div>
+    </section>
+
+
+    <!-- 5. 전환 한 줄 -->
+    <section class="sm-section">
+      <div class="sm-container">
+        <div class="sm-quote-box">
+          <h3>
+            방법은 바뀌어도,<br>
+            구조가 바뀌지 않으면 일은 줄어들지 않습니다.
+          </h3>
+          <p>
+            근본적인 해결을 위해서는 안전관리자가 더 노력하는 것이 아니라,
+            관리 방식 자체가 바뀌어야 합니다.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 12 [F] -->
-  <section class="fs2-sec fs2-flow">
-    <div class="fs2-inner">
-      <h2 class="fs2-h2">이 모든 것이<br>하나로 연결됩니다.</h2>
-      <p class="fs2-svg-cap" style="max-width:48ch;margin:0 auto 20px;">지금 쓰실 수 있는 실선 흐름과, 곧 이어질 점선을 한 그림에 모았습니다.</p>
-      <svg class="fs2-flow-svg-d" viewBox="0 0 900 200" width="100%" style="max-width:900px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="f12t">
-        <title id="f12t">서비스 전체 연결 다이어그램</title>
-        <defs><linearGradient id="gf" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>
-        <rect x="20" y="72" width="100" height="56" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="70" y="98" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 중</text>
-        <text x="70" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">적용 확인</text>
-        <path d="M130 100 H160" stroke="url(#gf)" stroke-width="2.5"/><polygon points="160,100 172,100 166,94 166,106" fill="#60a5fa"/>
-        <rect x="176" y="72" width="100" height="56" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="226" y="98" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 중</text>
-        <text x="226" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">운영·알림</text>
-        <path d="M286 100 H316" stroke="url(#gf)" stroke-width="2.5"/><polygon points="316,100 328,100 322,94 322,106" fill="#60a5fa"/>
-        <rect x="332" y="72" width="100" height="56" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="382" y="98" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">이용 중</text>
-        <text x="382" y="116" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">이상·점검</text>
-        <path d="M442 100 H472" stroke="url(#gf)" stroke-width="2.5"/><polygon points="472,100 484,100 478,94 478,106" fill="#60a5fa"/>
-        <rect x="488" y="72" width="100" height="56" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="538" y="98" text-anchor="middle" fill="#f59e0b" font-size="9" font-weight="800" font-family="Noto Sans KR,sans-serif">준비 중</text>
-        <text x="538" y="116" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">수선 연결</text>
-        <path d="M598 100 H628" stroke="#475569" stroke-width="2" stroke-dasharray="6 4"/><polygon points="628,100 638,100 633,95 633,105" fill="#64748b"/>
-        <rect x="644" y="72" width="120" height="56" rx="10" fill="#0f172a" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="704" y="92" text-anchor="middle" fill="#f59e0b" font-size="8" font-weight="900" font-family="Noto Sans KR,sans-serif">준비 중</text>
-        <text x="704" y="112" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">신고·선임 분기</text>
-        <path d="M226 72 Q226 36 704 36 Q770 36 770 72" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="500" y="30" text-anchor="middle" fill="#64748b" font-size="9" font-family="Noto Sans KR,sans-serif">운영 단계에서 분기 → 인앱 신고 · 선임 연결</text>
-      </svg>
-      <svg class="fs2-flow-svg-m" viewBox="0 0 280 480" width="100%" style="max-width:320px;display:none;margin:0 auto;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="70" y="16" width="140" height="52" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="140" y="48" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">적용 확인</text>
-        <line x1="140" y1="68" x2="140" y2="88" stroke="#60a5fa" stroke-width="2"/>
-        <rect x="70" y="92" width="140" height="52" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="140" y="124" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">운영·알림</text>
-        <line x1="140" y1="144" x2="140" y2="164" stroke="#60a5fa" stroke-width="2"/>
-        <rect x="70" y="168" width="140" height="52" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
-        <text x="140" y="200" text-anchor="middle" fill="#fff" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">이상·점검</text>
-        <line x1="140" y1="220" x2="140" y2="240" stroke="#60a5fa" stroke-width="2"/>
-        <rect x="70" y="244" width="140" height="52" rx="10" fill="#1e293b" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="140" y="268" text-anchor="middle" fill="#f59e0b" font-size="8" font-weight="900" font-family="Noto Sans KR,sans-serif">준비 중</text>
-        <text x="140" y="282" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="900" font-family="Noto Sans KR,sans-serif">수선 연결</text>
-        <line x1="140" y1="296" x2="140" y2="316" stroke="#64748b" stroke-width="2" stroke-dasharray="5 4"/>
-        <rect x="70" y="320" width="140" height="56" rx="10" fill="#0f172a" stroke="#64748b" stroke-dasharray="5 4"/>
-        <text x="140" y="348" text-anchor="middle" fill="#f59e0b" font-size="8" font-weight="900" font-family="Noto Sans KR,sans-serif">준비 중</text>
-        <text x="140" y="366" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="800" font-family="Noto Sans KR,sans-serif">신고·선임</text>
-      </svg>
-      <p class="fs2-patent-note">핵심 흐름은 특허 출원(제10-2026-0056330 외 7건)으로 보호하고 있습니다. <a href="patents.html">특허 안내 →</a></p>
-    </div>
-  </section>
 
-  <!-- 13 [A] -->
-  <section class="fs2-sec fs2-a">
-    <div class="fs2-inner" style="min-height:auto;text-align:center;padding-top:32px;padding-bottom:48px;">
-      <h2 class="fs2-h2" style="margin-left:auto;margin-right:auto;">3분이면<br>시작됩니다.</h2>
-      <p class="fs2-solve" style="margin:0 auto 8px;color:rgba(255,255,255,.6);text-align:center;max-width:40ch;">말로만 듣던 것부터 하나씩 줄여 보세요.</p>
-      <div class="fs2-cta-row">
-        <a class="fs2-btn fs2-btn-pri" href="free-diagnosis.html">무료 법령진단 시작 →</a>
-        <a class="fs2-btn fs2-btn-ghost" href="service/saas.html#pricing">SaaS 요금제 보기</a>
-        <a class="fs2-btn fs2-btn-ghost" href="fix-request.html?from=for-safety-manager&amp;type=general">도입 문의</a>
+    <!-- 6. 관리 방식 전환 -->
+    <section class="sm-section" style="background:#ffffff;">
+      <div class="sm-container">
+        <div class="sm-grid reverse">
+
+          <!-- 우 텍스트 -->
+          <div>
+            <span class="sm-kicker">관리 방식의 전환</span>
+            <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
+              그래서 안전관리는<br>
+              흐름으로 연결되어야 합니다
+            </h2>
+            <p class="sm-desc">
+              법령 확인에서 시작해<br>
+              일정 생성, 담당자 배정, 현장 점검,<br>
+              이상 보고, 조치, 기록 보관까지.<br><br>
+              하나의 흐름으로 이어져야<br>
+              안전관리자가 혼자 떠안지 않습니다.
+            </p>
+          </div>
+
+          <!-- 좌 이미지 -->
+          <div class="sm-image-box sm-flow-img">
+            <img src="assets/img/safety-manager/safety-flow.jpg"
+                 alt="법령 확인부터 점검, 보고, 조치, 기록까지 이어지는 안전관리 흐름">
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+
+    <!-- 7. 선택 CTA -->
+    <section class="sm-section sm-choice">
+      <div class="sm-container">
+
+        <div style="text-align:center;">
+          <span class="sm-kicker">NEXT STEP</span>
+          <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);">
+            지금 필요한 것을 선택하세요
+          </h2>
+          <p class="sm-desc" style="max-width:620px;margin:0 auto;">
+            먼저 우리 사업장의 법령 상태를 확인하거나,<br>
+            실제 운영 방식이 어떻게 바뀌는지 확인할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="sm-choice-grid">
+
+          <div class="sm-choice-card">
+            <h3>우리 사업장 법령 상태 확인</h3>
+            <p>
+              업종, 인원, 설비 조건을 기준으로
+              적용 법령과 의무 항목을 먼저 확인합니다.
+            </p>
+            <a href="free-diagnosis.html" class="sm-btn primary">무료 법령진단 시작 →</a>
+          </div>
+
+          <div class="sm-choice-card">
+            <h3>안전관리 운영 방식 보기</h3>
+            <p>
+              점검, 알림, 보고, 조치, 기록이
+              어떻게 하나의 흐름으로 연결되는지 확인합니다.
+            </p>
+            <a href="service/saas.html" class="sm-btn secondary">TAI SAFE 자세히 보기 →</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
 
   </main>
 
@@ -579,45 +494,6 @@
   <script src="assets/js/header.js"></script>
   <script src="assets/js/nav-auth.js"></script>
   <script src="assets/js/footer.js"></script>
-  <script>
-  if (typeof WOW !== 'undefined') new WOW().init();
-  (function() {
-    function fmt(n, comma) {
-      return comma ? n.toLocaleString('ko-KR') : String(n);
-    }
-    function runEl(el, target, comma, ms) {
-      if (el.getAttribute('data-fs2-done')) return;
-      el.setAttribute('data-fs2-done', '1');
-      var t0 = performance.now();
-      function ease(t) { return 1 - Math.pow(1 - t, 3); }
-      function frame(now) {
-        var p = Math.min(1, (now - t0) / ms);
-        var v = Math.round(target * ease(p));
-        el.textContent = fmt(v, comma);
-        if (p < 1) requestAnimationFrame(frame);
-        else el.textContent = fmt(target, comma);
-      }
-      requestAnimationFrame(frame);
-    }
-    function fire(scope) {
-      if (!scope || scope.getAttribute('data-fs2-fired')) return;
-      scope.setAttribute('data-fs2-fired', '1');
-      scope.querySelectorAll('[data-target], [data-fs2-count]').forEach(function(el) {
-        var raw = el.getAttribute('data-target') || el.getAttribute('data-fs2-count');
-        var t = parseInt(raw, 10);
-        if (isNaN(t)) return;
-        var comma = el.getAttribute('data-fs2-comma') === '1' || el.getAttribute('data-fs2-comma') === 'true';
-        var ms = t > 30000 ? 2600 : t > 5000 ? 2200 : 1800;
-        runEl(el, t, comma, ms);
-      });
-    }
-    var scopes = document.querySelectorAll('#fs2 .fs2-count-scope');
-    if (!('IntersectionObserver' in window)) { scopes.forEach(fire); return; }
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(en) { if (en.isIntersecting) fire(en.target); });
-    }, { threshold: 0.5 });
-    scopes.forEach(function(s) { io.observe(s); });
-  })();
-  </script>
+  <script>if (typeof WOW !== 'undefined') new WOW().init();</script>
 </body>
 </html>
