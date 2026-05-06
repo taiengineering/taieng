@@ -74,11 +74,11 @@
 
     /* "그래서 이렇게 해결하려고 합니다" 섹션 (factory3.png + 4 불릿 + 결론) */
     .factory-options { padding: 130px 0; background: #f9f9f9; }
-    /* 헤드라인 ↔ 이미지 사이 여백 확대 (라벨 잘림 방지) */
-    .factory-options .section-title { margin-bottom: 60px; }
-    /* factory3.png 자체 위쪽 여백 + 잘림 방지 */
+    /* 헤드라인 ↔ 이미지 사이 충분한 여백 (라벨 잘림 방지 v3) */
+    .factory-options .section-title { margin-bottom: 80px; }
+    /* factory3.png 자체 위쪽 여백 (24px → 100px, 충분히 크게) */
     .factory-options .tai-wide-image {
-      margin-top: 24px;
+      margin-top: 100px;
       margin-bottom: 28px;
       box-shadow: none;
       border-radius: 0;
@@ -289,7 +289,8 @@
 
     @media (max-width: 991px) {
       .factory-options { padding: 80px 0; }
-      .factory-options .section-title { margin-bottom: 40px; }
+      .factory-options .section-title { margin-bottom: 50px; }
+      .factory-options .tai-wide-image { margin-top: 60px; }
       .factory-bullet-grid { grid-template-columns: repeat(2, 1fr); }
       .flow-section { padding: 80px 0; }
       .flow-side { padding-right: 0; margin-bottom: 28px; }
