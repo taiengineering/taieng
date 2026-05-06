@@ -153,26 +153,56 @@
       line-height: 1.8;
     }
 
-    /* 전환 박스 */
+    /* 5번 전환 박스 — 큰 헤드라인 + 오렌지 강조 + 디바이더 + 작은 부연 */
     .transition-box {
-      max-width: 1020px;
+      max-width: 1100px;
       margin: 0 auto;
       background: #fff;
-      border-radius: 24px;
-      padding: 42px 48px;
+      border-radius: 28px;
+      padding: clamp(64px, 8vw, 110px) clamp(36px, 6vw, 80px);
       border: 1px solid #e2e8f0;
-      box-shadow: 0 14px 36px rgba(15, 23, 42, .06);
+      box-shadow: 0 18px 48px rgba(15, 23, 42, .08);
+      text-align: center;
     }
-    .transition-box h3 {
-      font-size: 2rem;
+    .transition-title {
+      font-size: clamp(1.9rem, 4.4vw, 3.4rem);
       font-weight: 900;
       color: #0f172a;
-      margin-bottom: 10px;
-    }
-    .transition-box p {
-      color: #64748b;
+      line-height: 1.3;
+      letter-spacing: -.025em;
       margin: 0;
-      line-height: 1.8;
+      word-break: keep-all;
+    }
+    .transition-title span {
+      color: #c2410c;
+    }
+    .transition-divider {
+      display: block;
+      width: 52px;
+      height: 3px;
+      background: #c2410c;
+      border: 0;
+      margin: 28px auto 28px;
+      border-radius: 2px;
+    }
+    .transition-desc {
+      color: #64748b;
+      font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+      margin: 0;
+      line-height: 1.85;
+      word-break: keep-all;
+    }
+    @media (max-width: 768px) {
+      .transition-box {
+        padding: 56px 28px;
+        border-radius: 20px;
+      }
+      .transition-title {
+        font-size: 1.6rem;
+      }
+      .transition-divider {
+        margin: 22px auto 22px;
+      }
     }
 
     /* CTA */
@@ -224,8 +254,6 @@
       .impact-title { font-size: 2rem; }
       .tai-image-box img { height: 260px; }
       .process-image img { height: 220px; }
-      .transition-box { padding: 30px 24px; }
-      .transition-box h3 { font-size: 1.5rem; }
       .construction-cta-card { padding: 30px 24px; }
     }
   </style>
@@ -371,15 +399,18 @@
     </div>
   </section>
 
-  <!-- 5. 전환 메시지 -->
-  <section class="pd-top-90 pd-bottom-90" style="background:#f8fafc;">
+  <!-- 5. 전환 메시지 — 큰 헤드라인 + 오렌지 디바이더 -->
+  <section class="pd-top-110 pd-bottom-110" style="background:#f8fafc;">
     <div class="container">
       <div class="transition-box">
-        <h3>방법은 바뀌어도, 구조는 그대로입니다.</h3>
-        <p>
-          근본적인 해결을 위해서는
-          전달 방식이 아니라
-          관리 방식의 전환이 필요합니다.
+        <h3 class="transition-title">
+          방법은 바뀌어도,<br>
+          <span>구조</span>는 그대로입니다
+        </h3>
+        <span class="transition-divider" aria-hidden="true"></span>
+        <p class="transition-desc">
+          근본적인 해결을 위해서는<br>
+          전달 방식이 아니라, 관리 방식의 전환이 필요합니다.
         </p>
       </div>
     </div>
