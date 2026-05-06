@@ -128,6 +128,32 @@
       display: block;
     }
 
+    /* 결정적 한 줄 (이미지 아래 메시지 압축) */
+    .sm-conclusion {
+      text-align: center;
+      margin-top: 56px;
+      padding: 0 20px;
+    }
+    .sm-conclusion h3 {
+      font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -.025em;
+      line-height: 1.4;
+      margin: 0 0 18px;
+    }
+    .sm-conclusion h3 strong {
+      color: #1A5FD4;
+      font-weight: 900;
+    }
+    .sm-conclusion p {
+      color: #64748b;
+      font-size: 1rem;
+      line-height: 1.85;
+      margin: 0 auto;
+      max-width: 560px;
+    }
+
     .sm-cta-row {
       display: flex;
       gap: 12px;
@@ -275,6 +301,10 @@
       .sm-flow-img img {
         height: 280px;
       }
+
+      .sm-conclusion {
+        margin-top: 40px;
+      }
     }
   </style>
 </head>
@@ -325,7 +355,7 @@
     </section>
 
 
-    <!-- 2. 매일 반복되는 문제 (시안 그대로) -->
+    <!-- 2. 매일 반복되는 문제 -->
     <section class="sm-section">
       <div class="sm-container">
 
@@ -345,7 +375,39 @@
     </section>
 
 
-    <!-- 3. 핵심 공감 메시지 -->
+    <!-- 3. 방법은 바꿔도, 구조는 그대로 (safe3) -->
+    <section class="sm-section" style="background:#f8fafc;">
+      <div class="sm-container">
+
+        <div style="text-align:center;margin-bottom:50px;">
+          <span class="sm-kicker">지금은 이렇게 버티고 있습니다</span>
+          <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:0;">
+            방법은 바꿔도,<br>
+            <span>구조</span>는 그대로입니다
+          </h2>
+        </div>
+
+        <div class="sm-fullimg">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe3.png"
+               alt="엑셀 정리 → 종이 출력 → 단톡방 공유 → 안전관리자가 더 챙기고 → 그래도 일은 줄지 않습니다">
+        </div>
+
+        <div class="sm-conclusion">
+          <h3>
+            문제는 <strong>노력</strong>이 아니라,<br>
+            <strong>구조</strong>입니다
+          </h3>
+          <p>
+            엑셀을 더 만들고, 종이를 더 출력하고, 단톡방을 더 늘려도<br>
+            결국 모든 일은 안전관리자 한 사람에게 다시 돌아옵니다.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 4. 핵심 공감 메시지 -->
     <section class="sm-message">
       <div class="sm-container">
         <h2>
@@ -360,7 +422,7 @@
     </section>
 
 
-    <!-- 4. 현실 장면 -->
+    <!-- 5. 현실 장면 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-grid reverse">
@@ -392,7 +454,7 @@
     </section>
 
 
-    <!-- 5. 구조 문제 -->
+    <!-- 6. 구조 문제 (⚠ 3번과 메시지 중복 후보) -->
     <section class="sm-section" style="background:#f8fafc;">
       <div class="sm-container">
         <div class="sm-grid">
@@ -423,7 +485,7 @@
     </section>
 
 
-    <!-- 6. 전환 한 줄 -->
+    <!-- 7. 전환 한 줄 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-quote-box">
@@ -440,7 +502,7 @@
     </section>
 
 
-    <!-- 7. 관리 방식 전환 -->
+    <!-- 8. 관리 방식 전환 -->
     <section class="sm-section" style="background:#ffffff;">
       <div class="sm-container">
         <div class="sm-grid reverse">
@@ -472,7 +534,7 @@
     </section>
 
 
-    <!-- 8. 선택 CTA -->
+    <!-- 9. 선택 CTA -->
     <section class="sm-section sm-choice">
       <div class="sm-container">
 
