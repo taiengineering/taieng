@@ -116,6 +116,18 @@
       display: block;
     }
 
+    /* 풀폭 인포그래픽 이미지 (자연 비율) */
+    .sm-fullimg {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .sm-fullimg img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .sm-cta-row {
       display: flex;
       gap: 12px;
@@ -313,7 +325,27 @@
     </section>
 
 
-    <!-- 2. 핵심 공감 메시지 -->
+    <!-- 2. 매일 반복되는 문제 (시안 그대로) -->
+    <section class="sm-section">
+      <div class="sm-container">
+
+        <div style="text-align:center;margin-bottom:42px;">
+          <span class="sm-kicker">매일 반복되는 문제</span>
+          <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:0;">
+            이런 일이 매일 반복됩니다
+          </h2>
+        </div>
+
+        <div class="sm-fullimg">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe2.png"
+               alt="안전관리자가 매일 마주치는 5가지 문제 — 적용 법령, 점검 일정, TBM·허가, 점검 기록, 기상 대응">
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- 3. 핵심 공감 메시지 -->
     <section class="sm-message">
       <div class="sm-container">
         <h2>
@@ -328,7 +360,7 @@
     </section>
 
 
-    <!-- 3. 현실 장면 -->
+    <!-- 4. 현실 장면 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-grid reverse">
@@ -360,7 +392,7 @@
     </section>
 
 
-    <!-- 4. 구조 문제 -->
+    <!-- 5. 구조 문제 -->
     <section class="sm-section" style="background:#f8fafc;">
       <div class="sm-container">
         <div class="sm-grid">
@@ -391,7 +423,7 @@
     </section>
 
 
-    <!-- 5. 전환 한 줄 -->
+    <!-- 6. 전환 한 줄 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-quote-box">
@@ -408,7 +440,7 @@
     </section>
 
 
-    <!-- 6. 관리 방식 전환 -->
+    <!-- 7. 관리 방식 전환 -->
     <section class="sm-section" style="background:#ffffff;">
       <div class="sm-container">
         <div class="sm-grid reverse">
@@ -440,7 +472,7 @@
     </section>
 
 
-    <!-- 7. 선택 CTA -->
+    <!-- 8. 선택 CTA -->
     <section class="sm-section sm-choice">
       <div class="sm-container">
 
