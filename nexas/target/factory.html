@@ -45,69 +45,22 @@
     body.sc5 {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    .law-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: center;
-      box-shadow: 0 3px 14px rgba(0,0,0,.07);
-      height: 100%;
-    }
-    .law-card .law-icon { font-size: 2rem; margin-bottom: 10px; }
-    .law-card h5 { font-size: .92rem; font-weight: 800; color: #1e293b; margin: 0; line-height: 1.4; }
-    .duty-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 24px 20px;
-      box-shadow: 0 3px 16px rgba(0,0,0,.07);
-      height: 100%;
-      border-left: 4px solid #059669;
-    }
-    .duty-card h5 { font-size: 1rem; font-weight: 800; color: #1e293b; margin-bottom: 8px; }
-    .duty-card p { font-size: .88rem; color: #64748b; margin: 6px 0 0; line-height: 1.55; }
-    .auto-block {
-      background: #f0fdf4;
-      border-radius: 14px;
-      padding: 28px 24px;
-      height: 100%;
-    }
-    .auto-block .ab-icon { font-size: 2rem; margin-bottom: 12px; }
-    .auto-block h5 { font-size: 1rem; font-weight: 800; color: #14532d; margin-bottom: 8px; }
-    .auto-block p { font-size: .9rem; color: #374151; line-height: 1.6; margin: 0; }
 
-    /* 이미지 박스 */
-    .tai-image-box,
-    .tai-process-image,
-    .compare-img {
+    /* 이미지 박스 (현실공감 섹션) */
+    .tai-image-box {
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 14px 36px rgba(15, 23, 42, 0.14);
       background: #e5e7eb;
     }
-    .tai-image-box img,
-    .tai-process-image img,
-    .compare-img img {
+    .tai-image-box img {
       width: 100%;
       display: block;
       object-fit: cover;
+      height: 360px;
     }
-    .tai-image-box img { height: 360px; }
-    .tai-process-image img { height: 360px; }
-    .compare-box {
-      height: 100%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .compare-content { padding: 28px; }
-    .compare-content h4 { color: #fff; font-weight: 900; margin-bottom: 14px; }
-    .compare-content ul { margin: 0; padding-left: 18px; color: #d1d5db; line-height: 1.9; }
-    .compare-img img { height: 260px; }
     @media (max-width: 768px) {
-      .tai-image-box img,
-      .tai-process-image img { height: 240px; }
-      .compare-img img { height: 220px; }
+      .tai-image-box img { height: 240px; }
     }
 
     /* 풀폭 와이드 이미지 (factory2.png, factory3.png 등) */
@@ -120,12 +73,13 @@
     }
 
     /* "그래서 이렇게 해결하려고 합니다" 섹션 (factory3.png + 4 불릿 + 결론) */
-    /* 상하 여백 130px (이전 96px → 130px) */
     .factory-options { padding: 130px 0; background: #f9f9f9; }
-    .factory-options .section-title { margin-bottom: 28px; }
-    /* factory3.png 상단 잘림 방지 — border-radius 0, padding 0, overflow visible */
+    /* 헤드라인 ↔ 이미지 사이 여백 확대 (라벨 잘림 방지) */
+    .factory-options .section-title { margin-bottom: 60px; }
+    /* factory3.png 자체 위쪽 여백 + 잘림 방지 */
     .factory-options .tai-wide-image {
-      margin-bottom: 20px;
+      margin-top: 24px;
+      margin-bottom: 28px;
       box-shadow: none;
       border-radius: 0;
       overflow: visible;
@@ -335,6 +289,7 @@
 
     @media (max-width: 991px) {
       .factory-options { padding: 80px 0; }
+      .factory-options .section-title { margin-bottom: 40px; }
       .factory-bullet-grid { grid-template-columns: repeat(2, 1fr); }
       .flow-section { padding: 80px 0; }
       .flow-side { padding-right: 0; margin-bottom: 28px; }
@@ -536,130 +491,6 @@
             <h4 class="flow-cta-title">이 모든 흐름을 하나로 관리하세요.</h4>
             <p class="flow-cta-desc">TAI SAFE로 안전관리 체계를 완성하세요.</p>
             <a href="../service/saas.html" class="flow-cta-btn sec">TAI SAFE 자세히 보기 →</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 위험성평가 + 이미지 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
-    <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6 order-lg-1 order-2">
-          <div class="tai-image-box">
-            <img src="../assets/img/factory/risk-assessment-workers.jpg" alt="작업자가 참여하는 위험성평가">
-          </div>
-        </div>
-
-        <div class="col-lg-6 order-lg-2 order-1">
-          <div class="section-title">
-            <h2 class="title">
-              위험성평가는 이제<br>
-              안전관리자 혼자 만드는 문서가 아닙니다
-            </h2>
-            <p>
-              작업자 참여 없는 위험성평가, 현장이 반영되지 않은 평가,
-              기록만 있는 평가는 사고 발생 시 형식적 평가로 판단될 수 있습니다.
-            </p>
-            <p>
-              현장의 위험은 작업자가 가장 먼저 압니다.
-              TAI Safe는 작업자가 직접 위험요인 확인과 점검에 참여하도록 구조를 바꿉니다.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Before / After -->
-  <section class="service-area pd-top-90 pd-bottom-90" style="background:#0f172a;color:#fff;">
-    <div class="container">
-      <div class="section-title text-center">
-        <h2 class="title" style="color:#fff;">같은 현장, 결과는 완전히 다릅니다</h2>
-        <p style="color:#cbd5e1;">TAI를 쓰기 전과 후, 안전관리 방식은 두 가지로 나뉩니다.</p>
-      </div>
-
-      <div class="row g-4 mt-3 align-items-stretch">
-        <div class="col-lg-6">
-          <div class="compare-box compare-box--before">
-            <div class="compare-img">
-              <img src="../assets/img/factory/before-paper-safety.jpg" alt="종이와 엑셀로 관리하는 기존 안전관리">
-            </div>
-            <div class="compare-content">
-              <h4>TAI 이전</h4>
-              <ul>
-                <li>안전관리자 중심</li>
-                <li>종이 점검표와 엑셀 관리</li>
-                <li>이상 보고 지연</li>
-                <li>기록과 조치 분리</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="compare-box compare-box--after">
-            <div class="compare-img">
-              <img src="../assets/img/factory/after-digital-safety.jpg" alt="TAI로 전산화된 안전관리">
-            </div>
-            <div class="compare-content">
-              <h4>TAI 이후</h4>
-              <ul>
-                <li>작업자 참여형 점검</li>
-                <li>담당자 자동 배정</li>
-                <li>이상 즉시 알림</li>
-                <li>증빙 자동 저장</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TAI 해결 구조 -->
-  <section class="featured-area pd-top-110 pd-bottom-110">
-    <div class="container">
-      <div class="section-title text-center">
-        <h2 class="title">안전관리를 분산하고, 전산화합니다</h2>
-        <p>안전관리자는 모든 일을 직접 하는 사람이 아니라, 현장 전체를 운영하는 사람이 되어야 합니다.</p>
-      </div>
-
-      <div class="tai-process-image mt-4">
-        <img src="../assets/img/factory/tai-safety-flow.jpg" alt="법령 진단부터 점검 배정, 이상 보고, 증빙 저장까지 이어지는 TAI Safe 흐름">
-      </div>
-
-      <div class="row g-4 mt-4">
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">⚖️</div>
-            <h5>법령 자동 판정</h5>
-            <p>업종, 인원, 설비 조건에 따라 적용 법령과 의무 항목을 자동으로 정리합니다.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">👷</div>
-            <h5>작업자 점검 배정</h5>
-            <p>안전관리자가 혼자 하는 점검을 작업자와 조장에게 분산합니다.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">🔔</div>
-            <h5>이상 즉시 알림</h5>
-            <p>현장에서 이상이 입력되면 관리자에게 즉시 전달됩니다.</p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-          <div class="auto-block">
-            <div class="ab-icon">🧾</div>
-            <h5>증빙 자동 저장</h5>
-            <p>누가, 언제, 무엇을 확인했는지 기록과 보고서로 남습니다.</p>
           </div>
         </div>
       </div>
