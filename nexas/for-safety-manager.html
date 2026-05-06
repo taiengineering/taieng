@@ -102,6 +102,7 @@
       overflow: hidden;
     }
 
+    /* 히어로 이미지 — safe1.png는 인물+말풍선 합성이라 잘림 안됨(비율 유지) */
     .sm-hero-img {
       border-radius: 30px;
       overflow: hidden;
@@ -111,8 +112,7 @@
 
     .sm-hero-img img {
       width: 100%;
-      height: 520px;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
 
@@ -258,7 +258,7 @@
         min-height: auto;
       }
 
-      .sm-hero-img img,
+      /* 히어로 이미지는 모바일에서도 자연 비율 유지 */
       .sm-image-box img,
       .sm-flow-img img {
         height: 280px;
@@ -283,19 +283,17 @@
 
           <!-- 좌 텍스트 -->
           <div>
-            <span class="sm-kicker">FOR SAFETY MANAGER</span>
+            <span class="sm-kicker">안전관리자를 위한 TAI Safe</span>
 
             <h1 class="sm-title">
-              안전관리,<br>
               아직도 <span>혼자</span><br>
               다 하고 계십니까?
             </h1>
 
             <p class="sm-desc">
-              점검 일정도, 법령 확인도, TBM도, 보고서도<br>
-              결국 안전관리자 한 사람에게 돌아옵니다.<br><br>
-              문제는 당신이 부족해서가 아닙니다.<br>
-              구조가 그렇게 되어 있기 때문입니다.
+              법령 확인, 점검 일정, TBM, 허가, 보고, 기록까지.<br>
+              당신이 못해서 힘든 게 아닙니다.<br>
+              구조가 그렇게 되어 있는 겁니다.
             </p>
 
             <div class="sm-cta-row">
@@ -306,8 +304,8 @@
 
           <!-- 우 이미지 -->
           <div class="sm-hero-img">
-            <img src="assets/img/safety-manager/hero-safety-manager.jpg"
-                 alt="많은 서류와 현장 업무를 혼자 처리하는 안전관리자">
+            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe1.png"
+                 alt="법령·점검 일정·기록·현장·보고의 부담을 혼자 짊어지는 안전관리자">
           </div>
 
         </div>
