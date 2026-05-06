@@ -261,15 +261,91 @@
       letter-spacing: -.005em;
     }
 
+    /* flow 직후 2-CTA (좌: 녹색 무료법령진단 / 우: 네이비 TAI SAFE) */
+    .flow-cta-section { padding: 0 0 130px; background: #fff; }
+    .flow-cta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .flow-cta-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      transition: transform .15s, box-shadow .15s, border-color .15s;
+    }
+    .flow-cta-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(15,23,42,.08);
+    }
+    .flow-cta-icon {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .flow-cta-card.pri .flow-cta-icon { background: #d1fae5; color: #059669; }
+    .flow-cta-card.sec .flow-cta-icon { background: #dbeafe; color: #1565c0; }
+    .flow-cta-body { flex: 1; min-width: 0; }
+    .flow-cta-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 6px;
+      letter-spacing: -.01em;
+      line-height: 1.4;
+      word-break: keep-all;
+    }
+    .flow-cta-desc {
+      font-size: .9rem;
+      color: #64748b;
+      margin: 0 0 14px;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    .flow-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: .92rem;
+      font-weight: 800;
+      text-decoration: none !important;
+      transition: background .15s, transform .15s;
+    }
+    .flow-cta-btn.pri {
+      background: #059669;
+      color: #fff !important;
+    }
+    .flow-cta-btn.pri:hover { background: #047857; transform: translateY(-1px); }
+    .flow-cta-btn.sec {
+      background: #1565c0;
+      color: #fff !important;
+    }
+    .flow-cta-btn.sec:hover { background: #0d4d99; transform: translateY(-1px); }
+
     @media (max-width: 991px) {
       .factory-options { padding: 80px 0; }
       .factory-bullet-grid { grid-template-columns: repeat(2, 1fr); }
       .flow-section { padding: 80px 0; }
       .flow-side { padding-right: 0; margin-bottom: 28px; }
+      .flow-cta-section { padding: 0 0 80px; }
+      .flow-cta-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 575px) {
       .factory-bullet-grid { grid-template-columns: 1fr; }
       .factory-conclusion { padding: 32px 22px; gap: 12px; }
+      .flow-cta-card { padding: 24px 22px; gap: 16px; flex-direction: column; align-items: flex-start; text-align: left; }
+      .flow-cta-card .flow-cta-icon { width: 48px; height: 48px; font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -442,6 +518,30 @@
     </div>
   </section>
 
+  <!-- flow 직후 2-CTA — 좌: 무료법령진단 (녹색) / 우: TAI SAFE (네이비) -->
+  <section class="flow-cta-section">
+    <div class="container">
+      <div class="flow-cta-grid">
+        <div class="flow-cta-card pri">
+          <div class="flow-cta-icon">📋</div>
+          <div class="flow-cta-body">
+            <h4 class="flow-cta-title">우리 사업장, 법령 준수 상태는?</h4>
+            <p class="flow-cta-desc">지금 무료로 진단받아보세요.</p>
+            <a href="../free-diagnosis.html" class="flow-cta-btn pri">무료 법령진단 시작하기 →</a>
+          </div>
+        </div>
+        <div class="flow-cta-card sec">
+          <div class="flow-cta-icon">💻</div>
+          <div class="flow-cta-body">
+            <h4 class="flow-cta-title">이 모든 흐름을 하나로 관리하세요.</h4>
+            <p class="flow-cta-desc">TAI SAFE로 안전관리 체계를 완성하세요.</p>
+            <a href="../service/saas.html" class="flow-cta-btn sec">TAI SAFE 자세히 보기 →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 위험성평가 + 이미지 -->
   <section class="featured-area pd-top-110 pd-bottom-110">
     <div class="container">
@@ -577,28 +677,6 @@
         법령에서 시작해 점검, 조치, 증빙까지.<br>
         TAI Safe가 현장 안전관리의 흐름을 바꿉니다.
       </p>
-    </div>
-  </section>
-
-  <!-- 최종 CTA -->
-  <section class="subscribe-area">
-    <div class="container">
-      <div class="subscribe-inner">
-        <div class="row align-items-center">
-          <div class="col-lg-5">
-            <h2>우리 공장, 지금 구조로 안전관리가 가능할까요?</h2>
-            <p class="pe-4">
-              업종, 인원, 설비를 입력하면 적용 법령과 의무 항목을 3분 내에 확인할 수 있습니다.
-            </p>
-          </div>
-          <div class="col-lg-6 offset-lg-1">
-            <div class="d-flex gap-3 flex-wrap justify-content-lg-start justify-content-center mt-lg-0 mt-4">
-              <a href="../free-diagnosis.html" class="btn btn-base" style="padding:13px 28px;font-size:1rem;">무료 법령진단 시작</a>
-              <a href="../fix-request.html?from=target-factory&type=general" class="btn btn-border-white" style="padding:13px 24px;font-size:1rem;">도입 문의</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
