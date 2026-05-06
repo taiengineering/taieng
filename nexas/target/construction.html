@@ -46,7 +46,7 @@
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* 이미지 박스 (현실 공감 / 감정 압축) + 프로세스 이미지 (대응 / 흐름) */
+    /* 이미지 박스 (현실 공감 / 감정 압축) + 프로세스 이미지 (흐름) */
     .tai-image-box,
     .tai-process-image {
       border-radius: 24px;
@@ -60,17 +60,89 @@
       object-fit: cover;
       display: block;
     }
-    .slash-image img {
-      width: 100%;
-      height: 360px;
-      object-fit: cover;
-      display: block;
-    }
     .process-image img {
       width: 100%;
       height: 320px;
       object-fit: cover;
       display: block;
+    }
+
+    /* 3번 현실 대응 — 풀폭 이미지 + 좌측 텍스트 오버레이 */
+    .response-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #e5e7eb;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, .12);
+    }
+    .response-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .response-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding-left: clamp(36px, 6%, 80px);
+      pointer-events: none;
+    }
+    .response-text-box {
+      pointer-events: auto;
+      max-width: 380px;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 30px 32px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .response-sub-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: #b45309;
+      letter-spacing: -.005em;
+      margin: 0 0 12px;
+    }
+    .response-title {
+      font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.35;
+      letter-spacing: -.02em;
+      margin: 0;
+      word-break: keep-all;
+    }
+    @media (max-width: 991px) {
+      .response-overlay {
+        padding-left: 5%;
+      }
+      .response-text-box {
+        max-width: 60%;
+        padding: 22px 22px;
+      }
+      .response-title {
+        font-size: 1.3rem;
+      }
+    }
+    @media (max-width: 575px) {
+      .response-overlay {
+        position: static;
+        padding: 28px 0 0;
+      }
+      .response-text-box {
+        max-width: 100%;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+      .response-title {
+        font-size: 1.5rem;
+      }
     }
 
     /* 핵심 메시지 */
@@ -160,7 +232,6 @@
     @media (max-width: 768px) {
       .impact-title { font-size: 2rem; }
       .tai-image-box img { height: 260px; }
-      .slash-image img { height: 220px; }
       .process-image img { height: 220px; }
       .transition-box { padding: 30px 24px; }
       .transition-box h3 { font-size: 1.5rem; }
@@ -258,26 +329,18 @@
     </div>
   </section>
 
-  <!-- 3. 현실 대응 -->
+  <!-- 3. 현실 대응 — 풀폭 이미지 + 좌측 텍스트 오버레이 -->
   <section class="pd-top-110 pd-bottom-110">
     <div class="container">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-4">
-          <div class="section-title mb-0">
-            <h4 class="sub-title">그래서 현장에서는</h4>
-            <h2 class="title">이렇게 대응하려고 합니다</h2>
-            <p>
-              서류를 더 만들고,<br>
-              무전으로 다시 전달하고,<br>
-              단톡방에 공유하고,<br>
-              결국 안전관리자가 다시 확인합니다.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-8">
-          <div class="tai-process-image slash-image">
-            <img src="../assets/img/construction/construction-response-slash.jpg" alt="">
+      <div class="response-wrapper">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/construction/construction2.png"
+             alt="현장에서는 서류를 더 만들고, 무전으로 전달하고, 단톡방에 공유하고, 결국 안전관리자가 다시 확인합니다"
+             class="response-img"
+             loading="lazy">
+        <div class="response-overlay">
+          <div class="response-text-box">
+            <h4 class="response-sub-title">그래서 현장에서는</h4>
+            <h2 class="response-title">이렇게 대응하려고<br>합니다</h2>
           </div>
         </div>
       </div>
