@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.7.1 (2026-05-06): 도입 문의 링크 fix-request.html → contact.html (도입 문의는 일반 문의 페이지로 가야 함, fix-request는 선임/수선 연결 전용)
  * v3.7.0 (2026-05-05): 풋터 재구성 — 시작하기 섹션 삭제, 무료 법령진단/도입 문의/FAQ → 서비스로 편입,
  *                      TAI에 바란다 → 회사의 TAI 기술력 직후로 이동, 안전정보 → 헤더와 동기화 (4개 항목)
  * v3.6.0 (2026-05-04): 풋터 정리 — 교육사업·수선연결·컨설팅·선임연결·전문가 미노출 (헤더 메뉴 정리와 동기화)
@@ -115,7 +116,7 @@
     '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
     '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
     '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
-    '            <li><a href="' + b + 'fix-request.html?from=footer&type=general"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
+    '            <li><a href="' + b + 'contact.html"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
     '          </ul>' +
     '        </div>' +
