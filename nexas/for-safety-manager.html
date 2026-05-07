@@ -56,42 +56,49 @@
     .sm-fullimg { width: 100%; border-radius: 20px; overflow: hidden; }
     .sm-fullimg img { width: 100%; height: auto; display: block; }
 
-    /* ── 5개 문제 카드 (사진 아래 텍스트) ── */
-    .sm-problem-grid {
+    /* ── 섹션2: 이미지 위 오버레이 텍스트 ── */
+    .sm-problem-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+    .sm-problem-wrap > img { width: 100%; height: auto; display: block; }
+    .sm-problem-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-top: -8px;
+      z-index: 2;
     }
-    .sm-problem-card { text-align: center; }
-    .sm-pc-inner {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 22px 14px;
-      box-shadow: 0 4px 16px rgba(15,23,42,.06);
+    .sm-po-item {
+      padding: 48px 10px 18px;
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.95) 100%);
+      text-align: center;
     }
-    .sm-problem-card h4 {
-      font-size: .88rem;
+    .sm-po-item h4 {
+      font-size: .85rem;
       font-weight: 800;
       color: #0f172a;
       line-height: 1.5;
       margin: 0;
       word-break: keep-all;
     }
-    .sm-pc-sub {
+    .sm-problem-sub {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 6px;
+    }
+    .sm-problem-sub p {
       font-size: .78rem;
       color: #94a3b8;
       line-height: 1.55;
-      margin: 10px 0 0;
-      padding: 0 4px;
+      margin: 0;
+      padding: 6px 8px 0;
+      text-align: center;
       word-break: keep-all;
     }
-    @media (max-width: 991px) {
-      .sm-problem-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    }
-    @media (max-width: 575px) {
-      .sm-problem-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 767px) {
+      .sm-problem-overlay { grid-template-columns: repeat(5, 1fr); }
+      .sm-po-item { padding: 28px 4px 10px; }
+      .sm-po-item h4 { font-size: .72rem; }
+      .sm-problem-sub p { font-size: .68rem; }
     }
 
     .sm-conclusion { text-align: center; margin-top: 56px; padding: 0 20px; }
@@ -143,37 +150,29 @@
       </div>
     </section>
 
-    <!-- 2. 매일 반복되는 문제 (사진 + 텍스트 카드) -->
+    <!-- 2. 매일 반복되는 문제 (이미지 위 오버레이 텍스트 + 아래 서브텍스트) -->
     <section class="sm-section">
       <div class="sm-container">
         <div style="text-align:center;margin-bottom:42px;">
           <span class="sm-kicker">매일 반복되는 문제</span>
           <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:0;">이런 일이 매일 반복됩니다</h2>
         </div>
-        <div class="sm-fullimg">
+        <div class="sm-problem-wrap">
           <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe2.png" alt="안전관리자가 매일 마주치는 5가지 문제">
+          <div class="sm-problem-overlay">
+            <div class="sm-po-item"><h4>우리 사업장에 뭐가 적용되는지 모르겠어요</h4></div>
+            <div class="sm-po-item"><h4>점검 일정 엑셀로 관리하는데 미치겠어요</h4></div>
+            <div class="sm-po-item"><h4>매일 아침 종이 들고 현장 돌아요</h4></div>
+            <div class="sm-po-item"><h4>점검은 했는데 기록이 없대요</h4></div>
+            <div class="sm-po-item"><h4>폭염특보인데 작업 계속해야 하나</h4></div>
+          </div>
         </div>
-        <div class="sm-problem-grid">
-          <div class="sm-problem-card">
-            <div class="sm-pc-inner"><h4>우리 사업장에 뭐가 적용되는지 모르겠어요</h4></div>
-            <p class="sm-pc-sub">473개 법령, 33,845개 조문, 54,925개 항에서 찾아야 합니다</p>
-          </div>
-          <div class="sm-problem-card">
-            <div class="sm-pc-inner"><h4>점검 일정 엑셀로 관리하는데 미치겠어요</h4></div>
-            <p class="sm-pc-sub">법령마다 주기가 달라 놓치기 쉽습니다</p>
-          </div>
-          <div class="sm-problem-card">
-            <div class="sm-pc-inner"><h4>매일 아침 종이 들고 현장 돌아요</h4></div>
-            <p class="sm-pc-sub">TBM, 허가 확인까지 종이 뭉치가 쌓입니다</p>
-          </div>
-          <div class="sm-problem-card">
-            <div class="sm-pc-inner"><h4>점검은 했는데 기록이 없대요</h4></div>
-            <p class="sm-pc-sub">종이는 잃어버리고, 사진은 어디 갔는지 모릅니다</p>
-          </div>
-          <div class="sm-problem-card">
-            <div class="sm-pc-inner"><h4>폭염특보인데 작업 계속해야 하나</h4></div>
-            <p class="sm-pc-sub">기상 위험에서 기준 판단이 필요합니다</p>
-          </div>
+        <div class="sm-problem-sub">
+          <p>473개 법령, 33,845개 조문, 54,925개 항에서 찾아야 합니다</p>
+          <p>법령마다 주기가 달라 놓치기 쉽습니다</p>
+          <p>TBM, 허가 확인까지 종이 뭉치가 쌓입니다</p>
+          <p>종이는 잃어버리고, 사진은 어디 갔는지 모릅니다</p>
+          <p>기상 위험에서 기준 판단이 필요합니다</p>
         </div>
       </div>
     </section>
