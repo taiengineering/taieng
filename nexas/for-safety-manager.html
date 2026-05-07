@@ -30,8 +30,7 @@
     .sm-page { font-family: 'Noto Sans KR', sans-serif; color: #0f172a; }
     .sm-section { padding: 90px 0; }
     .sm-container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
-    .sm-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 56px; align-items: center; }
-    .sm-grid.reverse { grid-template-columns: 1.05fr 0.95fr; }
+    .sm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
     .sm-kicker { display: block; font-size: 0.78rem; font-weight: 900; color: #1A5FD4; letter-spacing: .08em; margin-bottom: 14px; }
     .sm-title { font-size: clamp(2rem, 4.8vw, 3.7rem); font-weight: 900; line-height: 1.18; letter-spacing: -0.04em; margin-bottom: 22px; }
     .sm-title span { color: #1A5FD4; }
@@ -65,7 +64,6 @@
     .sm-message p { color: #cbd5e1; line-height: 1.8; margin: 0; }
     .sm-image-box { border-radius: 26px; overflow: hidden; background: #e5e7eb; box-shadow: 0 20px 54px rgba(15,23,42,.14); }
     .sm-image-box img { width: 100%; height: 390px; object-fit: cover; display: block; }
-    .sm-flow-img img { height: 320px; }
     .sm-quote-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px; padding: 38px 42px; box-shadow: 0 16px 40px rgba(15,23,42,.06); }
     .sm-quote-box h3 { font-size: clamp(1.45rem, 3vw, 2.1rem); font-weight: 900; line-height: 1.45; margin-bottom: 12px; }
     .sm-quote-box p { color: #64748b; line-height: 1.75; margin: 0; }
@@ -78,7 +76,7 @@
     .sm-choice-card .sm-btn.primary:hover { background: #1248a8; color: #fff; }
     .sm-choice-card .sm-btn.secondary { color: #1A5FD4; border: 1px solid #cbd5e1; background: #fff; }
     .sm-choice-card .sm-btn.secondary:hover { border-color: #1A5FD4; color: #1248a8; }
-    @media (max-width: 991px) { .sm-grid, .sm-grid.reverse, .sm-choice-grid { grid-template-columns: 1fr; } .sm-image-box img, .sm-flow-img img { height: 280px; } .sm-conclusion { margin-top: 40px; } }
+    @media (max-width: 991px) { .sm-grid, .sm-choice-grid { grid-template-columns: 1fr; } .sm-image-box img { height: 280px; } .sm-conclusion { margin-top: 40px; } }
   </style>
 </head>
 <body class="sc5">
@@ -147,7 +145,7 @@
     <!-- 5. 현실 장면 (텍스트 왼쪽, 이미지 오른쪽) -->
     <section class="sm-section">
       <div class="sm-container">
-        <div class="sm-grid reverse">
+        <div class="sm-grid">
           <div>
             <span class="sm-kicker">현장의 현실</span>
             <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">점검은 했는데,<br>기록이 없다고 합니다</h2>
