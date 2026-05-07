@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-    <!-- TAI global favicon, manifest, Organization -->
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,274 +36,125 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    /* ================= 안전관리자 페이지 리뉴얼 ================= */
     .sm-page {
       font-family: 'Noto Sans KR', sans-serif;
       color: #0f172a;
     }
+    .sm-section { padding: 90px 0; }
+    .sm-container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    .sm-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 56px; align-items: center; }
+    .sm-grid.reverse { grid-template-columns: 1.05fr 0.95fr; }
+    .sm-kicker { display: block; font-size: 0.78rem; font-weight: 900; color: #1A5FD4; letter-spacing: .08em; margin-bottom: 14px; }
+    .sm-title { font-size: clamp(2rem, 4.8vw, 3.7rem); font-weight: 900; line-height: 1.18; letter-spacing: -0.04em; margin-bottom: 22px; }
+    .sm-title span { color: #1A5FD4; }
+    .sm-desc { font-size: 1.02rem; line-height: 1.85; color: #475569; margin-bottom: 0; }
 
-    .sm-section {
-      padding: 90px 0;
+    /* ── 히어로: 이미지 전체 배경 + 왼쪽 텍스트 오버레이 ── */
+    .sm-hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
     }
-
-    .sm-container {
+    .sm-hero-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+    }
+    .sm-hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    /* 왼쪽 navy 그라디언트 오버레이 */
+    .sm-hero-bg::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(15,43,74,0.92) 0%, rgba(15,43,74,0.75) 40%, rgba(15,43,74,0.3) 65%, transparent 85%);
+      z-index: 1;
+    }
+    .sm-hero-content {
+      position: relative;
+      z-index: 2;
       max-width: 1160px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: calc(var(--tai-nav-h, 90px) + 48px) 20px 60px;
+      width: 100%;
     }
-
-    .sm-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 56px;
-      align-items: center;
+    .sm-hero-text {
+      max-width: 520px;
     }
-
-    .sm-grid.reverse {
-      grid-template-columns: 1.05fr 0.95fr;
-    }
-
-    .sm-kicker {
-      display: block;
-      font-size: 0.78rem;
-      font-weight: 900;
-      color: #1A5FD4;
+    .sm-hero-text .sm-kicker {
+      color: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 6px;
       letter-spacing: .08em;
-      margin-bottom: 14px;
+      margin-bottom: 20px;
     }
-
-    .sm-title {
-      font-size: clamp(2rem, 4.8vw, 3.7rem);
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.04em;
-      margin-bottom: 22px;
-    }
-
-    .sm-title span {
-      color: #1A5FD4;
-    }
-
-    .sm-desc {
-      font-size: 1.02rem;
-      line-height: 1.85;
-      color: #475569;
-      margin-bottom: 0;
-    }
-
-    .sm-hero {
-      min-height: 680px;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(120deg, #f8fafc 0%, #ffffff 55%, #eef5ff 100%);
-      padding-top: calc(var(--tai-nav-h, 90px) + 40px);
-      padding-bottom: 70px;
-      overflow: hidden;
-    }
-
-    /* 히어로 이미지 — safe1.png는 인물+말풍선 합성이라 잘림 안됨(비율 유지) */
-    .sm-hero-img {
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 28px 70px rgba(15,23,42,.18);
-      background: #e5e7eb;
-    }
-
-    .sm-hero-img img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* 풀폭 인포그래픽 이미지 (자연 비율) */
-    .sm-fullimg {
-      width: 100%;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .sm-fullimg img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* 결정적 한 줄 (이미지 아래 메시지 압축) */
-    .sm-conclusion {
-      text-align: center;
-      margin-top: 56px;
-      padding: 0 20px;
-    }
-    .sm-conclusion h3 {
-      font-size: clamp(1.6rem, 3.6vw, 2.6rem);
-      font-weight: 900;
-      color: #0f172a;
-      letter-spacing: -.025em;
-      line-height: 1.4;
-      margin: 0 0 18px;
-    }
-    .sm-conclusion h3 strong {
-      color: #1A5FD4;
-      font-weight: 900;
-    }
-    .sm-conclusion p {
-      color: #64748b;
-      font-size: 1rem;
-      line-height: 1.85;
-      margin: 0 auto;
-      max-width: 560px;
-    }
-
-    .sm-cta-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-
-    .sm-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 30px;
-      border-radius: 12px;
-      font-weight: 900;
-      text-decoration: none;
-      transition: .2s ease;
-    }
-
-    .sm-btn.primary {
-      background: #1A5FD4;
+    .sm-hero-text .sm-title {
       color: #fff;
-      box-shadow: 0 10px 26px rgba(26,95,212,.28);
+      font-size: clamp(2rem, 4.8vw, 3.2rem);
     }
-
-    .sm-btn.primary:hover {
-      background: #1248a8;
-      color: #fff;
+    .sm-hero-text .sm-title span {
+      color: #60a5fa;
     }
-
-    .sm-btn.secondary {
-      background: #fff;
-      color: #1A5FD4;
-      border: 1px solid #cbd5e1;
+    .sm-hero-text .sm-desc {
+      color: rgba(255,255,255,0.8);
     }
-
-    .sm-btn.secondary:hover {
-      border-color: #1A5FD4;
-      color: #1248a8;
-    }
-
-    .sm-message {
-      background: #0f172a;
-      color: #fff;
-      text-align: center;
-      padding: 86px 20px;
-    }
-
-    .sm-message h2 {
-      color: #fff;
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.35;
-      margin-bottom: 18px;
-    }
-
-    .sm-message p {
-      color: #cbd5e1;
-      line-height: 1.8;
-      margin: 0;
-    }
-
-    .sm-image-box {
-      border-radius: 26px;
-      overflow: hidden;
-      background: #e5e7eb;
-      box-shadow: 0 20px 54px rgba(15,23,42,.14);
-    }
-
-    .sm-image-box img {
-      width: 100%;
-      height: 390px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .sm-flow-img img {
-      height: 320px;
-    }
-
-    .sm-quote-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 24px;
-      padding: 38px 42px;
-      box-shadow: 0 16px 40px rgba(15,23,42,.06);
-    }
-
-    .sm-quote-box h3 {
-      font-size: clamp(1.45rem, 3vw, 2.1rem);
-      font-weight: 900;
-      line-height: 1.45;
-      margin-bottom: 12px;
-    }
-
-    .sm-quote-box p {
-      color: #64748b;
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    .sm-choice {
-      background: #f8fafc;
-    }
-
-    .sm-choice-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 36px;
-    }
-
-    .sm-choice-card {
-      background: #fff;
-      border-radius: 26px;
-      padding: 40px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 18px 44px rgba(15,23,42,.08);
-    }
-
-    .sm-choice-card h3 {
-      font-size: 1.45rem;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .sm-choice-card p {
-      color: #64748b;
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
+    .sm-cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .sm-btn { display: inline-flex; align-items: center; justify-content: center; padding: 15px 30px; border-radius: 12px; font-weight: 900; text-decoration: none; transition: .2s ease; }
+    .sm-btn.primary { background: #fff; color: #0f2b4a; box-shadow: 0 10px 26px rgba(0,0,0,.18); }
+    .sm-btn.primary:hover { background: #f0f6ff; color: #0f2b4a; }
+    .sm-btn.secondary { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.5); }
+    .sm-btn.secondary:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,.08); }
 
     @media (max-width: 991px) {
-      .sm-grid,
-      .sm-grid.reverse,
-      .sm-choice-grid {
-        grid-template-columns: 1fr;
+      .sm-hero { min-height: 420px; }
+      .sm-hero-bg::after {
+        background: linear-gradient(90deg, rgba(15,43,74,0.88) 0%, rgba(15,43,74,0.65) 50%, rgba(15,43,74,0.4) 100%);
       }
+      .sm-hero-content { padding-top: calc(var(--tai-nav-h, 90px) + 32px); padding-bottom: 48px; }
+    }
+    @media (max-width: 575px) {
+      .sm-hero { min-height: 380px; }
+      .sm-hero-content { padding-top: calc(var(--tai-nav-h, 90px) + 20px); padding-bottom: 36px; }
+      .sm-hero-text .sm-title { font-size: 1.8rem; }
+    }
 
-      .sm-hero {
-        min-height: auto;
-      }
+    .sm-fullimg { width: 100%; border-radius: 20px; overflow: hidden; }
+    .sm-fullimg img { width: 100%; height: auto; display: block; }
+    .sm-conclusion { text-align: center; margin-top: 56px; padding: 0 20px; }
+    .sm-conclusion h3 { font-size: clamp(1.6rem, 3.6vw, 2.6rem); font-weight: 900; color: #0f172a; letter-spacing: -.025em; line-height: 1.4; margin: 0 0 18px; }
+    .sm-conclusion h3 strong { color: #1A5FD4; font-weight: 900; }
+    .sm-conclusion p { color: #64748b; font-size: 1rem; line-height: 1.85; margin: 0 auto; max-width: 560px; }
+    .sm-message { background: #0f172a; color: #fff; text-align: center; padding: 86px 20px; }
+    .sm-message h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.35; margin-bottom: 18px; }
+    .sm-message p { color: #cbd5e1; line-height: 1.8; margin: 0; }
+    .sm-image-box { border-radius: 26px; overflow: hidden; background: #e5e7eb; box-shadow: 0 20px 54px rgba(15,23,42,.14); }
+    .sm-image-box img { width: 100%; height: 390px; object-fit: cover; display: block; }
+    .sm-flow-img img { height: 320px; }
+    .sm-quote-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 24px; padding: 38px 42px; box-shadow: 0 16px 40px rgba(15,23,42,.06); }
+    .sm-quote-box h3 { font-size: clamp(1.45rem, 3vw, 2.1rem); font-weight: 900; line-height: 1.45; margin-bottom: 12px; }
+    .sm-quote-box p { color: #64748b; line-height: 1.75; margin: 0; }
+    .sm-choice { background: #f8fafc; }
+    .sm-choice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 36px; }
+    .sm-choice-card { background: #fff; border-radius: 26px; padding: 40px; border: 1px solid #e2e8f0; box-shadow: 0 18px 44px rgba(15,23,42,.08); }
+    .sm-choice-card h3 { font-size: 1.45rem; font-weight: 900; margin-bottom: 12px; }
+    .sm-choice-card p { color: #64748b; line-height: 1.75; margin-bottom: 24px; }
+    .sm-choice-card .sm-btn.primary { background: #1A5FD4; color: #fff; }
+    .sm-choice-card .sm-btn.primary:hover { background: #1248a8; color: #fff; }
+    .sm-choice-card .sm-btn.secondary { color: #1A5FD4; border: 1px solid #cbd5e1; background: #fff; }
+    .sm-choice-card .sm-btn.secondary:hover { border-color: #1A5FD4; color: #1248a8; }
 
-      /* 히어로 이미지는 모바일에서도 자연 비율 유지 */
-      .sm-image-box img,
-      .sm-flow-img img {
-        height: 280px;
-      }
-
-      .sm-conclusion {
-        margin-top: 40px;
-      }
+    @media (max-width: 991px) {
+      .sm-grid, .sm-grid.reverse, .sm-choice-grid { grid-template-columns: 1fr; }
+      .sm-image-box img, .sm-flow-img img { height: 280px; }
+      .sm-conclusion { margin-top: 40px; }
     }
   </style>
 </head>
@@ -318,67 +168,51 @@
 
   <main class="sm-page">
 
-    <!-- 1. 히어로 -->
+    <!-- 1. 히어로: 이미지 전체 배경 + 왼쪽 텍스트 -->
     <section class="sm-hero">
-      <div class="sm-container">
-        <div class="sm-grid">
-
-          <!-- 좌 텍스트 -->
-          <div>
-            <span class="sm-kicker">안전관리자를 위한 TAI Safe</span>
-
-            <h1 class="sm-title">
-              아직도 <span>혼자</span><br>
-              다 하고 계십니까?
-            </h1>
-
-            <p class="sm-desc">
-              법령 확인, 점검 일정, TBM, 허가, 보고, 기록까지.<br>
-              당신이 못해서 힘든 게 아닙니다.<br>
-              구조가 그렇게 되어 있는 겁니다.
-            </p>
-
-            <div class="sm-cta-row">
-              <a href="free-diagnosis.html" class="sm-btn primary">무료 법령진단 시작 →</a>
-              <a href="service/saas.html" class="sm-btn secondary">TAI SAFE 자세히 보기 →</a>
-            </div>
+      <div class="sm-hero-bg">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe1.png"
+             alt="법령·점검 일정·기록·현장·보고의 부담을 혼자 짊어지는 안전관리자" loading="eager">
+      </div>
+      <div class="sm-hero-content">
+        <div class="sm-hero-text">
+          <span class="sm-kicker">안전관리자를 위한 TAI Safe</span>
+          <h1 class="sm-title">
+            아직도 <span>혼자</span><br>
+            다 하고 계십니까?
+          </h1>
+          <p class="sm-desc">
+            법령 확인, 점검 일정, TBM, 허가, 보고, 기록까지.<br>
+            당신이 못해서 힘든 게 아닙니다.<br>
+            구조가 그렇게 되어 있는 겁니다.
+          </p>
+          <div class="sm-cta-row">
+            <a href="free-diagnosis.html" class="sm-btn primary">무료 법령진단 시작 →</a>
+            <a href="service/saas.html" class="sm-btn secondary">TAI SAFE 자세히 보기 →</a>
           </div>
-
-          <!-- 우 이미지 -->
-          <div class="sm-hero-img">
-            <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe1.png"
-                 alt="법령·점검 일정·기록·현장·보고의 부담을 혼자 짊어지는 안전관리자">
-          </div>
-
         </div>
       </div>
     </section>
 
-
     <!-- 2. 매일 반복되는 문제 -->
     <section class="sm-section">
       <div class="sm-container">
-
         <div style="text-align:center;margin-bottom:42px;">
           <span class="sm-kicker">매일 반복되는 문제</span>
           <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:0;">
             이런 일이 매일 반복됩니다
           </h2>
         </div>
-
         <div class="sm-fullimg">
           <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe2.png"
                alt="안전관리자가 매일 마주치는 5가지 문제 — 적용 법령, 점검 일정, TBM·허가, 점검 기록, 기상 대응">
         </div>
-
       </div>
     </section>
 
-
-    <!-- 3. 방법은 바꿔도, 구조는 그대로 (safe3) -->
+    <!-- 3. 방법은 바꿔도, 구조는 그대로 -->
     <section class="sm-section" style="background:#f8fafc;">
       <div class="sm-container">
-
         <div style="text-align:center;margin-bottom:50px;">
           <span class="sm-kicker">지금은 이렇게 버티고 있습니다</span>
           <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:0;">
@@ -386,192 +220,115 @@
             <span>구조</span>는 그대로입니다
           </h2>
         </div>
-
         <div class="sm-fullimg">
           <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe3.png"
                alt="엑셀 정리 → 종이 출력 → 단톡방 공유 → 안전관리자가 더 챙기고 → 그래도 일은 줄지 않습니다">
         </div>
-
         <div class="sm-conclusion">
-          <h3>
-            문제는 <strong>노력</strong>이 아니라,<br>
-            <strong>구조</strong>입니다
-          </h3>
-          <p>
-            엑셀을 더 만들고, 종이를 더 출력하고, 단톡방을 더 늘려도<br>
-            결국 모든 일은 안전관리자 한 사람에게 다시 돌아옵니다.
-          </p>
+          <h3>문제는 <strong>노력</strong>이 아니라,<br><strong>구조</strong>입니다</h3>
+          <p>엑셀을 더 만들고, 종이를 더 출력하고, 단톡방을 더 늘려도<br>결국 모든 일은 안전관리자 한 사람에게 다시 돌아옵니다.</p>
         </div>
-
       </div>
     </section>
-
 
     <!-- 4. 핵심 공감 메시지 -->
     <section class="sm-message">
       <div class="sm-container">
-        <h2>
-          안전관리자는<br>
-          일을 못하는 사람이 아닙니다
-        </h2>
-        <p>
-          법령은 계속 바뀌고, 점검은 반복되고, 기록은 남겨야 합니다.<br>
-          그런데 그 모든 흐름이 아직도 한 사람에게 집중되어 있습니다.
-        </p>
+        <h2>안전관리자는<br>일을 못하는 사람이 아닙니다</h2>
+        <p>법령은 계속 바뀌고, 점검은 반복되고, 기록은 남겨야 합니다.<br>그런데 그 모든 흐름이 아직도 한 사람에게 집중되어 있습니다.</p>
       </div>
     </section>
 
-
-    <!-- 5. 현실 장면 — 점검 vs 기록 미스매치 -->
+    <!-- 5. 현실 장면 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-grid reverse">
-
-          <!-- 우 텍스트 -->
           <div>
             <span class="sm-kicker">현장의 현실</span>
             <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
-              점검은 했는데,<br>
-              기록이 없다고 합니다
+              점검은 했는데,<br>기록이 없다고 합니다
             </h2>
             <p class="sm-desc">
-              작업자는 확인했다고 말하고,<br>
-              관리자는 기록을 찾고,<br>
-              사고가 나면 결국 안전관리자가 설명해야 합니다.<br><br>
-              점검보다 힘든 건,<br>
-              점검했다는 것을 증명하는 일입니다.
+              작업자는 확인했다고 말하고,<br>관리자는 기록을 찾고,<br>사고가 나면 결국 안전관리자가 설명해야 합니다.<br><br>점검보다 힘든 건,<br>점검했다는 것을 증명하는 일입니다.
             </p>
           </div>
-
-          <!-- 좌 이미지 -->
           <div class="sm-image-box">
-            <img src="assets/img/safety-manager/record-missing.jpg"
-                 alt="점검 기록을 찾지 못해 난감한 안전관리자">
+            <img src="assets/img/safety-manager/record-missing.jpg" alt="점검 기록을 찾지 못해 난감한 안전관리자">
           </div>
-
         </div>
       </div>
     </section>
 
-
-    <!-- 6. 법령 추적의 한계 — 자동으로 안 바뀌는 엑셀 -->
+    <!-- 6. 법령 추적의 한계 -->
     <section class="sm-section" style="background:#f8fafc;">
       <div class="sm-container">
         <div class="sm-grid">
-
-          <!-- 좌 텍스트 -->
           <div>
             <span class="sm-kicker">법령 추적의 한계</span>
             <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
-              법령은 매일 바뀌는데,<br>
-              엑셀은 그대로입니다
+              법령은 매일 바뀌는데,<br>엑셀은 그대로입니다
             </h2>
             <p class="sm-desc">
-              시행규칙, 기술기준, 고시까지<br>
-              산업안전 관련 법령은 매년 수십 차례 개정됩니다.<br>
-              한 사람이 모두 따라가는 건 사실상 불가능합니다.<br><br>
-              바뀌었는지도 모르고 운영하다 보면,<br>
-              감사에서야 &ldquo;왜 안 했냐&rdquo;는 질문이 돌아옵니다.
+              시행규칙, 기술기준, 고시까지<br>산업안전 관련 법령은 매년 수십 차례 개정됩니다.<br>한 사람이 모두 따라가는 건 사실상 불가능합니다.<br><br>바뀌었는지도 모르고 운영하다 보면,<br>감사에서야 &ldquo;왜 안 했냐&rdquo;는 질문이 돌아옵니다.
             </p>
           </div>
-
-          <!-- 우 이미지 -->
           <div class="sm-image-box">
-            <img src="assets/img/safety-manager/excel-overload.jpg"
-                 alt="법령은 계속 개정되지만 그대로인 엑셀 관리 대장">
+            <img src="assets/img/safety-manager/excel-overload.jpg" alt="법령은 계속 개정되지만 그대로인 엑셀 관리 대장">
           </div>
-
         </div>
       </div>
     </section>
-
 
     <!-- 7. 전환 한 줄 -->
     <section class="sm-section">
       <div class="sm-container">
         <div class="sm-quote-box">
-          <h3>
-            방법은 바뀌어도,<br>
-            구조가 바뀌지 않으면 일은 줄어들지 않습니다.
-          </h3>
-          <p>
-            근본적인 해결을 위해서는 안전관리자가 더 노력하는 것이 아니라,
-            관리 방식 자체가 바뀌어야 합니다.
-          </p>
+          <h3>방법은 바뀌어도,<br>구조가 바뀌지 않으면 일은 줄어들지 않습니다.</h3>
+          <p>근본적인 해결을 위해서는 안전관리자가 더 노력하는 것이 아니라, 관리 방식 자체가 바뀌어야 합니다.</p>
         </div>
       </div>
     </section>
-
 
     <!-- 8. 관리 방식 전환 -->
     <section class="sm-section" style="background:#ffffff;">
       <div class="sm-container">
         <div class="sm-grid reverse">
-
-          <!-- 우 텍스트 -->
           <div>
             <span class="sm-kicker">관리 방식의 전환</span>
             <h2 class="sm-title" style="font-size:clamp(1.8rem,3.8vw,2.8rem);">
-              그래서 안전관리는<br>
-              흐름으로 연결되어야 합니다
+              그래서 안전관리는<br>흐름으로 연결되어야 합니다
             </h2>
             <p class="sm-desc">
-              법령 확인에서 시작해<br>
-              일정 생성, 담당자 배정, 현장 점검,<br>
-              이상 보고, 조치, 기록 보관까지.<br><br>
-              하나의 흐름으로 이어져야<br>
-              안전관리자가 혼자 떠안지 않습니다.
+              법령 확인에서 시작해<br>일정 생성, 담당자 배정, 현장 점검,<br>이상 보고, 조치, 기록 보관까지.<br><br>하나의 흐름으로 이어져야<br>안전관리자가 혼자 떠안지 않습니다.
             </p>
           </div>
-
-          <!-- 좌 이미지 -->
           <div class="sm-image-box sm-flow-img">
-            <img src="assets/img/safety-manager/safety-flow.jpg"
-                 alt="법령 확인부터 점검, 보고, 조치, 기록까지 이어지는 안전관리 흐름">
+            <img src="assets/img/safety-manager/safety-flow.jpg" alt="법령 확인부터 점검, 보고, 조치, 기록까지 이어지는 안전관리 흐름">
           </div>
-
         </div>
       </div>
     </section>
 
-
     <!-- 9. 선택 CTA -->
     <section class="sm-section sm-choice">
       <div class="sm-container">
-
         <div style="text-align:center;">
           <span class="sm-kicker">NEXT STEP</span>
-          <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);">
-            지금 필요한 것을 선택하세요
-          </h2>
-          <p class="sm-desc" style="max-width:620px;margin:0 auto;">
-            먼저 우리 사업장의 법령 상태를 확인하거나,<br>
-            실제 운영 방식이 어떻게 바뀌는지 확인할 수 있습니다.
-          </p>
+          <h2 class="sm-title" style="font-size:clamp(1.9rem,4vw,3rem);">지금 필요한 것을 선택하세요</h2>
+          <p class="sm-desc" style="max-width:620px;margin:0 auto;">먼저 우리 사업장의 법령 상태를 확인하거나,<br>실제 운영 방식이 어떻게 바뀌는지 확인할 수 있습니다.</p>
         </div>
-
         <div class="sm-choice-grid">
-
           <div class="sm-choice-card">
             <h3>우리 사업장 법령 상태 확인</h3>
-            <p>
-              업종, 인원, 설비 조건을 기준으로
-              적용 법령과 의무 항목을 먼저 확인합니다.
-            </p>
+            <p>업종, 인원, 설비 조건을 기준으로 적용 법령과 의무 항목을 먼저 확인합니다.</p>
             <a href="free-diagnosis.html" class="sm-btn primary">무료 법령진단 시작 →</a>
           </div>
-
           <div class="sm-choice-card">
             <h3>안전관리 운영 방식 보기</h3>
-            <p>
-              점검, 알림, 보고, 조치, 기록이
-              어떻게 하나의 흐름으로 연결되는지 확인합니다.
-            </p>
+            <p>점검, 알림, 보고, 조치, 기록이 어떻게 하나의 흐름으로 연결되는지 확인합니다.</p>
             <a href="service/saas.html" class="sm-btn secondary">TAI SAFE 자세히 보기 →</a>
           </div>
-
         </div>
-
       </div>
     </section>
 
