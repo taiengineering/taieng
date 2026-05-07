@@ -55,6 +55,40 @@
     @media (max-width: 575px) { .sm-hero { padding-top: 60px; } .sm-hero-text .sm-title { font-size: 1.8rem; } }
     .sm-fullimg { width: 100%; border-radius: 20px; overflow: hidden; }
     .sm-fullimg img { width: 100%; height: auto; display: block; }
+
+    /* ── 5개 문제 카드 (사진 아래 텍스트) ── */
+    .sm-problem-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: -8px;
+    }
+    .sm-problem-card {
+      padding: 24px 16px 20px;
+      text-align: center;
+    }
+    .sm-problem-card h4 {
+      font-size: .88rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.5;
+      margin: 0 0 8px;
+      word-break: keep-all;
+    }
+    .sm-problem-card p {
+      font-size: .78rem;
+      color: #94a3b8;
+      line-height: 1.55;
+      margin: 0;
+      word-break: keep-all;
+    }
+    @media (max-width: 991px) {
+      .sm-problem-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    }
+    @media (max-width: 575px) {
+      .sm-problem-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     .sm-conclusion { text-align: center; margin-top: 56px; padding: 0 20px; }
     .sm-conclusion h3 { font-size: clamp(1.6rem, 3.6vw, 2.6rem); font-weight: 900; color: #0f172a; letter-spacing: -.025em; line-height: 1.4; margin: 0 0 18px; }
     .sm-conclusion h3 strong { color: #1A5FD4; font-weight: 900; }
@@ -104,7 +138,7 @@
       </div>
     </section>
 
-    <!-- 2. 매일 반복되는 문제 -->
+    <!-- 2. 매일 반복되는 문제 (사진 + 텍스트 카드) -->
     <section class="sm-section">
       <div class="sm-container">
         <div style="text-align:center;margin-bottom:42px;">
@@ -113,6 +147,28 @@
         </div>
         <div class="sm-fullimg">
           <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/safe-manager/safe2.png" alt="안전관리자가 매일 마주치는 5가지 문제">
+        </div>
+        <div class="sm-problem-grid">
+          <div class="sm-problem-card">
+            <h4>우리 사업장에 뭐가 적용되는지 모르겠어요</h4>
+            <p>473개 법령, 33,845개 조문, 54,925개 항에서 찾아야 합니다</p>
+          </div>
+          <div class="sm-problem-card">
+            <h4>점검 일정 엑셀로 관리하는데 미치겠어요</h4>
+            <p>법령마다 주기가 달라 놓치기 쉽습니다</p>
+          </div>
+          <div class="sm-problem-card">
+            <h4>매일 아침 종이 들고 현장 돌아요</h4>
+            <p>TBM, 허가 확인까지 종이 뭉치가 쌓입니다</p>
+          </div>
+          <div class="sm-problem-card">
+            <h4>점검은 했는데 기록이 없대요</h4>
+            <p>종이는 잃어버리고, 사진은 어디 갔는지 모릅니다</p>
+          </div>
+          <div class="sm-problem-card">
+            <h4>폭염특보인데 작업 계속해야 하나</h4>
+            <p>기상 위험에서 기준 판단이 필요합니다</p>
+          </div>
         </div>
       </div>
     </section>
