@@ -1,0 +1,44 @@
+    /* ── 섹션2: 이미지 안 흰색 영역에 텍스트 오버레이 ── */
+    .sm-problem-wrap { position: relative; border-radius: 20px; overflow: hidden; }
+    .sm-problem-wrap > img { width: 100%; height: auto; display: block; }
+    .sm-problem-overlay {
+      position: absolute;
+      bottom: 2.5%;
+      left: 0; right: 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      z-index: 2;
+    }
+    .sm-po-item {
+      padding: 0 12px;
+      background: transparent;
+      text-align: center;
+    }
+    .sm-po-item h4 {
+      font-size: .82rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.45;
+      margin: 0;
+      word-break: keep-all;
+    }
+    .sm-problem-sub {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 12px;
+    }
+    .sm-problem-sub p {
+      font-size: .78rem;
+      color: #94a3b8;
+      line-height: 1.55;
+      margin: 0;
+      padding: 0 8px;
+      text-align: center;
+      word-break: keep-all;
+    }
+    @media (max-width: 767px) {
+      .sm-po-item { padding: 0 4px; }
+      .sm-po-item h4 { font-size: .68rem; }
+      .sm-problem-sub p { font-size: .64rem; }
+    }
