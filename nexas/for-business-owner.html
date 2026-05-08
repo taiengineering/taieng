@@ -44,10 +44,10 @@
     .owner-hero-section {
       position: relative;
       width: 100%;
-      background-color: #0f1f3d;       /* owner1.png 좌측 네이비와 동일 톤 (이미지 로딩 전 깜빡임 방지) */
+      background-color: #0f1f3d;
       background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner1.png');
       background-size: cover;
-      background-position: right center; /* 우측의 신문/안전모가 잘리지 않도록 */
+      background-position: right center;
       background-repeat: no-repeat;
       overflow: hidden;
     }
@@ -61,11 +61,7 @@
       display: flex;
       align-items: center;
     }
-    .owner-hero-content {
-      width: 100%;
-      max-width: 560px;                /* 좌측 텍스트 영역. 우측 신문이 가려지지 않게 제한 */
-    }
-
+    .owner-hero-content { width: 100%; max-width: 560px; }
     .owner-hero-eyebrow {
       display: inline-block;
       font-size: .82rem;
@@ -81,7 +77,6 @@
       margin-right: 10px;
       letter-spacing: 0;
     }
-
     .owner-hero-content h1 {
       font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 900;
@@ -96,8 +91,6 @@
       line-height: 1.75;
       margin-bottom: 36px;
     }
-
-    /* CTA 빨간 버튼 */
     .owner-hero-cta {
       display: inline-flex;
       align-items: center;
@@ -119,20 +112,10 @@
       box-shadow: 0 14px 34px rgba(220,38,38,.4);
       color: #fff !important;
     }
-
-    /* 모바일: 이미지가 너무 좁아 보일 위험 → 좌측 네이비 영역만 보이게 position 조정 + 텍스트 가독성 */
     @media(max-width:991px) {
-      .owner-hero-section {
-        background-position: 75% center;  /* 모바일에선 우측을 더 보여주되 텍스트는 좌측 어두운 영역 위에 */
-      }
-      .owner-hero-inner {
-        padding: 110px 20px 70px;
-        min-height: 540px;
-      }
-      .owner-hero-content {
-        max-width: 100%;
-      }
-      /* 이미지 위 텍스트 가독성을 위한 좌측 그라디언트 추가 */
+      .owner-hero-section { background-position: 75% center; }
+      .owner-hero-inner { padding: 110px 20px 70px; min-height: 540px; }
+      .owner-hero-content { max-width: 100%; }
       .owner-hero-section::before {
         content: '';
         position: absolute;
@@ -142,26 +125,272 @@
       }
     }
     @media(max-width:575px) {
-      .owner-hero-inner {
-        padding: 96px 18px 56px;
-        min-height: 460px;
+      .owner-hero-inner { padding: 96px 18px 56px; min-height: 460px; }
+      .owner-hero-cta { width: 100%; justify-content: center; }
+    }
+
+    /* ── ② 공감 섹션 (시안 v2 — 좌우 박스 대비 + 화살표 + 다크 결론) ── */
+    .empathy-sec {
+      background: #fff;
+      padding: 100px 0 88px;
+    }
+    .empathy-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .empathy-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #eef3ff;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 800;
+      color: #1A5FD4;
+      letter-spacing: .01em;
+      margin-bottom: 22px;
+    }
+    .empathy-head h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.2;
+      letter-spacing: -.03em;
+      margin: 0 0 18px;
+    }
+    .empathy-head .empathy-sub {
+      font-size: 1rem;
+      color: #475569;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .empathy-head .empathy-sub strong {
+      color: #1A5FD4;
+      font-weight: 800;
+    }
+
+    /* 좌우 박스 그리드 + 중앙 화살표 */
+    .empathy-grid {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      gap: 0;
+      align-items: stretch;
+      max-width: 1100px;
+      margin: 0 auto 32px;
+    }
+    .empathy-box {
+      border-radius: 22px;
+      padding: 28px;
+      position: relative;
+    }
+    .empathy-box-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: .01em;
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+    .empathy-box-label .lbl-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      font-size: .7rem;
+      font-weight: 900;
+    }
+
+    /* 좌측 (이상) — 회색 톤 */
+    .empathy-box.box-want {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding-top: 42px;
+    }
+    .empathy-box.box-want .empathy-box-label {
+      background: #475569;
+      color: #fff;
+    }
+    .empathy-box.box-want .empathy-box-label .lbl-icon {
+      background: #fff;
+      color: #475569;
+    }
+    .empathy-box.box-want .empathy-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 14px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .empathy-box.box-want .empathy-item:last-child {
+      border-bottom: 0;
+    }
+    .empathy-box.box-want .empathy-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+    }
+    .empathy-box.box-want .empathy-text {
+      font-size: 1rem;
+      color: #475569;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* 중앙 화살표 */
+    .empathy-arrow {
+      align-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1A5FD4;
+      font-size: 1.6rem;
+      font-weight: 900;
+      height: 100%;
+    }
+    .empathy-arrow svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* 우측 (현실) — 파란 강조 */
+    .empathy-box.box-real {
+      background: #f1f5fc;
+      border: 1.5px solid #c5d8f5;
+      padding-top: 42px;
+      box-shadow: 0 12px 36px rgba(26,95,212,.12);
+    }
+    .empathy-box.box-real .empathy-box-label {
+      background: #1A5FD4;
+      color: #fff;
+    }
+    .empathy-box.box-real .empathy-box-label .lbl-icon {
+      background: #fff;
+      color: #1A5FD4;
+    }
+    .empathy-box.box-real .empathy-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 14px;
+      border-bottom: 1px solid rgba(26,95,212,.12);
+    }
+    .empathy-box.box-real .empathy-item:last-child {
+      border-bottom: 0;
+    }
+    .empathy-box.box-real .empathy-icon {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #1A5FD4;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .empathy-box.box-real .empathy-text-block {
+      flex: 1;
+    }
+    .empathy-box.box-real .empathy-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.45;
+      margin: 0 0 4px;
+    }
+    .empathy-box.box-real .empathy-desc {
+      font-size: .85rem;
+      color: #64748b;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* 다크 결론 풀폭 */
+    .empathy-conclusion {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #0f2b4a;
+      border-radius: 18px;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 16px 44px rgba(15,43,74,.25);
+    }
+    .empathy-conclusion-icon {
+      flex-shrink: 0;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .empathy-conclusion-text h3 {
+      color: #fff;
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      font-weight: 900;
+      margin: 0 0 8px;
+      line-height: 1.4;
+      letter-spacing: -.02em;
+    }
+    .empathy-conclusion-text p {
+      color: rgba(255,255,255,.72);
+      font-size: .95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* 모바일 반응형 (991px↓) — 1열 + 화살표 회전 */
+    @media(max-width:991px) {
+      .empathy-sec { padding: 72px 0 64px; }
+      .empathy-head { margin-bottom: 44px; }
+      .empathy-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
       }
-      .owner-hero-cta {
-        width: 100%;
-        justify-content: center;
+      .empathy-arrow {
+        height: auto;
+        transform: rotate(90deg);
       }
+      .empathy-conclusion {
+        padding: 28px 24px;
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+      }
+    }
+    @media(max-width:575px) {
+      .empathy-box { padding: 24px 18px; padding-top: 38px; }
+      .empathy-box.box-want .empathy-item,
+      .empathy-box.box-real .empathy-item { padding: 14px 6px; }
+      .empathy-box.box-want .empathy-text { font-size: .92rem; }
+      .empathy-box.box-real .empathy-title { font-size: .98rem; }
+      .empathy-box.box-real .empathy-desc { font-size: .8rem; }
     }
 
     /* ── 이하 기존 섹션 그대로 ── */
-    .honest-sec { background: #fff; padding: 88px 0 72px; }
-    .honest-list { max-width: 640px; margin: 0 auto; }
-    .honest-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
-    .honest-x { font-size: 1.1rem; color: #cbd5e1; font-weight: 900; flex-shrink: 0; width: 28px; text-align: center; line-height: 1.8; }
-    .honest-o { font-size: 1.1rem; color: #0f172a; font-weight: 900; flex-shrink: 0; width: 28px; text-align: center; line-height: 1.8; }
-    .honest-item p { font-size: 1.05rem; color: #94a3b8; line-height: 1.7; margin: 0; }
-    .honest-item.active p { color: #0f172a; font-weight: 700; font-size: 1.1rem; }
-    .honest-conclusion { margin-top: 36px; padding: 28px 32px; background: #0f172a; border-radius: 14px; text-align: center; max-width: 640px; margin-left: auto; margin-right: auto; }
-    .honest-conclusion p { color: #fff; font-size: 1.15rem; font-weight: 800; margin: 0; line-height: 1.5; }
     .solution-sec { background: #f8fafc; padding: 88px 0; }
     .sol-card { background: #fff; border-radius: 18px; padding: 40px 32px 34px; box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%; border-top: 4px solid #0f172a; transition: transform .2s, box-shadow .2s; }
     .sol-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
@@ -170,7 +399,6 @@
     .sol-card p { font-size: .9rem; color: #64748b; line-height: 1.7; margin: 0 0 14px; }
     .sol-card .sol-highlight { background: #f1f5f9; border-left: 3px solid #0f172a; padding: 12px 16px; border-radius: 0 10px 10px 0; font-size: .85rem; color: #334155; font-weight: 700; line-height: 1.6; }
 
-    /* ── 앱 프리뷰 섹션 ── */
     .app-preview-sec { background: #0b0f14; padding: 80px 0; overflow: hidden; }
     .app-preview-sec h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
     .app-preview-sec .ap-sub { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.7; margin-bottom: 36px; }
@@ -210,7 +438,6 @@
         법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
         안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
       </p>
-
       <a href="free-diagnosis.html" class="owner-hero-cta">
         우리 사업장도 해당되는지 3분 만에 확인하기 →
       </a>
@@ -218,21 +445,84 @@
   </div>
 </section>
 
-<!-- ══ ② 솔직한 공감 ══ -->
-<section class="honest-sec">
+<!-- ══ ② 공감 섹션 (시안 v2: 좌우 박스 대비 + 화살표 + 다크 결론) ══ -->
+<section class="empathy-sec">
   <div class="container">
-    <div class="section-title text-center mb-5">
-      <h2 class="title">당신이 원하는 건 이겁니다</h2>
+    <!-- 헤더 -->
+    <div class="empathy-head">
+      <span class="empathy-chip">02 공감 섹션</span>
+      <h2>당신이 원하는 건 이겁니다</h2>
+      <p class="empathy-sub">
+        솔직히 말해서, 안전관리는 우선순위가 아니죠.<br>
+        당신이 <strong>진짜 원하는 3가지</strong>를 TAI가 해결합니다.
+      </p>
     </div>
-    <div class="honest-list">
-      <div class="honest-item"><span class="honest-x">✕</span><p>안전관리를 잘 하고 싶다</p></div>
-      <div class="honest-item"><span class="honest-x">✕</span><p>서류를 깔끔하게 정리하고 싶다</p></div>
-      <div class="honest-item"><span class="honest-x">✕</span><p>점검 일정을 체계적으로 관리하고 싶다</p></div>
-      <div style="border-top:1px solid #e2e8f0;margin:28px 0;"></div>
-      <div class="honest-item active"><span class="honest-o">✓</span><p>처벌받지 않으면 됩니다.</p></div>
-      <div class="honest-item active"><span class="honest-o">✓</span><p>법적으로 충분히 대응할 수 있으면 됩니다.</p></div>
-      <div class="honest-item active"><span class="honest-o">✓</span><p>돈을 최소한으로 쓰고 싶습니다.</p></div>
-      <div class="honest-conclusion"><p>TAI는 그 세 가지를 해결합니다.</p></div>
+
+    <!-- 좌우 박스 + 화살표 -->
+    <div class="empathy-grid">
+      <!-- 좌측: 하고 싶은 일 (이상) -->
+      <div class="empathy-box box-want">
+        <span class="empathy-box-label">
+          <span class="lbl-icon">✕</span>하고 싶은 일 (이상)
+        </span>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="far fa-clipboard"></i></div>
+          <div class="empathy-text">안전관리를 잘 하고 싶다</div>
+        </div>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="far fa-folder"></i></div>
+          <div class="empathy-text">서류를 깔끔하게 정리하고 싶다</div>
+        </div>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="far fa-calendar-alt"></i></div>
+          <div class="empathy-text">점검 일정을 체계적으로 관리하고 싶다</div>
+        </div>
+      </div>
+
+      <!-- 화살표 -->
+      <div class="empathy-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+
+      <!-- 우측: 진짜 원하는 일 (현실) -->
+      <div class="empathy-box box-real">
+        <span class="empathy-box-label">
+          <span class="lbl-icon">✓</span>진짜 원하는 일 (현실)
+        </span>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="empathy-text-block">
+            <h4 class="empathy-title">처벌받지 않으면 됩니다.</h4>
+            <p class="empathy-desc">사업주가 직접 처벌받습니다.</p>
+          </div>
+        </div>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="fas fa-gavel"></i></div>
+          <div class="empathy-text-block">
+            <h4 class="empathy-title">법적으로 충분히 대응할 수 있으면 됩니다.</h4>
+            <p class="empathy-desc">법적 책임을 다했다는 증거가 필요합니다.</p>
+          </div>
+        </div>
+        <div class="empathy-item">
+          <div class="empathy-icon"><i class="fas fa-won-sign"></i></div>
+          <div class="empathy-text-block">
+            <h4 class="empathy-title">돈을 최소한으로 쓰고 싶습니다.</h4>
+            <p class="empathy-desc">과태료보다 저렴한 비용으로 해결하고 싶습니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 다크 결론 -->
+    <div class="empathy-conclusion">
+      <div class="empathy-conclusion-icon">💡</div>
+      <div class="empathy-conclusion-text">
+        <h3>TAI는 그 세 가지를 해결합니다.</h3>
+        <p>복잡한 안전관리는 TAI가 대신하고, 당신은 사업에만 집중하세요.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -271,7 +561,7 @@
   </div>
 </section>
 
-<!-- ══ ③-1 앱 프리뷰 (신규) ══ -->
+<!-- ══ ③-1 앱 프리뷰 ══ -->
 <section class="app-preview-sec">
   <div class="container">
     <div class="row justify-content-center">
