@@ -372,7 +372,6 @@
     }
     .ap-left .ap-cta:hover { transform: translateY(-2px); color: #0f172a !important; }
 
-    /* fan-out 영역 */
     .ap-fanout {
       position: relative;
       width: 100%;
@@ -395,8 +394,6 @@
       object-position: top center;
       display: block;
     }
-
-    /* 메인(중앙, 5초 점검) — 가장 큼, 위로 떠있음, 그림자 강함, 테두리 */
     .ap-phone.featured {
       width: 248px;
       height: 510px;
@@ -413,8 +410,6 @@
       box-shadow: inset 0 0 0 3px rgba(96,165,250,.4);
       pointer-events: none;
     }
-
-    /* 좌1 (홈) — 메인 살짝 가림, 살짝 회전 */
     .ap-phone.l1 {
       width: 200px; height: 410px;
       z-index: 4;
@@ -423,8 +418,6 @@
       box-shadow: 0 18px 50px rgba(0,0,0,.5);
       opacity: .92;
     }
-
-    /* 좌2 (알림) — 더 멀리, 더 회전, 더 흐림 */
     .ap-phone.l2 {
       width: 168px; height: 345px;
       z-index: 3;
@@ -433,8 +426,6 @@
       box-shadow: 0 14px 40px rgba(0,0,0,.45);
       opacity: .78;
     }
-
-    /* 우1 (출퇴근) */
     .ap-phone.r1 {
       width: 200px; height: 410px;
       z-index: 4;
@@ -443,8 +434,6 @@
       box-shadow: 0 18px 50px rgba(0,0,0,.5);
       opacity: .92;
     }
-
-    /* 우2 (QR 스캔) */
     .ap-phone.r2 {
       width: 168px; height: 345px;
       z-index: 3;
@@ -453,16 +442,12 @@
       box-shadow: 0 14px 40px rgba(0,0,0,.45);
       opacity: .78;
     }
-
-    /* hover: 메인 외 폰들 살짝 일어섬 */
     .ap-fanout:hover .ap-phone.l1 { transform: rotate(-2deg) translateY(-8px); opacity: 1; }
     .ap-fanout:hover .ap-phone.r1 { transform: rotate(2deg) translateY(-8px); opacity: 1; }
     .ap-fanout:hover .ap-phone.l2 { transform: rotate(-4deg) translateY(10px); opacity: .9; }
     .ap-fanout:hover .ap-phone.r2 { transform: rotate(4deg) translateY(10px); opacity: .9; }
-
-    /* 모바일/태블릿 */
     @media(max-width:1199px) {
-      .ap-phone.l2, .ap-phone.r2 { display: none; }  /* 좌우 끝 화면 숨김 */
+      .ap-phone.l2, .ap-phone.r2 { display: none; }
       .ap-phone.l1 { left: calc(50% - 230px); }
       .ap-phone.r1 { right: calc(50% - 230px); }
     }
@@ -477,17 +462,131 @@
     }
     @media(max-width:575px) {
       .ap-fanout { height: 400px; }
-      .ap-phone.l1, .ap-phone.r1 { display: none; }  /* 모바일은 메인만 */
+      .ap-phone.l1, .ap-phone.r1 { display: none; }
       .ap-phone.featured { width: 200px; height: 400px; transform: translateY(0); }
     }
 
-    /* ── 이하 기존 섹션 그대로 ── */
     .scenario-sec { background: #fff; padding: 80px 0; }
     .scenario-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.1); }
-    .safety-essence { background: #f8fafc; padding: 88px 0; text-align: center; }
-    .safety-essence .essence-small { font-size: .9rem; color: #94a3b8; line-height: 1.7; margin-bottom: 32px; }
-    .safety-essence h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900; color: #0f172a; line-height: 1.3; margin-bottom: 16px; letter-spacing: -.02em; }
-    .safety-essence .essence-sub { font-size: 1.05rem; color: #64748b; line-height: 1.7; }
+
+    /* ── ⑤ 안전의 본질 (다크 + 취소선 + 크기로 압도) ── */
+    .safety-essence {
+      background: #0a1628;
+      padding: 130px 0 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .safety-essence::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: min(900px, 80%);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(96,165,250,.2), transparent);
+    }
+    .safety-essence-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+    }
+
+    /* 작은 라벨 */
+    .se-label {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      color: rgba(255,255,255,.4);
+      text-transform: uppercase;
+      margin-bottom: 44px;
+    }
+
+    /* 취소선 3줄 (이전 가치) */
+    .se-strikethrough {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .se-strikethrough li {
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      font-weight: 600;
+      color: rgba(255,255,255,.35);
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: rgba(255,255,255,.25);
+      letter-spacing: -.01em;
+      line-height: 1.4;
+    }
+
+    /* 가로 구분선 (강조) */
+    .se-divider {
+      width: 56px;
+      height: 2px;
+      background: rgba(255,255,255,.25);
+      margin: 0 auto 34px;
+      border: 0;
+    }
+
+    /* "그것보다 더 중요한 건" 작은 회색 */
+    .se-bridge {
+      font-size: .98rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.55);
+      margin: 0 0 22px;
+      letter-spacing: -.01em;
+    }
+
+    /* 큰 메인 메시지 — 페이지 전체에서 가장 큰 글자 */
+    .se-main {
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      letter-spacing: -.035em;
+      margin: 0 0 50px;
+    }
+
+    /* 얇은 가로 구분선 */
+    .se-divider-thin {
+      width: 32px;
+      height: 1px;
+      background: rgba(255,255,255,.18);
+      margin: 0 auto 24px;
+      border: 0;
+    }
+
+    /* 부연 1줄 */
+    .se-tagline {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.6);
+      letter-spacing: -.005em;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media(max-width:991px) {
+      .safety-essence { padding: 100px 0 92px; }
+      .se-label { margin-bottom: 36px; }
+      .se-strikethrough { margin-bottom: 36px; gap: 10px; }
+      .se-divider { margin-bottom: 28px; }
+      .se-main { margin-bottom: 38px; }
+    }
+    @media(max-width:575px) {
+      .safety-essence { padding: 84px 0 76px; }
+      .se-label { font-size: .72rem; margin-bottom: 28px; }
+      .se-strikethrough li { font-size: 1rem; }
+      .se-bridge { font-size: .92rem; }
+      .se-tagline { font-size: .92rem; }
+    }
+
+    /* ── ⑥ CTA ── */
     .owner-cta { background: #0f172a; padding: 80px 0; }
     .owner-cta h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 16px; }
     .owner-cta p { color: rgba(255,255,255,.7); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
@@ -668,7 +767,6 @@
 <section class="app-preview-sec">
   <div class="app-preview-inner">
 
-    <!-- 좌측 카피 -->
     <div class="ap-left">
       <h2>작업자가 이렇게<br>쉽게 씁니다</h2>
       <p class="ap-sub">
@@ -686,34 +784,22 @@
       <a href="free-diagnosis.html" class="ap-cta">무료 진단 시작 →</a>
     </div>
 
-    <!-- 우측 5장 fan-out -->
     <div class="ap-fanout">
-
-      <!-- 좌2: 알림 (가장 멀리, 가장 작음) -->
       <div class="ap-phone l2">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/12-notifications-light-light.png" alt="TAI Safe 알림 화면" loading="lazy">
       </div>
-
-      <!-- 좌1: 홈 -->
       <div class="ap-phone l1">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/01-home-light-light.png" alt="TAI Safe 홈 화면" loading="lazy">
       </div>
-
-      <!-- 메인: 5초 점검 -->
       <div class="ap-phone featured">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/02-inspect-light-light.png" alt="TAI Safe 점검 — 정상/이상 1클릭" loading="lazy">
       </div>
-
-      <!-- 우1: 출퇴근 -->
       <div class="ap-phone r1">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/13-attendance-light-light.png" alt="TAI Safe 출퇴근 화면" loading="lazy">
       </div>
-
-      <!-- 우2: QR 스캔 (가장 멀리) -->
       <div class="ap-phone r2">
         <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/app-screenshots/14-qr-scan-light-light.png" alt="TAI Safe QR 스캔 화면" loading="lazy">
       </div>
-
     </div>
   </div>
 </section>
@@ -727,16 +813,26 @@
   </div>
 </section>
 
-<!-- ══ ⑤ 안전의 본질 ══ -->
+<!-- ══ ⑤ 안전의 본질 (다크 + 취소선 + 크기로 압도) ══ -->
 <section class="safety-essence">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <p class="essence-small">감독을 피하는 것.<br>벌금을 내지 않는 것.<br>처벌받지 않는 것.</p>
-        <h2>그것보다 더 중요한 건<br>사람이 다치지 않는 것입니다.</h2>
-        <p class="essence-sub">TAI는 안전을 제대로 지키기 위해 만들어진 서비스입니다.</p>
-      </div>
-    </div>
+  <div class="safety-essence-inner">
+    <span class="se-label">THE REAL ESSENCE</span>
+
+    <ul class="se-strikethrough">
+      <li>감독을 피하는 것.</li>
+      <li>벌금을 내지 않는 것.</li>
+      <li>처벌받지 않는 것.</li>
+    </ul>
+
+    <hr class="se-divider">
+
+    <p class="se-bridge">그것보다 더 중요한 건</p>
+
+    <h2 class="se-main">사람이 다치지 않는 것입니다.</h2>
+
+    <hr class="se-divider-thin">
+
+    <p class="se-tagline">TAI는 안전을 제대로 지키기 위해 만들어진 서비스입니다.</p>
   </div>
 </section>
 
