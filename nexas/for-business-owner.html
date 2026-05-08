@@ -39,16 +39,169 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
-    .owner-hero-section { background: linear-gradient(135deg, #0f2b4a 0%, #1565c0 100%); }
-    .owner-hero-left-col { display: flex; align-items: center; padding: 120px 48px 50px 80px; min-height: 520px; }
-    .owner-hero-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .1em; color: rgba(255,255,255,.9); border: 1.5px solid rgba(255,255,255,.4); border-radius: 6px; padding: 5px 14px; margin-bottom: 22px; }
-    .owner-hero-left-col h1 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); font-weight: 900; color: #fff; line-height: 1.18; letter-spacing: -.03em; margin-bottom: 18px; }
-    .owner-hero-left-col .hero-sub { font-size: .98rem; color: rgba(255,255,255,.82); line-height: 1.7; margin-bottom: 32px; }
-    .owner-hero-right-col { position: relative; overflow: hidden; min-height: 520px; padding: 0; }
-    .owner-hero-right-col img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; position: absolute; top: 0; left: 0; }
-    .owner-hero-right-col::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 100px; background: linear-gradient(to right, rgba(15,43,74,.75), transparent); z-index: 1; }
-    @media(max-width:991px) { .owner-hero-left-col { min-height: auto; padding: 100px 24px 40px; } .owner-hero-right-col { min-height: 280px; } .owner-hero-right-col::before { display: none; } }
-    @media(max-width:575px) { .owner-hero-left-col { padding: 90px 20px 32px; } .owner-hero-right-col { min-height: 220px; } }
+
+    /* ── 히어로 (시안 반영) ── */
+    .owner-hero-section {
+      background: linear-gradient(135deg, #0f2b4a 0%, #1a3a6b 100%);
+      position: relative;
+    }
+    .owner-hero-left-col {
+      display: flex;
+      align-items: center;
+      padding: 110px 48px 56px 80px;
+      min-height: 580px;
+    }
+    .owner-hero-left-inner { width: 100%; }
+    .owner-hero-eyebrow {
+      display: inline-block;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .01em;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 24px;
+    }
+    .owner-hero-eyebrow .eb-num {
+      display: inline-block;
+      color: #fff;
+      font-weight: 900;
+      margin-right: 10px;
+      letter-spacing: 0;
+    }
+    .owner-hero-left-col h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.18;
+      letter-spacing: -.03em;
+      margin-bottom: 22px;
+    }
+    .owner-hero-left-col .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    /* 통계 박스 3개 (벌금/정역/과태료) */
+    .owner-stats-row {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .owner-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255,255,255,.92);
+    }
+    .owner-stat-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .owner-stat-text { line-height: 1.3; }
+    .owner-stat-label {
+      display: block;
+      font-size: .72rem;
+      color: rgba(255,255,255,.55);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .owner-stat-value {
+      display: block;
+      font-size: .92rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* CTA 빨간 버튼 + 보조 라벨 */
+    .owner-hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #dc2626;
+      color: #fff !important;
+      padding: 17px 32px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      text-decoration: none !important;
+      letter-spacing: -.01em;
+      box-shadow: 0 10px 28px rgba(220,38,38,.3);
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .owner-hero-cta:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(220,38,38,.4);
+      color: #fff !important;
+    }
+    .owner-hero-cta-meta {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      color: rgba(255,255,255,.6);
+      font-size: .82rem;
+    }
+    .owner-hero-cta-meta span::before {
+      content: '✓';
+      color: rgba(255,255,255,.6);
+      margin-right: 6px;
+      font-weight: 700;
+    }
+
+    /* 우측 이미지 */
+    .owner-hero-right-col {
+      position: relative;
+      overflow: hidden;
+      min-height: 580px;
+      padding: 0;
+    }
+    .owner-hero-right-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .owner-hero-right-col::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 120px;
+      background: linear-gradient(to right, rgba(15,43,74,.6), transparent);
+      z-index: 1;
+    }
+
+    @media(max-width:991px) {
+      .owner-hero-left-col { min-height: auto; padding: 100px 24px 44px; }
+      .owner-hero-right-col { min-height: 280px; }
+      .owner-hero-right-col::before { display: none; }
+      .owner-stats-row { gap: 14px; }
+      .owner-stat-item { flex-basis: 100%; }
+    }
+    @media(max-width:575px) {
+      .owner-hero-left-col { padding: 90px 20px 36px; }
+      .owner-hero-right-col { min-height: 220px; }
+      .owner-hero-cta { width: 100%; justify-content: center; }
+      .owner-hero-cta-meta { gap: 12px; font-size: .78rem; }
+    }
+
+    /* ── 이하 기존 섹션 그대로 ── */
     .honest-sec { background: #fff; padding: 88px 0 72px; }
     .honest-list { max-width: 640px; margin: 0 auto; }
     .honest-item { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
@@ -94,23 +247,57 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ ① 히어로 ══ -->
+<!-- ══ ① 히어로 (시안 반영) ══ -->
 <section class="owner-hero-section">
   <div class="container-fluid px-0">
     <div class="row g-0">
       <div class="col-lg-6 owner-hero-left-col">
         <div class="owner-hero-left-inner">
-          <span class="owner-hero-eyebrow">사업주 · 현장소장 · 공장장</span>
+          <span class="owner-hero-eyebrow">
+            <span class="eb-num">01</span>사업주·현장소장·공장장을 위한 TAI Safe
+          </span>
           <h1>이게 다<br>내 책임입니다.</h1>
           <p class="hero-sub">
             법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
             안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
           </p>
-          <a href="free-diagnosis.html" class="btn-navy">우리 사업장도 해당되는지 확인하기</a>
+
+          <div class="owner-stats-row">
+            <div class="owner-stat-item">
+              <div class="owner-stat-icon">⚖️</div>
+              <div class="owner-stat-text">
+                <span class="owner-stat-label">벌금</span>
+                <span class="owner-stat-value">최대 10억</span>
+              </div>
+            </div>
+            <div class="owner-stat-item">
+              <div class="owner-stat-icon">⛓️</div>
+              <div class="owner-stat-text">
+                <span class="owner-stat-label">징역</span>
+                <span class="owner-stat-value">최대 1년</span>
+              </div>
+            </div>
+            <div class="owner-stat-item">
+              <div class="owner-stat-icon">📋</div>
+              <div class="owner-stat-text">
+                <span class="owner-stat-label">과태료</span>
+                <span class="owner-stat-value">최대 3천만원</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="free-diagnosis.html" class="owner-hero-cta">
+            우리 사업장도 해당되는지 3분 만에 확인하기 →
+          </a>
+          <div class="owner-hero-cta-meta">
+            <span>무료 진단</span>
+            <span>회원가입 없이</span>
+            <span>3분 완성</span>
+          </div>
         </div>
       </div>
       <div class="col-lg-6 owner-hero-right-col">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/service/owner-news.png" alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사" loading="eager">
+        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner1.png" alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사" loading="eager">
       </div>
     </div>
   </div>
