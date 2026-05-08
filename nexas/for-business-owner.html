@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-    <!-- TAI global favicon, manifest, Organization -->
     <link rel="icon" href="/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -40,7 +39,49 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
 
-    /* ── 히어로 ── */
+    /* ── 공통 CTA 버튼 (안전관리자 페이지와 동일 패턴) ── */
+    .owner-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none !important;
+      letter-spacing: -.01em;
+      transition: .2s ease;
+      white-space: nowrap;
+    }
+    .owner-btn.primary {
+      background: #fff;
+      color: #0f2b4a !important;
+      box-shadow: 0 10px 26px rgba(0,0,0,.18);
+    }
+    .owner-btn.primary:hover {
+      background: #f0f6ff;
+      color: #0f2b4a !important;
+      transform: translateY(-2px);
+    }
+    .owner-btn.secondary {
+      background: transparent;
+      color: #fff !important;
+      border: 1.5px solid rgba(255,255,255,.5);
+    }
+    .owner-btn.secondary:hover {
+      border-color: #fff;
+      color: #fff !important;
+      background: rgba(255,255,255,.08);
+    }
+    .owner-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .owner-cta-row.center { justify-content: center; }
+
+    /* ── ① 히어로 ── */
     .owner-hero-section {
       position: relative;
       width: 100%;
@@ -91,27 +132,6 @@
       line-height: 1.75;
       margin-bottom: 36px;
     }
-    .owner-hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #dc2626;
-      color: #fff !important;
-      padding: 17px 32px;
-      border-radius: 10px;
-      font-size: 1.05rem;
-      font-weight: 800;
-      text-decoration: none !important;
-      letter-spacing: -.01em;
-      box-shadow: 0 10px 28px rgba(220,38,38,.3);
-      transition: background .2s, transform .2s, box-shadow .2s;
-    }
-    .owner-hero-cta:hover {
-      background: #b91c1c;
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(220,38,38,.4);
-      color: #fff !important;
-    }
     @media(max-width:991px) {
       .owner-hero-section { background-position: 75% center; }
       .owner-hero-inner { padding: 110px 20px 70px; min-height: 540px; }
@@ -126,7 +146,7 @@
     }
     @media(max-width:575px) {
       .owner-hero-inner { padding: 96px 18px 56px; min-height: 460px; }
-      .owner-hero-cta { width: 100%; justify-content: center; }
+      .owner-hero-content .owner-cta-row .owner-btn { width: 100%; }
     }
 
     /* ── ② 공감 섹션 ── */
@@ -309,7 +329,7 @@
       .sv2-card-highlight-text { font-size: .82rem; }
     }
 
-    /* ── ③-1 앱 프리뷰 섹션 (5장 fan-out, 다크) ── */
+    /* ── ③-1 앱 프리뷰 섹션 ── */
     .app-preview-sec {
       background: linear-gradient(180deg, #0b0f14 0%, #0f1c2e 100%);
       padding: 110px 0 130px;
@@ -469,7 +489,7 @@
     .scenario-sec { background: #fff; padding: 80px 0; }
     .scenario-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.1); }
 
-    /* ── ⑤ 안전의 본질 (다크 + 취소선 + 크기로 압도) ── */
+    /* ── ⑤ 안전의 본질 ── */
     .safety-essence {
       background: #0a1628;
       padding: 130px 0 120px;
@@ -492,8 +512,6 @@
       padding: 0 24px;
       position: relative;
     }
-
-    /* 작은 라벨 */
     .se-label {
       display: inline-block;
       font-size: .78rem;
@@ -503,8 +521,6 @@
       text-transform: uppercase;
       margin-bottom: 44px;
     }
-
-    /* 취소선 3줄 (이전 가치) */
     .se-strikethrough {
       list-style: none;
       padding: 0;
@@ -523,8 +539,6 @@
       letter-spacing: -.01em;
       line-height: 1.4;
     }
-
-    /* 가로 구분선 (강조) */
     .se-divider {
       width: 56px;
       height: 2px;
@@ -532,8 +546,6 @@
       margin: 0 auto 34px;
       border: 0;
     }
-
-    /* "그것보다 더 중요한 건" 작은 회색 */
     .se-bridge {
       font-size: .98rem;
       font-weight: 600;
@@ -541,8 +553,6 @@
       margin: 0 0 22px;
       letter-spacing: -.01em;
     }
-
-    /* 큰 메인 메시지 — 페이지 전체에서 가장 큰 글자 */
     .se-main {
       font-size: clamp(2.2rem, 5.5vw, 4.2rem);
       font-weight: 900;
@@ -551,8 +561,6 @@
       letter-spacing: -.035em;
       margin: 0 0 50px;
     }
-
-    /* 얇은 가로 구분선 */
     .se-divider-thin {
       width: 32px;
       height: 1px;
@@ -560,8 +568,6 @@
       margin: 0 auto 24px;
       border: 0;
     }
-
-    /* 부연 1줄 */
     .se-tagline {
       font-size: 1rem;
       font-weight: 500;
@@ -570,7 +576,6 @@
       line-height: 1.6;
       margin: 0;
     }
-
     @media(max-width:991px) {
       .safety-essence { padding: 100px 0 92px; }
       .se-label { margin-bottom: 36px; }
@@ -586,10 +591,30 @@
       .se-tagline { font-size: .92rem; }
     }
 
-    /* ── ⑥ CTA ── */
-    .owner-cta { background: #0f172a; padding: 80px 0; }
-    .owner-cta h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; margin-bottom: 16px; }
-    .owner-cta p { color: rgba(255,255,255,.7); font-size: 1rem; line-height: 1.7; margin-bottom: 32px; }
+    /* ── ⑥ CTA (두 버튼 옆 배치) ── */
+    .owner-cta {
+      background: #0f172a;
+      padding: 88px 0;
+      text-align: center;
+    }
+    .owner-cta h2 {
+      color: #fff;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      margin: 0 0 16px;
+      letter-spacing: -.02em;
+    }
+    .owner-cta p {
+      color: rgba(255,255,255,.7);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 auto 36px;
+      max-width: 620px;
+    }
+    @media(max-width:575px) {
+      .owner-cta { padding: 72px 0; }
+      .owner-cta .owner-cta-row .owner-btn { width: 100%; }
+    }
   </style>
 </head>
 <body class="sc5">
@@ -609,9 +634,10 @@
         법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
         안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
       </p>
-      <a href="free-diagnosis.html" class="owner-hero-cta">
-        우리 사업장도 해당되는지 3분 만에 확인하기 →
-      </a>
+      <div class="owner-cta-row">
+        <a href="free-diagnosis.html" class="owner-btn primary">무료 법령진단 시작 →</a>
+        <a href="service/saas.html" class="owner-btn secondary">TAI Safe 자세히 보기 →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -813,7 +839,7 @@
   </div>
 </section>
 
-<!-- ══ ⑤ 안전의 본질 (다크 + 취소선 + 크기로 압도) ══ -->
+<!-- ══ ⑤ 안전의 본질 ══ -->
 <section class="safety-essence">
   <div class="safety-essence-inner">
     <span class="se-label">THE REAL ESSENCE</span>
@@ -836,12 +862,15 @@
   </div>
 </section>
 
-<!-- ══ ⑥ CTA ══ -->
+<!-- ══ ⑥ CTA (두 버튼 옆 배치) ══ -->
 <section class="owner-cta">
-  <div class="container text-center">
+  <div class="container">
     <h2>3분이면 됩니다. 무료입니다.</h2>
-    <p>우리 사업장이 처벌 대상인지 지금 확인하세요.<br>데이터를 입력하면 법령 엔진이 자동으로 판단합니다.</p>
-    <a href="free-diagnosis.html" class="btn-red">무료 법령진단 시작</a>
+    <p>우리 사업장이 처벌 대상인지 지금 확인하거나,<br>안전관리 운영 방식이 어떻게 바뀌는지 살펴보세요.</p>
+    <div class="owner-cta-row center">
+      <a href="free-diagnosis.html" class="owner-btn primary">무료 법령진단 시작 →</a>
+      <a href="service/saas.html" class="owner-btn secondary">TAI Safe 자세히 보기 →</a>
+    </div>
   </div>
 </section>
 
