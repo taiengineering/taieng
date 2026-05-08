@@ -40,18 +40,32 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
 
-    /* ── 히어로 (시안 반영) ── */
+    /* ── 히어로 (시안 반영 v2: 풀폭 배경 이미지 + 좌측 텍스트 오버레이) ── */
     .owner-hero-section {
-      background: linear-gradient(135deg, #0f2b4a 0%, #1a3a6b 100%);
       position: relative;
+      width: 100%;
+      background-color: #0f1f3d;       /* owner1.png 좌측 네이비와 동일 톤 (이미지 로딩 전 깜빡임 방지) */
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner1.png');
+      background-size: cover;
+      background-position: right center; /* 우측의 신문/안전모가 잘리지 않도록 */
+      background-repeat: no-repeat;
+      overflow: hidden;
     }
-    .owner-hero-left-col {
+    .owner-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 130px 24px 90px;
+      min-height: 620px;
       display: flex;
       align-items: center;
-      padding: 110px 48px 56px 80px;
-      min-height: 580px;
     }
-    .owner-hero-left-inner { width: 100%; }
+    .owner-hero-content {
+      width: 100%;
+      max-width: 560px;                /* 좌측 텍스트 영역. 우측 신문이 가려지지 않게 제한 */
+    }
+
     .owner-hero-eyebrow {
       display: inline-block;
       font-size: .82rem;
@@ -67,59 +81,20 @@
       margin-right: 10px;
       letter-spacing: 0;
     }
-    .owner-hero-left-col h1 {
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+
+    .owner-hero-content h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
       font-weight: 900;
       color: #fff;
       line-height: 1.18;
       letter-spacing: -.03em;
       margin-bottom: 22px;
     }
-    .owner-hero-left-col .hero-sub {
+    .owner-hero-content .hero-sub {
       font-size: 1rem;
       color: rgba(255,255,255,.78);
       line-height: 1.75;
-      margin-bottom: 30px;
-    }
-
-    /* 통계 박스 3개 (벌금/정역/과태료) */
-    .owner-stats-row {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      margin-bottom: 30px;
-    }
-    .owner-stat-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,.92);
-    }
-    .owner-stat-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-    .owner-stat-text { line-height: 1.3; }
-    .owner-stat-label {
-      display: block;
-      font-size: .72rem;
-      color: rgba(255,255,255,.55);
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .owner-stat-value {
-      display: block;
-      font-size: .92rem;
-      font-weight: 800;
-      color: #fff;
+      margin-bottom: 36px;
     }
 
     /* CTA 빨간 버튼 + 보조 라벨 */
@@ -159,46 +134,40 @@
       font-weight: 700;
     }
 
-    /* 우측 이미지 */
-    .owner-hero-right-col {
-      position: relative;
-      overflow: hidden;
-      min-height: 580px;
-      padding: 0;
-    }
-    .owner-hero-right-col img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-    .owner-hero-right-col::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 120px;
-      background: linear-gradient(to right, rgba(15,43,74,.6), transparent);
-      z-index: 1;
-    }
-
+    /* 모바일: 이미지가 너무 좁아 보일 위험 → 좌측 네이비 영역만 보이게 position 조정 + 텍스트 가독성 */
     @media(max-width:991px) {
-      .owner-hero-left-col { min-height: auto; padding: 100px 24px 44px; }
-      .owner-hero-right-col { min-height: 280px; }
-      .owner-hero-right-col::before { display: none; }
-      .owner-stats-row { gap: 14px; }
-      .owner-stat-item { flex-basis: 100%; }
+      .owner-hero-section {
+        background-position: 75% center;  /* 모바일에선 우측을 더 보여주되 텍스트는 좌측 어두운 영역 위에 */
+      }
+      .owner-hero-inner {
+        padding: 110px 20px 70px;
+        min-height: 540px;
+      }
+      .owner-hero-content {
+        max-width: 100%;
+      }
+      /* 이미지 위 텍스트 가독성을 위한 좌측 그라디언트 추가 */
+      .owner-hero-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(15,31,61,.92) 0%, rgba(15,31,61,.7) 50%, rgba(15,31,61,.2) 100%);
+        z-index: 1;
+      }
     }
     @media(max-width:575px) {
-      .owner-hero-left-col { padding: 90px 20px 36px; }
-      .owner-hero-right-col { min-height: 220px; }
-      .owner-hero-cta { width: 100%; justify-content: center; }
-      .owner-hero-cta-meta { gap: 12px; font-size: .78rem; }
+      .owner-hero-inner {
+        padding: 96px 18px 56px;
+        min-height: 460px;
+      }
+      .owner-hero-cta {
+        width: 100%;
+        justify-content: center;
+      }
+      .owner-hero-cta-meta {
+        gap: 12px;
+        font-size: .78rem;
+      }
     }
 
     /* ── 이하 기존 섹션 그대로 ── */
@@ -247,57 +216,26 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ ① 히어로 (시안 반영) ══ -->
+<!-- ══ ① 히어로 (풀폭 배경 이미지 + 좌측 텍스트 오버레이) ══ -->
 <section class="owner-hero-section">
-  <div class="container-fluid px-0">
-    <div class="row g-0">
-      <div class="col-lg-6 owner-hero-left-col">
-        <div class="owner-hero-left-inner">
-          <span class="owner-hero-eyebrow">
-            <span class="eb-num">01</span>사업주·현장소장·공장장을 위한 TAI Safe
-          </span>
-          <h1>이게 다<br>내 책임입니다.</h1>
-          <p class="hero-sub">
-            법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
-            안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
-          </p>
+  <div class="owner-hero-inner">
+    <div class="owner-hero-content">
+      <span class="owner-hero-eyebrow">
+        <span class="eb-num">01</span>사업주·현장소장·공장장을 위한 TAI Safe
+      </span>
+      <h1>이게 다<br>내 책임입니다.</h1>
+      <p class="hero-sub">
+        법이 바뀌었습니다. 이제 사업주가 직접 처벌받습니다.<br>
+        안전관리에 관심이 없어도, 법은 관심 없다는 걸 허락하지 않습니다.
+      </p>
 
-          <div class="owner-stats-row">
-            <div class="owner-stat-item">
-              <div class="owner-stat-icon">⚖️</div>
-              <div class="owner-stat-text">
-                <span class="owner-stat-label">벌금</span>
-                <span class="owner-stat-value">최대 10억</span>
-              </div>
-            </div>
-            <div class="owner-stat-item">
-              <div class="owner-stat-icon">⛓️</div>
-              <div class="owner-stat-text">
-                <span class="owner-stat-label">징역</span>
-                <span class="owner-stat-value">최대 1년</span>
-              </div>
-            </div>
-            <div class="owner-stat-item">
-              <div class="owner-stat-icon">📋</div>
-              <div class="owner-stat-text">
-                <span class="owner-stat-label">과태료</span>
-                <span class="owner-stat-value">최대 3천만원</span>
-              </div>
-            </div>
-          </div>
-
-          <a href="free-diagnosis.html" class="owner-hero-cta">
-            우리 사업장도 해당되는지 3분 만에 확인하기 →
-          </a>
-          <div class="owner-hero-cta-meta">
-            <span>무료 진단</span>
-            <span>회원가입 없이</span>
-            <span>3분 완성</span>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 owner-hero-right-col">
-        <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner1.png" alt="중대재해처벌법 5인 이상 확대 — 벌금 10억, 징역 1년, 과태료 상세 신문 기사" loading="eager">
+      <a href="free-diagnosis.html" class="owner-hero-cta">
+        우리 사업장도 해당되는지 3분 만에 확인하기 →
+      </a>
+      <div class="owner-hero-cta-meta">
+        <span>무료 진단</span>
+        <span>회원가입 없이</span>
+        <span>3분 완성</span>
       </div>
     </div>
   </div>
