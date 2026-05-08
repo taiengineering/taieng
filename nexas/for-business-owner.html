@@ -40,7 +40,7 @@
   <style>
     body { font-family: 'Noto Sans KR', sans-serif; }
 
-    /* ── 히어로 (시안 반영 v2: 풀폭 배경 이미지 + 좌측 텍스트 오버레이) ── */
+    /* ── 히어로 ── */
     .owner-hero-section {
       position: relative;
       width: 100%;
@@ -129,15 +129,9 @@
       .owner-hero-cta { width: 100%; justify-content: center; }
     }
 
-    /* ── ② 공감 섹션 (시안 v2 — 좌우 박스 대비 + 화살표 + 다크 결론) ── */
-    .empathy-sec {
-      background: #fff;
-      padding: 100px 0 88px;
-    }
-    .empathy-head {
-      text-align: center;
-      margin-bottom: 56px;
-    }
+    /* ── ② 공감 섹션 ── */
+    .empathy-sec { background: #fff; padding: 100px 0 88px; }
+    .empathy-head { text-align: center; margin-bottom: 56px; }
     .empathy-chip {
       display: inline-flex;
       align-items: center;
@@ -165,12 +159,7 @@
       line-height: 1.8;
       margin: 0;
     }
-    .empathy-head .empathy-sub strong {
-      color: #1A5FD4;
-      font-weight: 800;
-    }
-
-    /* 좌우 박스 그리드 + 중앙 화살표 */
+    .empathy-head .empathy-sub strong { color: #1A5FD4; font-weight: 800; }
     .empathy-grid {
       display: grid;
       grid-template-columns: 1fr 56px 1fr;
@@ -179,11 +168,7 @@
       max-width: 1100px;
       margin: 0 auto 32px;
     }
-    .empathy-box {
-      border-radius: 22px;
-      padding: 28px;
-      position: relative;
-    }
+    .empathy-box { border-radius: 22px; padding: 28px; position: relative; }
     .empathy-box-label {
       display: inline-flex;
       align-items: center;
@@ -209,196 +194,248 @@
       font-size: .7rem;
       font-weight: 900;
     }
-
-    /* 좌측 (이상) — 회색 톤 */
-    .empathy-box.box-want {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      padding-top: 42px;
-    }
-    .empathy-box.box-want .empathy-box-label {
-      background: #475569;
-      color: #fff;
-    }
-    .empathy-box.box-want .empathy-box-label .lbl-icon {
-      background: #fff;
-      color: #475569;
-    }
+    .empathy-box.box-want { background: #f8fafc; border: 1px solid #e2e8f0; padding-top: 42px; }
+    .empathy-box.box-want .empathy-box-label { background: #475569; color: #fff; }
+    .empathy-box.box-want .empathy-box-label .lbl-icon { background: #fff; color: #475569; }
     .empathy-box.box-want .empathy-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 18px 14px;
-      border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: center; gap: 16px; padding: 18px 14px; border-bottom: 1px solid #e2e8f0;
     }
-    .empathy-box.box-want .empathy-item:last-child {
-      border-bottom: 0;
-    }
+    .empathy-box.box-want .empathy-item:last-child { border-bottom: 0; }
     .empathy-box.box-want .empathy-icon {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #e2e8f0;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: #e2e8f0; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center; font-size: 1.05rem;
     }
-    .empathy-box.box-want .empathy-text {
-      font-size: 1rem;
-      color: #475569;
-      font-weight: 600;
-      line-height: 1.5;
-    }
-
-    /* 중앙 화살표 */
+    .empathy-box.box-want .empathy-text { font-size: 1rem; color: #475569; font-weight: 600; line-height: 1.5; }
     .empathy-arrow {
-      align-self: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #1A5FD4;
-      font-size: 1.6rem;
-      font-weight: 900;
-      height: 100%;
+      align-self: center; display: flex; align-items: center; justify-content: center;
+      color: #1A5FD4; font-size: 1.6rem; font-weight: 900; height: 100%;
     }
-    .empathy-arrow svg {
-      width: 32px;
-      height: 32px;
-    }
-
-    /* 우측 (현실) — 파란 강조 */
+    .empathy-arrow svg { width: 32px; height: 32px; }
     .empathy-box.box-real {
-      background: #f1f5fc;
-      border: 1.5px solid #c5d8f5;
-      padding-top: 42px;
+      background: #f1f5fc; border: 1.5px solid #c5d8f5; padding-top: 42px;
       box-shadow: 0 12px 36px rgba(26,95,212,.12);
     }
-    .empathy-box.box-real .empathy-box-label {
-      background: #1A5FD4;
-      color: #fff;
-    }
-    .empathy-box.box-real .empathy-box-label .lbl-icon {
-      background: #fff;
-      color: #1A5FD4;
-    }
+    .empathy-box.box-real .empathy-box-label { background: #1A5FD4; color: #fff; }
+    .empathy-box.box-real .empathy-box-label .lbl-icon { background: #fff; color: #1A5FD4; }
     .empathy-box.box-real .empathy-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 18px 14px;
+      display: flex; align-items: flex-start; gap: 16px; padding: 18px 14px;
       border-bottom: 1px solid rgba(26,95,212,.12);
     }
-    .empathy-box.box-real .empathy-item:last-child {
-      border-bottom: 0;
-    }
+    .empathy-box.box-real .empathy-item:last-child { border-bottom: 0; }
     .empathy-box.box-real .empathy-icon {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #1A5FD4;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 50%; background: #1A5FD4; color: #fff;
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
     }
-    .empathy-box.box-real .empathy-text-block {
-      flex: 1;
-    }
-    .empathy-box.box-real .empathy-title {
-      font-size: 1.05rem;
-      font-weight: 900;
-      color: #0f172a;
-      line-height: 1.45;
-      margin: 0 0 4px;
-    }
-    .empathy-box.box-real .empathy-desc {
-      font-size: .85rem;
-      color: #64748b;
-      line-height: 1.55;
-      margin: 0;
-    }
-
-    /* 다크 결론 풀폭 */
+    .empathy-box.box-real .empathy-text-block { flex: 1; }
+    .empathy-box.box-real .empathy-title { font-size: 1.05rem; font-weight: 900; color: #0f172a; line-height: 1.45; margin: 0 0 4px; }
+    .empathy-box.box-real .empathy-desc { font-size: .85rem; color: #64748b; line-height: 1.55; margin: 0; }
     .empathy-conclusion {
-      max-width: 1100px;
-      margin: 0 auto;
-      background: #0f2b4a;
-      border-radius: 18px;
-      padding: 32px 40px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
+      max-width: 1100px; margin: 0 auto; background: #0f2b4a; border-radius: 18px;
+      padding: 32px 40px; display: flex; align-items: center; gap: 24px;
       box-shadow: 0 16px 44px rgba(15,43,74,.25);
     }
     .empathy-conclusion-icon {
-      flex-shrink: 0;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.06);
-      border: 1.5px solid rgba(255,255,255,.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
+      flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.18);
+      display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
     }
     .empathy-conclusion-text h3 {
-      color: #fff;
-      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-      font-weight: 900;
-      margin: 0 0 8px;
-      line-height: 1.4;
-      letter-spacing: -.02em;
+      color: #fff; font-size: clamp(1.3rem, 2.4vw, 1.7rem); font-weight: 900;
+      margin: 0 0 8px; line-height: 1.4; letter-spacing: -.02em;
     }
-    .empathy-conclusion-text p {
-      color: rgba(255,255,255,.72);
-      font-size: .95rem;
-      line-height: 1.6;
-      margin: 0;
-    }
-
-    /* 모바일 반응형 (991px↓) — 1열 + 화살표 회전 */
+    .empathy-conclusion-text p { color: rgba(255,255,255,.72); font-size: .95rem; line-height: 1.6; margin: 0; }
     @media(max-width:991px) {
       .empathy-sec { padding: 72px 0 64px; }
       .empathy-head { margin-bottom: 44px; }
-      .empathy-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .empathy-arrow {
-        height: auto;
-        transform: rotate(90deg);
-      }
-      .empathy-conclusion {
-        padding: 28px 24px;
-        flex-direction: column;
-        text-align: center;
-        gap: 16px;
-      }
+      .empathy-grid { grid-template-columns: 1fr; gap: 32px; }
+      .empathy-arrow { height: auto; transform: rotate(90deg); }
+      .empathy-conclusion { padding: 28px 24px; flex-direction: column; text-align: center; gap: 16px; }
     }
     @media(max-width:575px) {
       .empathy-box { padding: 24px 18px; padding-top: 38px; }
-      .empathy-box.box-want .empathy-item,
-      .empathy-box.box-real .empathy-item { padding: 14px 6px; }
+      .empathy-box.box-want .empathy-item, .empathy-box.box-real .empathy-item { padding: 14px 6px; }
       .empathy-box.box-want .empathy-text { font-size: .92rem; }
       .empathy-box.box-real .empathy-title { font-size: .98rem; }
       .empathy-box.box-real .empathy-desc { font-size: .8rem; }
     }
 
-    /* ── 이하 기존 섹션 그대로 ── */
-    .solution-sec { background: #f8fafc; padding: 88px 0; }
-    .sol-card { background: #fff; border-radius: 18px; padding: 40px 32px 34px; box-shadow: 0 4px 24px rgba(0,0,0,.07); height: 100%; border-top: 4px solid #0f172a; transition: transform .2s, box-shadow .2s; }
-    .sol-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
-    .sol-card .sol-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #0f172a; color: #fff; font-weight: 900; font-size: .95rem; margin-bottom: 18px; }
-    .sol-card h4 { font-size: 1.2rem; font-weight: 900; color: #0f172a; margin-bottom: 14px; line-height: 1.35; }
-    .sol-card p { font-size: .9rem; color: #64748b; line-height: 1.7; margin: 0 0 14px; }
-    .sol-card .sol-highlight { background: #f1f5f9; border-left: 3px solid #0f172a; padding: 12px 16px; border-radius: 0 10px 10px 0; font-size: .85rem; color: #334155; font-weight: 700; line-height: 1.6; }
+    /* ── ③ 해결 가치 섹션 (시안 적용) ── */
+    .solution-v2-sec {
+      background: #f8fafc;
+      padding: 100px 0 96px;
+    }
+    .solution-v2-head {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .solution-v2-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 18px;
+      background: #eef3ff;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 800;
+      color: #1A5FD4;
+      margin-bottom: 22px;
+      letter-spacing: .01em;
+    }
+    .solution-v2-head h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      color: #0f2b4a;
+      line-height: 1.2;
+      letter-spacing: -.03em;
+      margin: 0 0 16px;
+    }
+    .solution-v2-head .sv2-sub {
+      font-size: 1rem;
+      color: #64748b;
+      line-height: 1.8;
+      margin: 0;
+    }
 
+    /* 카드 그리드 */
+    .solution-v2-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .sv2-card {
+      background: #fff;
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 32px rgba(15,43,74,.08);
+      border: 1px solid rgba(15,43,74,.04);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .sv2-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(15,43,74,.14);
+    }
+
+    /* 카드 상단 사진 */
+    .sv2-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    .sv2-card-img.img1 {
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
+      background-position: 0% center;
+      background-size: 300% auto;
+    }
+    .sv2-card-img.img2 {
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
+      background-position: 50% center;
+      background-size: 300% auto;
+    }
+    .sv2-card-img.img3 {
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
+      background-position: 100% center;
+      background-size: 300% auto;
+    }
+
+    /* 사진 아래 가운데에 떠 있는 번호 원 */
+    .sv2-card-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #0f2b4a;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 8px 20px rgba(15,43,74,.3);
+      z-index: 2;
+      letter-spacing: .02em;
+    }
+
+    .sv2-card-body {
+      padding: 50px 32px 28px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .sv2-card-title {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #0f2b4a;
+      line-height: 1.35;
+      margin: 0 0 14px;
+      letter-spacing: -.02em;
+    }
+    .sv2-card-desc {
+      font-size: .92rem;
+      color: #64748b;
+      line-height: 1.7;
+      margin: 0;
+      flex: 1;
+    }
+
+    /* 다크 네이비 강조 박스 (카드 하단) */
+    .sv2-card-highlight {
+      margin: 22px 22px 22px;
+      padding: 18px 20px;
+      background: #0f2b4a;
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+    }
+    .sv2-card-highlight-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+    .sv2-card-highlight-text {
+      color: #fff;
+      font-size: .88rem;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: -.01em;
+    }
+
+    /* 모바일 반응형 */
+    @media(max-width:991px) {
+      .solution-v2-sec { padding: 72px 0 68px; }
+      .solution-v2-head { margin-bottom: 44px; }
+      .solution-v2-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .sv2-card-img { aspect-ratio: 16 / 9; }
+    }
+    @media(max-width:575px) {
+      .sv2-card-body { padding: 46px 22px 22px; }
+      .sv2-card-title { font-size: 1.2rem; }
+      .sv2-card-desc { font-size: .88rem; }
+      .sv2-card-highlight { margin: 18px 16px 18px; padding: 16px 18px; }
+      .sv2-card-highlight-text { font-size: .82rem; }
+    }
+
+    /* ── 앱 프리뷰 섹션 ── */
     .app-preview-sec { background: #0b0f14; padding: 80px 0; overflow: hidden; }
     .app-preview-sec h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 12px; }
     .app-preview-sec .ap-sub { color: rgba(255,255,255,.6); font-size: .95rem; line-height: 1.7; margin-bottom: 36px; }
@@ -426,7 +463,7 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ ① 히어로 (풀폭 배경 이미지 + 좌측 텍스트 오버레이) ══ -->
+<!-- ══ ① 히어로 ══ -->
 <section class="owner-hero-section">
   <div class="owner-hero-inner">
     <div class="owner-hero-content">
@@ -445,10 +482,9 @@
   </div>
 </section>
 
-<!-- ══ ② 공감 섹션 (시안 v2: 좌우 박스 대비 + 화살표 + 다크 결론) ══ -->
+<!-- ══ ② 공감 섹션 ══ -->
 <section class="empathy-sec">
   <div class="container">
-    <!-- 헤더 -->
     <div class="empathy-head">
       <span class="empathy-chip">02 공감 섹션</span>
       <h2>당신이 원하는 건 이겁니다</h2>
@@ -458,9 +494,7 @@
       </p>
     </div>
 
-    <!-- 좌우 박스 + 화살표 -->
     <div class="empathy-grid">
-      <!-- 좌측: 하고 싶은 일 (이상) -->
       <div class="empathy-box box-want">
         <span class="empathy-box-label">
           <span class="lbl-icon">✕</span>하고 싶은 일 (이상)
@@ -479,7 +513,6 @@
         </div>
       </div>
 
-      <!-- 화살표 -->
       <div class="empathy-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
@@ -487,7 +520,6 @@
         </svg>
       </div>
 
-      <!-- 우측: 진짜 원하는 일 (현실) -->
       <div class="empathy-box box-real">
         <span class="empathy-box-label">
           <span class="lbl-icon">✓</span>진짜 원하는 일 (현실)
@@ -516,7 +548,6 @@
       </div>
     </div>
 
-    <!-- 다크 결론 -->
     <div class="empathy-conclusion">
       <div class="empathy-conclusion-icon">💡</div>
       <div class="empathy-conclusion-text">
@@ -527,34 +558,82 @@
   </div>
 </section>
 
-<!-- ══ ③ 해결 카드 3개 ══ -->
-<section class="solution-sec">
+<!-- ══ ③ 해결 가치 섹션 (시안 적용) ══ -->
+<section class="solution-v2-sec">
   <div class="container">
-    <div class="row g-4">
-      <div class="col-lg-4">
-        <div class="sol-card">
-          <div class="sol-num">1</div>
-          <h4>걸려도 괜찮게</h4>
-          <p>모든 점검·조치·보고 기록이 타임스탬프와 함께 자동으로 쌓입니다. 감독관이 와도 서류를 즉시 제출할 수 있습니다.</p>
-          <p>"관리하고 있었다"는 증거가 자동으로 만들어집니다.</p>
-          <div class="sol-highlight">감사·점검 시 "이 정도면 잘 관리하고 있네요"라는 말을 듣게 됩니다</div>
+    <!-- 헤더 -->
+    <div class="solution-v2-head">
+      <span class="solution-v2-chip">03 해결 가치</span>
+      <h2>TAI는 이렇게 해결합니다</h2>
+      <p class="sv2-sub">복잡한 안전관리, TAI가 핵심만 해결해 드립니다.</p>
+    </div>
+
+    <!-- 카드 3개 -->
+    <div class="solution-v2-grid">
+      <!-- 카드 01 — 걸려도 괜찮게 -->
+      <div class="sv2-card">
+        <div class="sv2-card-img img1">
+          <div class="sv2-card-num">01</div>
+        </div>
+        <div class="sv2-card-body">
+          <h3 class="sv2-card-title">걸려도 괜찮게</h3>
+          <p class="sv2-card-desc">
+            모든 점검·조치·보고 기록이 타임스탬프와 함께<br>
+            자동으로 쌓입니다.<br>
+            감독관이 와도 서류를 즉시 제출할 수 있습니다.
+          </p>
+        </div>
+        <div class="sv2-card-highlight">
+          <div class="sv2-card-highlight-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="sv2-card-highlight-text">
+            "관리하고 있었다"는 증거가<br>
+            자동으로 만들어집니다.<br>
+            <span style="color:rgba(255,255,255,.65);font-size:.78rem;display:inline-block;margin-top:4px;">감사·점검 시 "이 정도면 잘 관리하고 있네요"<br>라는 말을 듣게 됩니다</span>
+          </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="sol-card">
-          <div class="sol-num">2</div>
-          <h4>법적으로 충분히<br>대응할 수 있습니다</h4>
-          <p>법령이 요구하는 의무 항목을 자동으로 추적하고, 기한 전에 알려줍니다. 안전관리자에게 자동 배정되고, 작업자가 직접 체크합니다.</p>
-          <p>대표는 결과만 확인하면 됩니다.</p>
-          <div class="sol-highlight">법이 요구하는 모든 것을 빠짐없이 실행하고 있다는 체계를 갖추게 됩니다</div>
+
+      <!-- 카드 02 — 법적으로 충분히 대응 -->
+      <div class="sv2-card">
+        <div class="sv2-card-img img2">
+          <div class="sv2-card-num">02</div>
+        </div>
+        <div class="sv2-card-body">
+          <h3 class="sv2-card-title">법적으로 충분히<br>대응할 수 있습니다</h3>
+          <p class="sv2-card-desc">
+            법령이 요구하는 의무 항목을 자동으로 추적하고,<br>
+            기한 전에 알려줍니다. 안전관리자에게 자동 배정되고,<br>
+            작업자가 직접 체크합니다. 대표는 결과만 확인하세요.
+          </p>
+        </div>
+        <div class="sv2-card-highlight">
+          <div class="sv2-card-highlight-icon"><i class="fas fa-gavel"></i></div>
+          <div class="sv2-card-highlight-text">
+            법이 요구하는 모든 것을 빠짐없이<br>
+            실행하고 있다는 체계를 갖추게 됩니다.
+          </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="sol-card">
-          <div class="sol-num">3</div>
-          <h4>과태료 1건보다<br>쌉니다</h4>
-          <p>TAI Safe는 월 7.9만원부터 시작합니다. 안전관리 관련 과태료 1건 평균 300만원. TAI를 3년 써도 과태료 1건보다 저렴합니다.</p>
-          <div class="sol-highlight">과태료를 한 번이라도 맞아본 사업주는 이 비용이 보험이라는 걸 압니다</div>
+
+      <!-- 카드 03 — 과태료 1건보다 쌉니다 -->
+      <div class="sv2-card">
+        <div class="sv2-card-img img3">
+          <div class="sv2-card-num">03</div>
+        </div>
+        <div class="sv2-card-body">
+          <h3 class="sv2-card-title">과태료 1건보다 쌉니다</h3>
+          <p class="sv2-card-desc">
+            TAI Safe는 월 7.9만원부터 시작합니다.<br>
+            안전관리 관련 과태료 1건 평균 300만원.<br>
+            TAI를 3년 써도 과태료 1건보다 저렴합니다.
+          </p>
+        </div>
+        <div class="sv2-card-highlight">
+          <div class="sv2-card-highlight-icon"><i class="fas fa-coins"></i></div>
+          <div class="sv2-card-highlight-text">
+            과태료를 한 번이라도 맞아본 사업주는<br>
+            이 비용이 보험이라는 걸 압니다.
+          </div>
         </div>
       </div>
     </div>
