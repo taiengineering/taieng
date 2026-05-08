@@ -259,7 +259,7 @@
       .empathy-box.box-real .empathy-desc { font-size: .8rem; }
     }
 
-    /* ── ③ 해결 가치 섹션 (시안 적용) ── */
+    /* ── ③ 해결 가치 섹션 ── */
     .solution-v2-sec {
       background: #f8fafc;
       padding: 100px 0 96px;
@@ -318,7 +318,7 @@
       box-shadow: 0 20px 48px rgba(15,43,74,.14);
     }
 
-    /* 카드 상단 사진 */
+    /* 카드 상단 사진 — 각 카드 개별 이미지 (3장 분리됨) */
     .sv2-card-img {
       width: 100%;
       aspect-ratio: 4 / 3;
@@ -328,19 +328,13 @@
       position: relative;
     }
     .sv2-card-img.img1 {
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
-      background-position: 0% center;
-      background-size: 300% auto;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3-1.png');
     }
     .sv2-card-img.img2 {
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
-      background-position: 50% center;
-      background-size: 300% auto;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3-2.png');
     }
     .sv2-card-img.img3 {
-      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3.png');
-      background-position: 100% center;
-      background-size: 300% auto;
+      background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/owner/owner3-3.png');
     }
 
     /* 사진 아래 가운데에 떠 있는 번호 원 */
@@ -558,17 +552,15 @@
   </div>
 </section>
 
-<!-- ══ ③ 해결 가치 섹션 (시안 적용) ══ -->
+<!-- ══ ③ 해결 가치 섹션 ══ -->
 <section class="solution-v2-sec">
   <div class="container">
-    <!-- 헤더 -->
     <div class="solution-v2-head">
       <span class="solution-v2-chip">03 해결 가치</span>
       <h2>TAI는 이렇게 해결합니다</h2>
       <p class="sv2-sub">복잡한 안전관리, TAI가 핵심만 해결해 드립니다.</p>
     </div>
 
-    <!-- 카드 3개 -->
     <div class="solution-v2-grid">
       <!-- 카드 01 — 걸려도 괜찮게 -->
       <div class="sv2-card">
