@@ -21,264 +21,337 @@
 }
 </script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI 인앱 서비스. 신고서식 자동화·점검일지·화학물질 라벨·MSDS·TBM기록지·경영진 보고서까지 SaaS 구독 안에 모두 포함.">
-  <title>인앱 서비스 | TAI 엔지니어링</title>
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="TAI Safe | 엑셀 없는 스마트 산업안전관리 플랫폼">
-  <meta property="og:description" content="과태료 리스크 3분 만에 진단하세요. 1인 집중에서 전원 참여로 바꾸는 법령 기반 안전관리 시스템.">
-  <meta property="og:image" content="https://taieng.co.kr/assets/img/og-image.png">
-  <link rel="stylesheet" href="../assets/css/animate.min.css">
-  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/css/magnific.min.css">
-  <link rel="stylesheet" href="../assets/css/owl.min.css">
-  <link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/responsive.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <style>
-  body { font-family: 'Noto Sans KR', 'Lato', sans-serif; }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TAI Apps — TAI Safe를 확장하는 산업안전 운영 앱 생태계. TBM, 점검일지, MSDS, 라벨, 보고서 자동화까지 필요한 앱을 추가해 현장 운영을 확장하세요.">
+<title>TAI Apps | 산업안전 운영 앱 생태계</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="TAI Apps | 산업안전 운영 앱 생태계">
+<meta property="og:description" content="TAI Safe 위에서 필요한 기능만 추가하세요. TBM, 점검일지, MSDS, 라벨, 보고서 자동화까지 산업안전 운영을 확장하는 앱 생태계입니다.">
+<meta property="og:image" content="https://taieng.co.kr/assets/img/og-image.png">
 
-  /* ── 히어로 ── */
-  .inapp-hero {
-    background: linear-gradient(135deg, #050a14, #0d1b2e, #0a1628);
-    padding: 110px 0 80px;
-    position: relative; overflow: hidden;
-  }
-  .inapp-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 50% 70% at 10% 50%, rgba(139,92,246,.12) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .inapp-eyebrow {
-    display: inline-block;
-    font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
-    color: #a78bfa; background: rgba(139,92,246,.15);
-    border: 1px solid rgba(139,92,246,.4);
-    border-radius: 4px; padding: 5px 12px; margin-bottom: 22px;
-  }
-  .inapp-hero h1 { font-size: clamp(2.2rem,4.5vw,3.8rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 18px; }
-  .inapp-hero h1 em { color: #c4b5fd; font-style: normal; }
-  .inapp-hero p { font-size: 1.05rem; color: rgba(255,255,255,.72); margin-bottom: 32px; line-height: 1.65; }
+<link rel="stylesheet" href="../assets/css/animate.min.css">
+<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/css/magnific.min.css">
+<link rel="stylesheet" href="../assets/css/owl.min.css">
+<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/responsive.css">
+<link rel="stylesheet" href="../assets/css/tai-brand.css">
+<link rel="stylesheet" href="../assets/css/tai-main.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-  /* ── 기능 카드 ── */
-  .feat-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 28px 24px;
-    height: 100%;
-    box-shadow: 0 4px 20px rgba(0,0,0,.07);
-    border-top: 4px solid #7c3aed;
-    display: flex; flex-direction: column;
-    transition: transform .2s, box-shadow .2s;
-  }
-  .feat-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,.12); }
-  .feat-icon { font-size: 2.2rem; margin-bottom: 14px; }
-  .feat-card h4 { font-size: 1rem; font-weight: 900; color: #0d1b2a; margin-bottom: 8px; }
-  .feat-card p { font-size: .87rem; color: #64748b; line-height: 1.65; flex: 1; margin-bottom: 14px; }
-  .feat-badge {
-    display: inline-block;
-    font-size: .7rem; font-weight: 700; letter-spacing: .05em;
-    background: #f5f3ff; color: #7c3aed;
-    border-radius: 5px; padding: 3px 10px;
-  }
+<style>
+:root{
+  --navy:#07111f;
+  --navy2:#0f172a;
+  --blue:#1A5FD4;
+  --blue2:#2563eb;
+  --purple:#7c3aed;
+  --text:#0f172a;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --bg:#f8fafc;
+  --green:#16a34a;
+  --orange:#f97316;
+}
+*{box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;margin:0;color:var(--text);background:#fff;}
+a{text-decoration:none;}
+.tai-apps-page{overflow:hidden;}
 
-  /* ── 강조 섹션 ── */
-  .emphasis-section { background: #0d1b2a; padding: 80px 0; }
-  .emphasis-quote {
-    border-left: 4px solid #7c3aed;
-    padding: 24px 28px;
-    background: rgba(139,92,246,.08);
-    border-radius: 0 12px 12px 0;
-    margin-bottom: 20px;
-  }
-  .emphasis-quote p {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 800; color: #fff; margin: 0; line-height: 1.5;
-  }
-  .emphasis-quote span { font-size: .85rem; color: rgba(255,255,255,.5); font-weight: 400; display: block; margin-top: 8px; }
-  </style>
+/* Header-safe */
+#tai-header{position:relative;z-index:20;}
+
+/* HERO */
+.apps-hero{
+  min-height:540px;
+  background:
+    radial-gradient(circle at 72% 32%, rgba(37,99,235,.28), transparent 32%),
+    radial-gradient(circle at 12% 70%, rgba(124,58,237,.22), transparent 32%),
+    linear-gradient(135deg,#050a14 0%,#081426 46%,#0f1d33 100%);
+  position:relative;
+  padding:108px 0 58px;
+  color:#fff;
+}
+.apps-hero::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(5,10,20,.92) 0%,rgba(5,10,20,.74) 38%,rgba(5,10,20,.28) 100%);
+  pointer-events:none;
+}
+.apps-hero::after{
+  content:"";position:absolute;inset:auto 0 0;height:1px;background:rgba(255,255,255,.12);
+}
+.apps-hero .container{position:relative;z-index:2;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#bfdbfe;background:rgba(37,99,235,.14);border:1px solid rgba(147,197,253,.28);border-radius:999px;padding:8px 14px;margin-bottom:20px;}
+.hero-title{font-size:clamp(2.2rem,4.4vw,4rem);font-weight:900;line-height:1.12;letter-spacing:-.045em;margin:0 0 20px;}
+.hero-title em{font-style:normal;color:#60a5fa;}
+.hero-desc{font-size:1.02rem;line-height:1.75;color:rgba(255,255,255,.76);max-width:560px;margin:0 0 28px;}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;color:#e2e8f0;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.13);border-radius:999px;padding:9px 13px;font-size:.86rem;font-weight:700;}
+.hero-tag i{color:#60a5fa;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.btn-app-primary{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-radius:12px;padding:15px 24px;font-size:.95rem;font-weight:900;box-shadow:0 14px 34px rgba(37,99,235,.32);}
+.btn-app-primary:hover{color:#fff;transform:translateY(-1px);}
+.btn-app-ghost{display:inline-flex;align-items:center;gap:8px;color:#fff;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.055);border-radius:12px;padding:14px 22px;font-size:.95rem;font-weight:800;}
+.btn-app-ghost:hover{color:#fff;background:rgba(255,255,255,.1);}
+.hero-note{font-size:.8rem;color:rgba(255,255,255,.52);margin-top:16px;}
+
+/* Hero marketplace mockup */
+.apps-board{position:relative;min-height:380px;}
+.market-window{background:rgba(248,250,252,.97);border:1px solid rgba(255,255,255,.45);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.45);padding:18px;transform:perspective(1100px) rotateY(-7deg) rotateX(2deg);transform-origin:center;}
+.market-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#0f172a;}
+.market-title{font-weight:900;font-size:1rem;}
+.market-search{font-size:.72rem;color:#94a3b8;background:#f1f5f9;border-radius:999px;padding:8px 12px;}
+.market-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.mini-app{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:14px;color:#0f172a;min-height:118px;box-shadow:0 8px 24px rgba(15,23,42,.06);}
+.mini-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.mini-icon{width:34px;height:34px;border-radius:10px;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:900;}
+.badge-free,.badge-pro,.badge-soon{font-size:.64rem;font-weight:900;border-radius:999px;padding:4px 8px;}
+.badge-free{background:#dcfce7;color:#15803d;}
+.badge-pro{background:#f5f3ff;color:#7c3aed;}
+.badge-soon{background:#ffedd5;color:#c2410c;}
+.mini-app h4{font-size:.9rem;font-weight:900;margin:0 0 4px;color:#0f172a;}
+.mini-app p{font-size:.72rem;line-height:1.45;color:#64748b;margin:0;}
+.float-card{position:absolute;background:#fff;color:#0f172a;border-radius:16px;padding:15px 17px;box-shadow:0 18px 48px rgba(0,0,0,.28);border:1px solid #e2e8f0;}
+.float-card.one{right:-6px;top:38px;}
+.float-card.two{left:-24px;bottom:20px;}
+.float-card .fc-k{font-size:.68rem;font-weight:900;color:#2563eb;margin-bottom:4px;}
+.float-card .fc-v{font-size:.95rem;font-weight:900;}
+
+/* Common */
+.apps-sec{padding:92px 0;}
+.apps-sec-gray{background:var(--bg);}
+.apps-label{display:inline-block;font-size:.72rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.apps-h2{font-size:clamp(1.7rem,3.6vw,2.55rem);font-weight:900;letter-spacing:-.035em;line-height:1.28;margin-bottom:14px;color:var(--text);}
+.apps-desc{font-size:.98rem;line-height:1.75;color:var(--muted);margin:0;}
+
+/* Core ecosystem */
+.core-diagram{position:relative;min-height:420px;margin-top:36px;}
+.core-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 24px 70px rgba(29,78,216,.28);z-index:2;}
+.core-center strong{font-size:1.35rem;font-weight:900;}
+.core-center span{font-size:.8rem;color:rgba(255,255,255,.7);margin-top:6px;}
+.orbit-app{position:absolute;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:16px 18px;box-shadow:0 10px 30px rgba(15,23,42,.08);min-width:150px;text-align:center;}
+.orbit-app b{display:block;font-size:.9rem;margin-top:6px;}
+.orbit-app span{font-size:1.5rem;}
+.o1{left:8%;top:12%;}.o2{right:10%;top:10%;}.o3{left:5%;bottom:18%;}.o4{right:7%;bottom:16%;}.o5{left:50%;top:0;transform:translateX(-50%);}.o6{left:50%;bottom:0;transform:translateX(-50%);}
+
+/* App grid */
+.filter-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:34px 0 28px;}
+.filter-tab{border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;padding:10px 18px;font-size:.86rem;font-weight:900;}
+.filter-tab.active{background:#0f172a;color:#fff;border-color:#0f172a;}
+.app-card{height:100%;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 10px 28px rgba(15,23,42,.06);transition:.18s;display:flex;flex-direction:column;}
+.app-card:hover{transform:translateY(-5px);box-shadow:0 20px 44px rgba(15,23,42,.1);}
+.app-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.app-icon{width:50px;height:50px;border-radius:15px;background:#eff6ff;color:#1d4ed8;display:flex;align-items:center;justify-content:center;font-size:1.35rem;}
+.app-card.pro .app-icon{background:#f5f3ff;color:#7c3aed;}
+.app-card.soon .app-icon{background:#fff7ed;color:#f97316;}
+.app-card h3{font-size:1.08rem;font-weight:900;margin:0 0 8px;color:#0f172a;}
+.app-card p{font-size:.88rem;line-height:1.65;color:#64748b;margin:0 0 18px;flex:1;}
+.app-meta{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:14px;font-size:.78rem;}
+.app-meta strong{color:#0f172a;}
+.app-meta span{color:#64748b;}
+
+/* Flow */
+.flow-wrap{margin-top:42px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.flow-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 22px;box-shadow:0 10px 28px rgba(15,23,42,.06);}
+.flow-num{width:34px;height:34px;border-radius:50%;background:#0f172a;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:16px;}
+.flow-card h4{font-size:1.05rem;font-weight:900;margin-bottom:8px;}
+.flow-card p{font-size:.86rem;line-height:1.65;color:#64748b;margin:0;}
+
+/* Pricing structure */
+.tier-box{height:100%;border-radius:22px;padding:34px;background:#fff;border:1px solid var(--line);box-shadow:0 10px 28px rgba(15,23,42,.06);}
+.tier-box.pro{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;border-color:#1e293b;}
+.tier-box h3{font-size:1.35rem;font-weight:900;margin-bottom:8px;}
+.tier-box p{font-size:.9rem;line-height:1.7;color:#64748b;margin-bottom:22px;}
+.tier-box.pro p{color:rgba(255,255,255,.72);}
+.tier-list{list-style:none;padding:0;margin:0;display:grid;gap:10px;}
+.tier-list li{font-size:.9rem;color:#334155;display:flex;gap:9px;align-items:flex-start;}
+.tier-box.pro .tier-list li{color:rgba(255,255,255,.9);}
+.tier-list li::before{content:'✓';font-weight:900;color:#16a34a;}
+
+/* CTA */
+.apps-cta{padding:88px 0;background:linear-gradient(135deg,#0f172a,#1A5FD4);color:#fff;text-align:center;}
+.apps-cta h2{font-size:clamp(1.8rem,3.8vw,2.7rem);font-weight:900;letter-spacing:-.035em;margin-bottom:14px;}
+.apps-cta p{color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:30px;}
+.apps-cta .btn-app-primary{background:#fff;color:#1d4ed8;}
+.apps-cta .btn-app-primary:hover{color:#1d4ed8;}
+
+@media(max-width:991px){
+  .apps-hero{padding:96px 0 64px;}
+  .market-window{transform:none;margin-top:36px;}
+  .float-card{display:none;}
+  .core-diagram{min-height:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  .core-center,.orbit-app{position:static;transform:none;width:auto;height:auto;border-radius:18px;min-width:0;}
+  .core-center{grid-column:1/-1;padding:34px;}
+  .flow-wrap{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:575px){
+  .apps-sec{padding:66px 0;}
+  .market-grid{grid-template-columns:1fr;}
+  .flow-wrap,.core-diagram{grid-template-columns:1fr;}
+  .hero-actions a{width:100%;justify-content:center;}
+}
+</style>
 </head>
-<body class="sc5">
 
+<body class="sc5">
 <div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ══ 히어로 ══ -->
-<section class="inapp-hero">
-  <div class="container">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-7">
-        <span class="inapp-eyebrow">⚡ 인앱 서비스</span>
-        <h1>안전 관련 귀찮은 것들,<br><em>TAI가 다 대행합니다</em></h1>
-        <p>SaaS 구독 안에서 추가 요금 없이 사용할 수 있는 인앱 기능들입니다.</p>
-        <div class="d-flex gap-3 flex-wrap">
-          <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:.95rem;padding:13px 28px;">무료로 시작하기</a>
-          <a href="../pricing.html" class="btn btn-border" style="font-size:.95rem;padding:13px 24px;color:#fff;border-color:rgba(255,255,255,.4);">요금제 확인</a>
-        </div>
-      </div>
-      <div class="col-lg-5">
-        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:28px;">
-          <p style="color:rgba(255,255,255,.5);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">SaaS 구독 포함 기능</p>
-          <div style="color:rgba(255,255,255,.82);font-size:.88rem;line-height:2.1;">
-            <div>✅ 신고서식 자동화</div>
-            <div>✅ 법정 점검일지 자동 생성</div>
-            <div>✅ 화학물질 라벨 자동 생성</div>
-            <div>✅ MSDS 자동 연동</div>
-            <div>✅ TBM 기록지 자동 생성</div>
-            <div>✅ 안전관리회의록 자동 생성</div>
-            <div>✅ 경영진 보고서 자동화</div>
+<main class="tai-apps-page">
+
+  <!-- HERO -->
+  <section class="apps-hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="hero-eyebrow">TAI APPS</div>
+          <h1 class="hero-title">현장 입력부터<br>문서·보고·증빙까지<br><em>Apps가 자동 처리합니다</em></h1>
+          <p class="hero-desc">TAI Safe 위에서 필요한 기능만 추가하세요. TBM, 점검일지, MSDS, 화학물질 라벨, 경영진 보고서까지 산업안전 운영을 확장하는 앱 생태계입니다.</p>
+          <div class="hero-tags">
+            <span class="hero-tag"><i class="fas fa-check-circle"></i> 문서 자동화</span>
+            <span class="hero-tag"><i class="fas fa-check-circle"></i> 현장 실행</span>
+            <span class="hero-tag"><i class="fas fa-check-circle"></i> 자동 증빙</span>
+            <span class="hero-tag"><i class="fas fa-check-circle"></i> 유료 확장 가능</span>
           </div>
+          <div class="hero-actions">
+            <a href="#apps" class="btn-app-primary"><i class="fas fa-th-large"></i> 앱 둘러보기</a>
+            <a href="../free-diagnosis.html" class="btn-app-ghost"><i class="fas fa-shield-alt"></i> 무료 법령진단</a>
+          </div>
+          <div class="hero-note">TAI Safe 구독 고객은 기본 Apps부터 바로 사용할 수 있습니다.</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ 포함 기능 8개 (service-area) ══ -->
-<section class="service-area default-pd-top" style="background:#f8fafc;">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="section-title text-center">
-          <h4 class="sub-title">SaaS 구독 포함</h4>
-          <h2 class="title">추가 요금 없이 모두 사용하세요</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row g-4">
-
-      <!-- 1. 신고서식 자동화 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">📝</div>
-          <h4>신고서식 자동화</h4>
-          <p>점검 완료 데이터를 바탕으로 법정 신고서식이 자동 작성됩니다. 출력 후 날인만 하면 됩니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 2. 법정 점검일지 자동 생성 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">📋</div>
-          <h4>법정 점검일지 자동 생성</h4>
-          <p>수기로 작성하던 점검일지가 자동으로 만들어집니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 3. 화학물질 라벨 자동 생성 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">🏷️</div>
-          <h4>화학물질 라벨 자동 생성</h4>
-          <p>GHS 기준 라벨이 자동으로 생성되어, 별도 제작 없이 바로 출력 가능합니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 4. MSDS 자동 연동 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">🔬</div>
-          <h4>MSDS 자동 연동</h4>
-          <p>물질안전보건자료를 자동으로 연동하여 최신 정보를 유지합니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 5. TBM 기록지 자동 생성 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">📅</div>
-          <h4>TBM 기록지 자동 생성</h4>
-          <p>전자서명까지 완료되면 기록지가 자동 저장됩니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 6. 안전보건공단 자료 자동 참조 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">🔗</div>
-          <h4>안전보건공단 자료 자동 참조</h4>
-          <p>KOSHA 가이드 등 관련 자료를 자동으로 참조합니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 7. 안전관리회의록 자동 생성 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">🗒️</div>
-          <h4>안전관리회의록 자동 생성</h4>
-          <p>회의 내용을 입력하면 법정 양식에 맞게 자동 생성됩니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-      <!-- 8. 경영진 보고서 자동화 -->
-      <div class="col-lg-3 col-md-6">
-        <div class="feat-card">
-          <div class="feat-icon">📊</div>
-          <h4>경영진 보고서 자동화</h4>
-          <p>월간 안전 현황 리포트가 자동 생성됩니다. 별도 취합 없이 즉시 제출 가능합니다.</p>
-          <span class="feat-badge">SaaS 포함</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ 강조 섹션 (management-area) ══ -->
-<section class="emphasis-section">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="section-title text-center" style="margin-bottom:48px;">
-          <h4 class="sub-title" style="color:#a78bfa;">TAI의 설계 철학</h4>
-          <h2 class="title" style="color:#fff;">왜 이것들을 만들었나요</h2>
-        </div>
-        <div class="emphasis-quote">
-          <p>"서류 작성 시간을 안전관리 시간으로 돌릴 수 있습니다."</p>
-          <span>서류를 쓰는 데 쓰는 시간이 결국 안전을 소홀하게 만듭니다. TAI는 그 시간을 되돌려 드립니다.</span>
-        </div>
-        <div class="emphasis-quote">
-          <p>"안전관리자와 현장의 입장에서 설계하고 만들었습니다."</p>
-          <span>실제 겸직 안전관리자가 가장 힘들어하는 것부터 자동화했습니다. 이론이 아닌 현장 기준입니다.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CTA (subscribe-area) ══ -->
-<section class="subscribe-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="subscribe-inner">
-          <div class="row no-gutters">
-            <div class="col-xl-5 col-lg-6">
-              <h2>귀찮은 것들을 TAI에 맡기세요</h2>
-              <p class="pe-5">SaaS 구독 안에 모두 포함되어 있습니다. 추가 요금이 없습니다.</p>
-            </div>
-            <div class="col-lg-6 offset-xl-1 align-self-center">
-              <div class="d-flex gap-3 flex-wrap">
-                <a href="../free-diagnosis.html" class="btn btn-base" style="font-size:1rem;padding:14px 32px;font-weight:700;">무료로 시작하기</a>
-                <a href="../pricing.html" class="btn btn-border-white" style="font-size:1rem;padding:14px 24px;">요금제 확인</a>
+        <div class="col-lg-6">
+          <div class="apps-board">
+            <div class="market-window">
+              <div class="market-top">
+                <div class="market-title">TAI Apps Marketplace</div>
+                <div class="market-search">검색: TBM, MSDS, Report</div>
+              </div>
+              <div class="market-grid">
+                <div class="mini-app"><div class="mini-head"><div class="mini-icon">T</div><span class="badge-free">FREE</span></div><h4>TBM Auto</h4><p>TBM 기록지와 전자서명을 자동 보관합니다.</p></div>
+                <div class="mini-app"><div class="mini-head"><div class="mini-icon">M</div><span class="badge-free">FREE</span></div><h4>MSDS Sync</h4><p>물질안전보건자료를 자동 연동합니다.</p></div>
+                <div class="mini-app"><div class="mini-head"><div class="mini-icon">R</div><span class="badge-pro">PRO</span></div><h4>AI Risk Report</h4><p>현장 데이터를 기반으로 리스크 보고서를 생성합니다.</p></div>
+                <div class="mini-app"><div class="mini-head"><div class="mini-icon">E</div><span class="badge-soon">SOON</span></div><h4>ERP Connector</h4><p>기존 사내 시스템과 안전 데이터를 연결합니다.</p></div>
               </div>
             </div>
+            <div class="float-card one"><div class="fc-k">자동 생성</div><div class="fc-v">이번 달 보고서 12건</div></div>
+            <div class="float-card two"><div class="fc-k">설치된 Apps</div><div class="fc-v">FREE 5개 · PRO 2개</div></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- INTRO -->
+  <section class="apps-sec apps-sec-gray text-center">
+    <div class="container">
+      <span class="apps-label">PLATFORM EXTENSION</span>
+      <h2 class="apps-h2">TAI Safe는 하나의 앱이 아니라<br>확장 가능한 산업안전 플랫폼입니다</h2>
+      <p class="apps-desc" style="max-width:680px;margin:0 auto;">현장마다 필요한 기능은 다릅니다. TAI Apps는 필요한 기능만 추가해 각 현장에 맞는 안전관리 운영 체계를 구성할 수 있게 합니다.</p>
+
+      <div class="core-diagram">
+        <div class="core-center"><strong>TAI Safe Core</strong><span>법령 · 업무 · 현장 · 기록</span></div>
+        <div class="orbit-app o1"><span>📋</span><b>점검일지</b></div>
+        <div class="orbit-app o2"><span>🧪</span><b>MSDS</b></div>
+        <div class="orbit-app o3"><span>🏷️</span><b>라벨</b></div>
+        <div class="orbit-app o4"><span>📊</span><b>보고서</b></div>
+        <div class="orbit-app o5"><span>🦺</span><b>TBM</b></div>
+        <div class="orbit-app o6"><span>🤖</span><b>AI Apps</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPS GRID -->
+  <section class="apps-sec" id="apps">
+    <div class="container">
+      <div class="text-center">
+        <span class="apps-label">TAI APPS</span>
+        <h2 class="apps-h2">필요한 기능을 앱처럼 추가하세요</h2>
+        <p class="apps-desc">기본 운영은 무료 Apps로 시작하고, 고급 자동화는 PRO Apps로 확장합니다.</p>
+      </div>
+
+      <div class="filter-tabs">
+        <span class="filter-tab active">전체 Apps</span>
+        <span class="filter-tab">FREE</span>
+        <span class="filter-tab">PRO</span>
+        <span class="filter-tab">Coming Soon</span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6"><div class="app-card"><div class="app-card-top"><div class="app-icon">🦺</div><span class="badge-free">FREE</span></div><h3>TBM Auto</h3><p>TBM 기록지를 자동 생성하고 전자서명까지 저장합니다.</p><div class="app-meta"><strong>설치됨</strong><span>현장 실행</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card"><div class="app-card-top"><div class="app-icon">📋</div><span class="badge-free">FREE</span></div><h3>Inspection Docs</h3><p>수기로 작성하던 법정 점검일지를 자동으로 생성합니다.</p><div class="app-meta"><strong>설치됨</strong><span>문서 자동화</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card"><div class="app-card-top"><div class="app-icon">🧪</div><span class="badge-free">FREE</span></div><h3>MSDS Sync</h3><p>물질안전보건자료를 연동하고 최신 정보를 유지합니다.</p><div class="app-meta"><strong>설치됨</strong><span>자료 연동</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card"><div class="app-card-top"><div class="app-icon">🏷️</div><span class="badge-free">FREE</span></div><h3>Label Generator</h3><p>GHS 기준 화학물질 라벨을 자동 생성하고 출력합니다.</p><div class="app-meta"><strong>설치됨</strong><span>출력 자동화</span></div></div></div>
+
+        <div class="col-lg-3 col-md-6"><div class="app-card"><div class="app-card-top"><div class="app-icon">🗒️</div><span class="badge-free">FREE</span></div><h3>Meeting Notes</h3><p>안전관리회의 내용을 법정 양식에 맞게 자동 정리합니다.</p><div class="app-meta"><strong>설치됨</strong><span>회의록</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card pro"><div class="app-card-top"><div class="app-icon">📊</div><span class="badge-pro">PRO</span></div><h3>Executive Report</h3><p>월간 안전 현황과 리스크를 경영진 보고서로 자동 생성합니다.</p><div class="app-meta"><strong>유료 확장</strong><span>보고 자동화</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card pro"><div class="app-card-top"><div class="app-icon">🤖</div><span class="badge-pro">PRO</span></div><h3>AI Risk Report</h3><p>누적 데이터를 분석해 반복 위험과 미조치 리스크를 요약합니다.</p><div class="app-meta"><strong>유료 확장</strong><span>AI 분석</span></div></div></div>
+        <div class="col-lg-3 col-md-6"><div class="app-card soon"><div class="app-card-top"><div class="app-icon">🔌</div><span class="badge-soon">SOON</span></div><h3>ERP Connector</h3><p>ERP, 그룹웨어, 사내 시스템과 안전관리 데이터를 연결합니다.</p><div class="app-meta"><strong>준비 중</strong><span>연동</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="apps-sec apps-sec-gray">
+    <div class="container">
+      <div class="text-center">
+        <span class="apps-label">AUTOMATION FLOW</span>
+        <h2 class="apps-h2">현장에서 실행하면<br>Apps가 문서와 증빙으로 바꿉니다</h2>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-card"><div class="flow-num">1</div><h4>현장에서 입력</h4><p>작업자는 모바일에서 TBM, 점검, 사진, 서명을 입력합니다.</p></div>
+        <div class="flow-card"><div class="flow-num">2</div><h4>Apps가 자동 처리</h4><p>입력 데이터가 각 앱의 규칙에 따라 문서와 기록으로 정리됩니다.</p></div>
+        <div class="flow-card"><div class="flow-num">3</div><h4>증빙 자동 보관</h4><p>일자, 담당자, 사진, 서명 이력이 함께 저장됩니다.</p></div>
+        <div class="flow-card"><div class="flow-num">4</div><h4>보고서 생성</h4><p>필요 시 경영진 보고서와 감독 대응 자료로 출력합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE / PRO -->
+  <section class="apps-sec">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="apps-label">FREE & PRO</span>
+        <h2 class="apps-h2">기본 Apps는 무료로,<br>고급 자동화는 PRO로 확장됩니다</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6"><div class="tier-box"><h3>FREE Apps</h3><p>TAI Safe 운영에 필요한 기본 문서화와 현장 실행 기능입니다.</p><ul class="tier-list"><li>TBM 기록지 자동 생성</li><li>법정 점검일지 자동 생성</li><li>MSDS 자동 연동</li><li>GHS 라벨 자동 생성</li><li>안전관리회의록 자동 생성</li></ul></div></div>
+        <div class="col-lg-6"><div class="tier-box pro"><h3>PRO Apps</h3><p>데이터 분석, 고급 보고, 외부 연동 등 가치가 높은 확장 기능입니다.</p><ul class="tier-list"><li>AI 리스크 분석 보고서</li><li>경영진 월간 보고 자동화</li><li>스마트 위험성평가</li><li>다현장 통합 관제</li><li>ERP·그룹웨어 연동</li></ul></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUTURE -->
+  <section class="apps-sec apps-sec-gray">
+    <div class="container">
+      <div class="text-center mb-5">
+        <span class="apps-label">COMING SOON</span>
+        <h2 class="apps-h2">더 많은 산업안전 Apps가 추가됩니다</h2>
+        <p class="apps-desc">TAI Apps는 계속 확장됩니다. 현장 운영 데이터가 쌓일수록 더 높은 자동화가 가능해집니다.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6"><div class="app-card soon"><div class="app-card-top"><div class="app-icon">🎙️</div><span class="badge-soon">SOON</span></div><h3>Voice TBM</h3><p>음성으로 TBM 내용을 기록하고 자동으로 회의록을 생성합니다.</p><div class="app-meta"><strong>준비 중</strong><span>AI 음성</span></div></div></div>
+        <div class="col-lg-4 col-md-6"><div class="app-card soon"><div class="app-card-top"><div class="app-icon">📹</div><span class="badge-soon">SOON</span></div><h3>AI CCTV</h3><p>CCTV 기반으로 위험 행동과 보호구 미착용을 탐지합니다.</p><div class="app-meta"><strong>준비 중</strong><span>AI 비전</span></div></div></div>
+        <div class="col-lg-4 col-md-6"><div class="app-card soon"><div class="app-card-top"><div class="app-icon">🌱</div><span class="badge-soon">SOON</span></div><h3>ESG Safety Report</h3><p>안전관리 데이터를 ESG와 지속가능경영 보고에 활용합니다.</p><div class="app-meta"><strong>준비 중</strong><span>보고 확장</span></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="apps-cta">
+    <div class="container">
+      <h2>현장 운영은 그대로 두고<br>자동화만 추가하세요</h2>
+      <p>TAI Apps는 기존 안전관리 체계를 더 빠르고, 더 자동화되고, 더 증빙 가능하게 만듭니다.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="../free-diagnosis.html" class="btn-app-primary">무료 법령진단 시작하기</a>
+        <a href="../pricing.html" class="btn-app-ghost">요금제 확인</a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
