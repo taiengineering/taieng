@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.6 (2026-05-08): 메뉴 명칭 변경 — 'SaaS 구독' → 'TAI Safe', '인앱 서비스' → 'TAI Apps' (링크 경로 유지)
  * v3.5.5 (2026-05-04): 메뉴 정리 — 교육사업·전문가매칭·수선연결·컨설팅·선임연결·연결서비스 사전등록·전문가(역할별) 미노출
  * v3.5.4 (2026-05-03): 파비콘은 HTML head 의 절대경로(/favicon.ico 등)만 사용 — JS에서 덮어쓰기 제거
  * v3.5.3 (2026-05-01): 파비콘 전역 세팅 추가 (favicon.svg)
@@ -291,8 +292,8 @@
     '            <a href="#">\uC11C\uBE44\uC2A4</a>',
     '            <ul class="sub-menu">',
     '              <li><a href="' + base + 'service/diagnosis.html">\uBC95\uB839\uC9C4\uB2E8</a></li>',
-    '              <li><a href="' + base + 'service/saas.html">SaaS \uAD6C\uB3C5</a></li>',
-    '              <li><a href="' + base + 'service/inapp.html">\uC778\uC571 \uC11C\uBE44\uC2A4</a></li>',
+    '              <li><a href="' + base + 'service/saas.html">TAI Safe</a></li>',
+    '              <li><a href="' + base + 'service/inapp.html">TAI Apps</a></li>',
     '            </ul>',
     '          </li>',
     '          <li class="menu-item-has-children">',
