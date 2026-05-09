@@ -72,13 +72,13 @@
   .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:14px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s; }
   .submit-btn:hover { background:#c1121f; }
 
-  /* 연락처 정보 카드 (로고 비침 효과) */
-  .contact-info-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; margin-bottom:16px; position:relative; overflow:hidden; }
+  /* 연락처 정보 카드 (로고 비침 효과 — 카드 내부 우측 하단 200px, 잘리지 않게) */
+  .contact-info-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; margin-bottom:16px; position:relative; overflow:hidden; min-height:380px; }
   .contact-info-card::before {
-    content:''; position:absolute; right:-50px; bottom:-50px; width:340px; height:340px;
+    content:''; position:absolute; right:20px; bottom:20px; width:200px; height:200px;
     background-image:url('/logo-512.png');
     background-size:contain; background-repeat:no-repeat; background-position:center;
-    opacity:0.08; pointer-events:none; z-index:0;
+    opacity:0.10; pointer-events:none; z-index:0;
   }
   .contact-info-card > * { position:relative; z-index:1; }
   .ci-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:20px; }
@@ -116,7 +116,6 @@
         <form id="contactMarketingForm" style="background:#fff;border-radius:16px;padding:36px;box-shadow:0 2px 14px rgba(0,0,0,.06);">
           <h3 style="font-size:1.2rem;font-weight:900;color:var(--navy);margin-bottom:22px;">문의 작성</h3>
 
-          <!-- 1. 문의 분야 (첫 필드) -->
           <div class="form-row">
             <label class="form-label-tai">문의 분야 <span style="color:var(--red);">*</span></label>
             <input type="hidden" id="contactCategory" name="contactCategory">
@@ -129,13 +128,11 @@
             </div>
           </div>
 
-          <!-- 2. 성함 -->
           <div class="form-row">
             <label class="form-label-tai">성함 <span style="color:var(--red);">*</span></label>
             <input type="text" id="contactName" class="form-input-tai" placeholder="홍길동" required>
           </div>
 
-          <!-- 3. 이메일 / 연락처 -->
           <div class="row g-3">
             <div class="col-md-6 form-row">
               <label class="form-label-tai">이메일 <span style="color:var(--red);">*</span></label>
@@ -147,25 +144,21 @@
             </div>
           </div>
 
-          <!-- 4. 회사명 (선택) -->
           <div class="form-row">
             <label class="form-label-tai">회사명<span class="form-label-opt">(선택)</span></label>
             <input type="text" id="contactCompany" class="form-input-tai" placeholder="(주)TAI엔지니어링">
           </div>
 
-          <!-- 5. 제목 (선택) -->
           <div class="form-row">
             <label class="form-label-tai">제목<span class="form-label-opt">(선택)</span></label>
             <input type="text" id="contactTitle" class="form-input-tai" maxlength="500" placeholder="제목이 없으면 비워 두셔도 됩니다">
           </div>
 
-          <!-- 6. 문의 내용 (Summernote 웹에디터) -->
           <div class="form-row">
             <label class="form-label-tai">문의 내용 <span style="color:var(--red);">*</span></label>
             <textarea id="contactContent" name="contactContent"></textarea>
           </div>
 
-          <!-- 7. 첨부파일 -->
           <div class="form-row">
             <label class="form-label-tai">첨부파일<span class="form-label-opt">(선택 · 최대 5개 · 각 10MB 이하)</span></label>
             <label class="file-input-wrap" for="contactAttachments">
@@ -175,7 +168,6 @@
             <div class="attach-file-list" id="attachFileList"></div>
           </div>
 
-          <!-- 동의 + 제출 -->
           <label style="display:flex;gap:8px;align-items:flex-start;font-size:.8rem;color:var(--sub);margin-bottom:20px;cursor:pointer;">
             <input type="checkbox" id="contactAgree" style="margin-top:2px;" required>
             <span>개인정보 수집 및 이용에 동의합니다. <a href="privacy.html" style="color:var(--red);">개인정보처리방침</a></span>
@@ -213,7 +205,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/lang/summernote-ko-KR.min.js"></script>
 <script>
 $(document).ready(function() {
-  // ── Summernote 웹에디터 초기화 ──
   $('#contactContent').summernote({
     lang: 'ko-KR',
     height: 240,
@@ -234,7 +225,6 @@ $(document).ready(function() {
     }
   });
 
-  // ── 문의 분야 버튼 ──
   document.querySelectorAll('.ctype-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.ctype-btn').forEach(b => b.classList.remove('selected'));
@@ -249,9 +239,8 @@ $(document).ready(function() {
     });
   });
 
-  // ── 첨부파일 검증 + chip 표시 ──
   const MAX_FILES = 5;
-  const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+  const MAX_SIZE = 10 * 1024 * 1024;
   const fileInput = document.getElementById('contactAttachments');
   const fileList = document.getElementById('attachFileList');
   if (fileInput) {
@@ -259,16 +248,12 @@ $(document).ready(function() {
       const files = Array.from(e.target.files || []);
       if (files.length > MAX_FILES) {
         alert(`첨부파일은 최대 ${MAX_FILES}개까지 가능합니다.`);
-        e.target.value = '';
-        if (fileList) fileList.innerHTML = '';
-        return;
+        e.target.value = ''; if (fileList) fileList.innerHTML = ''; return;
       }
       for (const f of files) {
         if (f.size > MAX_SIZE) {
           alert(`"${f.name}" 파일이 10MB를 초과합니다.`);
-          e.target.value = '';
-          if (fileList) fileList.innerHTML = '';
-          return;
+          e.target.value = ''; if (fileList) fileList.innerHTML = ''; return;
         }
       }
       if (fileList) {
@@ -279,11 +264,9 @@ $(document).ready(function() {
     });
   }
 
-  // ── 폼 submit 검증 (capture phase) ──
   const form = document.getElementById('contactMarketingForm');
   if (form) {
     form.addEventListener('submit', function(e) {
-      // 분야
       const cat = document.getElementById('contactCategory');
       if (cat && !cat.value) {
         e.preventDefault(); e.stopImmediatePropagation();
@@ -291,7 +274,6 @@ $(document).ready(function() {
         document.querySelector('.contact-type-grid')?.scrollIntoView({behavior:'smooth', block:'center'});
         return false;
       }
-      // 내용 (Summernote의 stripped text)
       const html = $('#contactContent').summernote('code') || '';
       const stripped = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, '').trim();
       if (!stripped) {
@@ -300,7 +282,6 @@ $(document).ready(function() {
         $('#contactContent').summernote('focus');
         return false;
       }
-      // textarea sync (다른 핸들러가 textarea.value를 읽는 경우 대비)
       document.getElementById('contactContent').value = html;
     }, true);
   }
