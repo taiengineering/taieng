@@ -72,20 +72,23 @@
   .submit-btn { background:var(--red); color:#fff; font-weight:700; font-size:1rem; padding:14px; border-radius:8px; border:none; cursor:pointer; width:100%; transition:background .2s; }
   .submit-btn:hover { background:#c1121f; }
 
-  /* 연락처 정보 카드 (로고 비침 효과 — 카드 내부 우측 하단 200px, 잘리지 않게) */
-  .contact-info-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; margin-bottom:16px; position:relative; overflow:hidden; min-height:380px; }
+  /* 연락처 정보 카드 — 로고가 카드 전체에 cover 배경으로 깔림 */
+  .contact-info-card { background:var(--navy); border-radius:14px; padding:28px; color:#fff; margin-bottom:16px; position:relative; overflow:hidden; min-height:420px; }
   .contact-info-card::before {
-    content:''; position:absolute; right:20px; bottom:20px; width:200px; height:200px;
+    content:''; position:absolute; inset:0;
     background-image:url('/logo-512.png');
-    background-size:contain; background-repeat:no-repeat; background-position:center;
-    opacity:0.10; pointer-events:none; z-index:0;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center center;
+    opacity:0.10;
+    pointer-events:none; z-index:0;
   }
   .contact-info-card > * { position:relative; z-index:1; }
   .ci-item { display:flex; gap:14px; align-items:flex-start; margin-bottom:20px; }
   .ci-item:last-child { margin-bottom:0; }
-  .ci-icon { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,.1); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
+  .ci-icon { width:36px; height:36px; border-radius:8px; background:rgba(255,255,255,.15); backdrop-filter:blur(2px); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.9rem; flex-shrink:0; }
   .ci-item strong { font-size:.85rem; font-weight:700; display:block; margin-bottom:4px; }
-  .ci-item span { font-size:.82rem; color:rgba(255,255,255,.7); line-height:1.55; }
+  .ci-item span { font-size:.82rem; color:rgba(255,255,255,.78); line-height:1.55; }
 
   /* 빠른 링크 */
   .quick-links { background:var(--gray-bg); border-radius:14px; padding:24px; }
