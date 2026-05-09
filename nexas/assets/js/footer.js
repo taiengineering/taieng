@@ -1,5 +1,7 @@
 /**
  * TAI 공통 Footer — assets/js/footer.js
+ * v3.7.2 (2026-05-09): 풋터 서비스 섹션 — "도입 문의" → "문의하기" rename, FAQ와 위치 swap (FAQ 먼저, 문의하기 그 다음).
+ *                      회사 섹션 — "💬 TAI에 바란다"를 개인정보처리방침 아래로 이동 (가장 마지막 항목).
  * v3.7.1 (2026-05-06): 도입 문의 링크 fix-request.html → contact.html (도입 문의는 일반 문의 페이지로 가야 함, fix-request는 선임/수선 연결 전용)
  * v3.7.0 (2026-05-05): 풋터 재구성 — 시작하기 섹션 삭제, 무료 법령진단/도입 문의/FAQ → 서비스로 편입,
  *                      TAI에 바란다 → 회사의 TAI 기술력 직후로 이동, 안전정보 → 헤더와 동기화 (4개 항목)
@@ -116,8 +118,8 @@
     '            <li><a href="' + b + 'service/saas.html"><i class="fas fa-angle-right"></i>SaaS 구독</a></li>' +
     '            <li><a href="' + b + 'service/inapp.html"><i class="fas fa-angle-right"></i>인앱 서비스</a></li>' +
     '            <li><a href="' + b + 'free-diagnosis.html"><i class="fas fa-angle-right"></i>무료 법령진단</a></li>' +
-    '            <li><a href="' + b + 'contact.html"><i class="fas fa-angle-right"></i>도입 문의</a></li>' +
     '            <li><a href="' + b + 'faq.html"><i class="fas fa-angle-right"></i>FAQ</a></li>' +
+    '            <li><a href="' + b + 'contact.html"><i class="fas fa-angle-right"></i>문의하기</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
@@ -153,9 +155,9 @@
     '          <ul>' +
     '            <li><a href="' + b + 'about.html"><i class="fas fa-angle-right"></i>회사소개</a></li>' +
     '            <li><a href="' + b + 'patents.html"><i class="fas fa-angle-right"></i>TAI 기술력</a></li>' +
-    '            <li><a href="#" id="tai-footer-feedback-open"><i class="fas fa-angle-right"></i>💬 TAI에 바란다</a></li>' +
     '            <li><a href="' + b + 'terms.html"><i class="fas fa-angle-right"></i>이용약관</a></li>' +
     '            <li><a href="' + b + 'privacy.html"><i class="fas fa-angle-right"></i>개인정보처리방침</a></li>' +
+    '            <li><a href="#" id="tai-footer-feedback-open"><i class="fas fa-angle-right"></i>💬 TAI에 바란다</a></li>' +
     '          </ul>' +
     '        </div>' +
     '      </div>' +
