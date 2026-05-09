@@ -220,7 +220,7 @@ a{text-decoration:none;}
 
 /* Filter tabs */
 .filter-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:34px 0 28px;}
-.filter-tab{border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;padding:10px 18px;font-size:.86rem;font-weight:900;cursor:pointer;transition:.18s ease;}
+.filter-tab{border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;padding:10px 18px;font-size:.86rem;font-weight:900;cursor:pointer;transition:.18s ease;user-select:none;}
 .filter-tab:hover{border-color:#cbd5e1;}
 .filter-tab.active{background:#0f172a;color:#fff;border-color:#0f172a;}
 
@@ -403,16 +403,16 @@ a{text-decoration:none;}
         <p class="apps-desc">법령·법규 정보 8개, SaaS 운영 7개, 현장 실행 4개, 문서 자동화 3개 — 총 22개 모듈을 통합 제공합니다.</p>
       </div>
 
-      <div class="filter-tabs">
-        <span class="filter-tab active">전체 모듈 (22)</span>
-        <span class="filter-tab">법령·법규 정보 (8)</span>
-        <span class="filter-tab">SaaS 운영 (7)</span>
-        <span class="filter-tab">현장 실행 (4)</span>
-        <span class="filter-tab">문서 자동화 (3)</span>
+      <div class="filter-tabs" role="tablist" aria-label="모듈 카테고리 필터">
+        <span class="filter-tab active" data-filter="all" role="tab" tabindex="0">전체 모듈 (22)</span>
+        <span class="filter-tab" data-filter="legal" role="tab" tabindex="0">법령·법규 정보 (8)</span>
+        <span class="filter-tab" data-filter="saas" role="tab" tabindex="0">SaaS 운영 (7)</span>
+        <span class="filter-tab" data-filter="field" role="tab" tabindex="0">현장 실행 (4)</span>
+        <span class="filter-tab" data-filter="doc" role="tab" tabindex="0">문서 자동화 (3)</span>
       </div>
 
       <!-- ───────── 카테고리 1: 법령·법규 정보 (8) ───────── -->
-      <div class="cat-section">
+      <div class="cat-section" data-category="legal">
         <div class="cat-title-row">
           <div class="cat-title-badge cat-legal">법령</div>
           <h3 class="cat-title-text">법령·법규 정보</h3>
@@ -504,7 +504,7 @@ a{text-decoration:none;}
       </div>
 
       <!-- ───────── 카테고리 2: SaaS 운영 (7) ───────── -->
-      <div class="cat-section">
+      <div class="cat-section" data-category="saas">
         <div class="cat-title-row">
           <div class="cat-title-badge cat-saas">운영</div>
           <h3 class="cat-title-text">SaaS 운영</h3>
@@ -586,7 +586,7 @@ a{text-decoration:none;}
       </div>
 
       <!-- ───────── 카테고리 3: 현장 실행 Apps (4) ───────── -->
-      <div class="cat-section">
+      <div class="cat-section" data-category="field">
         <div class="cat-title-row">
           <div class="cat-title-badge cat-field">현장</div>
           <h3 class="cat-title-text">현장 실행 Apps</h3>
@@ -638,7 +638,7 @@ a{text-decoration:none;}
       </div>
 
       <!-- ───────── 카테고리 4: 문서 자동화 (3) ───────── -->
-      <div class="cat-section">
+      <div class="cat-section" data-category="doc">
         <div class="cat-title-row">
           <div class="cat-title-badge cat-doc">문서</div>
           <h3 class="cat-title-text">문서 자동화</h3>
@@ -723,5 +723,60 @@ a{text-decoration:none;}
 <script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
 <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
+
+<!-- TAI Apps 카테고리 필터 (2026-05-09 추가)
+     - 5개 .filter-tab 클릭 → data-filter 값으로 .cat-section[data-category] 표시/숨김
+     - 'all' = 전체 4개 카테고리 모두 표시
+     - 클릭 후 해당 섹션으로 부드러운 스크롤 (헤더 90px offset 보정)
+     - 키보드 접근성: Enter/Space 키로도 작동 (role="tab" tabindex="0")
+-->
+<script>
+(function(){
+  'use strict';
+  var tabs = document.querySelectorAll('.filter-tabs .filter-tab');
+  var sections = document.querySelectorAll('.cat-section[data-category]');
+  if(!tabs.length || !sections.length) return;
+
+  function applyFilter(filter, scrollTarget){
+    tabs.forEach(function(t){
+      var on = t.getAttribute('data-filter') === filter;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    sections.forEach(function(sec){
+      var match = (filter === 'all') || (sec.getAttribute('data-category') === filter);
+      sec.style.display = match ? '' : 'none';
+    });
+    if(scrollTarget){
+      var target = (filter === 'all')
+        ? document.getElementById('apps')
+        : document.querySelector('.cat-section[data-category="'+filter+'"]');
+      if(target){
+        var topPos = target.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: topPos, behavior: 'smooth' });
+      }
+    }
+  }
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      applyFilter(tab.getAttribute('data-filter'), true);
+    });
+    // 키보드 접근성 (Enter/Space)
+    tab.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        applyFilter(tab.getAttribute('data-filter'), true);
+      }
+    });
+  });
+
+  // URL 해시 지원 (#legal, #saas, #field, #doc)
+  var hash = (window.location.hash || '').replace('#','').toLowerCase();
+  if(hash && ['legal','saas','field','doc'].indexOf(hash) >= 0){
+    applyFilter(hash, false);
+  }
+})();
+</script>
 </body>
 </html>
