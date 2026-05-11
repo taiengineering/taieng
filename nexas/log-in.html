@@ -312,6 +312,7 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/footer.js"></script>
 <script>
 const API = 'https://taieng.co.kr/_api';
@@ -503,14 +504,49 @@ function showForgot(e) {
   showMsg('비밀번호 재설정 메일을 발송합니다.', 'success');
 }
 
-// ── 간편 로그인 (네이버/카카오/구글) ──
-// 백엔드 OAuth 엔드포인트가 준비되면 location.href 라인 활성화 (현재는 placeholder)
-function loginSocial(provider) {
+// ── 간편 로그인 (카카오 / 네이버 / 구글) ──
+const SB_URL = 'https://vwlahtguyggrhvslabax.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3bGFodGd1eWdncmh2c2xhYmF4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyOTE1OTYsImV4cCI6MjA5Mjg2NzU5Nn0.Yp6P7ahaCuna_gwYC8_S2KD081Ov9Fs65e9o_AenP48';
+const _sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
+
+async function loginSocial(provider) {
   const labels = { naver:'네이버', kakao:'카카오', google:'구글' };
-  // const redirect = encodeURIComponent(taiPostLoginTarget());
-  // location.href = API + '/auth/oauth/' + provider + '?redirect=' + redirect;
-  alert(labels[provider] + ' 간편 로그인은 곧 지원 예정입니다.\n현재는 이메일 로그인을 이용해 주세요.');
+
+  // 카카오: Supabase OAuth
+  if (provider === 'kakao' && _sb) {
+    const { data, error } = await _sb.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: { redirectTo: location.origin + '/mypage/' }
+    });
+    if (error) showMsg('카카오 로그인 오류: ' + error.message, 'error');
+    return;
+  }
+
+  // 네이버/구글: 준비 중
+  alert(labels[provider] + ' 간편 로그인은 곧 지원 예정입니다.\n현재는 이메일 또는 카카오 로그인을 이용해 주세요.');
 }
+
+// ── OAuth 콜백 처리 (카카오 로그인 후 리다이렉트 시) ──
+(async function handleOAuthCallback() {
+  if (!_sb) return;
+  if (!location.hash || !location.hash.includes('access_token')) return;
+  try {
+    const { data: { session }, error } = await _sb.auth.getSession();
+    if (error || !session) return;
+    // Supabase 세션을 기존 localStorage 키에 저장
+    localStorage.setItem('access_token', session.access_token);
+    if (session.refresh_token) localStorage.setItem('refresh_token', session.refresh_token);
+    if (session.user) {
+      const u = session.user;
+      if (u.id) localStorage.setItem('user_id', u.id);
+      const meta = u.user_metadata || {};
+      if (meta.name || meta.full_name) localStorage.setItem('user_name', meta.name || meta.full_name);
+      if (u.email) localStorage.setItem('user_email', u.email);
+    }
+    localStorage.setItem('tai_session', '1');
+    location.href = taiPostLoginTarget();
+  } catch(e) { console.error('OAuth callback error:', e); }
+})();
 </script>
 </body>
 </html>
