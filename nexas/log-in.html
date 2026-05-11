@@ -516,7 +516,7 @@ async function loginSocial(provider) {
   if (provider === 'kakao' && _sb) {
     const { data, error } = await _sb.auth.signInWithOAuth({
       provider: 'kakao',
-      options: { redirectTo: location.origin + '/mypage/' }
+      options: { redirectTo: location.origin + '/log-in.html' }
     });
     if (error) showMsg('카카오 로그인 오류: ' + error.message, 'error');
     return;
