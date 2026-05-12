@@ -512,18 +512,18 @@ const _sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : nul
 async function loginSocial(provider) {
   const labels = { naver:'네이버', kakao:'카카오', google:'구글' };
 
-  // 카카오: Supabase OAuth
-  if (provider === 'kakao' && _sb) {
+  // 카카오/구글: Supabase OAuth
+  if ((provider === 'kakao' || provider === 'google') && _sb) {
     const { data, error } = await _sb.auth.signInWithOAuth({
-      provider: 'kakao',
+      provider: provider,
       options: { redirectTo: location.origin + '/log-in.html' }
     });
-    if (error) showMsg('카카오 로그인 오류: ' + error.message, 'error');
+    if (error) showMsg(labels[provider] + ' 로그인 오류: ' + error.message, 'error');
     return;
   }
 
-  // 네이버/구글: 준비 중
-  alert(labels[provider] + ' 간편 로그인은 곧 지원 예정입니다.\n현재는 이메일 또는 카카오 로그인을 이용해 주세요.');
+  // 네이버: 준비 중
+  alert(labels[provider] + ' 간편 로그인은 곧 지원 예정입니다.\n현재는 이메일, 카카오, 구글 로그인을 이용해 주세요.');
 }
 
 // ── OAuth 콜백 처리 (카카오 로그인 후 리다이렉트 시) ──
