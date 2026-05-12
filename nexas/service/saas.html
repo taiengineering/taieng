@@ -46,13 +46,11 @@
   body > .preloader, body > #preloader { position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important; pointer-events: none; z-index: 999999; margin: 0 !important; padding: 0 !important; }
   body > .body-overlay, body > #body-overlay { position: fixed !important; top: 0 !important; left: 0 !important; margin: 0 !important; padding: 0 !important; }
   #tai-header:not(.navbar-area) { display: block; height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: visible; }
-  /* 헤더 — 다크 히어로 위에서 메뉴/로그인 가독성 (반투명 + 블러) */
   body header.navbar-area, body .navbar-area {
     background: linear-gradient(180deg, rgba(10,22,40,.82) 0%, rgba(10,22,40,.55) 55%, rgba(10,22,40,0) 100%) !important;
     backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
   }
-  /* 스크롤 후 — 단단한 다크 배경 */
   body .navbar-area.navbar-area-fixed {
     background: rgba(15,23,42,.92) !important;
     backdrop-filter: blur(12px) !important;
@@ -62,91 +60,84 @@
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
-  /* ============ 새 히어로 — 코드 기반, 다크 그라디언트 + 그리드 패턴 ============ */
+  /* ============ 새 히어로 — saas13.png 배경 + 좌측 텍스트 오버레이 ============ */
   .saas-hero {
     position: relative !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26,95,212,.18) 0%, transparent 60%),
-      linear-gradient(180deg, #0a1628 0%, #0f1f3d 50%, #0a1628 100%) !important;
+    background-color: #0a1628;
+    background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas13.png');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
     color: #fff;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
   }
-  /* 배경 SVG 그리드 패턴 (얇은 선) */
   .saas-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(96,165,250,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(96,165,250,.05) 1px, transparent 1px);
-    background-size: 64px 64px;
-    background-position: 0 0;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, #000 30%, transparent 80%);
+    background: linear-gradient(90deg, rgba(8,18,38,.95) 0%, rgba(8,18,38,.85) 35%, rgba(8,18,38,.55) 55%, rgba(8,18,38,.15) 75%, transparent 92%);
     pointer-events: none;
-    z-index: 0;
-  }
-  /* 미세한 빛 점 효과 */
-  .saas-hero::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: 12%;
-    width: 360px;
-    height: 360px;
-    background: radial-gradient(circle, rgba(96,165,250,.12) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(40px);
+    z-index: 1;
   }
   .saas-hero-inner {
     position: relative;
     z-index: 2;
-    max-width: 1080px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 140px 24px 96px;
-    text-align: center;
+    padding: 130px 24px 80px;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
   }
+  .saas-hero-content {
+    max-width: 560px;
+    padding-right: 24px;
+  }
+  .saas-hero-spacer { width: 100%; }
 
-  /* 라벨 칩 */
+  /* 라벨 — TAI SAFE 박스 + 부연 */
   .saas-hero-chip {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border: 1px solid rgba(147,197,253,.3);
-    background: rgba(26,95,212,.12);
-    border-radius: 999px;
-    font-size: .82rem;
-    font-weight: 800;
-    letter-spacing: .04em;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .saas-hero-chip .chip-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px;
+    border: 1px solid rgba(147,197,253,.45);
+    background: rgba(26,95,212,.15);
+    border-radius: 8px;
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .08em;
     color: #93c5fd;
-    margin-bottom: 28px;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
-  .saas-hero-chip .chip-dot {
-    width: 6px; height: 6px;
-    background: #4ade80;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(74,222,128,.7);
+  .saas-hero-chip .chip-tag .tag-strong { color: #fff; margin-right: 4px; }
+  .saas-hero-chip .chip-desc {
+    font-size: .88rem;
+    color: rgba(255,255,255,.65);
+    font-weight: 600;
+    letter-spacing: -.01em;
   }
 
   /* 메인 헤드라인 */
   .saas-hero h1 {
-    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    font-size: clamp(2.2rem, 4.8vw, 3.8rem);
     font-weight: 900;
     color: #fff;
-    line-height: 1.15;
-    letter-spacing: -.04em;
+    line-height: 1.22;
+    letter-spacing: -.035em;
     margin: 0 0 24px;
   }
   .saas-hero h1 .accent {
@@ -158,69 +149,27 @@
 
   /* 서브 카피 */
   .saas-hero-sub {
-    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    font-size: clamp(.98rem, 1.3vw, 1.1rem);
     color: rgba(255,255,255,.72);
     line-height: 1.75;
-    max-width: 680px;
-    margin: 0 auto 48px;
+    margin: 0 0 36px;
     letter-spacing: -.005em;
   }
 
-  /* 통계 박스 3개 */
-  .saas-hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    max-width: 720px;
-    margin: 0 auto 48px;
-  }
-  .saas-stat {
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.12);
-    border-radius: 14px;
-    padding: 22px 18px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: transform .25s, border-color .25s;
-  }
-  .saas-stat:hover {
-    transform: translateY(-3px);
-    border-color: rgba(96,165,250,.4);
-  }
-  .saas-stat-value {
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1;
-    letter-spacing: -.02em;
-    margin-bottom: 8px;
-  }
-  .saas-stat-value .unit {
-    font-size: .65em;
-    color: #93c5fd;
-    margin-left: 2px;
-  }
-  .saas-stat-label {
-    font-size: .82rem;
-    color: rgba(255,255,255,.55);
-    line-height: 1.45;
-    letter-spacing: -.005em;
-  }
-
-  /* CTA 버튼 두 개 */
+  /* CTA 영역 */
   .saas-hero-cta-row {
     display: flex;
-    gap: 12px;
-    justify-content: center;
+    gap: 14px;
+    align-items: center;
     flex-wrap: wrap;
-    margin: 0 0 56px;
+    margin: 0 0 48px;
   }
   .saas-hero-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 16px 32px;
-    border-radius: 12px;
+    padding: 15px 28px;
+    border-radius: 10px;
     font-size: 1rem;
     font-weight: 800;
     text-decoration: none !important;
@@ -229,65 +178,82 @@
     white-space: nowrap;
   }
   .saas-hero-btn.primary {
-    background: #fff;
-    color: #0f2b4a !important;
-    box-shadow: 0 14px 32px rgba(0,0,0,.25);
+    background: #1A5FD4;
+    color: #fff !important;
+    box-shadow: 0 14px 32px rgba(26,95,212,.35);
   }
   .saas-hero-btn.primary:hover {
-    background: #f0f6ff;
-    color: #0f2b4a !important;
-    transform: translateY(-2px);
-    box-shadow: 0 18px 40px rgba(0,0,0,.3);
-  }
-  .saas-hero-btn.secondary {
-    background: transparent;
+    background: #1248a8;
     color: #fff !important;
-    border: 1.5px solid rgba(255,255,255,.5);
-  }
-  .saas-hero-btn.secondary:hover {
-    border-color: #fff;
-    color: #fff !important;
-    background: rgba(255,255,255,.08);
     transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(26,95,212,.45);
+  }
+  .saas-hero-cta-hint {
+    font-size: .85rem;
+    color: rgba(255,255,255,.55);
+    font-weight: 600;
+    letter-spacing: -.005em;
   }
 
-  /* 스크롤 큐 */
-  .saas-hero-scroll {
-    color: rgba(255,255,255,.4);
-    font-size: .78rem;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    display: inline-flex;
-    flex-direction: column;
+  /* 하단 4개 아이콘 + 한 줄 설명 */
+  .saas-hero-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,.1);
+  }
+  .saas-feature {
+    text-align: center;
+  }
+  .saas-feature-icon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 10px;
+    display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
+    color: #93c5fd;
+    font-size: 1.1rem;
   }
-  .saas-hero-scroll .arrow {
-    font-size: 1rem;
-    animation: scrollBounce 2s infinite;
+  .saas-feature-title {
+    font-size: .85rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
   }
-  @keyframes scrollBounce {
-    0%, 100% { transform: translateY(0); opacity: .4; }
-    50% { transform: translateY(6px); opacity: 1; }
+  .saas-feature-desc {
+    font-size: .72rem;
+    color: rgba(255,255,255,.55);
+    line-height: 1.4;
+    letter-spacing: -.005em;
   }
 
   /* 모바일 반응형 */
   @media(max-width: 991px) {
     .saas-hero { min-height: auto; }
-    .saas-hero-inner { padding: 120px 20px 80px; }
-    .saas-hero h1 { line-height: 1.18; }
-    .saas-hero-stats { gap: 12px; }
-    .saas-stat { padding: 18px 14px; }
+    .saas-hero::before {
+      background: linear-gradient(180deg, rgba(8,18,38,.92) 0%, rgba(8,18,38,.75) 50%, rgba(8,18,38,.55) 100%);
+    }
+    .saas-hero-inner {
+      grid-template-columns: 1fr;
+      padding: 110px 24px 70px;
+    }
+    .saas-hero-content {
+      max-width: 100%;
+      padding-right: 0;
+    }
+    .saas-hero-spacer { display: none; }
+    .saas-hero-features { grid-template-columns: repeat(4, 1fr); gap: 12px; }
   }
   @media(max-width: 575px) {
-    .saas-hero-inner { padding: 100px 18px 64px; }
-    .saas-hero-chip { font-size: .76rem; padding: 7px 14px; margin-bottom: 22px; }
-    .saas-hero-sub { margin-bottom: 36px; }
-    .saas-hero-stats { grid-template-columns: 1fr; max-width: 320px; gap: 10px; margin-bottom: 36px; }
-    .saas-hero-stat { padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
-    .saas-hero-cta-row .saas-hero-btn { width: 100%; justify-content: center; }
-    .saas-hero::after { width: 200px; height: 200px; }
+    .saas-hero-inner { padding: 96px 18px 56px; }
+    .saas-hero-chip { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 24px; }
+    .saas-hero-cta-row { flex-direction: column; align-items: stretch; gap: 12px; }
+    .saas-hero-btn { width: 100%; justify-content: center; }
+    .saas-hero-cta-hint { text-align: center; }
+    .saas-hero-features { grid-template-columns: repeat(2, 1fr); gap: 16px; padding-top: 24px; }
   }
 
   /* ============ 결정 페이지 섹션 스타일 (기존 그대로 보존) ============ */
@@ -374,55 +340,66 @@
   <div id="tai-header"></div>
   <div id="saas-page" style="margin:0;padding:0;">
 
-  <!-- ① HERO — 코드 기반 다크 그라디언트 + 그리드 패턴 -->
+  <!-- ① HERO — saas13.png 배경 + 좌측 텍스트 오버레이 -->
   <section class="saas-hero">
     <div class="saas-hero-inner">
 
-      <!-- 라벨 칩 (그린닷 = '운영중' 신호) -->
-      <span class="saas-hero-chip">
-        <span class="chip-dot"></span>
-        산업안전관리 SaaS · TAI Safe
-      </span>
+      <!-- 좌측 콘텐츠 -->
+      <div class="saas-hero-content">
 
-      <!-- 메인 헤드라인 -->
-      <h1>
-        안전관리는<br>
-        <span class="accent">시스템이 합니다.</span>
-      </h1>
+        <!-- 라벨 -->
+        <div class="saas-hero-chip">
+          <span class="chip-tag"><span class="tag-strong">TAI</span>SAFE</span>
+          <span class="chip-desc">법령기반 산업안전관리 SaaS</span>
+        </div>
 
-      <!-- 서브 카피 -->
-      <p class="saas-hero-sub">
-        법령에서 의무를 만들고, 일정으로 배분하고,<br>
-        현장에서 실행되게 만드는 운영 시스템입니다.
-      </p>
+        <!-- 메인 헤드라인 -->
+        <h1>
+          안전관리,<br>
+          이제 <span class="accent">혼자 하지 마세요</span>
+        </h1>
 
-      <!-- 통계 박스 3개 -->
-      <div class="saas-hero-stats">
-        <div class="saas-stat">
-          <div class="saas-stat-value">473<span class="unit">개</span></div>
-          <div class="saas-stat-label">적용 가능 법령<br>자동 분석</div>
+        <!-- 서브 카피 -->
+        <p class="saas-hero-sub">
+          법령 확인부터 점검, 보고, 조치, 기록까지<br>
+          흩어진 안전관리를 하나의 흐름으로 연결합니다.
+        </p>
+
+        <!-- CTA + 부연 -->
+        <div class="saas-hero-cta-row">
+          <a href="../free-diagnosis.html" class="saas-hero-btn primary">무료 진단 시작하기 →</a>
+          <span class="saas-hero-cta-hint">30초면 충분합니다</span>
         </div>
-        <div class="saas-stat">
-          <div class="saas-stat-value">12<span class="unit">가지</span></div>
-          <div class="saas-stat-label">기능이 하나의<br>흐름으로 연결</div>
+
+        <!-- 하단 4개 아이콘 -->
+        <div class="saas-hero-features">
+          <div class="saas-feature">
+            <div class="saas-feature-icon"><i class="fas fa-gavel"></i></div>
+            <div class="saas-feature-title">법령 기반</div>
+            <div class="saas-feature-desc">자동 의무 식별</div>
+          </div>
+          <div class="saas-feature">
+            <div class="saas-feature-icon"><i class="fas fa-tasks"></i></div>
+            <div class="saas-feature-title">업무 자동화</div>
+            <div class="saas-feature-desc">점검·보고·알림</div>
+          </div>
+          <div class="saas-feature">
+            <div class="saas-feature-icon"><i class="fas fa-folder-open"></i></div>
+            <div class="saas-feature-title">증빙 관리</div>
+            <div class="saas-feature-desc">기록·문서 보관</div>
+          </div>
+          <div class="saas-feature">
+            <div class="saas-feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="saas-feature-title">감사 대응</div>
+            <div class="saas-feature-desc">완벽한 근거 확보</div>
+          </div>
         </div>
-        <div class="saas-stat">
-          <div class="saas-stat-value">무제한</div>
-          <div class="saas-stat-label">관리자 / 작업자<br>등록</div>
-        </div>
+
       </div>
 
-      <!-- CTA 두 버튼 -->
-      <div class="saas-hero-cta-row">
-        <a href="../free-diagnosis.html" class="saas-hero-btn primary">무료 법령진단 시작 →</a>
-        <a href="#pricing" class="saas-hero-btn secondary">요금제 보기 ↓</a>
-      </div>
+      <!-- 우측 — saas13.png가 차지 (요소 없음, 그리드 비율만) -->
+      <div class="saas-hero-spacer"></div>
 
-      <!-- 스크롤 큐 -->
-      <a href="#intro" class="saas-hero-scroll">
-        <span>SCROLL</span>
-        <span class="arrow">↓</span>
-      </a>
     </div>
   </section>
 
