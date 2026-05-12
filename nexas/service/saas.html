@@ -60,7 +60,7 @@
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
-  /* ============ 새 히어로 — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 560px) ============ */
+  /* ============ 새 히어로 — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px, 5개 말풍선 가시성 강화) ============ */
   .saas-hero {
     position: relative !important;
     width: 100% !important;
@@ -73,15 +73,22 @@
     background-position: right center;
     background-repeat: no-repeat;
     color: #fff;
-    min-height: 560px;
+    min-height: 600px;
     display: flex;
     align-items: center;
   }
+  /* 좌측 다크 그라디언트 — 좁고 빠르게 페이드 (5개 말풍선 모두 선명하게) */
   .saas-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(8,18,38,.95) 0%, rgba(8,18,38,.85) 35%, rgba(8,18,38,.55) 55%, rgba(8,18,38,.15) 75%, transparent 92%);
+    background: linear-gradient(90deg,
+      rgba(8,18,38,.95) 0%,
+      rgba(8,18,38,.88) 22%,
+      rgba(8,18,38,.6) 38%,
+      rgba(8,18,38,.25) 52%,
+      rgba(8,18,38,.05) 65%,
+      transparent 75%);
     pointer-events: none;
     z-index: 1;
   }
@@ -90,10 +97,10 @@
     z-index: 2;
     max-width: 1320px;
     margin: 0 auto;
-    padding: 95px 24px 30px;
+    padding: 105px 24px 40px;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1.35fr;
     align-items: center;
   }
   .saas-hero-content {
@@ -107,7 +114,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
   .saas-hero-chip .chip-tag {
     display: inline-flex;
@@ -138,7 +145,7 @@
     color: #fff;
     line-height: 1.22;
     letter-spacing: -.035em;
-    margin: 0 0 16px;
+    margin: 0 0 18px;
   }
   .saas-hero h1 .accent {
     background: linear-gradient(90deg, #60a5fa 0%, #93c5fd 100%);
@@ -152,7 +159,7 @@
     font-size: clamp(.94rem, 1.2vw, 1.05rem);
     color: rgba(255,255,255,.72);
     line-height: 1.7;
-    margin: 0 0 24px;
+    margin: 0 0 26px;
     letter-spacing: -.005em;
   }
 
@@ -162,7 +169,7 @@
     gap: 14px;
     align-items: center;
     flex-wrap: wrap;
-    margin: 0 0 28px;
+    margin: 0 0 32px;
   }
   .saas-hero-btn {
     display: inline-flex;
@@ -200,7 +207,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    padding-top: 22px;
+    padding-top: 24px;
     border-top: 1px solid rgba(255,255,255,.1);
   }
   .saas-feature {
@@ -231,6 +238,11 @@
   }
 
   /* 모바일 반응형 */
+  @media(max-width: 1199px) {
+    /* 1200px↓: 좌측 콘텐츠 살짝 줄여 우측 이미지 공간 확보 */
+    .saas-hero-inner { grid-template-columns: 1fr 1.5fr; }
+    .saas-hero-content { max-width: 480px; }
+  }
   @media(max-width: 991px) {
     .saas-hero { min-height: auto; }
     .saas-hero::before {
@@ -238,7 +250,7 @@
     }
     .saas-hero-inner {
       grid-template-columns: 1fr;
-      padding: 85px 24px 40px;
+      padding: 90px 24px 50px;
     }
     .saas-hero-content {
       max-width: 100%;
@@ -248,7 +260,7 @@
     .saas-hero-features { grid-template-columns: repeat(4, 1fr); gap: 12px; }
   }
   @media(max-width: 575px) {
-    .saas-hero-inner { padding: 80px 18px 32px; }
+    .saas-hero-inner { padding: 80px 18px 36px; }
     .saas-hero-chip { flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 18px; }
     .saas-hero-cta-row { flex-direction: column; align-items: stretch; gap: 10px; }
     .saas-hero-btn { width: 100%; justify-content: center; }
@@ -340,7 +352,7 @@
   <div id="tai-header"></div>
   <div id="saas-page" style="margin:0;padding:0;">
 
-  <!-- ① HERO — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 560px) -->
+  <!-- ① HERO — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px) -->
   <section class="saas-hero">
     <div class="saas-hero-inner">
 
