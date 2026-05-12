@@ -60,7 +60,7 @@
   #saas-page * { box-sizing: border-box; }
   #saas-page { font-family: 'Noto Sans KR', sans-serif; --sp-blue:#1A5FD4; --sp-dark:#0f172a; --sp-red:#dc2626; --sp-green:#15803d; --sp-gray:#64748b; --sp-border:#e2e8f0; --sp-bg:#f8fafc; }
 
-  /* ============ 새 히어로 — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px, 5개 말풍선 가시성 강화) ============ */
+  /* ============ 새 히어로 — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px, contain으로 이미지 축소) ============ */
   .saas-hero {
     position: relative !important;
     width: 100% !important;
@@ -69,7 +69,7 @@
     overflow: hidden;
     background-color: #0a1628;
     background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/saas/saas13.png');
-    background-size: cover;
+    background-size: contain;
     background-position: right center;
     background-repeat: no-repeat;
     color: #fff;
@@ -77,18 +77,16 @@
     display: flex;
     align-items: center;
   }
-  /* 좌측 다크 그라디언트 — 좁고 빠르게 페이드 (5개 말풍선 모두 선명하게) */
+  /* 좌측 다크 그라디언트 — contain 이미지에 맞춰 단순화, 좌측 50%까지 진한 다크 */
   .saas-hero::before {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg,
-      rgba(8,18,38,.95) 0%,
-      rgba(8,18,38,.88) 22%,
-      rgba(8,18,38,.6) 38%,
-      rgba(8,18,38,.25) 52%,
-      rgba(8,18,38,.05) 65%,
-      transparent 75%);
+      rgba(8,18,38,1) 0%,
+      rgba(8,18,38,1) 40%,
+      rgba(8,18,38,.5) 52%,
+      transparent 62%);
     pointer-events: none;
     z-index: 1;
   }
@@ -239,7 +237,6 @@
 
   /* 모바일 반응형 */
   @media(max-width: 1199px) {
-    /* 1200px↓: 좌측 콘텐츠 살짝 줄여 우측 이미지 공간 확보 */
     .saas-hero-inner { grid-template-columns: 1fr 1.5fr; }
     .saas-hero-content { max-width: 480px; }
   }
@@ -352,7 +349,7 @@
   <div id="tai-header"></div>
   <div id="saas-page" style="margin:0;padding:0;">
 
-  <!-- ① HERO — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px) -->
+  <!-- ① HERO — saas13.png 배경 + 좌측 텍스트 오버레이 (min-height 600px, contain) -->
   <section class="saas-hero">
     <div class="saas-hero-inner">
 
