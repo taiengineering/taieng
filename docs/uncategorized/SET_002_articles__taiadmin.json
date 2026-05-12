@@ -1,0 +1,170 @@
+{
+  "set_id": "SET-002",
+  "random_seed": "002",
+  "selection_rule": "CORE 5 (산업안전 핵심, SET-001과 다른 법령) + DIVERSITY 15 (LAW 4 / ENF_DECREE 4 / ENF_RULE 3 / NOTICE 3 / STANDARD 1)",
+  "selected_at": "2026-05-04",
+  "rule_patterns_version": "v1.1",
+  "audit_version": "v3",
+  "articles": [
+    {
+      "bucket": "CORE",
+      "id": "8289cf26-5459-494e-b358-d35ca2a777fd",
+      "law_name": "산업안전보건기준에 관한 규칙",
+      "article_no": 627,
+      "article_title": "유해가스의 처리 등",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "CORE",
+      "id": "d714d364-0449-46f8-8c1a-cedbd1f632ea",
+      "law_name": "산업안전보건기준에 관한 규칙",
+      "article_no": 193,
+      "article_title": "낙하물에 의한 위험 방지",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "CORE",
+      "id": "e512d2de-8a73-47c4-928a-76db457e284e",
+      "law_name": "산업안전보건법 시행규칙",
+      "article_no": 71,
+      "article_title": "중대재해 원인조사의 내용 등",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "CORE",
+      "id": "615dce2a-036f-4b7f-8320-057bfe13bffe",
+      "law_name": "산업안전보건법 시행규칙",
+      "article_no": 92,
+      "article_title": "건설재해예방전문지도기관의 지도ㆍ감독",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "CORE",
+      "id": "5dcb51a3-0cfb-45fe-b513-c6c732f22b14",
+      "law_name": "화재의 예방 및 안전관리에 관한 법률",
+      "article_no": 36,
+      "article_title": "피난계획의 수립 및 시행",
+      "law_type_code": "LAW"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "916f7c23-3193-4729-931a-aab0b52d96a6",
+      "law_name": "노후계획도시 정비 및 지원에 관한 특별법",
+      "article_no": 9,
+      "article_title": "실무위원회의 설치 등",
+      "law_type_code": "LAW"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "e0346dbb-fd4d-4a9e-a562-ea1afc6ba544",
+      "law_name": "대기환경보전법",
+      "article_no": 58,
+      "article_title": "저공해자동차의 구매ㆍ임차 계획",
+      "law_type_code": "LAW"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "95959078-ac2b-4172-9754-689b6cc6f022",
+      "law_name": "재난안전통신망법",
+      "article_no": 16,
+      "article_title": "재난안전통신망의 사용",
+      "law_type_code": "LAW"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "d81ce0d7-d012-445f-9547-5d1f1735037e",
+      "law_name": "체외진단의료기기법",
+      "article_no": 8,
+      "article_title": "임상적 성능시험기관",
+      "law_type_code": "LAW"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "247abbef-80ae-4ea5-8377-0af4805ef766",
+      "law_name": "소방시설 설치 및 관리에 관한 법률 시행령",
+      "article_no": 28,
+      "article_title": "운영세칙",
+      "law_type_code": "ENFORCEMENT_DECREE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "9942f05d-7f45-469e-a518-7df53ab72973",
+      "law_name": "신에너지 및 재생에너지 개발ㆍ이용ㆍ보급 촉진법 시행령",
+      "article_no": 5,
+      "article_title": "심의회의 운영",
+      "law_type_code": "ENFORCEMENT_DECREE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "0b5a33b4-d2c0-446d-8acd-856553a9d11a",
+      "law_name": "의료법 시행령",
+      "article_no": 18,
+      "article_title": "의료관련감염 감시 시스템 구축ㆍ운영 업무의 위탁",
+      "law_type_code": "ENFORCEMENT_DECREE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "8ca5820c-3309-4617-bcd0-204f86b013fc",
+      "law_name": "정보통신공사업법 시행령",
+      "article_no": 36,
+      "article_title": "사용전검사 등",
+      "law_type_code": "ENFORCEMENT_DECREE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "d6fb9345-a69f-4398-813e-41378b174b7f",
+      "law_name": "건설기계 안전기준에 관한 규칙",
+      "article_no": 167,
+      "article_title": "소음",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "bd8d748a-2806-4080-82c4-20ba0f4e3ac0",
+      "law_name": "전기용품 및 생활용품 안전관리법 시행규칙",
+      "article_no": 9,
+      "article_title": "안전인증서의 발급 등",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "ff0e70c0-4afd-4486-bf61-4e5fdcbc3489",
+      "law_name": "하수도법 시행규칙",
+      "article_no": 2,
+      "article_title": "하수도정비기본계획의 변경승인 대상",
+      "law_type_code": "ENFORCEMENT_RULE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "73848a89-d249-4864-a275-149e96cee969",
+      "law_name": "위험물안전관리에 관한 세부기준",
+      "article_no": 126,
+      "article_title": "환기설비 및 배출설비의 특례",
+      "law_type_code": "NOTICE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "2f34aa89-3cff-424a-a14d-2e3d787158fe",
+      "law_name": "염색업종 유해화학물질 취급시설 설치 및 관리에 관한 고시",
+      "article_no": 18,
+      "article_title": "유해화학물질 취급시설의 변경 등에 관한 적용",
+      "law_type_code": "NOTICE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "e564f24a-06ba-42f8-8dcc-098ff4c3960d",
+      "law_name": "공동주택 바닥충격음 차단구조 인정 및 검사기준",
+      "article_no": 19,
+      "article_title": "품질관리 상태 확인점검",
+      "law_type_code": "NOTICE"
+    },
+    {
+      "bucket": "DIVERSITY",
+      "id": "04416f7e-8bfe-42a6-ade6-d493d3193ec6",
+      "law_name": "고체에어로졸소화설비의 화재안전기술기준(NFTC 110)",
+      "article_no": 2,
+      "article_title": "2.6.2.3 화재표시반에는 해당 회로도 및 취급설명서를 비치할 것",
+      "law_type_code": "STANDARD"
+    }
+  ]
+}

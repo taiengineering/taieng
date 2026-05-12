@@ -1,0 +1,28 @@
+{
+  "articles": 2,
+  "matched_drafts": 1,
+  "over_extraction": 1,
+  "recall_gaps": 1,
+  "patterns": [
+    {
+      "article_id": "3b89fbcd-f8cc-4b1f-9449-d585c0f46394",
+      "law_name": "산업안전보건법 시행규칙",
+      "article": "제77조",
+      "orig_count": 1,
+      "fresh_count": 1,
+      "match_count": 0,
+      "over_extraction_indices": [
+        0
+      ],
+      "recall_gap_indices": [
+        0
+      ],
+      "over_extraction_summaries": [
+        "도급승인 기준 미달, 거짓·부정한 방법으로 승인을 받은 경우 등에 해당하면 도급승인·연장승인·변경승인을 취소"
+      ],
+      "recall_gap_summaries": [
+        "고용노동부장관은 도급승인 기준 미달, 부정한 방법에 의한 승인, 연장·변경승인 미이행 시 도급승인을 취소해야 한다"
+      ]
+    }
+  ]
+}
