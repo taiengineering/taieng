@@ -1,0 +1,15 @@
+# Document Integrity Event Bus
+## 2026-05-13
+
+## Event Types
+| Event | Severity |
+|-------|----------|
+| DOCUMENT_COMPLETENESS_DRIFT | CRITICAL |
+| REQUIREMENT_RULE_DRIFT | HIGH |
+| HIDDEN_MANDATORY_DRIFT | HIGH |
+| TEMPLATE_RENDER_DRIFT | WARNING |
+| PDF_ARTIFACT_MISMATCH | WARNING |
+| EXPLAINABILITY_LOSS | CRITICAL |
+| UNSUPPORTED_DOCUMENT_INFERENCE | HIGH |
+
+## engine_integrity_event 테이블 공유 (기존 테이블 재활용)
