@@ -28,542 +28,114 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
 /* ================= ABOUT TAI RENEWAL CSS ================= */
+#tai-about-renewal { font-family: 'Noto Sans KR', sans-serif; color: #0f172a; }
 
-#tai-about-renewal {
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #0f172a;
-}
+/* §1 히어로 */
+.tai-about-hero { position: relative; overflow: hidden; background: #07111f; color: #fff; min-height: 600px; }
+.about-hero-bg { position: absolute; inset: 0; background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/company/company2.png'); background-size: cover; background-position: center; }
+.about-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,17,31,0.92) 0%, rgba(7,17,31,0.78) 35%, rgba(7,17,31,0.15) 65%, rgba(7,17,31,0.05) 100%); }
+.about-hero-inner { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; min-height: 600px; padding-top: calc(var(--tai-nav-h, 90px) + 50px); padding-bottom: 0; }
+.about-hero-content { max-width: 560px; }
+.about-kicker { display: inline-block; font-size: .76rem; font-weight: 900; letter-spacing: .12em; color: #1A5FD4; margin-bottom: 14px; }
+.about-kicker.light { color: #93c5fd; }
+.tai-about-hero .about-kicker { color: #93c5fd; }
+.tai-about-hero h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.2; color: #fff; letter-spacing: -.03em; margin-bottom: 24px; }
+.about-hero-accent { color: #60a5fa; }
+.tai-about-hero .about-hero-desc { color: rgba(255,255,255,.78); font-size: 1rem; line-height: 1.8; margin-bottom: 28px; max-width: 42ch; }
+.tai-about-hero .about-hero-desc strong { color: #60a5fa; font-weight: 700; }
+.about-hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 0; }
+.about-hero-values { display: flex; gap: 32px; flex-wrap: wrap; padding: 24px 0; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.12); }
+.about-value-item { display: flex; flex-direction: column; gap: 2px; }
+.about-value-icon { font-size: 1.1rem; margin-bottom: 4px; }
+.about-value-from { font-size: 0.72rem; color: rgba(255,255,255,0.45); line-height: 1.3; }
+.about-value-to { font-size: 0.82rem; color: #fff; font-weight: 700; line-height: 1.3; }
+.about-hero-closing { position: absolute; bottom: 28px; right: 20px; z-index: 2; text-align: right; font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.about-hero-closing strong { color: #60a5fa; font-weight: 700; }
 
-/* ===== §1 히어로 (전체화면 이미지 + 오버레이) ===== */
-.tai-about-hero {
-  position: relative;
-  overflow: hidden;
-  background: #07111f;
-  color: #fff;
-  min-height: 600px;
-}
-
-.about-hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/company/company2.png');
-  background-size: cover;
-  background-position: center;
-}
-
-.about-hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(7,17,31,0.92) 0%,
-    rgba(7,17,31,0.78) 35%,
-    rgba(7,17,31,0.15) 65%,
-    rgba(7,17,31,0.05) 100%
-  );
-}
-
-.about-hero-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 600px;
-  padding-top: calc(var(--tai-nav-h, 90px) + 50px);
-  padding-bottom: 0;
-}
-
-.about-hero-content {
-  max-width: 560px;
-}
-
-.about-kicker {
-  display: inline-block;
-  font-size: .76rem;
-  font-weight: 900;
-  letter-spacing: .12em;
-  color: #1A5FD4;
-  margin-bottom: 14px;
-}
-
-.about-kicker.light {
-  color: #93c5fd;
-}
-
-.tai-about-hero .about-kicker {
-  color: #93c5fd;
-}
-
-.tai-about-hero h1 {
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
-  font-weight: 900;
-  line-height: 1.2;
-  color: #fff;
-  letter-spacing: -.03em;
-  margin-bottom: 24px;
-}
-
-.about-hero-accent {
-  color: #60a5fa;
-}
-
-.tai-about-hero .about-hero-desc {
-  color: rgba(255,255,255,.78);
-  font-size: 1rem;
-  line-height: 1.8;
-  margin-bottom: 28px;
-  max-width: 42ch;
-}
-
-.tai-about-hero .about-hero-desc strong {
-  color: #60a5fa;
-  font-weight: 700;
-}
-
-.about-hero-cta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 0;
-}
-
-/* 하단 가치 제안 바 */
-.about-hero-values {
-  display: flex;
-  gap: 32px;
-  flex-wrap: wrap;
-  padding: 24px 0;
-  margin-top: 40px;
-  border-top: 1px solid rgba(255,255,255,0.12);
-}
-
-.about-value-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.about-value-icon {
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-}
-
-.about-value-from {
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.3;
-}
-
-.about-value-to {
-  font-size: 0.82rem;
-  color: #fff;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-/* 우하단 클로징 */
-.about-hero-closing {
-  position: absolute;
-  bottom: 28px;
-  right: 20px;
-  z-index: 2;
-  text-align: right;
-  font-size: 0.92rem;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.5;
-}
-
-.about-hero-closing strong {
-  color: #60a5fa;
-  font-weight: 700;
-}
-
-/* ===== 공통 버튼 ===== */
-.about-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-size: .95rem;
-  font-weight: 900;
-  text-decoration: none;
-  transition: .2s ease;
-}
-
-.about-btn.primary {
-  background: #1A5FD4;
-  color: #fff;
-}
+/* 버튼 */
+.about-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 12px; font-size: .95rem; font-weight: 900; text-decoration: none; transition: .2s ease; }
+.about-btn.primary { background: #1A5FD4; color: #fff; }
 .about-btn.primary:hover { background: #1248a8; color: #fff; }
-
-.about-btn.secondary {
-  background: rgba(255,255,255,.08);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.34);
-}
+.about-btn.secondary { background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.34); }
 .about-btn.secondary:hover { background: rgba(255,255,255,.14); color: #fff; }
-
-.about-btn.secondary-dark {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.42);
-}
+.about-btn.secondary-dark { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.42); }
 .about-btn.secondary-dark:hover { background: rgba(255,255,255,.08); color: #fff; }
-
-.about-btn.white {
-  background: #fff;
-  color: #0f172a;
-}
+.about-btn.white { background: #fff; color: #0f172a; }
 .about-btn.white:hover { background: #f0f6ff; color: #0f172a; }
+.about-final-cta { display: flex; gap: 12px; flex-wrap: wrap; }
 
-.about-final-cta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+/* §2~ 공통 */
+.about-section { padding: 100px 0; }
+.about-white { background: #fff; }
+.about-gray { background: #f8fafc; }
+.about-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+.about-split.reverse { grid-template-columns: .95fr 1.05fr; }
+.about-split.reverse .about-text { order: 2; }
+.about-split.reverse .about-image-box { order: 1; }
+.about-text h2, .about-center h2 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 900; line-height: 1.28; letter-spacing: -.035em; margin-bottom: 22px; }
+.about-text p { color: #64748b; line-height: 1.85; font-size: .98rem; margin-bottom: 14px; }
+.about-image-box { border-radius: 28px; overflow: hidden; background: #e5e7eb; box-shadow: 0 24px 70px rgba(0,0,0,.18); }
+.about-image-box img { width: 100%; height: 390px; object-fit: cover; display: block; }
+.about-flow-image img { height: 340px; }
+.about-center { max-width: 760px; margin: 0 auto 44px; text-align: center; }
+.about-center p { color: #64748b; line-height: 1.8; }
 
-/* ===== §2~ 이하 기존 스타일 유지 ===== */
-.about-section {
-  padding: 100px 0;
-}
+/* §3 관점 */
+.about-belief-section { background: linear-gradient(135deg, #0f172a 0%, #10284c 100%); color: #fff; padding: 100px 0; }
+.about-belief-section .about-center h2 { color: #fff; }
+.about-belief-section .about-center p { color: rgba(255,255,255,.68); }
+.belief-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.belief-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: 34px 28px; }
+.belief-num { color: #93c5fd; font-weight: 900; font-size: .85rem; margin-bottom: 18px; }
+.belief-card h3 { color: #fff; font-size: 1.25rem; font-weight: 900; margin-bottom: 12px; }
+.belief-card p { color: rgba(255,255,255,.66); line-height: 1.75; margin: 0; }
 
-.about-white {
-  background: #fff;
-}
+/* §5 플로우 */
+.about-flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 12px; flex-wrap: nowrap; }
+.flow-step { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 26px 20px; text-align: center; flex: 1; box-shadow: 0 12px 32px rgba(15,23,42,.07); }
+.flow-icon { font-size: 2rem; margin-bottom: 14px; }
+.flow-step h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; }
+.flow-step p { color: #64748b; line-height: 1.6; font-size: .86rem; margin: 0; }
+.flow-arrow { display: flex; align-items: center; color: #1A5FD4; font-weight: 900; font-size: 1.4rem; }
 
-.about-gray {
-  background: #f8fafc;
-}
+/* §6 기술 */
+.about-tech-brief { background: linear-gradient(135deg, #0f172a 0%, #1A5FD4 100%); color: #fff; padding: 80px 0; }
+.about-tech-box { display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center; }
+.about-tech-box h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.7rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
+.about-tech-box p { color: rgba(255,255,255,.72); line-height: 1.8; margin: 0; max-width: 680px; }
 
-.about-split {
-  display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: 56px;
-  align-items: center;
-}
+/* §7 대표 */
+.founder-simple { display: grid; grid-template-columns: 260px 1fr; gap: 52px; align-items: center; max-width: 960px; margin: 0 auto; }
+.founder-simple-photo { border-radius: 24px; overflow: hidden; background: #e5e7eb; box-shadow: 0 16px 42px rgba(15,23,42,.14); }
+.founder-simple-photo img { width: 100%; height: 320px; object-fit: cover; display: block; }
+.founder-simple-text h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 900; line-height: 1.32; margin-bottom: 18px; }
+.founder-simple-text p { color: #64748b; line-height: 1.85; margin-bottom: 12px; }
+.founder-sign { margin-top: 22px; font-weight: 900; color: #0f172a; }
 
-.about-split.reverse {
-  grid-template-columns: .95fr 1.05fr;
-}
+/* §8 마지막 */
+.about-final { background: #0f172a; color: #fff; padding: 100px 0; text-align: center; }
+.about-final h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 900; line-height: 1.25; margin-bottom: 18px; }
+.about-final p { color: rgba(255,255,255,.7); margin-bottom: 32px; }
+.about-final-cta { justify-content: center; }
 
-.about-split.reverse .about-text {
-  order: 2;
-}
-
-.about-split.reverse .about-image-box {
-  order: 1;
-}
-
-.about-text h2,
-.about-center h2 {
-  font-size: clamp(1.9rem, 4vw, 3rem);
-  font-weight: 900;
-  line-height: 1.28;
-  letter-spacing: -.035em;
-  margin-bottom: 22px;
-}
-
-.about-text p {
-  color: #64748b;
-  line-height: 1.85;
-  font-size: .98rem;
-  margin-bottom: 14px;
-}
-
-.about-image-box {
-  border-radius: 28px;
-  overflow: hidden;
-  background: #e5e7eb;
-  box-shadow: 0 24px 70px rgba(0,0,0,.18);
-}
-
-.about-image-box img {
-  width: 100%;
-  height: 390px;
-  object-fit: cover;
-  display: block;
-}
-
-.about-flow-image img {
-  height: 340px;
-}
-
-.about-center {
-  max-width: 760px;
-  margin: 0 auto 44px;
-  text-align: center;
-}
-
-.about-center p {
-  color: #64748b;
-  line-height: 1.8;
-}
-
-.about-belief-section {
-  background: linear-gradient(135deg, #0f172a 0%, #10284c 100%);
-  color: #fff;
-  padding: 100px 0;
-}
-
-.about-belief-section .about-center h2 {
-  color: #fff;
-}
-
-.about-belief-section .about-center p {
-  color: rgba(255,255,255,.68);
-}
-
-.belief-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.belief-card {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 24px;
-  padding: 34px 28px;
-}
-
-.belief-num {
-  color: #93c5fd;
-  font-weight: 900;
-  font-size: .85rem;
-  margin-bottom: 18px;
-}
-
-.belief-card h3 {
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 900;
-  margin-bottom: 12px;
-}
-
-.belief-card p {
-  color: rgba(255,255,255,.66);
-  line-height: 1.75;
-  margin: 0;
-}
-
-.about-flow-steps {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: nowrap;
-}
-
-.flow-step {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 26px 20px;
-  text-align: center;
-  flex: 1;
-  box-shadow: 0 12px 32px rgba(15,23,42,.07);
-}
-
-.flow-icon {
-  font-size: 2rem;
-  margin-bottom: 14px;
-}
-
-.flow-step h3 {
-  font-size: 1rem;
-  font-weight: 900;
-  margin-bottom: 8px;
-}
-
-.flow-step p {
-  color: #64748b;
-  line-height: 1.6;
-  font-size: .86rem;
-  margin: 0;
-}
-
-.flow-arrow {
-  display: flex;
-  align-items: center;
-  color: #1A5FD4;
-  font-weight: 900;
-  font-size: 1.4rem;
-}
-
-.about-tech-brief {
-  background: linear-gradient(135deg, #0f172a 0%, #1A5FD4 100%);
-  color: #fff;
-  padding: 80px 0;
-}
-
-.about-tech-box {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 36px;
-  align-items: center;
-}
-
-.about-tech-box h2 {
-  color: #fff;
-  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
-  font-weight: 900;
-  line-height: 1.3;
-  margin-bottom: 14px;
-}
-
-.about-tech-box p {
-  color: rgba(255,255,255,.72);
-  line-height: 1.8;
-  margin: 0;
-  max-width: 680px;
-}
-
-.founder-simple {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 52px;
-  align-items: center;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.founder-simple-photo {
-  border-radius: 24px;
-  overflow: hidden;
-  background: #e5e7eb;
-  box-shadow: 0 16px 42px rgba(15,23,42,.14);
-}
-
-.founder-simple-photo img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  display: block;
-}
-
-.founder-simple-text h2 {
-  font-size: clamp(1.7rem, 3.6vw, 2.6rem);
-  font-weight: 900;
-  line-height: 1.32;
-  margin-bottom: 18px;
-}
-
-.founder-simple-text p {
-  color: #64748b;
-  line-height: 1.85;
-  margin-bottom: 12px;
-}
-
-.founder-sign {
-  margin-top: 22px;
-  font-weight: 900;
-  color: #0f172a;
-}
-
-.about-final {
-  background: #0f172a;
-  color: #fff;
-  padding: 100px 0;
-  text-align: center;
-}
-
-.about-final h2 {
-  color: #fff;
-  font-size: clamp(2rem, 4.5vw, 3.4rem);
-  font-weight: 900;
-  line-height: 1.25;
-  margin-bottom: 18px;
-}
-
-.about-final p {
-  color: rgba(255,255,255,.7);
-  margin-bottom: 32px;
-}
-
-.about-final-cta {
-  justify-content: center;
-}
-
-/* ===== 반응형 ===== */
+/* 반응형 */
 @media (max-width: 991px) {
-  .about-split,
-  .about-split.reverse,
-  .about-tech-box,
-  .founder-simple {
-    grid-template-columns: 1fr;
-  }
-
-  .about-split.reverse .about-text,
-  .about-split.reverse .about-image-box {
-    order: initial;
-  }
-
-  .belief-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-flow-steps {
-    flex-direction: column;
-  }
-
-  .flow-arrow {
-    justify-content: center;
-    transform: rotate(90deg);
-  }
-
-  .about-image-box img,
-  .about-flow-image img {
-    height: 280px;
-  }
-
-  .founder-simple-photo {
-    max-width: 240px;
-    margin: 0 auto;
-  }
+  .about-split, .about-split.reverse, .about-tech-box, .founder-simple { grid-template-columns: 1fr; }
+  .about-split.reverse .about-text, .about-split.reverse .about-image-box { order: initial; }
+  .belief-grid { grid-template-columns: 1fr; }
+  .about-flow-steps { flex-direction: column; }
+  .flow-arrow { justify-content: center; transform: rotate(90deg); }
+  .about-image-box img, .about-flow-image img { height: 280px; }
+  .founder-simple-photo { max-width: 240px; margin: 0 auto; }
 }
-
 @media (max-width: 768px) {
-  .tai-about-hero {
-    min-height: auto;
-  }
-
-  .about-hero-inner {
-    min-height: auto;
-    padding-top: calc(var(--tai-nav-h, 90px) + 30px);
-    padding-bottom: 36px;
-  }
-
-  .about-hero-bg {
-    opacity: 0.3;
-    background-position: top center;
-  }
-
-  .about-hero-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(7,17,31,0.95) 0%,
-      rgba(7,17,31,0.88) 100%
-    );
-  }
-
-  .tai-about-hero h1 {
-    font-size: 1.7rem;
-  }
-
-  .about-hero-values {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .about-hero-closing {
-    position: static;
-    text-align: left;
-    margin-top: 24px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
+  .tai-about-hero { min-height: auto; }
+  .about-hero-inner { min-height: auto; padding-top: calc(var(--tai-nav-h, 90px) + 30px); padding-bottom: 36px; }
+  .about-hero-bg { opacity: 0.3; background-position: top center; }
+  .about-hero-overlay { background: linear-gradient(180deg, rgba(7,17,31,0.95) 0%, rgba(7,17,31,0.88) 100%); }
+  .tai-about-hero h1 { font-size: 1.7rem; }
+  .about-hero-values { flex-direction: column; gap: 16px; }
+  .about-hero-closing { position: static; text-align: left; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
 }
   </style>
 </head>
@@ -572,52 +144,29 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- ================= ABOUT TAI RENEWAL ================= -->
 <main id="tai-about-renewal">
 
-  <!-- 1. HERO (전체화면 이미지 + 오버레이) -->
+  <!-- 1. HERO -->
   <section class="tai-about-hero">
     <div class="about-hero-bg"></div>
     <div class="about-hero-overlay"></div>
-
     <div class="container about-hero-inner">
       <div class="about-hero-content">
         <span class="about-kicker light">ABOUT TAI ENGINEERING</span>
         <h1>산업안전은<br>사람의 책임감만으로<br><span class="about-hero-accent">유지될 수 없습니다</span></h1>
-        <p class="about-hero-desc">
-          법령부터 점검, 보고, 조치, 기록까지.<br>
-          TAI는 산업안전 운영 자체를<br>
-          <strong>하나의 흐름</strong>으로 연결합니다.
-        </p>
+        <p class="about-hero-desc">법령부터 점검, 보고, 조치, 기록까지.<br>TAI는 산업안전 운영 자체를<br><strong>하나의 흐름</strong>으로 연결합니다.</p>
         <div class="about-hero-cta">
           <a href="service/saas.html" class="about-btn primary">TAI Safe 보기 →</a>
           <a href="free-diagnosis.html" class="about-btn secondary">무료 법령진단</a>
         </div>
-
         <div class="about-hero-values">
-          <div class="about-value-item">
-            <span class="about-value-icon">👥</span>
-            <span class="about-value-from">혼자 하는 안전관리에서</span>
-            <span class="about-value-to">모두가 함께하는 안전관리로</span>
-          </div>
-          <div class="about-value-item">
-            <span class="about-value-icon">🔗</span>
-            <span class="about-value-from">기억에 의존하는 관리에서</span>
-            <span class="about-value-to">흐름이 연결되는 관리로</span>
-          </div>
-          <div class="about-value-item">
-            <span class="about-value-icon">📊</span>
-            <span class="about-value-from">사후 대응 중심에서</span>
-            <span class="about-value-to">선제 예방 중심으로</span>
-          </div>
+          <div class="about-value-item"><span class="about-value-icon">👥</span><span class="about-value-from">혼자 하는 안전관리에서</span><span class="about-value-to">모두가 함께하는 안전관리로</span></div>
+          <div class="about-value-item"><span class="about-value-icon">🔗</span><span class="about-value-from">기억에 의존하는 관리에서</span><span class="about-value-to">흐름이 연결되는 관리로</span></div>
+          <div class="about-value-item"><span class="about-value-icon">📊</span><span class="about-value-from">사후 대응 중심에서</span><span class="about-value-to">선제 예방 중심으로</span></div>
         </div>
       </div>
     </div>
-
-    <div class="about-hero-closing">
-      더 안전한 현장, 더 지속 가능한 운영<br>
-      <strong>TAI</strong> 가 만듭니다.
-    </div>
+    <div class="about-hero-closing">더 안전한 현장, 더 지속 가능한 운영<br><strong>TAI</strong> 가 만듭니다.</div>
   </section>
 
   <!-- 2. 문제 선언 -->
@@ -625,7 +174,7 @@
     <div class="container">
       <div class="about-split">
         <div class="about-image-box">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/about/about-old-structure.jpg" alt="엑셀, 종이, 단톡방, 서류철로 흩어진 기존 안전관리 구조" loading="lazy">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/company/company3.png" alt="엑셀, 종이, 단톡방, 서류철로 흩어진 기존 안전관리 구조" loading="lazy">
         </div>
         <div class="about-text">
           <span class="about-kicker">WHY CHANGE</span>
@@ -647,21 +196,9 @@
         <p>정보가 흐르고, 의무가 연결되고, 현장이 즉시 반응하는 구조.<br>TAI는 그 구조를 만드는 회사입니다.</p>
       </div>
       <div class="belief-grid">
-        <div class="belief-card">
-          <div class="belief-num">01</div>
-          <h3>기억이 아니라 흐름</h3>
-          <p>사람이 외우고 전달하는 구조는 반드시 누락됩니다. 법령과 의무는 시스템 안에서 흘러야 합니다.</p>
-        </div>
-        <div class="belief-card">
-          <div class="belief-num">02</div>
-          <h3>집중이 아니라 분산</h3>
-          <p>안전관리자 한 명에게 모든 업무가 몰리면 현장은 지속적으로 관리될 수 없습니다.</p>
-        </div>
-        <div class="belief-card">
-          <div class="belief-num">03</div>
-          <h3>보고가 아니라 운영</h3>
-          <p>안전은 보고서로 유지되지 않습니다. 점검, 조치, 기록이 실제 운영 흐름으로 이어져야 합니다.</p>
-        </div>
+        <div class="belief-card"><div class="belief-num">01</div><h3>기억이 아니라 흐름</h3><p>사람이 외우고 전달하는 구조는 반드시 누락됩니다. 법령과 의무는 시스템 안에서 흘러야 합니다.</p></div>
+        <div class="belief-card"><div class="belief-num">02</div><h3>집중이 아니라 분산</h3><p>안전관리자 한 명에게 모든 업무가 몰리면 현장은 지속적으로 관리될 수 없습니다.</p></div>
+        <div class="belief-card"><div class="belief-num">03</div><h3>보고가 아니라 운영</h3><p>안전은 보고서로 유지되지 않습니다. 점검, 조치, 기록이 실제 운영 흐름으로 이어져야 합니다.</p></div>
       </div>
     </div>
   </section>
@@ -704,27 +241,21 @@
     </div>
   </section>
 
-  <!-- 6. 기술력 간략 표현 -->
+  <!-- 6. 기술력 -->
   <section class="about-tech-brief">
     <div class="container">
       <div class="about-tech-box">
-        <div>
-          <span class="about-kicker light">TECHNOLOGY</span>
-          <h2>법령을 업무로 바꾸는<br>TAI의 기술</h2>
-          <p>TAI는 법령 데이터, 규칙 엔진, 자동 일정화, 현장 실행 데이터를 연결합니다. 핵심 기술은 별도의 기술력 페이지에서 자세히 확인할 수 있습니다.</p>
-        </div>
+        <div><span class="about-kicker light">TECHNOLOGY</span><h2>법령을 업무로 바꾸는<br>TAI의 기술</h2><p>TAI는 법령 데이터, 규칙 엔진, 자동 일정화, 현장 실행 데이터를 연결합니다. 핵심 기술은 별도의 기술력 페이지에서 자세히 확인할 수 있습니다.</p></div>
         <a href="patents.html" class="about-btn white">기술력 보기 →</a>
       </div>
     </div>
   </section>
 
-  <!-- 7. 대표 철학 축소 섹션 -->
+  <!-- 7. 대표 철학 -->
   <section class="about-section about-gray">
     <div class="container">
       <div class="founder-simple">
-        <div class="founder-simple-photo">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/about/ceo-profile.jpg" alt="TAI 엔지니어링 대표" loading="lazy">
-        </div>
+        <div class="founder-simple-photo"><img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/about/ceo-profile.jpg" alt="TAI 엔지니어링 대표" loading="lazy"></div>
         <div class="founder-simple-text">
           <span class="about-kicker">WHY TAI EXISTS</span>
           <h2>우리는 안전관리자를<br>더 힘들게 만드는 시스템을 만들지 않습니다</h2>
