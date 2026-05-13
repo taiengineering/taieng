@@ -27,10 +27,7 @@
   <link rel="stylesheet" href="assets/css/tai-main.css">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-/* ================= ABOUT TAI RENEWAL CSS ================= */
 #tai-about-renewal { font-family: 'Noto Sans KR', sans-serif; color: #0f172a; }
-
-/* §1 히어로 */
 .tai-about-hero { position: relative; overflow: hidden; background: #07111f; color: #fff; min-height: 600px; }
 .about-hero-bg { position: absolute; inset: 0; background-image: url('https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/company/company2.png'); background-size: cover; background-position: center; }
 .about-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,17,31,0.92) 0%, rgba(7,17,31,0.78) 35%, rgba(7,17,31,0.15) 65%, rgba(7,17,31,0.05) 100%); }
@@ -51,8 +48,6 @@
 .about-value-to { font-size: 0.82rem; color: #fff; font-weight: 700; line-height: 1.3; }
 .about-hero-closing { position: absolute; bottom: 28px; right: 20px; z-index: 2; text-align: right; font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 .about-hero-closing strong { color: #60a5fa; font-weight: 700; }
-
-/* 버튼 */
 .about-btn { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; border-radius: 12px; font-size: .95rem; font-weight: 900; text-decoration: none; transition: .2s ease; }
 .about-btn.primary { background: #1A5FD4; color: #fff; }
 .about-btn.primary:hover { background: #1248a8; color: #fff; }
@@ -63,8 +58,6 @@
 .about-btn.white { background: #fff; color: #0f172a; }
 .about-btn.white:hover { background: #f0f6ff; color: #0f172a; }
 .about-final-cta { display: flex; gap: 12px; flex-wrap: wrap; }
-
-/* §2~ 공통 */
 .about-section { padding: 100px 0; }
 .about-white { background: #fff; }
 .about-gray { background: #f8fafc; }
@@ -79,8 +72,6 @@
 .about-flow-image img { height: 340px; }
 .about-center { max-width: 760px; margin: 0 auto 44px; text-align: center; }
 .about-center p { color: #64748b; line-height: 1.8; }
-
-/* §3 관점 */
 .about-belief-section { background: linear-gradient(135deg, #0f172a 0%, #10284c 100%); color: #fff; padding: 100px 0; }
 .about-belief-section .about-center h2 { color: #fff; }
 .about-belief-section .about-center p { color: rgba(255,255,255,.68); }
@@ -89,36 +80,26 @@
 .belief-num { color: #93c5fd; font-weight: 900; font-size: .85rem; margin-bottom: 18px; }
 .belief-card h3 { color: #fff; font-size: 1.25rem; font-weight: 900; margin-bottom: 12px; }
 .belief-card p { color: rgba(255,255,255,.66); line-height: 1.75; margin: 0; }
-
-/* §5 플로우 */
 .about-flow-steps { display: flex; align-items: stretch; justify-content: center; gap: 12px; flex-wrap: nowrap; }
 .flow-step { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 26px 20px; text-align: center; flex: 1; box-shadow: 0 12px 32px rgba(15,23,42,.07); }
 .flow-icon { font-size: 2rem; margin-bottom: 14px; }
 .flow-step h3 { font-size: 1rem; font-weight: 900; margin-bottom: 8px; }
 .flow-step p { color: #64748b; line-height: 1.6; font-size: .86rem; margin: 0; }
 .flow-arrow { display: flex; align-items: center; color: #1A5FD4; font-weight: 900; font-size: 1.4rem; }
-
-/* §6 기술 */
 .about-tech-brief { background: linear-gradient(135deg, #0f172a 0%, #1A5FD4 100%); color: #fff; padding: 80px 0; }
 .about-tech-box { display: grid; grid-template-columns: 1fr auto; gap: 36px; align-items: center; }
 .about-tech-box h2 { color: #fff; font-size: clamp(1.8rem, 3.5vw, 2.7rem); font-weight: 900; line-height: 1.3; margin-bottom: 14px; }
 .about-tech-box p { color: rgba(255,255,255,.72); line-height: 1.8; margin: 0; max-width: 680px; }
-
-/* §7 대표 */
 .founder-simple { display: grid; grid-template-columns: 260px 1fr; gap: 52px; align-items: center; max-width: 960px; margin: 0 auto; }
 .founder-simple-photo { border-radius: 24px; overflow: hidden; background: #e5e7eb; box-shadow: 0 16px 42px rgba(15,23,42,.14); }
 .founder-simple-photo img { width: 100%; height: 320px; object-fit: cover; display: block; }
 .founder-simple-text h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 900; line-height: 1.32; margin-bottom: 18px; }
 .founder-simple-text p { color: #64748b; line-height: 1.85; margin-bottom: 12px; }
 .founder-sign { margin-top: 22px; font-weight: 900; color: #0f172a; }
-
-/* §8 마지막 */
 .about-final { background: #0f172a; color: #fff; padding: 100px 0; text-align: center; }
 .about-final h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 900; line-height: 1.25; margin-bottom: 18px; }
 .about-final p { color: rgba(255,255,255,.7); margin-bottom: 32px; }
 .about-final-cta { justify-content: center; }
-
-/* 반응형 */
 @media (max-width: 991px) {
   .about-split, .about-split.reverse, .about-tech-box, .founder-simple { grid-template-columns: 1fr; }
   .about-split.reverse .about-text, .about-split.reverse .about-image-box { order: initial; }
@@ -214,7 +195,7 @@
           <p>법령에서 의무를 만들고, 일정으로 배분하고, 현장에서 실행되게 하며, 결과를 증빙으로 남기는 산업안전 운영 시스템입니다.</p>
         </div>
         <div class="about-image-box about-flow-image">
-          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/about/about-safety-flow.jpg" alt="법령 확인부터 점검, 보고, 조치, 기록까지 연결되는 TAI Safe 운영 흐름" loading="lazy">
+          <img src="https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/company/company4.png" alt="법령 확인부터 점검, 보고, 조치, 기록까지 연결되는 TAI Safe 운영 흐름" loading="lazy">
         </div>
       </div>
     </div>
