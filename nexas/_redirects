@@ -17,6 +17,9 @@
 /sitemap_laws.xml /sitemap_laws.xml 200
 /sitemap_precedents.xml /sitemap_precedents.xml 200
 
+# 구버전 도메인 리다이렉트
+https://new.taieng.co.kr/* https://taieng.co.kr/:splat 301
+
 # SPA 폴백은 저장소에 두지 않습니다. 필요 시 Cloudflare Pages 대시보드의
 # "Compatibility / SPA" 또는 동일 효과의 규칙만 사용하고,
 # 위 사이트맵 URL이 먼저 매칭되는지(또는 대시보드 규칙 순서) 확인하세요.
