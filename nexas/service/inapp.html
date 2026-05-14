@@ -383,8 +383,8 @@ a{text-decoration:none;}
         TAI Safe를 구성하는 모든 모듈을 한 곳에서 확인하세요.
       </p>
       <div class="hero-actions">
-        <a href="#apps" class="btn-app-primary"><i class="fas fa-th-large"></i> 모듈 둘러보기</a>
-        <a href="../free-diagnosis.html" class="btn-app-ghost"><i class="fas fa-shield-alt"></i> 무료 법령진단</a>
+        <a href="#apps" class="btn-app-primary" data-tai-track="cta_click" data-tai-location="hero"><i class="fas fa-th-large"></i> 모듈 둘러보기</a>
+        <a href="../free-diagnosis.html" class="btn-app-ghost" data-tai-track="free_diagnosis_start" data-tai-location="content"><i class="fas fa-shield-alt"></i> 무료 법령진단</a>
       </div>
     </div>
   </section>
@@ -720,8 +720,8 @@ a{text-decoration:none;}
       <h2>현장 운영은 그대로 두고<br>22개 모듈로 자동화하세요</h2>
       <p>TAI Apps는 기존 안전관리 체계에 필요한 모듈을 추가하는 방식으로 확장합니다.</p>
       <div class="hero-actions" style="justify-content:center;">
-        <a href="../free-diagnosis.html" class="btn-app-primary">무료 법령진단 시작하기</a>
-        <a href="../pricing.html" class="btn-app-ghost">요금제 확인</a>
+        <a href="../free-diagnosis.html" class="btn-app-primary" data-tai-track="free_diagnosis_start" data-tai-location="content">무료 법령진단 시작하기</a>
+        <a href="../pricing.html" class="btn-app-ghost" data-tai-track="cta_click" data-tai-location="pricing">요금제 확인</a>
       </div>
     </div>
   </section>
@@ -743,7 +743,7 @@ a{text-decoration:none;}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-        <a href="../pricing.html" class="btn btn-primary" style="background:#1565c0;border-color:#1565c0;">시작하기</a>
+        <a href="../pricing.html" class="btn btn-primary" style="background:#1565c0;border-color:#1565c0;" data-tai-track="cta_click" data-tai-location="pricing">시작하기</a>
       </div>
     </div>
   </div>
@@ -858,5 +858,6 @@ a{text-decoration:none;}
   });
 })();
 </script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body>
 </html>

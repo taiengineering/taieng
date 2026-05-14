@@ -190,7 +190,7 @@
             <input type="checkbox" id="contactAgree" style="margin-top:2px;" required>
             <span>개인정보 수집 및 이용에 동의합니다. <a href="privacy.html" style="color:var(--red);">개인정보처리방침</a></span>
           </label>
-          <button type="submit" class="submit-btn" id="contactSubmitBtn">문의 접수하기</button>
+          <button type="submit" class="submit-btn" id="contactSubmitBtn" data-tai-track="consultation_click" data-tai-location="content">문의 접수하기</button>
         </form>
       </div>
       <div class="col-lg-5">
@@ -201,7 +201,7 @@
             <p>문의 전에 빠르게 확인해보세요</p>
           </div>
           <div class="faq-mini-item">
-            <button type="button" class="faq-mini-q">무료 법령 진단은 정말 무료인가요?<span class="q-icon">+</span></button>
+            <button type="button" class="faq-mini-q" data-tai-track="free_diagnosis_start" data-tai-location="content">무료 법령 진단은 정말 무료인가요?<span class="q-icon">+</span></button>
             <div class="faq-mini-a">네, 시설 정보 기준 1차 분석은 완전 무료입니다. 로그인 없이도 이용 가능하며, 적용 법령·선임 의무·점검 항목·리스크 수준을 확인하실 수 있습니다.</div>
           </div>
           <div class="faq-mini-item">
@@ -342,4 +342,5 @@ $(document).ready(function() {
   }
 });
 </script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body></html>

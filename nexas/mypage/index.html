@@ -176,7 +176,7 @@
 					<div class="tai-mypage-card tai-mypage-quick">
 						<h3 class="mb-3">빠른 이동</h3>
 						<div class="d-flex flex-wrap gap-2">
-							<a href="../free-diagnosis.html" class="btn btn-base btn-sm">무료 법령진단</a>
+							<a href="../free-diagnosis.html" class="btn btn-base btn-sm" data-tai-track="free_diagnosis_start" data-tai-location="content">무료 법령진단</a>
 							<a href="contracts/" class="btn btn-outline-secondary btn-sm">계약 관리</a>
 						</div>
 					</div>
@@ -190,7 +190,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6"><p class="small mb-0">© TAI Engineering.</p></div>
-					<div class="col-md-6 text-md-end"><a href="../index.html" class="small me-3">홈</a><a href="../fix-request.html?from=mypage&type=general" class="small">문의</a></div>
+					<div class="col-md-6 text-md-end"><a href="../index.html" class="small me-3">홈</a><a href="../fix-request.html?from=mypage&type=general" class="small" data-tai-track="consultation_click" data-tai-location="content">문의</a></div>
 				</div>
 			</div>
 		</div>
@@ -263,5 +263,6 @@ async function loadExpertStatus() {
 
 window.taiOnPageShowAuth = function () { try { taiMypageRenderNav(); } catch (e) {} };
 	</script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body>
 </html>

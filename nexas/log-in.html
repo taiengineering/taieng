@@ -236,7 +236,7 @@
 
         <div class="auth-switch">
           아직 계정이 없으신가요?
-          <a href="#" onclick="switchPanel('register');return false;">회원가입</a>
+          <a href="#" onclick="switchPanel('register');return false;" data-tai-track="cta_click" data-tai-location="content">회원가입</a>
         </div>
       </div>
 
@@ -282,7 +282,7 @@
           </span>
         </label>
 
-        <button class="submit-btn" id="btn-reg" onclick="doRegister()">회원가입</button>
+        <button class="submit-btn" id="btn-reg" onclick="doRegister()" data-tai-track="cta_click" data-tai-location="content">회원가입</button>
 
         <!-- 간편 로그인 (가입 패널에도 동일) -->
         <div class="social-divider">또는 간편 가입</div>
@@ -555,5 +555,6 @@ async function loginSocial(provider) {
   } catch(e) { console.error('OAuth callback error:', e); }
 })();
 </script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body>
 </html>

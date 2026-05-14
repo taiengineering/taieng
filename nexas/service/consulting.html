@@ -128,8 +128,8 @@
               TAI가 확실히 연결합니다.
             </p>
             <div class="btn-area mb-4">
-              <a class="btn btn-white me-3" href="../fix-request.html?from=service-consulting&type=consulting">컨설팅 문의하기</a>
-              <a class="btn btn-border-white" href="../free-diagnosis.html">무료 진단 먼저</a>
+              <a class="btn btn-white me-3" href="../fix-request.html?from=service-consulting&type=consulting" data-tai-track="consultation_click" data-tai-location="content">컨설팅 문의하기</a>
+              <a class="btn btn-border-white" href="../free-diagnosis.html" data-tai-track="free_diagnosis_start" data-tai-location="content">무료 진단 먼저</a>
             </div>
             <ul class="page-list breadcrumb">
               <li class="breadcrumb-item"><a href="../index.html">홈</a></li>
@@ -297,7 +297,7 @@
             <p>일이 많은 업체도 있겠지만, 다른 데는 의뢰가 넘쳐나는데 나한테만 의뢰가 없는 상황이 있습니다.<br>TAI가 그 상황을 해결합니다. 실력 있는 전문가가 공평하게 일을 받을 수 있는 곳이 TAI입니다.</p>
             <div class="d-flex gap-3 flex-wrap">
               <a href="../mypage/expert-application/" class="btn btn-base">전문가 등록하기</a>
-              <a href="../fix-request.html?from=service-consulting&type=consulting" class="btn btn-border">문의하기</a>
+              <a href="../fix-request.html?from=service-consulting&type=consulting" class="btn btn-border" data-tai-track="consultation_click" data-tai-location="content">문의하기</a>
             </div>
           </div>
         </div>
@@ -350,5 +350,6 @@
   <script src="../assets/js/header.js"></script>
   <script src="../assets/js/footer.js"></script>
   <script>if (typeof WOW !== 'undefined') new WOW().init();</script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body>
 </html>

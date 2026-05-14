@@ -179,20 +179,20 @@
         <div class="still-question">
           <h4>더 궁금한 점이 있으신가요?</h4>
           <p>문의하시면 영업일 1일 이내 답변드립니다</p>
-          <a href="contact.html" class="btn-red">문의하기</a>
+          <a href="contact.html" class="btn-red" data-tai-track="consultation_click" data-tai-location="content">문의하기</a>
         </div>
       </div>
       <div class="col-lg-4">
         <div style="background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:80px;">
           <h5 style="font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:16px;">빠른 시작</h5>
-          <a href="free-diagnosis.html" class="btn-red d-block text-center" style="margin-bottom:12px;">무료 법령 진단</a>
+          <a href="free-diagnosis.html" class="btn-red d-block text-center" style="margin-bottom:12px;" data-tai-track="free_diagnosis_start" data-tai-location="content">무료 법령 진단</a>
           <a href="log-in.html" class="btn-outline d-block text-center" style="margin-bottom:20px;">로그인</a>
           <div style="padding-top:16px;border-top:1px solid var(--border);">
             <p style="font-size:.82rem;color:var(--sub);margin-bottom:12px;">관련 서비스</p>
             <div style="display:flex;flex-direction:column;gap:8px;">
               <a href="service/saas.html" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ TAI Safe SaaS</a>
-              <a href="fix-request.html?from=faq&type=appointment" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 선임 연결</a>
-              <a href="fix-request.html?from=faq&type=repair" style="font-size:.85rem;color:var(--navy);font-weight:600;">→ 수선 연결</a>
+              <a href="fix-request.html?from=faq&type=appointment" style="font-size:.85rem;color:var(--navy);font-weight:600;" data-tai-track="consultation_click" data-tai-location="content">→ 선임 연결</a>
+              <a href="fix-request.html?from=faq&type=repair" style="font-size:.85rem;color:var(--navy);font-weight:600;" data-tai-track="consultation_click" data-tai-location="content">→ 수선 연결</a>
             </div>
           </div>
           <div style="padding-top:16px;border-top:1px solid var(--border);margin-top:16px;">
@@ -232,4 +232,5 @@ function filterFaq(cat,btn){
   });
 }
 </script>
+<script src="/assets/js/tai-analytics.js"></script>
 </body></html>
