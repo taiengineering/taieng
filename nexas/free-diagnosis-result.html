@@ -202,6 +202,15 @@
   .btn-saas{display:block;background:var(--ink);color:#fff;border-radius:10px;padding:13px;text-align:center;font-size:.88rem;font-weight:800;cursor:pointer;transition:background .15s;}
   .btn-saas:hover{background:#1e293b;color:#fff;}
 
+  /* 법적 면책 배너 (유료/관리자 결과와 동일 톤) */
+  .legal-disclaimer-banner{
+    display:flex;align-items:flex-start;gap:10px;
+    background:#fffbeb;border:1px solid #f59e0b;border-radius:var(--radius);
+    padding:14px 16px;margin-top:16px;
+    font-size:.82rem;font-weight:600;color:#92400e;line-height:1.55;
+  }
+  .legal-disclaimer-banner .legal-disclaimer-icon{flex-shrink:0;font-size:1.1rem;line-height:1.2;}
+
   /* ── S8: 면책·푸터 ── */
   .disclaimer{background:var(--gray-light);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-top:16px;font-size:.74rem;color:var(--gray);line-height:1.75;}
   .disclaimer strong{color:var(--ink);}
@@ -333,6 +342,11 @@
       </div>
     </div>
     <a class="btn-saas" href="for-safety-manager.html">TAI Safe 더 알아보기 →</a>
+  </div>
+
+  <div class="legal-disclaimer-banner" role="note" aria-label="법적 면책 안내">
+    <span class="legal-disclaimer-icon" aria-hidden="true">⚠️</span>
+    <span>본 진단 결과는 참고용이며 법적 효력이 없습니다. 정확한 법적 판단은 관련 전문가에게 문의하시기 바랍니다.</span>
   </div>
 
   <!-- ═══ S8: 면책 + 푸터 ═══ -->
