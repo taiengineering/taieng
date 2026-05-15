@@ -96,12 +96,12 @@ scenario_run_id: regression_20260515_001
   ├── trace_id: process_registration_01JXR3KBN2
   │     flow_key: process_registration
   │     parent_trace_id: login_01JXR3K9M7
-  │     step 0~8
+  │     step 0~6
   │
   └── trace_id: diagnosis_01JXR3KD5P
-        flow_key: diagnosis_submit
+        flow_key: diagnosis
         parent_trace_id: null  (독립)
-        step 0~9
+        step 0~3
 ```
 
 ---
@@ -287,7 +287,7 @@ step_order 2: select_sector_construction → result: skipped
 | **timeout_exceeded** | 임의 step (1건) | 단일 이벤트 | event의 created_at 간격이 임계값 초과 |
 | **regression_detected** | flow 전체 + golden_scenario (N건) | 현재 실행 vs golden 기대값 | 현재 result set과 expected_* 비교 |
 | **sequence_violation** | flow 전체 (N건) | 같은 trace 내 step_order 검사 | step_order 순서 역전 또는 필수 step 누락 |
-| **orphan_event** | 단일 event (1건) | trace 소속 확인 | trace_id에 해당하는 flow 정의 없음 |
+| **orphan_event** | 단일 event (1건) | trace 소속 확인 | trace_id에 해당하는 flow 정의 없음, 또는 step_key가 flow에 미등록 |
 | **schema_drift** | save_db (1건) | payload 구조 비교 | payload_summary의 key 구조가 이전 실행과 다름 |
 | **health_degraded** | heartbeat 이벤트 (N건) | 시계열 | 연속 N회 failure 또는 응답시간 증가 추세 |
 
@@ -295,10 +295,11 @@ step_order 2: select_sector_construction → result: skipped
 
 | 시점 | 대상 판단 유형 | 트리거 |
 |------|---------------|--------|
-| **실시간 (step 단위)** | payload_missing, timeout_exceeded, orphan_event | 개별 event 도착 시 |
-| **flow 완료 후** | field_mismatch, db_mismatch, sequence_violation, schema_drift | trace의 마지막 step 도착 시 |
+| **실시간 (step 단위)** | payload_missing, timeout_exceeded | 개별 event 도착 시 |
+| **flow 완료 후** | field_mismatch, db_mismatch, sequence_violation, orphan_event | trace의 마지막 step 도착 시 |
 | **주기적 (cron)** | stuck_detected, health_degraded | 1분~10분 주기 |
 | **테스트 실행 후** | regression_detected | scenario_run 완료 시 |
+| **스키마 변경 감지** | schema_drift | save_db 이벤트의 payload 구조 변경 시 |
 
 ---
 
@@ -315,16 +316,23 @@ trace_id: login_01JXR3K9M7
 parent_trace_id: null
 scenario_run_id: null (실제 운영) 또는 regression_20260515_001 (테스트)
 
-step 0: open_form     | submit   | browser  | success | 로그인 화면
-step 1: submit_form   | submit   | browser  | success | ID/PW 제출
-step 2: validate_auth | validate | api      | success | 인증 검증
-step 3: read_result   | read     | api      | success | 토큰 발급
+┌─────────────────────────────────────────────────────────────────────────┐
+│ step │ step_key      │ event_type │ connector │ result  │ 비고        │
+│ 0    │ open_form     │ submit     │ browser   │ success │ 로그인 화면 │
+│ 1    │ submit_form   │ submit     │ browser   │ success │ ID/PW 제출  │
+│ 2    │ validate_auth │ validate   │ api       │ success │ 인증 검증   │
+│ 3    │ read_result   │ read       │ api       │ success │ 토큰 발급   │
+└─────────────────────────────────────────────────────────────────────────┘
 
-payload_summary (step 1):
-{"has_username": true, "has_password": true, "login_method": "email"}
+payload_summary 예시 (step 1):
+{
+    "has_username": true,
+    "has_password": true,
+    "login_method": "email"
+}
 
-integrity 판단:
-- payload_missing: step 1 has_username = false
+가능한 integrity 판단:
+- payload_missing: step 1에서 has_username = false
 - timeout_exceeded: step 2 응답 5초 초과
 - stuck_detected: step 2 이후 step 3 미도착 (30초 이상)
 ```
@@ -340,28 +348,41 @@ trace_id: process_registration_01JXR3KBN2
 parent_trace_id: login_01JXR3K9M7
 scenario_run_id: null (운영) 또는 regression_20260515_001 (테스트)
 
-step 0: open_form           | submit   | browser  | success | 등록 화면
-step 1: load_data           | read     | api      | success | 공정목록 로드
-step 2: select_process_type | submit   | browser  | success | 공정유형 선택
-step 3: input_field         | submit   | browser  | success | 상세정보 입력
-step 4: submit_form         | submit   | api      | success | 서버 전송
-step 5: validate_input      | validate | api      | success | 서버 검증
-step 6: save_db             | save     | database | success | DB 저장
-step 7: read_result         | read     | api      | success | 저장값 조회
-step 8: render_result       | render   | browser  | success | 결과 표시
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ step │ step_key            │ event_type │ connector │ result  │ 비고         │
+│ 0    │ open_form           │ submit     │ browser   │ success │ 등록 화면    │
+│ 1    │ load_data           │ read       │ api       │ success │ 공정목록 로드│
+│ 2    │ select_process_type │ submit     │ browser   │ success │ 공정유형 선택│
+│ 3    │ input_field         │ submit     │ browser   │ success │ 상세정보 입력│
+│ 4    │ submit_form         │ submit     │ api       │ success │ 서버 전송    │
+│ 5    │ validate_input      │ validate   │ api       │ success │ 서버 검증    │
+│ 6    │ save_db             │ save       │ database  │ success │ DB 저장      │
+│ 7    │ read_result         │ read       │ api       │ success │ 저장값 조회  │
+│ 8    │ render_result       │ render     │ browser   │ success │ 결과 표시    │
+└──────────────────────────────────────────────────────────────────────────────┘
 
-payload_summary (step 4):
-{"process_type": "PRESS", "field_count": 8, "has_equipment_link": true, "required_field_exists": true}
+payload_summary 예시 (step 4, submit_form):
+{
+    "process_type": "PRESS",
+    "field_count": 8,
+    "has_equipment_link": true,
+    "required_field_exists": true
+}
 
-payload_summary (step 7):
-{"process_type": "PRESS", "row_count": 1, "required_field_exists": true}
+payload_summary 예시 (step 7, read_result):
+{
+    "process_type": "PRESS",
+    "row_count": 1,
+    "required_field_exists": true
+}
 
-integrity 판단:
-- payload_missing: step 4 required_field_exists = false
-- field_mismatch: step 4 vs step 7 process_type 대소문자 불일치
+가능한 integrity 판단:
+- payload_missing: step 4에서 required_field_exists = false
+- field_mismatch: step 4 process_type = "PRESS" vs step 7 process_type = "press" (대소문자)
 - db_mismatch: step 6 payload_hash ≠ step 7 payload_hash
 - sequence_violation: step 6(save_db) 없이 step 7(read_result) 도착
 - stuck_detected: step 6 이후 step 7 미도착 (60초 이상)
+- regression_detected: golden scenario에서 기대 step 수 = 9인데 8개만 도착
 ```
 
 ### 8.3 법령진단 Flow
@@ -375,26 +396,40 @@ trace_id: diagnosis_submit_01JXR3KD5P
 parent_trace_id: login_01JXR3K9M7 (회원) 또는 null (비회원)
 scenario_run_id: null (운영) 또는 regression_20260515_001 (테스트)
 
-step 0: open_form        | submit   | browser  | success | 진단 입력 화면
-step 1: select_sector    | submit   | browser  | success | 섹터 선택
-step 2: input_conditions | submit   | browser  | success | 조건값 입력
-step 3: submit_form      | submit   | api      | success | 진단 요청
-step 4: validate_input   | validate | api      | success | 조건값 검증
-step 5: evaluate_rules   | validate | api      | success | 법령 룰 판정
-step 6: save_db          | save     | database | success | 결과 저장
-step 7: generate_output  | submit   | api      | success | 보고서 생성
-step 8: read_result      | read     | api      | success | 결과 조회
-step 9: render_result    | render   | browser  | success | 결과 표시
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│ step │ step_key             │ event_type │ connector │ result  │ 비고            │
+│ 0    │ open_form            │ submit     │ browser   │ success │ 진단 입력 화면  │
+│ 1    │ select_sector        │ submit     │ browser   │ success │ 섹터 선택       │
+│ 2    │ input_conditions     │ submit     │ browser   │ success │ 조건값 입력     │
+│ 3    │ submit_form          │ submit     │ api       │ success │ 진단 요청       │
+│ 4    │ validate_input       │ validate   │ api       │ success │ 조건값 검증     │
+│ 5    │ evaluate_rules       │ validate   │ api       │ success │ 법령 룰 판정    │
+│ 6    │ save_db              │ save       │ database  │ success │ 결과 저장       │
+│ 7    │ generate_output      │ submit     │ api       │ success │ 보고서 생성     │
+│ 8    │ read_result          │ read       │ api       │ success │ 결과 조회       │
+│ 9    │ render_result        │ render     │ browser   │ success │ 결과 표시       │
+└──────────────────────────────────────────────────────────────────────────────────┘
 
-payload_summary (step 3):
-{"sector": "BUILDING", "tier": "STANDARD", "condition_count": 5, "required_field_exists": true, "has_area": true}
+payload_summary 예시 (step 3, submit_form):
+{
+    "sector": "BUILDING",
+    "tier": "STANDARD",
+    "condition_count": 5,
+    "required_field_exists": true,
+    "has_area": true
+}
 
-payload_summary (step 5):
-{"matched_rule_count": 23, "obligation_count": 15, "penalty_count": 8, "evaluation_ms": 340}
+payload_summary 예시 (step 5, evaluate_rules):
+{
+    "matched_rule_count": 23,
+    "obligation_count": 15,
+    "penalty_count": 8,
+    "evaluation_ms": 340
+}
 
-integrity 판단:
-- payload_missing: step 3 required_field_exists = false
-- timeout_exceeded: step 5 evaluation_ms > 5000
+가능한 integrity 판단:
+- payload_missing: step 3에서 required_field_exists = false
+- timeout_exceeded: step 5 evaluation_ms > 5000 (5초 초과)
 - regression_detected: golden scenario 기대 obligation 23개인데 15개만 반환
 - stuck_detected: step 5 이후 step 6 미도착 (120초 이상)
 - sequence_violation: step 4(validate) 없이 step 5(evaluate) 도착
@@ -405,12 +440,14 @@ integrity 판단:
 ## 결론
 
 ### 1. Trace 구조 결론
-- 1 독립 flow = 1 trace_id (불변)
+
+- **1 독립 flow = 1 trace_id** (불변)
 - trace_id 형식: `{flow_key}_{uuid7_short}`
 - 선행 flow 필요 시 parent_trace_id로 연결 (최대 3단계)
 - 테스트 묶음은 scenario_run_id (실 운영은 NULL)
 
 ### 2. Flow 구조 결론
+
 - flow_key: `{domain}_{action}` snake_case, 최대 3단어
 - step_key: `{verb}_{object}` snake_case, flow_key 반복 금지
 - step_order: 0-based 연속 정수
@@ -419,29 +456,35 @@ integrity 판단:
 - branch = 같은 step_order + 다른 step_key
 
 ### 3. Event 연결 방식
-- 단일 이벤트 판단: source_event_id = 해당 event.id
-- 복수 이벤트 비교: source_event_id = 마지막 event.id + detail.compared_events
-- 흐름 전체 판단: source_event_id = NULL, trace_id로 그룹 참조
-- 외부 비교: scenario_run_id + golden_scenario 참조
+
+- 단일 이벤트 판단: `source_event_id` = 해당 event.id
+- 복수 이벤트 비교: `source_event_id` = 마지막 event.id + `detail.compared_events`
+- 흐름 전체 판단: `source_event_id` = NULL, `trace_id`로 그룹 참조
+- 외부 비교: `scenario_run_id` + golden_scenario 참조
 
 ### 4. Integrity 판단 방식
-- 실시간 판단 (3종): payload_missing, timeout_exceeded, orphan_event
-- flow 완료 후 판단 (4종): field_mismatch, db_mismatch, sequence_violation, schema_drift
-- 주기적 판단 (2종): stuck_detected, health_degraded
-- 테스트 후 판단 (1종): regression_detected
+
+- **실시간 판단 (3종):** payload_missing, timeout_exceeded, orphan_event
+- **flow 완료 후 판단 (4종):** field_mismatch, db_mismatch, sequence_violation, schema_drift
+- **주기적 판단 (2종):** stuck_detected, health_degraded
+- **테스트 후 판단 (1종):** regression_detected
 
 ### 5. 위험 요소
-1. trace_id 전파 누락 → emitEvent() Thin Agent가 강제
-2. step_order 역전 (비동기) → created_at 보조 정렬
-3. payload_summary PII 유출 → emitEvent()에서 PII 필터링
-4. retry 폭발 → retry 상한(max 5)
-5. stuck 오탐 → flow별 임계값 차별화
-6. golden scenario 방치 → 코드 변경 시 동기 갱신 필요
+
+1. **trace_id 전파 누락:** 서비스 코드에서 trace_id를 전파하지 않으면 flow 연결 불가. emitEvent() Thin Agent가 이를 강제해야 함
+2. **step_order 순서 보장:** 비동기 처리에서 step_order가 역전될 수 있음. created_at 기반 보조 정렬 필요
+3. **payload_summary PII 유출:** 개발자가 실수로 PII를 payload_summary에 포함할 수 있음. emitEvent()에서 PII 필터링 필요
+4. **retry 폭발:** retry 무한 루프 시 같은 step_order로 이벤트 폭발. retry 상한(max 5) 필요
+5. **stuck 판단 오탐:** 네트워크 지연과 실제 stuck 구분 어려움. 임계값 설정이 flow별로 다를 수 있음
+6. **golden scenario 유지보수:** 코드 변경 시 golden scenario도 갱신 필요. 방치 시 regression 오탐 폭발
 
 ### 6. 다음 구현 제안
-1. business_event 테이블 생성 (Supabase migration)
-2. engine_integrity_event ALTER (Supabase migration)
-3. Flow Registry 테이블 설계 (flow_key별 step 정의 저장)
-4. emitEvent() Python 함수 (Cursor)
-5. Process Registration Flow Mapping (TASK 03)
-6. Watch Engine 판단 로직 (Cursor)
+
+| 순서 | 작업 | 도구 | 내용 |
+|------|------|------|------|
+| 1 | business_event 테이블 생성 | Supabase migration | TASK 02 SQL 실행 |
+| 2 | engine_integrity_event ALTER | Supabase migration | TASK 02 SQL 실행 |
+| 3 | Flow Registry 테이블 설계 | 설계 → migration | flow_key별 step 정의 저장 (Flow DSL 기반) |
+| 4 | emitEvent() Python 함수 | Cursor (tai-api) | Thin Agent 코드 구현 |
+| 5 | Process Registration Flow Mapping | 설계 (기획창) | TASK 03 실행 |
+| 6 | Watch Engine 판단 로직 | Cursor (tai-api) | integrity rule 실행 코드 |
