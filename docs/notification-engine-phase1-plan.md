@@ -1,295 +1,511 @@
-# 45cm / TAI Notification Engine
+# TAI / 45cm Platform
 
-## 개발 목표 및 범위 고정 기획서 (Phase 1)
+## 워크플로우엔진작업지시서-2026-05-15-001
+
+### Workflow Integrity Evaluator Foundation
 
 작성일: 2026-05-15
-상태: 개발 범위 고정 초안
-대상: 45cm Platform / TAI Runtime
+상태: 실행 지시서
+대상: Claude Code / 개발 에이전트
 
 ---
 
-# 1. 작성 목적
+# 1. 이번 작업 목적
 
-현재 Notification / Alert 구조는:
+현재 Workflow Engine은:
 
-- 관제
-- 운영
-- Workflow
-- Runtime
-- 업무전달
-- Escalation
-
-등으로 빠르게 확장 중이다.
-
-플랫폼 구조 특성상 확장 가능성이 매우 크기 때문에, 목표와 범위를 고정하지 않으면 무한 엔진 개발 상태로 진입할 위험이 있다.
-
-따라서 본 문서는 Phase 1 Notification Engine의 명확한 목표, 역할, 범위, 제외사항을 정의한다.
-
----
-
-# 2. 현재 상황 정의
-
-현재 시스템에는 아래 3개 계층이 혼재되어 있다.
-
-## 2.1 Legacy Notification
-
-기존 업무 알림 시스템.
-
-예:
-
-- notifications
-- notification_queue
-- overdue_history
-
-특징:
-
-- 사용자 알림 중심
-- 업무 overdue 중심
-- SMS / Push 중심
-
-## 2.2 Watch Alert System
-
-관제 중심 시스템.
-
-예:
-
-- alert_rule_registry
-- alert_history
-- Telegram alert
-
-특징:
-
-- 운영 감시
-- integrity alert
-- cooldown / dedupe
-
-## 2.3 Runtime Notification Layer
-
-차세대 구조.
-
-예:
-
-- runtime_notification_event
-- runtime_notification_queue
-- runtime_escalation_queue
-
-특징:
-
-- Event 기반
-- Runtime 기반
-- 역할 기반 확장 가능
-
----
-
-# 3. 핵심 전략 결정
-
-Notification Engine은 메시지 발송 기능이 아니다.
-
-현재 플랫폼 기준 정의는 다음과 같다.
-
-```text
-Event 기반 운영 커뮤니케이션 엔진
+```
+상태(State)
+전이(Transition)
+타임라인(Timeline)
+이벤트(Event)
 ```
 
----
+를 기록 가능하게 되었다.
 
-# 4. Phase 1 최종 목표
+다음 단계 목표는:
 
-Phase 1의 목표는 다음과 같다.
-
-```text
-모든 엔진의 이벤트를 중앙 Notification Runtime으로 수렴
+```
+Workflow 흐름의 정상성(Integrity)을 평가
 ```
 
-즉 Watch Engine, Workflow Engine, Runtime Engine, Approval Engine 등은 직접 메시지 발송을 하지 않는다.
+하는 것이다.
+
+중요:
+
+이번 작업은:
+
+```
+Workflow Runtime 구현
+```
+
+이 아니다.
+
+이번 작업 목표는:
+
+```
+Workflow Integrity Evaluation Layer 구축
+```
+
+이다.
 
 ---
 
-# 5. 핵심 원칙
+# 2. 절대 원칙
 
-## 5.1 Engine은 Signal만 발생
+---
 
-모든 엔진은 Event / Signal 생성만 수행한다.
+## 원칙 1
 
-## 5.2 Notification Engine만 Delivery 수행
+```
+Workflow ≠ Integrity
+```
 
-실제 발송은 Notification Engine만 수행한다.
+Workflow는 상태 흐름 생성.
 
-## 5.3 Event Contract 통일
+Integrity는 흐름 평가.
 
-모든 엔진은 공통 Event 규약을 사용한다.
+---
+
+## 원칙 2
+
+Integrity Layer는:
+
+```
+판단(Evaluation)
+```
+
+만 수행.
+
+상태 변경 금지.
+
+---
+
+## 원칙 3
+
+Integrity Layer는:
+
+```
+Notification 직접 호출 금지
+```
+
+반드시:
+
+```
+Integrity Event
+→ Alert Layer
+→ Notification Runtime
+```
+
+경유.
+
+---
+
+## 원칙 4
+
+현재 단계는:
+
+```
+Business Workflow Integrity
+```
+
+구축 단계.
+
+Infra Monitoring 방향 금지.
+
+---
+
+## 원칙 5
+
+Integrity Layer는:
+
+```
+Business State 흐름 평가
+```
+
+중심.
+
+CPU/memory 관제 아님.
+
+---
+
+# 3. 이번 작업 범위
+
+---
+
+# 3.1 Integrity Rule Registry 구축
+
+신규 테이블:
+
+예:
+
+```
+workflow_integrity_rule_registry
+```
+
+목적:
+
+```
+Workflow Integrity 규칙 중앙화
+```
 
 필수 필드:
 
-- event_type
-- source_engine
-- severity
-- tenant_id
-- trace_id
-- occurred_at
-- payload
+* rule_code
+* workflow_type
+* rule_type
+* severity
+* enabled
+* description
+* evaluation_window_sec
+* created_at
 
-## 5.4 Alert ≠ Notification
+초기 rule_type:
 
-구조:
-
-```text
-Event
-→ Integrity
-→ Alert
-→ Notification
 ```
-
-## 5.5 사람은 마지막 Escalation
-
-우선순위:
-
-```text
-자동 처리
-→ Retry
-→ Queue
-→ Escalation
-→ Human
+TIMEOUT
+INVALID_TRANSITION
+STUCK
+SEQUENCE_VIOLATION
+MISSING_STEP
 ```
 
 ---
 
-# 6. Phase 1 범위
+# 3.2 Workflow Integrity Event 테이블 구축
 
-포함 범위:
+신규 테이블:
 
-- Event Intake Layer
-- Unified Notification Event
-- Recipient Resolution (기본)
-- Unified Delivery Queue
-- Telegram Delivery
-- ACK / RESOLVE Lifecycle
-- Cooldown / Dedupe
-- Cockpit UI 연동
+예:
 
----
-
-# 7. 제외 범위
-
-현재 단계에서 제외:
-
-- 조직도 엔진
-- Inbox Platform
-- Slack-style 협업
-- AI Routing
-- Multi-region Messaging
-- Notification Marketplace
-- 완전한 BPM
-
----
-
-# 8. 핵심 개발 범위
-
-## 8.1 Notification Event Adapter
-
-각 엔진 Event → Notification Event 변환.
-
-## 8.2 Recipient Resolver
-
-누가 받아야 하는가 결정.
-
-## 8.3 Delivery Queue Worker
-
-Queue → Telegram 발송.
-
-## 8.4 Delivery Audit
-
-발송 기록 저장.
-
-## 8.5 ACK Lifecycle
-
-운영 개입 상태 관리.
-
----
-
-# 9. 기존 시스템 처리 방향
-
-## 9.1 Watch Engine
-
-Telegram 직접 발송 제거.
-
-대신:
-
-```text
-runtime_notification_event 생성
+```
+workflow_integrity_event
 ```
 
-## 9.2 Legacy Notification
+목적:
 
-즉시 삭제 금지.
+```
+Integrity 이상 탐지 결과 저장
+```
 
-유지 + 점진 통합 전략 사용.
+필수 필드:
 
-## 9.3 runtime_notification_* 계층
-
-플랫폼 Notification Core로 승격.
-
----
-
-# 10. 성공 기준
-
-- 모든 운영 Alert가 runtime_notification_event로 수렴
-- Watch Engine이 직접 발송하지 않음
-- Telegram Delivery가 Queue 기반으로 동작
-- ACK / RESOLVE lifecycle 정상 동작
-- Cooldown / Dedupe 유지
+* workflow_id
+* workflow_type
+* integrity_type
+* severity
+* trace_id
+* detected_at
+* payload
+* resolved
+* resolved_at
 
 ---
 
-# 11. 금지사항
+# 3.3 Integrity Evaluator Engine 구현
 
-- Notification Engine 안에 비즈니스 로직 넣기
-- Engine 간 직접 발송
-- AI 기반 recipient 추론
-- 채널별 로직 분산
+신규 서비스:
+
+예:
+
+```
+integrity_evaluator.py
+```
+
+역할:
+
+```
+Workflow Timeline 기반 정상성 평가
+```
+
+현재 범위:
+
+* timeline 조회
+* rule 조회
+* 이상 탐지
+* integrity event 생성
+
+현재 단계에서:
+
+```
+자동 수정 금지
+```
 
 ---
 
-# 12. 최종 정의
+# 3.4 Timeout Detection 구현
 
-Phase 1 Notification Engine은:
+목적:
 
-```text
-모든 플랫폼 이벤트를 중앙 운영 커뮤니케이션 Queue로 수렴시키는 엔진
+```
+Workflow 정지 탐지
+```
+
+예:
+
+```
+APPROVAL_PENDING 상태 1시간 초과
+```
+
+탐지 가능해야 함.
+
+현재:
+
+* detect only
+* auto transition 금지
+
+---
+
+# 3.5 Invalid Transition Detection 구현
+
+목적:
+
+```
+허용되지 않은 상태 전이 탐지
+```
+
+기준:
+
+```
+workflow_transition_registry
+```
+
+참조.
+
+---
+
+# 3.6 Sequence Violation Detection 구현
+
+목적:
+
+```
+Workflow 흐름 순서 이상 탐지
+```
+
+예:
+
+```
+APPROVED 없이 COMPLETED
+```
+
+---
+
+# 3.7 Missing Step Detection 구현
+
+목적:
+
+```
+필수 상태 누락 탐지
+```
+
+예:
+
+```
+VALIDATING 없이 APPROVAL_PENDING
+```
+
+---
+
+# 3.8 Integrity Timeline API
+
+신규 API:
+
+```
+/workflow/integrity/{workflow_id}
+```
+
+반환:
+
+* integrity events
+* triggered rules
+* timeline correlation
+
+---
+
+# 3.9 Integrity ↔ Alert Hook 정의
+
+현재 범위:
+
+* interface 정의만
+* Alert Runtime 직접 구현 금지
+
+예:
+
+```
+emit_integrity_alert()
+```
+
+---
+
+# 4. 작업 제외 범위
+
+절대 구현 금지.
+
+---
+
+## 제외 1
+
+Workflow auto recovery 금지.
+
+---
+
+## 제외 2
+
+Workflow auto transition 금지.
+
+---
+
+## 제외 3
+
+AI integrity 판단 금지.
+
+---
+
+## 제외 4
+
+Business decision logic 금지.
+
+---
+
+## 제외 5
+
+Notification direct send 금지.
+
+---
+
+## 제외 6
+
+Infra monitoring 금지.
+
+---
+
+## 제외 7
+
+Workflow orchestration 금지.
+
+---
+
+# 5. 핵심 아키텍처 목표
+
+목표 구조:
+
+```
+Workflow Engine
+    ↓
+Workflow Timeline
+    ↓
+Integrity Evaluator
+    ↓
+Integrity Event
+    ↓
+Alert Layer
+    ↓
+Notification Runtime
+```
+
+핵심:
+
+```
+Integrity는 Workflow를 평가한다
+Notification은 전달한다
+```
+
+---
+
+# 6. 성공 기준
+
+---
+
+## 성공 기준 1
+
+Integrity Rule Registry 구축 완료.
+
+---
+
+## 성공 기준 2
+
+Integrity Event 저장 완료.
+
+---
+
+## 성공 기준 3
+
+Timeout Detection 정상 동작.
+
+---
+
+## 성공 기준 4
+
+Invalid Transition Detection 정상 동작.
+
+---
+
+## 성공 기준 5
+
+Sequence Violation 탐지 가능.
+
+---
+
+## 성공 기준 6
+
+Missing Step 탐지 가능.
+
+---
+
+## 성공 기준 7
+
+Integrity Timeline API 정상 동작.
+
+---
+
+# 7. 코드 구조 요구사항
+
+신규 구조:
+
+```
+workflow_integrity/
+
+  registry/
+  evaluator/
+  detectors/
+  events/
+  timeline/
+  hooks/
+```
+
+---
+
+# 8. 중요한 설계 철학
+
+현재 가장 중요한 것은:
+
+```
+Workflow 흐름을 평가 가능한 상태로 만드는 것
 ```
 
 이다.
 
-현재 목표는 완전한 협업 플랫폼 구축이 아니다.
+즉:
 
-현재 목표는:
-
-```text
-운영 Alert / Runtime Notification / Escalation의 중앙화와 규약 통일
+```
+"무슨 상태인가?"
 ```
 
-이다.
+가 아니라,
 
----
+```
+"정상 흐름인가?"
+```
 
-# 13. 최종 결론
+를 판단하는 단계로 진입하는 것이다.
 
-현재 단계에서 가장 중요한 것은 기능 수 증가가 아니다.
+그리고 반드시 유지해야 하는 핵심 철학:
 
-핵심은:
-
-- Event 규약 통일
-- Notification 중앙화
-- Engine 간 역할 분리
-
-이다.
-
-그리고 반드시 유지해야 하는 핵심 철학은:
-
-```text
-Engine은 감지한다
-Notification Engine은 전달한다
-사람은 마지막에만 개입한다
+```
+Workflow는 상태를 만든다
+Integrity는 상태를 평가한다
+Alert는 운영 중요도를 판단한다
+Notification은 전달한다
 ```
 
 이다.
