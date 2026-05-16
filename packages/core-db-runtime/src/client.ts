@@ -1,4 +1,4 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 let sb: SupabaseClient | null = null;
 
@@ -12,6 +12,20 @@ export function supabase(): SupabaseClient {
   return sb;
 }
 
-// Direct schema query helper — Supabase JS v2 uses .schema()
-export function mkt() { return supabase().schema('marketing'); }
-export function coreAi() { return supabase().schema('core_ai'); }
+// Schema-scoped query helpers
+// Return SupabaseClient to avoid non-portable inferred types
+export function mkt(): SupabaseClient {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!,
+    { db: { schema: 'marketing' } },
+  );
+}
+
+export function coreAi(): SupabaseClient {
+  return createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_KEY!,
+    { db: { schema: 'core_ai' } },
+  );
+}
