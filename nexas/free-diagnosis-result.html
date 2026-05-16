@@ -37,6 +37,7 @@
   <meta property="og:image" content="https://taieng.co.kr/assets/img/og-image.png">
   <meta name="description" content="귀 사업장에 적용되는 산업안전 법적 의무 진단 결과입니다.">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tai-responsive.css">
   <style>
   *{box-sizing:border-box;margin:0;padding:0;}
   :root{
@@ -224,6 +225,17 @@
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
   /* ── PRINT ── */
+  @media (max-width: 768px) {
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .saas-plans { grid-template-columns: 1fr; }
+    .law-badge { word-break: break-word; white-space: normal; }
+    .rule-desc, .urgent-title { word-break: break-word; }
+    .saas-img { max-width: 100%; height: auto; }
+  }
+  @media (max-width: 480px) {
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+
   @media print{
     .pdf-cta,.paid-cta,.saas-section,.btn-saas,.btn-paid-start,.btn-reveal,.urgent-section{display:none!important;}
     body{background:#fff;}
@@ -327,17 +339,17 @@
     <div class="saas-plans">
       <div class="saas-plan-card">
         <div class="sp-sector">건물</div>
-        <div class="sp-price">59,000원~</div>
+        <div class="sp-price">149,000원~</div>
         <div class="sp-label">/월 · VAT 별도</div>
       </div>
       <div class="saas-plan-card">
         <div class="sp-sector">산업</div>
-        <div class="sp-price">79,000원~</div>
+        <div class="sp-price">149,000원~</div>
         <div class="sp-label">/월 · VAT 별도</div>
       </div>
       <div class="saas-plan-card">
         <div class="sp-sector">건설</div>
-        <div class="sp-price">145,000원~</div>
+        <div class="sp-price">249,000원~</div>
         <div class="sp-label">/월 · VAT 별도</div>
       </div>
     </div>
