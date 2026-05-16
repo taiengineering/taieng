@@ -7,25 +7,32 @@ export function supabase(): SupabaseClient {
     const url = process.env.SUPABASE_URL;
     const key = process.env.SUPABASE_SERVICE_KEY;
     if (!url || !key) throw new Error('SUPABASE_URL and SUPABASE_SERVICE_KEY required');
-    sb = createClient(url, key, { db: { schema: 'public' } });
+    sb = createClient(url, key);
   }
   return sb;
 }
 
-// Schema-scoped query helpers
-// Return SupabaseClient to avoid non-portable inferred types
-export function mkt(): SupabaseClient {
-  return createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_KEY!,
-    { db: { schema: 'marketing' } },
-  );
+let mktClient: any = null;
+let aiClient: any = null;
+
+export function mkt(): any {
+  if (!mktClient) {
+    mktClient = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!,
+      { db: { schema: 'marketing' } },
+    );
+  }
+  return mktClient;
 }
 
-export function coreAi(): SupabaseClient {
-  return createClient(
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_KEY!,
-    { db: { schema: 'core_ai' } },
-  );
+export function coreAi(): any {
+  if (!aiClient) {
+    aiClient = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!,
+      { db: { schema: 'core_ai' } },
+    );
+  }
+  return aiClient;
 }
