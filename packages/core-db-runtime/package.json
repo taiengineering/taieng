@@ -1,5 +1,5 @@
 {
-  "name": "@45cm/core-queue-runtime",
+  "name": "@45cm/core-db-runtime",
   "version": "0.1.0",
   "private": true,
   "main": "dist/index.js",
@@ -7,13 +7,10 @@
   "scripts": { "build": "tsc", "dev": "tsc --watch" },
   "dependencies": {
     "@45cm/core-shared-types": "workspace:*",
-    "bullmq": "^5.12.0",
-    "ioredis": "^5.4.0",
-    "uuid": "^9.0.0"
+    "@supabase/supabase-js": "^2.45.0"
   },
   "devDependencies": {
     "typescript": "^5.4.0",
-    "@types/uuid": "^9.0.0",
     "@types/node": "^20.0.0"
   }
 }
