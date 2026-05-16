@@ -3,9 +3,9 @@ import { getRedisConnection } from './connection';
 
 const queues = new Map<string, Queue>();
 
-export function getQueue<T = unknown>(name: string, opts?: Partial<QueueOptions>): Queue<T> {
-  if (queues.has(name)) return queues.get(name)! as Queue<T>;
-  const q = new Queue<T>(name, {
+export function getQueue(name: string, opts?: Partial<QueueOptions>): Queue {
+  if (queues.has(name)) return queues.get(name)!;
+  const q = new Queue(name, {
     connection: getRedisConnection(),
     defaultJobOptions: {
       attempts: 3,
@@ -15,13 +15,17 @@ export function getQueue<T = unknown>(name: string, opts?: Partial<QueueOptions>
     },
     ...opts,
   });
-  queues.set(name, q as unknown as Queue);
+  queues.set(name, q);
   return q;
 }
 
-export async function enqueue<T>(queueNameStr: string, jobName: string, data: T & { workspace_id: string; trace_id?: string; correlation_id?: string }): Promise<string> {
+export async function enqueue(
+  queueNameStr: string,
+  jobName: string,
+  data: Record<string, unknown> & { workspace_id: string; trace_id?: string; correlation_id?: string },
+): Promise<string> {
   if (!data.workspace_id) throw new Error('workspace_id is required for all queue jobs');
-  const q = getQueue<T>(queueNameStr);
-  const job = await q.add(jobName, data, { jobId: undefined });
+  const q = getQueue(queueNameStr);
+  const job = await q.add(jobName, data);
   return job.id ?? '';
 }
