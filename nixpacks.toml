@@ -1,0 +1,13 @@
+providers = ["node"]
+
+[phases.setup]
+nixPkgs = ["nodejs_22"]
+
+[phases.install]
+cmds = ["npm install -g pnpm@9 && pnpm install --no-frozen-lockfile"]
+
+[phases.build]
+cmds = ["pnpm --filter @45cm/marketing-api... --filter @45cm/marketing-worker... build"]
+
+[start]
+cmd = "node start-mkt.js"
