@@ -1,29 +1,37 @@
 # Notification Surface Freeze Boundary
 
-작성일: 2026-05-16
-상태: Phase 1 Surface Freeze Active
+작성일: 2026-05-17
+범위: Notification Engine · Phase 1 Surface Freeze
 
 ---
 
 ## Freeze 대상
 
-| 영역 | 설명 | Freeze 이유 |
-|---|---|---|
-| **Header Bell Grammar** | `#notif-bell` + `#notif-badge` + 팝업 | 모든 페이지에서 사용 |
-| **Badge Grammar** | unread count, 60s refresh, 99+ 상한 | 전체 UX 의존 |
-| **Feed Entry Grammar** | severity/channel/source badge | Feed UX Contract |
-| **Timeline Entry Flow** | trace_id → Timeline Modal | Trace Integrity |
-| **Notification Center Nav** | notification-center.html 경로 | Legacy redirect 의존 |
+Phase 1에서 정의된 Surface 범위를 고정한다.
 
-## 변경 가능
+---
 
-| 영역 | 조건 |
-|---|---|
-| 팝업 Feed 수 | 기본 5개 → 조정 가능 |
-| Badge 색상 | 기존 색상 유지 |
-| 신규 진입점 | 추가 가능 |
-| 모바일 Surface | Phase 2 신규 |
+## 고정된 Surface
 
-## 핵심
+1. Header Bell Popup — Feed 5건 + Unread Badge + 알림센터 링크
+2. Notification Center — Feed/Timeline/Settings/Health 4탭
+3. Mobile Notification Center — 동일 기능 compact
 
-**Operational UX를 안정화한 상태에서만 확장한다.**
+---
+
+## Phase 1 종료 시점 이후 금지
+
+- 새 Surface 추가 (Slack bot, Email digest 등)
+- Feed 구조 변경 (필드 추가/제거)
+- Timeline step 추가
+- Health 위젯 지표 변경
+- Queue/Retry/DLQ UI
+
+---
+
+## Phase 2 진입 조건
+
+1. Operational Navigation Completion 100%
+2. 모든 Surface에서 Read Flow 정상 동작
+3. Sidebar Badge Slot 연동 완료
+4. 모바일 최적화 검증 완료
