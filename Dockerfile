@@ -1,10 +1,8 @@
 FROM node:22-slim AS base
 WORKDIR /app
 
-# Install pnpm
 RUN npm install -g pnpm@9
 
-# Copy workspace config first (cache layer)
 COPY package.json pnpm-workspace.yaml ./
 COPY packages/core-shared-types/package.json packages/core-shared-types/
 COPY packages/core-ai-runtime/package.json packages/core-ai-runtime/
@@ -20,15 +18,19 @@ COPY apps/marketing-collector/package.json apps/marketing-collector/
 COPY apps/marketing-ai-worker/package.json apps/marketing-ai-worker/
 COPY apps/scheduler/package.json apps/scheduler/
 
-# Install all deps
 RUN pnpm install --no-frozen-lockfile
 
-# Copy source
 COPY . .
 
-# Build
 RUN pnpm --filter @45cm/marketing-api... --filter @45cm/marketing-worker... build
 
-# Runtime
+# Diagnostic: show dist structure + catch startup errors
 EXPOSE 3100
-CMD ["node", "start-mkt.js"]
+CMD ["node", "-e", "\
+  console.log('=== DIAG START ===');\
+  console.log('node_modules exists:', require('fs').existsSync('/app/node_modules/@45cm'));\
+  console.log('api dist exists:', require('fs').existsSync('/app/apps/marketing-api/dist/server.js'));\
+  console.log('worker dist exists:', require('fs').existsSync('/app/apps/marketing-worker/dist/worker.js'));\
+  try { require('/app/apps/marketing-api/dist/server.js'); }\
+  catch(e) { console.error('FATAL:', e.message); console.error(e.stack); }\
+"]
