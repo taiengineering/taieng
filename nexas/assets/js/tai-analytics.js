@@ -1,18 +1,10 @@
 /**
  * TAI Analytics — GA4 이벤트 추적 유틸
  * 정적 HTML 사이트용 (jQuery/Bootstrap 환경)
- *
- * 사용법:
- *   <script src="/assets/js/tai-analytics.js"></script>
- *   taiTrack('cta_click', { location: 'hero', button_text: '무료진단' });
- *
- * 주의: 개인정보(전화번호, 이메일, 주민번호 등) 절대 전송 금지
- * AI 검색 키워드는 카테고리 수준으로만 전송
  */
 (function () {
   'use strict';
 
-  // 이벤트명 정의
   window.TAI_EVENTS = {
     SIGNUP_START: 'signup_start',
     SIGNUP_COMPLETE: 'signup_complete',
@@ -29,40 +21,26 @@
     MODULE_DETAIL_VIEW: 'module_detail_view'
   };
 
-  /**
-   * GA4 이벤트 전송
-   * @param {string} eventName - 이벤트명 (TAI_EVENTS 상수 사용 권장)
-   * @param {Object} [params] - 추가 파라미터
-   */
   window.taiTrack = function (eventName, params) {
     if (typeof window.gtag !== 'function') return;
-    try {
-      window.gtag('event', eventName, params || {});
-    } catch (e) {
-      // GA 오류가 사이트를 깨뜨리지 않도록
-    }
+    try { window.gtag('event', eventName, params || {}); } catch (e) {}
   };
 
-  // 자동 추적: 페이지별 이벤트
   document.addEventListener('DOMContentLoaded', function () {
     var path = window.location.pathname;
 
-    // 가격 페이지 조회
     if (path.indexOf('pricing') >= 0) {
       taiTrack(TAI_EVENTS.PRICING_VIEW, { page: path });
-
-      // 시험결제 카드 동적 로드 (이니시스 테스트용)
+      // pricing-v2: DB 완전 연동 (하드코딩 FALLBACK 대체)
       var s = document.createElement('script');
-      s.src = '/assets/js/pricing-test-patch.js';
+      s.src = '/assets/js/pricing-v2.js';
       document.body.appendChild(s);
     }
 
-    // 무료진단 페이지 진입
     if (path.indexOf('free-diagnosis') >= 0 || path.indexOf('diagnosis') >= 0) {
       taiTrack(TAI_EVENTS.FREE_DIAGNOSIS_START, { page: path });
     }
 
-    // CTA 버튼 자동 추적 (data-tai-track 속성)
     var tracked = document.querySelectorAll('[data-tai-track]');
     for (var i = 0; i < tracked.length; i++) {
       (function (el) {
@@ -70,16 +48,11 @@
           var evt = el.getAttribute('data-tai-track') || 'cta_click';
           var loc = el.getAttribute('data-tai-location') || '';
           var txt = el.textContent.trim().substring(0, 50);
-          taiTrack(evt, {
-            location: loc,
-            button_text: txt,
-            page: window.location.pathname
-          });
+          taiTrack(evt, { location: loc, button_text: txt, page: window.location.pathname });
         });
       })(tracked[i]);
     }
 
-    // 상담 신청 버튼 자동 추적
     var consultBtns = document.querySelectorAll(
       'a[href*="connect"], a[href*="consult"], button[class*="consult"]'
     );
