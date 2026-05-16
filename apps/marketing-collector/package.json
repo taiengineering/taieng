@@ -1,0 +1,20 @@
+{
+  "name": "@45cm/marketing-collector",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/collector.ts",
+    "start": "node dist/collector.js"
+  },
+  "dependencies": {
+    "@45cm/core-shared-types": "workspace:*",
+    "@45cm/core-queue-runtime": "workspace:*",
+    "@45cm/core-event-runtime": "workspace:*",
+    "@45cm/channel-naver-kin": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsx": "^4.7.0"
+  }
+}

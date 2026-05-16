@@ -1,0 +1,18 @@
+{
+  "name": "@45cm/scheduler",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/scheduler.ts",
+    "start": "node dist/scheduler.js"
+  },
+  "dependencies": {
+    "@45cm/core-shared-types": "workspace:*",
+    "@45cm/core-queue-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsx": "^4.7.0"
+  }
+}
