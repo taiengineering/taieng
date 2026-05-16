@@ -50,6 +50,11 @@
     // 가격 페이지 조회
     if (path.indexOf('pricing') >= 0) {
       taiTrack(TAI_EVENTS.PRICING_VIEW, { page: path });
+
+      // 시험결제 카드 동적 로드 (이니시스 테스트용)
+      var s = document.createElement('script');
+      s.src = '/assets/js/pricing-test-patch.js';
+      document.body.appendChild(s);
     }
 
     // 무료진단 페이지 진입
