@@ -1,100 +1,47 @@
-// 45cm Marketing Worker
-// Consumes: 45.marketing.draft, 45.marketing.humanize
-// RFC-002 Queue Contract compliant
-// Workers MUST be idempotent
-
-import { MARKETING_QUEUES } from '@45cm/core-queue-runtime';
-import { aiRuntime } from '@45cm/core-ai-runtime';
+// Marketing Worker — BullMQ consumers for draft + humanize pipeline (Steps 5+8)
+import { createWorker, MARKETING_QUEUES } from '@45cm/core-queue-runtime';
+import { aiGenerate } from '@45cm/core-ai-runtime';
+import { updateDraft, getDraftById, insertUsageLog, insertApprovalRequest } from '@45cm/core-db-runtime';
 import { createEvent, emitEvent, MARKETING_EVENTS } from '@45cm/core-event-runtime';
 
-// ─── Draft Consumer Placeholder ───
+// ====== Humanize Worker ======
+interface HumanizePayload { workspace_id: string; draft_id: string; body: string; trace_id?: string; correlation_id?: string; }
 
-async function processDraftJob(payload: {
-  workspaceId: string;
-  contentId?: string;
-  channelId?: string;
-  input: string;
-}) {
-  console.log(`[Worker] Processing draft job for workspace: ${payload.workspaceId}`);
+const humanizeWorker = createWorker<HumanizePayload>(MARKETING_QUEUES.HUMANIZE, async (job) => {
+  const { workspace_id, draft_id, body, trace_id } = job.data;
+  console.log(`[humanize] job=${job.id} draft=${draft_id} trace=${trace_id}`);
 
-  // Call AI Runtime (never call provider directly)
-  const result = await aiRuntime.generate({
-    workspaceId: payload.workspaceId,
-    engine: 'marketing',
-    capability: 'marketing.generate_draft',
-    input: payload.input,
-  });
-
-  console.log(`[Worker] Draft generated: ${result.requestId}`);
-
-  // Emit event per RFC-001
-  const event = createEvent({
-    eventType: MARKETING_EVENTS.DRAFT_GENERATED,
-    eventVersion: 1,
-    workspaceId: payload.workspaceId,
-    engine: 'marketing',
-    source: 'marketing-worker',
-    capability: 'draft',
-    payload: {
-      requestId: result.requestId,
-      output: result.output,
-      model: result.model,
-    },
-  });
-  emitEvent(event);
-
-  // TODO: Save draft to marketing.drafts via Supabase
-  // TODO: Enqueue 45.marketing.humanize
-
-  return result;
-}
-
-// ─── Humanize Consumer Placeholder ───
-
-async function processHumanizeJob(payload: {
-  workspaceId: string;
-  draftId: string;
-  body: string;
-}) {
-  console.log(`[Worker] Processing humanize job for draft: ${payload.draftId}`);
-
-  const result = await aiRuntime.generate({
-    workspaceId: payload.workspaceId,
+  const ai = await aiGenerate({
+    workspaceId: workspace_id,
     engine: 'marketing',
     capability: 'marketing.rewrite_humanize',
-    input: payload.body,
-  });
-
-  console.log(`[Worker] Humanized: ${result.requestId}`);
-
-  const event = createEvent({
-    eventType: MARKETING_EVENTS.DRAFT_HUMANIZED,
-    eventVersion: 1,
-    workspaceId: payload.workspaceId,
-    engine: 'marketing',
-    source: 'marketing-worker',
-    capability: 'humanize',
-    payload: {
-      draftId: payload.draftId,
-      requestId: result.requestId,
-      output: result.output,
+    input: body,
+    context: {
+      systemPrompt: 'Rewrite the following Korean marketing reply to sound natural, professional, and human-written. Remove any AI-generated feel. Keep the same meaning and facts. Output only the rewritten text.',
     },
   });
-  emitEvent(event);
 
-  // TODO: Update marketing.drafts status
-  // TODO: Enqueue 45.marketing.approval
+  // Save usage log
+  await insertUsageLog({
+    workspace_id, engine: 'marketing', capability: 'marketing.rewrite_humanize',
+    provider: 'openai', model: ai.model, prompt_tokens: ai.usage.promptTokens,
+    completion_tokens: ai.usage.completionTokens, estimated_cost_usd: ai.usage.estimatedCostUsd,
+    latency_ms: ai.latencyMs, status: 'success', trace_id,
+  });
 
-  return result;
-}
+  // Update draft with humanized body
+  await updateDraft(draft_id, { humanized_body: ai.output, status: 'humanized' });
 
-// ─── Worker Bootstrap ───
+  // Emit event
+  emitEvent(createEvent({
+    eventType: MARKETING_EVENTS.DRAFT_HUMANIZED, eventVersion: 1,
+    workspaceId: workspace_id, engine: 'marketing', source: 'marketing-worker',
+    capability: 'humanize', payload: { draft_id, trace_id },
+  }));
 
-console.log('Marketing Worker starting...');
-console.log(`Listening on queues: ${MARKETING_QUEUES.DRAFT}, ${MARKETING_QUEUES.HUMANIZE}`);
+  console.log(`[humanize] done draft=${draft_id}`);
+});
 
-// TODO: Connect BullMQ workers to Redis
-// TODO: Register processDraftJob for 45.marketing.draft
-// TODO: Register processHumanizeJob for 45.marketing.humanize
+humanizeWorker.on('ready', () => console.log(`[worker] ${MARKETING_QUEUES.HUMANIZE} ready`));
 
-export { processDraftJob, processHumanizeJob };
+console.log('Marketing Worker started.');

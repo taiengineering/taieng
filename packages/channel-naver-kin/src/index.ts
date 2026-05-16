@@ -1,20 +1,16 @@
-// 45cm Channel Adapter — Naver Kin
-// RFC-006 Channel Adapter compliant
-// Adapter MUST NOT call AI directly
+// Naver Kin Channel Adapter — RFC-006 compliant
+// Adapter MUST NOT call AI or contain business logic
 
-import type { PlatformEvent } from '@45cm/core-shared-types';
-
-// ─── Channel Adapter Interface (RFC-006) ───
-
-export interface ChannelAdapter {
-  channel: string;
-  collect?(input: CollectInput): Promise<CollectedContent[]>;
-  publish?(input: PublishInput): Promise<PublishResult>;
-  reply?(input: ReplyInput): Promise<ReplyResult>;
-  monitor?(input: MonitorInput): Promise<MonitorResult>;
+export interface NormalizedContent {
+  source: string;
+  externalId: string;
+  title: string;
+  body: string;
+  author?: string;
+  url: string;
+  collectedAt: string;
+  rawPayload: Record<string, unknown>;
 }
-
-// ─── Naver Kin Types ───
 
 export interface CollectInput {
   workspaceId: string;
@@ -22,78 +18,38 @@ export interface CollectInput {
   maxResults?: number;
 }
 
-export interface CollectedContent {
-  externalId: string;
-  title: string;
-  body: string;
-  url: string;
-  author?: string;
-  collectedAt: string;
-  rawPayload: Record<string, unknown>;
+const API_URL = 'https://openapi.naver.com/v1/search/kin.json';
+
+export async function collect(input: CollectInput): Promise<NormalizedContent[]> {
+  const clientId = process.env.NAVER_CLIENT_ID;
+  const clientSecret = process.env.NAVER_CLIENT_SECRET;
+  if (!clientId || !clientSecret) throw new Error('NAVER_CLIENT_ID/SECRET required');
+
+  const params = new URLSearchParams({
+    query: input.keyword,
+    display: String(input.maxResults ?? 10),
+    sort: 'date',
+  });
+
+  const res = await fetch(`${API_URL}?${params}`, {
+    headers: { 'X-Naver-Client-Id': clientId, 'X-Naver-Client-Secret': clientSecret },
+  });
+  if (!res.ok) throw new Error(`Naver API ${res.status}: ${await res.text()}`);
+
+  const json = await res.json() as { items?: Array<{ title: string; description: string; link: string; }> };
+  const items = json.items ?? [];
+
+  return items.map((item, i) => ({
+    source: 'naver_kin',
+    externalId: `nk-${Buffer.from(item.link).toString('base64url').slice(0, 32)}`,
+    title: stripHtml(item.title),
+    body: stripHtml(item.description),
+    url: item.link,
+    collectedAt: new Date().toISOString(),
+    rawPayload: item as unknown as Record<string, unknown>,
+  }));
 }
 
-export interface PublishInput {
-  workspaceId: string;
-  targetUrl: string;
-  body: string;
+function stripHtml(s: string): string {
+  return s.replace(/<[^>]*>/g, '').replace(/&[a-z]+;/gi, ' ').trim();
 }
-
-export interface PublishResult {
-  success: boolean;
-  externalId?: string;
-  error?: string;
-}
-
-export interface ReplyInput {
-  workspaceId: string;
-  targetContentId: string;
-  body: string;
-}
-
-export interface ReplyResult {
-  success: boolean;
-  externalId?: string;
-  error?: string;
-}
-
-export interface MonitorInput {
-  workspaceId: string;
-  keywords: string[];
-}
-
-export interface MonitorResult {
-  detectedCount: number;
-  contents: CollectedContent[];
-}
-
-// ─── Naver Kin Adapter ───
-
-export class NaverKinAdapter implements ChannelAdapter {
-  channel = 'naver_kin';
-
-  async collect(input: CollectInput): Promise<CollectedContent[]> {
-    // TODO: Call Naver Search API
-    // 1. Read workspace keywords
-    // 2. Query Naver Kin search API
-    // 3. Normalize external content
-    // 4. Return normalized contents
-    console.log(`[NaverKin] Collecting for keyword: ${input.keyword}`);
-
-    // Placeholder: return empty
-    return [];
-  }
-
-  async reply(input: ReplyInput): Promise<ReplyResult> {
-    // TODO: Semi-auto reply via Naver API or manual publish
-    console.log(`[NaverKin] Reply to: ${input.targetContentId}`);
-    return { success: false, error: 'Not implemented' };
-  }
-
-  async monitor(input: MonitorInput): Promise<MonitorResult> {
-    // TODO: Periodic keyword monitoring
-    console.log(`[NaverKin] Monitoring keywords: ${input.keywords.join(', ')}`);
-    return { detectedCount: 0, contents: [] };
-  }
-}
-
-export const naverKinAdapter = new NaverKinAdapter();

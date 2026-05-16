@@ -1,64 +1,55 @@
-// 45cm Marketing Collector
-// Collects external content via Channel Adapters
-// RFC-006: Adapter MUST NOT call AI directly
-
-import { naverKinAdapter } from '@45cm/channel-naver-kin';
-import { createJob, MARKETING_QUEUES } from '@45cm/core-queue-runtime';
+// Marketing Collector — Periodic keyword collection (Step 4)
+import { collect } from '@45cm/channel-naver-kin';
+import { enqueue, MARKETING_QUEUES } from '@45cm/core-queue-runtime';
+import { insertContent } from '@45cm/core-db-runtime';
 import { createEvent, emitEvent, MARKETING_EVENTS } from '@45cm/core-event-runtime';
+import { v4 as uuid } from 'uuid';
 
-async function collectFromNaverKin(workspaceId: string, keywords: string[]) {
-  console.log(`[Collector] Starting Naver Kin collection for workspace: ${workspaceId}`);
+const DEFAULT_KEYWORDS = [
+  '\uc911\ub300\uc7ac\ud574\ucc98\ubc8c\ubc95', '\uc0b0\uc5c5\uc548\uc804\ubcf4\uac74\ubc95', '\uc548\uc804\uad00\ub9ac\uc790 \uc120\uc784',
+  '\uacfc\ud0dc\ub8cc \uae30\uc900', '\uc704\ud5d8\uc131\ud3c9\uac00',
+];
+
+async function runCollection(workspaceId: string, keywords: string[]) {
+  console.log(`[collector] workspace=${workspaceId} keywords=${keywords.length}`);
 
   for (const keyword of keywords) {
-    const contents = await naverKinAdapter.collect({
-      workspaceId,
-      keyword,
-      maxResults: 10,
-    });
+    try {
+      const items = await collect({ workspaceId, keyword, maxResults: 5 });
+      if (items.length === 0) continue;
 
-    if (contents.length > 0) {
-      // Emit keyword detected event
-      const event = createEvent({
-        eventType: MARKETING_EVENTS.KEYWORD_DETECTED,
-        eventVersion: 1,
-        workspaceId,
-        engine: 'marketing',
-        source: 'channel-naver-kin',
-        capability: 'collect',
-        payload: { keyword, count: contents.length },
-      });
-      emitEvent(event);
+      const traceId = uuid();
+      emitEvent(createEvent({
+        eventType: MARKETING_EVENTS.KEYWORD_DETECTED, eventVersion: 1,
+        workspaceId, engine: 'marketing', source: 'channel-naver-kin',
+        capability: 'collect', payload: { keyword, count: items.length }, traceId,
+      }));
 
-      // Enqueue classify job for each content
-      for (const content of contents) {
-        const job = createJob({
-          queue: MARKETING_QUEUES.CLASSIFY,
-          workspaceId,
-          engine: 'marketing',
-          capability: 'classify',
-          payload: {
-            externalId: content.externalId,
-            title: content.title,
-            body: content.body,
-            url: content.url,
-            keyword,
-          },
+      for (const item of items) {
+        const content = await insertContent({
+          workspace_id: workspaceId, source: item.source, external_id: item.externalId,
+          content_type: 'question', title: item.title, body: item.body, url: item.url,
+          raw_payload: item.rawPayload, collected_at: item.collectedAt,
         });
-        // TODO: Enqueue via BullMQ
-        console.log(`[Collector] Classify job created: ${job.job_id}`);
-      }
-    }
 
-    // TODO: Save to marketing.contents via Supabase
+        await enqueue(MARKETING_QUEUES.CLASSIFY, 'classify', {
+          workspace_id: workspaceId, content_id: content.id,
+          title: item.title, body: item.body, keyword, trace_id: traceId,
+        });
+      }
+      console.log(`[collector] keyword="${keyword}" collected=${items.length}`);
+    } catch (err) {
+      console.error(`[collector] keyword="${keyword}" error:`, err);
+    }
   }
 }
 
-// ─── Collector Bootstrap ───
+// One-shot run (scheduler will call this periodically)
+const ws = process.env.DEFAULT_WORKSPACE_ID ?? '00000000-0000-0000-0000-000000000000';
+runCollection(ws, DEFAULT_KEYWORDS).then(() => {
+  console.log('[collector] done');
+  // Keep alive for scheduler or exit
+  if (process.env.COLLECTOR_MODE !== 'daemon') process.exit(0);
+});
 
-console.log('Marketing Collector starting...');
-
-// TODO: Load keywords from workspace config + domain pack
-// TODO: Schedule periodic collection via scheduler app
-// TODO: Connect to BullMQ for job enqueueing
-
-export { collectFromNaverKin };
+export { runCollection };
