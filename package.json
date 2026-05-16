@@ -1,12 +1,18 @@
 {
   "name": "taieng",
   "private": true,
-  "description": "TAI public site — Cloudflare Pages (nexas/)",
+  "description": "TAI Engineering Platform — Monorepo",
   "scripts": {
-    "build": "npm --prefix nexas ci && npm --prefix nexas run build",
-    "start": "npm --prefix nexas start"
+    "build:nexas": "npm --prefix nexas ci && npm --prefix nexas run build",
+    "start:nexas": "npm --prefix nexas start",
+    "dev:mkt": "npx concurrently -n api,worker -c blue,green \"pnpm --filter @45cm/marketing-api dev\" \"pnpm --filter @45cm/marketing-worker dev\"",
+    "build:mkt": "npx pnpm@9 --filter @45cm/marketing-api... --filter @45cm/marketing-worker... build",
+    "start:mkt": "node start-mkt.js"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
 }
