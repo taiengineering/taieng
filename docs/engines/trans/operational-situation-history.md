@@ -2,63 +2,79 @@
 
 ## 목적
 
-Situation의 시간 흐름을 추적하여 "상황이 어떻게 변했는가"를 파악할 수 있는 기반 구조 정의.
+Situation의 시간 흐름을 추적하여 "상황이 어떻게 변했는가"를 파악한다.
+
+## 구현 상태 (T-05 완료)
+
+- ✅ DB 테이블: `operational_situation_snapshot`
+- ✅ Snapshot Builder: `situation_snapshot_builder.py`
+- ✅ Snapshot Store: `situation_snapshot_store.py`
+- ✅ Scheduler: `SITUATION_SNAPSHOT_GENERATE` (5분 주기)
+- ✅ API: `situation_history_api.py` (4개 엔드포인트)
+- ✅ Cockpit S25 연동
 
 ## Situation Snapshot 구조
 
 ```json
 {
-  "situation_id": "sit_20260519_001",
+  "id": "uuid",
+  "situation_id": "{tenant}:{domain}:{flow}:{type}",
+  "tenant_id": "mock_flaky_01",
   "title": "결제 흐름 안정성 저하",
   "summary": "최근 실패와 응답 지연이 함께 증가하고 있습니다.",
   "priority": "P1",
+  "urgency": "즉시 확인 필요",
   "trend": "degrading",
   "impact": "일부 사용자 영향 가능",
-  "storyline": [
-    "최근 응답 지연이 증가했습니다.",
-    "이후 실패 흐름이 반복 발생하기 시작했습니다.",
-    "현재 일부 사용자가 작업을 완료하지 못하고 있습니다.",
-    "결제 API 상태를 우선 확인하세요."
-  ],
-  "recommended_focus": [
-    "결제 로그 확인",
-    "PG사 상태 확인"
-  ],
+  "storyline": [...],
+  "recommended_focus": [...],
   "status": "active",
   "confidence": 0.82,
   "event_count": 20,
-  "generated_at": "2026-05-19T14:30:00Z"
+  "source_event_ids": [...],
+  "generated_at": "2026-05-19T14:30:00Z",
+  "environment": "production"
 }
 ```
 
-## 필드 정의
+## DB 테이블
 
-| 필드 | 타입 | 설명 |
+`public.operational_situation_snapshot`
+
+| 컨럼 | 타입 | 설명 |
 |------|------|------|
-| situation_id | string | 고유 식별자 |
-| title | string | 상황 제목 |
-| summary | string | 상황 요약 |
-| priority | string | P1~P4 |
-| trend | string | improving/stable/degrading/accelerating |
-| impact | string | 영향 범위 |
-| storyline | list[str] | 흐름 설명 |
-| recommended_focus | list[str] | 우선 확인사항 |
-| status | string | 상황 상태 (Lifecycle) |
-| confidence | float | 신뢰도 |
-| event_count | int | 입력 이벤트 수 |
-| generated_at | datetime | 생성 시점 |
+| id | uuid | PK |
+| situation_id | text | {tenant}:{domain}:{flow}:{type} |
+| tenant_id | text | 테넌트 |
+| title | text | 상황 제목 |
+| summary | text | 상황 요약 |
+| priority | text | P1~P4 |
+| urgency | text | 운영 긴급도 |
+| trend | text | improving/stable/degrading/accelerating |
+| impact | text | 영향 범위 |
+| storyline | jsonb | 흐름 설명 |
+| recommended_focus | jsonb | 우선 확인사항 |
+| status | text | Lifecycle 상태 |
+| confidence | numeric | 신뢰도 |
+| event_count | integer | 입력 이벤트 수 |
+| source_event_ids | jsonb | 원본 이벤트 ID |
+| generated_at | timestamptz | 생성 시점 |
+| environment | text | production / mock |
+| created_at | timestamptz | 개례 생성일 |
 
-## 이력 활용 목적
+RLS enabled + service_role full access.
 
-- 상황 변화 추이 파악
-- 운영 보고서 기반 데이터
-- Situation Timeline UI 데이터 소스
-- 운영 품질 측정 기반
+## API
 
-## 현재 단계 제한
+| Endpoint | 설명 |
+|----------|------|
+| GET /situation/recent | 최근 상황 |
+| GET /situation/timeline/{sid} | 상황 timeline |
+| GET /situation/detail/{id} | 특정 상황 |
+| GET /situation/history/{sid} | lifecycle history |
 
-- DB 저장 구현 없음 (문서 정의만)
-- Scheduler 저장 없음
-- Situation Runtime 생성 없음
+## Scheduler
 
-History Foundation 정의 단계.
+| Job | 주기 | Handler |
+|-----|------|--------|
+| SITUATION_SNAPSHOT_GENERATE | 5분 | direct://situation_snapshot_generate |
