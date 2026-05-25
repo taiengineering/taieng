@@ -291,9 +291,12 @@ async function runPaidDiagnosis(orderId) {
       })
     });
     const json = await r.json();
-    paidResultData = json.data;
-    pdfUrl = json.data?.pdf_url || '';
-    renderPaidResult(json.data);
+    if (!r.ok) {
+      throw new Error(json.detail || json.message || `HTTP ${r.status}`);
+    }
+    paidResultData = json.data || json;
+    pdfUrl = paidResultData?.pdf_url || '';
+    renderPaidResult(paidResultData);
   } catch(e) {
     area.innerHTML = '<p style="color:#dc2626;font-size:.88rem;text-align:center;">결과를 불러오지 못했습니다. 고객센터에 문의해주세요.</p>';
   }
@@ -924,8 +927,12 @@ async function submitFree() {
       })
     });
     const runJson = await runR.json();
-    freeResultData = runJson.data;
-    renderFreeResult(runJson.data);
+    if (!runR.ok) {
+      const errMsg = runJson.detail || runJson.message || `HTTP ${runR.status}`;
+      throw new Error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+    }
+    freeResultData = runJson.data || runJson;
+    renderFreeResult(freeResultData);
     goStep(3);
   } catch(e) {
     renderFreeResult(null);
@@ -949,7 +956,13 @@ function renderFreeResult(data) {
   }
   const items = data.obligations || data.results || data.items || [];
   const unconfirmed = data.unconfirmed || data.blind_spots || [];
+  const detailToken = data.public_token || '';
   let html = '';
+  if (detailToken) {
+    html += `<div style="margin-bottom:14px;text-align:center;">
+      <a class="btn-primary-tai" href="free-diagnosis-result.html?token=${encodeURIComponent(detailToken)}">상세 결과 페이지 보기 →</a>
+    </div>`;
+  }
   if (items.length) {
     html += `<div class="result-section"><div class="result-section-title">적용 법령 의무 (${items.length}건)</div>`;
     items.forEach(it => {
