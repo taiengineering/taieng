@@ -256,6 +256,29 @@ let pdfUrl = '';
   } else {
     updateProgress(0);
   }
+
+  // 이니시스 통합인증(SA) 팝업 결과 수신
+  window.addEventListener('message', async function (e) {
+    if (!e.data || e.data.type !== 'INICIS_AUTH_RESULT') return;
+    if (e.data.success && e.data.mtxId) {
+      try {
+        const r = await fetch(`${API}/auth/inicis/result/${encodeURIComponent(e.data.mtxId)}`);
+        const json = await r.json();
+        const d = json.data || {};
+        if (d.status === 'SUCCESS') {
+          await onAuthSuccess({ auth_token: d.mtx_id });
+        } else {
+          alert('인증에 실패했습니다: ' + (d.result_msg || ''));
+        }
+      } catch (err) {
+        alert('인증 결과 조회 실패');
+      }
+    } else if (e.data.type === 'INICIS_AUTH_RESULT' && !e.data.success) {
+      alert(e.data.message || '인증에 실패했습니다.');
+      const btn = document.getElementById('btnAuth');
+      if (btn) { btn.disabled = false; btn.textContent = '본인 확인 시작 →'; }
+    }
+  });
 })();
 
 // ── 경로 2: 유료 직입 ──
@@ -345,39 +368,52 @@ function sectorLabel() {
   return { BUILDING:'건물', INDUSTRY:'산업', CONSTRUCTION:'건설' }[sector] || sector;
 }
 
-// ── Step 0: 본인인증 ──
+// ── Step 0: 본인인증 (이니시스 통합인증 SA) ──
 async function startAuth() {
   const btn = document.getElementById('btnAuth');
   btn.disabled = true; btn.textContent = '준비 중...';
   try {
-    const r = await fetch(`${API}/diagnosis/auth/prepare`, { method: 'POST' });
-    if (r.status === 503) {
-      alert('본인인증 서비스를 일시적으로 이용할 수 없습니다. 잠시 후 다시 시도해주세요.');
-      btn.disabled = false; btn.textContent = '본인 확인 시작 →'; return;
+    const r = await fetch(`${API}/auth/inicis/request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ svc_code: '01', fixed_user: false })
+    });
+    if (!r.ok) {
+      const errJson = await r.json().catch(() => ({}));
+      alert(errJson.detail || '본인인증 요청 실패');
+      btn.disabled = false; btn.textContent = '본인 확인 시작 →';
+      return;
     }
     const json = await r.json();
-    openInicisPopup(json.data);
-  } catch(e) {
+    const data = json.data;
+    window._pendingMtxId = data.mtx_id;
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = data.form_action;
+    form.target = 'inicisAuthPopup';
+    form.acceptCharset = 'utf-8';
+
+    Object.keys(data.form_params || {}).forEach(function (key) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = data.form_params[key];
+      form.appendChild(input);
+    });
+
+    window.open('', 'inicisAuthPopup',
+      'width=' + (data.popup_width || 400) + ',height=' + (data.popup_height || 640));
+    document.body.appendChild(form);
+    form.submit();
+    form.remove();
+
+    btn.disabled = false; btn.textContent = '본인 확인 시작 →';
+  } catch (e) {
     alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
     btn.disabled = false; btn.textContent = '본인 확인 시작 →';
   }
 }
-
-function openInicisPopup(params) {
-  if (typeof INIStdPay !== 'undefined') { INIStdPay.pay(params); }
-  else { onAuthSuccess({ auth_token: 'DEV_TOKEN_' + Date.now() }); }
-}
-
-window.onAuthCallback = async function(callbackData) {
-  try {
-    const r = await fetch(`${API}/diagnosis/auth/callback`, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(callbackData)
-    });
-    const json = await r.json();
-    if (json.data?.auth_token) await onAuthSuccess(json.data);
-  } catch(e) {}
-};
 
 async function onAuthSuccess(data) {
   authToken = data.auth_token;
