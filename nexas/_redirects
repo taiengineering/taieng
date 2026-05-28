@@ -1,7 +1,4 @@
 # Cloudflare Pages: 상단 규칙이 우선입니다.
-# SPA용 "/* /index.html 200" 가 프로젝트·대시보드에 있으면,
-# 아래 사이트맵 경로가 그 규칙보다 먼저 와야 실제 XML 파일이 서빙됩니다.
-# (문서: redirects는 자산 매칭과 무관하게 평가될 수 있음 — 명시적 self-proxy로 우선 처리)
 
 /sitemap.xml /sitemap.xml 200
 /sitemap_index.xml /sitemap_index.xml 200
@@ -20,6 +17,8 @@
 # 구버전 도메인 리다이렉트
 https://new.taieng.co.kr/* https://taieng.co.kr/:splat 301
 
-# SPA 폴백은 저장소에 두지 않습니다. 필요 시 Cloudflare Pages 대시보드의
-# "Compatibility / SPA" 또는 동일 효과의 규칙만 사용하고,
-# 위 사이트맵 URL이 먼저 매칭되는지(또는 대시보드 규칙 순서) 확인하세요.
+# /mypage/service/ 잘못된 경로 리다이렉트 (실제 경로: /mypage/ 또는 루트)
+/mypage/service/diagnosis.html /mypage/diagnosis/ 301
+/mypage/service/free-diagnosis.html /free-diagnosis 301
+/mypage/service/service/* /mypage/:splat 301
+/mypage/service/* /mypage/:splat 301
