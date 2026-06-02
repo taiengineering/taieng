@@ -594,6 +594,8 @@
   <input type="hidden" id="df_mKey" name="mKey">
   <input type="hidden" id="df_oid" name="oid">
   <input type="hidden" id="df_price" name="price">
+  <input type="hidden" id="df_tax" name="tax">
+  <input type="hidden" id="df_taxfree" name="taxfree" value="0">
   <input type="hidden" id="df_goodname" name="goodname">
   <input type="hidden" id="df_buyername" name="buyername">
   <input type="hidden" id="df_buyertel" name="buyertel">
@@ -710,7 +712,11 @@ function diagPay(productType, planCode, amount, goodname) {
     document.getElementById('df_mid').value          = d.mid         || '';
     document.getElementById('df_mKey').value         = d.mKey        || '';
     document.getElementById('df_oid').value          = d.oid         || '';
-    document.getElementById('df_price').value        = d.price       || String(amount);
+    var totalPrice = parseInt(d.price || amount);
+    var taxAmt = Math.round(totalPrice / 11);
+    document.getElementById('df_price').value        = String(totalPrice);
+    document.getElementById('df_tax').value          = String(taxAmt);
+    document.getElementById('df_taxfree').value      = '0';
     document.getElementById('df_goodname').value     = d.goodname    || goodname;
     document.getElementById('df_buyername').value    = d.buyername   || '고객';
     document.getElementById('df_buyertel').value     = d.buyertel    || '00000000000';
