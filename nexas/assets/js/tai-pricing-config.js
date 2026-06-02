@@ -103,7 +103,7 @@ window.TAI_PRICING = (function() {
   function annualPrice(monthly) { return monthly * (12 - CONFIG.annualDiscount); }
   function annualMonthly(monthly) { return Math.round(annualPrice(monthly) / 12); }
 
-  // ══════ 가격 표시 HTML (상품가격 + VAT + 결제금액) ══════
+  // ══════ 가격 표시 HTML ══════
   function priceBreakdownHtml(basePrice) {
     var vat = vatAmount(basePrice);
     var total = totalWithVat(basePrice);
@@ -151,13 +151,13 @@ window.TAI_PRICING = (function() {
         + '</div></div>';
       html += plans.map(function(p) {
         var featHtml = (p.features||[]).map(function(f){return '<li>'+f+'</li>';}).join('');
-        var goodname = p.name + ' 진단 (공급가액 ' + fmt(p.price) + '원 + VAT ' + fmt(vatAmount(p.price)) + '원)';
+        var goodname = p.name + ' 진단';
         return '<div class="' + s.cols + '"><div class="price-card' + (p.featured?' featured':'') + '">'
           + '<div class="pc-tier">' + p.name + '</div>'
           + '<div class="pc-name">' + p.basis + '</div>'
           + priceBreakdownHtml(p.price)
           + '<hr><ul>' + featHtml + '</ul>'
-          + '<button class="pc-cta' + (p.featured?' blue-cta':'') + '" onclick="diagPay(\'' + s.type + '\',\'' + p.code + '\',' + p.price + ',\'' + goodname.replace(/'/g,"\\'") + '\')">결제 ' + fmt(totalWithVat(p.price)) + '원</button>'
+          + '<button class="pc-cta' + (p.featured?' blue-cta':'') + '" onclick="diagPay(\'' + s.type + '\',\'' + p.code + '\',' + p.price + ',\'' + goodname + '\')">결제 ' + fmt(totalWithVat(p.price)) + '원</button>'
           + '</div></div>';
       }).join('');
       container.innerHTML = html;
@@ -186,13 +186,13 @@ window.TAI_PRICING = (function() {
             + '<a href="../fix-request.html?from=saas&type=general" class="sp-price-cta consult-cta">도입 문의</a>'
             + '</div></div>';
         }
-        var goodname = 'TAI Safe ' + p.name + ' (공급가액 ' + fmt(p.price) + '원 + VAT ' + fmt(vatAmount(p.price)) + '원)';
+        var goodname = 'TAI Safe ' + p.name;
         return '<div class="' + colSize + '"><div class="sp-price">'
           + '<div class="tier">' + p.name + '</div>'
           + '<div class="plan-name">' + p.desc + '<br><small style="font-weight:500;color:#94a3b8;font-size:.78rem;">' + p.basis + '</small></div>'
           + saasPriceBreakdownHtml(p.price)
           + '<hr><ul>' + featHtml + '</ul>'
-          + '<button class="sp-price-cta" onclick="spPay(event,\'' + s.type + '\',\'' + p.code + '\',' + p.price + ',\'' + goodname.replace(/'/g,"\\'") + '\')">결제 월 ' + fmt(totalWithVat(p.price)) + '원</button>'
+          + '<button class="sp-price-cta" onclick="spPay(event,\'' + s.type + '\',\'' + p.code + '\',' + p.price + ',\'' + goodname + '\')">결제 월 ' + fmt(totalWithVat(p.price)) + '원</button>'
           + '</div></div>';
       }).join('');
       container.innerHTML = html;
