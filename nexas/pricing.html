@@ -681,6 +681,7 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+<script src="assets/js/tai-pricing-config.js"></script>
 <script>
 if (typeof WOW !== 'undefined') new WOW().init();
 
@@ -697,73 +698,11 @@ var _pendingGoods = '';
 var _pendingAmount = 0;
 var _pendingSaasPlan = {};
 
-var SAAS_FALLBACK = {
-  BUILDING: [
-    { plan_code:'BUILDING_BASIC',    plan_name:'BASIC',    sector:'BUILDING', price_monthly:59000,  is_recommended:false, is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'소규모 건물 (아파트, 상가)',
-      features:['법령 자동 판정','점검 일정 자동 생성','소방·전기·환경 법령','기록 자동화','D-3 알림'] },
-    { plan_code:'BUILDING_STANDARD', plan_name:'STANDARD', sector:'BUILDING', price_monthly:99000,  is_recommended:true,  is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'중규모 건물 (오피스, 복합)',
-      features:['BASIC 전체 포함','서류 자동화','법령 변경 알림','경영진 대시보드','기록 무제한'] },
-    { plan_code:'BUILDING_CUSTOM',   plan_name:'CUSTOM',   sector:'BUILDING', price_monthly:0,      is_recommended:false, is_custom:true,
-      included_members:10, over_member_price:3000,
-      target:'대형 관리업체',
-      features:['STANDARD 전체 포함','다수 건물 통합 관리','전담 매니저','API 연동','맞춤 리포트'] },
-  ],
-  INDUSTRY: [
-    { plan_code:'INDUSTRY_STARTER_V2',  plan_name:'STARTER',  sector:'INDUSTRY', price_monthly:79000,  is_recommended:false, is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'5~30인 겸직 안전관리자',
-      features:['법령엔진 자동 작동','점검 일정 자동 생성','작업자 배정·D-3 알림','TBM 전자서명','기록 보관 6개월'] },
-    { plan_code:'INDUSTRY_BUSINESS_V2', plan_name:'BUSINESS', sector:'INDUSTRY', price_monthly:149000, is_recommended:true,  is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'30~100인 사업장',
-      features:['STARTER 전체 포함','신고서식 자동화','법령 변경 알림','QR·RFID 점검','경영진 대시보드','기록 무제한'] },
-    { plan_code:'INDUSTRY_PRO',         plan_name:'PRO',      sector:'INDUSTRY', price_monthly:249000, is_recommended:false, is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'100인+ 전담 안전관리자',
-      features:['BUSINESS 전체 포함','위험성평가 자동화','설비 수명주기 관리','멀티사이트 지원','전담 온보딩'] },
-    { plan_code:'INDUSTRY_CUSTOM_V2',   plan_name:'CUSTOM',   sector:'INDUSTRY', price_monthly:0,      is_recommended:false, is_custom:true,
-      included_members:10, over_member_price:3000,
-      target:'대기업·다사업장',
-      features:['PRO 전체 포함','무제한 사업장','전담 매니저','ERP 연동','맞춤 계약'] },
-  ],
-  CONSTRUCTION: [
-    { plan_code:'CONSTRUCTION_STANDARD_V2', plan_name:'STANDARD', sector:'CONSTRUCTION', price_monthly:199000, is_recommended:false, is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'50억 미만 현장',
-      features:['건설안전법 자동 판정','TBM 일지 자동화','위험작업 허가서','D-3 알림','기록 보관'] },
-    { plan_code:'CONSTRUCTION_PREMIUM_V2', plan_name:'PREMIUM',  sector:'CONSTRUCTION', price_monthly:399000, is_recommended:true,  is_custom:false,
-      included_members:10, over_member_price:3000,
-      target:'50억+ 현장',
-      features:['STANDARD 전체 포함','하도급 업체 관리','위험성평가 자동화','경영진 대시보드','서류 자동화'] },
-    { plan_code:'CONSTRUCTION_CUSTOM_V2',  plan_name:'CUSTOM',   sector:'CONSTRUCTION', price_monthly:0,      is_recommended:false, is_custom:true,
-      included_members:10, over_member_price:3000,
-      target:'대형건설사',
-      features:['PREMIUM 전체 포함','다현장 통합 관리','전담 매니저','API 연동','맞춤 계약'] },
-  ],
-};
-
-var MAIN_CODES    = ['BUILDING_V2','BUILDING_LARGE_V2','INDUSTRY_V2','CONSTRUCTION'];
-var SPECIAL_CODES = ['HAZARD_LOW','HAZARD_MID','HAZARD_HIGH'];
-var DIAG_META = {
-  'BUILDING_V2':       { icon:'🏢', name:'소형건물',        sub:'5,000㎡ 미만',       fallbackPrice:99000,  isRec:false, goodsName:'소형건물 법령진단',
-    features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
-  'BUILDING_LARGE_V2': { icon:'🏛️', name:'대형건물',        sub:'5,000㎡ 이상',       fallbackPrice:249000, isRec:false, goodsName:'대형건물 법령진단',
-    features:['PDF 법령진단 리포트','적용 법령·의무 전체 도출','선임·신고·점검 의무 상세','과태료·벌칙 정보','12개월 재발행·조회'] },
-  'INDUSTRY_V2':       { icon:'🏭', name:'제조·산업',       sub:'공장·산업시설',       fallbackPrice:249000, isRec:true,  recLabel:'⭐ 가장 많이 선택', goodsName:'제조·산업 법령진단',
-    features:['PDF 법령진단 리포트','법령·설비·공정 통합 분석','과태료·벌칙 정보','12개월 재발행·조회','감사 대응 서류'] },
-  'CONSTRUCTION':      { icon:'🏗️', name:'건설현장',        sub:'공사 현장',           fallbackPrice:399000, isRec:false, goodsName:'건설현장 법령진단',
-    features:['PDF 법령진단 리포트','공종별 법령·의무 도출','선임·신고·점검·작업 분석','과태료·벌칙 정보','12개월 재발행·조회'] },
-  'HAZARD_LOW':        { icon:'⚠️',  name:'특수시설 일반형', sub:'1~2종 위험시설',      fallbackPrice:199000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (일반형)',
-    features:['PDF 법령진단 리포트','위험물·유해화학물질 분석','선임·점검·신고 도출','12개월 재발행·조회'] },
-  'HAZARD_MID':        { icon:'⚠️',  name:'특수시설 중급형', sub:'3~5종 위험시설',      fallbackPrice:399000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (중급형)',
-    features:['PDF 법령진단 리포트','복합 위험시설 법령 통합','선임·점검·신고 도출','12개월 재발행·조회'] },
-  'HAZARD_HIGH':       { icon:'🔴',  name:'특수시설 고급형', sub:'6종 이상 위험시설',   fallbackPrice:699000, isRec:false, isSpecial:true, goodsName:'특수시설 법령진단 (고급형)',
-    features:['PDF 법령진단 리포트','고위험 복합시설 정밀 분석','선임·점검·신고 도출','12개월 재발행·조회','별도 온보딩 지원'] },
-};
+var _P = window.TAI_PRICING || {};
+var SAAS_FALLBACK = _P.SAAS_FALLBACK || {};
+var MAIN_CODES = _P.MAIN_DIAG_CODES || [];
+var SPECIAL_CODES = _P.SPECIAL_DIAG_CODES || [];
+var DIAG_META = _P.DIAG_META || {};
 
 async function loadPricingData(){
   try {
