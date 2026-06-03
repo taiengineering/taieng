@@ -119,6 +119,7 @@
   .plan-card {
     background: #fff; border-radius: 24px; padding: 36px 28px 32px;
     height: 100%; border: 2px solid #e2e8f0; position: relative; transition: box-shadow .2s;
+    display: flex; flex-direction: column;
   }
   .plan-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); }
   .plan-card.featured { border-color: #0891b2; box-shadow: 0 4px 24px rgba(8,145,178,.15); }
@@ -150,6 +151,7 @@
     background: #fff; border-radius: 20px; padding: 28px 22px 24px;
     height: 100%; border: 2px solid #e2e8f0; transition: box-shadow .2s, border-color .2s;
     position: relative;
+    display: flex; flex-direction: column;
   }
   .diag-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.08); border-color: #cbd5e1; }
   .diag-card.recommended { border-color: #0891b2; box-shadow: 0 4px 20px rgba(8,145,178,.14); }
@@ -170,6 +172,8 @@
   .diag-features { list-style: none; padding: 0; margin: 0 0 16px; }
   .diag-features li { display: flex; align-items: flex-start; gap: 7px; font-size: .82rem; color: #475569; margin-bottom: 5px; line-height: 1.5; }
   .diag-features li::before { content: '·'; color: #94a3b8; font-size: 1.1rem; line-height: 1; flex-shrink: 0; }
+  /* 버튼 하단 정렬 통일 */
+  .plan-card > .btn, .diag-card > .btn { margin-top: auto; }
 
   .special-toggle-wrap { text-align: center; margin-top: 32px; }
   .special-toggle-btn {
@@ -447,7 +451,7 @@
       <div class="text-center mb-5">
         <p style="color:#64748b;font-size:.92rem;max-width:640px;margin:0 auto;line-height:1.7;">
           <strong>단일 결제 서비스</strong>입니다. 시설 유형에 맞는 진단을 선택하고 바로 결제하세요.<br>
-          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 12개월</span> · 안전관리 설계서 재발행·조회 포함
+          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 3개월</span> · 안전관리 설계서 재발행·조회 포함
         </p>
       </div>
 
@@ -464,7 +468,7 @@
         <h5>📌 법령진단이란?</h5>
         <p>법령진단은 <strong style="color:#22d3ee;">1회성 단건 결제 서비스</strong>입니다.
         사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 과태료·벌칙 정보를 자동 도출합니다.
-        결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 안전관리 설계서 재발행·조회가 가능합니다.</p>
+        결제일로부터 <strong style="color:#22d3ee;">3개월간</strong> 안전관리 설계서 재발행·조회가 가능합니다.</p>
       </div>
     </div>
 
@@ -696,7 +700,7 @@ function renderDiagCard(p, sector, icon){
     +'<div class="diag-type-sub">'+(p.basis||'')+'</div>'
     +'<div class="diag-price">'+price.toLocaleString('ko-KR')+'<span class="unit">원</span></div>'
     +'<div class="diag-vat">VAT 별도 · 단건 1회성</div>'
-    +'<div class="diag-period">🕐 서비스 제공기간 12개월</div>'
+    +'<div class="diag-period">🕐 서비스 제공기간 3개월</div>'
     +'<hr class="diag-divider">'
     +'<ul class="diag-features">'+featHtml+'</ul>'
     +'<button class="btn '+btnCls+'" style="width:100%;font-weight:700;"'
