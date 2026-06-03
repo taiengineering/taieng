@@ -319,25 +319,57 @@ $(document).ready(function() {
     });
   }
 
+  const CONTACT_API = 'https://api.taieng.co.kr/contacts';
   const form = document.getElementById('contactMarketingForm');
   if (form) {
     form.addEventListener('submit', function(e) {
+      e.preventDefault();
       const cat = document.getElementById('contactCategory');
       if (cat && !cat.value) {
-        e.preventDefault(); e.stopImmediatePropagation();
         alert('문의 분야를 선택해 주세요.');
         document.querySelector('.contact-type-grid')?.scrollIntoView({behavior:'smooth', block:'center'});
-        return false;
+        return;
       }
+      if (!document.getElementById('contactName').value.trim())  { alert('성함을 입력해 주세요.'); return; }
+      if (!document.getElementById('contactEmail').value.trim()) { alert('이메일을 입력해 주세요.'); return; }
+      if (!document.getElementById('contactPhone').value.trim()) { alert('연락처를 입력해 주세요.'); return; }
+      if (!document.getElementById('contactAgree').checked) { alert('개인정보 수집 및 이용에 동의해 주세요.'); return; }
       const html = $('#contactContent').summernote('code') || '';
       const stripped = html.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, '').trim();
-      if (!stripped) {
-        e.preventDefault(); e.stopImmediatePropagation();
-        alert('문의 내용을 입력해 주세요.');
-        $('#contactContent').summernote('focus');
-        return false;
-      }
-      document.getElementById('contactContent').value = html;
+      if (!stripped) { alert('문의 내용을 입력해 주세요.'); $('#contactContent').summernote('focus'); return; }
+      const payload = {
+        category: cat ? cat.value : '',
+        name: document.getElementById('contactName').value.trim(),
+        email: document.getElementById('contactEmail').value.trim(),
+        phone: document.getElementById('contactPhone').value.trim(),
+        company: document.getElementById('contactCompany').value.trim(),
+        title: document.getElementById('contactTitle').value.trim(),
+        content: html,
+        source: 'taieng.co.kr/contact',
+        page_url: location.href
+      };
+      const btn = document.getElementById('contactSubmitBtn');
+      const orig = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = '접수 중...'; }
+      fetch(CONTACT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        if (!res.ok || (res.d && res.d.status && res.d.status !== 'success')) {
+          throw new Error((res.d && (res.d.detail || res.d.message)) || '접수에 실패했습니다.');
+        }
+        alert('문의가 접수되었습니다. 영업일 1일 이내에 연락드리겠습니다.');
+        form.reset();
+        try { $('#contactContent').summernote('reset'); } catch(_) {}
+        document.querySelectorAll('.ctype-btn').forEach(function(b){ b.classList.remove('selected'); });
+        if (cat) cat.value = '';
+        var fl = document.getElementById('attachFileList'); if (fl) fl.innerHTML = '';
+      })
+      .catch(function(err){ alert(err.message || '접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.'); })
+      .finally(function(){ if (btn) { btn.disabled = false; btn.textContent = orig || '문의 접수하기'; } });
     }, true);
   }
 });
