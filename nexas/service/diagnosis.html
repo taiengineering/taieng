@@ -732,5 +732,38 @@ function diagPay(productType, planCode, amount, goodname) {
 }
 </script>
 <script src="/assets/js/tai-analytics.js"></script>
+
+<style>
+/* 이니시스 결제 오버레이 배경 투명도 조정 */
+div[style*="z-index"][style*="background"] {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+</style>
+<script>
+// 이니시스 오버레이 배경 투명도 동적 조정
+(function(){
+  var obs = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType !== 1) return;
+        var st = node.getAttribute && node.getAttribute('style');
+        if (st && st.indexOf('z-index') > -1 && (st.indexOf('background') > -1 || st.indexOf('opacity') > -1)) {
+          node.style.setProperty('background', 'rgba(0,0,0,0.5)', 'important');
+          node.style.setProperty('opacity', '1', 'important');
+        }
+        // iframe 옆 형제 요소도 확인
+        if (node.tagName === 'IFRAME' && node.previousElementSibling) {
+          var sib = node.previousElementSibling;
+          var sibSt = sib.getAttribute && sib.getAttribute('style');
+          if (sibSt && sibSt.indexOf('background') > -1) {
+            sib.style.setProperty('background', 'rgba(0,0,0,0.5)', 'important');
+          }
+        }
+      });
+    });
+  });
+  obs.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 </body>
 </html>
