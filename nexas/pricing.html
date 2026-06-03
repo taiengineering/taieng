@@ -326,23 +326,6 @@
 <div class="body-overlay" id="body-overlay"></div>
 <div id="tai-header"></div>
 
-<!-- KG이니시스 결제 폼 -->
-<form id="payForm" method="post" accept-charset="EUC-KR" style="display:none;">
-  <input type="hidden" name="version"      value="1.0">
-  <input type="hidden" name="gopaymethod"  value="Card">
-  <input type="hidden" name="ini_mid"      id="ini_mid"      value="TAI_MID_PLACEHOLDER"><!-- TODO: 실제 MID 교체 -->
-  <input type="hidden" name="orderid"      id="orderid"      value="">
-  <input type="hidden" name="price"        id="price"        value="">
-  <input type="hidden" name="goodsname"    id="goodsname"    value="">
-  <input type="hidden" name="currency"     value="WON">
-  <input type="hidden" name="buyername"    id="buyername"    value="">
-  <input type="hidden" name="buyertel"     id="buyertel"     value="">
-  <input type="hidden" name="buyeremail"   id="buyeremail"   value="">
-  <input type="hidden" name="returnurl"    value="https://taieng.co.kr/nexas/payment-result.html">
-  <input type="hidden" name="closeurl"     value="https://taieng.co.kr/nexas/payment-cancel.html">
-  <input type="hidden" name="acceptmethod" value="CARDSEL(1):SKIN(#0891b2)">
-</form>
-
 <!-- SaaS 도입 문의 모달 -->
 <div class="modal fade" id="saasModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
@@ -373,45 +356,7 @@
       </div>
       <div class="modal-footer border-0 gap-2">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <a href="fix-request.html?from=pricing&type=general" class="btn btn-base px-4 fw-bold" data-tai-track="consultation_click" data-tai-location="pricing">도입 문의하기</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 법령진단 결제 확인 모달 -->
-<div class="modal fade" id="diagPayModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold" id="diagModalTitle">법령진단 결제</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-        <div class="payment-detail-box">
-          <div class="p-row"><span class="p-label">상품명</span><span class="p-val" id="modal-goods-name">—</span></div>
-          <div class="p-row"><span class="p-label">서비스 제공기간</span><span class="p-val" style="color:#059669;">결제일로부터 12개월</span></div>
-          <div class="p-row"><span class="p-label">안전관리 설계서 재발행·조회</span><span class="p-val" style="color:#059669;">12개월 포함</span></div>
-          <div class="p-row"><span class="p-label">결제 금액 (VAT 별도)</span><span class="p-val p-total" id="modal-amount">—</span></div>
-        </div>
-        <div class="alert alert-light border mb-0 py-2" style="font-size:.82rem;color:#475569;">
-          <i class="fas fa-info-circle me-1 text-primary"></i>
-          결제 완료 후 안전관리 설계서(PDF)가 이메일로 발송됩니다.
-        </div>
-        <div class="mt-3">
-          <label class="form-label fw-semibold" style="font-size:.85rem;">구매자 이름 <span class="text-danger">*</span></label>
-          <input type="text" class="form-control form-control-sm" id="buyer-name" placeholder="홍길동">
-          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">연락처 <span class="text-danger">*</span></label>
-          <input type="tel" class="form-control form-control-sm" id="buyer-tel" placeholder="010-0000-0000">
-          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 (안전관리 설계서 수신) <span class="text-danger">*</span></label>
-          <input type="email" class="form-control form-control-sm" id="buyer-email" placeholder="email@example.com">
-        </div>
-      </div>
-      <div class="modal-footer border-0 gap-2">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-base px-4 fw-bold" onclick="proceedDiagPayment()">
-          <i class="fas fa-lock me-1"></i> 결제하기
-        </button>
+        <a href="contact.html" class="btn btn-base px-4 fw-bold" data-tai-track="consultation_click" data-tai-location="pricing">도입 문의하기</a>
       </div>
     </div>
   </div>
@@ -506,26 +451,14 @@
         </p>
       </div>
 
-      <div id="diag-loading" class="row g-4 justify-content-center">
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
-        <div class="col-lg-3 col-md-6"><div class="skel-card"><div class="skeleton skel-line short"></div><div class="skeleton skel-line tall mt-2"></div><div class="skeleton skel-line mt-3"></div></div></div>
+      <div class="sector-tabs">
+        <button class="sector-tab-btn active" onclick="switchDiagSectorTab('building', this)"><span class="sector-icon">🏢</span>건물·시설</button>
+        <button class="sector-tab-btn" onclick="switchDiagSectorTab('industry', this)"><span class="sector-icon">🏭</span>제조·산업</button>
+        <button class="sector-tab-btn" onclick="switchDiagSectorTab('construction', this)"><span class="sector-icon">🏗️</span>건설현장</button>
       </div>
-
-      <div id="diag-main-cards" class="row g-4 justify-content-center" style="display:none;"></div>
-
-      <div id="special-wrap" style="display:none;">
-        <div class="special-toggle-wrap">
-          <button class="special-toggle-btn" id="specialToggleBtn" onclick="toggleSpecial()">
-            ⚠️ 특수시설 진단 보기 <span class="arr">▼</span>
-          </button>
-        </div>
-        <div class="special-section" id="specialSection">
-          <div class="special-label">특수시설 (위험물·유해화학물질 등)</div>
-          <div id="diag-special-cards" class="row g-4 justify-content-center"></div>
-        </div>
-      </div>
+      <div id="diag-sector-building" class="sector-panel active"><div id="diag-building-cards" class="row g-4 justify-content-center"></div></div>
+      <div id="diag-sector-industry" class="sector-panel"><div id="diag-industry-cards" class="row g-4 justify-content-center"></div></div>
+      <div id="diag-sector-construction" class="sector-panel"><div id="diag-construction-cards" class="row g-4 justify-content-center"></div></div>
 
       <div class="price-notice">
         <h5>📌 법령진단이란?</h5>
@@ -603,7 +536,7 @@
         <a href="free-diagnosis.html" class="diag-nudge-btn" data-tai-track="free_diagnosis_start" data-tai-location="pricing">
           <i class="fas fa-search me-1"></i>3분 무료 진단으로 플랜 추천받기 →
         </a>
-        <a href="fix-request.html?from=pricing&type=general" class="diag-nudge-secondary" data-tai-track="consultation_click" data-tai-location="pricing">
+        <a href="contact.html" class="diag-nudge-secondary" data-tai-track="consultation_click" data-tai-location="pricing">
           직접 상담을 원하시면 →
         </a>
       </div>
@@ -622,6 +555,8 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+<script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
+<script src="assets/js/inicis-fix.js"></script>
 <script src="assets/js/tai-pricing-config.js"></script>
 <script>
 if (typeof WOW !== 'undefined') new WOW().init();
@@ -634,8 +569,6 @@ if (typeof WOW !== 'undefined') new WOW().init();
 var API = 'https://api.taieng.co.kr';
 var _saasPlans = [];
 var _diagReports = [];
-var _pendingGoods = '';
-var _pendingAmount = 0;
 var _pendingSaasPlan = {};
 
 var _P = window.TAI_PRICING || {};
@@ -713,7 +646,7 @@ function renderSaasCard(p){
   var basisHtml = p.basis ? '<div class="mb-2" style="font-size:.78rem;color:#64748b;">'+p.basis+'</div>' : '';
 
   var btnHtml = isCustom
-    ? '<a href="fix-request.html?from=pricing&type=general" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;" data-tai-track="consultation_click" data-tai-location="pricing">도입 문의하기</a>'
+    ? '<a href="contact.html" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;" data-tai-track="consultation_click" data-tai-location="pricing">도입 문의하기</a>'
     : '<button class="btn '+(isFeat?'btn-base':'btn-border')+'" style="width:100%;font-weight:700;"'
       +' onclick="startSaasPayment(\''+p.plan_name+'\',\''+p.sector+'\','+mon+')">구독 문의 / 결제</button>';
 
@@ -730,22 +663,17 @@ function renderSaasCard(p){
 }
 
 function renderDiagSection(){
-  var loading   = document.getElementById('diag-loading');
-  var mainCards = document.getElementById('diag-main-cards');
-  var specWrap  = document.getElementById('special-wrap');
-  var sectorIcons = { BUILDING:'🏢', INDUSTRY:'🏭', CONSTRUCTION:'🏗️' };
-  var mainHtml = '';
+  renderDiagSector('BUILDING', 'diag-building');
+  renderDiagSector('INDUSTRY', 'diag-industry');
+  renderDiagSector('CONSTRUCTION', 'diag-construction');
+}
 
-  ['BUILDING','INDUSTRY','CONSTRUCTION'].forEach(function(sector){
-    (_P.getDiagPlans ? _P.getDiagPlans(sector) : []).forEach(function(p){
-      mainHtml += renderDiagCard(p, sector, sectorIcons[sector] || '📋');
-    });
-  });
-
-  loading.style.display = 'none';
-  mainCards.innerHTML = mainHtml;
-  mainCards.style.display = '';
-  if(specWrap) specWrap.style.display = 'none';
+function renderDiagSector(sector, domKey){
+  var cards = document.getElementById(domKey+'-cards');
+  if(!cards) return;
+  var icons = { BUILDING:'🏢', INDUSTRY:'🏭', CONSTRUCTION:'🏗️' };
+  var plans = _P.getDiagPlans ? _P.getDiagPlans(sector) : [];
+  cards.innerHTML = plans.map(function(p){ return renderDiagCard(p, sector, icons[sector]||'📋'); }).join('');
 }
 
 function renderDiagCard(p, sector, icon){
@@ -757,6 +685,9 @@ function renderDiagCard(p, sector, icon){
   var btnCls  = isRec ? 'btn-base' : 'btn-border';
   var goodsName = (p.name || '') + ' 진단';
   var price = p.price || 0;
+  var productType = 'DIAG_' + sector;
+  var codeEsc = (p.code || '').replace(/'/g, "\\'");
+  var goodsEsc = goodsName.replace(/'/g, "\\'");
 
   return '<div class="'+col+'"><div class="'+cls+'">'
     +recBadge
@@ -769,7 +700,7 @@ function renderDiagCard(p, sector, icon){
     +'<hr class="diag-divider">'
     +'<ul class="diag-features">'+featHtml+'</ul>'
     +'<button class="btn '+btnCls+'" style="width:100%;font-weight:700;"'
-    +' onclick="startDiagPayment(\''+goodsName.replace(/'/g,"\\'")+'\','+price+')">바로 결제 '+price.toLocaleString('ko-KR')+'원</button>'
+    +' onclick="diagPay(\''+productType+'\',\''+codeEsc+'\','+price+',\''+goodsEsc+'\')">바로 결제 '+price.toLocaleString('ko-KR')+'원</button>'
     +'</div></div>';
 }
 
@@ -781,10 +712,23 @@ window.switchMainTab = function(tab, btn){
 };
 
 window.switchSectorTab = function(sector, btn){
-  document.querySelectorAll('.sector-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.sector-tab-btn').forEach(function(b){ b.classList.remove('active'); });
-  document.getElementById('sector-'+sector).classList.add('active');
-  btn.classList.add('active');
+  var root = document.getElementById('tab-saas');
+  if(!root) return;
+  root.querySelectorAll('.sector-panel').forEach(function(p){ p.classList.remove('active'); });
+  root.querySelectorAll('.sector-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var panel = document.getElementById('sector-'+sector);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+};
+
+window.switchDiagSectorTab = function(sector, btn){
+  var root = document.getElementById('tab-diagnosis');
+  if(!root) return;
+  root.querySelectorAll('.sector-panel').forEach(function(p){ p.classList.remove('active'); });
+  root.querySelectorAll('.sector-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var panel = document.getElementById('diag-sector-'+sector);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
 };
 
 window.startSaasPayment = function(planName, sector, amount){
@@ -800,46 +744,6 @@ window.startSaasPayment = function(planName, sector, amount){
   new bootstrap.Modal(document.getElementById('saasModal')).show();
 };
 
-window.startDiagPayment = function(goodsName, amount){
-  _pendingGoods   = goodsName;
-  _pendingAmount  = amount;
-  document.getElementById('diagModalTitle').textContent   = goodsName;
-  document.getElementById('modal-goods-name').textContent = goodsName;
-  document.getElementById('modal-amount').textContent     = amount.toLocaleString('ko-KR')+'원';
-  document.getElementById('buyer-name').value  = '';
-  document.getElementById('buyer-tel').value   = '';
-  document.getElementById('buyer-email').value = '';
-  new bootstrap.Modal(document.getElementById('diagPayModal')).show();
-};
-
-window.proceedDiagPayment = function(){
-  var name  = (document.getElementById('buyer-name').value  || '').trim();
-  var tel   = (document.getElementById('buyer-tel').value   || '').trim();
-  var email = (document.getElementById('buyer-email').value || '').trim();
-  if(!name || !tel || !email){ alert('구매자 정보를 모두 입력해 주세요.'); return; }
-
-  var orderId = 'TAI' + Date.now();
-  document.getElementById('orderid').value   = orderId;
-  document.getElementById('price').value     = _pendingAmount;
-  document.getElementById('goodsname').value = _pendingGoods;
-  document.getElementById('buyername').value = name;
-  document.getElementById('buyertel').value  = tel.replace(/-/g, '');
-  document.getElementById('buyeremail').value= email;
-
-  bootstrap.Modal.getInstance(document.getElementById('diagPayModal')).hide();
-  setTimeout(function(){
-    location.href = 'fix-request.html?from=pricing&type=general&goods='+encodeURIComponent(_pendingGoods)+'&amount='+_pendingAmount;
-  }, 300);
-};
-
-window.toggleSpecial = function(){
-  var btn = document.getElementById('specialToggleBtn');
-  var sec = document.getElementById('specialSection');
-  var open = btn.classList.contains('open');
-  btn.classList.toggle('open', !open);
-  sec.classList.toggle('open', !open);
-};
-
 window.toggleFaq = function(qEl){
   var aEl    = qEl.nextElementSibling;
   var isOpen = qEl.classList.contains('open');
@@ -851,6 +755,86 @@ window.toggleFaq = function(qEl){
 document.addEventListener('DOMContentLoaded', function(){ loadPricingData(); });
 
 })();
+</script>
+
+<!-- KG이니시스 결제 폼 (diagnosis.html 동일) -->
+<form id="diag_inicis_form" method="POST" accept-charset="UTF-8" style="display:none">
+  <input type="hidden" name="version" value="1.0">
+  <input type="hidden" name="gopaymethod" value="Card">
+  <input type="hidden" name="currency" value="WON">
+  <input type="hidden" name="langtype" value="KO">
+  <input type="hidden" name="acceptmethod" value="centerCd(Y)">
+  <input type="hidden" name="use_chkfake" value="Y">
+  <input type="hidden" id="df_mid" name="mid">
+  <input type="hidden" id="df_mKey" name="mKey">
+  <input type="hidden" id="df_oid" name="oid">
+  <input type="hidden" id="df_price" name="price">
+  <input type="hidden" id="df_tax" name="tax">
+  <input type="hidden" id="df_taxfree" name="taxfree" value="0">
+  <input type="hidden" id="df_goodname" name="goodname">
+  <input type="hidden" id="df_buyername" name="buyername">
+  <input type="hidden" id="df_buyertel" name="buyertel">
+  <input type="hidden" id="df_buyeremail" name="buyeremail">
+  <input type="hidden" id="df_timestamp" name="timestamp">
+  <input type="hidden" id="df_signature" name="signature">
+  <input type="hidden" id="df_verification" name="verification">
+  <input type="hidden" id="df_returnUrl" name="returnUrl">
+  <input type="hidden" id="df_closeUrl" name="closeUrl">
+</form>
+
+<script>
+/* KG이니시스 결제 (diagnosis.html 동일) */
+var DIAG_API = 'https://api.taieng.co.kr';
+var DIAG_RETURN = 'https://taieng.co.kr/_api/payments/inicis/return';
+var DIAG_CLOSE  = 'https://taieng.co.kr/_api/payments/result?resultCode=CLOSE';
+
+function diagPay(productType, planCode, amount, goodname) {
+  var token     = localStorage.getItem('access_token') || '';
+  var userId    = localStorage.getItem('user_id') || '';
+  var companyId = localStorage.getItem('company_id') || '';
+
+  if (!userId) {
+    userId = 'guest_' + Date.now();
+  }
+
+  var headers = { 'Content-Type': 'application/json' };
+  if (token) {
+    headers['Authorization'] = 'Bearer ' + token;
+  }
+
+  var payload = { user_id: userId, product_type: productType, amount: amount, goodname: goodname, plan_code: planCode, period_months: 1, payment_type: 'CARD', return_url: DIAG_RETURN, close_url: DIAG_CLOSE };
+  if (companyId) payload.company_id = companyId;
+
+  fetch(DIAG_API + '/payments/inicis/prepare', {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (!res || res.status !== 'success') throw new Error((res && (res.detail || res.message)) || '결제 준비 실패');
+    var d = res.data;
+    document.getElementById('df_mid').value          = d.mid         || '';
+    document.getElementById('df_mKey').value         = d.mKey        || '';
+    document.getElementById('df_oid').value          = d.oid         || '';
+    var totalPrice = parseInt(d.price || amount);
+    var taxAmt = Math.round(totalPrice / 11);
+    document.getElementById('df_price').value        = String(totalPrice);
+    document.getElementById('df_tax').value          = String(taxAmt);
+    document.getElementById('df_taxfree').value      = '0';
+    document.getElementById('df_goodname').value     = d.goodname    || goodname;
+    document.getElementById('df_buyername').value    = d.buyername   || '고객';
+    document.getElementById('df_buyertel').value     = d.buyertel    || '00000000000';
+    document.getElementById('df_buyeremail').value   = d.buyeremail  || '';
+    document.getElementById('df_timestamp').value    = d.timestamp   || '';
+    document.getElementById('df_signature').value    = d.signature   || '';
+    document.getElementById('df_verification').value = d.verification || '';
+    document.getElementById('df_returnUrl').value    = DIAG_RETURN;
+    document.getElementById('df_closeUrl').value     = DIAG_CLOSE;
+    INIStdPay.pay('diag_inicis_form');
+  })
+  .catch(function(err) { alert('오류: ' + err.message); });
+}
 </script>
 <script src="/assets/js/tai-analytics.js"></script>
 </body>
