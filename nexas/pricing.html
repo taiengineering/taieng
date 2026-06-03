@@ -30,7 +30,7 @@
 </script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="TAI Safe 요금제. 건물·산업·건설 SaaS 구독(59,000원~)과 법령진단 단건(99,000원~). 과태료 리스크를 가장 저렴하게 해결합니다.">
+  <meta name="description" content="TAI Safe 요금제. 건물·산업·건설 SaaS 구독과 법령진단 단건. 과태료 리스크를 가장 저렴하게 해결합니다.">
   <title>요금제 | TAI 엔지니어링</title>
   <meta property="og:type" content="website">
   <meta property="og:title" content="TAI Safe | 엑셀 없는 스마트 산업안전관리 플랫폼">
@@ -356,8 +356,7 @@
           <div class="p-row"><span class="p-label">플랜</span><span class="p-val" id="saas-modal-plan">—</span></div>
           <div class="p-row"><span class="p-label">섹터</span><span class="p-val" id="saas-modal-sector">—</span></div>
           <div class="p-row"><span class="p-label">월 요금 (VAT 별도)</span><span class="p-val p-total" id="saas-modal-price">—</span></div>
-          <div class="p-row"><span class="p-label">포함 인원</span><span class="p-val" id="saas-modal-members">10명</span></div>
-          <div class="p-row"><span class="p-label">초과 단가</span><span class="p-val">3,000원/명/월</span></div>
+          <div class="p-row"><span class="p-label">등록 인원</span><span class="p-val" id="saas-modal-members">관리자/작업자 무제한</span></div>
         </div>
         <div class="alert alert-info py-2 mb-3" style="font-size:.82rem;">
           <i class="fas fa-info-circle me-1"></i>
@@ -392,19 +391,19 @@
         <div class="payment-detail-box">
           <div class="p-row"><span class="p-label">상품명</span><span class="p-val" id="modal-goods-name">—</span></div>
           <div class="p-row"><span class="p-label">서비스 제공기간</span><span class="p-val" style="color:#059669;">결제일로부터 12개월</span></div>
-          <div class="p-row"><span class="p-label">리포트 재발행·조회</span><span class="p-val" style="color:#059669;">12개월 포함</span></div>
+          <div class="p-row"><span class="p-label">안전관리 설계서 재발행·조회</span><span class="p-val" style="color:#059669;">12개월 포함</span></div>
           <div class="p-row"><span class="p-label">결제 금액 (VAT 별도)</span><span class="p-val p-total" id="modal-amount">—</span></div>
         </div>
         <div class="alert alert-light border mb-0 py-2" style="font-size:.82rem;color:#475569;">
           <i class="fas fa-info-circle me-1 text-primary"></i>
-          결제 완료 후 PDF 법령진단 리포트가 이메일로 발송됩니다.
+          결제 완료 후 안전관리 설계서(PDF)가 이메일로 발송됩니다.
         </div>
         <div class="mt-3">
           <label class="form-label fw-semibold" style="font-size:.85rem;">구매자 이름 <span class="text-danger">*</span></label>
           <input type="text" class="form-control form-control-sm" id="buyer-name" placeholder="홍길동">
           <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">연락처 <span class="text-danger">*</span></label>
           <input type="tel" class="form-control form-control-sm" id="buyer-tel" placeholder="010-0000-0000">
-          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 (리포트 수신) <span class="text-danger">*</span></label>
+          <label class="form-label fw-semibold mt-2" style="font-size:.85rem;">이메일 (안전관리 설계서 수신) <span class="text-danger">*</span></label>
           <input type="email" class="form-control form-control-sm" id="buyer-email" placeholder="email@example.com">
         </div>
       </div>
@@ -457,7 +456,7 @@
         <button class="toggle-switch" id="billing-toggle" onclick="toggleBilling()"></button>
         <span class="billing-label" id="label-annual">연간 <span class="annual-badge">2개월 무료</span></span>
       </div>
-      <div class="billing-note">사업장(시설/현장)당 월정액 · VAT 별도 · 포함 10명 초과 시 3,000원/명</div>
+      <div class="billing-note">시설 1개 기준 / 월 · VAT 별도 · 관리자/작업자 무제한</div>
 
       <div class="sector-tabs">
         <button class="sector-tab-btn active" onclick="switchSectorTab('building', this)">
@@ -499,7 +498,7 @@
       <div class="price-notice mt-4">
         <h5>📌 SaaS 구독 안내</h5>
         <p>월 구독 기준이며, 연간 구독 시 2개월 무료 혜택이 제공됩니다. 구독은 언제든지 취소 가능하며 위약금이 없습니다.
-        포함 인원(10명) 초과 시 3,000원/명/월이 익월 자동 정산됩니다. 세금계산서 발행이 가능합니다.</p>
+        관리자/작업자 등록은 무제한입니다. 세금계산서 발행이 가능합니다.</p>
       </div>
     </div>
 
@@ -508,7 +507,7 @@
       <div class="text-center mb-5">
         <p style="color:#64748b;font-size:.92rem;max-width:640px;margin:0 auto;line-height:1.7;">
           <strong>단일 결제 서비스</strong>입니다. 시설 유형에 맞는 진단을 선택하고 바로 결제하세요.<br>
-          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 12개월</span> · 리포트 재발행·조회 포함
+          <span style="color:#0891b2;font-weight:700;">서비스 제공기간: 결제일로부터 12개월</span> · 안전관리 설계서 재발행·조회 포함
         </p>
       </div>
 
@@ -537,7 +536,7 @@
         <h5>📌 법령진단이란?</h5>
         <p>법령진단은 <strong style="color:#22d3ee;">1회성 단건 결제 서비스</strong>입니다.
         사업장·시설 정보를 입력하면 적용 법령, 의무 항목, 선임 요건, 과태료·벌칙 정보를 자동 도출합니다.
-        결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 리포트 재발행·조회가 가능합니다.</p>
+        결제일로부터 <strong style="color:#22d3ee;">12개월간</strong> 안전관리 설계서 재발행·조회가 가능합니다.</p>
       </div>
     </div>
 
@@ -566,7 +565,7 @@
           <div class="benefit-tag">법령진단 + SaaS</div>
           <div class="benefit-icon">⚡</div>
           <h5>법령진단 → 구독 전환 할인</h5>
-          <p>법령진단 리포트 수령 후 SaaS 구독으로 연결 시 첫 3개월 특별 요금을 협의해 드립니다.</p>
+          <p>법령진단 안전관리 설계서 수령 후 SaaS 구독으로 연결 시 첫 3개월 특별 요금을 협의해 드립니다.</p>
         </div>
       </div>
       <div class="col-md-4">
@@ -591,15 +590,15 @@
     <h2>자주 묻는 질문</h2>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">결제는 언제 이루어지나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">SaaS 구독은 매월 결제일 자동 청구됩니다 (정기결제 시스템 최종 준비 중). 법령진단 단건은 결제 즉시 처리되며 영업일 1~2일 이내 PDF 리포트가 이메일로 발송됩니다.</div>
+      <div class="faq-a">SaaS 구독은 매월 결제일 자동 청구됩니다 (정기결제 시스템 최종 준비 중). 법령진단 단건은 결제 즉시 처리되며 영업일 1~2일 이내 안전관리 설계서(PDF)가 이메일로 발송됩니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">환불 정책은 어떻게 되나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">SaaS 구독은 결제 후 7일 이내 이용 내역이 없을 경우 전액 환불됩니다. 법령진단 단건은 리포트 발송 전 취소 시 전액 환불, 발송 후에는 환불이 불가합니다.</div>
+      <div class="faq-a">SaaS 구독은 결제 후 7일 이내 이용 내역이 없을 경우 전액 환불됩니다. 법령진단 단건은 안전관리 설계서 발송 전 취소 시 전액 환불, 발송 후에는 환불이 불가합니다.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">포함 인원 초과 시 어떻게 되나요? <span class="faq-icon">+</span></div>
-      <div class="faq-a">포함 인원(10명)을 초과하더라도 서비스는 중단 없이 계속됩니다. 초과 인원 1명당 3,000원/월이 익월 청구서에 합산되어 자동 정산됩니다.</div>
+      <div class="faq-q" onclick="toggleFaq(this)">관리자/작업자 등록에 제한이 있나요? <span class="faq-icon">+</span></div>
+      <div class="faq-a">관리자/작업자 등록은 무제한입니다. 시설 1개 기준 과금이며, 등록 인원 수에 따른 추가 요금은 없습니다.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">건물·산업·건설 섹터가 다른가요? <span class="faq-icon">+</span></div>
@@ -699,26 +698,11 @@ var _pendingAmount = 0;
 var _pendingSaasPlan = {};
 
 var _P = window.TAI_PRICING || {};
-var SAAS_FALLBACK = _P.SAAS_FALLBACK || {};
-var MAIN_CODES = _P.MAIN_DIAG_CODES || [];
-var SPECIAL_CODES = _P.SPECIAL_DIAG_CODES || [];
-var DIAG_META = _P.DIAG_META || {};
 
 async function loadPricingData(){
-  try {
-    var results = await Promise.allSettled([
-      fetch(API+'/public/pricing/saas-plans'),
-      fetch(API+'/public/pricing/diagnosis-reports')
-    ]);
-    if(results[0].status==='fulfilled' && results[0].value.ok){
-      var sj = await results[0].value.json();
-      _saasPlans = sj.data || sj.plans || sj || [];
-    }
-    if(results[1].status==='fulfilled' && results[1].value.ok){
-      var dj = await results[1].value.json();
-      _diagReports = dj.data || dj.reports || dj || [];
-    }
-  } catch(e){ console.warn('[pricing v4] API error:', e); }
+  if(_P.fetchFromAPI){
+    try { await _P.fetchFromAPI(); } catch(e) {}
+  }
 
   renderSaasSector('BUILDING', 'building');
   renderSaasSector('INDUSTRY', 'industry');
@@ -748,42 +732,31 @@ function highlightPlan(planName){
   }, 800);
 }
 
-function getPlansBySector(sector){
-  if(!_saasPlans || !_saasPlans.length) return null;
-  var filtered = _saasPlans.filter(function(p){
-    var s = (p.sector || p.plan_sector || '').toUpperCase();
-    return s === sector.toUpperCase();
-  });
-  return filtered.length ? filtered : null;
+function mapSaasPlan(p, sector){
+  return {
+    plan_code:      p.code,
+    plan_name:      p.name,
+    sector:         sector,
+    price_monthly:  p.price,
+    is_recommended: !!p.featured,
+    is_custom:      !!p.custom,
+    target:         p.desc || '',
+    basis:          p.basis || '',
+    features:       p.features || [],
+  };
 }
 
 function renderSaasSector(sector, domKey){
   var loading = document.getElementById(domKey+'-loading');
   var cards   = document.getElementById(domKey+'-cards');
-  var apiPlans = getPlansBySector(sector);
-  var plans    = apiPlans ? normalizeSaasPlans(apiPlans) : SAAS_FALLBACK[sector];
+  var plans   = (_P.getSaasPlans ? _P.getSaasPlans(sector) : []).map(function(p){
+    return mapSaasPlan(p, sector);
+  });
 
   cards.innerHTML = plans.map(function(p){ return renderSaasCard(p); }).join('');
   loading.style.display = 'none';
   cards.style.display = '';
   cards.className = 'row g-4 justify-content-center';
-}
-
-function normalizeSaasPlans(raw){
-  return raw.map(function(p){
-    return {
-      plan_code:         p.plan_code || p.code || '',
-      plan_name:         p.plan_name || p.name || '',
-      sector:            (p.sector || p.plan_sector || '').toUpperCase(),
-      price_monthly:     parseInt(p.price_monthly || p.monthly_price || 0),
-      is_recommended:    !!(p.is_recommended || p.featured),
-      is_custom:         !!(p.is_custom || p.is_enterprise || (p.plan_name||'').toUpperCase()==='CUSTOM'),
-      included_members:  parseInt(p.included_members || 10),
-      over_member_price: parseInt(p.over_member_price || 3000),
-      target:            p.target || p.description || '',
-      features:          p.features || [],
-    };
-  });
 }
 
 function renderSaasCard(p){
@@ -796,15 +769,11 @@ function renderSaasCard(p){
     ? '<div class="plan-custom-price">별도 협의</div><div class="plan-price-sub" style="color:#94a3b8;">사업장·규모에 따라 결정</div><div class="plan-vat">&nbsp;</div>'
     : '<div class="plan-price"><span class="price-display" data-monthly="'+mon+'">'+mon.toLocaleString('ko-KR')+'</span>원</div>'
       +'<div class="plan-price-sub">/ 사업장 · <span class="period-unit">월</span></div>'
-      +'<div class="plan-vat">VAT 별도</div>';
-
-  var quotaHtml = '<div class="plan-quota-box">'
-    +'<div class="q-row"><span class="q-label">👥 포함 인원</span><span class="q-val">'+(p.included_members||10)+'명</span></div>'
-    +'<div class="q-over">초과 인원당 '+(p.over_member_price||3000).toLocaleString('ko-KR')+'원/명/월</div>'
-    +'</div>';
+      +'<div class="plan-vat">VAT 별도 · 관리자/작업자 무제한</div>';
 
   var featsHtml = (p.features||[]).map(function(f){ return '<li>'+f+'</li>'; }).join('');
   var targetHtml = p.target ? '<div class="mb-2" style="font-size:.78rem;color:#64748b;">'+p.target+'</div>' : '';
+  var basisHtml = p.basis ? '<div class="mb-2" style="font-size:.78rem;color:#64748b;">'+p.basis+'</div>' : '';
 
   var btnHtml = isCustom
     ? '<a href="fix-request.html?from=pricing&type=general" class="btn btn-border" style="width:100%;font-weight:700;border-color:#7c3aed;color:#7c3aed;" data-tai-track="consultation_click" data-tai-location="pricing">도입 문의하기</a>'
@@ -817,68 +786,53 @@ function renderSaasCard(p){
     +priceHtml
     +'<div class="plan-divider"></div>'
     +targetHtml
-    +quotaHtml
+    +basisHtml
     +'<ul class="plan-features'+(isCustom?' custom-feat':'')+'">'+featsHtml+'</ul>'
     +btnHtml
     +'</div></div>';
-}
-
-function getDiagPrice(code){
-  if(!_diagReports || !_diagReports.length) return null;
-  var row = _diagReports.find(function(r){
-    return (r.facility_type_code||r.plan_code||r.code||'') === code && r.is_active !== false;
-  });
-  if(!row) return null;
-  var p = row.total_report_fee || row.price || row.amount;
-  return p != null ? parseInt(p) : null;
 }
 
 function renderDiagSection(){
   var loading   = document.getElementById('diag-loading');
   var mainCards = document.getElementById('diag-main-cards');
   var specWrap  = document.getElementById('special-wrap');
-  var specCards = document.getElementById('diag-special-cards');
+  var sectorIcons = { BUILDING:'🏢', INDUSTRY:'🏭', CONSTRUCTION:'🏗️' };
+  var mainHtml = '';
 
-  var mainHtml = MAIN_CODES.map(function(code){
-    var m = DIAG_META[code];
-    var p = getDiagPrice(code);
-    if(p === null) p = m.fallbackPrice;
-    return renderDiagCard(code, m, p, false);
-  }).join('');
-
-  var specHtml = SPECIAL_CODES.map(function(code){
-    var m = DIAG_META[code];
-    var p = getDiagPrice(code);
-    if(p === null) p = m.fallbackPrice;
-    return renderDiagCard(code, m, p, true);
-  }).join('');
+  ['BUILDING','INDUSTRY','CONSTRUCTION'].forEach(function(sector){
+    (_P.getDiagPlans ? _P.getDiagPlans(sector) : []).forEach(function(p){
+      mainHtml += renderDiagCard(p, sector, sectorIcons[sector] || '📋');
+    });
+  });
 
   loading.style.display = 'none';
   mainCards.innerHTML = mainHtml;
   mainCards.style.display = '';
-  if(specHtml){ specCards.innerHTML = specHtml; specWrap.style.display = ''; }
+  if(specWrap) specWrap.style.display = 'none';
 }
 
-function renderDiagCard(code, m, price, isSpecial){
-  var col     = isSpecial ? 'col-lg-4 col-md-6' : 'col-lg-3 col-md-6';
-  var cls     = 'diag-card' + (m.isRec?' recommended':'') + (isSpecial?' special-card':'');
-  var recBadge= m.isRec && m.recLabel ? '<div class="diag-rec-badge">'+m.recLabel+'</div>' : '';
-  var featHtml= m.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
-  var btnCls  = m.isRec ? 'btn-base' : 'btn-border';
-  var btnStyle= (isSpecial && !m.isRec) ? 'border-color:#7c3aed;color:#7c3aed;' : '';
+function renderDiagCard(p, sector, icon){
+  var isRec = !!p.featured;
+  var col   = 'col-lg-3 col-md-6';
+  var cls   = 'diag-card' + (isRec ? ' recommended' : '');
+  var recBadge = isRec ? '<div class="diag-rec-badge">⭐ 가장 많이 선택</div>' : '';
+  var featHtml = (p.features||[]).map(function(f){ return '<li>'+f+'</li>'; }).join('');
+  var btnCls  = isRec ? 'btn-base' : 'btn-border';
+  var goodsName = (p.name || '') + ' 진단';
+  var price = p.price || 0;
 
   return '<div class="'+col+'"><div class="'+cls+'">'
     +recBadge
-    +'<span class="diag-icon"'+(m.isRec?' style="margin-top:10px;"':'')+'>'+m.icon+'</span>'
-    +'<div class="diag-type-name">'+m.name+'</div>'
-    +'<div class="diag-type-sub">'+m.sub+'</div>'
+    +'<span class="diag-icon"'+(isRec?' style="margin-top:10px;"':'')+'>'+(icon||'📋')+'</span>'
+    +'<div class="diag-type-name">'+p.name+'</div>'
+    +'<div class="diag-type-sub">'+(p.basis||'')+'</div>'
     +'<div class="diag-price">'+price.toLocaleString('ko-KR')+'<span class="unit">원</span></div>'
     +'<div class="diag-vat">VAT 별도 · 단건 1회성</div>'
     +'<div class="diag-period">🕐 서비스 제공기간 12개월</div>'
     +'<hr class="diag-divider">'
     +'<ul class="diag-features">'+featHtml+'</ul>'
-    +'<button class="btn '+btnCls+'" style="width:100%;font-weight:700;'+btnStyle+'"'
-    +' onclick="startDiagPayment(\''+m.goodsName+'\','+price+')">바로 결제 '+price.toLocaleString('ko-KR')+'원</button>'
+    +'<button class="btn '+btnCls+'" style="width:100%;font-weight:700;"'
+    +' onclick="startDiagPayment(\''+goodsName.replace(/'/g,"\\'")+'\','+price+')">바로 결제 '+price.toLocaleString('ko-KR')+'원</button>'
     +'</div></div>';
 }
 
@@ -976,6 +930,5 @@ document.addEventListener('DOMContentLoaded', function(){ loadPricingData(); });
 })();
 </script>
 <script src="/assets/js/tai-analytics.js"></script>
-<script src="/assets/js/pricing-v2.js" defer></script>
 </body>
 </html>
