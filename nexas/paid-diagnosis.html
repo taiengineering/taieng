@@ -65,6 +65,9 @@
   .msg-box { border-radius:8px; padding:11px 14px; font-size:.85rem; margin:12px 0; display:none; }
   .msg-box.error { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
   .msg-box.show { display:block; }
+  .withdrawal-notice { background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:14px 16px; margin:16px 0; font-size:.82rem; color:#9a3412; line-height:1.65; }
+  .withdrawal-notice .wn-title { font-weight:800; margin-bottom:6px; }
+  .wn-check { display:flex; gap:8px; align-items:flex-start; margin-top:10px; font-size:.84rem; color:#0f2b4a; }
 </style>
 </head>
 <body class="sc5 diag-page-modern">
@@ -135,9 +138,47 @@
       입력 도중 중단하셔도 <strong>로그인 후 이어서</strong> 진행할 수 있습니다.
     </div>
 
-    <button class="btn-primary-tai" id="btnToPayment" onclick="goToPayment()">결제하고 진단 시작하기 →</button>
+    <!-- 청약철회 제한 고지 (전자상거래법 제17조 제2항) -->
+    <div class="withdrawal-notice">
+      <div class="wn-title">⚠️ 청약철회 제한 고지 — 결제 전 필독</div>
+      법령진단 결과는 <strong>디지털 콘텐츠</strong>로 즉시 제공됩니다. 결제 후 결과를 열람하면 서비스가 개시된 것으로 간주되어
+      <strong>전자상거래법 제17조 제2항</strong>에 따라 청약철회가 제한됩니다.<br>
+      • 결과 열람 전: 7일 이내 전액 환불 · 결과 열람 후: 환불 불가 · 문의 tai@taieng.co.kr
+      <div class="wn-check">
+        <input type="checkbox" id="withdrawalConsentCheck" onchange="onWithdrawalConsentChange()">
+        <label for="withdrawalConsentCheck">위 청약철회 제한 고지에 동의합니다 (필수)</label>
+      </div>
+    </div>
+
+    <button class="btn-primary-tai" id="btnToPayment" onclick="goToPayment()" disabled>결제하고 진단 시작하기 →</button>
+    <p style="text-align:center;font-size:.77rem;color:#94a3b8;margin-top:8px;">* KG이니시스 안전결제</p>
   </div>
 </div>
+
+<!-- 이니시스 단건결제 폼 -->
+<form id="diag_inicis_form" method="POST" accept-charset="UTF-8" style="display:none">
+  <input type="hidden" name="version" value="1.0">
+  <input type="hidden" name="gopaymethod" value="Card">
+  <input type="hidden" name="currency" value="WON">
+  <input type="hidden" name="langtype" value="KO">
+  <input type="hidden" name="acceptmethod" value="centerCd(Y)">
+  <input type="hidden" name="use_chkfake" value="Y">
+  <input type="hidden" id="df_mid" name="mid">
+  <input type="hidden" id="df_mKey" name="mKey">
+  <input type="hidden" id="df_oid" name="oid">
+  <input type="hidden" id="df_price" name="price">
+  <input type="hidden" id="df_tax" name="tax">
+  <input type="hidden" id="df_taxfree" name="taxfree" value="0">
+  <input type="hidden" id="df_goodname" name="goodname">
+  <input type="hidden" id="df_buyername" name="buyername">
+  <input type="hidden" id="df_buyertel" name="buyertel">
+  <input type="hidden" id="df_buyeremail" name="buyeremail">
+  <input type="hidden" id="df_timestamp" name="timestamp">
+  <input type="hidden" id="df_signature" name="signature">
+  <input type="hidden" id="df_verification" name="verification">
+  <input type="hidden" id="df_returnUrl" name="returnUrl">
+  <input type="hidden" id="df_closeUrl" name="closeUrl">
+</form>
 
 <div id="tai-footer"></div>
 
@@ -147,8 +188,11 @@
 <script src="assets/js/header.js"></script>
 <script src="assets/js/nav-auth.js"></script>
 <script src="assets/js/footer.js"></script>
+<script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="UTF-8"></script>
 <script>
 const API = 'https://api.taieng.co.kr';
+const DIAG_RETURN = 'https://taieng.co.kr/_api/payments/inicis/return';
+const DIAG_CLOSE  = 'https://taieng.co.kr/_api/payments/result?resultCode=CLOSE';
 
 // 섹터별 기준값 정의 (price_master criteria_type 과 일치)
 // CONSTRUCTION 입력 단위는 '억원'. /resolve 에는 원 단위로 환산해 전달(× 1억).
@@ -221,6 +265,10 @@ function onCriteriaChange() {
   clearMsg();
 }
 
+function onWithdrawalConsentChange() {
+  document.getElementById('btnToPayment').disabled = !document.getElementById('withdrawalConsentCheck').checked;
+}
+
 function won(n) {
   return Number(n || 0).toLocaleString() + '원';
 }
@@ -270,14 +318,93 @@ function renderPrice(d) {
   const feats = Array.isArray(d.features) ? d.features : [];
   document.getElementById('prFeats').innerHTML = feats.map(f => `<li>${f}</li>`).join('');
 
+  // 가격 재산정 시 동의/버튼 초기화
+  const cc = document.getElementById('withdrawalConsentCheck');
+  if (cc) cc.checked = false;
+  document.getElementById('btnToPayment').disabled = true;
+
   document.getElementById('priceResult').classList.add('show');
   document.getElementById('priceResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// 결제 단계로 — 다음 페이지에서 연결 (현재는 자리만)
+// ── 결제 (KG이니시스 단건결제) ──
 function goToPayment() {
   if (!resolved) { showMsg('먼저 가격을 확인해 주세요.'); return; }
-  alert('결제 연동은 다음 단계에서 연결됩니다.');
+  if (!document.getElementById('withdrawalConsentCheck').checked) {
+    showMsg('청약철회 제한 고지에 동의해 주세요.'); return;
+  }
+
+  var userId = '';
+  var token  = '';
+  var companyId = '';
+  try {
+    userId    = localStorage.getItem('user_id') || '';
+    token     = localStorage.getItem('access_token') || '';
+    companyId = localStorage.getItem('company_id') || '';
+  } catch (e) {}
+  if (!userId) {
+    // 회원 게이트를 통과했더라도 user_id 가 없으면 로그인 유도
+    const here = location.pathname + location.search;
+    try { localStorage.setItem('postLoginRedirect', here); } catch (e) {}
+    alert('로그인 후 결제할 수 있습니다.');
+    location.href = 'log-in.html?redirect=' + encodeURIComponent(here);
+    return;
+  }
+
+  var supply   = Number(resolved.amount || 0);            // 공급가(VAT 별도)
+  var goodname = resolved.display_name || 'TAI LDX 법령진단'; // 'LDX' 포함 → result.html 진단 분기 인식
+  var productType = 'DIAGNOSIS';
+
+  var btn = document.getElementById('btnToPayment');
+  btn.disabled = true; btn.textContent = '결제창 준비 중...';
+
+  var headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+
+  var payload = {
+    user_id: userId,
+    product_type: productType,
+    amount: supply,
+    goodname: goodname,
+    plan_code: resolved.tier_code || '',
+    period_months: 1,
+    payment_type: 'CARD',
+    return_url: DIAG_RETURN,
+    close_url: DIAG_CLOSE
+  };
+  if (companyId) payload.company_id = companyId;
+
+  fetch(API + '/payments/inicis/prepare', {
+    method: 'POST', headers: headers, body: JSON.stringify(payload)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(res){
+    if (!res || res.status !== 'success') throw new Error((res && (res.detail || res.message)) || '결제 준비 실패');
+    var d = res.data;
+    document.getElementById('df_mid').value          = d.mid         || '';
+    document.getElementById('df_mKey').value         = d.mKey        || '';
+    document.getElementById('df_oid').value          = d.oid         || '';
+    var totalPrice = parseInt(d.price || (supply + Math.round(supply * 0.1)));
+    var taxAmt = Math.round(totalPrice / 11);
+    document.getElementById('df_price').value        = String(totalPrice);
+    document.getElementById('df_tax').value          = String(taxAmt);
+    document.getElementById('df_taxfree').value      = '0';
+    document.getElementById('df_goodname').value     = d.goodname    || goodname;
+    document.getElementById('df_buyername').value    = d.buyername   || (function(){ try { return localStorage.getItem('user_name') || '고객'; } catch(e){ return '고객'; } })();
+    document.getElementById('df_buyertel').value     = d.buyertel    || '00000000000';
+    document.getElementById('df_buyeremail').value   = d.buyeremail  || (function(){ try { return localStorage.getItem('user_email') || ''; } catch(e){ return ''; } })();
+    document.getElementById('df_timestamp').value    = d.timestamp   || '';
+    document.getElementById('df_signature').value    = d.signature   || '';
+    document.getElementById('df_verification').value = d.verification || '';
+    document.getElementById('df_returnUrl').value    = DIAG_RETURN;
+    document.getElementById('df_closeUrl').value     = DIAG_CLOSE;
+    if (typeof INIStdPay === 'undefined') { throw new Error('결제 모듈을 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.'); }
+    INIStdPay.pay('diag_inicis_form');
+  })
+  .catch(function(err){
+    showMsg('결제 오류: ' + err.message);
+    btn.disabled = false; btn.textContent = '결제하고 진단 시작하기 →';
+  });
 }
 </script>
 <script src="/assets/js/tai-analytics.js"></script>
