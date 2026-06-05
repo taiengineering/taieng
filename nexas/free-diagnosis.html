@@ -245,12 +245,14 @@ let disclaimerLogId = '';
 let freeResultData = null;
 let paidResultData = null;
 let pdfUrl = '';
+let paidOrderId = '';
 
 // ── 초기화 ──
 (function init() {
   const params = new URLSearchParams(location.search);
   const paidCode = params.get('paid');
-  const orderId = params.get('order_id');
+  // result.html은 oid로 넘김. 구버전 order_id 도 허용.
+  const orderId = params.get('oid') || params.get('order_id');
   if (paidCode && orderId) {
     handlePaidEntry(paidCode, orderId);
   } else {
@@ -281,20 +283,28 @@ let pdfUrl = '';
   });
 })();
 
-// ── 경로 2: 유료 직입 ──
+// ── 경로 2: 결제 완료 후 진입 (result.html → ?paid=1&oid=...) ──
+// 신규 정책: 결제 후 상세입력. 결제 성공을 신뢰하고 유료 상세입력(step4)으로 진입한다.
 async function handlePaidEntry(paidCode, orderId) {
-  document.querySelector('.pb-wrap').style.display = 'none';
-  try {
-    const r = await fetch(`${API}/payment/verify?order_id=${orderId}`);
-    const json = await r.json();
-    const d = json.data;
-    if (!d || d.status !== 'paid') { showPanelOnly('step0'); alert('결제 정보를 확인할 수 없습니다.'); return; }
-    sector = d.sector || paidCode.split('_')[0] || 'INDUSTRY';
-    paidTier = d.tier || 'PAID';
-    paidFee = d.amount || 0;
-    authToken = d.auth_token || '';
-    await runPaidDiagnosis(orderId);
-  } catch(e) { showPanelOnly('step0'); }
+  paidOrderId = orderId;
+  // 섹터는 paid 코드 접두사에서 추론(BUILDING_/INDUSTRY_/CONSTRUCTION_). 없으면 섹터 선택부터.
+  const guessSector = (paidCode || '').toString().toUpperCase().split('_')[0];
+  if (['BUILDING','INDUSTRY','CONSTRUCTION'].includes(guessSector)) {
+    sector = guessSector;
+  }
+  if (!sector) {
+    // 섹터를 알 수 없으면 섹터 선택 단계로 보낸다(결제정보는 보존).
+    showPanelOnly('step1');
+    updateProgress(1);
+    return;
+  }
+  // 결제 완료 상태 → 유료 상세입력 단계로 진입
+  document.getElementById('step4Sub').textContent = '결제가 완료되었습니다. 시설·공정·설비 정보를 입력하면 진단이 시작됩니다.';
+  await loadPaidFlow();
+  showPanelOnly('step4');
+  updateProgress(4);
+  const back = document.getElementById('btnBackToResult');
+  if (back) back.style.display = 'none';
 }
 
 async function runPaidDiagnosis(orderId) {
@@ -303,13 +313,11 @@ async function runPaidDiagnosis(orderId) {
   const area = document.getElementById('paidResultArea');
   area.innerHTML = '<div class="result-empty">⏳ 진단 분석 중...</div>';
   try {
-    const industryPaid = { BASIC: 'INDUSTRY_V2', STANDARD: 'INDUSTRY_STANDARD', PREMIUM: 'INDUSTRY_PREMIUM' };
-    const userTier = sector === 'INDUSTRY' ? (industryPaid[paidTier] || paidTier) : undefined;
     const r = await fetch(`${API}/diagnosis/run`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        sector, tier: paidTier, user_tier: userTier,
-        auth_token: authToken, payment_ref: orderId,
+        sector, tier: paidTier || 'PAID',
+        auth_token: authToken, payment_ref: orderId || paidOrderId,
         form_data: formValues['paid'] || {}
       })
     });
@@ -553,7 +561,7 @@ function renderTableCellHtml(col, row, ri, prefix, fieldCode) {
     const manual = v && String(v).startsWith('__MANUAL__::') ? String(v).slice(12) : '';
     const show = manual ? manual : (v || '');
     return `<div class="diag-ss-wrap">
-      <input type="text" class="form-input-tai diag-ss-inp" data-tc="${col.key}" data-ri="${ri}" value="${String(show).replace(/"/g,'&quot;')}" placeholder="${(col.manual_placeholder||'검색 또는 직접입력').replace(/"/g,'&quot;')}" autocomplete="off" />
+      <input type="text" class="form-input-tai diag-ss-inp" data-tc="${col.key}" data-ri="${ri}" value="${String(show).replace(/"/g,'&quot;')}" placeholder="${(col.manual_placeholder||'검색하여 선택').replace(/"/g,'&quot;')}" autocomplete="off" />
       <div class="diag-ss-dd"></div>
     </div>`;
   }
@@ -758,13 +766,6 @@ function renderField(f, prefix) {
       <div class="yn-btn" onclick="setYN('${f.field_code}',true,this,'${prefix}')">예</div>
       <div class="yn-btn" onclick="setYN('${f.field_code}',false,this,'${prefix}')">아니오</div>
     </div>`;
-  } else if (f.field_type === 'tri_state') {
-    ctrl = `<div class="yn-grid" style="grid-template-columns:1fr 1fr 1fr;">
-      <div class="yn-btn" onclick="setTriState('${f.field_code}','yes',this,'${prefix}')">예</div>
-      <div class="yn-btn" onclick="setTriState('${f.field_code}','no',this,'${prefix}')">아니오</div>
-      <div class="yn-btn" onclick="setTriState('${f.field_code}','unknown',this,'${prefix}')"
-        style="font-size:.82rem;">모름</div>
-    </div>`;
   } else if (f.field_type === 'select') {
     const opts = (f.input_options || []).map(o => `<option value="${o.value}">${o.label}</option>`).join('');
     ctrl = `<select class="form-select-tai" id="${id}" onchange="setVal('${f.field_code}',this.value,'${prefix}')">
@@ -792,13 +793,6 @@ function setVal(code, val, prefix) {
 function setYN(code, val, el, prefix) {
   el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
   el.className = 'yn-btn ' + (val ? 'sel-yes' : 'sel-no');
-  setVal(code, val, prefix);
-}
-function setTriState(code, val, el, prefix) {
-  el.parentNode.querySelectorAll('.yn-btn').forEach(b => b.className = 'yn-btn');
-  if (val === 'yes') el.className = 'yn-btn sel-yes';
-  else if (val === 'no') el.className = 'yn-btn sel-no';
-  else el.className = 'yn-btn sel-unknown';
   setVal(code, val, prefix);
 }
 function toggleMulti(code, el, prefix) {
@@ -1102,7 +1096,7 @@ async function loadPaidForm(tierCode) {
       if (el) el.value = val;
       setVal(code, val, 'paid');
     });
-    document.getElementById('finalPriceBanner').textContent = `💳 결제 금액: ${paidFee.toLocaleString()}원 (VAT 별도)`;
+    document.getElementById('finalPriceBanner').textContent = `💳 결제 완료 — 입력 후 진단이 시작됩니다`;
     document.getElementById('paymentArea').style.display = 'block';
   } catch(e) {
     area.innerHTML = '<p style="color:#dc2626;font-size:.88rem;text-align:center;">항목을 불러오지 못했습니다.</p>';
@@ -1119,13 +1113,17 @@ function startPayment() {
   const totalFields = document.querySelectorAll('#paidFormArea .form-row').length;
   const confirmed = confirm(
     `입력 내용을 확인해 주세요.\n\n` +
-    `• 입력 완료: ${filledCount}건 / 전체: ${totalFields}건\n` +
-    `• 결제 금액: ${paidFee.toLocaleString()}원 (VAT 별도)\n\n` +
+    `• 입력 완료: ${filledCount}건 / 전체: ${totalFields}건\n\n` +
     `⚠️ 진단 실행 후에는 재입력할 수 없습니다.\n` +
     `정보를 모두 입력하셨습니까?`
   );
   if (!confirmed) return;
   if (!validateTables('paid')) return;
+  // 결제 완료 후 진입(paidOrderId 보유) 시: 결제 재진행 없이 곧바로 진단 실행
+  if (paidOrderId) {
+    runPaidDiagnosis(paidOrderId);
+    return;
+  }
   const modal = new bootstrap.Modal(document.getElementById('payPrepModal'));
   modal.show();
 }

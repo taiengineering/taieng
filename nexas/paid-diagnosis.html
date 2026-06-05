@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JRP9SHHC5M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JRP9SHHC5M');
+</script>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#2563eb">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유료 법령진단 | TAI 엔지니어링</title>
+<meta name="description" content="회원 전용 유료 법령진단 — 사업장 규모에 따른 정밀 진단과 PDF 리포트.">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/tai-brand.css">
+<link rel="stylesheet" href="assets/css/tai-main.css">
+<link rel="stylesheet" href="assets/css/diagnosis-modern.css">
+<link rel="stylesheet" href="/assets/css/tai-responsive.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  .pd-wrap { max-width: 720px; margin: 0 auto; padding: 96px 20px 64px; }
+  .pd-head { text-align: center; margin-bottom: 32px; }
+  .pd-head h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: #0f2b4a; margin-bottom: 8px; }
+  .pd-head p { color: #64748b; font-size: .95rem; }
+  .pd-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; margin-bottom: 20px; box-shadow: 0 2px 16px rgba(15,43,74,.05); }
+  .pd-card-title { font-size: 1rem; font-weight: 800; color: #0f2b4a; margin-bottom: 16px; }
+  .sector-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 4px; }
+  @media(max-width:560px){ .sector-grid { grid-template-columns: 1fr; } }
+  .sector-card { border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 18px 14px; text-align: center; cursor: pointer; transition: all .15s; }
+  .sector-card:hover { border-color: #1565c0; }
+  .sector-card.selected { border-color: #1565c0; background: #eff6ff; }
+  .sc-icon { font-size: 1.8rem; }
+  .sc-name { font-weight: 800; color: #0f2b4a; margin-top: 6px; font-size: .95rem; }
+  .sc-desc { font-size: .78rem; color: #94a3b8; margin-top: 2px; }
+  .pd-label { display:block; font-size:.85rem; font-weight:700; color:#0f2b4a; margin: 14px 0 6px; }
+  .pd-input-row { display:flex; align-items:center; gap:10px; }
+  .form-input-tai { width:100%; border:1.5px solid #e2e8f0; border-radius:8px; padding:12px 14px; font-size:.95rem; outline:none; transition:border-color .15s; }
+  .form-input-tai:focus { border-color:#1565c0; }
+  .pd-unit { color:#64748b; font-size:.9rem; white-space:nowrap; }
+  .pd-hint { font-size:.78rem; color:#94a3b8; margin-top:6px; }
+  .btn-primary-tai { background:#1565c0; color:#fff; font-weight:800; font-size:1rem; padding:14px; border-radius:10px; border:none; cursor:pointer; width:100%; transition:background .2s; margin-top:8px; }
+  .btn-primary-tai:hover { background:#0f2b4a; }
+  .btn-primary-tai:disabled { background:#cbd5e1; cursor:not-allowed; }
+  /* 가격 안내 */
+  .price-result { display:none; }
+  .price-result.show { display:block; }
+  .pr-plan { font-size:1.1rem; font-weight:900; color:#0f2b4a; }
+  .pr-sub { font-size:.84rem; color:#64748b; margin-top:2px; }
+  .pr-amount-box { background:#f8fafc; border-radius:12px; padding:18px 20px; margin:16px 0; }
+  .pr-row { display:flex; justify-content:space-between; padding:6px 0; font-size:.92rem; }
+  .pr-row.total { border-top:1px solid #e2e8f0; margin-top:6px; padding-top:12px; font-weight:900; font-size:1.05rem; color:#0f2b4a; }
+  .pr-feats { list-style:none; padding:0; margin:8px 0 0; }
+  .pr-feats li { font-size:.86rem; color:#475569; padding:4px 0 4px 22px; position:relative; }
+  .pr-feats li::before { content:'✓'; position:absolute; left:0; color:#16a34a; font-weight:900; }
+  .time-notice { background:#fffbeb; border:1px solid #fde68a; border-radius:10px; padding:12px 14px; font-size:.84rem; color:#92400e; margin:14px 0; line-height:1.6; }
+  .member-banner { background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:12px 14px; font-size:.85rem; color:#1e40af; margin-bottom:20px; }
+  .msg-box { border-radius:8px; padding:11px 14px; font-size:.85rem; margin:12px 0; display:none; }
+  .msg-box.error { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
+  .msg-box.show { display:block; }
+</style>
+</head>
+<body class="sc5 diag-page-modern">
+<div class="preloader" id="preloader"><div class="preloader-inner"><div class="spinner"><div class="dot1"></div><div class="dot2"></div></div></div></div>
+<div class="body-overlay" id="body-overlay"></div>
+
+<div id="tai-header"></div>
+
+<div class="pd-wrap">
+  <div class="pd-head">
+    <h1>유료 법령진단</h1>
+    <p>사업장 규모에 맞는 정밀 진단과 PDF 리포트를 제공합니다.</p>
+  </div>
+
+  <div class="member-banner" id="memberBanner">
+    유료 진단은 <strong>회원 전용</strong>입니다. 결과는 마이페이지에서 언제든 다시 확인할 수 있습니다.
+  </div>
+
+  <!-- 1. 가격결정 정보 입력 -->
+  <div class="pd-card">
+    <div class="pd-card-title">1. 사업장 정보 입력</div>
+
+    <label class="pd-label">사업장 유형</label>
+    <div class="sector-grid">
+      <div class="sector-card" data-sector="BUILDING" onclick="selectSector('BUILDING',this)">
+        <div class="sc-icon">🏢</div><div class="sc-name">건물</div><div class="sc-desc">사무실·상가·학교</div>
+      </div>
+      <div class="sector-card" data-sector="INDUSTRY" onclick="selectSector('INDUSTRY',this)">
+        <div class="sc-icon">🏭</div><div class="sc-name">산업</div><div class="sc-desc">제조·공장·창고</div>
+      </div>
+      <div class="sector-card" data-sector="CONSTRUCTION" onclick="selectSector('CONSTRUCTION',this)">
+        <div class="sc-icon">🏗️</div><div class="sc-name">건설</div><div class="sc-desc">공사현장·인프라</div>
+      </div>
+    </div>
+
+    <div id="criteriaArea" style="display:none;">
+      <label class="pd-label" id="criteriaLabel">기준값</label>
+      <div class="pd-input-row">
+        <input type="number" class="form-input-tai" id="criteriaInput" min="0" inputmode="numeric"
+          placeholder="0" oninput="this.value=this.value.replace(/[^0-9.]/g,''); onCriteriaChange()">
+        <span class="pd-unit" id="criteriaUnit"></span>
+      </div>
+      <div class="pd-hint" id="criteriaHint"></div>
+    </div>
+
+    <div class="msg-box error" id="msgBox"></div>
+
+    <button class="btn-primary-tai" id="btnResolve" onclick="resolvePrice()" disabled>가격 확인하기</button>
+  </div>
+
+  <!-- 2. 가격 안내 -->
+  <div class="pd-card price-result" id="priceResult">
+    <div class="pd-card-title">2. 진단 비용 안내</div>
+    <div class="pr-plan" id="prPlan"></div>
+    <div class="pr-sub" id="prSub"></div>
+
+    <div class="pr-amount-box">
+      <div class="pr-row"><span>공급가액</span><span id="prSupply"></span></div>
+      <div class="pr-row"><span>부가세 (10%)</span><span id="prVat"></span></div>
+      <div class="pr-row total"><span>결제 예정 금액</span><span id="prTotal"></span></div>
+    </div>
+
+    <ul class="pr-feats" id="prFeats"></ul>
+
+    <div class="time-notice">
+      ⏱️ 결제 완료 후 <strong>시설·공정·설비 등 상세 정보 입력</strong>이 필요합니다.
+      입력에는 보통 <strong>10~20분</strong>이 소요되며, 입력을 마치면 즉시 정밀 진단이 시작됩니다.
+      입력 도중 중단하셔도 <strong>로그인 후 이어서</strong> 진행할 수 있습니다.
+    </div>
+
+    <button class="btn-primary-tai" id="btnToPayment" onclick="goToPayment()">결제하고 진단 시작하기 →</button>
+  </div>
+</div>
+
+<div id="tai-footer"></div>
+
+<script src="assets/js/jquery.3.6.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/header.js"></script>
+<script src="assets/js/nav-auth.js"></script>
+<script src="assets/js/footer.js"></script>
+<script>
+const API = 'https://api.taieng.co.kr';
+
+// 섹터별 기준값 정의 (price_master criteria_type 과 일치)
+const CRITERIA = {
+  BUILDING:     { label: '연면적', unit: '㎡',  hint: '건축물대장 기준 연면적을 입력하세요.' },
+  INDUSTRY:     { label: '상시 근로자 수', unit: '명', hint: '사업장 전체 상시 근로자 수를 입력하세요.' },
+  CONSTRUCTION: { label: '공사 금액', unit: '원', hint: '총 공사 도급금액을 입력하세요. (예: 5000000000 = 50억)' }
+};
+
+let sector = '';
+let resolved = null;  // /resolve 응답 data
+
+// ── 회원 게이트: 유료 진단은 회원 전용 ──
+(function memberGate() {
+  let userId = '';
+  try { userId = localStorage.getItem('user_id') || ''; } catch (e) {}
+  const loggedIn = !!userId || (function(){ try { return localStorage.getItem('tai_session') === '1'; } catch(e){ return false; } })();
+  if (!loggedIn) {
+    // 로그인 후 이 페이지로 복귀
+    const here = location.pathname + location.search;
+    try { localStorage.setItem('postLoginRedirect', here); } catch (e) {}
+    alert('유료 진단은 회원 전용입니다. 로그인 후 이용해 주세요.');
+    location.href = 'log-in.html?redirect=' + encodeURIComponent(here);
+  }
+})();
+
+// ── 가격표에서 넘어온 섹터(?sector=) 자동 선택 ──
+(function presetSector() {
+  const params = new URLSearchParams(location.search);
+  const s = (params.get('sector') || '').toUpperCase();
+  if (['BUILDING','INDUSTRY','CONSTRUCTION'].indexOf(s) < 0) return;
+  // DOM 준비 후 해당 섹터 카드 선택
+  document.addEventListener('DOMContentLoaded', function () {
+    const card = document.querySelector('.sector-card[data-sector="' + s + '"]');
+    if (card) selectSector(s, card);
+  });
+})();
+
+function showMsg(text) {
+  const box = document.getElementById('msgBox');
+  box.textContent = text;
+  box.classList.add('show');
+}
+function clearMsg() {
+  document.getElementById('msgBox').classList.remove('show');
+}
+
+function selectSector(val, el) {
+  sector = val;
+  document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const c = CRITERIA[val];
+  document.getElementById('criteriaArea').style.display = 'block';
+  document.getElementById('criteriaLabel').textContent = c.label;
+  document.getElementById('criteriaUnit').textContent = c.unit;
+  document.getElementById('criteriaHint').textContent = c.hint;
+  document.getElementById('criteriaInput').value = '';
+  document.getElementById('btnResolve').disabled = true;
+  // 가격 안내 숨김(섹터 변경 시 초기화)
+  document.getElementById('priceResult').classList.remove('show');
+  resolved = null;
+  clearMsg();
+}
+
+function onCriteriaChange() {
+  const v = document.getElementById('criteriaInput').value.trim();
+  document.getElementById('btnResolve').disabled = !(sector && v !== '');
+  clearMsg();
+}
+
+function won(n) {
+  return Number(n || 0).toLocaleString() + '원';
+}
+
+async function resolvePrice() {
+  if (!sector) { showMsg('사업장 유형을 선택해 주세요.'); return; }
+  const value = document.getElementById('criteriaInput').value.trim();
+  if (value === '') { showMsg('기준값을 입력해 주세요.'); return; }
+
+  const btn = document.getElementById('btnResolve');
+  btn.disabled = true; btn.textContent = '확인 중...';
+  clearMsg();
+  try {
+    const url = `${API}/public/pricing/resolve?service_type=DIAGNOSIS&sector=${encodeURIComponent(sector)}&value=${encodeURIComponent(value)}`;
+    const r = await fetch(url);
+    const json = await r.json();
+    if (json.status !== 'success' || !json.data) {
+      showMsg('해당 조건에 맞는 진단 상품을 찾지 못했습니다. 입력값을 확인해 주세요.');
+      return;
+    }
+    resolved = json.data;
+    renderPrice(resolved);
+  } catch (e) {
+    showMsg('가격 조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+  } finally {
+    btn.disabled = false; btn.textContent = '가격 확인하기';
+  }
+}
+
+function renderPrice(d) {
+  const supply = Number(d.amount || 0);
+  const vatRate = d.vat_included ? 0 : Number(d.vat_rate || 0.1);
+  const vat = d.vat_included ? 0 : Math.round(supply * vatRate);
+  const total = supply + vat;
+
+  document.getElementById('prPlan').textContent = d.display_name || '법령진단';
+  document.getElementById('prSub').textContent = d.sub_label || '';
+  document.getElementById('prSupply').textContent = won(supply);
+  document.getElementById('prVat').textContent = d.vat_included ? '포함' : won(vat);
+  document.getElementById('prTotal').textContent = won(total);
+
+  const feats = Array.isArray(d.features) ? d.features : [];
+  document.getElementById('prFeats').innerHTML = feats.map(f => `<li>${f}</li>`).join('');
+
+  document.getElementById('priceResult').classList.add('show');
+  document.getElementById('priceResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// 결제 단계로 — 다음 페이지에서 연결 (현재는 자리만)
+function goToPayment() {
+  if (!resolved) { showMsg('먼저 가격을 확인해 주세요.'); return; }
+  alert('결제 연동은 다음 단계에서 연결됩니다.');
+}
+</script>
+<script src="/assets/js/tai-analytics.js"></script>
+</body>
+</html>
