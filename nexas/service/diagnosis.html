@@ -546,7 +546,7 @@
   </div>
 </section>
 
-<!-- 가격 (보호 영역 — 카드 심사 중, 절대 수정 금지) -->
+<!-- 가격 (유료 진단 1페이지로 이동) -->
 <section class="price-section" id="pricing">
   <div class="container">
     <div class="row justify-content-center mb-4">
@@ -582,31 +582,6 @@
 <div id="tai-footer"></div>
 <div class="back-to-top"><span class="back-top"><i class="fas fa-angle-double-up"></i></span></div>
 
-<!-- KG이니시스 결제 폼 (보호 영역) -->
-<form id="diag_inicis_form" method="POST" accept-charset="UTF-8" style="display:none">
-  <input type="hidden" name="version" value="1.0">
-  <input type="hidden" name="gopaymethod" value="Card">
-  <input type="hidden" name="currency" value="WON">
-  <input type="hidden" name="langtype" value="KO">
-  <input type="hidden" name="acceptmethod" value="centerCd(Y)">
-  <input type="hidden" name="use_chkfake" value="Y">
-  <input type="hidden" id="df_mid" name="mid">
-  <input type="hidden" id="df_mKey" name="mKey">
-  <input type="hidden" id="df_oid" name="oid">
-  <input type="hidden" id="df_price" name="price">
-  <input type="hidden" id="df_tax" name="tax">
-  <input type="hidden" id="df_taxfree" name="taxfree" value="0">
-  <input type="hidden" id="df_goodname" name="goodname">
-  <input type="hidden" id="df_buyername" name="buyername">
-  <input type="hidden" id="df_buyertel" name="buyertel">
-  <input type="hidden" id="df_buyeremail" name="buyeremail">
-  <input type="hidden" id="df_timestamp" name="timestamp">
-  <input type="hidden" id="df_signature" name="signature">
-  <input type="hidden" id="df_verification" name="verification">
-  <input type="hidden" id="df_returnUrl" name="returnUrl">
-  <input type="hidden" id="df_closeUrl" name="closeUrl">
-</form>
-
 <script src="../assets/js/jquery.3.6.min.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/wow.min.js"></script>
@@ -614,8 +589,6 @@
 <script src="../assets/js/header.js"></script>
 <script src="../assets/js/nav-auth.js"></script>
 <script src="../assets/js/footer.js"></script>
-<script src="https://stdpay.inicis.com/stdjs/INIStdPay.js" charset="utf-8"></script>
-<script src="../assets/js/inicis-fix.js"></script>
 <script src="../assets/js/tai-pricing-config.js"></script>
 <script>if(typeof WOW !== 'undefined') new WOW().init();</script>
 <script>
@@ -678,57 +651,19 @@ document.addEventListener('DOMContentLoaded', function () {
   counters.forEach(function(el) { io.observe(el); });
 })();
 
-/* KG이니시스 결제 (보호 영역) */
-var DIAG_API = 'https://api.taieng.co.kr';
-var DIAG_RETURN = 'https://taieng.co.kr/_api/payments/inicis/return';
-var DIAG_CLOSE  = 'https://taieng.co.kr/_api/payments/result?resultCode=CLOSE';
-
+/* ════════════════════════════════════════════════════
+   법령진단 유료 버튼 → 유료진단 1페이지(paid-diagnosis)로 이동
+   (이니시스 직접 호출 제거. 신규 플로우: 회원게이트→가격결정입력→가격안내→결제)
+   가격 카드(tai-pricing-config.js)가 onclick="diagPay('DIAG_BUILDING', ...)" 호출.
+   이 페이지는 nexas/service/ 하위이므로 paid-diagnosis 는 상위(../)에 위치.
+════════════════════════════════════════════════════ */
 function diagPay(productType, planCode, amount, goodname) {
-  var token     = localStorage.getItem('access_token') || '';
-  var userId    = localStorage.getItem('user_id') || '';
-  var companyId = localStorage.getItem('company_id') || '';
-
-  if (!userId) {
-    userId = 'guest_' + Date.now();
+  var sector = (productType || '').replace(/^DIAG_/, '');
+  var url = '../paid-diagnosis.html';
+  if (['BUILDING','INDUSTRY','CONSTRUCTION'].indexOf(sector) >= 0) {
+    url += '?sector=' + encodeURIComponent(sector);
   }
-
-  var headers = { 'Content-Type': 'application/json' };
-  if (token) {
-    headers['Authorization'] = 'Bearer ' + token;
-  }
-
-  var payload = { user_id: userId, product_type: productType, amount: amount, goodname: goodname, plan_code: planCode, period_months: 1, payment_type: 'CARD', return_url: DIAG_RETURN, close_url: DIAG_CLOSE };
-  if (companyId) payload.company_id = companyId;
-
-  fetch(DIAG_API + '/payments/inicis/prepare', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify(payload)
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(res) {
-    if (!res || res.status !== 'success') throw new Error((res && (res.detail || res.message)) || '결제 준비 실패');
-    var d = res.data;
-    document.getElementById('df_mid').value          = d.mid         || '';
-    document.getElementById('df_mKey').value         = d.mKey        || '';
-    document.getElementById('df_oid').value          = d.oid         || '';
-    var totalPrice = parseInt(d.price || amount);
-    var taxAmt = Math.round(totalPrice / 11);
-    document.getElementById('df_price').value        = String(totalPrice);
-    document.getElementById('df_tax').value          = String(taxAmt);
-    document.getElementById('df_taxfree').value      = '0';
-    document.getElementById('df_goodname').value     = d.goodname    || goodname;
-    document.getElementById('df_buyername').value    = d.buyername   || '고객';
-    document.getElementById('df_buyertel').value     = d.buyertel    || '00000000000';
-    document.getElementById('df_buyeremail').value   = d.buyeremail  || '';
-    document.getElementById('df_timestamp').value    = d.timestamp   || '';
-    document.getElementById('df_signature').value    = d.signature   || '';
-    document.getElementById('df_verification').value = d.verification || '';
-    document.getElementById('df_returnUrl').value    = DIAG_RETURN;
-    document.getElementById('df_closeUrl').value     = DIAG_CLOSE;
-    INIStdPay.pay('diag_inicis_form');
-  })
-  .catch(function(err) { alert('오류: ' + err.message); });
+  location.href = url;
 }
 </script>
 <script src="/assets/js/tai-analytics.js"></script>
