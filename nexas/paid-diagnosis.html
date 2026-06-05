@@ -65,6 +65,9 @@
   .msg-box { border-radius:8px; padding:11px 14px; font-size:.85rem; margin:12px 0; display:none; }
   .msg-box.error { background:#fef2f2; color:#dc2626; border:1px solid #fecaca; }
   .msg-box.show { display:block; }
+  .input-caution { background:#fef2f2; border:1px solid #fecaca; border-radius:10px; padding:13px 15px; margin:16px 0 4px; font-size:.83rem; color:#b91c1c; line-height:1.7; }
+  .input-caution .ic-title { font-weight:800; margin-bottom:4px; }
+  .input-caution strong { color:#991b1b; }
   .withdrawal-notice { background:#fff7ed; border:1px solid #fed7aa; border-radius:10px; padding:14px 16px; margin:16px 0; font-size:.82rem; color:#9a3412; line-height:1.65; }
   .withdrawal-notice .wn-title { font-weight:800; margin-bottom:6px; }
   .wn-check { display:flex; gap:8px; align-items:flex-start; margin-top:10px; font-size:.84rem; color:#0f2b4a; }
@@ -111,6 +114,15 @@
         <span class="pd-unit" id="criteriaUnit"></span>
       </div>
       <div class="pd-hint" id="criteriaHint"></div>
+    </div>
+
+    <!-- 정확한 입력 당부 (가격 확인 버튼 직전) -->
+    <div class="input-caution">
+      <div class="ic-title">⚠️ 입력값을 정확히 입력해 주세요</div>
+      입력하신 <strong>연면적·상시 근로자 수·공사 금액</strong>에 따라
+      <strong>적용되는 법령과 진단 범위, 진단 금액이 달라집니다.</strong>
+      실제 사업장 정보와 다르게 입력하면 진단 결과가 사업장에 맞지 않을 수 있으니,
+      대략적인 값이 아니라 <strong>정확한 값</strong>을 입력해 주세요.
     </div>
 
     <div class="msg-box error" id="msgBox"></div>
