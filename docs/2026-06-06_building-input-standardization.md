@@ -91,3 +91,31 @@
 - construction_type 값 = 건축공사/토목공사/산업설비/조경공사/전문건설/기타.
 - **엔드포인트: 폼은 엔진 직접호출 아님** → `POST /diagnosis/create`(또는 PATCH `/diagnosis/{id}`)로 input_data 저장 후 `diagnosis-step2.html`로 이동. 엔진 매핑은 `/diagnosis` 처리에서.
 - **→ 세 곳이 서로 다름: (a) diagnosis_input_fields DB · (b) 실제 tadmin HTML 폼 · (c) 엔진 condition_code. 표준화는 (b)↔(c) 기준으로 재도출 필요. §2·§5·§6·§7-2·7-3은 (a) 기준이므로 (b) 확인 후 갱신해야 함.**
+
+## 8. ★소비자(runtime) 경로 입력 소비 — v510과 다름 (2026-06-06)
+
+소비자 진단(무료 `/anonymous-diagnosis`, 통합 `/diagnosis/run`)은 `run_diagnose_step1_runtime`(`diagnosis_runtime_step1.py`)를 쓰며 **평가 방식이 v510과 완전히 다름**:
+- 룰 소스: `fetch_runtime_rules_as_v1`(runtime_metadata_resolution → v1 투영) — 레거시 테이블 아님.
+- 입력→컨텍스트: **`_input_to_facility_context(sector, inp)`**(`legal_context.py`) — 입력에서 facility_ctx **파생**.
+- 평가: **`evaluate_facility_conditions_db(facility_ctx, rules, sector)`** + `CONDITION_CODE_TO_CONTEXT_KEY` 매핑 — 룰 condition_code를 ctx 키로 **매핑**해 비교(이름 정확일치 불요).
+- → **§5~§7(normalize_input·단일 condition_code 정확일치·레거시)은 v510 전용. 소비자 경로엔 적용 안 됨.**
+
+### 8-1. `_input_to_facility_context`가 읽는 입력 키 (소비자 경로 실사용)
+- **공통 해소:** `worker_count` ← `worker_count` 또는 `employee_count` 둘 다 허용 → v510 worker/employee 불일치 **해소**. `has_hazardous_material` → `has_` **와** `is_hazardous_material` 둘 다 set → has_/is_ 불일치 **해소**.
+- **BUILDING:** building_use_type/building_use → **building_use_code (읽음 — v510에선 무시)**, total_floor_area/floor_area→building_area, floor_count, electric_capacity→electrical_capacity_kw, has_high_pressure_gas(+gas_capacity_kg), gas_capacity_m3, has_hazardous_material, elevator_count(or has_elevator), annual_energy_toe, has_boiler(+boiler_capacity_kw).
+- **MANUFACTURING:** ksic_major→ksic_code → **is_factory_registered 파생(C 시작)**, worker_count, electric_capacity, has_hazardous_material, has_high_pressure_gas, gas_capacity_kg/m3, has_boiler, has_chemical_substance, elevator_count, annual_energy_toe, building_area.
+- **CONSTRUCTION:** **contract_amount_eok→construction_amount+contract_amount (tadmin 폼 필드명과 일치 ✓)**, construction_type→건축/토목/공통(+is_building/is_civil), direct_workers+subcon_workers→worker_count 합, **has_tunnel_bridge·has_blasting·has_crane·has_high_work (직접 읽음)**, electric_capacity.
+- **SPECIAL_FACILITY:** facility_type→building_use_code, total_floor_area, hospital_beds, student_count, worker_count.
+
+### 8-2. 사실 정리 + 잔존 이슈
+- 소비자(runtime) 경로는 v510보다 정합성이 훨씬 높음 — worker/employee·위험물 has_/is_·건물용도·ksic 모두 해소.
+- 잔존(사실): ① 건설 tadmin 폼 토글은 `has_tunnel_work`/`has_bridge_work`(분리)인데 ctx는 `has_tunnel_bridge`(통합) → 이름 불일치. `has_crane/has_blasting/has_high_work`는 일치, 그러나 `has_excavation/has_electrical_work/has_gas_work/has_chemical_work`는 ctx 파생에 없음. ② facility-type 룰이 building_use_code(문자열)에서 어떻게 매칭되는지, 어떤 condition_code가 ctx 키로 매핑되는지는 `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 미독 → 추가 확인.
+
+### 8-3. 진입점별 엔진 (확정)
+- `/anonymous-diagnosis`(무료) → runtime. `/diagnosis/run`(통합·Nexas) → runtime. `/legal-engine/diagnose/step1`(v510, factory_id) → 레거시.
+- tadmin 상세폼의 `/diagnosis/create`·`/diagnosis/{id}`(draft CRUD)는 **2026-06-06 롤백·비활성화**(`routers/diagnosis_input_draft.py`). 입력 저장 표준 = **factories(시설)→factory_process(공정)→equipment_assets(설비)**, 임시저장 = `factories.diagnosis_status='DRAFT'`.
+
+### 8-4. 미완료 (다음)
+- (나) 건물·산업 tadmin 입력폼 필드명(건설만 읽음).
+- (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부).
+- (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 — runtime 룰 condition_code↔ctx 키 매핑.
