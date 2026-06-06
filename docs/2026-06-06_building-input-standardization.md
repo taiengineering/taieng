@@ -185,13 +185,41 @@ cc·cv 필수; **ctx_key = map.get(cc, cc)**; actual = ctx[ctx_key] (없으면 c
    - has_chemical_substance(건물)·is_multi_use(건물): BUILDING 분기 미파생 → ctx 기본 0/없음 → 드롭.
 5. `_probe_law_engine`: runtime 소스=`runtime_metadata_resolution`, impacts에 **무료진단·유료진단·SaaS 법적의무(safe>점검관리)** 명시 → SaaS 의무도 이 엔진 사용.
 
+## 13. ★D/A/F 엔진 영향도 — 우선순위 확정 (2026-06-06)
+
+추가 정독: `diagnosis_runtime_step1.py`, `legal_runtime_fetch.py`, `rule_candidate_projection.py` + DB(`runtime_metadata_resolution`).
+
+**★선결 사실 — 런타임 condition_code 생성 한계:** `project_metadata_to_v1`→`_apply_runtime_condition`(`services/rule_candidate_projection.py`)이 `runtime_metadata_resolution.condition_value` 텍스트를 정규식 파싱해 **딱 4종**만 생성: `building_area`(㎡)·`electric_capacity`(kW)·`construction_amount`(억)·`employee_count`(명/인). 그 외 = condition_code="". 
+**DB 확정:** runtime_metadata_resolution 3,395행 중 condition_value 채워진 행 **7건**, 4종 단위 인식 **1건**("별표3(종류+인원)"→`employee_count≥3` **오파싱**). 나머지 3,388행 = 무조건 적용. → 입력값이 비교될 룰 자체가 사실상 부재.
+
+### [D] sector 코드
+- **처리방침:** 진입 어댑터에서 변환 보장. 코어에 리터럴 INDUSTRIAL 도달 시 = **ValueError**(Default Context 아님).
+- **근거:** `run_diagnose_step1_runtime`(`diagnosis_runtime_step1.py`) — `if sector_raw not in allowed_sectors: raise ValueError`(컨텍스트 생성보다 가드 선행). allowed에 INDUSTRIAL 없음. 변환 확정: `diagnosis_integrated_svc.run_diagnosis`/`upgrade_diagnosis`(`engine_sector="MANUFACTURING" if sector=="INDUSTRIAL"`) + anonymous SECTOR_BY_KIND. `diagnosis_nexas_adapter.py`·`normalize_sector_db`는 변환 안 함.
+- **condition_code:** 해당 없음. **결론:** 라이브 소비자 경로(통합/무료)는 변환되어 정상. 미변환 위험 = 비활성 `/diagnosis/create`·직접 API.
+
+### [A] electrical_capacity_kw
+- **처리방침:** **현재 electric_capacity 조건 룰 = 0건 → 판정 영향 없음.** 예방적 Layer B 통일 권장.
+- **근거:** `_apply_runtime_condition`는 kW→`electric_capacity` 생성(electrical_capacity_kw라는 cc는 런타임 미생성). DB: kW 포함 condition_value **0건**. `_input_to_facility_context`(`legal_context.py`) BUILDING/MFG는 `inp["electric_capacity"]`만 → 폼 electrical_capacity_kw 드롭(ctx 0). CONSTRUCTION만 둘 다.
+- **condition_code:** `electric_capacity`(ctx 키 동일). **영향 법령:** 현재 **해당없음(0건)**. **결론:** ①현재 미사용 ②Layer B를 `electrical_capacity_kw or electric_capacity`로 통일하는 건 향후 대비로 타당(엔진 `legal_context.py` 영역).
+
+### [F] 건물용도 → 시설유형 파생
+- **처리방침:** **현재 런타임 기준 파생 불필요** — 투영이 시설유형/building_use_code condition_code를 **생성 안 함** → 매칭 룰 0. 그런 룰은 cc=""로 **무조건 적용**(누락 아닌 과적용 방향).
+- **근거:** `_apply_runtime_condition` 생성 cc 4종에 시설유형 없음. `_input_to_facility_context` BUILDING은 building_use_code(문자열)만, 시설유형 불리언·is_multi_use 미파생(is_multi_use 기본 0). `CONDITION_CODE_TO_CONTEXT_KEY`에 시설유형 키 없음.
+- **condition_code:** 해당 없음. **필요 building_use 값:** 업무/판매/근린생활/의료/교육연구/숙박/운수/창고/공장/기타.
+- **결론:** ①현재 불필요 ②③ 플래그 종류·판정기준 = 법령 도메인 = **확인불가(코드 근거 없음)**. 도입 시 (룰 condition_value 구조화 + 투영 파서 + Layer B 파생 + 맵) 4곳 동시 변경 필요.
+
+### 13-1. 즉시 정합성 이슈 (엔진 영역, 우선순위)
+1. **(최우선) 룰 condition 공백:** condition_value 미채움 3,388/3,395 → **입력 표준화 이전에 엔진 룰 condition 구조화가 선행**돼야 입력이 판정에 의미. (입력부 문제가 아니라 엔진 데이터 문제.)
+2. **sector 필터 무력화(과적용):** `project_metadata_to_v1`이 `sector_hint`로 전 룰 sector를 요청 섹터로 덮어씀 → 원 sector(공통/제조/건설) 무시, `filter_runtime_for_sector` 전량 통과. 건물·제조는 전 카탈로그 적용(건설만 법령 prefix 필터).
+3. **오파싱 1건:** `"별표3(종류+인원)"`(산안법17조)→`employee_count≥3` 생성(`_apply_runtime_condition`).
+4. **카탈로그 주석 모순:** `legal_runtime_fetch.py` "CATALOG ONLY/격리" 주석 ↔ `run_diagnose_step1_runtime` 실제 진단 사용(`rule_version="runtime_metadata_resolution:v1"`).
+
+### 13-2. 최종 3목록
+- **소비자 화면 필수 유지(현재 실사용):** `sector`; `worker_count`/`employee_count`(건설 산안법16조 50명 선임·`get_construction_summary`); `contract_amount_eok`→`construction_amount`(건설 임계 1/50/100/120/150/200억·선임); `floor_area`(`auto_tier_func` 과금 등급). 그 외 시설상세는 현재 판정 기여 0.
+- **판정 누락 가능 필드(입력받으나 미반영):** electrical_capacity_kw·transformer_capacity_kva·gas_capacity_kg/m3·boiler_capacity_kw·elevator_count·annual_energy_toe·has_high_pressure_gas/has_chemical_substance/has_boiler·industry_type·hazardous_materials[]·building_use(시설유형)·건설 위험작업 토글 — 원인은 §13 선결사실(런타임 cc 4종 한계 + condition_value 공백).
+- **즉시 수정 엔진 정합성:** 위 13-1 (1)~(4).
+
 ## 진행 현황 요약 (2026-06-06)
-- (가) runtime 입력 소비 = §8 · (나) 건물·산업 폼 = §9 · (다) diagnosis_input_fields 사용처 = §10 · (추가) condition_code↔ctx 매핑+평가기 = §12. **전 항목 완료.**
-- **핵심 결론:** 소비자 표준화 = **3계층(폼필드명 → `_input_to_facility_context`(Layer B) → ctx키 ← `CONDITION_CODE_TO_CONTEXT_KEY`(Layer C) ← 룰 condition_code)이 같은 ctx 키에서 일치**하도록. 최우선 정합:
-  ① electrical_capacity_kw → 폼/Layer B 둘 중 하나를 electric_capacity로 통일
-  ② 위험물 표현(산업 배열 hazardous_materials ↔ 엔진 has_hazardous_material 불리언)
-  ③ industry_type(한글) ↔ ksic 코드 (is_factory_registered 파생용)
-  ④ sector INDUSTRIAL ↔ MANUFACTURING 상위 변환 보장
-  ⑤ 건설 근로자(total_workers↔subcon_workers)·터널/교량(has_tunnel_work+has_bridge_work↔has_tunnel_bridge) 토글
-  ⑥ 건물용도→시설유형 플래그 파생(현재 runtime·v510 모두 미파생; building_use_code 문자열 eq만 가능)
-- **경계:** 위 정합은 GPT 영역(엔진/스키마/판정)과 입력부(폼) 양쪽에 걸침 → 엔진측 변경은 GPT, 폼측은 입력부 표준화로 분리 진행.
+- (가) runtime 입력 소비 = §8 · (나) 건물·산업 폼 = §9 · (다) diagnosis_input_fields 사용처 = §10 · (추가) condition_code↔ctx 매핑+평가기 = §12 · (D/A/F) 엔진 영향도 = §13. **전 항목 완료.**
+- **핵심 결론(갱신):** 입력 표준화의 실효성은 **엔진 룰 condition 데이터 구조화(§13-1 ①)**가 선행돼야 발생. 현재 런타임은 condition_code 4종만 생성하고 그나마 데이터가 비어 있어, 대부분의 입력이 판정에 미반영(과적용 상태). 따라서 우선순위는 (1) 엔진 룰 condition 채움 → (2) sector 스탬프/오파싱 수정 → (3) 폼↔ctx 3계층 정합(electrical_capacity_kw·위험물·industry_type·sector·건설 토글·건물용도 파생).
+- **경계:** 13-1 전 항목은 엔진(GPT) 영역(룰 데이터·투영·sector 스탬프·파싱). 폼 필드명만 입력부(Claude). F2/F3 판정기준은 법령 도메인 = 확인불가.
