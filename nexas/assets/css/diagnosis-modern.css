@@ -387,6 +387,22 @@ body.diag-page-modern a { text-decoration: none; }
   padding-bottom: 16px;
   border-bottom: 1px solid var(--tai-line);
 }
+.diag-page-modern .diag-tier-panel {
+  margin-bottom: 20px;
+}
+.diag-page-modern .diag-tier-panel-head {
+  font-size: .95rem;
+  font-weight: 800;
+  color: var(--tai-text);
+  margin-bottom: 12px;
+}
+.diag-page-modern .diag-tier-placeholder {
+  text-align: center;
+  color: #94a3b8;
+  font-size: .88rem;
+  padding: 24px 0;
+  margin: 0;
+}
 .diag-page-modern .form-row { margin-bottom: 20px; }
 .diag-page-modern .form-label-tai {
   font-size: .9rem;

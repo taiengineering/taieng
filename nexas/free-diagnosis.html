@@ -127,7 +127,20 @@
       <p class="panel-title" id="step2Title">기본 정보를 입력해주세요</p>
       <p class="panel-sub" id="step2Sub">필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다</p>
       <div class="price-banner" id="priceBanner"></div>
-      <div id="dynFormArea"><div style="text-align:center;padding:40px 0;color:#94a3b8;">항목을 불러오는 중...</div></div>
+      <div id="diagPanelsWrap">
+        <div class="diag-tier-panel active" id="diagPanelFacility" data-tier="facility">
+          <div class="diag-tier-panel-head">시설 정보</div>
+          <div id="dynFormArea"><div style="text-align:center;padding:40px 0;color:#94a3b8;">항목을 불러오는 중...</div></div>
+        </div>
+        <div class="diag-tier-panel" id="diagPanelProcess" data-tier="process" style="display:none;">
+          <div class="diag-tier-panel-head">공정 정보</div>
+          <div id="dynFormAreaProcess"><p class="diag-tier-placeholder">공정 입력은 Week2에서 제공됩니다.</p></div>
+        </div>
+        <div class="diag-tier-panel" id="diagPanelEquipment" data-tier="equipment" style="display:none;">
+          <div class="diag-tier-panel-head">설비 정보</div>
+          <div id="dynFormAreaEquipment"><p class="diag-tier-placeholder">설비 입력은 Week2에서 제공됩니다.</p></div>
+        </div>
+      </div>
       <div class="disclaimer-box">
         <div class="disclaimer-text">
           본 진단 결과는 현행 법령과 사업장 정보를 정밀 분석하여 적용 가능한 법적 의무를 도출한 것입니다.<br>
@@ -219,7 +232,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <a href="fix-request.html?from=free-diagnosis&type=general" class="btn btn-danger" data-tai-track="consultation_click" data-tai-location="content">도입 문의하기</a>
+        <a href="contact.html" class="btn btn-danger" data-tai-track="consultation_click" data-tai-location="content">도입 문의하기</a>
       </div>
     </div>
   </div>
@@ -367,9 +380,41 @@ function selectSector(val, el) {
   el.classList.add('selected');
   if (sector !== val) {
     sector = val;
-    formValues['free'] = {};
+    formValues['free'] = { facility: {}, process: [], equipment: [] };
     paidFee = 0;
   }
+}
+
+function ensureFormLayer(prefix) {
+  if (!formValues[prefix]) formValues[prefix] = {};
+  const fv = formValues[prefix];
+  if (!fv.facility || typeof fv.facility !== 'object') fv.facility = {};
+  if (!Array.isArray(fv.process)) fv.process = [];
+  if (!Array.isArray(fv.equipment)) fv.equipment = [];
+  return fv;
+}
+
+function applyDiagPanelVisibility() {
+  const proc = document.getElementById('diagPanelProcess');
+  const equip = document.getElementById('diagPanelEquipment');
+  // Week1: 공정·설비 패널은 골격만 (항상 비노출)
+  if (proc) proc.style.display = 'none';
+  if (equip) equip.style.display = 'none';
+}
+
+function buildFormData(prefix) {
+  const fv = ensureFormLayer(prefix);
+  const flat = {};
+  Object.entries(fv).forEach(([k, v]) => {
+    if (k === 'facility' || k === 'process' || k === 'equipment') return;
+    flat[k] = v;
+  });
+  return {
+    ...flat,
+    facility: { ...fv.facility },
+    process: [...(fv.process || [])],
+    equipment: [...(fv.equipment || [])],
+  };
 }
 
 function sectorLabel() {
@@ -449,6 +494,8 @@ async function loadFreeForm() {
   const titleMap = { BUILDING:'건물 기본 정보', INDUSTRY:'산업 기본 정보', CONSTRUCTION:'건설 기본 정보' };
   document.getElementById('step2Title').textContent = titleMap[sector] || '기본 정보 입력';
   document.getElementById('step2Sub').textContent = '필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다';
+  applyDiagPanelVisibility();
+  ensureFormLayer('free');
   document.getElementById('dynFormArea').innerHTML = '<div style="text-align:center;padding:30px 0;color:#94a3b8;">입력 항목 불러오는 중...</div>';
   document.getElementById('disclaimerCheck').checked = false;
   document.getElementById('btnSubmit').disabled = true;
@@ -493,10 +540,11 @@ function ksicPartsFromForm(prefix) {
 }
 
 function ensureFormTableRows(prefix, fieldCode, minRows) {
-  if (!formValues[prefix]) formValues[prefix] = {};
-  if (!Array.isArray(formValues[prefix][fieldCode])) formValues[prefix][fieldCode] = [];
-  const arr = formValues[prefix][fieldCode];
+  const fv = ensureFormLayer(prefix);
+  if (!Array.isArray(fv[fieldCode])) fv[fieldCode] = [];
+  const arr = fv[fieldCode];
   while (arr.length < (minRows || 1)) arr.push({});
+  fv.facility[fieldCode] = arr;
   return arr;
 }
 
@@ -627,6 +675,7 @@ function bindTableRowEvents(wrap, prefix, fieldCode, cols) {
     });
     if (!formValues[prefix]) formValues[prefix] = {};
     formValues[prefix][fieldCode] = out;
+    ensureFormLayer(prefix).facility[fieldCode] = out;
   };
   wrap.querySelectorAll('input,select').forEach(el => {
     el.addEventListener('change', syncFromDom);
@@ -786,8 +835,9 @@ function renderField(f, prefix) {
 
 // ── 값 저장 ──
 function setVal(code, val, prefix) {
-  if (!formValues[prefix]) formValues[prefix] = {};
-  formValues[prefix][code] = val;
+  const fv = ensureFormLayer(prefix);
+  fv[code] = val;
+  fv.facility[code] = val;
   if (code === 'total_floor_area' && sector === 'BUILDING' && val) fetchPriceTier(val, prefix);
 }
 function setYN(code, val, el, prefix) {
@@ -797,10 +847,11 @@ function setYN(code, val, el, prefix) {
 }
 function toggleMulti(code, el, prefix) {
   el.classList.toggle('checked');
-  if (!formValues[prefix]) formValues[prefix] = {};
-  if (!Array.isArray(formValues[prefix][code])) formValues[prefix][code] = [];
-  const v = el.dataset.val, arr = formValues[prefix][code], idx = arr.indexOf(v);
+  const fv = ensureFormLayer(prefix);
+  if (!Array.isArray(fv[code])) fv[code] = [];
+  const v = el.dataset.val, arr = fv[code], idx = arr.indexOf(v);
   if (idx === -1) arr.push(v); else arr.splice(idx, 1);
+  fv.facility[code] = [...arr];
 }
 
 async function fetchPriceTier(area, prefix) {
@@ -909,7 +960,7 @@ async function fetchBuildingRegister(addrPrefix, roadAddr, diagPrefix) {
 
 // ── FREE 진단 제출 ──
 async function submitFree() {
-  const freeData = formValues['free'] || {};
+  const freeData = ensureFormLayer('free');
   const requiredFields = document.querySelectorAll('#dynFormArea .req');
   let missing = [];
   requiredFields.forEach(reqEl => {
@@ -953,7 +1004,7 @@ async function submitFree() {
       body: JSON.stringify({
         sector, tier: 'FREE', auth_token: authToken,
         disclaimer_log_id: disclaimerLogId,
-        form_data: formValues['free'] || {}
+        form_data: buildFormData('free')
       })
     });
     const runJson = await runR.json();
