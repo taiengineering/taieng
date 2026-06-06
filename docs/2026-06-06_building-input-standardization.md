@@ -148,3 +148,20 @@ sector(**INDUSTRIAL**,hidden) · tier(PAID1) · company_name · **industry_type*
 - (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부) — 미독.
 - (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 매핑 — 미독.
 - industry-paid2/3, construction-step1 등 후속 단계 폼 필드 — 미독.
+
+## 10. diagnosis_input_fields 사용처 — (다) 종결 (2026-06-06)
+- `routers/diagnosis_fields.py`(prefix `/diagnosis`, 2026-04-15 신규, 공개 API):
+  - **`GET /diagnosis/fields?sector=&tier=`** → `diagnosis_input_fields`에서 field_code/field_name/field_type/field_group/unit/is_required/placeholder/help_text/auto_source/input_options/sort_order/tier 조회 → **동적 폼 렌더 카탈로그** 반환. 산업은 누적(FREE+PAID1..PAIDn). `normalize_sector_db` + `sector_codes_for_query`로 섹터 정규화.
+  - `GET /diagnosis/pricing`(price_diagnosis_report), `/equipment-options`(system_codes), `/process-options`(ksic_process_map) — diagnosis_input_fields 아님.
+- **결정적(사실):** 내가 확인한 tadmin 폼 3종(building/industry-paid1/construction)은 **`/diagnosis/fields`를 호출하지 않는 정적 HTML**(fetch는 `/diagnosis/create`·`/{id}`·AutofillBiz/Address·MultiSelectGroup 정적옵션뿐) → **tadmin SaaS 폼은 `diagnosis_input_fields`를 사용하지 않음**.
+- → `diagnosis_input_fields`는 레거시 아님(살아있는 동적 폼 카탈로그 API). 다만 소비자는 Nexas(마케팅) 동적폼 등으로 추정(주석: equipment/process-options = "Nexas 동적 폼"); tadmin 정적폼과 무관.
+- **결론:** §7-5의 (a)diagnosis_input_fields ≠ (b)tadmin폼 불일치의 구조적 원인 = **tadmin이 (a)를 안 씀**. 표준화는 (b)tadmin 정적폼 ↔ (c)엔진(runtime `_input_to_facility_context`) 기준으로 진행해야 하며, (a)는 Nexas 동적폼 경로에서 별도 정합 필요.
+
+## 11. 남은 1건 (추가) — 미독
+- `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY`(`services/legal_engine_svc.py`) 전수: runtime 룰 condition_code ↔ ctx 키 매핑, `building_use_code`(문자열) 시설유형 매칭 방식. 소비자(runtime) 경로 정합성의 마지막 핵심. (대용량 파일 — 별도 진행 권장)
+- 후속 단계 폼: industry-paid2/3, construction-step1, diagnosis-step2/3.
+
+## 진행 현황 요약 (2026-06-06)
+- (가) runtime 입력 소비 = §8 완료 · (나) 건물·산업 폼 = §9 완료 · (다) diagnosis_input_fields 사용처 = §10 완료.
+- 남음: (추가) CONDITION_CODE_TO_CONTEXT_KEY 전수(§11).
+- **핵심 결론:** 소비자 표준화 기준선 = **tadmin 정적폼(b) ↔ runtime `_input_to_facility_context`(c)**. 최우선 정합 대상 = ① electrical_capacity_kw↔electric_capacity ② 위험물 표현(배열↔불리언) ③ industry_type↔ksic ④ sector INDUSTRIAL↔MANUFACTURING ⑤ 건설 근로자·터널/교량 토글.
