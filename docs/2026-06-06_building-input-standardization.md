@@ -15,7 +15,7 @@
 - 나머지는 (B) 이름 불일치 또는 (C) 열린 `input` 경유 → 엔진 실사용 여부를 엔진 코드로 확인해야 확정.
 - 표준/자유 구분은 `field_type`에 이미 존재(select·boolean·multi_select=코드형, number·text=값/자유), 모름 처리 정책은 `unknown_handler`에 존재(대부분 ALLOW_AND_ASK_AFTER, `has_safety_manager`=BLOCK_PAY).
 
-## 2. BUILDING 대조 분류
+## 2. BUILDING 대조 분류 (스키마 이름매칭 기준 초안 — §5가 우선)
 
 **A. 엔진 직결 확정 (6) — 이름 일치, 표준화 1순위**
 건물 용도, 연면적, 지상 층수, 상시 근로자 수, 수전용량, 승강기 대수.
@@ -34,7 +34,7 @@
 
 **🔧 항목 결함 1건**: "다중이용 업종"(multi_select)은 선택 목록(코드)이 비어 있음 → 자유 기입 → 오입력 위험.
 
-## 3. GPT 질문 프롬프트 (엔진 담당에게 그대로 전달)
+## 3. GPT 질문 프롬프트 (참고용 — 현재는 Claude가 §5에서 직접 답함)
 
 ```
 [역할] 당신은 TAI Safe 법령엔진(판정 로직·런타임 매칭·엔진 데이터) 담당입니다.
@@ -47,47 +47,37 @@
  · 참조한 파일명   · 참조한 함수명   · 참조한 룰/데이터 키   · 참조한 조건문 또는 매핑명
 근거가 없으면 엔진사용 여부는 반드시 "확인불가"로 표시하세요. 추측으로 Y 처리하지 마세요.
 
-[배경 사실]
-- 입력 정의: diagnosis_input_fields (sector='BUILDING', is_active=true), 약 36개 필드.
-- 엔진 입력 스키마: schemas/legal_engine.py 의 DiagnoseStep1Body
-  = 타입 지정 필드 + 열린 input(dict) 둘 다 존재.
-- BUILDING에서 스키마 타입 필드와 이름이 일치하는 건 아래 A 6개뿐.
-  나머지는 열린 input으로만 들어오거나(C), 이름이 다릅니다(B).
-
-[질문] 아래 각 항목에 대해 표로 답하세요.
-형식:  입력코드 | 엔진사용(Y/N/확인불가) | 엔진이 받는 코드명(다르면 매핑) | 판단 근거(파일/함수/룰키/조건·매핑 중 1개 이상) | 영향 법령·판정(한 줄)
-
-A. 이름 일치(엔진 직결 추정):
-building_use_type(건물용도), total_floor_area(연면적), floor_count(지상층수),
-worker_count(상시근로자수), electric_capacity(수전용량), elevator_count(승강기대수)
-
-B. 이름/형태 불일치 — 매핑 확인 필요:
-has_gas(가스시설) ↔ has_high_pressure_gas?
-has_chemical(화학물질) ↔ has_chemical_substance?
-has_hazmat_storage(위험물저장소) / has_oil_storage(유류저장) ↔ has_hazardous_material?
-is_energy_intensive(에너지다소비 O/X) ↔ annual_energy_toe(숫자)?
-
-C. 엔진 사용 여부 불명(열린 input 경유) — 사용/미사용 판정 요청:
-address, basement_count, built_year, main_structure, has_safety_manager,
-has_emergency_gen, emergency_gen_kw, escalator_count, has_mech_parking, mech_parking_count,
-has_sprinkler, has_fire_hydrant, has_smoke_control, has_emergency_broadcast,
-has_water_tank, water_tank_ton, has_septic_tank, septic_tank_ton, has_cooling_tower,
-has_asbestos, is_multi_use, multi_use_type, has_central_hvac, is_complex_building, underground_area
-
-D. 엔진 스키마엔 있는데 BUILDING 입력 화면엔 없음 — 누락인지/입력 필요한지 확인:
-floor_area(바닥면적), employee_count(종업원수), gas_capacity_kg·gas_capacity_m3(가스용량),
-has_boiler·boiler_capacity_kw(보일러), annual_energy_toe(연간에너지)
-
-[추가 1건] multi_use_type(다중이용 업종)은 선택 목록(코드)이 비어 있습니다.
-엔진이 이 값을 쓴다면, 어떤 코드 목록이어야 하는지 알려주세요.
-
-[마지막에 아래 3개를 별도 정리]
-1. BUILDING 입력 화면에서 반드시 유지해야 할 필드 (엔진 사용 근거가 확인된 것)
-2. 엔진에는 있으나 현재 입력 화면에 없어 추가 검토가 필요한 필드
-3. 현재 입력 화면에는 있으나 엔진 사용 근거가 확인되지 않는 필드
+[질문] 입력코드 | 엔진사용(Y/N/확인불가) | 엔진이 받는 코드명(다르면 매핑) | 판단 근거 | 영향 법령·판정
+[마지막] 3개 목록: ①유지 ②엔진엔 있으나 화면에 없음 ③화면엔 있으나 엔진 미사용
 ```
 
 ## 4. 다음 단계
-- GPT 답 수신 → C(약 25개) "표준화 대상 / 자유입력 OK" 확정, B(5개) 이름 매핑 확정, D 누락 여부 확정.
+- §5 검증 결과 기준 → ② 이름 정합(엔진 키에 입력 코드 맞추기) 우선, ③ 화면 간소화, 누락 입력 추가 검토.
 - 그 후 4단계: 입력 화면(`tadmin/.../diagnosis-input-building.html`) 정합화 — 한 화면씩.
 - 산업(INDUSTRIAL)·건설(CONSTRUCTION)은 BUILDING 검증 후 동일 패턴 반복.
+
+## 5. Claude 검증 답변 (코드·DB 추적 — 2026-06-06 추가, §2보다 우선)
+
+**경로 추적(라이브 기준):**
+입력 → `run_diagnose_step1_v510`(`services/legal_v510_svc.py`)에서 `inp` 구성 → `normalize_input(inp)`(`services/input_normalizer.py`) → `_evaluate_conditions`→`_check_rule_conditions`(`services/legal_rules.py`)가 `context.get(condition_code)`로 룰 조건 1개 조회 → 룰은 `fetch_diagnosis_rules`(`services/legal_diagnosis_rules.py`) 우선순위 RUNTIME>V2>레거시, 운영=레거시 `master_building_legal_rules_legacy_contaminated`.
+
+**판정 메커니즘:** 룰마다 `condition_code` 1개. 입력 키가 normalize 후 그 코드와 **정확히 같아야** 작동. `ALIAS_MAP`은 짧음(total_floor_area→building_area, electric_capacity→electrical_capacity_kw, floors→floor_count, gas_capacity→gas_capacity_kg, workers→worker_count, contract_amount_eok→contract_amount). 불리언→1/0. 미등록 키는 그대로 통과.
+
+**① 엔진이 실제로 쓰는 입력 (레거시 룰 수, BUILDING+COMMON):**
+연면적→building_area(117), 승강기→elevator_count(58), 다중이용여부 is_multi_use→is_multi_use(43), 수전용량→electrical_capacity_kw(32), 지상층수→floor_count(27), 상시근로자수→worker_count(13), 안전관리자선임 has_safety_manager(1).
+
+**② 룰은 있으나 입력 이름이 어긋나 값이 버려짐 (정합화 핵심 = 진짜 병목):**
+- 상시근로자수: 룰 90개가 `employee_count`로 검사 ↔ 입력은 `worker_count`(별칭 없음) → 90개 미작동
+- 위험물/화학/고압가스/가스용량: 룰 `is_hazardous_material`(47)·`has_chemical_substance`(38)·`has_high_pressure_gas`(33)·`gas_capacity_kg`(56)·`gas_capacity_m3`(27) ↔ 입력 `has_hazmat_storage·has_oil_storage·has_chemical·has_gas`
+- 에너지: 룰 `annual_energy_toe`(17) ↔ 입력 `is_energy_intensive`(O/X)
+
+**③ 매칭 condition_code 없음 (엔진 미사용):**
+주소, 지하층수, 건축연도, 주구조, 비상발전기, 에스컬레이터, 기계식주차장, 소방 4종, 저수조, 정화조, 냉각탑, 석면, 다중이용업종(multi_use_type), 중앙공조, 복합건축물, 지하주차장면적, **건물용도(building_use_type)**.
+
+**§2 대비 정정:** §2-A에 넣었던 `building_use_type`은 레거시 condition_code로 **미사용**. §2-C에 넣었던 `is_multi_use`는 **실사용(43)**. §2는 스키마 이름매칭 기준 초안, **§5(라이브 룰 기준)가 우선**.
+
+**근거 파일:** `legal_v510_svc.py`, `input_normalizer.py`(ALIAS_MAP), `legal_rules.py`(_check_rule_conditions), `legal_diagnosis_rules.py`(fetch_rules_v1); 룰 수 = `master_building_legal_rules_legacy_contaminated`(is_active, diagnosis_stage=1) 집계.
+
+**가장 큰 시사점:** 표준화 핵심은 "필드 추가"가 아니라 **이름 정합**. worker_count↔employee_count, has_chemical↔has_chemical_substance, has_hazmat/oil↔is_hazardous_material, has_gas↔has_high_pressure_gas(+가스용량), is_energy_intensive↔annual_energy_toe만 맞춰도 수백 개 룰 조건이 살아남(06-03 READY 0건과 직결).
+
+**남은 확인(진행 중):** (1) 운영 엔진 플래그 실제값(Railway 환경변수) (2) 건물용도→시설유형 is_*(is_medical_facility·is_officetel_or_lodging 등) 미연결 갭 (3) hospital_beds·student_count 등 시설유형 입력 누락.
