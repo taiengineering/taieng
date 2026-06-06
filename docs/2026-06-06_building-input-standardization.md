@@ -119,3 +119,32 @@
 - (나) 건물·산업 tadmin 입력폼 필드명(건설만 읽음).
 - (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부).
 - (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 — runtime 룰 condition_code↔ctx 키 매핑.
+
+## 9. ★실제 입력폼 필드명 — 건물·산업 + runtime 대조 (2026-06-06)
+
+### 9-1. BUILDING 폼 (`diagnosis-input-building.html`) 실제 필드
+sector(BUILDING,hidden) · company_name · building_use(select 업무/판매/근린생활/의료/교육연구/숙박/운수/창고/공장/기타) · biz_number · road_address · floor_area · floor_count · underground_floor_count · **employee_count** · operation_shift(radio) · **electrical_capacity_kw** · transformer_capacity_kva · annual_energy_toe · has_elevator→elevator_count · has_boiler→boiler_capacity_kw · [소방]has_sprinkler/has_fire_alarm/has_fire_extinguisher/has_emergency_lighting/has_fire_door · [위험물]has_hazardous_material/hazardous_material_type(multi)/hazardous_quantity_ratio/has_chemical_substance · [수질]has_wastewater_facility/has_waste_treatment/wastewater_daily_m3/air_emission_permit · [다중]is_multi_use/multi_use_type(이제 채워짐) · [특수]is_hospital/is_school/is_childcare/is_underground_commercial. → POST /diagnosis/create (8-3 롤백경로).
+
+### 9-2. INDUSTRY PAID1 폼 (`diagnosis-input-industry-paid1.html`) 실제 필드
+sector(**INDUSTRIAL**,hidden) · tier(PAID1) · company_name · **industry_type**(한글: 금속제조/화학공업/식품/전자반도체/자동차부품/섬유의류/목재종이/고무플라스틱/기계제조/기타) · biz_number · road_address · **employee_count** · factory_area · floor_area · contractor_count · operation_shift · **hazardous_materials**(다중선택: flammable_liquid/flammable_gas/oxidizer/toxic/corrosive/explosive/carcinogen/reactive/cmc) · [안전]has_safety_manager/has_health_manager/has_safety_committee/has_safety_training/has_health_checkup/has_msds/has_ppe/has_emergency_plan · [전기환경]electrical_capacity_kw/transformer_capacity_kva/annual_energy_toe/has_wastewater_facility/has_air_emission/has_noise_vibration. → POST /diagnosis/create → industry-paid2.
+
+### 9-3. 폼 ↔ runtime 엔진 대조 (사실)
+**BUILDING 분기가 읽음:** building_use→building_use_code, floor_area→building_area, floor_count, employee_count→worker_count, annual_energy_toe, has_elevator/elevator_count, has_boiler/boiler_capacity_kw, has_hazardous_material.
+**BUILDING 폼엔 있으나 드롭:** electrical_capacity_kw(엔진 BUILDING 분기는 electric_capacity만 읽음), has_chemical_substance(BUILDING 분기 미독), is_multi_use(BUILDING 분기 미독), 그외(underground_floor_count·operation_shift·transformer_capacity_kva·소방5·hazardous_material_type/quantity·수질4·multi_use_type·특수4).
+**BUILDING 엔진 가능하나 폼 없음:** 고압가스(has_high_pressure_gas/gas_capacity_kg/gas_capacity_m3).
+**MANUFACTURING 분기가 읽음(INDUSTRY 폼에서):** employee_count→worker_count, floor_area→building_area, annual_energy_toe.
+**INDUSTRY 폼엔 있으나 드롭:** industry_type(엔진은 ksic_major/ksic_code 기대 → is_factory_registered 미파생), electrical_capacity_kw(엔진 electric_capacity), hazardous_materials[](엔진은 has_hazardous_material 불리언 기대), factory_area·contractor_count·operation_shift·transformer·안전8·환경3.
+**MANUFACTURING 엔진 가능하나 폼 없음:** has_high_pressure_gas, gas_capacity_kg/m3, has_boiler, has_chemical_substance, elevator_count.
+
+### 9-4. 전 폼 공통 불일치 (사실, 표준화 핵심)
+1. **전기용량 이름:** 건물·산업 폼=`electrical_capacity_kw` ↔ 런타임 BUILDING/MANUFACTURING 분기=`electric_capacity` → 드롭. (CONSTRUCTION 분기만 둘 다 허용.)
+2. **근로자 필드 폼마다 다름:** 건물·산업=`employee_count`(런타임 OK), 건설=`direct_workers`+`total_workers`(런타임은 direct_workers+`subcon_workers` → total_workers 명칭 불일치).
+3. **위험물 표현:** 건물=`has_hazardous_material` 불리언(런타임 OK), 산업=`hazardous_materials` 다중배열(런타임 미독).
+4. **업종/KSIC:** 산업=`industry_type` 한글라벨 ↔ 런타임=ksic 코드 기대.
+5. **sector 코드:** 산업폼=`INDUSTRIAL` ↔ 런타임 allowed={BUILDING,MANUFACTURING,CONSTRUCTION,SPECIAL_FACILITY}; 상위 변환 의존(미변환 시 ValueError/default ctx 위험).
+6. 세 폼 모두 → `/diagnosis/create` (8-3 롤백 경로).
+
+### 9-5. 미완료 (다음)
+- (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부) — 미독.
+- (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 매핑 — 미독.
+- industry-paid2/3, construction-step1 등 후속 단계 폼 필드 — 미독.
