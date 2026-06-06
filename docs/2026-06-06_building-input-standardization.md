@@ -52,12 +52,12 @@
 ## 6. 보강 조사 — 남은 확인 종결 (2026-06-06)
 
 **(1) 라이브 엔진 경로 = 레거시 확정 (코드 근거).**
-`legal_runtime_fetch.py` 헤더: "[CATALOG ONLY - NOT DIAGNOSIS SOURCE] runtime_metadata_resolution = 법령 카탈로그. 진단 경로 격리됨(2026-05-31)". `USE_RUNTIME_ENGINE` 기본 false, `USE_V2_ENGINE` 기본 false. → 진단은 `fetch_rules_v1`(레거시) 기본·설계상 경로. (누가 `TAI_USE_V2_ENGINE=true`로 켜면 master_rule_v2 경로로 변경 — 운영 설정 아님.)
+`legal_runtime_fetch.py` 헤더: "[CATALOG ONLY - NOT DIAGNOSIS SOURCE] runtime_metadata_resolution = 법령 카탈로그. 진단 경로 격리됨(2026-05-31)". `USE_RUNTIME_ENGINE` 기본 false, `USE_V2_ENGINE` 기본 false. → 진단은 `fetch_rules_v1`(레거시) 기본·설계상 경로. (누가 `TAI_USE_V2_ENGINE=true`로 켜면 master_rule_v2 경로로 변경 — 운영 설정 아님.) ※§8에서 정정: 소비자 무료·통합 진단은 runtime 직접 호출 경로(플래그 우회).
 
 **(2) 역방향 갭 — "엔진은 검사하는데 입력 소스가 아예 없는 조건"(진짜 누락):**
-- **건물용도가 0개 룰을 구동.** building_use_type은 condition_code가 아니고, 거기서 시설유형 플래그(is_medical_facility·is_hospital_or_clinic·is_officetel_or_lodging·is_apartment_or_elderly·is_residential_or_care·is_warehouse·is_parking_area 등)를 **파생하지 않음** → 시설유형 룰 전부 미작동. 건물용도→시설유형 코드 매핑 필요.
+- **건물용도가 0개 룰을 구동.** building_use_type은 condition_code가 아니고, 거기서 시설유형 플래그(is_medical_facility·is_hospital_or_clinic·is_officetel_or_lodging·is_apartment_or_elderly·is_residential_or_care·is_warehouse·is_parking_area 등)를 **파생하지 않음** → 시설유형 룰 전부 미작동. 건물용도→시설유형 코드 매핑 필요. (§12에서 runtime도 동일 갭 확인)
 - `building_grade`(13건): 입력 소스 없음.
-- `employee_count`(90건): 입력 worker_count만 → 별칭 필요(②와 동일, 최대 임팩트).
+- `employee_count`(90건): 입력 worker_count만 → 별칭 필요(②와 동일, 최대 임팩트). (§12: runtime은 맵으로 해소)
 - `hospital_beds`(5)·`student_count`(4): 의료/학교 건물 룰이 쓰나 BUILDING 화면엔 없음(SPECIAL_FACILITY 입력에만 존재).
 
 **(3) 표준화 우선순위(결론):** ① 이름 정합(employee_count·위험물·가스·에너지) → ② 건물용도→시설유형 매핑 → ③ 화면 간소화(§5-③). 이 셋이 06-03 READY 0건의 직접 원인.
@@ -109,7 +109,7 @@
 
 ### 8-2. 사실 정리 + 잔존 이슈
 - 소비자(runtime) 경로는 v510보다 정합성이 훨씬 높음 — worker/employee·위험물 has_/is_·건물용도·ksic 모두 해소.
-- 잔존(사실): ① 건설 tadmin 폼 토글은 `has_tunnel_work`/`has_bridge_work`(분리)인데 ctx는 `has_tunnel_bridge`(통합) → 이름 불일치. `has_crane/has_blasting/has_high_work`는 일치, 그러나 `has_excavation/has_electrical_work/has_gas_work/has_chemical_work`는 ctx 파생에 없음. ② facility-type 룰이 building_use_code(문자열)에서 어떻게 매칭되는지, 어떤 condition_code가 ctx 키로 매핑되는지는 `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 미독 → 추가 확인.
+- 잔존(사실): ① 건설 tadmin 폼 토글은 `has_tunnel_work`/`has_bridge_work`(분리)인데 ctx는 `has_tunnel_bridge`(통합) → 이름 불일치. `has_crane/has_blasting/has_high_work`는 일치, 그러나 `has_excavation/has_electrical_work/has_gas_work/has_chemical_work`는 ctx 파생에 없음. ② facility-type 룰이 building_use_code(문자열)에서 어떻게 매칭되는지, 어떤 condition_code가 ctx 키로 매핑되는지는 `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` → §12에서 종결.
 
 ### 8-3. 진입점별 엔진 (확정)
 - `/anonymous-diagnosis`(무료) → runtime. `/diagnosis/run`(통합·Nexas) → runtime. `/legal-engine/diagnose/step1`(v510, factory_id) → 레거시.
@@ -145,8 +145,8 @@ sector(**INDUSTRIAL**,hidden) · tier(PAID1) · company_name · **industry_type*
 6. 세 폼 모두 → `/diagnosis/create` (8-3 롤백 경로).
 
 ### 9-5. 미완료 (다음)
-- (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부) — 미독.
-- (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 매핑 — 미독.
+- (다) diagnosis_input_fields 사용처(`diagnosis_fields.py` 렌더 제공 여부) — §10 완료.
+- (추가) `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY` 전수 매핑 — §12 완료.
 - industry-paid2/3, construction-step1 등 후속 단계 폼 필드 — 미독.
 
 ## 10. diagnosis_input_fields 사용처 — (다) 종결 (2026-06-06)
@@ -157,11 +157,41 @@ sector(**INDUSTRIAL**,hidden) · tier(PAID1) · company_name · **industry_type*
 - → `diagnosis_input_fields`는 레거시 아님(살아있는 동적 폼 카탈로그 API). 다만 소비자는 Nexas(마케팅) 동적폼 등으로 추정(주석: equipment/process-options = "Nexas 동적 폼"); tadmin 정적폼과 무관.
 - **결론:** §7-5의 (a)diagnosis_input_fields ≠ (b)tadmin폼 불일치의 구조적 원인 = **tadmin이 (a)를 안 씀**. 표준화는 (b)tadmin 정적폼 ↔ (c)엔진(runtime `_input_to_facility_context`) 기준으로 진행해야 하며, (a)는 Nexas 동적폼 경로에서 별도 정합 필요.
 
-## 11. 남은 1건 (추가) — 미독
-- `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY`(`services/legal_engine_svc.py`) 전수: runtime 룰 condition_code ↔ ctx 키 매핑, `building_use_code`(문자열) 시설유형 매칭 방식. 소비자(runtime) 경로 정합성의 마지막 핵심. (대용량 파일 — 별도 진행 권장)
-- 후속 단계 폼: industry-paid2/3, construction-step1, diagnosis-step2/3.
+## 11. (추가) condition_code↔ctx 매핑 작업 — §12에서 종결
+- `evaluate_facility_conditions_db` + `CONDITION_CODE_TO_CONTEXT_KEY`는 **`services/legal_rules.py`**에 있음(legal_engine_svc.py는 import만). §12 참조.
+- 후속 단계 폼: industry-paid2/3, construction-step1, diagnosis-step2/3 — 미독.
+
+## 12. ★condition_code↔ctx 매핑 + 평가기 — (추가) 종결 (2026-06-06)
+
+위치: **`services/legal_rules.py`** (`legal_engine_svc.py`/`diagnosis_runtime_step1.py`는 import만).
+
+### 12-1. CONDITION_CODE_TO_CONTEXT_KEY (룰 condition_code → facility_ctx 키, 19개)
+employee_count→**worker_count** · building_area→**total_floor_area** · electrical_capacity_kw→**electric_capacity** · contract_amount→**construction_amount** · construction_amount→construction_amount · 나머지 동일키(floor_count, elevator_count, boiler_capacity_kw, boiler_capacity_th, gas_capacity_kg, gas_capacity_m3, transformer_capacity_kva, annual_energy_toe, contractor_count, is_hazardous_material, is_multi_use, is_factory_registered, electric_capacity, worker_count).
+- 맵에 없는 cc는 `cc` 그대로 ctx 조회(`.get(cc, cc)`).
+
+### 12-2. `_db_rule_matches_facility(rule, ctx)`
+cc·cv 필수; **ctx_key = map.get(cc, cc)**; actual = ctx[ctx_key] (없으면 ctx[cc]); 숫자면 operator(gte/lte/gt/lt/eq) 비교, 문자면 **eq 일치만**.
+
+### 12-3. `evaluate_facility_conditions_db(ctx, rules, sector)`
+- **조건없는 룰(cc 없거나 cv None):** rule.sector ∈ {COMMON, BUILDING_MANUFACTURING, CONSTRUCTION_MANUFACTURING, BUILDING_CONSTRUCTION} → **무조건 적용**; sector=CONSTRUCTION이면 산안법16조 APPOINT/NOTIFY는 worker_count≥50, 그 외 관련법(산안/중대재해/건설산업/건설기술/근로기준/산재보상/전기안전) 포함 시 적용; 그 외 sector → **무조건 적용**.
+- **조건있는 룰:** `_db_rule_matches_facility` 결과로 applicable/not.
+
+### 12-4. 결론 (사실)
+1. **룰 condition_code 이름 불일치는 이 맵이 흡수.** employee_count·building_area·contract_amount·electrical_capacity_kw → ctx 키로 정규화 → v510에서 미작동하던 employee_count(90룰) 등이 **runtime 경로에선 해소**(맵+ctx 양쪽이 정합할 때).
+2. **시설유형 플래그 룰**(is_medical_facility/is_hospital_or_clinic/is_warehouse 등)은 **맵에도 없고** `_input_to_facility_context`가 building_use_code에서 **파생도 안 함** → ctx에 키 없음 → **여전히 not_applicable**. ctx엔 building_use_code(문자열)만 존재 → 룰 cc가 정확히 `building_use_code`이고 cv가 동일 문자열(eq)일 때만 매칭. → §6-(2) 역방향 갭이 runtime에도 **부분 존속**.
+3. **조건없는 COMMON·결합그룹 룰 = 무조건 적용** → 엔진 출력의 상당부분.
+4. **3계층이 같은 ctx 키에서 만나야 작동:** 폼필드명 →(라우터/어댑터)→ inp키 →(`_input_to_facility_context`, Layer B)→ ctx키 ←(`CONDITION_CODE_TO_CONTEXT_KEY`, Layer C)← 룰 condition_code.
+   - 예) electrical_capacity_kw: Layer C는 electric_capacity로 매핑하지만, Layer B(BUILDING/MFG 분기)가 inp["electric_capacity"]만 읽어 폼의 electrical_capacity_kw가 ctx.electric_capacity(0)에 안 들어감 → **드롭 확정(Layer B 원인)**. → §9-4 #1 재확인.
+   - has_chemical_substance(건물)·is_multi_use(건물): BUILDING 분기 미파생 → ctx 기본 0/없음 → 드롭.
+5. `_probe_law_engine`: runtime 소스=`runtime_metadata_resolution`, impacts에 **무료진단·유료진단·SaaS 법적의무(safe>점검관리)** 명시 → SaaS 의무도 이 엔진 사용.
 
 ## 진행 현황 요약 (2026-06-06)
-- (가) runtime 입력 소비 = §8 완료 · (나) 건물·산업 폼 = §9 완료 · (다) diagnosis_input_fields 사용처 = §10 완료.
-- 남음: (추가) CONDITION_CODE_TO_CONTEXT_KEY 전수(§11).
-- **핵심 결론:** 소비자 표준화 기준선 = **tadmin 정적폼(b) ↔ runtime `_input_to_facility_context`(c)**. 최우선 정합 대상 = ① electrical_capacity_kw↔electric_capacity ② 위험물 표현(배열↔불리언) ③ industry_type↔ksic ④ sector INDUSTRIAL↔MANUFACTURING ⑤ 건설 근로자·터널/교량 토글.
+- (가) runtime 입력 소비 = §8 · (나) 건물·산업 폼 = §9 · (다) diagnosis_input_fields 사용처 = §10 · (추가) condition_code↔ctx 매핑+평가기 = §12. **전 항목 완료.**
+- **핵심 결론:** 소비자 표준화 = **3계층(폼필드명 → `_input_to_facility_context`(Layer B) → ctx키 ← `CONDITION_CODE_TO_CONTEXT_KEY`(Layer C) ← 룰 condition_code)이 같은 ctx 키에서 일치**하도록. 최우선 정합:
+  ① electrical_capacity_kw → 폼/Layer B 둘 중 하나를 electric_capacity로 통일
+  ② 위험물 표현(산업 배열 hazardous_materials ↔ 엔진 has_hazardous_material 불리언)
+  ③ industry_type(한글) ↔ ksic 코드 (is_factory_registered 파생용)
+  ④ sector INDUSTRIAL ↔ MANUFACTURING 상위 변환 보장
+  ⑤ 건설 근로자(total_workers↔subcon_workers)·터널/교량(has_tunnel_work+has_bridge_work↔has_tunnel_bridge) 토글
+  ⑥ 건물용도→시설유형 플래그 파생(현재 runtime·v510 모두 미파생; building_use_code 문자열 eq만 가능)
+- **경계:** 위 정합은 GPT 영역(엔진/스키마/판정)과 입력부(폼) 양쪽에 걸침 → 엔진측 변경은 GPT, 폼측은 입력부 표준화로 분리 진행.
