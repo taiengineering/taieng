@@ -61,3 +61,33 @@
 - `hospital_beds`(5)·`student_count`(4): 의료/학교 건물 룰이 쓰나 BUILDING 화면엔 없음(SPECIAL_FACILITY 입력에만 존재).
 
 **(3) 표준화 우선순위(결론):** ① 이름 정합(employee_count·위험물·가스·에너지) → ② 건물용도→시설유형 매핑 → ③ 화면 간소화(§5-③). 이 셋이 06-03 READY 0건의 직접 원인.
+
+## 7. 산업·건설 + 미확인 3건 + 실제폼 발견 (2026-06-06)
+
+### 7-1. 섹터 그룹 (`get_sector_groups`, legal_helpers.py)
+- BUILDING→[COMMON,BUILDING,…] · MANUFACTURING→[COMMON,MANUFACTURING,…] · CONSTRUCTION→[COMMON,CONSTRUCTION,…]. 결합그룹은 stage1 0건.
+- 레거시 stage1 활성: COMMON 861 · BUILDING 425 · MANUFACTURING 288 · CONSTRUCTION 176. COMMON은 전 섹터 공통.
+
+### 7-2. INDUSTRIAL (룰=MANUFACTURING+COMMON) — diagnosis_input_fields 기준
+- 사용(이름 일치): total_floor_area→building_area, electric_capacity→electrical_capacity_kw, **has_chemical_substance**(MFG17+COMMON38), **has_high_pressure_gas**(MFG36+COMMON33), **has_boiler**(MFG5), worker_count(MFG9+COMMON11), has_safety_manager(1). → BUILDING과 달리 위험물·가스·보일러 코드 일치.
+- 이름 불일치: has_hazardous_material↔is_hazardous_material(124); worker_count↔employee_count(63); ksic_major↔is_factory_registered(35, 라이브 normalize 미파생); gas_capacity_kg(97) 숫자입력 없음.
+- 매칭 없음: address, ksic_sub, has_hazmat_storage, has_dust_work, has_noise_work, has_confined_space, has_radiation. process_list/equipment_list=stage2/3.
+
+### 7-3. CONSTRUCTION (룰=CONSTRUCTION+COMMON) — diagnosis_input_fields 기준
+- 금액 룰: contract_amount(65)+construction_amount(34)=99 (엔진은 contract_amount_eok에서 파생).
+- 사용: construction_type(1); is_construction_site(4, 코드가 1로 채움); worker_count→COMMON(11). employee_count(CONS7+COMMON42) 미작동.
+- 매칭 없음(stage1): project_duration, project_address, has_subcontractor, subcontractor_count, 위험작업 불리언 전부, operation_shift. 입력없는 룰코드: TUNNEL_*, WATER_*, is_hazardous_material(5), building_area(4), electric_capacity(2).
+
+### 7-4. 미확인 3건 — 종결
+- (1) 섹터명: **엔진코드 MANUFACTURING = 표시코드 INDUSTRIAL**, SPECIAL_FACILITY=BUILDING. 변환 `routers/anonymous_diagnosis.py`(_SECTOR_NORMALIZE, SECTOR_BY_KIND). v510 라우터는 MANUFACTURING만 허용(INDUSTRIAL 불가).
+- (다중엔진) **무료진단=`run_diagnose_step1_runtime`(runtime_metadata_resolution)+고정 프리셋**. v510(factory_id)=레거시. 진입점마다 엔진 다름.
+- (3) 건설 위험작업 불리언(has_excavation 등) stage1·stage2 **직접 미소비**. stage2는 process_id(→process_lv3→PROCESS_LV3_CONDITION_MAP)·equipment_type_code(→EQUIPMENT_CODE_CONDITION_MAP)·work_types로 has_* 생성(`code_condition_resolver.py`).
+
+### 7-5. ★실제 입력폼 ≠ diagnosis_input_fields (중대 발견)
+실제 tadmin 폼 `diagnosis-input-construction.html`(safe.taieng.co.kr):
+- 금액 필드명 = **contract_amount_eok** (project_amount 아님; project_amount는 DB정의에만 존재).
+- 근로자 = **direct_workers + total_workers** (worker_count 아님).
+- 위험토글 = has_tunnel_work, has_bridge_work, has_excavation, has_crane, has_high_work, has_blasting, has_electrical_work, has_gas_work, has_chemical_work + has_safety_manager/health_manager/safety_training/ppe/emergency_plan.
+- construction_type 값 = 건축공사/토목공사/산업설비/조경공사/전문건설/기타.
+- **엔드포인트: 폼은 엔진 직접호출 아님** → `POST /diagnosis/create`(또는 PATCH `/diagnosis/{id}`)로 input_data 저장 후 `diagnosis-step2.html`로 이동. 엔진 매핑은 `/diagnosis` 처리에서.
+- **→ 세 곳이 서로 다름: (a) diagnosis_input_fields DB · (b) 실제 tadmin HTML 폼 · (c) 엔진 condition_code. 표준화는 (b)↔(c) 기준으로 재도출 필요. §2·§5·§6·§7-2·7-3은 (a) 기준이므로 (b) 확인 후 갱신해야 함.**
