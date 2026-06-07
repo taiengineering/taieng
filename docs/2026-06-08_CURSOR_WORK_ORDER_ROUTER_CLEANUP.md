@@ -48,10 +48,11 @@
 - **5~10개씩** 나눠 삭제 → 배포 → 확인. 한 번에 전부 삭제 금지.
 - 조금이라도 의심되면 개별 STOP 보고.
 
-## Phase 4 — fcm 중복 등록 정리
+## Phase 4 — fcm 중복 등록 정리 (기획창 확정)
 - `fcm`이 `saas_core`·`external` 양쪽 그룹에 등록됨.
-- **어느 쪽을 유지할지는 기획창 결정 후 진행** (임의 선택 금지).
-- 한쪽 등록 라인 제거 후 prefix/tags 영향 확인 → 배포 → 동작 확인.
+- **확정: `external` 그룹 유지, `saas_core`에서 제거.** (FCM 푸시는 외부 연동 성격)
+- 작업: `router_registry/saas_core.py`의 `{"module": "routers.fcm"}` 라인 1개 삭제. `external.py`의 fcm 등록은 그대로 둔다. `routers/fcm.py` 파일은 삭제하지 않는다.
+- 배포 → `/health` 200 → FCM 알림 동작 1건 확인.
 
 ## 배포·검증 공통 규칙
 - `git push origin main` → 자동배포(1~2분).
