@@ -44,6 +44,9 @@
   .auth-box{text-align:center;padding:10px 0}
   .auth-box .ic{font-size:40px}
   .auth-box p{color:var(--mut);font-size:14px;margin:10px 0 18px}
+  .dev-skip{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+  .dev-skip .btn-ghost{font-size:13px;padding:11px}
+  .dev-note{font-size:11px;color:var(--mut);margin-top:6px}
   .hide{display:none}
   .res-hero{text-align:center;padding:12px 0 20px}
   .res-hero .grade{display:inline-block;font-size:30px;font-weight:800;padding:8px 26px;border-radius:50px;color:#fff;background:var(--warn)}
@@ -71,7 +74,7 @@
     <i id="s1" class="on"></i><i id="s2"></i><i id="s3"></i><i id="s4"></i>
   </div>
 
-  <!-- STEP 1: 섬터 선택 -->
+  <!-- STEP 1: 섹터 선택 -->
   <div id="step1" class="card">
     <h2>어떤 사업장인가요?</h2>
     <div class="sub">진단할 사업장 유형을 선택하세요</div>
@@ -91,6 +94,11 @@
       <div class="ic">🔐</div>
       <p>휴대폰 본인인증으로 간편하게 확인합니다</p>
       <button id="doAuth" class="btn">본인인증 하기</button>
+    </div>
+    <!-- 개발/테스트 우회: ?dev=1 일 때만 노출. 인증 키 설정 전 흐름 점검용. 정책상 운영 기본값은 인증 필수. -->
+    <div id="devSkip" class="dev-skip hide">
+      <button id="skipAuth" class="btn btn-ghost">[개발용] 본인인증 건너뛰고 진행</button>
+      <div class="dev-note">테스트 모드입니다. 실제 배포에서는 본인인증이 필수입니다.</div>
     </div>
     <div id="authErr" class="err hide"></div>
   </div>
@@ -112,6 +120,7 @@
 
 <script>
 const API = window.TAI_API_BASE || 'https://api.taieng.co.kr';
+const DEV = new URLSearchParams(location.search).get('dev')==='1';
 const st = { sector:null, tier:'FREE', fields:[], values:{}, authed:false, ci:null };
 
 function goStep(n){
@@ -122,7 +131,7 @@ function goStep(n){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// STEP1: 섬터 선택
+// STEP1: 섹터 선택
 document.querySelectorAll('.sector-btn').forEach(b=>{
   b.onclick=()=>{
     document.querySelectorAll('.sector-btn').forEach(x=>x.classList.remove('on'));
@@ -136,22 +145,36 @@ document.getElementById('toAuth').onclick=()=>{
   if(st.authed){ loadFields(); goStep(3); } else { goStep(2); }
 };
 
-// STEP2: 본인인증 (정책 필수). 이니시스 통합인증 연결점—환경 준비 전엔 진행차단.
+// STEP2: 본인인증 (정책 필수). 이니시스 통합인증 연결점.
+// 인증 키 미설정 동안 흐름이 막히지 않도록, ?dev=1 이면 우회 버튼 노출.
 document.getElementById('doAuth').onclick=async()=>{
   const err=document.getElementById('authErr');
   err.classList.add('hide');
   try{
-    // 이니시스 통합인증 팝업 호출 (환경변수 설정 후 활성). 미설정시 안내.
+    // 이니시스 통합인증 준비 확인 (환경변수/키 설정 후 ready:true). 미설정시 안내.
     const r=await fetch(API+'/auth/identity/ready');
     if(!r.ok) throw 0;
     const j=await r.json();
-    if(j && j.ready){ window.location.href=j.auth_url; return; }
+    if(j && j.ready && j.auth_url){ window.location.href=j.auth_url; return; }
     throw 0;
   }catch(e){
-    err.textContent='본인인증 준비 중입니다. 잠시 후 다시 시도해주세요.';
+    if(DEV){
+      err.textContent='본인인증이 아직 설정되지 않았습니다. 아래 [개발용] 버튼으로 진행할 수 있습니다.';
+    }else{
+      err.textContent='본인인증 준비 중입니다. 잠시 후 다시 시도해주세요.';
+    }
     err.classList.remove('hide');
   }
 };
+// 개발 우회 버튼: ?dev=1 일 때만
+(function setupDevSkip(){
+  if(!DEV) return;
+  document.getElementById('devSkip').classList.remove('hide');
+  document.getElementById('skipAuth').onclick=()=>{
+    st.authed=true; st.ci=null;        // 인증 없이 진행 (테스트)
+    loadFields(); goStep(3);
+  };
+})();
 // 인증 콜백 처리 (?auth=ok&ci=...)
 (function handleAuthReturn(){
   const q=new URLSearchParams(location.search);
