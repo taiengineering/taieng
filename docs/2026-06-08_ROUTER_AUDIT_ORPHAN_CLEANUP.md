@@ -12,7 +12,7 @@
 
 ## 3. 핵심 발견
 - `routers/` 파일 ~205개 중 **약 55개가 어느 그룹에도 등록되지 않음(orphan).**
-- ⚠️ **미등록 ≠ 死코드.** 라우터 등록은 안 됐어도 다른 모듈이 `import`해서 쓰는 헬퍼/서비스가 섞여 있음 (`_messaging_compat`, `matching_deps`, `_rule_gen_prompts`, `health`, `ksic_engine` 등). 등록 여부만 보고 삭제 금지 → 반드시 import 참조 검사 선행.
+- ⚠️ **미등록 ≠ 死코드.** 라우터 등록은 안 됐어도 다른 모듈이 `import`해서 쓰는 헬퍼/서비스가 섞여 있음. 등록 여부만 보고 삭제 금지 → 반드시 import 참조 검사 선행.
 
 ## 4. 그룹별 활성 등록 목록
 - **saas_core (8):** auth, users, companies, factories, system_codes, notifications, fcm, onboarding
@@ -54,5 +54,16 @@ _messaging_compat, _rule_gen_prompts, matching_deps, health(추정: main 직접 
 3. 모든 변경 전 main 브랜치 SHA 확인
 4. 권장 순서: B(이관완료) → A(버전 스텁) → import 검사 통과한 C → F(fcm 중복)
 
-## 7. import 참조 검사 결과
-(아래 섹션에 추가 예정)
+## 7. import 참조 검사 결과 (GitHub code search 기반, 표본)
+| 모듈 | 코드(.py) 참조 | 판정 |
+|---|---|---|
+| `factory_process_v2` | 0건 (자기 자신만) | 死코드 확정 |
+| `auth_oauth` | 0건 (docs 2건만) | 死 유력 |
+| `ksic_engine` | 0건 (자기 자신 + docs 4건) | 라우터 미노출 — KSIC 기능 중요성 고려해 기능 확인 후 처리 |
+
+**검사 한계:** GitHub code search는 인덱싱 기반(토큰화·반영 지연)이라 100% 정확하지 않다. "코드 참조 0"은 강한 신호이나 단독 삭제 근거로는 불충분 → 실삭제 전 반드시 **격리(등록 해제) → 배포 → /health 200 & 동작 확인** 단계로 최종 검증.
+
+**전수 검사 권장 방법:** orphan 50개+ 전수는 MCP code search보다 백엔드 창에서 로컬 정적분석이 더 정확·효율적.
+- `vulture .` 또는 `pyflakes` 로 미사용 모듈 탐지
+- `grep -rn "import 모듈명" routers/ services/` 로 참조처 확인
+- 이 결과를 본 문서 표에 누적 기록 후 B→A→C 순으로 정리 진행
