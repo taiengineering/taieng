@@ -134,11 +134,11 @@
         </div>
         <div class="diag-tier-panel" id="diagPanelProcess" data-tier="process" style="display:none;">
           <div class="diag-tier-panel-head">공정 정보</div>
-          <div id="dynFormAreaProcess"><p class="diag-tier-placeholder">공정 입력은 Week2에서 제공됩니다.</p></div>
+          <div id="dynFormAreaProcess"></div>
         </div>
         <div class="diag-tier-panel" id="diagPanelEquipment" data-tier="equipment" style="display:none;">
           <div class="diag-tier-panel-head">설비 정보</div>
-          <div id="dynFormAreaEquipment"><p class="diag-tier-placeholder">설비 입력은 Week2에서 제공됩니다.</p></div>
+          <div id="dynFormAreaEquipment"></div>
         </div>
       </div>
       <div class="disclaimer-box">
@@ -394,12 +394,31 @@ function ensureFormLayer(prefix) {
   return fv;
 }
 
-function applyDiagPanelVisibility() {
+function applyDiagPanelVisibility(prefix) {
+  // prefix: 'free' | 'paid' (기본 'free')
+  const pfx = prefix || 'free';
   const proc = document.getElementById('diagPanelProcess');
   const equip = document.getElementById('diagPanelEquipment');
-  // Week1: 공정·설비 패널은 골격만 (항상 비노출)
-  if (proc) proc.style.display = 'none';
-  if (equip) equip.style.display = 'none';
+
+  // sector/tier별 노출 규칙 (INPUT_STAGE_COMPLETION_PLAN 작업3 표)
+  // 공정: INDUSTRY PAID2+ / CONSTRUCTION PAID
+  // 설비: BUILDING PAID / INDUSTRY PAID3 / CONSTRUCTION PAID
+  const t = (pfx === 'paid') ? (paidTier || '') : 'FREE';
+  let showProc = false, showEquip = false;
+
+  if (sector === 'INDUSTRY') {
+    showProc  = (t === 'STANDARD' || t === 'PREMIUM');
+    showEquip = (t === 'PREMIUM');
+  } else if (sector === 'CONSTRUCTION') {
+    showProc  = (pfx === 'paid');
+    showEquip = (pfx === 'paid');
+  } else if (sector === 'BUILDING') {
+    showProc  = false;            // 건물은 공정 없음
+    showEquip = (pfx === 'paid');
+  }
+
+  if (proc)  proc.style.display  = showProc  ? '' : 'none';
+  if (equip) equip.style.display = showEquip ? '' : 'none';
 }
 
 function buildFormData(prefix) {
@@ -494,7 +513,7 @@ async function loadFreeForm() {
   const titleMap = { BUILDING:'건물 기본 정보', INDUSTRY:'산업 기본 정보', CONSTRUCTION:'건설 기본 정보' };
   document.getElementById('step2Title').textContent = titleMap[sector] || '기본 정보 입력';
   document.getElementById('step2Sub').textContent = '필수 항목을 입력하면 즉시 법령진단 결과를 확인합니다';
-  applyDiagPanelVisibility();
+  applyDiagPanelVisibility('free');
   ensureFormLayer('free');
   document.getElementById('dynFormArea').innerHTML = '<div style="text-align:center;padding:30px 0;color:#94a3b8;">입력 항목 불러오는 중...</div>';
   document.getElementById('disclaimerCheck').checked = false;
@@ -1142,6 +1161,7 @@ async function loadPaidForm(tierCode) {
     const r = await fetch(`${API}/diagnosis/fields?sector=${sector}&tier=${tierApi}`);
     const json = await r.json();
     renderDynForm('paidFormArea', json.data?.groups || [], 'paid');
+    applyDiagPanelVisibility('paid');
     Object.entries(formValues['free'] || {}).forEach(([code, val]) => {
       const el = document.getElementById(`paid_${code}`);
       if (el) el.value = val;
