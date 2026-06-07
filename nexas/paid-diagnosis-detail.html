@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>유료 법령진단 · 상세입력 | TAI Safe</title>
+<style>
+  :root{--p:#2c5fff;--ink:#1a2233;--mut:#6b7585;--line:#e4e8f0;--bg:#f5f7fb;--ok:#16a34a;--warn:#dc2626}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+  .wrap{max-width:720px;margin:0 auto;padding:24px 16px 90px}
+  .head{padding:20px 0 8px}
+  .head h1{font-size:22px;font-weight:800}
+  .head p{color:var(--mut);font-size:13px;margin-top:4px}
+  .paybar{display:flex;align-items:center;gap:8px;background:#eafaf0;border:1px solid #bbf0cd;border-radius:10px;padding:10px 14px;font-size:13px;color:#15803d;margin:12px 0}
+  .steps{display:flex;gap:6px;justify-content:center;margin:18px 0}
+  .steps i{flex:1;height:5px;border-radius:3px;background:var(--line);max-width:80px}
+  .steps i.on{background:var(--p)}
+  .steps i.done{background:var(--ok)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:16px}
+  .card h2{font-size:18px;font-weight:700;margin-bottom:4px}
+  .card .sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+  .grp{margin-bottom:20px}
+  .grp-t{font-size:13px;font-weight:700;color:var(--p);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .fld{margin-bottom:14px}
+  .fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  .fld label .req{color:var(--warn)}
+  .fld .help{font-size:12px;color:var(--mut);margin-top:4px}
+  .ipt,.sel{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:14px;font-family:inherit}
+  .ipt:focus,.sel:focus{outline:none;border-color:var(--p)}
+  .unit-row{display:flex;align-items:center;gap:8px}.unit-row .ipt{flex:1}.unit-row .u{font-size:13px;color:var(--mut)}
+  .bool-row{display:flex;gap:8px}
+  .bool-btn{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:10px;text-align:center;cursor:pointer;font-size:14px;font-weight:600;background:#fff}
+  .bool-btn.on{border-color:var(--p);background:#f0f5ff;color:var(--p)}
+  /* 다수 KSIC 업종 */
+  .ksic-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+  .ksic-item{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:10px;padding:10px 12px}
+  .ksic-item .nm{flex:1;font-size:14px;font-weight:600}
+  .ksic-item .del{color:var(--warn);cursor:pointer;font-size:18px;border:none;background:none}
+  .add-row{display:flex;gap:8px}
+  .add-row .sel{flex:1}
+  .btn-sm{border:1.5px solid var(--p);background:#fff;color:var(--p);border-radius:10px;padding:0 16px;font-weight:700;cursor:pointer;white-space:nowrap}
+  /* table 형 (공정/설비) */
+  .tbl-row{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;position:relative}
+  .tbl-row .del{position:absolute;top:8px;right:10px;color:var(--warn);cursor:pointer;border:none;background:none;font-size:18px}
+  .tbl-row .cell{margin-bottom:8px}
+  .tbl-row .cell:last-child{margin-bottom:0}
+  .tbl-row .cell label{font-size:12px;color:var(--mut);display:block;margin-bottom:4px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1.5px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;background:#fff}
+  .chip.on{border-color:var(--p);background:#f0f5ff;color:var(--p)}
+  .navbtns{display:flex;gap:10px;margin-top:8px}
+  .btn{flex:1;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;background:var(--p);color:#fff}
+  .btn:disabled{background:#b8c4dd}
+  .btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+  .save-hint{font-size:12px;color:var(--mut);text-align:center;margin-top:10px}
+  /* 체크 확인 */
+  .review-grp{margin-bottom:16px}
+  .review-grp .rt{font-size:13px;font-weight:700;color:var(--p);margin-bottom:6px}
+  .review-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .review-row .k{color:var(--mut)}
+  .review-row .v{font-weight:600}
+  .hide{display:none}
+  .loading{text-align:center;padding:50px 0;color:var(--mut)}
+  .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--p);border-radius:50%;animation:sp 1s linear infinite;margin:0 auto 14px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .err{background:#fef2f2;border:1px solid #fecaca;color:var(--warn);border-radius:10px;padding:12px;font-size:13px;margin-top:10px}
+  .res-hero{text-align:center;padding:12px 0 8px}
+  .res-hero .grade{display:inline-block;font-size:28px;font-weight:800;padding:8px 26px;border-radius:50px;color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>안전관리설계서 · 상세정보 입력</h1>
+    <p>결제가 완료되었습니다. 정확한 법령 판정을 위해 상세 정보를 입력해주세요.</p>
+  </div>
+  <div class="paybar">✅ 결제 완료 · 입력은 단계별로 자동 저장됩니다 (중단해도 이어서 입력 가능)</div>
+  <div class="steps">
+    <i id="s1" class="on"></i><i id="s2"></i><i id="s3"></i><i id="s4"></i>
+  </div>
+
+  <!-- STEP 1: 업종·공정 (KSIC 다수 저장) -->
+  <div id="step1" class="card">
+    <h2>업종 · 공정</h2>
+    <div class="sub">해당 사업장의 업종과 주요 공정을 입력하세요. 업종은 여러 개 추가할 수 있습니다.</div>
+    <div id="step1Body"><div class="loading"><div class="spin"></div>불러오는 중...</div></div>
+    <div class="navbtns"><button id="save1" class="btn">저장하고 다음</button></div>
+    <div class="save-hint">입력한 내용은 자동 저장됩니다</div>
+    <div id="err1" class="err hide"></div>
+  </div>
+
+  <!-- STEP 2: 설비 (공정 기준) -->
+  <div id="step2" class="card hide">
+    <h2>설비</h2>
+    <div class="sub">보유한 설비를 입력하세요. 앞서 입력한 공정을 기준으로 권장 설비가 안내됩니다.</div>
+    <div id="step2Body"><div class="loading"><div class="spin"></div>불러오는 중...</div></div>
+    <div class="navbtns">
+      <button id="back2" class="btn btn-ghost">이전</button>
+      <button id="save2" class="btn">저장하고 다음</button>
+    </div>
+    <div class="save-hint">입력한 내용은 자동 저장됩니다</div>
+    <div id="err2" class="err hide"></div>
+  </div>
+
+  <!-- STEP 3: 체크 확인 (전체 보여주고 확인) -->
+  <div id="step3" class="card hide">
+    <h2>입력 내용 확인</h2>
+    <div class="sub">아래 내용으로 법령 판정을 실행합니다. 틀린 부분이 있으면 이전으로 돌아가 수정하세요.</div>
+    <div id="reviewBody"></div>
+    <div class="navbtns">
+      <button id="back3" class="btn btn-ghost">이전</button>
+      <button id="runEngine" class="btn">이 내용으로 진단 실행</button>
+    </div>
+    <div id="err3" class="err hide"></div>
+  </div>
+
+  <!-- STEP 4: 결과 -->
+  <div id="step4" class="card hide">
+    <div id="resBody"><div class="loading"><div class="spin"></div>법령을 분석하고 있습니다...</div></div>
+  </div>
+</div>
+
+<script>
+const API = window.TAI_API_BASE || 'https://api.taieng.co.kr';
+const q = new URLSearchParams(location.search);
+const st = {
+  sector:(q.get('sector')||'INDUSTRIAL').toUpperCase(),
+  oid:q.get('oid')||q.get('order_id')||null,
+  tier:'PAID',
+  ksicList:[],          // 다수 업종
+  step1Fields:[], step2Fields:[],
+  values:{},            // 시설·공정 기타 스칼라
+  processRows:[],       // 공정 table
+  equipmentRows:[],     // 설비 table
+};
+// 산업은 PAID1(시설·업종)+PAID2(공정) → step1, PAID3(설비) → step2
+// 건축·건설은 PAID(시설+공정 table) → step1, 설비 없으면 step2 생략
+const SECTOR_TIER = {
+  INDUSTRIAL:{ step1:'PAID2', step2:'PAID3' },  // 누적: PAID2=FREE+PAID1+PAID2
+  BUILDING:{ step1:'PAID', step2:null },
+  CONSTRUCTION:{ step1:'PAID', step2:null },
+};
+
+const LSKEY='tai_paid_detail_'+(st.oid||st.sector);
+function saveLocal(){ try{ localStorage.setItem(LSKEY, JSON.stringify({ksicList:st.ksicList,values:st.values,processRows:st.processRows,equipmentRows:st.equipmentRows})); }catch(e){} }
+function loadLocal(){ try{ const j=JSON.parse(localStorage.getItem(LSKEY)||'{}'); Object.assign(st,j); }catch(e){} }
+loadLocal();
+
+function goStep(n){
+  for(let i=1;i<=4;i++){
+    document.getElementById('step'+i).classList.toggle('hide', i!==n);
+    const dot=document.getElementById('s'+i);
+    dot.classList.toggle('on', i===n); dot.classList.toggle('done', i<n);
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+async function api(path){ const r=await fetch(API+path); return r.json(); }
+
+// ===== STEP1: 시설+업종(KSIC 다수)+공정 =====
+async function buildStep1(){
+  const box=document.getElementById('step1Body');
+  const tier=SECTOR_TIER[st.sector].step1;
+  let groups=[];
+  try{ const j=await api(`/diagnosis/fields?sector=${st.sector}&tier=${tier}`); groups=(j.data&&j.data.groups)||[]; }
+  catch(e){ box.innerHTML='<div class="err">입력항목 로딩 실패</div>'; return; }
+  box.innerHTML='';
+  // KSIC 다수 입력 (산업구축 · 업종코드 다수 저장 구조)
+  if(st.sector==='INDUSTRIAL'){ box.appendChild(buildKsicMulti()); }
+  // 나머지 그룹 렌더 (ksic_major 단일 필드는 다수입력으로 대체하므로 스킵)
+  groups.forEach(g=>{
+    const fields=g.fields.filter(f=> !(st.sector==='INDUSTRIAL' && f.field_code==='ksic_major'));
+    if(!fields.length) return;
+    const gd=document.createElement('div'); gd.className='grp';
+    gd.innerHTML=`<div class="grp-t">${g.group}</div>`;
+    fields.forEach(f=>{
+      if(f.field_type==='table'){ gd.appendChild(buildTable(f,'process')); }
+      else { gd.appendChild(renderField(f)); }
+    });
+    box.appendChild(gd);
+  });
+}
+
+function buildKsicMulti(){
+  const wrap=document.createElement('div'); wrap.className='grp';
+  wrap.innerHTML=`<div class="grp-t">업종 (다수 추가 가능)</div>`;
+  const list=document.createElement('div'); list.className='ksic-list'; list.id='ksicList';
+  const addRow=document.createElement('div'); addRow.className='add-row';
+  addRow.innerHTML=`<select class="sel" id="ksicSel"><option value="">업종 대분류 선택</option>`+
+    ['A 농업·임업·어업','C 제조업','D 전기·가스','E 수도·하수·폐기물','F 건설업','G 도매·소매','H 운수·창고','I 숙박·음식','J 정보통신','기타']
+      .map(o=>`<option value="${o.split(' ')[0]}">${o}</option>`).join('')+`</select>`+
+    `<button class="btn-sm" id="ksicAdd">추가</button>`;
+  wrap.appendChild(list); wrap.appendChild(addRow);
+  setTimeout(()=>{
+    renderKsicList();
+    document.getElementById('ksicAdd').onclick=()=>{
+      const sel=document.getElementById('ksicSel'); const v=sel.value; if(!v) return;
+      const label=sel.options[sel.selectedIndex].text;
+      if(st.ksicList.some(k=>k.code===v)) return;
+      st.ksicList.push({code:v,label}); saveLocal(); renderKsicList(); sel.value='';
+    };
+  },0);
+  return wrap;
+}
+function renderKsicList(){
+  const list=document.getElementById('ksicList'); if(!list) return;
+  list.innerHTML = st.ksicList.length? '' : '<div style="color:var(--mut);font-size:13px">업종을 1개 이상 추가하세요</div>';
+  st.ksicList.forEach((k,i)=>{
+    const it=document.createElement('div'); it.className='ksic-item';
+    it.innerHTML=`<span class="nm">${k.label}</span><button class="del" data-i="${i}">×</button>`;
+    it.querySelector('.del').onclick=()=>{ st.ksicList.splice(i,1); saveLocal(); renderKsicList(); };
+    list.appendChild(it);
+  });
+}
+
+// ===== STEP2: 설비 =====
+async function buildStep2(){
+  const tier=SECTOR_TIER[st.sector].step2;
+  const box=document.getElementById('step2Body');
+  if(!tier){ // 설비 단계 없는 섬터→바로 체크로
+    goStep(3); buildReview(); return;
+  }
+  let groups=[];
+  try{ const j=await api(`/diagnosis/fields?sector=${st.sector}&tier=${tier}`); groups=(j.data&&j.data.groups)||[]; }
+  catch(e){ box.innerHTML='<div class="err">설비 항목 로딩 실패</div>'; return; }
+  // step1에 이미 나온 그룹은 제외(누적 tier라 중복) → '설비' 그룹만
+  const only=groups.filter(g=>g.group==='설비' || g.fields.some(f=>f.field_code==='equipment_list'));
+  box.innerHTML='';
+  (only.length?only:groups).forEach(g=>{
+    const gd=document.createElement('div'); gd.className='grp';
+    gd.innerHTML=`<div class="grp-t">${g.group}</div>`;
+    g.fields.forEach(f=>{ if(f.field_type==='table') gd.appendChild(buildTable(f,'equipment')); else gd.appendChild(renderField(f)); });
+    box.appendChild(gd);
+  });
+}
+
+// ===== 공통 필드 렌더 =====
+function renderField(f){
+  const w=document.createElement('div'); w.className='fld';
+  const req=f.is_required?'<span class="req">*</span>':'';
+  const code=f.field_code; const cur=st.values[code];
+  let body='';
+  if(f.field_type==='boolean'){
+    body=`<div class="bool-row" data-code="${code}"><div class="bool-btn ${cur===true?'on':''}" data-v="true">예</div><div class="bool-btn ${cur===false?'on':''}" data-v="false">아니오</div></div>`;
+  } else if(f.field_type==='select'){
+    const opts=(f.input_options||[]).map(o=>`<option value="${o.value||o}" ${cur===(o.value||o)?'selected':''}>${o.label||o}</option>`).join('');
+    body=`<select class="sel" data-code="${code}"><option value="">선택</option>${opts}</select>`;
+  } else if(f.field_type==='multi_select'){
+    const opts=(f.input_options||[]);
+    body=`<div class="chips" data-code="${code}">`+opts.map(o=>{const v=o.value||o;const on=(cur||[]).includes(v)?'on':'';return `<span class="chip ${on}" data-v="${v}">${o.label||o}</span>`;}).join('')+`</div>`;
+  } else if(f.field_type==='number'){
+    const u=f.unit?`<span class="u">${f.unit}</span>`:'';
+    body=`<div class="unit-row"><input class="ipt" type="number" inputmode="decimal" data-code="${code}" value="${cur??''}" placeholder="${f.placeholder||''}">${u}</div>`;
+  } else {
+    body=`<input class="ipt" type="text" data-code="${code}" value="${cur??''}" placeholder="${f.placeholder||''}">`;
+  }
+  const help=f.help_text?`<div class="help">${f.help_text}</div>`:'';
+  w.innerHTML=`<label>${f.field_name}${req}</label>${body}${help}`;
+  const br=w.querySelector('.bool-row');
+  if(br) br.querySelectorAll('.bool-btn').forEach(b=>b.onclick=()=>{br.querySelectorAll('.bool-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');st.values[code]=b.dataset.v==='true';saveLocal();});
+  const ch=w.querySelector('.chips');
+  if(ch) ch.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');st.values[code]=[...ch.querySelectorAll('.chip.on')].map(x=>x.dataset.v);saveLocal();});
+  return w;
+}
+
+// table (공정/설비) — 행 추가·삭제
+function buildTable(f, kind){
+  const cols=(f.input_options&&f.input_options.columns)||[];
+  const addLabel=(f.input_options&&f.input_options.add_row_label)||'행 추가';
+  const wrap=document.createElement('div'); wrap.dataset.kind=kind;
+  const rowsRef = kind==='process'?st.processRows:st.equipmentRows;
+  const listId='tbl_'+kind;
+  wrap.innerHTML=`<div id="${listId}"></div><button class="btn-sm" style="width:100%;padding:10px" id="add_${kind}">+ ${addLabel}</button>`;
+  setTimeout(()=>{
+    const list=wrap.querySelector('#'+listId);
+    function draw(){
+      list.innerHTML='';
+      rowsRef.forEach((row,ri)=>{
+        const rd=document.createElement('div'); rd.className='tbl-row';
+        rd.innerHTML=`<button class="del" data-i="${ri}">×</button>`;
+        cols.forEach(c=>{
+          const cell=document.createElement('div'); cell.className='cell';
+          const lab=`<label>${c.label}${c.required?' *':''}</label>`;
+          let inp='';
+          if(c.type==='multi_select'){
+            inp=`<div class="chips" data-k="${c.key}">`+(c.options||[]).map(o=>`<span class="chip ${(row[c.key]||[]).includes(o)?'on':''}" data-v="${o}">${o}</span>`).join('')+`</div>`;
+          } else if(c.type==='select'||c.type==='searchable_select'){
+            const opts=(c.options||[]).map(o=>`<option ${row[c.key]===o?'selected':''}>${o}</option>`).join('');
+            inp=`<select class="sel" data-k="${c.key}"><option value="">선택</option>${opts}</select>`;
+          } else if(c.type==='number'){
+            inp=`<input class="ipt" type="number" data-k="${c.key}" value="${row[c.key]??''}">`;
+          } else if(c.type==='boolean'){
+            inp=`<div class="bool-row" data-k="${c.key}"><div class="bool-btn ${row[c.key]===true?'on':''}" data-v="true">예</div><div class="bool-btn ${row[c.key]===false?'on':''}" data-v="false">아니오</div></div>`;
+          } else {
+            inp=`<input class="ipt" type="text" data-k="${c.key}" value="${row[c.key]??''}" placeholder="${c.placeholder||''}">`;
+          }
+          cell.innerHTML=lab+inp; rd.appendChild(cell);
+        });
+        // 바인딩
+        rd.querySelector('.del').onclick=()=>{rowsRef.splice(ri,1);saveLocal();draw();};
+        rd.querySelectorAll('[data-k]').forEach(el=>{
+          const k=el.dataset.k;
+          if(el.classList.contains('chips')){ el.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');row[k]=[...el.querySelectorAll('.chip.on')].map(x=>x.dataset.v);saveLocal();});}
+          else if(el.classList.contains('bool-row')){ el.querySelectorAll('.bool-btn').forEach(b=>b.onclick=()=>{el.querySelectorAll('.bool-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');row[k]=b.dataset.v==='true';saveLocal();});}
+          else { el.oninput=()=>{row[k]=el.type==='number'?Number(el.value):el.value;saveLocal();}; el.onchange=el.oninput; }
+        });
+        list.appendChild(rd);
+      });
+    }
+    wrap.querySelector('#add_'+kind).onclick=()=>{rowsRef.push({});saveLocal();draw();};
+    if(!rowsRef.length) rowsRef.push({});
+    draw();
+  },0);
+  return wrap;
+}
+
+function collectScalars(scope){
+  document.querySelectorAll('#'+scope+' [data-code]').forEach(el=>{
+    if(el.classList.contains('bool-row')||el.classList.contains('chips')) return;
+    const c=el.dataset.code,v=el.value; if(v!==''&&v!=null) st.values[c]=el.type==='number'?Number(v):v;
+  });
+}
+
+// ===== 저장·네비게이션 =====
+document.getElementById('save1').onclick=()=>{
+  collectScalars('step1Body');
+  const err=document.getElementById('err1'); err.classList.add('hide');
+  if(st.sector==='INDUSTRIAL' && !st.ksicList.length){ err.textContent='업종을 1개 이상 추가해주세요.'; err.classList.remove('hide'); return; }
+  saveLocal(); goStep(2); buildStep2();
+};
+document.getElementById('back2').onclick=()=>{ collectScalars('step2Body'); saveLocal(); goStep(1); };
+document.getElementById('save2').onclick=()=>{ collectScalars('step2Body'); saveLocal(); goStep(3); buildReview(); };
+document.getElementById('back3').onclick=()=>{ goStep(2); };
+
+// ===== STEP3: 체크 확인 =====
+function buildReview(){
+  const box=document.getElementById('reviewBody'); box.innerHTML='';
+  if(st.ksicList.length){
+    const g=document.createElement('div'); g.className='review-grp';
+    g.innerHTML=`<div class="rt">업종</div>`+st.ksicList.map(k=>`<div class="review-row"><span class="k">${k.code}</span><span class="v">${k.label}</span></div>`).join('');
+    box.appendChild(g);
+  }
+  const sc=Object.keys(st.values);
+  if(sc.length){
+    const g=document.createElement('div'); g.className='review-grp';
+    g.innerHTML=`<div class="rt">시설 정보</div>`+sc.map(k=>{let v=st.values[k];if(Array.isArray(v))v=v.join(', ');if(v===true)v='예';if(v===false)v='아니오';return `<div class="review-row"><span class="k">${k}</span><span class="v">${v}</span></div>`;}).join('');
+    box.appendChild(g);
+  }
+  if(st.processRows.filter(r=>Object.keys(r).length).length){
+    const g=document.createElement('div'); g.className='review-grp';
+    g.innerHTML=`<div class="rt">공정 (${st.processRows.length})</div>`+st.processRows.map((r,i)=>`<div class="review-row"><span class="k">#${i+1}</span><span class="v">${r.process_name||r.name||'-'}</span></div>`).join('');
+    box.appendChild(g);
+  }
+  if(st.equipmentRows.filter(r=>Object.keys(r).length).length){
+    const g=document.createElement('div'); g.className='review-grp';
+    g.innerHTML=`<div class="rt">설비 (${st.equipmentRows.length})</div>`+st.equipmentRows.map((r,i)=>`<div class="review-row"><span class="k">#${i+1}</span><span class="v">${r.equipment_type||r.asset_name||'-'}</span></div>`).join('');
+    box.appendChild(g);
+  }
+}
+
+// ===== STEP4: 엔진 실행 =====
+document.getElementById('runEngine').onclick=async()=>{
+  goStep(4);
+  const box=document.getElementById('resBody');
+  const payload={ sector:st.sector, tier:'PAID', oid:st.oid,
+    ksic_list:st.ksicList.map(k=>k.code),
+    input:st.values,
+    process_list:st.processRows.filter(r=>Object.keys(r).length),
+    equipment_list:st.equipmentRows.filter(r=>Object.keys(r).length) };
+  try{
+    const r=await fetch(API+'/diagnosis/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const j=await r.json(); renderResult(box, j.data||j);
+    try{ localStorage.removeItem(LSKEY); }catch(e){}
+  }catch(e){ box.innerHTML='<div class="err">진단 처리 중 오류. 다시 시도해주세요.</div>'; }
+};
+
+function renderResult(box,d){
+  const total=d.applicable_count ?? d.applicable ?? '-';
+  const rules=d.rule_count ?? d.rules ?? '-';
+  const grade=d.risk_grade||d.grade||'HIGH';
+  const gc=grade==='LOW'?'#16a34a':(grade==='MID'||grade==='MEDIUM'?'#f59e0b':'#dc2626');
+  box.innerHTML=`<div class="res-hero"><div class="grade" style="background:${gc}">위험도 ${grade}</div></div>
+    <p style="text-align:center;color:var(--mut);font-size:14px;margin:10px 0 4px">적용 법령 <b style="color:var(--p)">${total}</b>건 · 주요 의무조항 <b style="color:var(--p)">${rules}</b>건</p>
+    <p style="text-align:center;color:var(--mut);font-size:13px;margin-top:14px">안전관리설계서(PDF)가 생성됩니다. 조항별 판정 근거·이행 서식·점검 체크리스트를 포함합니다.</p>
+    <div class="navbtns" style="margin-top:20px"><button class="btn" onclick="location.href='/mypage'">내 진단 결과 보기</button></div>`;
+}
+
+// 시작
+buildStep1();
+</script>
+</body>
+</html>
