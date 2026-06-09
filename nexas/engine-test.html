@@ -8,10 +8,10 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:100%;min-height:100%;background:#0a0e1a;font-family:'Noto Sans KR','Segoe UI',sans-serif;color:#e2e8f0;}
-.wrap{max-width:1280px;margin:0 auto;padding:0 12px 60px;}
+.wrap{width:100%;padding:0 10px 50px;}
 
 /* 툴바 */
-.toolbar{position:sticky;top:0;z-index:20;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 -12px 14px;}
+.toolbar{position:sticky;top:0;z-index:20;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 -10px 12px;}
 .tb-logo{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;}
 .tb-logo span{color:#22d3ee;}
 .tb-sub{font-size:11px;color:rgba(255,255,255,.4);}
@@ -23,51 +23,59 @@ html,body{width:100%;min-height:100%;background:#0a0e1a;font-family:'Noto Sans K
 .btn-run:hover{background:rgba(34,211,238,.28);}
 .btn-run:disabled{opacity:.5;cursor:not-allowed;}
 
-/* 카드 */
-.card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+/* 가로 10열 그리드 */
+.grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;}
+@media(max-width:1400px){.grid{grid-template-columns:repeat(5,minmax(0,1fr));}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* 카드 (세로 컬럼) */
+.card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-height:420px;}
 .card.running{border-color:rgba(34,211,238,.5);box-shadow:0 0 0 1px rgba(34,211,238,.3);}
 .card.done{border-color:rgba(40,200,100,.35);}
 .card.failed{border-color:rgba(255,95,87,.45);}
-.card-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.06);}
-.card-no{width:26px;height:26px;border-radius:50%;background:rgba(34,211,238,.15);color:#22d3ee;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.card-name{font-size:14px;font-weight:700;color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.card-sector{font-size:10px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);}
-.card-status{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+.card-head{padding:8px 9px;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.06);}
+.card-toprow{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.card-no{width:20px;height:20px;border-radius:50%;background:rgba(34,211,238,.15);color:#22d3ee;font-weight:800;font-size:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.card-sector{font-size:9px;padding:1px 6px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);}
+.card-status{font-size:9px;font-weight:700;padding:1px 6px;border-radius:999px;white-space:nowrap;margin-left:auto;}
 .st-wait{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);}
 .st-run{background:rgba(34,211,238,.18);color:#22d3ee;}
 .st-done{background:rgba(40,200,100,.18);color:#4ade80;}
 .st-fail{background:rgba(255,95,87,.18);color:#f87171;}
-.btn-mini{font-size:11px;padding:4px 10px;}
+.card-name{font-size:12px;font-weight:700;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-mini{font-size:10px;padding:3px 7px;width:100%;margin-top:6px;}
 
 /* 3칸 세로 */
-.card-body{display:flex;flex-direction:column;}
-.cell{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);}
+.card-body{display:flex;flex-direction:column;flex:1;}
+.cell{padding:8px 9px;border-bottom:1px solid rgba(255,255,255,.05);}
+.cell-result{flex:1;overflow:auto;}
 .cell:last-child{border-bottom:none;}
-.cell-label{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.cell-label{font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
 .cl-input{color:#60a5fa;}
 .cl-result{color:#4ade80;}
 .cl-verify{color:#fbbf24;}
 .cell-label .ln{flex:1;height:1px;background:rgba(255,255,255,.08);}
 
-.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 14px;}
-.kv-item{font-size:12px;display:flex;gap:6px;}
+.kv{display:flex;flex-direction:column;gap:3px;}
+.kv-item{font-size:10.5px;display:flex;justify-content:space-between;gap:6px;}
 .kv-k{color:rgba(255,255,255,.4);white-space:nowrap;}
-.kv-v{color:#e2e8f0;font-weight:600;}
+.kv-v{color:#e2e8f0;font-weight:600;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-.result-empty,.verify-empty{font-size:12px;color:rgba(255,255,255,.3);padding:4px 0;}
-.r-stat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
-.r-chip{font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);}
-.r-chip b{color:#22d3ee;font-size:14px;}
+.result-empty,.verify-empty{font-size:10.5px;color:rgba(255,255,255,.3);padding:2px 0;}
+.r-stat{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
+.r-chip{font-size:9.5px;padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);white-space:nowrap;}
+.r-chip b{color:#22d3ee;font-size:11px;}
 .r-chip.red b{color:#f87171;}
-.law-list{display:flex;flex-direction:column;gap:4px;max-height:180px;overflow:auto;}
-.law-row{font-size:11px;display:flex;gap:8px;padding:5px 8px;background:rgba(255,255,255,.04);border-radius:5px;border-left:2px solid rgba(34,211,238,.4);}
-.law-row .lr-type{flex-shrink:0;font-weight:700;color:#60a5fa;width:54px;}
-.law-row .lr-law{flex:1;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.law-row .lr-art{flex-shrink:0;color:rgba(255,255,255,.4);}
-.result-link{display:inline-block;margin-top:8px;font-size:11px;color:#22d3ee;text-decoration:none;border:1px solid rgba(34,211,238,.3);border-radius:5px;padding:5px 10px;}
+.law-list{display:flex;flex-direction:column;gap:3px;max-height:150px;overflow:auto;}
+.law-row{font-size:9.5px;display:flex;flex-direction:column;gap:1px;padding:4px 6px;background:rgba(255,255,255,.04);border-radius:4px;border-left:2px solid rgba(34,211,238,.4);}
+.law-row .lr-top{display:flex;gap:5px;align-items:center;}
+.law-row .lr-type{flex-shrink:0;font-weight:700;color:#60a5fa;}
+.law-row .lr-art{flex-shrink:0;color:rgba(255,255,255,.4);margin-left:auto;}
+.law-row .lr-law{color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.result-link{display:block;margin-top:6px;font-size:10px;color:#22d3ee;text-decoration:none;border:1px solid rgba(34,211,238,.3);border-radius:5px;padding:5px;text-align:center;}
 .result-link:hover{background:rgba(34,211,238,.12);}
 
-.verify-box{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
+.verify-box{font-size:10px;color:rgba(255,255,255,.55);line-height:1.5;word-break:break-all;}
 .verify-box .badge-ok{color:#4ade80;font-weight:700;}
 
 /* 페이징 */
@@ -75,7 +83,7 @@ html,body{width:100%;min-height:100%;background:#0a0e1a;font-family:'Noto Sans K
 .pager .pg-info{font-size:12px;color:rgba(255,255,255,.5);}
 
 .loading-row{text-align:center;padding:40px 0;color:rgba(255,255,255,.4);font-size:13px;}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.15);border-top-color:#22d3ee;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.15);border-top-color:#22d3ee;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:6px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
@@ -121,25 +129,21 @@ function fmtInput(f){
   if (sec === 'CONSTRUCTION') {
     rows.push(['공사금액', f.construction_amount ? n(Math.round(f.construction_amount/1e8))+'억' : '-']);
     rows.push(['공사종류', f.construction_type || '-']);
-    rows.push(['하도급인원', f.subcontractor_worker_count != null ? n(f.subcontractor_worker_count)+'명' : '-']);
+    rows.push(['하도급', f.subcontractor_worker_count != null ? n(f.subcontractor_worker_count)+'명' : '-']);
   } else if (sec === 'BUILDING' || sec === 'SPECIAL_FACILITY') {
     rows.push(['연면적', f.building_area ? n(f.building_area)+'㎡' : '-']);
     rows.push(['층수', f.floor_count != null ? f.floor_count+'층' : '-']);
     rows.push(['용도', f.main_purpose_name || f.building_use_code || '-']);
-    rows.push(['승강기', f.elevator_count != null ? f.elevator_count+'대' : '-']);
   } else {
     rows.push(['연면적', f.building_area ? n(f.building_area)+'㎡' : '-']);
-    rows.push(['업종(KSIC)', f.ksic_code || '-']);
-    rows.push(['공장등록', f.is_factory_registered ? '예' : '-']);
+    rows.push(['KSIC', f.ksic_code || '-']);
   }
-  // 공통 설비 플래그
   const flags = [];
   if (f.is_hazardous_material) flags.push('위험물');
   if (f.has_high_pressure_gas) flags.push('고압가스');
-  if (f.has_chemical_substance) flags.push('화학물질');
+  if (f.has_chemical_substance) flags.push('화학');
   if (f.has_boiler) flags.push('보일러');
-  if (f.electrical_capacity_kw) flags.push('전력 '+n(f.electrical_capacity_kw)+'kW');
-  if (flags.length) rows.push(['설비', flags.join(', ')]);
+  if (flags.length) rows.push(['설비', flags.join('·')]);
   return rows.map(r => `<div class="kv-item"><span class="kv-k">${esc(r[0])}</span><span class="kv-v">${esc(r[1])}</span></div>`).join('');
 }
 
@@ -150,15 +154,17 @@ function render(){
     document.getElementById('pager').style.display = 'none';
     return;
   }
-  el.innerHTML = state.items.map((f, idx) => {
+  el.innerHTML = '<div class="grid">' + state.items.map((f, idx) => {
     const no = (state.page - 1) * PAGE_SIZE + idx + 1;
     const sec = (f.sector || '').toUpperCase();
     return `<div class="card" id="card-${f.id}" data-fid="${esc(f.id)}">
       <div class="card-head">
-        <div class="card-no">${no}</div>
-        <div class="card-name">${esc(f.name || '(이름없음)')}</div>
-        <span class="card-sector">${esc(SECTOR_LABEL[sec] || sec || '-')}</span>
-        <span class="card-status st-wait" id="status-${f.id}">대기</span>
+        <div class="card-toprow">
+          <div class="card-no">${no}</div>
+          <span class="card-sector">${esc(SECTOR_LABEL[sec] || sec || '-')}</span>
+          <span class="card-status st-wait" id="status-${f.id}">대기</span>
+        </div>
+        <div class="card-name" title="${esc(f.name||'')}">${esc(f.name || '(이름없음)')}</div>
         <button class="btn btn-mini" onclick="runOne('${esc(f.id)}')">▶ 실행</button>
       </div>
       <div class="card-body">
@@ -166,17 +172,17 @@ function render(){
           <div class="cell-label cl-input">입력 <span class="ln"></span></div>
           <div class="kv">${fmtInput(f)}</div>
         </div>
-        <div class="cell">
+        <div class="cell cell-result">
           <div class="cell-label cl-result">결과 <span class="ln"></span></div>
-          <div id="result-${f.id}"><div class="result-empty">아직 실행하지 않았습니다.</div></div>
+          <div id="result-${f.id}"><div class="result-empty">미실행</div></div>
         </div>
         <div class="cell">
           <div class="cell-label cl-verify">검증 <span class="ln"></span></div>
-          <div id="verify-${f.id}"><div class="verify-empty">결과 생성 후 검증합니다.</div></div>
+          <div id="verify-${f.id}"><div class="verify-empty">결과 후 검증</div></div>
         </div>
       </div>
     </div>`;
-  }).join('');
+  }).join('') + '</div>';
   const pager = document.getElementById('pager');
   pager.style.display = 'flex';
   document.getElementById('pgInfo').textContent = `${state.page} / ${state.totalPages}  ·  총 ${state.total}개`;
@@ -218,35 +224,31 @@ function renderResult(fid, data){
   const total = data.applicable_count || s.total || rules.length;
   const lawCount = (data.result?.law_badges || []).length || new Set(rules.map(r=>r.law_name)).size;
   const chips = `<div class="r-stat">
-    <div class="r-chip">적용의무 <b>${n(total)}</b></div>
-    <div class="r-chip">적용법령 <b>${n(lawCount)}</b></div>
-    <div class="r-chip">위험도 <b>${esc(data.risk_level || '-')}</b></div>
-    <div class="r-chip">선임 <b>${n(s.appointment || 0)}</b></div>
-    <div class="r-chip">점검 <b>${n(s.inspection || 0)}</b></div>
+    <div class="r-chip">의무 <b>${n(total)}</b></div>
+    <div class="r-chip">법령 <b>${n(lawCount)}</b></div>
+    <div class="r-chip">위험 <b>${esc(data.risk_level || '-')}</b></div>
   </div>`;
-  const lawRows = rules.slice(0, 60).map(r => {
+  const lawRows = rules.slice(0, 80).map(r => {
     const t = (r.obligation_type || '').toUpperCase();
-    return `<div class="law-row"><span class="lr-type">${esc(OB_LABEL[t] || t || '의무')}</span><span class="lr-law">${esc(r.law_name || '-')}</span><span class="lr-art">${esc(r.law_article || '')}</span></div>`;
+    return `<div class="law-row"><div class="lr-top"><span class="lr-type">${esc(OB_LABEL[t] || t || '의무')}</span><span class="lr-art">${esc(r.law_article || '')}</span></div><span class="lr-law">${esc(r.law_name || '-')}</span></div>`;
   }).join('');
-  const link = `<a class="result-link" href="${RESULT_PAGE}?token=${encodeURIComponent(data.public_token)}" target="_blank">결과페이지 열기 →</a>`;
-  document.getElementById('result-'+fid).innerHTML = chips + `<div class="law-list">${lawRows || '<div class="result-empty">매칭된 의무가 없습니다.</div>'}</div>` + link;
+  const link = `<a class="result-link" href="${RESULT_PAGE}?token=${encodeURIComponent(data.public_token)}" target="_blank">결과페이지 →</a>`;
+  document.getElementById('result-'+fid).innerHTML = chips + `<div class="law-list">${lawRows || '<div class="result-empty">매칭 의무 없음</div>'}</div>` + link;
 }
 
 function renderVerify(fid, data){
-  // 검증칸: 결과의 법령 근거 존재율을 표기 (사장님이 추가 검증 기준을 채울 자리)
   const rules = (data.result?.rules_table || []).filter(r => r && r.law_name);
   const withArticle = rules.filter(r => (r.law_article || '').toString().trim()).length;
   const pct = rules.length ? Math.round(withArticle / rules.length * 100) : 0;
   document.getElementById('verify-'+fid).innerHTML = `<div class="verify-box">
-    의무 ${n(rules.length)}건 중 법령 조문 표기 <span class="badge-ok">${n(withArticle)}건 (${pct}%)</span><br>
-    public_token: <span style="font-family:monospace;font-size:11px;color:rgba(255,255,255,.5);">${esc(data.public_token)}</span><br>
-    <span style="color:rgba(255,255,255,.35);">※ 역회전 체인(draft→law_article→law_master) 정밀 검증은 별도 확인.</span>
+    조문표기 <span class="badge-ok">${n(withArticle)}/${n(rules.length)} (${pct}%)</span><br>
+    <span style="color:rgba(255,255,255,.3);">token: ${esc((data.public_token||'').slice(0,8))}…</span>
   </div>`;
 }
 
 async function runOne(fid){
-  setStatus(fid, 'st-run', '실행 중...');
-  document.getElementById('result-'+fid).innerHTML = '<div class="result-empty"><span class="spinner"></span>진단 실행 중...</div>';
+  setStatus(fid, 'st-run', '실행중');
+  document.getElementById('result-'+fid).innerHTML = '<div class="result-empty"><span class="spinner"></span>진단중</div>';
   try{
     const r = await fetch(`${API}/diagnosis/factory-test-run`, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -271,7 +273,6 @@ async function runAll(){
   const btn = document.getElementById('btnRunAll');
   btn.disabled = true;
   let done = 0, fail = 0;
-  // 순차 실행 — 하나 끝나면 다음 (부하 방지)
   for (let i = 0; i < state.items.length; i++){
     const f = state.items[i];
     document.getElementById('runStat').textContent = `실행 중 ${i+1} / ${state.items.length}`;
