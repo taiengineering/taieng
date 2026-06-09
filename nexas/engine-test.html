@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAI 엔진 검증 하니스</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;min-height:100%;background:#0a0e1a;font-family:'Noto Sans KR','Segoe UI',sans-serif;color:#e2e8f0;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 12px 60px;}
+
+/* 툴바 */
+.toolbar{position:sticky;top:0;z-index:20;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:12px;padding:12px 14px;margin:0 -12px 14px;}
+.tb-logo{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+.tb-logo span{color:#22d3ee;}
+.tb-sub{font-size:11px;color:rgba(255,255,255,.4);}
+.tb-spacer{flex:1;}
+.tb-stat{font-size:11px;color:rgba(34,211,238,.8);white-space:nowrap;}
+.btn{border:1px solid rgba(255,255,255,.15);border-radius:6px;background:none;color:rgba(255,255,255,.6);cursor:pointer;font-size:12px;padding:7px 12px;font-family:inherit;}
+.btn:hover{border-color:rgba(255,255,255,.35);color:#fff;}
+.btn-run{background:rgba(34,211,238,.15);border-color:rgba(34,211,238,.35);color:#22d3ee;font-weight:700;}
+.btn-run:hover{background:rgba(34,211,238,.28);}
+.btn-run:disabled{opacity:.5;cursor:not-allowed;}
+
+/* 카드 */
+.card{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.card.running{border-color:rgba(34,211,238,.5);box-shadow:0 0 0 1px rgba(34,211,238,.3);}
+.card.done{border-color:rgba(40,200,100,.35);}
+.card.failed{border-color:rgba(255,95,87,.45);}
+.card-head{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#0d1120;border-bottom:1px solid rgba(255,255,255,.06);}
+.card-no{width:26px;height:26px;border-radius:50%;background:rgba(34,211,238,.15);color:#22d3ee;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.card-name{font-size:14px;font-weight:700;color:#fff;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.card-sector{font-size:10px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);}
+.card-status{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap;}
+.st-wait{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);}
+.st-run{background:rgba(34,211,238,.18);color:#22d3ee;}
+.st-done{background:rgba(40,200,100,.18);color:#4ade80;}
+.st-fail{background:rgba(255,95,87,.18);color:#f87171;}
+.btn-mini{font-size:11px;padding:4px 10px;}
+
+/* 3칸 세로 */
+.card-body{display:flex;flex-direction:column;}
+.cell{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);}
+.cell:last-child{border-bottom:none;}
+.cell-label{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.cl-input{color:#60a5fa;}
+.cl-result{color:#4ade80;}
+.cl-verify{color:#fbbf24;}
+.cell-label .ln{flex:1;height:1px;background:rgba(255,255,255,.08);}
+
+.kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 14px;}
+.kv-item{font-size:12px;display:flex;gap:6px;}
+.kv-k{color:rgba(255,255,255,.4);white-space:nowrap;}
+.kv-v{color:#e2e8f0;font-weight:600;}
+
+.result-empty,.verify-empty{font-size:12px;color:rgba(255,255,255,.3);padding:4px 0;}
+.r-stat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.r-chip{font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);}
+.r-chip b{color:#22d3ee;font-size:14px;}
+.r-chip.red b{color:#f87171;}
+.law-list{display:flex;flex-direction:column;gap:4px;max-height:180px;overflow:auto;}
+.law-row{font-size:11px;display:flex;gap:8px;padding:5px 8px;background:rgba(255,255,255,.04);border-radius:5px;border-left:2px solid rgba(34,211,238,.4);}
+.law-row .lr-type{flex-shrink:0;font-weight:700;color:#60a5fa;width:54px;}
+.law-row .lr-law{flex:1;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.law-row .lr-art{flex-shrink:0;color:rgba(255,255,255,.4);}
+.result-link{display:inline-block;margin-top:8px;font-size:11px;color:#22d3ee;text-decoration:none;border:1px solid rgba(34,211,238,.3);border-radius:5px;padding:5px 10px;}
+.result-link:hover{background:rgba(34,211,238,.12);}
+
+.verify-box{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;}
+.verify-box .badge-ok{color:#4ade80;font-weight:700;}
+
+/* 페이징 */
+.pager{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;}
+.pager .pg-info{font-size:12px;color:rgba(255,255,255,.5);}
+
+.loading-row{text-align:center;padding:40px 0;color:rgba(255,255,255,.4);font-size:13px;}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.15);border-top-color:#22d3ee;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="toolbar">
+    <div>
+      <div class="tb-logo">TAI<span>Safe</span> 엔진 검증</div>
+      <div class="tb-sub">factories → 법령엔진 → 결과 → 검증</div>
+    </div>
+    <div class="tb-spacer"></div>
+    <div class="tb-stat" id="runStat"></div>
+    <button class="btn" onclick="reloadList()">⟳ 목록</button>
+    <button class="btn btn-run" id="btnRunAll" onclick="runAll()">▶ 전체 실행 (순차)</button>
+  </div>
+
+  <div id="cardList"><div class="loading-row"><span class="spinner"></span>사업장 목록 불러오는 중...</div></div>
+
+  <div class="pager" id="pager" style="display:none;">
+    <button class="btn" id="btnPrev" onclick="gotoPage(state.page-1)">◀ 이전</button>
+    <span class="pg-info" id="pgInfo">1 / 1</span>
+    <button class="btn" id="btnNext" onclick="gotoPage(state.page+1)">다음 ▶</button>
+  </div>
+</div>
+
+<script>
+const API = 'https://api.taieng.co.kr';
+const RESULT_PAGE = 'https://taieng.co.kr/paid-diagnosis-result.html';
+const PAGE_SIZE = 10;
+
+const SECTOR_LABEL = { BUILDING:'건물', INDUSTRY:'산업', INDUSTRIAL:'산업', MANUFACTURING:'산업', CONSTRUCTION:'건설', SPECIAL_FACILITY:'기타' };
+const OB_LABEL = { APPOINT:'선임', INSPECT:'점검', ACTION:'조치', REPORT:'보고', NOTIFY:'신고' };
+
+const state = { page:1, totalPages:1, total:0, items:[], running:false };
+
+const esc = v => (v ?? '').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const n = v => Number(v || 0).toLocaleString();
+
+function fmtInput(f){
+  const sec = (f.sector || '').toUpperCase();
+  const rows = [['섹터', SECTOR_LABEL[sec] || sec || '-']];
+  rows.push(['상시인원', f.employee_count != null ? n(f.employee_count)+'명' : '-']);
+  if (sec === 'CONSTRUCTION') {
+    rows.push(['공사금액', f.construction_amount ? n(Math.round(f.construction_amount/1e8))+'억' : '-']);
+    rows.push(['공사종류', f.construction_type || '-']);
+    rows.push(['하도급인원', f.subcontractor_worker_count != null ? n(f.subcontractor_worker_count)+'명' : '-']);
+  } else if (sec === 'BUILDING' || sec === 'SPECIAL_FACILITY') {
+    rows.push(['연면적', f.building_area ? n(f.building_area)+'㎡' : '-']);
+    rows.push(['층수', f.floor_count != null ? f.floor_count+'층' : '-']);
+    rows.push(['용도', f.main_purpose_name || f.building_use_code || '-']);
+    rows.push(['승강기', f.elevator_count != null ? f.elevator_count+'대' : '-']);
+  } else {
+    rows.push(['연면적', f.building_area ? n(f.building_area)+'㎡' : '-']);
+    rows.push(['업종(KSIC)', f.ksic_code || '-']);
+    rows.push(['공장등록', f.is_factory_registered ? '예' : '-']);
+  }
+  // 공통 설비 플래그
+  const flags = [];
+  if (f.is_hazardous_material) flags.push('위험물');
+  if (f.has_high_pressure_gas) flags.push('고압가스');
+  if (f.has_chemical_substance) flags.push('화학물질');
+  if (f.has_boiler) flags.push('보일러');
+  if (f.electrical_capacity_kw) flags.push('전력 '+n(f.electrical_capacity_kw)+'kW');
+  if (flags.length) rows.push(['설비', flags.join(', ')]);
+  return rows.map(r => `<div class="kv-item"><span class="kv-k">${esc(r[0])}</span><span class="kv-v">${esc(r[1])}</span></div>`).join('');
+}
+
+function render(){
+  const el = document.getElementById('cardList');
+  if (!state.items.length) {
+    el.innerHTML = '<div class="loading-row">등록된 사업장이 없습니다. factories 테이블에 사업장을 입력해 주세요.</div>';
+    document.getElementById('pager').style.display = 'none';
+    return;
+  }
+  el.innerHTML = state.items.map((f, idx) => {
+    const no = (state.page - 1) * PAGE_SIZE + idx + 1;
+    const sec = (f.sector || '').toUpperCase();
+    return `<div class="card" id="card-${f.id}" data-fid="${esc(f.id)}">
+      <div class="card-head">
+        <div class="card-no">${no}</div>
+        <div class="card-name">${esc(f.name || '(이름없음)')}</div>
+        <span class="card-sector">${esc(SECTOR_LABEL[sec] || sec || '-')}</span>
+        <span class="card-status st-wait" id="status-${f.id}">대기</span>
+        <button class="btn btn-mini" onclick="runOne('${esc(f.id)}')">▶ 실행</button>
+      </div>
+      <div class="card-body">
+        <div class="cell">
+          <div class="cell-label cl-input">입력 <span class="ln"></span></div>
+          <div class="kv">${fmtInput(f)}</div>
+        </div>
+        <div class="cell">
+          <div class="cell-label cl-result">결과 <span class="ln"></span></div>
+          <div id="result-${f.id}"><div class="result-empty">아직 실행하지 않았습니다.</div></div>
+        </div>
+        <div class="cell">
+          <div class="cell-label cl-verify">검증 <span class="ln"></span></div>
+          <div id="verify-${f.id}"><div class="verify-empty">결과 생성 후 검증합니다.</div></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  const pager = document.getElementById('pager');
+  pager.style.display = 'flex';
+  document.getElementById('pgInfo').textContent = `${state.page} / ${state.totalPages}  ·  총 ${state.total}개`;
+  document.getElementById('btnPrev').disabled = state.page <= 1;
+  document.getElementById('btnNext').disabled = state.page >= state.totalPages;
+}
+
+async function loadList(){
+  document.getElementById('cardList').innerHTML = '<div class="loading-row"><span class="spinner"></span>사업장 목록 불러오는 중...</div>';
+  try{
+    const r = await fetch(`${API}/diagnosis/factory-test-cases?page=${state.page}&size=${PAGE_SIZE}`);
+    const j = await r.json();
+    const d = j.data || {};
+    state.items = d.items || [];
+    state.total = d.total || 0;
+    state.totalPages = d.total_pages || 1;
+    render();
+  }catch(e){
+    document.getElementById('cardList').innerHTML = `<div class="loading-row" style="color:#f87171;">목록 로드 실패: ${esc(e.message)}</div>`;
+  }
+}
+
+function reloadList(){ loadList(); }
+function gotoPage(p){ if (state.running) return; if (p < 1 || p > state.totalPages) return; state.page = p; loadList(); }
+
+function setStatus(fid, cls, txt){
+  const s = document.getElementById('status-'+fid);
+  if (s){ s.className = 'card-status '+cls; s.textContent = txt; }
+  const card = document.getElementById('card-'+fid);
+  if (card){ card.classList.remove('running','done','failed');
+    if (cls === 'st-run') card.classList.add('running');
+    else if (cls === 'st-done') card.classList.add('done');
+    else if (cls === 'st-fail') card.classList.add('failed'); }
+}
+
+function renderResult(fid, data){
+  const s = data.result?.summary || {};
+  const rules = (data.result?.rules_table || []).filter(r => r && r.law_name);
+  const total = data.applicable_count || s.total || rules.length;
+  const lawCount = (data.result?.law_badges || []).length || new Set(rules.map(r=>r.law_name)).size;
+  const chips = `<div class="r-stat">
+    <div class="r-chip">적용의무 <b>${n(total)}</b></div>
+    <div class="r-chip">적용법령 <b>${n(lawCount)}</b></div>
+    <div class="r-chip">위험도 <b>${esc(data.risk_level || '-')}</b></div>
+    <div class="r-chip">선임 <b>${n(s.appointment || 0)}</b></div>
+    <div class="r-chip">점검 <b>${n(s.inspection || 0)}</b></div>
+  </div>`;
+  const lawRows = rules.slice(0, 60).map(r => {
+    const t = (r.obligation_type || '').toUpperCase();
+    return `<div class="law-row"><span class="lr-type">${esc(OB_LABEL[t] || t || '의무')}</span><span class="lr-law">${esc(r.law_name || '-')}</span><span class="lr-art">${esc(r.law_article || '')}</span></div>`;
+  }).join('');
+  const link = `<a class="result-link" href="${RESULT_PAGE}?token=${encodeURIComponent(data.public_token)}" target="_blank">결과페이지 열기 →</a>`;
+  document.getElementById('result-'+fid).innerHTML = chips + `<div class="law-list">${lawRows || '<div class="result-empty">매칭된 의무가 없습니다.</div>'}</div>` + link;
+}
+
+function renderVerify(fid, data){
+  // 검증칸: 결과의 법령 근거 존재율을 표기 (사장님이 추가 검증 기준을 채울 자리)
+  const rules = (data.result?.rules_table || []).filter(r => r && r.law_name);
+  const withArticle = rules.filter(r => (r.law_article || '').toString().trim()).length;
+  const pct = rules.length ? Math.round(withArticle / rules.length * 100) : 0;
+  document.getElementById('verify-'+fid).innerHTML = `<div class="verify-box">
+    의무 ${n(rules.length)}건 중 법령 조문 표기 <span class="badge-ok">${n(withArticle)}건 (${pct}%)</span><br>
+    public_token: <span style="font-family:monospace;font-size:11px;color:rgba(255,255,255,.5);">${esc(data.public_token)}</span><br>
+    <span style="color:rgba(255,255,255,.35);">※ 역회전 체인(draft→law_article→law_master) 정밀 검증은 별도 확인.</span>
+  </div>`;
+}
+
+async function runOne(fid){
+  setStatus(fid, 'st-run', '실행 중...');
+  document.getElementById('result-'+fid).innerHTML = '<div class="result-empty"><span class="spinner"></span>진단 실행 중...</div>';
+  try{
+    const r = await fetch(`${API}/diagnosis/factory-test-run`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ factory_id: fid })
+    });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || `HTTP ${r.status}`);
+    renderResult(fid, j);
+    renderVerify(fid, j);
+    setStatus(fid, 'st-done', '완료');
+    return true;
+  }catch(e){
+    document.getElementById('result-'+fid).innerHTML = `<div class="result-empty" style="color:#f87171;">실패: ${esc(e.message)}</div>`;
+    setStatus(fid, 'st-fail', '실패');
+    return false;
+  }
+}
+
+async function runAll(){
+  if (state.running || !state.items.length) return;
+  state.running = true;
+  const btn = document.getElementById('btnRunAll');
+  btn.disabled = true;
+  let done = 0, fail = 0;
+  // 순차 실행 — 하나 끝나면 다음 (부하 방지)
+  for (let i = 0; i < state.items.length; i++){
+    const f = state.items[i];
+    document.getElementById('runStat').textContent = `실행 중 ${i+1} / ${state.items.length}`;
+    const ok = await runOne(f.id);
+    if (ok) done++; else fail++;
+  }
+  document.getElementById('runStat').textContent = `완료 ${done} · 실패 ${fail}`;
+  btn.disabled = false;
+  state.running = false;
+}
+
+loadList();
+</script>
+</body>
+</html>
