@@ -78,6 +78,29 @@ html,body{width:100%;min-height:100%;background:#0a0e1a;font-family:'Noto Sans K
 .verify-box{font-size:10px;color:rgba(255,255,255,.55);line-height:1.5;word-break:break-all;}
 .verify-box .badge-ok{color:#4ade80;font-weight:700;}
 
+/* sector 적합성 검증 */
+.sec-health{display:inline-block;font-size:10px;font-weight:800;padding:3px 8px;border-radius:5px;margin-bottom:6px;}
+.sh-PASS{background:rgba(40,200,100,.18);color:#4ade80;border:1px solid rgba(40,200,100,.35);}
+.sh-WARN{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.35);}
+.sh-FAIL{background:rgba(255,95,87,.18);color:#f87171;border:1px solid rgba(255,95,87,.45);}
+.sh-ERR{background:rgba(255,255,255,.08);color:rgba(255,255,255,.45);}
+.v-counts{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
+.v-chip{font-size:9px;padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);white-space:nowrap;}
+.v-chip b{font-size:10.5px;}
+.v-chip.ok b{color:#4ade80;}
+.v-chip.warn b{color:#fbbf24;}
+.v-chip.fail b{color:#f87171;}
+.v-sub{font-size:9px;font-weight:800;letter-spacing:.04em;margin:6px 0 3px;}
+.v-sub.fail{color:#f87171;}
+.v-sub.warn{color:#fbbf24;}
+.v-law-list{display:flex;flex-direction:column;gap:2px;max-height:120px;overflow:auto;}
+.v-law{font-size:9px;display:flex;justify-content:space-between;gap:5px;padding:3px 5px;border-radius:4px;}
+.v-law.fail{background:rgba(255,95,87,.08);border-left:2px solid rgba(255,95,87,.5);}
+.v-law.warn{background:rgba(251,191,36,.07);border-left:2px solid rgba(251,191,36,.45);}
+.v-law .vl-name{color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.v-law .vl-sec{flex-shrink:0;color:rgba(255,255,255,.4);}
+.v-token{font-size:9px;color:rgba(255,255,255,.3);margin-top:5px;}
+
 /* 페이징 */
 .pager{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px;}
 .pager .pg-info{font-size:12px;color:rgba(255,255,255,.5);}
@@ -177,7 +200,7 @@ function render(){
           <div id="result-${f.id}"><div class="result-empty">미실행</div></div>
         </div>
         <div class="cell">
-          <div class="cell-label cl-verify">검증 <span class="ln"></span></div>
+          <div class="cell-label cl-verify">섹터 검증 <span class="ln"></span></div>
           <div id="verify-${f.id}"><div class="verify-empty">결과 후 검증</div></div>
         </div>
       </div>
@@ -236,19 +259,47 @@ function renderResult(fid, data){
   document.getElementById('result-'+fid).innerHTML = chips + `<div class="law-list">${lawRows || '<div class="result-empty">매칭 의무 없음</div>'}</div>` + link;
 }
 
-function renderVerify(fid, data){
-  const rules = (data.result?.rules_table || []).filter(r => r && r.law_name);
-  const withArticle = rules.filter(r => (r.law_article || '').toString().trim()).length;
-  const pct = rules.length ? Math.round(withArticle / rules.length * 100) : 0;
-  document.getElementById('verify-'+fid).innerHTML = `<div class="verify-box">
-    조문표기 <span class="badge-ok">${n(withArticle)}/${n(rules.length)} (${pct}%)</span><br>
-    <span style="color:rgba(255,255,255,.3);">token: ${esc((data.public_token||'').slice(0,8))}…</span>
-  </div>`;
+// sector 적합성 검증: factory-test-verify 호출 → PASS/WARN/FAIL 배지 + 부적합 법령 목록
+async function runVerify(fid, token){
+  const box = document.getElementById('verify-'+fid);
+  if (!token){ box.innerHTML = '<div class="verify-empty">토큰 없음</div>'; return; }
+  box.innerHTML = '<div class="verify-empty"><span class="spinner"></span>검증중</div>';
+  try{
+    const r = await fetch(`${API}/diagnosis/factory-test-verify/${encodeURIComponent(token)}`);
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || `HTTP ${r.status}`);
+    const health = j.sector_health || 'ERR';
+    const sm = j.summary || {};
+    const healthTxt = { PASS:'✓ 적합 (PASS)', WARN:'△ 검토 (WARN)', FAIL:'✕ 누수 (FAIL)' }[health] || health;
+    let html = `<div class="sec-health sh-${esc(health)}">${esc(healthTxt)}</div>`;
+    html += `<div class="v-counts">
+      <div class="v-chip ok">적합 <b>${n(sm.ok)}</b></div>
+      <div class="v-chip warn">미매핑 <b>${n(sm.unmapped)}</b></div>
+      <div class="v-chip fail">누수 <b>${n(sm.mismatch)}</b></div>
+    </div>`;
+    if ((j.mismatch_laws || []).length){
+      html += `<div class="v-sub fail">⚠ 타 섹터 전용 누수 (${j.mismatch_laws.length})</div>`;
+      html += '<div class="v-law-list">' + j.mismatch_laws.map(L =>
+        `<div class="v-law fail"><span class="vl-name" title="${esc(L.law_name)}">${esc(L.law_name)}</span><span class="vl-sec">${esc((L.sectors||[]).join('·'))}·${n(L.count)}건</span></div>`
+      ).join('') + '</div>';
+    }
+    if ((j.unmapped_laws || []).length){
+      html += `<div class="v-sub warn">△ 미매핑 (${j.unmapped_laws.length}) — 검토 대상</div>`;
+      html += '<div class="v-law-list">' + j.unmapped_laws.map(L =>
+        `<div class="v-law warn"><span class="vl-name" title="${esc(L.law_name)}">${esc(L.law_name)}</span><span class="vl-sec">${n(L.count)}건</span></div>`
+      ).join('') + '</div>';
+    }
+    html += `<div class="v-token">${esc(j.result_sector||'')} → ${esc(j.mapping_sector_key||'')} · token ${esc((token||'').slice(0,8))}…</div>`;
+    box.innerHTML = html;
+  }catch(e){
+    box.innerHTML = `<div class="sec-health sh-ERR">검증 실패</div><div class="v-token">${esc(e.message)}</div>`;
+  }
 }
 
 async function runOne(fid){
   setStatus(fid, 'st-run', '실행중');
   document.getElementById('result-'+fid).innerHTML = '<div class="result-empty"><span class="spinner"></span>진단중</div>';
+  document.getElementById('verify-'+fid).innerHTML = '<div class="verify-empty">결과 후 검증</div>';
   try{
     const r = await fetch(`${API}/diagnosis/factory-test-run`, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -257,8 +308,8 @@ async function runOne(fid){
     const j = await r.json();
     if (!r.ok) throw new Error(j.detail || `HTTP ${r.status}`);
     renderResult(fid, j);
-    renderVerify(fid, j);
     setStatus(fid, 'st-done', '완료');
+    await runVerify(fid, j.public_token);
     return true;
   }catch(e){
     document.getElementById('result-'+fid).innerHTML = `<div class="result-empty" style="color:#f87171;">실패: ${esc(e.message)}</div>`;
