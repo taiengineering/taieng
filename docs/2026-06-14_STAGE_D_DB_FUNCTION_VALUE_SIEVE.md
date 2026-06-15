@@ -59,32 +59,60 @@
 
 ### 한 규칙이 네 값으로 완전히 읽힘 (재해석 불필요)
 - 예: `executor / word / AUTHORITY / DROP` = "수범자를 보는 단어 규칙, 행정청, 버림"
-- 현황: executor·word = AUTHORITY 680/FRAGMENT 595/DELEGATED 98/SPECIAL 91 (값 단위)
-        executor·pattern = BUSINESS 3/AUTHORITY 3/FRAGMENT 4/DELEGATED 1/SPECIAL 2 (어미·형태)
-- BUSINESS가 pattern만인 것 = 원칙(BUSINESS 안 넓힘)과 일치. 검증된 패턴만.
 
 ---
 
-## 4. 거름망 최종 구조 (이 시점)
+## 4부 (이어서): 전 거름망 값 단위화 완성 + 1000행 버그 해결
+
+### ★ 대표 원칙: "원칙 1에 1룰. 나중에 합한다."
+- 실제 진단에서 KEEP가 전부 rule 24(BUSINESS 묶음 정규식)에 걸림 → 어느 값 때문인지 추적 불가.
+  "수도사업자/가스사업자/판촉영업자"(비고객 업종)가 rule 24의 "사업자"에 걸려 KEEP됨.
+- 대표 지적: BUSINESS도 **1룰=1값**으로 풀어야 추적된다. 합치는 건 나중에.
+
+### BUSINESS·FRAGMENT 패턴도 값 단위로 전개
+- BUSINESS 패턴(rule 24,25,36,39)이 잡던 executor 860개 값 → 한 값=한 룰(exact, KEEP) 전개.
+  패턴 끄고 측정: BUSINESS 6,603→6,533 (70건 중복정리, 빠짐 아님 — `~려는 자` 값은 이미 박힘 확인).
+  → BUSINESS 패턴 룰 4개 삭제.
+- FRAGMENT 패턴(동사조각·숫자치수)도 값 전개 → 분포 동일(4,281 유지) → 패턴 룰 삭제.
+- **결과: 거름망 전체가 word(값) 단위 2,251개, pattern 0개.** "원칙 1에 1룰" 완성.
+
+### 묶음 DROP 정규식 삭제 (3부 잔여)
+- AUTHORITY/SPECIAL_FACILITY/DELEGATED_ORG 묶음 정규식 6개 → 값으로 전개 확인 후 삭제.
+- 끈 상태 측정해 분포 동일(값이 다 받침) 확인 후 DELETE.
+
+### 1000행 버그 해결 (PostgREST RPC 제한)
+- 증상: 어댑터가 함수 결과를 1000건만 받음(by_class에 1000 합계).
+- 해결: ① 함수 diagnose_clauses_common()이 DROP 제외하고 KEEP+보류만 반환(불필요한 17000건 안 보냄).
+        ② Python _fetch_sieved_clauses가 .range() 페이지네이션으로 전체 수신.
+- 검증(실제 진단, 건설 factory): clauses_returned **13,971**(=KEEP 6,475 + 보류 7,496).
+  by_class = BUSINESS 6,475 / AMBIGUOUS 7,496. rule_id 추적 작동(사업주 2212, 건설사업자 1768,
+  전기사업자 1854, 노무제공플랫폼사업자 1579, 타이어제작자등 2108 …).
+
+### 글읽기 관찰 (다음 단계 재료)
+- KEEP에 건설 무관 업종 잔존: 타이어제작자·전기사업자·전기통신사업자·노무제공플랫폼사업자·제조업자.
+- 이는 정상 — 공용 거름은 "사업장 주체냐"만 봄. "건설이냐"는 다음 단계(섹터/업종). 대표 순서대로.
+- **이제 값 단위라 뺄 수 있음**: 비고객 업종 값 룰만 끄면 됨(묶음이면 불가했음).
+
+---
+
+## 거름망 최종 구조 (4부 시점)
 ```
-field_kind=executor 기준:
+field_kind=executor, rule_kind=word(값) 2,251개:
   [DROP] AUTHORITY(행정청) / SPECIAL_FACILITY(병원·학교·의료인) / DELEGATED_ORG(검사·인증·위탁기관)
-         / FRAGMENT(조각·숫자치수)  → 명백한 것만, 값 단위로 추적
-  [KEEP] BUSINESS(검증된 사업장 주체만, 안 넓힘 — pattern 3개)
-  [보류] 미매치 = KEEP_REVIEW (빠짐없이, 결과에 남김)
-순서(priority): FRAGMENT 10~22 → BUSINESS 28~30 → AUTHORITY 40~41 → SPECIAL 42~43 → DELEGATED 44
+         / FRAGMENT(조각·숫자치수)  → 값 단위, rule_id 추적
+  [KEEP] BUSINESS(사업장 주체 값)  → 값 단위
+  [보류] 미매치 = KEEP_REVIEW (빠짐없이)
+[함수] sieve_executor() 판정+rule_id / run_common_sieve() 측정 / diagnose_clauses_common() 진단(KEEP+보류, 페이지네이션)
+실제 진단 = 13,971건(KEEP 6,475 + 보류 7,496), DROP은 DB에서 제외.
 ```
 
----
+## 다음 (이 창에서 계속)
+- 섹터 거름 설계 (공용 다음, 통째거름 아님). 비고객 업종(타이어·전기·통신·플랫폼) 값 단위로 처리.
+- KSIC 공정명사 뽑기 C구조 (process_law_map, 거름망 통과분에 합치기 — "나중에 합한다").
+- 보류 7,496(AMBIGUOUS) 줄이기 — 단 개인(누구든지/근로자) 위주라 빠짐 위험, 신중히.
 
-## 5. 다음 (이 창에서 계속)
-- (가) 묶음 DROP 정규식(stage=common) 끌지 — 값 단위가 대체. 새 값은 보류로(빠짐없이) → 권고.
-- (나) DB 함수를 Python policy에 연결 (또는 어댑터가 함수 직접 호출).
-- (다) 섹터 거름 설계 (공용 다음 단계, 올바른 방식 = 통째거름 아님).
-- (라) KSIC 공정명사 뽑기 C구조 구현 (process_law_map 검수2 = 거름망 통과분만).
-
-## DB 변경 (이번 3부)
-- `legal_sieve_rule.stage` 컬럼 활용 (common/common_value/sector)
-- 값 단위 전개: common_value 1,442개 행 (묶음 DROP → 값 exact)
-- `legal_sieve_rule.field_kind`, `rule_kind` 컬럼 추가 + 전체 채움
-- 함수 `sieve_executor(text)`, `run_common_sieve()` 생성
+## DB 변경 (3·4부 누적)
+- `legal_sieve_rule`: stage(common/common_value/sector), field_kind, rule_kind 컬럼
+- 값 단위 전개: common_value 2,251개 (DROP 1,442 + BUSINESS/FRAGMENT 추가). 패턴 룰 전부 삭제.
+- 함수: sieve_executor(text), run_common_sieve(), diagnose_clauses_common()
+- tai-api: legal_engine_adapter_run.py — DB 함수 호출 + .range() 페이지네이션 (커밋 7f37fe8, 69deaef)
