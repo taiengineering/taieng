@@ -74,7 +74,7 @@
   패턴 끄고 측정: BUSINESS 6,603→6,533 (70건 중복정리, 빠짐 아님 — `~려는 자` 값은 이미 박힘 확인).
   → BUSINESS 패턴 룰 4개 삭제.
 - FRAGMENT 패턴(동사조각·숫자치수)도 값 전개 → 분포 동일(4,281 유지) → 패턴 룰 삭제.
-- **결과: 거름망 전체가 word(값) 단위 2,251개, pattern 0개.** "원칙 1에 1룰" 완성.
+- **결과: 거름망 전체가 word(값) 단위, pattern 0개.** "원칙 1에 1룰" 완성.
 
 ### 묶음 DROP 정규식 삭제 (3부 잔여)
 - AUTHORITY/SPECIAL_FACILITY/DELEGATED_ORG 묶음 정규식 6개 → 값으로 전개 확인 후 삭제.
@@ -95,11 +95,33 @@
 
 ---
 
-## 거름망 최종 구조 (4부 시점)
+## 5부: 분해 후 원본 삭제 + common_value 통일 (대표 원칙)
+
+### ★ 대표 원칙: "분해 후에는 기존 것 삭제가 바람직하다"
+- 분해(값 전개) 후 원본을 남기면 또 해석 대상이 됨. off(비활성)만 해둔 것도 같이 삭제.
+
+### 정리 내역
+- 비활성(off) 룰 삭제: sector 폐기 룰 6개(SECTOR_MISMATCH, 통째거름 폐기분) DELETE.
+- stage=common의 FRAGMENT word 22개 → 21개는 common_value에 중복(전개 시 들어감)이라 삭제,
+  남은 1개("벌금", 데이터에 없어 전개 안 됨)는 common_value로 stage 이동(값 룰 한 곳 통일).
+- 결과: **모든 룰이 stage=common_value / rule_kind=word 단위. 패턴 0, 비활성 0, 중복 0, 폐기잔재 0.**
+
+### 거름망 최종 (5부 시점) — 2,230개 값 룰
+| class | verdict | 룰 |
+|---|---|---|
+| BUSINESS | KEEP | 787 |
+| AUTHORITY | DROP | 680 |
+| FRAGMENT | DROP | 574 |
+| DELEGATED_ORG | DROP | 98 |
+| SPECIAL_FACILITY | DROP | 91 |
+- 분포 유지: AUTHORITY 38.2% / 보류 23.2% / BUSINESS 20.9% / FRAGMENT 13.7% / DELEGATED 2.8% / SPECIAL 1.1%.
+
+---
+
+## 거름망 최종 구조
 ```
-field_kind=executor, rule_kind=word(값) 2,251개:
-  [DROP] AUTHORITY(행정청) / SPECIAL_FACILITY(병원·학교·의료인) / DELEGATED_ORG(검사·인증·위탁기관)
-         / FRAGMENT(조각·숫자치수)  → 값 단위, rule_id 추적
+field_kind=executor, rule_kind=word(값), stage=common_value, 2,230개:
+  [DROP] AUTHORITY / SPECIAL_FACILITY / DELEGATED_ORG / FRAGMENT  → 값 단위, rule_id 추적
   [KEEP] BUSINESS(사업장 주체 값)  → 값 단위
   [보류] 미매치 = KEEP_REVIEW (빠짐없이)
 [함수] sieve_executor() 판정+rule_id / run_common_sieve() 측정 / diagnose_clauses_common() 진단(KEEP+보류, 페이지네이션)
@@ -111,8 +133,8 @@ field_kind=executor, rule_kind=word(값) 2,251개:
 - KSIC 공정명사 뽑기 C구조 (process_law_map, 거름망 통과분에 합치기 — "나중에 합한다").
 - 보류 7,496(AMBIGUOUS) 줄이기 — 단 개인(누구든지/근로자) 위주라 빠짐 위험, 신중히.
 
-## DB 변경 (3·4부 누적)
-- `legal_sieve_rule`: stage(common/common_value/sector), field_kind, rule_kind 컬럼
-- 값 단위 전개: common_value 2,251개 (DROP 1,442 + BUSINESS/FRAGMENT 추가). 패턴 룰 전부 삭제.
+## DB 변경 (3·4·5부 누적)
+- `legal_sieve_rule`: stage(common_value로 통일), field_kind=executor, rule_kind=word
+- 값 단위 2,230개 (BUSINESS 787 / AUTHORITY 680 / FRAGMENT 574 / DELEGATED 98 / SPECIAL 91). 패턴·비활성·중복 전부 삭제.
 - 함수: sieve_executor(text), run_common_sieve(), diagnose_clauses_common()
 - tai-api: legal_engine_adapter_run.py — DB 함수 호출 + .range() 페이지네이션 (커밋 7f37fe8, 69deaef)
