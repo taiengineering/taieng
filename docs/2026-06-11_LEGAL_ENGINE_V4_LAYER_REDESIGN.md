@@ -1,9 +1,10 @@
 # 법령엔진 v4 레이어 재설계 기획서 (객체화·표준화)
 
 작성일: 2026-06-11  
-**버전: v2 (2026-06-16 — 15차 실측 검증 반영)**  
+**버전: v2.1 (2026-06-16 — GPT 정밀검토 반영)**  
 작성: Claude (기획설계 담당 — 사장님 승인으로 GPT 영역 포함 진행)  
-상태: **설계 확정. WO-D-001~007 + WO-APPENDIX-COLLECT-001 이행 중**
+상태: **설계 확정. WO-D-001~007 + WO-APPENDIX-COLLECT-001 이행 중**  
+GPT 최종 판정: **승인 가능 — "v4 완성 구현"이 아니라 "관찰 파이프라인 구축 문서"로 승인**
 
 ---
 
@@ -18,7 +19,7 @@
   - docs/law-engine/LEGAL_RULE_PIPELINE__taiadmin.md
   - docs/law-engine/2026-05-07_DESIGN_master_rule_v2__taiadmin.md
 
-위 문서들은 2026-05 기준 설계로, 본 문서(v2)가 전면 대체한다.
+위 문서들은 2026-05 기준 설계로, 본 문서(v2.1)가 전면 대체한다.
 "설계가 뭔지 모르겠다"면 이 문서 하나만 읽으면 된다.
 
 구현 WO 전문은: docs/2026-06-16_WO_D_PIPELINE_IMPL.md
@@ -105,6 +106,21 @@
   → C축 대조기 → 전 법령 적용
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[D단계 비목표 — 이것을 만드는 게 아니다]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+D-001~007은 정확도 개선 작업이 아니다.
+D-001~007은 관찰 가능성 확보 작업이다.
+정확도 개선은 관찰 결과를 바탕으로 별도 WO로만 수행한다.
+
+D단계 완료 기준은 "정확한 결과"가 아니라:
+  - 입력부터 결과까지 trace가 생겼는가?
+  - 기존 Track A와 병행 비교 가능한가?
+  - 어디서 빠졌는지 볼 수 있는가?
+
+이 기준을 벗어나면 16번째 엔진 제작이 된다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 [절대 금지] 건드리면 안 되는 것
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -121,13 +137,43 @@
 D-002 거름 금지 사항:
   법 해석 기반 DROP 금지 (산안법이면 DROP 같은 규칙 — GPT 영역)
   AUTHORITY/BUSINESS/FRAGMENT 수준만 허용
+  애매하면 DROP이 아니라 반드시 PENDING (잘못 빼는 것이 가장 위험)
 
-D-004: SemanticClause를 facility_applicability_eval에 직접 연결 금지
+D-004A: SemanticClause를 facility_applicability_eval에 직접 연결 금지
   (binding_field 없어서 평가 대상 0건이 됨 — 가짜 연결)
+  D-004A의 입력 = facility_applicability rows (읽기만)
+  D-004A의 출력 = CheckResult view
+  D-004A의 금지 = evaluate_single_factory / evaluate_draft_for_facility 수정
+
+D-004B: D-001~007 범위에 포함하지 않는다.
+  D-004B는 별도 설계 승인 전 구현 금지.
+  선행 조건: D-001~007 완료 + 별표 수집 + actor 개선 + Registry 구축
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ---
+
+## v2.1 변경 내역 (GPT 정밀검토 반영)
+
+```
+v2 → v2.1 변경사항:
+
+1. D단계 비목표 명시 (GPT 위험1 대응)
+   "정확도 개선이 아니라 관찰 가능성 확보"
+   완료 기준 = trace 생성 + 병행 비교 가능 + 누락 지점 가시화
+
+2. D-004A 입출력 명확화 (GPT 개선점2 대응)
+   입력: facility_applicability rows
+   출력: CheckResult view
+   금지: evaluate_single_factory / evaluate_draft_for_facility 수정
+
+3. D-004B 강화 (GPT 개선점3 대응)
+   D-001~007 범위 외 명시
+   별도 설계 승인 전 구현 금지
+
+4. D-002 거름 원칙 보강 (GPT 위험3 대응)
+   "애매하면 PENDING" 명시 (DROP은 확실한 경우만)
+```
 
 ## v2 변경 내역 (2026-06-16 실측 기반)
 
@@ -305,22 +351,24 @@ B6 품질게이트 (ACTIVE/QUARANTINED)
 | 0값 매치 | TriValue UNKNOWN | D-004A 부분 적용 |
 | 기관·업자 혼입 | actor 1급 + C1 차단 | 거름망 2,219개 선행 |
 | 별표 조건 미진입 | AppendixCondition | WO-APPENDIX-COLLECT-001 대기 |
-| Track B 평가 미정 | D-004B 설계 | D-001~007 완료 후 |
+| Track B 평가 미정 | D-004B 설계 | D-001~007 + 별도 승인 후 |
 
 ---
 
 # 7. 이행 로드맵
 
-## 1단계 — 현재 진행
+## 1단계 — 현재 진행 (GPT 권고 순서)
 
 ```
 D-001  SemanticClause Pipeline    semantic_clause_fix → 객체화
 D-002  Common Sieve Engine        legal_sieve_rule (2,219개)
 D-003  Section Sieve              산업/건설/건물 분리
-D-004A Track A Check Adapter     facility_applicability 결과 래핑
+D-004A Track A Check Adapter     facility_applicability rows → CheckResult view
 D-005  KSIC Signal Engine         업종 신호
 D-006  Reverse Check Engine       역추적
 D-007  Refinery                   중복 제거·결과 생성
+       ↓
+       Track A 결과 ↔ 관찰 파이프라인 diff
 ```
 
 목표: 소비자 입력 → 결과까지 전 구간 관찰 가능. 기존 엔진 교체 아님.
@@ -329,8 +377,8 @@ D-007  Refinery                   중복 제거·결과 생성
 
 ```
 WO-APPENDIX-COLLECT-001    별표 수집 (law_appendix + appendix_condition)
-WO-D-004B                  Semantic Evaluator (Track B 평가 방법)
-WO-LEG-Compiler-003        Actor Resolution
+WO-LEG-Compiler-003        Actor Resolution (UNKNOWN 43,432건 개선)
+WO-D-004B                  Semantic Evaluator — 별도 설계 승인 후 착수
 ```
 
 ## 3단계 — 2단계 완료 후
@@ -350,7 +398,7 @@ Phase 4  전 법령 확대 → 전환
 1. 케이스 매트릭스: 8종 (제조 49/50명, 건설 49/50억, 빈 입력, 건물)
 2. 정답지: MUST/MUST_NOT 케이스당 10~20개. 글읽기 1회 → 이후 기계 대조
 3. trace: 모든 결과에 통과사유 부착
-4. diff: Track A ↔ Track B 비교 → 누락 항목만 글읽기
+4. diff: Track A ↔ 관찰 파이프라인 비교 → 누락 항목만 글읽기
 5. 글읽기 위치: 정답지 구축 / diff 신규분 / 분기별 표본 한정
 
 ---
@@ -361,7 +409,7 @@ Phase 4  전 법령 확대 → 전환
 |---|---|
 | Claude | 기획·WO 진행, A축·C축·검증, D-001~007 구현 조율 |
 | GPT | B3~B6 법 해석 변환 규칙, Compiler, 별표 수집기, Actor Resolution |
-| 사장님 | 표준 확정 승인, 정답지 글읽기 확정, 단계 전환 승인 |
+| 사장님 | 표준 확정 승인, 정답지 글읽기 확정, 단계 전환 승인, D-004B 설계 승인 |
 
 **GPT 관리 테이블 — Claude 수정·삭제 절대 금지:**  
 `constraint_node` / `numeric_constraint` / `rule_candidate` /  
