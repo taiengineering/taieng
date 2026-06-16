@@ -1,9 +1,42 @@
 # 법령엔진 v4 레이어 재설계 기획서 (객체화·표준화)
 
-작성일: 2026-06-11
-작성: Claude (기획설계 담당 — 사장님 승인으로 GPT 영역 포함 진행)
-상태: 설계 확정 대기 → 승인 시 단계별 이행
+작성일: 2026-06-11  
+**버전: v2 (2026-06-16 — 15차 실측 검증 반영)**  
+작성: Claude (기획설계 담당 — 사장님 승인으로 GPT 영역 포함 진행)  
+상태: **설계 확정. WO-D-001~007 + WO-APPENDIX-COLLECT-001 이행 중**  
 근거 분석: `2026-06-11_PIPELINE_TRACE_FWD_REV.md` (정추적·역추적 정밀분석)
+
+---
+
+## v2 변경 내역 (2026-06-16 실측 기반)
+
+```
+[확정된 사실 — DB·코드 직접 확인]
+
+1. Track A ≠ Track B. 현재 두 경로는 별개 엔진이다.
+   Track A: factories + draft_slot(binding_field) → evaluate_draft_for_facility
+             → facility_applicability
+   Track B: semantic_clause_fix → CandidateClause → SectionCandidateClause
+             → ??? (평가 방법 미설계)
+
+2. SemanticClause를 facility_applicability_eval에 직접 연결하면
+   평가 대상이 0건이 된다 (binding_field 없음).
+   → D-004를 A/B로 분리. D-004A = Track A 래핑, D-004B = NOT IMPLEMENTED.
+
+3. 시행령 별표 본체 미수집.
+   산안법 시행령 제16조: "별표 3과 같다" 언급만 있고
+   별표 3 데이터는 law_article에 없음 (article_type에 '별표' 없음).
+   → WO-APPENDIX-COLLECT-001 선행 필요.
+
+4. B3 품질 한계 확인.
+   ACTOR UNKNOWN 43,432건 = 원래 한계 + 일부 개선 가능.
+   EQUIPMENT_SCOPE distinct 토큰 8종 = B5 코드화 재료 빈약.
+   → WO-LEG-Compiler-003 (Actor Resolution) D-001~007 완료 후 발행 예정.
+
+5. v4 설계 논리는 유효. 방향 오류 없음.
+   단 Phase 0(표준 확정) 전에 WO-D-001~007로
+   관찰 가능한 파이프라인 먼저 구축 (GPT 권고, 채택).
+```
 
 ---
 
@@ -55,6 +88,30 @@
 6. 이미 보유한 사전 자산(industry_master 501 / ksic_process_map 6,957 /
    process_equipment_map 187,319)이 파이프라인에 연결돼 있지 않음
 
+## 1.4 v2 추가 — 15차 실측으로 확인된 구조적 단절
+
+```
+[단절 1] SemanticClause 경로 ↔ Track A 경로
+
+Track A (현재 운영 중):
+  factories(사업장) + draft_slot(binding_field 있는 것만)
+  → evaluate_draft_for_facility
+  → facility_applicability (MATCH_CANDIDATE / POSSIBLE_CANDIDATE)
+
+Track B (semantic_clause_fix 기반, 관찰 불가 상태):
+  semantic_clause_fix → legal_sieve_rule 거름
+  → 이후 사업장과 비교하는 방법이 정의되지 않음
+
+두 경로는 현재 연결되지 않는다.
+SemanticClause를 facility_applicability_eval에 넣으면 평가 대상 0건.
+
+[단절 2] 조문 본문 ↔ 시행령 별표
+
+산안법 제16조: "별표 3과 같다" (언급만)
+별표 3 본체: DB 미수집
+→ 선임 기준(제조업 50인 이상 등)이 파이프라인에 진입 불가
+```
+
 ---
 
 # 2. 설계 원칙 (불변)
@@ -62,18 +119,13 @@
 1. **양쪽이 같은 사전으로 말한다** — 법 측 대상과 사업장 측 보유물은 동일한
    공통 사전 코드로 표현. 대조 = "코드 ∈ 목록".
 2. **이음새 = 계약(Contract)** — 레이어 간 입출력 스키마를 고정. 레이어 구현은
-   교체 가능, 계약은 불변. (체크엔진 5원칙의 확장)
+   교체 가능, 계약은 불변.
 3. **결측 ≠ 0** — 모든 사업장 값은 3치(있음/없음/모름). 모름은 모름으로 흐른다.
-4. **탈락 = 보류, 소멸 금지** — 어떤 레이어도 데이터를 버리지 않는다. 탈락분은
-   사유와 함께 보류 풀에 보존되어 재처리 가능하다.
-5. **판단은 한 곳에만** — "모름을 포함시킬 것인가" 같은 정책 판단은 판정정책
-   레이어(C2) 단 한 곳. 나머지 레이어는 전부 무판단 변환·대조.
-6. **모든 산출물은 역링크** — 의무 → 조건 객체 → 조문 원문, 판정 → 통과 사유.
-   글읽기 검증이 결과 화면에서 바로 가능해야 한다.
+4. **탈락 = 보류, 소멸 금지** — 어떤 레이어도 데이터를 버리지 않는다.
+5. **판단은 한 곳에만** — 정책 판단은 판정정책 레이어(C2) 단 한 곳.
+6. **모든 산출물은 역링크** — 의무 → 조건 객체 → 조문 원문. 글읽기 검증이 결과 화면에서 바로 가능.
 7. **Candidate 철학 유지** — 어떤 레이어도 법적 Truth를 확정하지 않는다.
-   (기존 엔진의 강점 계승)
-8. **표준은 한 번 정하면 바꾸지 않는다** — 객체 스키마·사전 코드 체계는
-   버전으로만 진화하고, 문제 발생 시 표준이 아니라 구현을 고친다.
+8. **표준은 한 번 정하면 바꾸지 않는다** — 문제 발생 시 표준이 아니라 구현을 고친다.
 
 ---
 
@@ -81,74 +133,43 @@
 
 ## 3.1 FacilityProfile — 사업장 프로필 객체
 
-사업장이 "무엇을 가졌고 무엇을 하는가"의 표준 표현. 모든 진단의 입력.
-
 ```
 FacilityProfile {
-  profile_id, sector,                    # BUILDING/INDUSTRIAL/CONSTRUCTION(/휴면 SPECIAL_FACILITY)
-
-  building:  { use_code: TriValue<코드>,  # 건물용도 (공통사전 BLDG:*)
-               floor_area: TriValue<수>,  # 연면적 ㎡
-               floor_count: TriValue<수> }
-
-  workforce: { regular_workers: TriValue<수>,     # 상시근로자
-               subcontract_workers: TriValue<수> } # 협력업체
-
-  processes: TriList<공정코드>            # 공통사전 PROC:* (KSIC에서 확장 가능)
-  equipment: TriList<설비코드>            # 공통사전 EQUIP:* (보일러·압력용기·크레인·스프링클러…)
-  materials: TriList<물질코드>            # 공통사전 MAT:* (위험물·화학물질·고압가스…)
-  activities: TriList<활동코드>           # 공통사전 ACT:* (공사종류·발파·굴착·밀폐공간작업…)
-  metrics:   { construction_amount: TriValue<수>, electrical_kw: TriValue<수>,
-               gas_capacity: TriValue<수>, boiler_capacity: TriValue<수>, … }
-
-  provenance: { 입력값/확장값/기본값 구분 — A3 확장으로 추가된 항목은 표시 }
+  profile_id, sector,
+  building:  { use_code: TriValue<코드>, floor_area: TriValue<수>, floor_count: TriValue<수> }
+  workforce: { regular_workers: TriValue<수>, subcontract_workers: TriValue<수> }
+  processes: TriList<공정코드>    # PROC:*
+  equipment: TriList<설비코드>    # EQUIP:*
+  materials: TriList<물질코드>    # MAT:*
+  activities: TriList<활동코드>   # ACT:*
+  metrics:   { construction_amount, electrical_kw, gas_capacity, boiler_capacity, … }
+  provenance: { 입력값/확장값/기본값 구분 }
 }
 
 TriValue<T> = { state: PRESENT|ABSENT|UNKNOWN, value: T|null }
-TriList<T>  = { confirmed: [T], denied: [T], unknown_rest: true|false }
+TriList<T>  = { confirmed: [T], denied: [T], unknown_rest: bool }
 ```
 
-핵심: **UNKNOWN이 1급 상태.** 결측을 0으로 채우는 일이 타입 수준에서 불가능.
-
 ## 3.2 ApplicabilityCondition — 적용조건 객체
-
-조문 하나(또는 항·호 하나)가 요구하는 것의 표준 표현. 법 번역기의 산출물.
 
 ```
 ApplicabilityCondition {
   condition_id,
-  source: { law_id, article_id, part_ref, raw_text_span },   # 원문 역링크 (필수)
-
-  actor:   { code: 주체코드, raw: 원문주어 }   # ACTOR:OWNER(사업주)/AGENCY(기관)/
-                                              # CONTRACTOR(관리업자)/GOV(행정청)…
-                                              # ★ 1급 필드. 코드화 실패 시 UNKNOWN
-
-  targets: [ { kind: EQUIP|PROC|MAT|ACT|BLDG, # 무엇을 가진/하는 경우인가
-               code: 공통사전코드,
-               relation: HAS|OPERATES|HANDLES|PERFORMS,
-               raw: 원문구절 } ]
-
-  quantifiers: [ { metric: 지표코드(WORKERS|AREA|AMOUNT|CAPACITY…),
-                   subject_raw: 원문주어,     # ★ A 게이트 교훈: 수량의 주어 보존
-                   operator, value, unit } ]
-
-  obligation: { action_type: APPOINT|INSPECT|ACTION|REPORT|NOTIFY,
-                action_text, deadline, frequency,
-                evidence_form_ref, penalty_ref }
-
-  completeness: { actor_coded, targets_coded, quantifiers_subject_ok }  # B6 게이트 입력
-  status: ACTIVE | QUARANTINED(사유)                                     # 소멸 없음
+  source: { law_id, article_id, part_ref, raw_text_span },
+  actor:   { code: ACTOR:OWNER|AGENCY|CONTRACTOR|GOV, raw: 원문주어 }  # UNKNOWN 허용
+  targets: [ { kind: EQUIP|PROC|MAT|ACT|BLDG, code, relation, raw } ]
+  quantifiers: [ { metric, subject_raw, operator, value, unit } ]  # subject_raw 필수
+  obligation: { action_type, action_text, deadline, frequency, evidence_form_ref, penalty_ref }
+  completeness: { actor_coded, targets_coded, quantifiers_subject_ok }
+  status: ACTIVE | QUARANTINED(사유)
 }
 ```
 
-## 3.3 공통 사전 Registry (단일 표준)
+## 3.3 공통 사전 Registry
 
-- 체계: `EQUIP:*`(설비) / `PROC:*`(공정) / `MAT:*`(물질) / `ACT:*`(활동) /
-  `BLDG:*`(건물용도) / `ACTOR:*`(주체) / `METRIC:*`(수량지표)
-- 각 코드: 정식명 + 동의어/표기변형 목록(법령 표현 ↔ 소비자 표현 양방향)
-- 기존 자산 흡수: industry_master → PROC 시드, process_equipment_map →
-  PROC↔EQUIP 추론 간선, 별표·서식 데이터 → evidence_form_ref
-- 단일 소스 원칙: 사전은 한 테이블 군. 법 번역기도 사업장 번역기도 같은 것을 참조
+- `EQUIP:*` / `PROC:*` / `MAT:*` / `ACT:*` / `BLDG:*` / `ACTOR:*` / `METRIC:*`
+- 기존 자산 흡수: industry_master → PROC, process_equipment_map → PROC↔EQUIP 간선
+- **v2 추가**: 별표 데이터 → AppendixCondition (WO-APPENDIX-COLLECT-001 완료 후 연결)
 
 ---
 
@@ -156,149 +177,154 @@ ApplicabilityCondition {
 
 ```
 [B축 법 번역기 — 배치]              [A축 사업장 번역기 — 런타임]
-B1 수집/버전                        A1 입력수집 (sector별 폼)
-B2 구조파싱 (조/항/호)               A2 프로필표준화 (입력→FacilityProfile, 결측=UNKNOWN)
-B3 의미추출 (주체·대상·관계·수량·행위)  A3 프로필확장 (사전 추론: KSIC→공정→추정설비,
-B4 조건조립 (→ApplicabilityCondition)      "가지고 감" 원칙, provenance 표시)
-B5 사전정규화 (대상→공통사전 코드) ★신설
-B6 품질게이트 (완전성 검사→ACTIVE/보류) ★PASS깔때기 대체
-        ↘                          ↙
-          [공통 사전 Registry]
-        ↙                          ↘
-              [C축 대조기 — 런타임]
-C1 매칭   : Condition × Profile, 코드 대 코드 3치 대조 (무판단, 체크엔진 계약)
-C2 판정정책: UNKNOWN 처리 정책 (보수모드=잠정포함+확인질문 생성) ← 판단 유일 지점
-C3 의무생성: 통과 조건 → 의무 인스턴스 (행위/기한/주기/서식/벌칙 + trace)
-
-[횡단]
-사전 Registry / 레이어 계약(스키마) / 추적성(역링크·통과사유) / 보류 풀(Quarantine)
+B1 수집/버전                        A1 입력수집
+B2 구조파싱                         A2 프로필표준화 (결측=UNKNOWN)
+B3 의미추출                         A3 프로필확장 (KSIC→공정→설비 추론)
+B4 조건조립 → ApplicabilityCondition
+B5 사전정규화 (대상→공통사전 코드)
+B6 품질게이트 (ACTIVE / QUARANTINED)
+          ↘                       ↙
+            [공통 사전 Registry]
+          ↙                       ↘
+                [C축 대조기 — 런타임]
+  C1 매칭    : Condition × Profile, 코드 대 코드 3치 대조
+               actor≠OWNER → 즉시 NOT (혼입 차단)
+  C2 판정정책: UNKNOWN 처리 정책 (판단 유일 지점)
+  C3 의무생성: trace 필수 포함
 ```
 
-## 4.1 레이어별 역할·계약 정의
+## 4.1 레이어별 계약
 
-| 레이어 | 입력 → 출력 (계약) | 핵심 규칙 |
+| 레이어 | 입력 → 출력 | 핵심 규칙 |
 |---|---|---|
-| B1 | 법령 원문 → law_master/law_article + 버전 | 현행 유지 |
-| B2 | 조문 → 구조화 part | 현행 유지 |
-| B3 | part 텍스트 → 의미토큰 {주체,대상,관계,수량(주어포함),행위} | 추출물은 버려지지 않고 전부 B4로 |
-| B4 | 의미토큰 → ApplicabilityCondition(미정규화) | IF/THEN 슬롯·binding 개념 폐지, 객체 필드로 직행 |
-| B5 | Condition 대상 raw → 공통사전 코드 | 매핑 실패는 코드=UNKNOWN으로 보존 (버리지 않음) |
-| B6 | Condition → ACTIVE / QUARANTINED(사유) | 완전성 기준: actor 코드화 + targets 또는 quantifiers 1개 이상 유효. 보류는 재심사 큐로 |
-| A2 | 소비자입력 → FacilityProfile | 결측은 UNKNOWN. 0 기입 금지 |
-| A3 | Profile → 확장 Profile | 사전 간선으로 후보 확장. 확장분은 provenance=INFERRED |
-| C1 | Condition×Profile → MatchResult{MATCH/NOT/UNKNOWN, 사유} | actor≠OWNER면 즉시 NOT(혼입 차단). 수량은 주어 검증된 것만. 무판단 |
-| C2 | MatchResult → 포함/제외/잠정포함+질문 | 정책 한 곳. sector·플랜별 모드 가능 |
-| C3 | 포함 조건 → 의무 인스턴스 | trace(조문 역링크+통과사유) 필수 포함 |
+| B1~B2 | 법령 수집·파싱 | 현행 유지 |
+| B3 | part 텍스트 → 의미토큰 | subject 보존 필수 |
+| B4 | 의미토큰 → ApplicabilityCondition | IF/THEN·binding 폐지 |
+| B5 | Condition 대상 → 공통사전 코드 | 실패 시 UNKNOWN 보존 |
+| B6 | Condition → ACTIVE/QUARANTINED | 탈락=보류, 소멸 금지 |
+| A2 | 소비자입력 → FacilityProfile | 결측=UNKNOWN, 0 기입 금지 |
+| A3 | Profile → 확장 Profile | provenance=INFERRED 표시 |
+| C1 | Condition×Profile → MatchResult | actor≠OWNER 즉시 NOT |
+| C2 | MatchResult → 포함/제외/잠정 | 정책 한 곳 |
+| C3 | 포함 조건 → 의무 인스턴스 | trace 필수 |
 
 ---
 
-# 5. 기존 자산 재배치 (재작성 아닌 재배열)
+# 5. 기존 자산 재배치
 
-| 현행 | 신설계 위치 | 처리 |
+| 현행 | v4 위치 | 처리 |
 |---|---|---|
-| L0 수집 (law_collector 등) | B1 | 유지 |
-| L1 파싱 (auto_parse 등) | B2 | 유지 |
-| L2 constraint_node 284,579 / numeric_constraint 10,329 | B3 | 유지하되 산출물이 객체 필드로 직행 (subject 보존) |
-| L3 rule_candidate / L6 executable_draft+draft_slot | B4 | 통합·치환 — 슬롯/binding 개념 폐지 |
-| L4 compatibility_validation (PASS 깔때기) | B6 | 치환 — 탈락=소멸을 탈락=보류로 |
-| L5 numeric_family (A 게이트 포함) | B3/B4의 수량 처리에 흡수 (주어 게이트 계승) |
-| L7 facility_applicability_eval | C1 | 치환 — FIELD_MAP/존재확인/0비교 폐지, 코드 대조로 |
-| 입구 sector 필터 (law_sector_mapping) | C1 사전 필터 | 유지 (미매핑 통과 원칙 유지) |
-| L8 task/schedule/penalty | C3 | 유지·연결 |
-| 사전 자산 (ksic_process_map 등) | Registry + A3 | **신규 연결** (현재 미사용 → 핵심 활용) |
-| check_engine.py | C1의 대조 계약 + 검증 어댑터 | 유지·확장 |
-| master_rule_v2 (현재 0건) | — | 휴면 확인됨. 본 설계 범위 외 |
-| SPECIAL_FACILITY | — | 의도적 휴면 유지. 건드리지 않음 |
+| law_collector 등 | B1 | 유지 |
+| auto_parse 등 | B2 | 유지 |
+| constraint_node 284,579 | B3 | 유지, subject 보존 |
+| rule_candidate / executable_draft / draft_slot | B4 | **v2: 즉시 폐지 아님 — Track A로 병행 유지** |
+| compatibility_validation | B6 | 치환 (탈락=보류) |
+| facility_applicability_eval | C1 | **v2: Track A 어댑터(D-004A)로 래핑. 수정 금지.** |
+| law_sector_mapping | C1 사전 필터 | 유지 (미매핑 통과) |
+| task/schedule/penalty | C3 | 유지 |
+| ksic_process_map 등 사전 자산 | Registry + A3 | 신규 연결 |
+| check_engine.py | C1 계약 + 검증 어댑터 | 유지·확장 |
+| master_rule_v2 (0건) | — | 휴면 |
+| SPECIAL_FACILITY | — | 의도적 휴면 |
+| **법령 별표 본체 (v2 추가)** | **AppendixCondition** | **WO-APPENDIX-COLLECT-001 선행** |
 
 ---
 
-# 6. 현재 실패 → 설계 해결 매핑
+# 6. 실패 → 설계 해결 매핑
 
-| 확정된 실패 (분석 근거) | 해결 장치 |
-|---|---|
-| 산안법 제15~19조 영구 누락 (PASS 0건) | B6: 탈락=보류+사유, 재심사 큐 |
-| binding 커버리지 7% (계획서·위원회 비가시) | binding 개념 폐지 — 조건은 객체 필드, 전 조건이 대조 대상 |
-| scope 무력 통과 (결과의 84%) | B5 코드화 + C1 "코드 ∈ 보유목록" 대조 |
-| 0값 매치 (의료장소·친환경주택 혼입) | TriValue — 결측=UNKNOWN, 0 둔갑 타입상 불가 |
-| AMBIGUOUS 편승 | C1은 조건별 3치 결과를 보존, C2가 조건 단위로 정책 적용 (집계 편승 구조 폐지) |
-| 기관·업자 의무 혼입 | actor 1급 객체 + C1 즉시 차단 |
-| "N명" 주어 오인 (A 게이트로 1곳 수정) | quantifier.subject 보존 + 검증을 계약에 내장 (패턴이 아니라 구조로) |
-| 검증이 매번 글읽기 노동 | trace 필수 — 통과사유가 결과에 붙어 나옴. 정답지(골든 케이스) 대조는 check_engine 어댑터로 |
-
----
-
-# 7. 이행 전략 (단계별, 각 단계 독립 검증)
-
-**Phase 0 — 표준 확정 (코드 0줄)**
-객체 스키마 2종 + Registry 코드 체계 + 레이어 계약을 본 문서 기준으로 확정.
-GPT와 합의 지점: B3~B6 변환 규칙의 세부 (법 해석 로직 소유권은 GPT 유지,
-계약·스키마는 본 설계를 따름).
-
-**Phase 1 — Registry 구축 + A축**
-공통 사전 테이블 군 생성, 기존 사전 자산 흡수. A2/A3 구현
-(FacilityProfile 생성·확장). 검증: 8케이스 매트릭스의 프로필이 의도대로
-생성되는지 (특히 빈 입력 → 전부 UNKNOWN).
-
-**Phase 2 — 파일럿 법령군으로 B4~B6**
-산업안전보건법(법·령·규칙) + 화재예방법 + NFPC 일부 = 파일럿 범위.
-기존 B3 산출물(constraint_node/numeric_constraint)을 입력으로
-ApplicabilityCondition 생성 → B5 코드화 → B6 게이트.
-검증: 산안법 제15~19조 선임 의무가 ACTIVE Condition으로 살아나는지 글로 확인.
-
-**Phase 3 — C축 + 병행 가동**
-C1~C3 구현. 하니스에 신엔진 경로 추가, **기존 엔진과 병행 출력**(같은 케이스
-양쪽 결과 diff). 검증: 8케이스 × 정답지(MUST/MUST_NOT 센티넬) 기계 대조
-+ diff 신규 항목만 글읽기.
-
-**Phase 4 — 전 법령 확대 → 전환**
-파일럿 기준 충족 시 768개 법령 확대. 기존 경로는 보존(롤백 가능) 후 전환.
-
-각 Phase 공통 규칙: 기존 데이터·경로 삭제 금지(병행·보존), 단계별 결과는
-글읽기로 최종 확인, 보고 형식 = 1.산출물 2.검증결과 3.남은문제.
-
-**우선 착수 제안: Phase 0의 객체 스키마 + Phase 1의 Registry.**
-모든 것의 토대이며, 기존 엔진을 건드리지 않아 위험이 0이다.
+| 확정된 실패 | 해결 장치 | v2 상태 |
+|---|---|---|
+| 산안법 제15~19조 영구 누락 | B6 탈락=보류 | 미착수 (Phase 2) |
+| binding 커버리지 7% | binding 폐지, 조건 객체화 | 미착수 |
+| scope 무력 통과 84% | B5 코드화 + C1 코드 대조 | 미착수 |
+| 0값 매치 | TriValue (UNKNOWN 1급) | D-004A에서 부분 적용 |
+| 기관·업자 의무 혼입 | actor 1급 + C1 즉시 차단 | 거름망 2,219개로 부분 선행 |
+| 시행령 별표 조건 미진입 | AppendixCondition + 별표 수집 | **WO-APPENDIX-COLLECT-001 대기** |
+| Track B 평가 방법 미정 | D-004B 설계 | **D-001~007 + APPENDIX 완료 후** |
 
 ---
 
-# 8. 검증 체계 (설계에 내장)
+# 7. 이행 전략 — v2 확정 로드맵
 
-1. **케이스 매트릭스**: TEST_HARNESS 사업장 8종 — 제조 49/50명(선임 경계),
-   건설 49/50억, **전부 빈 입력**(UNKNOWN 처리·0값 결함 검출 전용),
-   전부 채운 입력, 건물, (휴면 제외).
-2. **정답지(골든 케이스)**: 케이스별 MUST/MUST_NOT 센티넬 10~20개.
-   글읽기는 정답지 구축 시 1회 (Claude 초안 → 사장님 글 확인 확정).
-   이후 재진단마다 check_engine 어댑터가 기계 대조.
-3. **trace 표준**: 모든 결과 항목에 통과사유(어느 조건이 어느 프로필 값과
-   어떻게 매치) 부착 — 역추적이 결과 화면에서 공짜.
-4. **diff**: 수정 전후 토큰 비교 — 추가/소멸 항목만 글읽기.
-5. 글읽기의 최종 지위: 기준을 세우는 곳(정답지·diff 신규분·분기별 표본)에만.
-   반복 대조는 기계. (글읽기 원칙은 유지하되 1회 투자로 전환)
+## 1단계 — 관찰 가능한 파이프라인 구축 (현재 진행)
+
+```
+WO-D-001  SemanticClause Pipeline        semantic_clause_fix → 객체화
+WO-D-002  Common Sieve Engine            legal_sieve_rule 적용
+WO-D-003  Section Sieve                  섹터별 분리
+WO-D-004A Track A Check Adapter         facility_applicability 결과 래핑
+WO-D-005  KSIC Signal Engine             process_noun_match_stats 활용
+WO-D-006  Reverse Check Engine           역추적
+WO-D-007  Refinery                       중복 제거·문장 생성
+```
+
+목표: 소비자 입력 → 결과까지 전 구간 관찰 가능한 상태.
+기존 엔진 교체 아님. 병행 실행.
+
+## 2단계 — 별표 수집 + Track B 평가 설계
+
+```
+WO-APPENDIX-COLLECT-001  별표 본체 수집 (law_appendix + appendix_condition)
+WO-D-004B                Semantic Candidate Evaluator 설계·구현
+```
+
+1단계 완료 후 착수. Track A / Track B diff 분석 후 누락 의무 확인 → 평가 방법 확정.
+
+## 3단계 — v4 원설계 이행 (Phase 0~4)
+
+```
+Phase 0  객체 스키마 + Registry 코드 체계 확정 (코드 0줄)
+Phase 1  Registry 구축 + A축 (FacilityProfile 생성·확장)
+Phase 2  파일럿 법령군 B4~B6 (ApplicabilityCondition 생성)
+Phase 3  C축 + 병행 가동 (Track A diff)
+Phase 4  전 법령 확대 → 전환
+```
+
+2단계 완료 후 착수. WO-LEG-Compiler-003 (Actor Resolution) 병행.
+
+---
+
+# 8. 검증 체계
+
+1. **케이스 매트릭스**: TEST_HARNESS 사업장 8종 (제조 49/50명, 건설 49/50억,
+   전부 빈 입력, 전부 채운 입력, 건물)
+2. **정답지(골든 케이스)**: MUST/MUST_NOT 센티넬 케이스당 10~20개.
+   글읽기는 정답지 구축 시 1회 → 이후 기계 대조.
+3. **trace 표준**: 모든 결과에 통과사유 부착.
+4. **diff**: Track A ↔ Track B 결과 비교 → 누락 항목만 글읽기.
+5. **글읽기 위치**: 정답지 구축 / diff 신규분 / 분기별 표본 한정.
 
 ---
 
 # 9. 역할 분담
 
-- **Claude**: 본 설계 전체의 기획·설계·진행 주관 (사장님 승인 기준).
-  객체 스키마/계약/Registry/A축/C축/검증 체계 구현 및 B축 이행 조율.
-- **GPT**: B3~B6의 법 해석 변환 규칙 세부(주체 추출 정밀화, 대상 표현 → 사전
-  코드 매핑 규칙, 보류 사유 분류)에 대한 협의·검수 파트너. 계약과 스키마는
-  본 설계를 따른다.
-- **사장님**: 표준 확정 승인(Phase 0), 정답지 글읽기 확정, 단계 전환 승인.
+| 담당 | 영역 |
+|---|---|
+| Claude | 기획·설계·WO 진행, A축·C축·검증 체계, D-001~007 구현 조율 |
+| GPT | B3~B6 법 해석 변환 규칙, Compiler 구조, 별표 수집기, Actor Resolution |
+| 사장님 | 표준 확정 승인, 정답지 글읽기 확정, 단계 전환 승인 |
+
+**GPT 관리 테이블 — Claude 수정·삭제 금지:**
+`constraint_node` / `numeric_constraint` / `rule_candidate` /
+`executable_draft` / `draft_slot` / `compatibility_validation`
 
 ---
 
-# 부록 A. 본 설계가 폐지하는 것 / 유지하는 것
+# 부록 A. 폐지 / 유지 목록 (v2 업데이트)
 
-폐지: IF/THEN draft_slot·binding_field 체계, compatibility PASS 소멸 깔때기,
+**폐지 (장기)**: IF/THEN draft_slot·binding_field 체계, compatibility PASS 소멸 깔때기,
 FIELD_MAP 11개 매핑, scope 존재확인 통과, 결측→0 기입, 집계 편승.
-유지: Candidate 철학, 수집·파싱 레이어, sector 필터(미매핑 통과), 사전 자산,
-check_engine, A 게이트의 교훈(주어 검증 — 구조로 승격), SPECIAL_FACILITY 휴면,
-글읽기 검증 원칙(위치만 이동).
+
+**v2 수정**: `facility_applicability_eval` — 즉시 교체 아님. Track A 어댑터(D-004A)로
+래핑 후 병행. D-004B 완성 후 단계적 전환.
+
+**유지**: Candidate 철학, 수집·파싱 레이어, sector 필터(미매핑 통과), 사전 자산,
+check_engine, A 게이트 교훈(subject 보존), SPECIAL_FACILITY 휴면, 글읽기 검증 원칙.
 
 # 부록 B. 근거 문서
 
-- `2026-06-11_PIPELINE_TRACE_FWD_REV.md` — 정추적·역추적 정밀분석 (깔때기
-  정량, 통과경로 전수 분류, 병목 우선순위)
-- `2026-06-10_CHECK_ENGINE_GUIDE.md` — 체크엔진 5원칙 (계약 사상의 원형)
-- WO-LEG-Compiler-001/002 — 주어 게이트 수정·검증 기록 (subject 보존의 근거)
+- `2026-06-11_PIPELINE_TRACE_FWD_REV.md` — 정추적·역추적 정밀분석
+- `2026-06-10_CHECK_ENGINE_GUIDE.md` — 체크엔진 5원칙
+- `2026-06-16_WO_D_PIPELINE_IMPL.md` — **구현 WO 전문 (v2 기준)**
+- `2026-06-15_SESSION_HANDOFF.md` — 15차 세션 핸드오프
+- WO-LEG-Compiler-001/002 — 주어 게이트 수정·검증 기록
