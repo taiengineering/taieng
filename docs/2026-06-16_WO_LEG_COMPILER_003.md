@@ -22,11 +22,43 @@ DROP/KEEP는 D-002 Common Sieve 또는 D-006 Reverse Check 영역이다.
 
 ---
 
+## ⚠️ 이 WO의 위치 (15차 흐름상)
+
+```
+오염 71%의 직접 원인은 Actor UNKNOWN이 아니다.
+직접 원인: employee_count 280 ≥ 50 → 도메인 불문 APPLICABLE
+
+예시:
+  의료법·장애인연금법·학교안전공제·협회설립·위원회운영
+  → 전부 "근로자 수 조건 충족" 하나로 통과
+
+따라서 이 WO는 오염 해결 WO가 아니다.
+이 WO는 D-004B 입력 데이터 준비 작업이다.
+
+올바른 순서:
+  D-004A 관찰 완료 (✅)
+  ↓
+  Actor Overlay 적용 (이 WO)
+  ↓
+  K-01~05 측정 (오염 감소량 확인)
+  ↓
+  주원인이 Actor인지 Domain인지 분리
+  ↓
+  D-004B 설계
+
+가장 위험한 착각:
+  "ACTOR UNKNOWN 43,432건을 해결하면 71% 오염이 해결될 것이다"
+  → 실측 데이터상 아직 그 인과관계는 증명되지 않음
+  → K-01~05가 증명 실험이다
+```
+
+---
+
 ## 배경
 
 `/refinery/run?limit=500` 결과 209건 중 71%가 오염.
-원인: `semantic_clause_fix`의 ACTOR UNKNOWN 43,432건(82%)으로 인해
-행정청·의료기관·협회 의무가 사업주 의무와 구분 없이 내려옴.
+오염의 직접 원인은 `binding_field = employee_count` 하나로 도메인 불문 매칭.
+Actor Overlay는 이 오염 중 "Actor 분류로 줄일 수 있는 부분"을 측정하는 도구다.
 
 ---
 
@@ -113,21 +145,46 @@ UNKNOWN:
 패턴 매칭 시 **긴 패턴 우선** 적용:
 
 ```sql
--- 예시 적용 순서 원칙
 ORDER BY
   length(pattern) DESC,  -- 긴 패턴 우선 (시·도지사 > 도지사)
   priority ASC           -- 우선순위 낮을수록 먼저
 LIMIT 1                  -- 가장 먼저 맞는 패턴 1개 선택
 ```
 
-이유: "시·도지사"와 "도지사"가 동시에 매칭될 경우 더 구체적인 패턴이 우선 적용돼야 함.
+---
+
+## 성공 기준 (K-01~05)
+
+Actor Overlay 완료 후 반드시 아래 5개를 측정한다.
+이것이 "Actor 문제인가 vs Domain 문제인가"를 분리하는 실험이다.
+
+```
+K-01: 209건 결과에 Actor Overlay 적용
+      → actor_group별 건수 집계
+
+K-02: AUTHORITY 제거 시 감소량 측정
+      → 209건 중 AUTHORITY 건수 / 제거 후 잔존 건수
+
+K-03: ASSOCIATION 제거 시 감소량 측정
+      → ASSOCIATION 건수 / 제거 후 잔존 건수
+
+K-04: BUSINESS만 남겼을 때 잔존 오염률 측정
+      → 남은 의무 중 실제 무관 법령 비율 (글읽기)
+
+K-05: Top 50 잔존 오염 사례 분석
+      → BUSINESS actor인데 여전히 무관한 것들 목록화
+      → 예상: 건설기계대여업, 의료기관, 공동주택 등
+      → 이것이 Domain 문제임을 확인하는 단계
+```
+
+K-04, K-05 결과로 다음 WO(D-004B vs Domain Rule WO) 결정.
 
 ---
 
 ## GPT에게 요청하는 산출물
 
 ### 1. 패턴 룰 CSV
-`actor_resolution_pattern` 입력용
+`actor_resolution_pattern` 입력용 전체 목록
 ```
 pattern, actor_code, actor_group, match_type, priority, note
 사업주, ACTOR:OWNER, BUSINESS, contains, 0,
