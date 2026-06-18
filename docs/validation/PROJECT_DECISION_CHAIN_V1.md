@@ -4,6 +4,16 @@
 **작성일**: 2026-06-18
 **성격**: 의사결정 흐름 기록. 새 분석/구현/법령수집 없음.
 **목적**: 신규 인력(GPT/Claude/개발자)이 이 문서 하나로 "왜 여기까지 왔는가"를 복원.
+**지위**: **공식 기준 문서 (Source of Truth for Project State).** GPT/Claude/신규 개발자가 프로젝트 상태를 복원할 때 최우선으로 읽는 문서.
+
+> ⚠️ 우선순위 규칙 (WO-DECISION-CHAIN-001 지시):
+> ```
+> P0. 이 문서(PROJECT_DECISION_CHAIN_V1.md) 작성  ← 완료
+> P1. Obligation Layer 검토
+> P2. Industrial 의무 확장
+> P3. Construction Block 해제 검토
+> ```
+> 이 문서가 완성되기 전에는 새 Phase 진입 금지였다. → 현재 완성됨. P1부터 진입 가능.
 
 > 이 문서는 기획서가 아니다. 기획서는 `docs/2026-06-11_LEGAL_ENGINE_V4_LAYER_REDESIGN.md`에 있다.
 > 이 문서는 "그 기획을 왜, 어떤 순서로 실행했는가"의 기록이다.
@@ -250,16 +260,17 @@ WO-APPENDIX3-CONSTRUCTION-LOCATE-001:
   §8 Golden Case Validation (케이스 8/8)
   INDUSTRIAL 안전관리자 + 일반의무 8건 MUST 100%
   Coverage Gap 분석
+  PROJECT_DECISION_CHAIN_V1 (이 문서, P0 완료)
 
 ⛔ 진행 불가:
   Phase 5 CONSTRUCTION = BLOCKED
   (별표3 건설업란 원문 부재)
 
-다음 우선순위 후보 (사장님 재선정 대기):
-  후보 1: Obligation Layer (Block 없음, 즉시 가능) — 권장
-  후보 2: BUILDING Coverage (원문 확보 리스크 재발 가능)
-  후보 3: INDUSTRIAL 심화 (Block 없음, 기존 구조 재사용) — 권장
-  후보 4: 건설업 원문 확보 → Construction 재개
+다음 우선순위 (WO-DECISION-CHAIN-001 지시 순서):
+  P1: Obligation Layer (Block 없음, 즉시 가능) — 다음 진입 대상
+  P2: INDUSTRIAL 의무 확장 (Block 없음, 기존 구조 재사용)
+  P3: 건설업 원문 확보 → Construction Block 해제 검토
+  (BUILDING Coverage는 원문 확보 리스크 재발 가능 → 후순위)
 ```
 
 ---
@@ -317,7 +328,7 @@ Q. §8을 왜 했나?           → 6번 (작동 검증 후 정답 검증)
 Q. Golden Case가 왜 필요?  → 6번 (정답지 없으면 정확도 측정 불가)
 Q. 왜 Construction 1순위?  → 8번 (입력 존재 + 단일 METRIC)
 Q. 왜 지금 Blocked?        → 9번 (별표3 건설업란 원문 부재)
-Q. 다음에 뭘 하나?         → 10번 (후보 1 또는 3 권장)
+Q. 다음에 뭘 하나?         → 10번 (P1 Obligation Layer)
 ```
 
 기획서를 읽지 않아도, WO들을 읽지 않아도, 이 문서만으로 복원 가능.
