@@ -1,11 +1,11 @@
 # SECTOR FILTER CONNECTION REPORT V1
-# WO-SECTOR-FILTER-CONNECTION-001
+# WO-SECTOR-FILTER-CONNECTION-001 / CLOSEOUT-001
 
 **작성일**: 2026-06-20
 **목적**: 기존 섹터별 법령 참조 구조를 거름망에 연결. COMMON + 동일 sector 법령만 후보 유지.
 **성격**: 구현(연결). 신규 법령/draft_slot/binding_field 생성 0건.
 **커밋**: tai-api `cbe28f8`(sector filter) + `5b19ff8`(TRUNCATE CASCADE 수정)
-**상태**: 배치 재실행 완료, DB 반영 검증 완료 (교차 오매핑 잔존 0건).
+**상태**: ★ 1단계 공식 종료 (WO-SECTOR-FILTER-CLOSEOUT-001). 전 파이프라인 반영, 최종 오매핑 0건.
 
 ---
 
@@ -78,6 +78,54 @@ DB 검증 (재실행 후 task_candidate × semantic_clause):
 
 ---
 
+## ★★ CLOSEOUT: 후속 배치 전 파이프라인 재생성 (CASCADE 자식 체인 복원)
+
+```
+TRUNCATE CASCADE로 비워진 자식 체인을 후속 배치로 재생성. 전부 정상 완료:
+
+railway run python3 scripts/run_schedule_candidate.py
+  → schedule_candidate 1,182건 / Tasks 연결 584 / Issues 0 / 완료 0.5초
+
+railway run python3 scripts/run_penalty_candidate.py
+  → penalty_candidate 3,129 / numeric 1,696 / reference_link 2,749
+    obligation_relation 7,511 / Issues 0 / 완료 5.6초
+
+railway run python3 scripts/run_compliance_package.py
+  → compliance_package 344건(시설별) / Review Queue 3,758 / Audit Log 20단계
+    완료 1.7초
+  Audit Log Step 18 = Task Candidate 3,405 (sector filter 값이 끝까지 전파됨)
+  Final Validation: traceability/UNKNOWN/conflict preservation 전부 ✅
+```
+
+---
+
+## ★★★ CLOSEOUT 최종 검증: 전 계층 오매핑 0건
+
+```
+재생성 후 파이프라인 전 계층 교차 오매핑 (law_sector ≠ COMMON AND ≠ facility):
+
+  task_candidate          교차 오매핑  0  ✅
+  document_requirement    교차 오매핑  0  ✅
+
+= task_candidate부터 그 아래 문서요건까지 섹터 섞임 완전 제거.
+  최종 산출물(compliance_package 344건) 기준 오매핑 0건.
+```
+
+---
+
+## 성공 기준 점검
+
+```
+SF-01 거름망 평가 시 facility sector 확인  → ✅ (factories.sector 699건 로드)
+SF-02 법령 sector 확인                     → ✅ (semantic_clause 49,997 part 로드)
+SF-03 COMMON + 동일 sector만 허용          → ✅ (sector_allowed, 7/7 단위검증)
+SF-04 기존 binding_field 평가 유지         → ✅ (앞단에 filter만 추가)
+SF-05 교차 sector 오매핑 차단              → ✅ (426건 차단, 전 계층 잔존 0)
+SF-06 신규 법령/draft_slot/binding_field 0건 → ✅ (기존 데이터만 참조)
+```
+
+---
+
 ## 미리보기(176/110) vs 실제 배치(426) 차이 설명 (정직)
 
 ```
@@ -90,30 +138,17 @@ DB 검증 (재실행 후 task_candidate × semantic_clause):
 
 ---
 
-## 성공 기준 점검
+## 2단계 분리 명시 (이번 WO 범위 아님, 착수 금지)
 
 ```
-SF-01 거름망 평가 시 facility sector 확인  → ✅ (factories.sector 699건 로드)
-SF-02 법령 sector 확인                     → ✅ (semantic_clause 49,997 part 로드)
-SF-03 COMMON + 동일 sector만 허용          → ✅ (sector_allowed, 7/7 단위검증)
-SF-04 기존 binding_field 평가 유지         → ✅ (앞단에 filter만 추가)
-SF-05 교차 sector 오매핑 차단              → ✅ (426건 차단, DB 잔존 0)
-SF-06 신규 법령/draft_slot/binding_field 0건 → ✅ (기존 데이터만 참조)
-```
+1단계(이 WO): sector filter 연결 → 오매핑 차단 ✅ 종료
+2단계(별도 WO): 건설 고유 입력 binding 확장 → 건설 고유 의무 활성화
+  → 본 WO에서 착수하지 않음. draft_slot/건설 binding 논의 없음.
+  → 별도 WO로 분리. GPT 법령 컴파일 선행 필요.
+  → 참조: WO-CONSTRUCTION-FILTER-CONNECTION-001 매핑표(GPT 인계 준비됨).
 
----
-
-## 후속 필요 작업 (CASCADE 영향)
-
-```
-TRUNCATE CASCADE로 task_candidate 자식 체인도 비워짐:
-  document_requirement_candidate / form_mapping_candidate /
-  checklist·evidence·field_coverage_candidate.
-→ 후속 배치 순서 재실행으로 재생성 필요:
-  railway run python3 scripts/run_schedule_candidate.py
-  railway run python3 scripts/run_penalty_candidate.py
-  railway run python3 scripts/run_compliance_package.py
-  (sector filter 적용된 task_candidate 기준으로 자식 깨끗이 재생성)
+별도 과제(분리): LAW_UNKNOWN 통과 2,377건
+  = semantic_clause sector 매핑 없는 part. 추후 매핑 확장 시 정합화 대상.
 ```
 
 ---
@@ -121,21 +156,6 @@ TRUNCATE CASCADE로 task_candidate 자식 체인도 비워짐:
 ## 완료 문장
 
 ```
-기존 섹터별 법령 참조 구조가 거름망에 연결되었다.
-신규 법령 생성 없이 COMMON + 동일 sector 법령만 후보로 남도록 처리하였다.
-배치 재실행 결과 교차 오매핑 426건이 차단되고 DB 검증상 오매핑 잔존 0건,
-COMMON 2,311건·동일 sector 339건은 유지됨을 확인하였다.
-```
-
----
-
-## 다음 단계 (2단계 예고, 이번 WO 범위 아님)
-
-```
-1단계(이 WO): sector filter 연결 → 오매핑 차단 ✅ 완료
-2단계(다음): 건설 고유 입력 binding 확장 → 건설 고유 의무 활성화
-  (WO-CONSTRUCTION-FILTER-CONNECTION 매핑표 + GPT 법령 컴파일 선행)
-
-별도 과제: LAW_UNKNOWN 통과 2,377건
-  = semantic_clause sector 매핑이 없는 part. 추후 매핑 확장 시 추가 정합화 대상.
+sector filter 1단계는 전 파이프라인에 반영되었고,
+최종 산출물 기준 섹터 오매핑 0건으로 종료한다.
 ```
