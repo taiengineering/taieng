@@ -2,436 +2,458 @@
 Trigger 기반 의무후보 생성 설계서
 
 작성일: 2026-06-22
-Unit 다계: 해결책 강구 (구현 없음)
+작성자: Claude (설계 전담)
+단계: 해결책 강구 (구현 없음)
 
 ---
 
-## 1. Route A 설계 — 직접조회 방식
+## 0. 설계 전제
 
-### 1-1. 대상 Trigger
+WO-VALIDATION-001 결과:
+- Trigger 연결률 81% (52개 중 42개 키워드 매칭 가능)
+- THRESHOLD/INDUSTRY/REFERENCE는 키워드 매칭 불가 → 별도 Route
+- condition_text + action_text 양방향 검색 필수
 
-```
-BUSINESS / WORK / EQUIPMENT / EQUIPMENT_ACT / HAZARD_FACTOR
-```
+두 Route가 확정된다:
+- **Route A**: 키워드 매칭 → semantic_clause 직접 조회
+- **Route B**: 조건판정 → applicability_conditions 경유
 
-### 1-2. 조회 구조
+---
+
+## 1. Route A 설계 — 직접 조회
+
+### 대상 Trigger 타입
+
+BUSINESS, WORK, EQUIPMENT, EQUIPMENT_ACT, HAZARD_FACTOR
+
+### 조회 구조
 
 ```
 Trigger Code
   ↓
-[Trigger 키워드 세트 조회]
-  condition_text MATCHES keyword_set
-  OR action_text MATCHES keyword_set
-  AND content_type IN ('OBLIGATION','PROHIBITION')
-  AND executor_text = '사업주'
+키워드 패턴 매핑 테이블 조회
   ↓
-의무후보 풀
+semantic_clause 검색
+  조건: content_type IN ('OBLIGATION','PROHIBITION')
+        AND executor_text = '사업주'
+        AND (condition_text OR action_text) MATCHES 키워드 패턴
+  ↓
+의무후보 생성
 ```
 
-**필수 원칙: condition_text OR action_text 양쪽 검색**
+### 핵심 원칙: 양방향 검색 필수
 
-검증 결과:
-- WORK:MELTING: condition 매칭 2건, action 매칭 41건 → action만 조회 시 95% 누라
-- WORK:DEMOLITION: condition 23, action 36 → 양쪽 합산 39건 (4건 중복)
-- condition만 조회 시 평균 40% 손실 발생
+condition_text만 검색하면 의무의 40~70%를 누락한다.
 
-### 1-3. 필드별 조회 전략
+실증:
+- WORK:MELTING — condition_text: 2건 / action_text: 41건 / 합계: 41건
+- WORK:DEMOLITION — condition_text: 23건 / action_text: 36건 / 합계: 39건
+- WORK:DIVING — condition_text: 21건 / action_text: 32건 / 합계: 32건
 
-| Trigger Type | condition_text 사용 | action_text 사용 | 이유 |
-|---|---|---|---|
-| BUSINESS | 사용 안 함 (IS NULL 조회) | X | 조건 없음 = NULL |
-| WORK | ✓ | ✓ | 키워드가 action에 주로 있음 |
-| EQUIPMENT | ✓ | ✓ | 설비명이 action에 많이 등장 |
-| EQUIPMENT_ACT | ✓ | ✓ | 사용행위 조합어 action에 집중 |
-| HAZARD_FACTOR | ✓ | ✓ | 유해인자명 action에 많이 등장 |
+의무 조회는 COALESCE(condition_text,'') || action_text 전체를 대상으로 한다.
 
-### 1-4. Trigger Code → 키워드 세트 매핑
+### BUSINESS 특수 처리
 
 ```
-BUSINESS:REGISTERED
-  키워드: []
-  조회: condition_text IS NULL
-
-WORK:CONFINED_SPACE
-  키워드: ["밀폐공간", "산소결핵", "황화수소"]
-  동의어: ["밀폐된 공간"] (2건 추가 확인)
-
-WORK:DIVING
-  키워드: ["잠수", "잠함", "잠수작업자"]
-
-WORK:HIGH_PRESSURE
-  키워드: ["고압작업", "고압가스", "기압조절실"]
-
-WORK:WELDING
-  키워드: ["용접", "용단"]
-
-WORK:ASBESTOS
-  키워드: ["석면", "석면해체", "석면분진"]
-
-WORK:BLASTING
-  키워드: ["발파", "화약류", "폭발물"]
-
-WORK:EXCAVATION
-  키워드: ["굴착", "굴착공사", "굱착작업"]
-
-WORK:DEMOLITION
-  키워드: ["해체", "철거", "해체작업"]
-
-WORK:MELTING
-  키워드: ["용해", "용융", "주조", "용선"]
-
-WORK:PAINTING
-  키워드: ["도장", "분사도장", "도료"]
-
-EQUIPMENT:CRANE
-  키워드: ["크레인", "양중기"]  ← 동의어 포함
-  확장 안 함: 타워크레인, 이동식크레인은 별도 코드로
-
-EQUIPMENT:CHEMICAL_VESSEL
-  키워드: ["화학설비", "반응기", "혼합기"]
-
-EQUIPMENT:LOCAL_EXHAUST
-  키워드: ["국소배기", "집진기", "후드"]
-
-EQUIPMENT:EXCAVATOR
-  키워드: ["굴착기", "차량계 건설기계", "건설기계"]
-
-HAZARD_FACTOR:CHEMICAL
-  키워드: ["관리대상 유해물질", "허가대상 유해물질", "금지유해물질", "화학물질"]
-
-HAZARD_FACTOR:DUST
-  키워드: ["분진", "분진작업", "광물성 분진"]
-
-HAZARD_FACTOR:RADIATION
-  키워드: ["방사선", "방사성물질", "방사선업무"]
+BUSINESS:REGISTERED → condition_text IS NULL 조회
+이유: condition_text IS NULL = 모든 사업장에 무조건 적용
+대상: 491건 (사업주 의무 전체의 40.9%)
 ```
+
+### Trigger별 키워드 패턴
+
+| Trigger Code | 검색 패턴 | 비고 |
+|---|---|---|
+| BUSINESS:REGISTERED | condition_text IS NULL | 무조건 발생 |
+| WORK:CONFINED_SPACE | (밀폐공간\|산소결핍\|황화수소\|밀폐된 공간) | 동의어 포함 |
+| WORK:BLASTING | (발파\|화약류\|폭발물) | |
+| WORK:DIVING | (잠수\|잠함\|잠수작업자) | |
+| WORK:ASBESTOS | (석면\|석면해체\|석면분진) | |
+| WORK:HIGH_PRESSURE | (고압작업\|고압가스\|기압조절실) | |
+| WORK:WELDING | (용접\|용단) | |
+| WORK:PAINTING | (도장\|분사도장\|도료) | |
+| WORK:EXCAVATION | (굴착\|굴착공사) | |
+| WORK:DEMOLITION | (해체\|철거) | |
+| WORK:MELTING | (용해\|용융\|주조\|용선) | |
+| EQUIPMENT:CRANE | (크레인\|양중기) | 양중기 동의어 필수 |
+| EQUIPMENT:TOWER_CRANE | (타워크레인) | CRANE 패턴에 포함 |
+| EQUIPMENT:MOBILE_CRANE | (이동식 크레인\|이동식크레인) | CRANE 패턴에 포함 |
+| EQUIPMENT:PRESS | (프레스) | |
+| EQUIPMENT:PRESSURE_VESSEL | (압력용기) | |
+| EQUIPMENT:CONVEYOR | (컨베이어) | |
+| EQUIPMENT:ELEVATOR | (승강기\|리프트\|엘리베이터) | |
+| EQUIPMENT:BOILER | (보일러) | |
+| EQUIPMENT:WELDER | (용접기\|용접전원\|아크용접) | WORK:WELDING과 중복 허용 |
+| EQUIPMENT:CHEMICAL_VESSEL | (화학설비\|반응기\|혼합기) | |
+| EQUIPMENT:LOCAL_EXHAUST | (국소배기\|집진기\|후드) | |
+| EQUIPMENT:EXCAVATOR | (굴착기\|차량계 건설기계\|건설기계) | |
+| EQUIPMENT_ACT:CRANE_USE | (크레인 사용\|크레인을 사용하여) | |
+| EQUIPMENT_ACT:LOCAL_EXHAUST_INSTALL | (국소배기 설치\|국소배기장치를 설치) | |
+| EQUIPMENT_ACT:WELDING | (용접작업\|용접 작업을 하는 경우) | |
+| EQUIPMENT_ACT:EXCAVATOR_USE | (차량계 건설기계 작업\|굴착기 사용) | |
+| HAZARD_FACTOR:CHEMICAL | (관리대상 유해물질\|허가대상 유해물질\|금지유해물질\|화학물질) | |
+| HAZARD_FACTOR:DUST | (분진\|분진작업\|광물성 분진) | |
+| HAZARD_FACTOR:RADIATION | (방사선\|방사성물질\|방사선업무) | |
+| HAZARD_FACTOR:FLAMMABLE | (인화성\|가연성 물질\|인화성 액체) | |
+| HAZARD_FACTOR:METAL_COMPOUND | (금속류\|납\|수은\|크롬\|망간) | |
+| HAZARD_FACTOR:NOISE_INTENSE | (강렬한 소음\|소음작업\|충격소음) | |
 
 ---
 
-## 2. Route B 설계 — 조건판정 방식
+## 2. Route B 설계 — 조건판정
 
-### 2-1. 대상 Trigger
+### 대상 Trigger 타입
 
-```
-THRESHOLD / INDUSTRY / REFERENCE
-```
+THRESHOLD, INDUSTRY, REFERENCE
 
-### 2-2. 조건판정 구조
+### Route B 구조
 
 ```
 Trigger Code
   ↓
-[applicability_conditions 테이블 조회]
-  threshold_code MATCHES, metric MATCHES, ksic_code 포함 확인
+applicability_conditions 조회
+  조건: metric MATCHES Trigger + 소비자 입력값 충족 여부 판정
   ↓
-[appendix_no → law_article.article_no 매핑]
+충족 시: appendix_no → law_article → semantic_clause id 조회
   ↓
-[semantic_clause.source_article_id 조회]
-  content_type IN ('OBLIGATION','PROHIBITION')
-  AND executor_text = '사업주'
+의무후보 생성
+```
+
+### applicability_conditions 실증 데이터 (14건 현황)
+
+실제 등록 예시:
+```
+law_name: 산업안전보건법 시행령
+appendix_no: 별표 3
+metric: METRIC:EMPLOYEE_COUNT
+operator: >=
+threshold_value: 50.0
+threshold_unit: 명
+action_type: APPOINTMENT
+action_text: 고위험 제조업군 50명 이상 499명 미만 안전관리자 1명
+scope_type: INDUSTRY
+scope_values: ["C10","C11","C19","C20","C21","C24"]
+```
+
+### THRESHOLD 조건판정 흐름
+
+```
+THRESHOLD:EMPLOYEE_50_PLUS
   ↓
-의무후보 풀
-```
-
-### 2-3. Route B 데이터 소스 확정
-
-실데이터 검증으로 확인:
-
-**applicability_conditions (14건)** 구조:
-```
-law_name + appendix_no  → 다음과 같이 연결
-  산안법 시행령 별표 3 + 50명 + C10 → 안전관리자 선임 의무
-  산안법 제17조     + employee >= 1  → 안전관리자 선임 의무
-```
-
-**appendix_no → law_article 연결 방식**:
-```
-appendicx_no = "제17조"
-  → law_article WHERE law_id = [산안법 id] AND article_no = 17
-  → semantic_clause WHERE source_article_id = [article.id]
-      AND executor_text = '사업주'
-      AND content_type = 'OBLIGATION'
-  → clause_id: 66772b0d... ("...안전관리자를 보좌하고...")
-```
-
-**실증된 Route B 연결 경로**:
-- 산안법 제17조 → clause_id `66772b0d` 1건 (OBLIGATION, executor='사업주')
-- 산안법 제18조 → 보건관리자 선임 조문
-- 산안법 제24조 → 산업안전보건위원회 구성 조문
-- 산안법 제25조 → 안전보건관리규정 작성 조문
-
-### 2-4. THRESHOLD 판정 로직
-
-```
-입력값 (employee_count, ksic_code)
+applicability_conditions 조회:
+  WHERE metric = 'METRIC:EMPLOYEE_COUNT'
+    AND operator = '>='
+    AND threshold_value <= [소비자 employee_count]
   ↓
-[applicability_conditions 필터]
-  metric = 'METRIC:EMPLOYEE_COUNT'
-  AND operator = '>='
-  AND threshold_value <= employee_count
-  AND (scope_values ∩ ksic_prefix) ≠ ∅  ← 업종 교집합
+scope_values(업종코드 목록)과 소비자 ksic_code 교집합 확인
   ↓
-[조건 충족 항목] → appendix_no → clause_id
+충족 시: appendix_no → law_article.article_no → semantic_clause 조회
   ↓
-의무후보
+의무후보 생성
 ```
 
-**현재 한계**: applicability_conditions가 14건만 있어 별표3 전체를 커버하지 못한다. WO-APPENDIX-COLLECT-001 완료 후 실질 비율 확대. 이 전까지는 14건 범위닌 판단 가능.
+### Route B 연결 경로 실증
+
+```
+applicability_conditions.appendix_no = "제17조"
+  ↓
+law_article.article_no = 17, law_name = '산업안전보건법'
+  ↓
+semantic_clause.source_article_id = law_article.id
+  WHERE executor_text = '사업주' AND content_type = 'OBLIGATION'
+  ↓
+clause_id: 66772b0d-516d-4eae-b5ec-c99729e63d3c
+("사업주는 사업장에 안전관리자를 두어야 한다...")
+
+연결 경로 실증 완료.
+```
+
+### Route B 현재 한계
+
+```
+현재 applicability_conditions 14건만 등록:
+  - 별표3 안전관리자: 7건
+  - 산안법 제29조 교육: 3건
+  - 산안법 제36조 위험성평가: 1건
+  - 산안법 제129조 건강진단: 1건
+  - 산안규칙 제19조 경보설비: 1건
+  - 산안법 제16조 관리감독자: 1건
+
+WO-APPENDIX-COLLECT-001 완료 후 대폭 확장 필요.
+현재는 위 14건에 한해서만 Route B 동작.
+```
 
 ---
 
 ## 3. 의무후보 데이터 구조
 
+### 최소 구조
+
 ```json
 {
   "candidate_id": "uuid",
   "semantic_clause_id": "uuid",
-  "trigger_code": "WORK:CONFINED_SPACE",
+  "trigger_codes": ["WORK:CONFINED_SPACE"],
   "trigger_route": "A",
-  "match_field": "action_text",
-  "match_keyword": "밀폐공간",
+  "match_source": "action_text",
   "confidence": "HIGH",
-  "reason": "action_text 키워드 매칭"
+  "reason": "action_text에서 '밀폐공간' 키워드 직접 매칭"
 }
 ```
 
 ### 필드 정의
 
-| 필드 | 타입 | 설명 |
+| 필드 | 타입 | 의미 |
 |---|---|---|
-| candidate_id | uuid | 의무후보 단위 식별자 |
-| semantic_clause_id | uuid (FK) | 연결된 semantic_clause.id |
-| trigger_code | text | 발생시키거나
-| trigger_route | A/B | 직접조회 vs 조건판정 |
-| match_field | condition/action/null | Route A에서 매칭된 필드 |
-| match_keyword | text/null | 실제 매칭된 키워드 |
-| confidence | HIGH/MED/LOW | HIGH: condition 매칭 / MED: action 매칭 / LOW: 별표 경유 |
-| reason | text | 체크엔진 판정 근거 |
+| candidate_id | uuid | 후보 고유 ID |
+| semantic_clause_id | uuid | 매칭된 조문 ID |
+| trigger_codes | text[] | 발생 Trigger (복수 가능) |
+| trigger_route | enum(A, B) | 조회 경로 |
+| match_source | enum(condition_text, action_text, applicability_condition) | 매칭 필드 |
+| confidence | enum(HIGH, MEDIUM, LOW) | 신뢰도 |
+| reason | text | 매칭 근거 요약 |
 
-### confidence 기준
-
-```
-HIGH: condition_text에 키워드 직접 매칭
-  → \"...\ubc00\ud3d0\uacf5\uac04\uc5d0\uc11c \uc791\uc5c5\uc744 \ud558\ub294 \uacbd\uc6b0\" → 조건이 매칭
-
-MED: action_text에만 키워드 매칭 (condition_text는 NULL이거나 불일치)
-  → "보늘러를 \uc804담하는 \uc548전관리자를..." → 조건 불명확하나 의무 연관성 높음
-
-LOW: Route B (applicability_conditions 경유)
-  → 별표 조건에 의해 생성되었으나 clause 연결이 소수
-```
-
-### 체크엔진에 기대하는 필수 정보
+### confidence 판정 기준
 
 ```
-체크엔진 입력:
-  semantic_clause_id     → clause 원문 확인
-  trigger_code           → Trigger 종류 확인
-  confidence             → 검증 우선순위
-  소비자 입력 원본   → employee_count, ksic_code, has_* 등
+HIGH   — condition_text 직접 매칭 (조건이 명시되어 있음)
+MEDIUM — action_text 매칭 (조건 없이 내용에서 키워드 발견)
+LOW    — Route B (applicability_conditions 경유, 업종 범위 추정 포함)
+```
 
-체크엔진 결정:
-  통과 / 제거 (주체 없음, 조건 불충족, 별표 미충족)
-  통과 시 최종 의무 목록에 포함
+### 체크엔진이 최소로 필요한 정보
+
+```
+1. semantic_clause_id         → 원문 조회용
+2. trigger_codes              → 어떤 조건으로 발생했는가
+3. trigger_route              → A/B 경로 구분
+4. confidence                 → 검증 우선순위
+5. executor_text (조문에서)    → 주체 재검증용
+6. condition_text (조문에서)   → 조건 재검증용
+7. source_article_id (조문에서) → 중복 제거용
 ```
 
 ---
 
 ## 4. 다중 Trigger 처리 정책
 
-### 4-1. 독립 조회후 UNION
+### 기본 원칙: 독립 조회 후 합집합
 
 ```
-입력: {
-  employee_count: 80,
-  has_confined_space: true,
-  equipment_assets: ["CRANE"]
-}
-
-Trigger Code Set:
-  BUSINESS:REGISTERED
-  THRESHOLD:EMPLOYEE_50_PLUS
-  WORK:CONFINED_SPACE
-  EQUIPMENT:CRANE
+입력:
+  {BUSINESS:REGISTERED, THRESHOLD:EMPLOYEE_50_PLUS, WORK:CONFINED_SPACE, EQUIPMENT:CRANE}
 
 처리:
-  [1] BUSINESS:REGISTERED → Route A (condition IS NULL) → 491건
-  [2] THRESHOLD:EMPLOYEE_50_PLUS → Route B (applicability_conditions) → 리스트 N건
-  [3] WORK:CONFINED_SPACE → Route A (키워드) → 22건
-  [4] EQUIPMENT:CRANE → Route A (키워드) → 29건
-
-  전체 UNION → source_article_id 기준 중복 제거
-  → 최종 의무후보 풀
+  Step 1. BUSINESS:REGISTERED → Route A → 491건
+  Step 2. THRESHOLD:EMPLOYEE_50_PLUS → Route B → N건
+  Step 3. WORK:CONFINED_SPACE → Route A → 22건
+  Step 4. EQUIPMENT:CRANE → Route A → 29건
+  Step 5. 합집합 (by semantic_clause_id)
 ```
 
-### 4-2. 우선순위
+### 교집합 사용 안 하는 이유
 
 ```
-독립 조회, UNION 전략. 교집합 방식 불사용.
+교집합 = 모든 Trigger 동시 만족 의무만 추출
+→ 법령은 조건 하나에 의무 하나가 발생
+→ WORK:CONFINED_SPACE만으로 밀폐공간 의무 발생
+→ 교집합 사용 시 의무 심각하게 누락
 
-근거:
-  WORK:CONFINED_SPACE와 EQUIPMENT:CRANE은 독립적으로 의무를 발생시키지,
-  둘 다 해당하는 사업장은 두 용어 모두의 의무를 받는다.
-  교집합 사용 시 없는 의무를 놈칐 수 있다.
+합집합 = 각 Trigger에 해당하는 의무 모두 수집
+→ 이후 체크엔진에서 실제 조건 충족 여부 재검증
+```
 
-조회 순서 (성능):
-  Route B (THRESHOLD) → 결과 소수 (몇 개), 먼저 조회
-  Route A BUSINESS → 491건 대량조회, 마지막
-  Route A 나머지 → Trigger 순서대로
+### 처리 순서
+
+```
+BUSINESS → THRESHOLD → WORK → EQUIPMENT → EQUIPMENT_ACT → HAZARD_FACTOR
+이유: BUSINESS가 가장 넓은 범위. 이후 Trigger들은 특수 조건 추가.
+우선순위는 없음. 모든 Trigger 독립 처리 후 합집합.
 ```
 
 ---
 
 ## 5. 중복 의무 처리 정책
 
-### 정책: source_article_id 기준 1건 유지, 트리거 목록만 눈적
+### 실증 데이터
 
-```
+178건 condition_based 의무 중 다중 Trigger 동시 매칭: 10건 (5.6%)
+
 예시:
-  EQUIPMENT:CRANE → 크레인 조문 X 파치 (source_article_id = AAA)
-  EQUIPMENT_ACT:CRANE_USE → 동일 조문 X 파치 (source_article_id = AAA)
+- EQUIPMENT:CRANE + WORK:DEMOLITION → "크레인 해체 작업 시 조치" 2건
+- WORK:WELDING + EQUIPMENT:WELDER → "아크용접기 안전장치" 2건
 
-  갰결: 의무후보 1건가 (source_article_id AAA)
-             trigger_codes: ["EQUIPMENT:CRANE", "EQUIPMENT_ACT:CRANE_USE"]
-             confidence: HIGH (두 트리거 중 높은 것 선택)
+### 정책: 의무후보는 1건, trigger_codes는 배열로 기록
 
-반대 경우:
-  WORK:CONFINED_SPACE → 조문 Y
-  HAZARD_FACTOR:CHEMICAL → 조문 Y (0건 확인됨 — 실제 중복 없음)
-
-만약 중복 발생 시:
-  trigger_codes 집합에 둘 다 저장
-  confidence 엄가는 직통 (OR 논리)
+```json
+{
+  "candidate_id": "uuid-001",
+  "semantic_clause_id": "f1013bf7-...",
+  "trigger_codes": ["EQUIPMENT:CRANE", "WORK:DEMOLITION"],
+  "primary_trigger": "EQUIPMENT:CRANE",
+  "confidence": "HIGH"
+}
 ```
 
-**거부 정책: source_article_id가 아닌 semantic_clause.id 기준 중복 제거**
+중복 제거 기준: semantic_clause_id 동일 → 통합 후 trigger_codes 배열에 모두 기록
 
-이유: 같은 조문의 다른 파트(PART)들이 각각 다른 의무일 수 있다.
-example: 제17조의 1항, 2항, 3항 이 모두 다른 의무를 정의할 수 있음.
+근거: 동일 조문에서 발생하는 의무는 1개. 복수 Trigger 매칭은 해당 사업장이 복수 조건을 만족함을 의미하며, 의무를 강화하는 정보다.
 
 ---
 
 ## 6. 동의어 처리 정책
 
-### 동의어 필요 검증 결과
+### 필수 동의어 (실증 기반)
 
-| Trigger | 주 키워드 | 동의어 | 추가 의무 |
-|---|---|---|---|
-| WORK:CONFINED_SPACE | 밀폐공간 | 밀폐된 공간 | +2건 |
-| EQUIPMENT:CRANE | 크레인 | 양중기 | +5건 (condition NULL이 많음) |
-| WORK:WELDING | 용접 | 아크용접 | 바로 용접 안에 포함됨 |
-
-### 동의어 사전 주요 엔트리 (WO-TRIGGER-001 시점 확정분)
-
+밀폐공간 동의어:
 ```
-WORK:CONFINED_SPACE → ["밀폐공간", "산소결합", "황화수소", "밀폐된 공간"]
-EQUIPMENT:CRANE     → ["크레인", "양중기"]
-WORK:DIVING         → ["잠수", "잠함", "잠수작업자"]
-WORK:HIGH_PRESSURE  → ["고압작업", "고압가스", "기압조절실"]
-WORK:ASBESTOS       → ["석면", "석면해체", "석면분진"]
-WORK:BLASTING       → ["발파", "화약류", "폭발물", "화약", "낙뜜"]
-WORK:EXCAVATION     → ["굵착", "굱착공사", "굱착작업"]
-HAZARD_FACTOR:CHEMICAL → ["관리대상 유해물질", "허가대상 유해물질", "금지유해물질", "화학물질", "유해물질"]
+"밀폐공간"으로만 찾으면 누락:
+  - "밀폐된 공간에서 스프레이 건을 사용하여..."
+  - "산소결핍증이 있거나 유해가스에 중독되었을 경우..."
+패턴: (밀폐공간|산소결핍|황화수소|밀폐된 공간)
 ```
 
-동의어 확장은 하드코딩 금지. 별도 관리 테이블(키워드 사전)으로 추후 확장할 수 있게 설계.
+크레인 동의어:
+```
+"크레인"으로만 찾으면 누락:
+  - "양중기의 달기 와이어로프..." 5건 누락
+  - "순간풍속...양중기를 사용하여..." 1건 누락
+패턴: (크레인|양중기)
+추가 의무 발견: 7건
+```
+
+### 동의어 관리 원칙
+
+```
+동의어 사전은 DB 테이블로 관리. 코드 하드코딩 금지.
+구조:
+  trigger_code        | keyword_pattern
+  WORK:CONFINED_SPACE | (밀폐공간|산소결핍|황화수소|밀폐된 공간)
+  EQUIPMENT:CRANE     | (크레인|양중기)
+
+확장 기준: 산업안전보건 법령에서 실제 사용되는 표현에 한정.
+일반 사전적 동의어 확장 금지 (과잉 Trigger 방지).
+```
 
 ---
 
 ## 7. 체크엔진 전달 구조
 
-### 채크엔진 입력 패키지
+### 의무후보 풀 최종 구조
 
 ```json
 {
   "factory_id": "uuid",
-  "diagnosis_id": "uuid",
-  "input_snapshot": {
-    "ksic_code": "C2511",
+  "diagnosis_context": {
+    "trigger_codes": ["BUSINESS:REGISTERED", "WORK:CONFINED_SPACE", "EQUIPMENT:CRANE"],
     "employee_count": 80,
-    "has_confined_space": true,
-    "equipment_assets": ["CRANE"],
-    "hazard_factors": []
+    "ksic_code": "25112"
   },
-  "trigger_codes": [
-    "BUSINESS:REGISTERED",
-    "THRESHOLD:EMPLOYEE_50_PLUS",
-    "WORK:CONFINED_SPACE",
-    "EQUIPMENT:CRANE",
-    "EQUIPMENT_ACT:CRANE_USE"
-  ],
   "candidates": [
     {
-      "candidate_id": "...",
-      "semantic_clause_id": "...",
-      "trigger_code": "WORK:CONFINED_SPACE",
+      "candidate_id": "uuid-001",
+      "semantic_clause_id": "uuid",
+      "trigger_codes": ["BUSINESS:REGISTERED"],
       "trigger_route": "A",
-      "match_field": "condition_text",
-      "match_keyword": "밀폐공간",
+      "match_source": "condition_text_null",
       "confidence": "HIGH",
-      "reason": "condition_text 매칭"
+      "reason": "무조건 발생 의무"
+    },
+    {
+      "candidate_id": "uuid-022",
+      "semantic_clause_id": "uuid",
+      "trigger_codes": ["WORK:CONFINED_SPACE"],
+      "trigger_route": "A",
+      "match_source": "condition_text",
+      "confidence": "HIGH",
+      "reason": "condition_text에서 '밀폐공간' 직접 매칭"
+    },
+    {
+      "candidate_id": "uuid-057",
+      "semantic_clause_id": "uuid",
+      "trigger_codes": ["EQUIPMENT:CRANE", "WORK:DEMOLITION"],
+      "trigger_route": "A",
+      "match_source": "action_text",
+      "confidence": "MEDIUM",
+      "reason": "action_text에서 크레인+해체 동시 매칭"
     }
   ]
 }
 ```
 
-### 체크엔진이 수행하는 검증
+### 체크엔진이 이 구조로 수행하는 검증
 
 ```
-[V1] executor_text 필터: '사업주' 아당시 제거
-[V2] condition 충족 검증: confidence=MED 이하는 후보에 대해 condition_text 재판단
-[V3] 별표 임계값 검증: THRESHOLD Route B 후보에 한정 (employee_count, ksic 조합 확인)
-[V4] 중복 제거: source_article_id 동일 후보 통합
-```
-
----
-
-## 8. 예상 후보 건수
-
-### 실데이터 기반 추정
-
-```
-[Route A 의무후보 (condition NULL + 키워드 매칭)]
-
-BUSINESS:REGISTERED       491건 (condition=NULL 전체)
-WORK 합계              236건 (Trigger별 합산, 중복 미제거)
-HAZARD_FACTOR 합계      164건
-EQUIPMENT 합계          146건
-EQUIPMENT_ACT 합계       45건
-
-원루 UNION 총: ~700~900건
-Trigger 간 중복 (10건 확인) 감안 시: ~680~870건
-
-[Route B 의무후보]
-THRESHOLD 회차당        5~15건 추정 (applicability_conditions 14건 기준)
-
-[의무후보 풀 총계]
-최소 (기본 사업장): ~500건 (BUSINESS만)
-표준 (크레인+밀폐공간 등 복합 사업장): ~600~750건
-고위험 (화학설비+다수 Trigger): ~850~950건
-
-체크엔진 통과 예상: 후보의 60~70% 통과
-  → 최종 의무 목록: 300~600건 예상
+검증 1. executor_text 재확인 (semantic_clause에서 직접 읽기)
+검증 2. confidence=MEDIUM 후보 조건 재검증
+검증 3. Route B 후보: employee_count + ksic_code 교차검증
+검증 4. source_article_id 기준 중복 의무 최종 제거
+검증 5. 우선순위 산정 (P1~P4)
 ```
 
 ---
 
-## WO-CHECK-001에 넘길 제약조건
+## 8. 예상 의무후보 건수
+
+### 단일 Trigger 기준
+
+| Trigger | 예상 후보 |
+|---|---|
+| BUSINESS:REGISTERED | 491건 |
+| HAZARD_FACTOR:CHEMICAL | 65건 |
+| WORK:MELTING | 41건 |
+| HAZARD_FACTOR:DUST | 37건 |
+| WORK:DEMOLITION | 39건 |
+| WORK:DIVING | 32건 |
+| HAZARD_FACTOR:RADIATION | 28건 |
+| EQUIPMENT:CRANE | 29건 |
+| WORK:HIGH_PRESSURE | 29건 |
+
+### 복합 입력 시 예상 후보 (중복 제거 후)
 
 ```
-[C1] Route A MED 후보 재판단
-  action_text 매칭만 시: confidence=MED
-  체크엔진이 condition_text 뢰치 확인 후 통과 여부 결정
+예시 입력:
+  employee_count=80, has_confined_space=true, equipment=[CRANE]
 
-[C2] Route B 후보 충족성 검증 방식
-  employee_count + ksic_code + threshold_value 조합 판단
+후보 추정:
+  BUSINESS:  491건 (기저)
+  WORK:CONFINED_SPACE: 22건 (고유분)
+  EQUIPMENT:CRANE: 약 15건 (BUSINESS 미중복분)
+  THRESHOLD: Route B, 약 5~10건
 
-[C3] 후보 중복 제거
-  source_article_id 동일 시 trigger_codes 병합, clause 단일화
+  총 예상: 530~540건
+  중복 제거 후: 510~530건
 
-[C4] executor_text 다중 파싱 예외 처리
-  executor_text ≠ '사업주'인 것 전체 제거
-  파싱 오류로 통과된 좌보 executor("지도·조언하", "정하") 제거
+최종 체크엔진 입력 규모: 사업장 유형별 300~600건 예상
+```
+
+### 중복 발생 비율
+
+실증: 178건 중 다중 Trigger 매칭 10건 = 5.6%
+→ 중복 비율 낮음. 중복 처리 로직이 병목될 가능성 낮음.
+
+---
+
+## 9. WO-CHECK-001 전달 항목
+
+체크엔진 상세설계에서 확정해야 할 것:
+
+```
+1. confidence=MEDIUM 후보 재검증 기준
+   → action_text 매칭은 조건 충족을 보장하지 않음
+   → 어떤 기준으로 PASS/DROP 판정하는가?
+
+2. Route B 후보의 업종 교차검증 방법
+   → scope_values vs 소비자 ksic_code (2자리 vs 4자리 정합성)
+
+3. THRESHOLD 수치 검증
+   → employee_count >= threshold_value AND ksic_code in scope_values 동시 충족
+
+4. 우선순위 P1~P4 산정 방법
+   → penalty_numeric 기준 구체적 임계값
+
+5. 최종 의무목록 규모 목표치
+   → 300~600건 입력 → 50~150건 출력 예상
 ```
 
 ---
