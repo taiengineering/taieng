@@ -1,0 +1,696 @@
+# TAI Safe 법령의무도출 시스템 설계 및 구현계획서
+
+TAI Engineering / TAI Safe | 작성 기간: 2026-06-22
+
+---
+
+## 목차
+
+1. WO-RESEARCH-001 — 법령의무 매핑 가능성 조사보고서
+2. WO-ANALYSIS-001 — Binding 계층 가능성 분석보고서
+3. WO-PROBLEM-001 — 법령 의무 발생조건 분석보고서
+4. WO-ARCH-001 — 법령의무도출 시스템 전체설계서
+5. WO-MAPPING-001 — 입력값 → Trigger Code 매핑 규칙 설계서
+6. WO-VALIDATION-001 — Trigger ↔ semantic_clause 연결성 검증보고서
+7. WO-TRIGGER-001 — Trigger 기반 의무후보 생성 설계서
+8. WO-GAP-001 — Check Engine / Check Layer 적합성 분석보고서
+9. WO-CHECK-001 — Trigger 후보 → 기존 Check Engine 연결 어댑터 설계서
+10. WO-PLAN-001 — Trigger 기반 법령의무도출 시스템 구현계획서
+11. CURSOR-TASK-001 — Trigger 기반 의무후보 생성기 구현 작업지시서
+12. 부록 — 구현 완료 현황 및 검증 결과
+
+---
+
+# 1. WO-RESEARCH-001 법령의무 매핑 가능성 조사보고서
+
+작성일: 2026-06-22 | 단계: 조사 (구현 없음)
+
+## 핵심 발견
+
+**사업주 의무 1,200건** 기준:
+- 현재 입력 데이터로 설명 가능: **~78%**
+- SCOPE 868건 중 TAI 타겟(사업주) 실효 건수: ~100건(11.5%)
+- master_rule_scope_mapping, master_rule_v2_relation: **전량 0건 (미구축)**
+
+## semantic_clause 구조
+
+| 구분 | 건수 | 비율 |
+|---|---|---|
+| 전체 | 58,495 | 100% |
+| OBLIGATION | 29,665 | 50.7% |
+| PROHIBITION | 1,742 | 3.0% |
+| 사업주 의무 | 1,200 | 2.1% |
+
+- `where_text`, `what_text`: **전체 NULL**
+- `condition_text` 채움: 22,240건 (38.0%)
+
+## 의무 발생 조건 분류 (사업주 1,200건)
+
+| 조건 패턴 | 건수 | 비율 |
+|---|---|---|
+| BUSINESS (조건 없음) | 491 | 40.9% |
+| UNRESOLVED_REFERENCE | 289 | 24.1% |
+| EQUIPMENT_USE | 116 | 9.7% |
+| WORK | 75 | 6.3% |
+| EQUIPMENT | 63 | 5.3% |
+| MATERIAL_HAZARD | 20 | 1.7% |
+| EVENT | 14 | 1.2% |
+
+## 결론: B. 일부 매핑 + 일부 엔진 필요
+
+현재 GAP은 **"엔진 부족"이 아니라 "binding 계층 미구축"**이다.
+
+*구현 없음 | 코드 수정 없음*
+
+---
+
+# 2. WO-ANALYSIS-001 Binding 계층 가능성 분석보고서
+
+작성일: 2026-06-22 | 단계: 분석 (구현 없음)
+
+## SCOPE 868건 실제 구성
+
+**11종 토큰뿐**: 소방시설(261), 소화설비(254), 소방대상물(145), 작업환경측정(66), 안전장치(63), 방호장치(52) 등
+
+**소방시설+소방대상물 (406건, 46.8%): 사업주 의무 비율 0%. 제외 대상.**
+
+## Binding 계층 구축 시 예상 커버율
+
+| 조건 카테고리 | 건수 | 커버 |
+|---|---|---|
+| A: 무조건 | 491 | ✅ |
+| B: 설비/공정 트리거 | 147 | ✅ |
+| C: 업종 기반 | 8 | ✅ |
+| D: 임계값 기반 | 39 | ✅ |
+| E1+E2: 이벤트 | 92 | ✅ |
+| E3+F: UNRESOLVED/기타 | 461 | ❌ |
+
+**예상 커버율: 777/1,200 = 64.8%**
+
+## 결론: B. 일부 가능, 별도 입력/테이블 필요
+
+*구현 없음 | 코드 수정 없음*
+
+---
+
+# 3. WO-PROBLEM-001 법령 의무 발생조건 분석보고서
+
+작성일: 2026-06-22 | 단계: 문제점 파악 (구현 없음)
+
+## 의무 발생조건 4레벨 구조
+
+```
+[레벨 1] 사업장 존재 ──────────────────→ 491건 (40.9%)
+
+[레벨 2] 설비/작업 보유·수행
+  ├── 특정 작업 수행 (has_* flag)   ──→ 75건 (6.3%)
+  ├── 특정 기계 보유 (equipment)    ──→ 63건 (5.3%)
+  ├── 기계 사용 중 (equipment_use)  ──→ 116건 (9.7%)
+  └── 기계 설치 행위 (install)      ──→ 22건 (1.8%)
+
+[레벨 3] 유해인자 취급 (추가 입력 필요) → 56건 (4.7%)
+
+[레벨 4] 참조조문 의존 (현재 불가)
+  ├── 열거 조항 참조 필요           ──→ ~260건 (21.7%)
+  └── 실시간 이벤트               ──→ ~17건 (1.4%)
+```
+
+## TAI 입력 데이터 커버율
+
+| 등급 | 건수 | 비율 |
+|---|---|---|
+| A. 즉시 커버 가능 | **836건** | **69.7%** |
+| B. 추가 입력 필요 | **56건** | **4.7%** |
+| C. 현재 불가 | **308건** | **25.7%** |
+
+**A+B 합계: 74.3%**
+
+*구현 없음 | 코드 수정 없음*
+
+---
+
+# 4. WO-ARCH-001 법령의무도출 시스템 전체설계서
+
+작성일: 2026-06-22 | 단계: 아키텍처 확정 (구현 없음)
+
+## 시스템 중심축
+
+**의무발생조건(Obligation Trigger Condition)**
+
+```
+중심축 = 조건(Condition) ↔ 입력(Input) 매칭
+```
+
+## 레벨별 처리 방식
+
+| 구간 | 처리 방식 | 엔진 필요 |
+|---|---|---|
+| 레벨 1: BUSINESS (40.9%) | 사업장 등록 = 즉시 발생 | ❌ |
+| 레벨 2: EQUIPMENT/WORK (23.1%) | 입력값 매핑 테이블 | ❌ |
+| 레벨 3: MATERIAL_HAZARD (4.7%) | 유해인자 입력 + 매핑 | 부분 |
+| 레벨 4: UNRESOLVED (25.7%) | 참조조문 해석, 이벤트 | ✅ |
+
+## 시스템 7개 레이어
+
+```
+[소비자 입력] → [입력 표준화] → [조건 매칭 (중심축)]
+  → [의무후보 생성] → [체크엔진] → [6W 보강] → [정제] → [출력]
+```
+
+## 의무발생조건 표준체계 (8개 코드)
+
+BUSINESS, THRESHOLD, INDUSTRY, EQUIPMENT, EQUIPMENT_ACT, WORK, HAZARD_FACTOR, EVENT
+
+## 매핑 계층 설계
+
+```
+입력값 → Trigger Code Set → semantic_clause 직접 조회 → 의무후보 풀
+
+규칙 A: 직접 변환 (has_confined_space=true → WORK:밀폐공간)
+규칙 B: 임계값 변환 (employee_count >= 50 → THRESHOLD:50이상)
+규칙 C: 분류 변환 (ksic_code → INDUSTRY:건설업)
+```
+
+## 6W 보강 레이어
+
+| 6W | 데이터 소스 | 현황 |
+|---|---|---|
+| 누가 | executor_text = "사업주" | ✅ |
+| 무엇을 | action_text | ✅ |
+| 왜 | law_article + law_master | ✅ |
+| 언제 | cycle_text | △ (드묾) |
+| 어떻게 | form_token + how_text | △ |
+| 어디서 | where_text | ❌ 전량 NULL → condition_text 보완 |
+
+## 우선순위 기준
+
+P1 (즉시): 벌칙 3년 이상 / 3,000만원 이상  
+P2 (중요): 벌칙 존재  
+P3 (일반): 의무 이행  
+P4 (권고): 노력 의무
+
+*구현 없음 | 테이블 생성 없음 | 코드 작성 없음*
+
+---
+
+# 5. WO-MAPPING-001 입력값 → Trigger Code 매핑 규칙 설계서
+
+작성일: 2026-06-22 | 단계: 해결책 강구 (구현 없음)
+
+## 0. 과잉 Trigger 금지 원칙
+
+```
+금지: KSIC상 용접공정 가능성이 높다 → WORK:WELDING 발생
+허용: 사용자가 용접공정을 실제 등록했다 → WORK:WELDING 발생
+```
+
+KSIC, 공정 추천 데이터(ksic_process_map, process_equipment_map)는 Trigger 생성 소스가 아니다.
+
+## Trigger Code 표준
+
+형식: `TRIGGER_TYPE:TRIGGER_VALUE` (영문 대문자 + 언더스코어)
+
+```
+BUSINESS:REGISTERED
+THRESHOLD:EMPLOYEE_20_PLUS / 50_PLUS / 100_PLUS / 300_PLUS
+THRESHOLD:AREA_400_PLUS / CONSTRUCTION_20BIL
+INDUSTRY:CONSTRUCTION / MANUFACTURING_HIGH_RISK
+EQUIPMENT:CRANE / PRESS / BOILER / ELEVATOR / LOCAL_EXHAUST / EXCAVATOR
+EQUIPMENT_ACT:CRANE_USE / WELDING / EXCAVATOR_USE / LOCAL_EXHAUST_INSTALL
+WORK:CONFINED_SPACE / BLASTING / DIVING / ASBESTOS / HIGH_PRESSURE / WELDING
+HAZARD_FACTOR:CHEMICAL / DUST / RADIATION / FLAMMABLE / NOISE_INTENSE
+```
+
+## 규칙 A: 직접 변환 (has_* Flag)
+
+| input_field | trigger_code | 커버 의무 |
+|---|---|---|
+| has_confined_space = true | WORK:CONFINED_SPACE | 21건 |
+| has_blasting = true | WORK:BLASTING | 4건 |
+| has_diving = true | WORK:DIVING | 27건 |
+| has_asbestos_demo = true | WORK:ASBESTOS | 24건 |
+| has_tower_crane = true | EQUIPMENT:TOWER_CRANE | 6건 |
+| has_high_pressure_gas = true | WORK:HIGH_PRESSURE + EQUIPMENT:HIGH_PRESSURE_VESSEL | 21건 |
+| has_chemical_substance = true | HAZARD_FACTOR:CHEMICAL | 65건 |
+| has_boiler = true | EQUIPMENT:BOILER | 5건 |
+
+## 규칙 B: 임계값 변환
+
+employee_count >= 20/50/100/300/500/1000 → THRESHOLD:EMPLOYEE_*  
+building_area >= 400 → THRESHOLD:AREA_400_PLUS  
+construction_amount >= 20억/8억 → THRESHOLD:CONSTRUCTION_20BIL/8BIL
+
+## 규칙 C: 설비 코드 변환
+
+| equipment_type_code | 설비명 | EQUIPMENT | EQUIPMENT_ACT | 의무 건수 |
+|---|---|---|---|---|
+| CRANE | 크레인 | EQUIPMENT:CRANE | EQUIPMENT_ACT:CRANE_USE | 24건 |
+| 008 | 용접기 | EQUIPMENT:WELDER | EQUIPMENT_ACT:WELDING | 18건 |
+| 021 | 이동식크레인 | EQUIPMENT:MOBILE_CRANE | EQUIPMENT_ACT:MOBILE_CRANE_USE | 7건 |
+| 025 | 승강기 | EQUIPMENT:ELEVATOR | EQUIPMENT_ACT:ELEVATOR_USE | 18건 |
+| 036 | 집진기 | EQUIPMENT:LOCAL_EXHAUST | EQUIPMENT_ACT:LOCAL_EXHAUST_INSTALL | 45건 |
+| 040 | 굴착기 | EQUIPMENT:EXCAVATOR | EQUIPMENT_ACT:EXCAVATOR_USE | 34건 |
+
+## 완료 조건 예시
+
+```json
+입력: {"employee_count": 80, "has_confined_space": true, "equipment_assets": ["CRANE"]}
+출력: ["BUSINESS:REGISTERED", "THRESHOLD:EMPLOYEE_50_PLUS",
+        "WORK:CONFINED_SPACE", "EQUIPMENT:CRANE", "EQUIPMENT_ACT:CRANE_USE"]
+```
+
+*구현 없음 | 테이블 생성 없음 | 코드 작성 없음*
+
+---
+
+# 6. WO-VALIDATION-001 Trigger ↔ semantic_clause 연결성 검증보고서
+
+작성일: 2026-06-22 | 단계: 검증 (구현 없음)
+
+## 검증 방법
+
+각 Trigger Code에 대해 condition_text + action_text 양방향 키워드 검색  
+대상: 사업주 의무 1,200건
+
+## 전체 검증 결과
+
+| 타입 | 전체 | 연결 강함 | 연결 약함 | 연결 불가 | 연결률 | 연결 의무 수 |
+|---|---|---|---|---|---|---|
+| BUSINESS | 1 | 1 | 0 | 0 | **100%** | 491 |
+| WORK | 10 | 10 | 0 | 0 | **100%** | 236 |
+| HAZARD_FACTOR | 8 | 6 | 2 | 0 | **100%** | 164 |
+| EQUIPMENT | 16 | 10 | 3 | 3 | **81%** | 146 |
+| EQUIPMENT_ACT | 9 | 4 | 3 | 2 | **78%** | 45 |
+| INDUSTRY | 3 | 1 | 0 | 2 | **33%** | 4 |
+| THRESHOLD | 5 | 0 | 2 | 3 | **0%** ❌ | 2 |
+| **합계** | **52** | **32** | **10** | **10** | **81%** | **1,088** |
+
+## 핵심 발견 1: action_text 병행 검색 필수
+
+condition_text만 검색하면 의무의 40~70%를 놓친다.
+
+예: WORK:MELTING — condition_text: 2건 / action_text: 41건 / 합계: 41건
+
+**→ 의무 조회는 `COALESCE(condition_text,'') || action_text` 전체를 대상으로 한다.**
+
+## 핵심 발견 2: THRESHOLD는 키워드 매칭 불가
+
+안전관리자 선임 의무는 semantic_clause에 `content_type='DELEGATION'`으로 분류.  
+별도 매핑 테이블 `{ threshold_code → [clause_id 목록] }` 형식 필요.
+
+## WO-TRIGGER-001 제약조건 3개
+
+1. 의무 조회는 condition_text + action_text 양방향 검색
+2. THRESHOLD는 키워드 매칭 아닌 매핑 테이블로 연결
+3. EQUIPMENT 0건 3개는 대체 Trigger로 커버 (EXPLOSIVES_STORAGE → WORK:BLASTING 등)
+
+*구현 없음 | 코드 작성 없음*
+
+---
+
+# 7. WO-TRIGGER-001 Trigger 기반 의무후보 생성 설계서
+
+작성일: 2026-06-22 | 단계: 해결책 강구 (구현 없음)
+
+## Route A: 직접 조회 (BUSINESS, WORK, EQUIPMENT, EQUIPMENT_ACT, HAZARD_FACTOR)
+
+```
+Trigger Code → 키워드 패턴 → semantic_clause 검색
+  WHERE content_type IN ('OBLIGATION','PROHIBITION')
+    AND executor_text = '사업주'
+    AND (COALESCE(condition_text,'') || action_text) ~ keyword_pattern
+```
+
+**BUSINESS:REGISTERED**: condition_text IS NULL (491건)
+
+| Trigger Code | 검색 패턴 |
+|---|---|
+| WORK:CONFINED_SPACE | (밀폐공간\|산소결핍\|황화수소\|밀폐된 공간) |
+| WORK:BLASTING | (발파\|화약류\|폭발물) |
+| WORK:DIVING | (잠수\|잠함\|잠수작업자) |
+| EQUIPMENT:CRANE | (크레인\|양중기) |
+| EQUIPMENT:LOCAL_EXHAUST | (국소배기\|집진기\|후드) |
+| HAZARD_FACTOR:CHEMICAL | (관리대상 유해물질\|허가대상 유해물질\|금지유해물질\|화학물질) |
+
+## Route B: 조건판정 (THRESHOLD, INDUSTRY, REFERENCE)
+
+```
+THRESHOLD:EMPLOYEE_50_PLUS
+  → applicability_conditions 조회 (metric='METRIC:EMPLOYEE_COUNT', threshold_value<=50)
+  → scope_values와 ksic_code 교집합
+  → appendix_no → law_article → semantic_clause id 조회
+```
+
+현재 applicability_conditions 14건 (WO-APPENDIX-COLLECT-001 후 확장)
+
+## 의무후보 데이터 구조
+
+```json
+{
+  "candidate_id": "uuid",
+  "semantic_clause_id": "uuid",
+  "trigger_codes": ["WORK:CONFINED_SPACE"],
+  "trigger_route": "A",
+  "match_source": "condition_text",
+  "confidence": "HIGH"
+}
+```
+
+confidence: condition_text 매칭=HIGH / action_text 매칭=MEDIUM / Route B=LOW
+
+## 다중 Trigger 처리 정책
+
+**독립 조회 후 합집합** (교집합 아님)
+
+- 모든 Trigger 독립 처리
+- semantic_clause_id 기준 중복 제거
+- 동일 조문 복수 매칭 시 trigger_codes 배열에 모두 기록
+
+## 예상 의무후보 건수
+
+복합 입력 시 (중복 제거 후): **300~600건**  
+중복 발생 비율: 5.6% (낮음, 병목 없음)
+
+*구현 없음 | 코드 작성 없음*
+
+---
+
+# 8. WO-GAP-001 Check Engine / Check Layer 적합성 분석보고서
+
+작성일: 2026-06-22 | 단계: 분석 (구현 없음)
+
+## 기존 Check Engine 입력 경로
+
+```
+rule_candidate (34,456건) → executable_draft (10,725건)
+  → draft_slot (binding_field) → facility_applicability
+```
+
+draft_slot binding_field에 `employee_count`, `equipment_type`, `has_tower_crane`, `has_blasting` 등 소비자 입력 필드가 이미 존재한다.
+
+## 기존 Check Engine 출력 상태 체계
+
+| 상태 | 의미 | 현재 건수 |
+|---|---|---|
+| MISSING_DATA | 판정 데이터 없음 | 3,773,215건 (95.7%) |
+| POSSIBLE_CANDIDATE | 조건 충족 가능성 | 128,606건 (3.3%) |
+| MATCH_CANDIDATE | 조건 충족 확인 | 6,976건 (0.2%) |
+| NOT_MATCHED | 조건 불충족 | 2,037건 |
+
+## 결론: B. 일부 수정 필요
+
+**그대로 사용 가능:**
+- facility_applicability 판정 상태 체계 ✅
+- task_candidate 유형 분류 (11종) ✅
+- runtime_candidate 구조 ✅
+- runtime_metadata_resolution (6W) ✅
+
+**수정 필요:**
+- 입력 경로: executable_draft → semantic_clause_id 직접 연결 어댑터 추가
+- MISSING_DATA 95.7%: Trigger 기반 구조에서 구조적 해결
+
+## Gap 목록
+
+| Gap | 내용 | 해결 방법 |
+|---|---|---|
+| Gap 1 | 입력 경로 불일치 (핵심) | 어댑터 계층 추가 |
+| Gap 2 | MISSING_DATA 95.7% | Trigger 기반 구조로 구조적 해결 |
+| Gap 3 | source_ref_id 형식 | semantic_clause_id로 변경 |
+| Gap 4 | task_candidate applicability_id | 신규 의무후보 ID 참조 |
+
+*구현 없음 | 코드 수정 없음*
+
+---
+
+# 9. WO-CHECK-001 Trigger 후보 → 기존 Check Engine 연결 어댑터 설계서
+
+작성일: 2026-06-22 | 단계: 해결책 강구 (구현 없음)
+
+## 절대 수정 금지 함수
+
+```
+evaluate_draft_for_facility()     services/facility_applicability_eval.py
+evaluate_scope_check()            services/facility_applicability_eval.py
+evaluate_numeric_check()          services/facility_applicability_eval.py
+extract_six_w()                   engine/six_w_heuristic.py
+```
+
+## Adapter 연결 지점: A. facility_applicability 직접 생성
+
+```
+1. 의무후보 배치 (300~600건) 수신
+2. semantic_clause 조회 (source_article_id, executor_text, condition_text)
+3. Trigger → numeric_slots / scope_slots 변환
+4. evaluate_draft_for_facility() 호출 (수정 없음)
+5. 결과를 facility_applicability에 INSERT
+   (draft_id = semantic_clause_id, source = 'trigger_based')
+6. MATCH_CANDIDATE → task_candidate 자동 생성
+```
+
+## TRIGGER_FIELD_MAP_EXTENSION (어댑터 파일에서 정의)
+
+```python
+TRIGGER_FIELD_MAP_EXTENSION = {
+    "has_confined_space":    ("has_confined_space",   "DIRECT"),
+    "has_blasting":          ("has_blasting",          "DIRECT"),
+    "has_diving":            ("has_diving",            "DIRECT"),
+    "has_asbestos_demo":     ("has_asbestos_demo",     "DIRECT"),
+    "has_high_pressure_gas": ("has_high_pressure_gas", "DIRECT"),
+    "has_chemical_substance":("has_chemical_substance","DIRECT"),
+    "has_boiler":            ("has_boiler",            "DIRECT"),
+    "has_tower_crane":       ("has_tower_crane",       "DIRECT"),
+    "equipment_type_code":   (None,                    "EQUIPMENT_JOIN"),
+}
+```
+
+## Trigger → slots 변환 규칙
+
+| Trigger | 처리 |
+|---|---|
+| BUSINESS:REGISTERED | slots 없음 → 직접 MATCH_CANDIDATE |
+| THRESHOLD:EMPLOYEE_50_PLUS | numeric_slots: [{employee_count, >=, 50}] |
+| WORK:CONFINED_SPACE | scope_slots: [{has_confined_space}] |
+| EQUIPMENT:CRANE | scope_slots: [{equipment_type_code}] |
+| HAZARD_FACTOR:CHEMICAL | scope_slots: [{has_chemical_substance}] |
+
+## MISSING_DATA 제거 전략
+
+Trigger 기반 후보는 이미 조건이 충족된 것만 생성됨 → MISSING_DATA 구조적 제거
+
+## 6W 연결
+
+| 6W | 소스 | 충족 여부 |
+|---|---|---|
+| who | executor_text = '사업주' | ✅ 100% |
+| what | action_text | ✅ 100% |
+| why | law_article + law_master | ✅ |
+| where | condition_text 키워드 + Trigger fallback | △ |
+| when | 법령 특성상 드묾 | ❌ |
+
+*구현 없음 | 코드 수정 없음 | 테이블 생성 없음*
+
+---
+
+# 10. WO-PLAN-001 Trigger 기반 법령의무도출 시스템 구현계획서
+
+작성일: 2026-06-22 | 단계: 실행계획 (구현 없음)
+
+## 핵심 원칙
+
+**"새 엔진을 만들지 말고, Trigger → 의무후보 구간만 채워서 기존 자산을 살린다."**
+
+신규 개발: 10~20% | 기존 자산 재활용: 80~90%
+
+## 재활용 자산 목록
+
+| 파일 | 역할 | 재사용 방식 |
+|---|---|---|
+| services/facility_applicability_eval.py | Check Engine | 함수 호출, 수정 없음 |
+| engine/six_w_heuristic.py | 6W 추출 | 함수 호출, 수정 없음 |
+| routers/obligation_adapter.py | 기존 어댑터 라우터 | Trigger 버전 별도 작성 |
+| facility_applicability 테이블 | 판정 결과 저장 | 구조 그대로 |
+| semantic_clause 테이블 | 법령 조문 | 키워드 검색 |
+| applicability_conditions 14건 | Route B 데이터 | 그대로 사용 |
+
+## 절대 수정 금지 파일
+
+```
+services/facility_applicability_eval.py
+engine/six_w_heuristic.py
+services/obligation_adapter_service.py
+routers/obligation_adapter.py
+routers/applicability_api.py
+```
+
+## 신규 작성 목록
+
+| 파일 | 역할 | 크기 | 담당 |
+|---|---|---|---|
+| services/trigger_generator.py | 입력값 → Trigger Code Set | ~100줄 | Cursor |
+| services/trigger_obligation_generator.py | Trigger → 의무후보 | ~200줄 | Cursor |
+| services/trigger_applicability_adapter.py | 의무후보 → Check Engine | ~150줄 | Cursor |
+| routers/trigger_diagnosis.py | API 엔드포인트 | ~80줄 | Cursor |
+
+**총 신규 코드: 약 530줄**
+
+## 구현 단계
+
+| 순서 | TASK | 목적 |
+|---|---|---|
+| 1 | Trigger Generator | 입력 → Trigger Code Set |
+| 2 | Obligation Generator | Trigger → 의무후보 |
+| 3 | Applicability Adapter | 의무후보 → Check Engine |
+| 4 | Check Engine 연결 | evaluate_draft_for_facility() 재사용 |
+| 5 | 6W 연결 | extract_six_w() 재사용 |
+| 6 | 출력 API | POST /trigger-diagnosis/{factory_id}/evaluate |
+
+## Post-MVP 범위 (이번 구현 제외)
+
+```
+THRESHOLD 전체 범위      → WO-APPENDIX-COLLECT-001 완료 후
+INDUSTRY Trigger         → 별표 데이터 구축 후
+HAZARD_FACTOR 세분화     → 유해인자 입력 UI 구축 후
+EVENT Trigger            → SaaS 런타임 레이어
+```
+
+*구현 없음*
+
+---
+
+# 11. CURSOR-TASK-001 Trigger 기반 의무후보 생성기 구현 작업지시서
+
+작성일: 2026-06-22 | 작성자: Claude | 대상: Cursor (구현 담당)
+
+## 배경 및 목적
+
+이 구조는 applicability_conditions 14건에만 의존 → 74.3% 커버 불가
+
+**목적**: semantic_clause 기반 Trigger → 의무후보 생성기를 기존 경로 앞에 붙인다.
+
+## 핵심 원칙
+
+```
+신규 라우터 생성 금지
+applicability_api.evaluate() 수정 금지
+evaluate_draft_for_facility() 수정 금지
+obligation_adapter_service.py 수정 금지
+facility_applicability_eval.py 수정 금지
+```
+
+## TASK-001: services/trigger_generator.py
+
+```python
+FLAG_TO_TRIGGER = {
+    "has_confined_space":    "WORK:CONFINED_SPACE",
+    "has_blasting":          "WORK:BLASTING",
+    "has_diving":            "WORK:DIVING",
+    "has_asbestos_demo":     "WORK:ASBESTOS",
+    "has_tower_crane":       "EQUIPMENT:TOWER_CRANE",
+    "has_high_pressure_gas": "WORK:HIGH_PRESSURE",
+    "has_chemical_substance":"HAZARD_FACTOR:CHEMICAL",
+    "has_boiler":            "EQUIPMENT:BOILER",
+}
+
+EMPLOYEE_THRESHOLDS = [(20, "20_PLUS"), (50, "50_PLUS"), (100, "100_PLUS")]
+
+EQUIPMENT_CODE_TO_TRIGGER = {
+    "CRANE": ["EQUIPMENT:CRANE", "EQUIPMENT_ACT:CRANE_USE"],
+    "021":   ["EQUIPMENT:MOBILE_CRANE"],
+    "008":   ["EQUIPMENT:WELDER", "WORK:WELDING"],
+    "036":   ["EQUIPMENT:LOCAL_EXHAUST"],
+    "040":   ["EQUIPMENT:EXCAVATOR", "WORK:EXCAVATION"],
+}
+```
+
+## TASK-002: services/trigger_obligation_generator.py
+
+```python
+TRIGGER_KEYWORD_MAP = {
+    "BUSINESS:REGISTERED": None,
+    "WORK:CONFINED_SPACE":  r"(밀폐공간|산소결핍|황화수소|밀폐된 공간)",
+    "WORK:BLASTING":        r"(발파|화약류|폭발물)",
+    "WORK:DIVING":          r"(잠수|잠함|잠수작업자)",
+    "WORK:ASBESTOS":        r"(석면|석면해체|석면분진)",
+    "WORK:HIGH_PRESSURE":   r"(고압작업|고압가스|기압조절실)",
+    "EQUIPMENT:CRANE":      r"(크레인|양중기)",
+    "EQUIPMENT:LOCAL_EXHAUST": r"(국소배기|집진기|후드)",
+    "EQUIPMENT:EXCAVATOR":  r"(굴착기|차량계 건설기계|건설기계)",
+    "HAZARD_FACTOR:CHEMICAL": r"(관리대상 유해물질|허가대상 유해물질|금지유해물질|화학물질)",
+}
+```
+
+## 완료 조건
+
+```
+입력: employee_count=80, has_confined_space=True, equipment=["CRANE"]
+출력 Trigger: ["BUSINESS:REGISTERED", "THRESHOLD:EMPLOYEE_50_PLUS",
+               "WORK:CONFINED_SPACE", "EQUIPMENT:CRANE", "EQUIPMENT_ACT:CRANE_USE"]
+의무후보: 30건 이상, WORK:CONFINED_SPACE confidence=HIGH 포함
+```
+
+---
+
+# 12. 부록 — 구현 완료 현황 및 검증 결과
+
+## 구현 완료 파일 (tai-api main 브랜치)
+
+| SHA | 파일 | 역할 |
+|---|---|---|
+| 8b6ee61 | services/trigger_generator.py | factory_id → Trigger Code Set |
+| 8b6ee61 | services/trigger_obligation_generator.py | Trigger → semantic_clause 후보 |
+| e466844 | services/obligation_adapter_service.py | build_obligations_from_trigger_candidates() 추가 |
+| e466844 | routers/obligation_adapter.py | POST /obligation-adapter/run-trigger/{factory_id} 추가 |
+| ab8d92d | services/trigger_applicability_adapter.py | TASK-003+004 Applicability Adapter |
+| ab8d92d | services/trigger_six_w_service.py | TASK-005 6W 서비스 |
+| ab8d92d | routers/trigger_diagnosis.py | TASK-006 API |
+| 9c9b094 | router_registry/diagnosis.py | trigger_diagnosis 라우터 등록 |
+
+## VERIFY-001 수치 검증 결과
+
+테스트 factory: `1427367d-65fd-4f26-8707-779e5854ad5c`
+
+| 항목 | 수치 |
+|---|---|
+| trigger_count | 10개 |
+| candidate_count | 421건 |
+| MATCH_CANDIDATE | 329건 |
+| POSSIBLE_CANDIDATE | 92건 |
+
+## VERIFY-002 의무 품질 검증 결과
+
+| 분류 | 건수 | 비율 |
+|---|---|---|
+| **A (정확)** | 22건 | **44%** |
+| **B (관련 있음)** | 17건 | **34%** |
+| **C (무관)** | 11건 | **22%** |
+| **필수 의무 누락** | 8건 | — |
+
+### A (정확) 예시
+
+- 밀폐공간 작업 프로그램 수립·시행 (제619조)
+- 밀폐공간 환기 의무 (제620조)
+- 이동식 크레인 해지장치 사용 (제149조)
+- 관리대상 유해물질 작업수칙 준수 (제436조)
+- 굴착기 인양작업 준수 (제221조)
+- 국소배기장치 첫 사용 전 점검 (제441조)
+
+### C (무관) 발생 원인
+
+1. BUSINESS:REGISTERED 과잉 (law_type/sector 필터 부재)
+2. 키워드 의미 충돌 (크레인→타워크레인, 고압가스→잠함 조문)
+
+### 필수 의무 누락 8건
+
+산소 농도 측정, 발파 통제구역/경고/계획, 크레인 점검/자격, 굴착기 작업계획서, 전도 방지
+
+## 최종 결론: **B. 품질 개선 후 테스트**
+
+개선 필요 사항:
+1. BUSINESS:REGISTERED C급 22% → law_type/sector 필터 추가
+2. 필수 의무 8건 누락 → 키워드 패턴 확장
+3. law_basis 96.1% 공백 → law_master JOIN 보강 (ISSUE-006)
+
+---
+
+*TAI Safe 법령의무도출 시스템 설계 및 구현계획서*  
+*2026-06-22 | TAI Engineering*
