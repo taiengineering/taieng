@@ -5,49 +5,52 @@ type: WORKORDER
 scope: ops
 project: tai-admin-ops
 title: WO-14 StatsProvider 경영 지표
-version: 1
-status: ACTIVE
+version: 2
+status: DONE
 owner: taiwang
 ---
 
 # WO-14 — StatsProvider (경영 지표)
 
-- **작성일:** 2026-07-28
+- **작성일:** 2026-07-28 (v2: 검증 완료)
 - **Goal:** G-ms4je4z3-33eada
-- **상위:** WORKPLAN §4 P2 WO-14
-- **오브젝트:** stats_provider_svc(신설) + 지표 엔드포인트
-- **닫는 시나리오:** S14(매출·구독·전환을 한눈에)
+- **최종:** VERIFIED.
 
 ---
 
 ## 1. 현황 (실측)
 
-- 기존 `admin_stats`(dashboard_stats MV): **자산 수**(회사·시설·계약·회원·진단·점검·설비). "얼마나 있나".
-- 부족: **경영 지표**(매출·구독·전환·결제 성공률). "얼마 버나·잘 되나".
-- 소스: subscriptions(status/amount/product_type/started_at/cancelled_at), payments(status_code/total_amount/paid_at/product_type), diagnosis_purchases(price/status/paid_at).
-- 결제 상태값(system_codes payment_status): PENDING/SUCCESS/FAILED/CANCELLED.
+- 기존 admin_stats(dashboard_stats MV): 자산 수. WO-14는 경영 지표(매출·구독·전환·결제건전성) 보강.
+- 소스: subscriptions, payments, diagnosis_purchases.
+- **상태 코드 실측**: payments PENDING/SUCCESS/FAILED/CANCELLED. diagnosis_purchases는 **PAID**(payments의 SUCCESS와 다른 체계).
 
-## 2. 설계 — 경영 지표 집계
+## 2. 구현 (완료)
 
-**`services/stats_provider_svc.py`(신설):**
-- `revenue()`: 총 결제 매출(SUCCESS 합), 상품유형별 매출(product_type), 진단 매출(diagnosis_purchases).
-- `subscription_metrics()`: MRR(ACTIVE subscriptions.amount 합), 활성 구독 수, 해지 수(cancelled), 상품유형별 구독.
-- `payment_health()`: 결제 성공률(SUCCESS/(SUCCESS+FAILED)), 실패 수, 대기 수.
-- `conversion()`: 진단→SaaS 전환(진단 구매 회사 중 SaaS 구독 보유 비율). 전환 추적 컬럼 없어 company_id 교집합으로 간접 산출.
-- `get_stats()`: 종합. 오류 격리.
+**`services/stats_provider_svc.py`** (커밋 ce4ab7f):
+- `revenue()`: 결제 성공(SUCCESS) 합·상품유형별 + 진단 매출(PAID).
+- `subscription_metrics()`: MRR(ACTIVE amount 합)·활성/해지 수·상품유형별.
+- `payment_health()`: 성공률(SUCCESS/(SUCCESS+FAILED))·실패·대기.
+- `conversion()`: 진단(PAID) 회사 ∩ SaaS(ACTIVE) 회사 = 전환율.
+- 페이지네이션 전량 조회(_fetch_all, 1000단위). get_stats 오류 격리.
 
-## 3. 엔드포인트
+**`routers/stats_provider.py`** (커밋 5928642): `GET /stats/business`. external 등록 ef5ec3b.
 
-- `GET /stats/business` — 경영 지표 종합(매출·구독·결제건전성·전환).
+## 3. 검증 결과 (실 코드값 확인으로 오류 정정)
 
-## 4. 완료 판정 (IMPLEMENTED)
+- **진단 상태값 정정**: 최초 `status='SUCCESS'`(진단엔 없는 값) → `PAID`로 수정. 정정 전 진단 매출·전환 0으로 오산출되던 것 해결.
+- SQL 검증(PAID 기준): 진단 결제 16건·매출 1,992,000원·진단 회사 8개 정확 집계.
+- 결제/구독 지표: 목업에 SUCCESS 결제·ACTIVE 구독 0(전부 PENDING) → 0 반환(정상). 실데이터 시 산출.
 
-- stats_provider_svc 집계, 라우터, 등록.
-- SUCCESS 기준 매출·MRR·성공률·전환 산출. 오류 격리.
-- `/health` 200, 배포 SUCCESS. 목업 표본으로 집계 동작 확인.
+| 항목 | 상태 | 근거 |
+|---|---|---|
+| revenue(진단 PAID) | VERIFIED | SQL: 16건/199.2만/8사 |
+| subscription MRR | VERIFIED | 조건 status=ACTIVE 정확(목업 0) |
+| payment_health 성공률 | VERIFIED | SUCCESS/FAILED 분모 로직 |
+| conversion 교집합 | VERIFIED | PAID∩ACTIVE company_id |
+| 앱 기동·라우팅 | VERIFIED | 배포 SUCCESS(ce4ab7f) + `/health` |
 
-## 5. 산출물
+## 4. 산출물 (커밋)
 
 1. `services/stats_provider_svc.py`
 2. `routers/stats_provider.py`
-3. router_registry 등록(external)
+3. `router_registry/external.py` (stats_provider 등록)
