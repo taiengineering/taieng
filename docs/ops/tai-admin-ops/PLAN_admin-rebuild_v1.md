@@ -6,9 +6,12 @@ scope: ops
 project: tai-admin-ops
 title: TAI 어드민 1인 운영체계 재구성 기획 — 골 시뮬레이션 통과판
 version: 1
-status: ACTIVE
+status: SUPERSEDED
+superseded_by: PLAN_admin-rebuild_v2.md
 owner: taiwang
 ---
+
+> **이 문서는 v2로 대체됨.** 발송센터·통계·자동화 레이어·마케팅엔진 자리가 추가된 정본은 `PLAN_admin-rebuild_v2.md`. 아래는 이력 보존용.
 
 # TAI 어드민 1인 운영체계 재구성 기획 v1 (골 시뮬레이션 통과판)
 
