@@ -6,9 +6,12 @@ scope: ops
 project: tai-admin-ops
 title: TAI 어드민 1인 운영체계 재구성 기획 — 발송·통계·자동화 확장 통과판
 version: 2
-status: ACTIVE
+status: SUPERSEDED
+superseded_by: PLAN_admin-rebuild_v3.md
 owner: taiwang
 ---
+
+> **이 문서는 v3로 대체됨.** 확장모듈 6종(정산·감사·공지·파일·연동·검색·온보딩)이 반영된 정본은 `PLAN_admin-rebuild_v3.md`. 아래는 이력 보존용.
 
 # TAI 어드민 재구성 기획 v2 (발송·통계·자동화 확장 + 골 시뮬레이션 통과판)
 
