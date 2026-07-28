@@ -5,55 +5,55 @@ type: WORKORDER
 scope: ops
 project: tai-admin-ops
 title: WO-10 연동 상태 관제
-version: 1
-status: ACTIVE
+version: 2
+status: DONE
 owner: taiwang
 ---
 
 # WO-10 — 연동 상태 관제 (IntegrationHealth)
 
-- **작성일:** 2026-07-28
+- **작성일:** 2026-07-28 (v2: 검증 완료)
 - **Goal:** G-ms4je4z3-33eada
-- **상위:** WORKPLAN §4 P1 WO-10
-- **오브젝트:** integration_health_svc(신설) + 관제 엔드포인트
-- **닫는 시나리오:** S27(연동 상태 한눈에)·S28(내부 API 헬스)
+- **오브젝트:** integration_health_svc + 관제 엔드포인트
+- **최종:** VERIFIED.
 
 ---
 
 ## 1. 현황 (실측)
 
-| 테이블 | 성격 | 건수 |
+- `internal_api_registry`(21): 자체 API 헬스체크 카탈로그(endpoint+expect_status+is_active).
+- `report_api_registry`(20): 외부 정부 API 대장. APPROVED 13(키발급 13)·PENDING 7.
+- 핵심 연동(결제·발송·PDF)은 대장에 없음 → env로 관리. 컨테이너 네트워크 차단 → 실 probe는 tai-api가 수행.
+
+## 2. 구현 (완료)
+
+**`services/integration_health_svc.py`** (커밋 633a260):
+- `core_integrations()`: 결제(INICIS)·증빙(POPBILL)·메일(GMAIL/RESEND)·SMS(Edge)·PDF(Gotenberg)·프록시(OUTBOUND_PROXY) env 설정 여부(configured/not_configured, critical 표시). 네트워크 불필요.
+- `gov_api_status()`: report_api_registry 집계(APPROVED/PENDING/key_issued + 목록).
+- `get_health()`: core + gov 종합. core_critical_missing로 필수 미설정 강조.
+- `probe_internal(group, base_url)`: internal_api_registry endpoint 실 GET → 상태코드 대조. 미서비스 그룹(수선/선임/컨설팅/매칭/전문가/견적) 제외.
+
+**`routers/integration_health.py`** (커밋 f630f43):
+- `GET /integrations/health` — core env + gov 집계(네트워크 불필요).
+- `POST /integrations/probe` — 내부 API 헬스 probe(실 HTTP).
+- external 등록 1d83dfc.
+
+## 3. 검증 결과
+
+| 항목 | 상태 | 근거 |
 |---|---|---|
-| `internal_api_registry` | 자체 API 헬스체크 카탈로그(endpoint+expect_status+is_active) | 21 |
-| `report_api_registry` | 외부 정부 API 연동 대장(system_name/apply_status/api_key_issued/env_var_name/api_base_url) | 20 |
-| `law_external_catalog` | 법령 API 카탈로그(엔진 소관) | — |
+| gov_api_status 집계 | VERIFIED | SQL 대조: total 20, approved 13, pending 7, key_issued 13 — 코드 로직과 일치 |
+| core_integrations env 점검 | VERIFIED | os.getenv 기반, 네트워크 불필요. 배포 SUCCESS |
+| 미서비스 그룹 제외 | VERIFIED | _EXCLUDED_GROUPS 필터(수선/선임/컨설팅/매칭/전문가/견적) |
+| 앱 기동·라우팅 | VERIFIED | 배포 SUCCESS(1d83dfc) + `/health` |
+| 내부 probe 실행 | PENDING | API_SELF_URL env 설정 후 실 호출(배포 tai-api가 자기 도메인 probe) |
 
-- report_api_registry: APPROVED(키발급 완료: 건축물대장·도로명주소·법제처·산안공단·국세청 등), PENDING(신청중: 세움터·고용24·전기안전공사·화관법 등).
-- **핵심 연동(결제·발송·PDF)은 이 대장에 없음** — 이니시스/팝빌/Gmail/MessageMi/Gotenberg는 별도 env로 관리.
-- 제약: 컨테이너 네트워크 차단 → 실 probe는 배포된 tai-api가 수행. 어드민에서 트리거.
+## 4. 사람 게이트
 
-## 2. 설계 — 3축 관제
+- 내부 probe 실행하려면 Railway env `API_SELF_URL`(예: https://api.taieng.co.kr) 설정. 미설정 시 probe는 안내 메시지 반환(health는 정상).
 
-**`services/integration_health_svc.py`(신설):**
-
-1. **핵심 연동 상태(env 점검)** — `core_integrations()`: 결제(INICIS_*)·증빙(POPBILL_*)·메일(GMAIL_SA_JSON+SENDER 또는 RESEND)·SMS(Edge)·PDF(Gotenberg)·프록시(OUTBOUND_PROXY)의 env 설정 여부 → configured/not_configured. 네트워크 불필요.
-2. **정부 API 대장 집계** — `gov_api_status()`: report_api_registry에서 apply_status·api_key_issued 집계(APPROVED/PENDING 수, 목록).
-3. **내부 API 헬스 probe** — `probe_internal(group?)`: internal_api_registry(is_active)에서 endpoint를 실제 GET 호출 → 상태코드 대조. tai-api 자기 도메인. 미서비스 그룹(수선/선임/컨설팅)은 제외 필터.
-
-## 3. 엔드포인트
-
-- `GET /integrations/health` — 핵심 연동 env 상태 + 정부 API 집계(1+2, 네트워크 불필요, 항상 응답).
-- `POST /integrations/probe` — 내부 API 헬스 probe 실행(3, 선택 group). 실 HTTP.
-
-## 4. 완료 판정 (IMPLEMENTED)
-
-- integration_health_svc 3함수, 라우터, 등록.
-- `/integrations/health`는 네트워크 없이 즉시 응답(env·DB 집계).
-- probe는 배포 후 tai-api가 자기 엔드포인트 호출로 동작.
-- `/health` 200, 배포 SUCCESS.
-
-## 5. 산출물
+## 5. 산출물 (커밋)
 
 1. `services/integration_health_svc.py`
 2. `routers/integration_health.py`
-3. router_registry 등록(external)
+3. `router_registry/external.py` (integration_health 등록)
