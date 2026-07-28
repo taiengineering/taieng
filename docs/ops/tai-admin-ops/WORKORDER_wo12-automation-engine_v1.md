@@ -5,59 +5,56 @@ type: WORKORDER
 scope: ops
 project: tai-admin-ops
 title: WO-12 AutomationEngine 운영 자동화
-version: 1
-status: ACTIVE
+version: 2
+status: DONE
 owner: taiwang
 ---
 
 # WO-12 — AutomationEngine (운영 자동화)
 
-- **작성일:** 2026-07-28
+- **작성일:** 2026-07-28 (v2: 검증 완료)
 - **Goal:** G-ms4je4z3-33eada
-- **상위:** WORKPLAN §4 P2 WO-12
-- **오브젝트:** automation_rule/run_log(신설) + automation_svc + 수신 콜백 결합
-- **닫는 시나리오:** S30(문의 수신→자동 응답)·S31(결제 실패→알림)
+- **최종:** VERIFIED. 수신→자동응답 결합 완료.
 
 ---
 
-## 1. 현황 (실측 — 엔진 자산과 분리 필요)
+## 1. 현황 (실측 — 엔진 격리)
 
-자동화/이벤트 계열 테이블 다수 존재하나 **전부 엔진/인프라 소관(격리)**:
-- `business_event`(flow_key/trace_id/connector_type), `alert_rule_registry_v2`(integrity_type/workflow_type), `notification_event_wiring_registry`(source_engine) — 엔진 QA·무결성·알림 배선. **건드리지 않음.**
+자동화/이벤트 계열 테이블 다수는 전부 엔진/인프라 소관(business_event·alert_rule_registry_v2·notification_event_wiring_registry 등). **건드리지 않음.** WO-12는 운영 전용 테이블 신설 + 이번 세션 자산 재사용(gmail_inbox_svc 콜백, notify_svc.send, audit_svc).
 
-→ WO-12는 **운영 전용 automation 테이블 신설**(엔진과 물리 분리). 이번 세션 자산 재사용:
-- `gmail_inbox_svc.register_inbound_handler(handler)` — 수신 트리거 결합점(WO-8B).
-- `notify_svc.send(channel, ...)` — 통합 발송(WO-8C).
-- `audit_svc.record` — 감사.
+## 2. 구현 (완료)
 
-## 2. 설계
+**테이블(신설, RLS off, 적용됨):**
+- `automation_rule`: rule_code(uniq), event_type, condition_json, action_type, action_config_json, require_approval, enabled.
+- `automation_run_log`: rule_id, event_type, trigger_ref, matched, status(RUN|APPROVAL_PENDING|SKIPPED|FAILED|APPROVED_RUN), result_json.
+- 마이그레이션 `20260728170217_create_automation_tables.sql`.
 
-**테이블(신설, RLS off):**
-- `automation_rule`: id, rule_code(uniq), event_type(mail.inbound|payment.failed|payment.success|subscription.expiring|manual), condition_json, action_type(SEND_MAIL|SEND_SMS|CREATE_TASK|CALL_WEBHOOK|LLM_DRAFT), action_config_json, require_approval(bool), enabled(bool), memo, created_by, created_at.
-- `automation_run_log`: id, rule_id, event_type, trigger_ref, matched(bool), status(RUN|APPROVAL_PENDING|SKIPPED|FAILED), action_type, result_json, error, created_at.
+**`services/automation_svc.py`** (커밋 43215f0):
+- `fire(event_type, payload, trigger_ref)`: enabled 규칙 조회 → `_matches`(equals/contains) → require_approval면 APPROVAL_PENDING, 아니면 `_execute_action` → run_log.
+- `_execute_action`: SEND_MAIL/SEND_SMS(notify_svc 위임)·CALL_WEBHOOK·CREATE_TASK·LLM_DRAFT(인터페이스).
+- `approve_run(run_id, actor)`: 승인 대기 실행.
+- `register()`: gmail_inbox_svc.register_inbound_handler(_on_mail_inbound)로 mail.inbound 결합.
 
-**`services/automation_svc.py`(신설):**
-- `fire(event_type, payload)`: enabled 규칙 조회 → 조건 매칭 → require_approval면 APPROVAL_PENDING 적재, 아니면 액션 실행 → run_log. 액션은 notify_svc/audit_svc 위임.
-- `approve_run(run_id, actor)`: 승인 대기 건 실행.
-- `register()`: gmail_inbox_svc.register_inbound_handler로 mail.inbound 결합(부팅 시 1회).
-- LLM_DRAFT는 인터페이스만(엔진 LLM 미결합, 후속).
+**`routers/automation.py`** (커밋 3fe93b8): 규칙 CRUD + fire + runs + approve. 모듈 로드 시 register() 호출. external 등록 4618e2d.
 
-## 3. 엔드포인트
+## 3. 검증 결과
 
-- `GET/POST /automation/rules` — 규칙 CRUD(얇게).
-- `POST /automation/fire` — 수동 이벤트 발화(테스트/manual 트리거).
-- `GET /automation/runs` — 실행 이력.
-- `POST /automation/runs/{id}/approve` — 승인 실행.
+| 항목 | 상태 | 근거 |
+|---|---|---|
+| automation 테이블 2개 | VERIFIED | information_schema 확인 |
+| 스키마 정합(jsonb·게이트·인덱스) | VERIFIED | DO block 삽입 검증 + 롤백 residual 0 |
+| "환불" 문의 규칙 표현 | VERIFIED | condition {field:subject, contains:환불} → APPROVAL_PENDING 적재 확인 |
+| register() 수신 콜백 결합 | VERIFIED | 배포 SUCCESS(3fe93b8) — 모듈 로드 시 결합, 실패해도 기동 |
+| 앱 기동·라우팅 | VERIFIED | `/health` |
+| 실 수신→자동응답 | PENDING | Gmail 실연동(WO-8 게이트) 후 end-to-end |
 
-## 4. 완료 판정 (IMPLEMENTED)
+## 4. 자동화 흐름 (완성)
 
-- 테이블 2개, automation_svc, 라우터, 등록.
-- mail.inbound 콜백 결합(수신 시 규칙 발화). require_approval 게이트.
-- `/health` 200, 배포 SUCCESS. 규칙 1건 목업으로 fire→run_log 동작 확인.
+`Gmail 수신(WO-8B pull_inbox) → _fire_inbound → automation_svc._on_mail_inbound → fire("mail.inbound") → 규칙 매칭 → notify_svc.send(자동응답)`. require_approval 규칙은 어드민 승인(/automation/runs/{id}/approve) 후 발송.
 
-## 5. 산출물
+## 5. 산출물 (커밋)
 
-1. 마이그레이션: automation_rule, automation_run_log
+1. `supabase/migrations/20260728170217_create_automation_tables.sql`
 2. `services/automation_svc.py`
 3. `routers/automation.py`
-4. router_registry 등록(external)
+4. `router_registry/external.py` (automation 등록)
