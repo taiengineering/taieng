@@ -1,0 +1,210 @@
+# TBM 팀·그룹 하이브리드 설계서
+
+- 작성일: 2026-08-11
+- 상태: **설계(DESIGN) — 미구현**. 구현 전 검토·인계용.
+- 범위: TBM(Tool Box Meeting)을 실무(반장·팀·소그룹 단위)에 맞게 재설계. 안전관리자 세팅 + 현장 리더 모바일 사용(하이브리드).
+- 근거: 내부 DB/라우터 직독 + 외부 실무 조사. 아래 사실은 모두 검증됨.
+
+---
+
+## 0. 문제 진단 (왜 꼬였나)
+
+실무 TBM은 **반장(TBM 리더) 주관 · 팀/소그룹 단위 · 현장 모바일**로 돌아가는데, 현재 시스템은:
+
+1. TBM 생성이 **관리자 웹(safe)에만** 있음 — 리더가 자기 팀 TBM을 만드는 경로 없음.
+2. TBM이 **시설(factory) 단위**로만 열림.
+3. 팀 개념(`teams` 테이블)은 **테이블만 있고(0행) worker·tbm·리더와 미연결**.
+4. 계정·인증·권한 인프라(`users`+RBAC)는 완성도 높은데 **worker와 미연결**(user_id 0건).
+
+→ 즉 "팀/소그룹이라는 실무 현실"을 담을 **배선(worker↔team/group, tbm↔group, 리더 역할·권한, worker↔계정)이 설계만 일부 되고 연결이 안 된 상태**. 본 설계의 핵심은 **끊긴 배선을 잇는 것**.
+
+---
+
+## 1. 외부 조사 (실무 TBM 운영)
+
+- TBM = 작업 전 안전점검회의. **작업팀장(반장)/관리감독자 중심**으로 진행.
+- **소단위(5~7명) 팀별**로 아침 작업 전 10분 내외. → 큰 팀은 그룹으로 나눠 진행.
+- 안전관리자는 **틀(위험성평가·절차·템플릿)** 제공, 반장이 팀 단위로 **운영**.
+- 근거: 중대재해 감축 로드맵 → 위험성평가 결과를 TBM으로 반복 전달·교육.
+
+---
+
+## 2. 내부 조사 (검증된 팩트)
+
+### 2-1. TBM 관련 테이블
+- `tbm_meetings`: 스코핑 = `factory_id` + `construction_site_id`. **team 참조 없음**. (qr_token/qr_expires_at 있음 — 현장 서명용)
+- `tbm_attendees`: 개인 단위(worker_id/user_id/name/서명). team 참조 없음.
+- `tbm_templates`: factory_id만(v1.1.1에서 시설 스코핑 적용됨). team 없음.
+
+### 2-2. 팀
+- `teams`: {id, **factory_id**, team_name, team_code, description, is_active}. 시설 스코핑. **0행(미사용)**.
+- `users.team_id` 있음(계정↔팀). `worker_registry`에는 **team_id 없음**.
+
+### 2-3. 근로자 등록 (`worker_registry`, 10명)
+- 수동등록 스키마에 `department`(부서) **있음(선택)**. 그러나:
+  - **엑셀 일괄등록엔 부서 칸 없음**(이름·연락선·직종·소속업체·입사일).
+  - 실제 DB: 부서 입력 **0명**. 자유텍스트이며 teams와 무관.
+- 직종코드에 **WJT016 관리감독자(반장)** 있음 → 리더 식별 수단은 있으나 역할·권한 미연결.
+- TBM 생성은 관리자 웹(tbm-setting)에만. 작업자 앱(/app/tbm.html)은 서명만.
+
+### 2-4. 계정·인증·권한 (`users`, 22행) — 인프라 완전 존재
+- 조직: company_id · factory_id · **team_id** · department · position · role_id/role_code · sector
+- 인증: username/password_hash · **소셜(kakao/naver/google)** · **생체(biometric_*)** · **본인인증(identity_ci/di/PASS)** · email_verified
+- 모바일·서명: push_token/platform · **signature_url** · allow_push/sms
+- RBAC: `roles` · `role_permissions` · `role_menu_permissions` · `role_site_permissions` · **`role_data_scope`** · `rule_pos_to_role`
+- 미배선: `worker_registry.user_id` **0건**, `app_installed` **0건**. worker↔계정 연결·초대→계정생성만 없음(`send_invite`는 invite_sent_at만).
+
+→ **결론**: TBM 리더 모바일은 새 인증을 만들 필요 없이 worker↔users 연결 + role_code + role_data_scope(자기 팀/그룹) + 기존 소셜/생체 로그인으로 성립. **배선만**.
+
+---
+
+## 3. 설계 결정 (사용자 확정)
+
+1. **하이브리드**: 안전관리자=세팅 주체, 리더=주 사용자+자기 팀 세팅도 가능. 둘 다 TBM 생성(스코프 다름).
+2. **조직 계층**: 회사 > 시설 > 부서 > 팀 > **그룹** > 근로자.
+3. **3섹터 모두**(산업·건물·건설) 지원. "시설"=factory_id(산업·건물) 또는 construction_site_id(건설) XOR.
+4. **다중소속**: 1근로자 → N그룹.
+5. **팀 리더 1명 강제**. 그룹 조장은 그룹당 1명(옵션).
+6. **용어**: 반장 → **"TBM 리더"**.
+
+---
+
+## 4. 조직 계층 모델
+
+```
+회사(company)
+ └ 시설(factory[산업·건물] | construction_site[건설])
+    └ 부서(department)
+       └ 팀(team)              ← 팀 리더 1명 강제
+          └ 그룹(group)         ← TBM 실제 단위(소단위 5~7명), 조장(옵션)
+             └ 근로자(worker)   ← 다중소속(N그룹)
+```
+· 예: 생산1팀 100명 → 그룹 다수로 분할, 각 그룹이 TBM 단위.
+
+---
+
+## 5. 데이터 모델 델타 (DDL 초안 — 확정 전)
+
+### 신설 `departments`
+```
+departments(
+  id uuid PK,
+  company_id uuid NOT NULL,
+  factory_id uuid NULL,
+  construction_site_id uuid NULL,
+  department_name text NOT NULL,
+  department_code text,
+  is_active bool DEFAULT true,
+  created_at, created_by, updated_at, updated_by,
+  CHECK (factory_id IS NOT NULL OR construction_site_id IS NOT NULL)  -- 시설 귀속 XOR
+)
+```
+
+### 확장 `teams` (기존 0행 활성화)
+```
++ department_id uuid FK departments        -- 계층 부모
++ construction_site_id uuid NULL           -- 건설 팀(기존 factory_id와 XOR)
++ lead_worker_id uuid FK worker_registry   -- 팀 리더(TBM 리더) 1명 강제
+```
+
+### 신설 `groups`
+```
+groups(
+  id uuid PK,
+  company_id uuid,
+  team_id uuid NOT NULL FK teams,               -- 그룹은 팀에 소속
+  group_name text NOT NULL,
+  group_code text,
+  lead_worker_id uuid NULL FK worker_registry,  -- 조장(그룹 TBM 진행, 옵션 1명)
+  is_active bool DEFAULT true,
+  created_at, updated_at
+)
+```
+
+### 신설 `worker_group` (다중소속 leaf)
+```
+worker_group(
+  id uuid PK,
+  worker_id uuid FK worker_registry,
+  group_id uuid FK groups,
+  is_lead bool DEFAULT false,   -- 이 그룹의 조장
+  assigned_at timestamptz,
+  UNIQUE(worker_id, group_id)
+)
+```
+· 1근로자 N그룹. 팀/부서/시설/회사는 group→team→dept→facility로 유도.
+
+### 확장 `tbm_meetings`
+```
++ group_id uuid NULL FK groups   -- TBM 주 단위
++ team_id  uuid NULL FK teams    -- 부모(유도/비정규화)
+```
+
+### 확장 `tbm_templates`
+```
++ team_id uuid NULL   -- 팀 템플릿. 스코프 = 전역(null)/시설(factory|site)/팀(team_id)
+```
+
+### worker↔계정
+```
+worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결.
+```
+
+---
+
+## 6. 역할·권한
+
+| 역할 | 식별 | 서피스 | 세팅 | TBM |
+|---|---|---|---|---|
+| 안전관리자 | 관리자 users 계정 | 웹(safe) | 부서·팀·그룹 편성, 근로자 다중배정, 리더·조장 지정, 템플릿 | 전 팀 생성·조회 |
+| **TBM 리더** | worker(WJT016) + teams.lead_worker_id + users 계정 | **모바일**(+웹) | 자기 팀 템플릿 선택+생성 | **자기 팀/그룹** 생성·실행·서명관리 |
+| 조장 | worker_group.is_lead + users 계정 | 모바일 | — | 자기 그룹 TBM 진행 |
+| 작업자 | worker | 모바일 | — | 서명 |
+
+· 권한 = 기존 RBAC(`roles`/`role_permissions`/**`role_data_scope`**)에 **팀/그룹 스코프** 규칙 추가(리더=자기 team_id/group_id 한정).
+
+---
+
+## 7. TBM 플로우 (팀/그룹 기반)
+
+```
+[세팅·안전관리자·웹]
+ 부서·팀·그룹 편성 → 근로자 다중배정 → 팀리더·조장 지정 (+팀 템플릿)
+        │
+[실행·TBM 리더/조장·모바일]
+ 내 그룹 선택 → 템플릿 선택/생성 → 그룹원 자동 소집(default 참석자) → TBM 생성(DRAFT)
+        │
+[현장·그룹원·모바일]
+ QR/푸시 서명 → 리더가 미서명 추적 → 완료
+```
+· `tbm_meetings.group_id`로 그룹 단위 개설·집계, 참석자 = 그룹원 자동 + 추가.
+· 현장 서명은 기존 `qr_token`/푸시(`sign_requested_at`) 재사용.
+
+---
+
+## 8. 단계적 도입 (리스크 낮은 순)
+
+- **Phase 1 — 조직 골격(웹)**: `departments` 신설 + `teams` 확장 + `groups` 신설 + `worker_group`(다중소속) + 관리자 "조직/팀/그룹 편성 + 다중배정 + 팀리더·조장 지정" UI. *TBM은 아직 시설 단위 유지.*
+- **Phase 2 — TBM 그룹화(웹)**: `tbm_meetings.group_id`·`tbm_templates.team_id` + 그룹 선택→그룹원 자동 소집. 관리자가 팀/그룹 단위 생성.
+- **Phase 3 — 리더 모바일 + 계정 배선**: worker↔users 연결 + 초대→계정생성 + role_data_scope(팀/그룹) + 앱 리더 뷰(내 그룹 TBM 생성·실행·QR서명·미서명추적). → 하이브리드 완성.
+
+---
+
+## 9. 미결정 (확정 필요)
+
+1. **템플릿 스코프에 부서 레벨**도 넣을지 — 전역/시설/**부서**/팀 4단 vs 전역/시설/팀 3단.
+2. **Phase 3 계정 배선**을 이번 범위에 포함할지, 아니면 Phase 1~2 먼저 확정하고 리더 모바일은 별도 트랙.
+
+---
+
+## 10. 원칙·제약 (기존 아키텍처 준수)
+
+- INSERT `ON CONFLICT DO NOTHING`, CONFIRMED 레코드 무단 수정 금지.
+- 사업장/시설 스코핑 우선, 서버측 인증 바인딩은 role_data_scope로(향후 하드닝).
+- 법령엔진 불간섭 — 본 설계는 SaaS 운영 영역(엔진 무관).
+- 파일 200줄/20KB+는 Cursor/Claude Code 로컬 편집.
+
+---
+
+## 변경 이력
+- 2026-08-11: 초안. 외부/내부 조사 기반 하이브리드 설계. 계층 회사>시설>부서>팀>그룹>근로자, 다중소속, 팀리더 1명강제, TBM리더 용어, 3섹터 지원. 미결정 2건.
