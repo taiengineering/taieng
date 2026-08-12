@@ -1,5 +1,6 @@
 /**
  * TAI 공통 Header — assets/js/header.js
+ * v3.5.7 (2026-08-12): 네비 우측에 '체험하기'(데모) 버튼 추가 — demo.taieng.co.kr (로그인 전/후 공통)
  * v3.5.6 (2026-05-08): 메뉴 명칭 변경 — 'SaaS 구독' → 'TAI Safe', '인앱 서비스' → 'TAI Apps' (링크 경로 유지)
  * v3.5.5 (2026-05-04): 메뉴 정리 — 교육사업·전문가매칭·수선연결·컨설팅·선임연결·연결서비스 사전등록·전문가(역할별) 미노출
  * v3.5.4 (2026-05-03): 파비콘은 HTML head 의 절대경로(/favicon.ico 등)만 사용 — JS에서 덮어쓰기 제거
@@ -18,6 +19,7 @@
 
   var STORAGE_KEY = 'tai_session';
   var ICON_URL = 'https://vwlahtguyggrhvslabax.supabase.co/storage/v1/object/public/site-assets/tai-icon-96.png';
+  var DEMO_URL = 'https://demo.taieng.co.kr';
 
   (function injectNavCss() {
     if (document.getElementById('tai-nav-vars')) return;
@@ -71,7 +73,6 @@
       '  text-shadow: 0 1px 4px rgba(0,0,0,.2);',
       '  white-space: nowrap;',
       '}',
-      /* fixed 상태: 배경이 다크 네이비이므로 흰색 텍스트 유지 */
       '.navbar-area.navbar-area-fixed .tai-logo-text {',
       '  color: #fff;',
       '  text-shadow: 0 1px 4px rgba(0,0,0,.25);',
@@ -92,7 +93,6 @@
       '  transition: background .15s, color .15s, border-color .15s;',
       '  white-space: nowrap;',
       '}',
-      /* 아웃라인 버튼 — 기본 (페이지 최상단, 다크 배경 위) */
       '.tai-nav-btn-outline {',
       '  border: 1.5px solid rgba(255,255,255,.55);',
       '  color: rgba(255,255,255,.9) !important;',
@@ -103,7 +103,6 @@
       '  color: #fff !important;',
       '  background: rgba(255,255,255,.08);',
       '}',
-      /* 아웃라인 버튼 — 스크롤 고정 (다크 네이비 배경 유지 → 흰색 텍스트) */
       '.navbar-area-fixed .tai-nav-btn-outline {',
       '  border-color: rgba(255,255,255,.5);',
       '  color: rgba(255,255,255,.9) !important;',
@@ -113,7 +112,6 @@
       '  background: rgba(255,255,255,.12);',
       '  color: #fff !important;',
       '}',
-      /* 솔리드 버튼 — 기본 (다크 배경 위 흰 버튼) */
       '.tai-nav-btn-solid {',
       '  border: 1.5px solid rgba(255,255,255,.9);',
       '  color: #0f2b4a !important;',
@@ -124,7 +122,6 @@
       '  border-color: #f0f6ff;',
       '  color: #0f2b4a !important;',
       '}',
-      /* 솔리드 버튼 — 스크롤 고정 (다크 배경 → 흰 버튼 유지) */
       '.navbar-area-fixed .tai-nav-btn-solid {',
       '  border-color: rgba(255,255,255,.9);',
       '  background: #fff;',
@@ -135,7 +132,16 @@
       '  border-color: #1565c0;',
       '  color: #fff !important;',
       '}',
-      /* 로그아웃 버튼 — 기본 */
+      '.tai-nav-btn-demo {',
+      '  border: 1.5px solid #1565c0;',
+      '  background: #1565c0;',
+      '  color: #fff !important;',
+      '}',
+      '.tai-nav-btn-demo:hover {',
+      '  background: #0f4c9a;',
+      '  border-color: #0f4c9a;',
+      '  color: #fff !important;',
+      '}',
       'button.tai-logout-btn {',
       '  cursor: pointer;',
       '  background: transparent;',
@@ -147,7 +153,6 @@
       '  color: #fff;',
       '  background: rgba(255,255,255,.08);',
       '}',
-      /* 로그아웃 버튼 — 스크롤 고정 (흰색 텍스트 유지) */
       '.navbar-area-fixed button.tai-logout-btn {',
       '  border-color: rgba(255,255,255,.5);',
       '  color: rgba(255,255,255,.9);',
@@ -230,12 +235,20 @@
     try { [STORAGE_KEY, 'access_token'].forEach(function (k) { sessionStorage.removeItem(k); }); } catch (e3) {}
   }
 
+  /* 데모 체험 버튼 — 로그인 전/후 공통. demo.taieng.co.kr 로 이동. */
+  var DEMO_LI = [
+    '    <li>',
+    '      <a href="' + DEMO_URL + '" class="tai-nav-btn tai-nav-btn-demo">체험하기</a>',
+    '    </li>',
+  ].join('\n');
+
   function buildNavRight() {
     var logged = isLoggedIn();
     if (logged) {
       return [
         '<div class="nav-right-part nav-right-part-desktop">',
         '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
+        DEMO_LI,
         '    <li>',
         '      <a href="' + base + 'mypage/" class="tai-nav-btn tai-nav-btn-outline">마이페이지</a>',
         '    </li>',
@@ -249,6 +262,7 @@
       return [
         '<div class="nav-right-part nav-right-part-desktop">',
         '  <ul style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;">',
+        DEMO_LI,
         '    <li>',
         '      <a href="' + base + 'log-in.html' + loginRedirectQs + '" class="tai-nav-btn tai-nav-btn-outline">로그인</a>',
         '    </li>',
