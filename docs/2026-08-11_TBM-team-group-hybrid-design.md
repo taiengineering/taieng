@@ -206,6 +206,44 @@ worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결
 
 ---
 
+## 11. 후속 작업 (2026-08-12) — worker 인물 단일 원장 + worker-list org 배선
+
+Phase 1·2 이후, 팀·그룹 모델을 실제 운영/데이터에 정착시키며 파생된 후속 작업.
+
+### 11-1. worker 인물 단일 원장 확립 (이중 테이블 정리)
+- **문제**: 건설 인원이 두 테이블에 병존.
+  - `construction_workers` = 건설 전용 로스터(출역·PTW·보건검진·서명·하도급).
+  - `worker_registry` = **조직·TBM·알림 인물 원장**. 부서/팀/그룹(`worker_group`)·`teams/groups.lead_worker_id`·`tbm_attendees.worker_id`가 모두 이 테이블을 참조(§5). 그러나 둘 사이 연결 컬럼이 없어 **동일 인물을 이중 관리**.
+- **결정**: `worker_registry` = 인물 단일 원장, `construction_workers` = 그 사람의 **건설 확장 속성**(1:1 링크). (조직/TBM/알림 식별은 이미 worker_registry 기준이므로 자연스러운 단일화.)
+- **구현(적용·검증 완료)**:
+  - `construction_workers.worker_registry_id uuid FK worker_registry(id) ON DELETE SET NULL` + 인덱스.
+  - DB 트리거 `public.sync_construction_worker_to_registry()`:
+    - `trg_sync_cw_registry_ins` (BEFORE INSERT): 건설 작업자 등록 시 worker_registry 행 자동 생성(company=사이트, job_type=role_code/worker_type, contractor_name=하도급/원청직영) + `NEW.worker_registry_id` 세팅.
+    - `trg_sync_cw_registry_upd` (BEFORE UPDATE OF worker_name/worker_phone/role_code/worker_type/subcontractor_id/is_active): 이름·연락처·직종·하도급·재직을 연결된 worker_registry 행에 자동 반영.
+  - 이름/연락처 null 또는 회사 null이면 스킵(가드). 테스트 삽입→연결 확인→삭제로 검증.
+- **효과**: 입력 1회, 사람 관리는 worker_registry 한 곳. 건설 화면(출역·PTW)은 construction_workers, 조직·TBM·알림은 worker_registry — 같은 사람으로 묶여 화면 충돌 없음.
+- **참고**: 트리거(=DB 레벨, 모든 등록 경로 커버, 저위험). 앱 코드(등록 라우터)로 옮길지는 선택(요청 시 전환). §2-4의 worker↔**users 계정** 배선(Phase 3)과는 별개 축 — 이 작업은 worker **인물 식별**의 단일화.
+
+### 11-2. worker-list(작업자관리) org 배선 — Phase 1 확장
+Phase 1에서 근로자 수정 패널에만 있던 부서·팀·그룹을, **엑셀 일괄등록과 검색**까지 확장(§2-3의 "엑셀에 부서 칸 없음" 해소).
+- **백엔드 `routers/worker_registry.py` v1.4.0**:
+  - 목록 `GET /worker-registry`에 `department_id/team_id/group_id` 필터 — `worker_group` 멤버십 기준으로 대상 worker id 산출(그룹→직접, 팀→하위 그룹, 부서→하위 팀의 그룹).
+  - `bulk-import`에 부서/팀/그룹 컬럼 파싱 → `_resolve_group_id()`(시설 범위에서 이름 캐스케이드 해석) → `worker_group` 배정(대표 1건 교체). 매칭 실패는 `org_failed[]` 리포트.
+  - 엑셀 템플릿(`/template`)에 부서/팀/그룹 컬럼 추가.
+  - **버그 수정**: 전화번호 헤더 `연락처`/`연락처(필수)` 인식(프론트 템플릿과 정합 — 종전 `연락선`만 읽어 파일 업로드가 실패하던 문제).
+- **프론트(tai-admin, worker-list)**:
+  - 검색에 시설→부서→팀→그룹 캐스케이드(`useWorkerList`) + `getQuery` org 파라미터.
+  - 엑셀 템플릿/미리보기에 부서·팀·그룹(`useWorkerBulkUpload`), '조직안내' 시트.
+  - **업로드 에러 하드닝**: 업로드 예외 try/catch(실패 시 모달 유지·재시도), 부분 실패 시 결과 뷰(등록실패/조직미배정/직종기타 상세 표) 유지, 실패 목록 CSV 다운로드.
+- **주의**: 엑셀의 부서/팀/그룹은 자유텍스트가 아니라 **등록된 조직명과 정확히 일치**해야 배정(그룹까지 입력 시 배정). worker-list는 시설(factory) 기준이라 해당 시설에 org가 있어야 셀렉트에 표시.
+
+### 11-3. 건설현장 org 경로 검증 (데모)
+- §4~5 계층을 **건설(construction_site_id) 경로**에서 실검증: 데모 건설현장에 부서 2·팀 4·그룹 5 + `worker_group` 배정(12명, 팀장·조장 지정), `departments/teams.construction_site_id` 스코프 동작 확인.
+- 하도급(`subcontractors`) 3사 배선도 함께: `construction_works/workers.subcontractor_id`는 **`companies`를 참조**(작업자는 companies+subcontractors 이중 FK)하므로, 동일 UUID를 companies(is_demo)+subcontractors 양쪽에 넣어 연결. org(worker_group)와는 **별개 축**(하도급=계약·소속, org=지휘·TBM 단위).
+
+---
+
 ## 변경 이력
 - 2026-08-11: 초안. 외부/내부 조사 기반 하이브리드 설계. 계층 회사>시설>부서>팀>그룹>근로자, 다중소속, 팀리더 1명강제, TBM리더 용어, 3섹터 지원. 미결정 2건.
 - 2026-08-11: **Phase 1·2 구현·배포 완료.** DDL 적용·검증(departments/groups/worker_group + teams·tbm_meetings·tbm_templates 확장, FK 체인 검증). 백엔드 org.py/worker_org.py/tbm.py(팀·그룹 임베드)/tbm_templates.py(그룹 자동소집·팀 스코핑)/worker_registry.py(factory_id·memo). 프론트 org-setting(건설현장 피커 포함)/worker-list(부서·팀·그룹·재직·시설·메모)/tbm-setting(팀 스코핑·그룹 캐스케이드)/tbm-list(팀·그룹 컬럼). nav '조직 관리' 그룹. Phase 3(리더 모바일·계정 배선)은 별도 트랙으로 작업지시서 발행. 미결정 #2 확정.
+- 2026-08-12: **후속 작업(§11).** (1) worker 인물 단일 원장 확립 — `construction_workers.worker_registry_id` FK + 동기화 트리거(등록 시 worker_registry 자동 생성·연결, 수정 자동 반영)로 이중 관리 해소. (2) worker-list org 배선(Phase 1 확장) — `worker_registry.py` v1.4.0: 목록 부서/팀/그룹 필터(worker_group), bulk-import 부서/팀/그룹 이름 해석·배정, 엑셀 템플릿 org 컬럼, `연락처` 헤더 인식(업로드 버그 수정). 프론트 검색 캐스케이드·엑셀 org 컬럼·업로드 에러 하드닝(예외 처리·부분실패 상세·실패 CSV). (3) 건설(construction_site) org 경로 데모 검증 + 하도급 3사 배선(subcontractor_id→companies 이중 FK 확인, org와 별개 축).
