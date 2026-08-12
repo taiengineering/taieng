@@ -1,7 +1,7 @@
 # TBM 팀·그룹 하이브리드 설계서
 
 - 작성일: 2026-08-11
-- 상태: **설계(DESIGN) — 미구현**. 구현 전 검토·인계용.
+- 상태: **Phase 1·2 구현·배포 완료(2026-08-11)** · Phase 3(리더 모바일·계정 배선)은 별도 모바일 트랙 인계. → 작업지시서: `docs/tbm/hybrid/WORKORDER_phase3-leader-mobile_v1.md`
 - 범위: TBM(Tool Box Meeting)을 실무(반장·팀·소그룹 단위)에 맞게 재설계. 안전관리자 세팅 + 현장 리더 모바일 사용(하이브리드).
 - 근거: 내부 DB/라우터 직독 + 외부 실무 조사. 아래 사실은 모두 검증됨.
 
@@ -83,7 +83,7 @@
 
 ---
 
-## 5. 데이터 모델 델타 (DDL 초안 — 확정 전)
+## 5. 데이터 모델 델타 (DDL — 적용·검증 완료)
 
 ### 신설 `departments`
 ```
@@ -96,7 +96,7 @@ departments(
   department_code text,
   is_active bool DEFAULT true,
   created_at, created_by, updated_at, updated_by,
-  CHECK (factory_id IS NOT NULL OR construction_site_id IS NOT NULL)  -- 시설 귀속 XOR
+  CHECK (num_nonnulls(factory_id, construction_site_id) = 1)  -- 시설 귀속 XOR
 )
 ```
 
@@ -145,9 +145,9 @@ worker_group(
 + team_id uuid NULL   -- 팀 템플릿. 스코프 = 전역(null)/시설(factory|site)/팀(team_id)
 ```
 
-### worker↔계정
+### worker↔계정 (Phase 3)
 ```
-worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결.
+worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결.  (Phase 3 인계)
 ```
 
 ---
@@ -161,7 +161,7 @@ worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결
 | 조장 | worker_group.is_lead + users 계정 | 모바일 | — | 자기 그룹 TBM 진행 |
 | 작업자 | worker | 모바일 | — | 서명 |
 
-· 권한 = 기존 RBAC(`roles`/`role_permissions`/**`role_data_scope`**)에 **팀/그룹 스코프** 규칙 추가(리더=자기 team_id/group_id 한정).
+· 권한 = 기존 RBAC(`roles`/`role_permissions`/**`role_data_scope`**)에 **팀/그룹 스코프** 규칙 추가(리더=자기 team_id/group_id 한정). *(Phase 3)*
 
 ---
 
@@ -184,16 +184,16 @@ worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결
 
 ## 8. 단계적 도입 (리스크 낮은 순)
 
-- **Phase 1 — 조직 골격(웹)**: `departments` 신설 + `teams` 확장 + `groups` 신설 + `worker_group`(다중소속) + 관리자 "조직/팀/그룹 편성 + 다중배정 + 팀리더·조장 지정" UI. *TBM은 아직 시설 단위 유지.*
-- **Phase 2 — TBM 그룹화(웹)**: `tbm_meetings.group_id`·`tbm_templates.team_id` + 그룹 선택→그룹원 자동 소집. 관리자가 팀/그룹 단위 생성.
-- **Phase 3 — 리더 모바일 + 계정 배선**: worker↔users 연결 + 초대→계정생성 + role_data_scope(팀/그룹) + 앱 리더 뷰(내 그룹 TBM 생성·실행·QR서명·미서명추적). → 하이브리드 완성.
+- **Phase 1 — 조직 골격(웹)** ✅ **완료·배포(2026-08-11)**: `departments` 신설 + `teams` 확장 + `groups` 신설 + `worker_group`(다중소속) + 관리자 "조직/팀/그룹 편성 + 다중배정 + 팀리더·조장 지정" UI(org-setting). 근로자 수정 패널에 부서·팀·그룹·재직상태·시설·메모. 건설현장 시설 피커 포함.
+- **Phase 2 — TBM 그룹화(웹)** ✅ **완료·배포(2026-08-11)**: `tbm_meetings.group_id/team_id` + 그룹 선택→**그룹원 자동 소집**(worker_id 연결). TBM 목록/상세 팀·그룹 표시. `tbm_templates.team_id` 팀 템플릿 스코핑(전역/시설/팀).
+- **Phase 3 — 리더 모바일 + 계정 배선** → **별도 모바일 트랙 인계(작업지시서 발행)**: worker↔users 연결 + 초대→계정생성(MessageMi) + role_data_scope(팀/그룹) + 앱 리더 뷰(내 그룹 TBM 생성·실행·QR서명·미서명추적). → 하이브리드 완성. 지시서: `docs/tbm/hybrid/WORKORDER_phase3-leader-mobile_v1.md`.
 
 ---
 
 ## 9. 미결정 (확정 필요)
 
-1. **템플릿 스코프에 부서 레벨**도 넣을지 — 전역/시설/**부서**/팀 4단 vs 전역/시설/팀 3단.
-2. **Phase 3 계정 배선**을 이번 범위에 포함할지, 아니면 Phase 1~2 먼저 확정하고 리더 모바일은 별도 트랙.
+1. **템플릿 스코프에 부서 레벨**도 넣을지 — 전역/시설/**부서**/팀 4단 vs 전역/시설/팀 3단. *(현재 3단으로 구현됨. 부서 레벨은 필요 시 추가.)*
+2. ~~Phase 3 계정 배선을 이번 범위에 포함할지~~ → **확정: Phase 1·2 웹 먼저 완료, Phase 3 리더 모바일은 별도 트랙(작업지시서 인계).**
 
 ---
 
@@ -208,3 +208,4 @@ worker_registry.user_id → users.id 활성화 + 초대 시 계정 생성/연결
 
 ## 변경 이력
 - 2026-08-11: 초안. 외부/내부 조사 기반 하이브리드 설계. 계층 회사>시설>부서>팀>그룹>근로자, 다중소속, 팀리더 1명강제, TBM리더 용어, 3섹터 지원. 미결정 2건.
+- 2026-08-11: **Phase 1·2 구현·배포 완료.** DDL 적용·검증(departments/groups/worker_group + teams·tbm_meetings·tbm_templates 확장, FK 체인 검증). 백엔드 org.py/worker_org.py/tbm.py(팀·그룹 임베드)/tbm_templates.py(그룹 자동소집·팀 스코핑)/worker_registry.py(factory_id·memo). 프론트 org-setting(건설현장 피커 포함)/worker-list(부서·팀·그룹·재직·시설·메모)/tbm-setting(팀 스코핑·그룹 캐스케이드)/tbm-list(팀·그룹 컬럼). nav '조직 관리' 그룹. Phase 3(리더 모바일·계정 배선)은 별도 트랙으로 작업지시서 발행. 미결정 #2 확정.
