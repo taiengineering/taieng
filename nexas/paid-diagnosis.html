@@ -409,7 +409,8 @@ function goToPayment() {
     document.getElementById('df_signature').value    = d.signature   || '';
     document.getElementById('df_verification').value = d.verification || '';
     document.getElementById('df_returnUrl').value    = DIAG_RETURN;
-    document.getElementById('df_closeUrl').value     = DIAG_CLOSE;
+    // closeUrl 에 retry=<현재 서비스 선택 페이지> 를 실어, 결제창 닫기(CLOSE) 시 결과화면의 '다시 시도'가 이 페이지로 오게 함
+    document.getElementById('df_closeUrl').value     = DIAG_CLOSE + '&retry=' + encodeURIComponent(location.href);
     if (typeof INIStdPay === 'undefined') { throw new Error('결제 모듈을 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.'); }
     INIStdPay.pay('diag_inicis_form');
   })
