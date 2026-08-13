@@ -1,6 +1,0 @@
-/* fix-request.html SVG 다이어그램 확대 오버라이드 */
-.fix-left{padding:32px 24px !important;}
-.fix-left h2{font-size:1.4rem !important;margin-bottom:4px !important;}
-.fix-left .fl-sub{font-size:.82rem !important;margin-bottom:16px !important;color:rgba(255,255,255,.85) !important;}
-.fl-diagram{max-width:100% !important;margin:0 auto 20px !important;}
-.fl-diagram img{filter:brightness(1.25) !important;}

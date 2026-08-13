@@ -1,8 +1,0 @@
-# XML 사이트맵 — 검색엔진·브라우저가 HTML로 오인하지 않도록 MIME 고정
-# 패턴은 Cloudflare Pages 공통 규칙(https://developers.cloudflare.com/pages/configuration/headers/)
-
-/sitemap*
-  Content-Type: application/xml; charset=utf-8
-
-/*.xml
-  Content-Type: application/xml; charset=utf-8
