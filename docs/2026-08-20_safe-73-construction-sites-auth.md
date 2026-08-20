@@ -1,58 +1,63 @@
-# WORKORDER — §73 construction_sites 인증·회사스코프 (무인증 해소)
+# WORKORDER — §73 construction_sites 인증·회사스코프 (v2 · 공통모듈 재사용)
 
-> 발행: 기획창 2026-08-20. 실행: Cursor(다중파일·핵심 보안 라우터, factories.py 선례와 동일 취급). 정답지: §80 `routers/diagnosis.py` v2.1.0 + `services/company_scope.py`.
+> 발행: 기획창 2026-08-20 (v2, v1 폐기). 실행: Cursor 권장(3파일·핵심 보안 라우터). 정본 모듈: `services/company_scope.py`(이미 존재). §80 `diagnosis.py` 와 동일 계열.
+> **v1과의 차이**: 손으로 만든 `_site_company`/`_assert_scope` 폐기 → 이미 있는 공통 모듈 헬퍼 재사용. + `run_list_query` None-skip 가드 추가.
 
-## 원인 (검증된 사실)
-`routers/construction_sites_router.py` 8개 엔드포인트 전부 무인증(`Depends(get_current_user)` 부재). 게다가 `schemas/construction.py` `SiteCreate.company_id: str` 가 **필수 클라이언트 입력**이고 `services/construction_sites_svc.build_site_create_payload` 가 `body.model_dump()` 를 그대로 insert → 클라이언트가 보낸 `company_id` 검증 없이 저장(P13 위반). `list_sites` 도 클라이언트 `company_id` 파라미터를 그대로 필터.
+## 원인 (검증 완료)
+`construction_sites_router.py` 8개 엔드포인트 전부 무인증. `SiteCreate.company_id: str`가 필수 클라 입력 → `build_site_create_payload`가 `body.model_dump()` 그대로 insert(P13). 목록은 클라 `company_id` 파라미터 그대로.
 
-## 적용 범위 (★ 확인 필요 — 기본값: 전체 잠금)
-지시서 원문 §73은 POST만 지목하나, **라우터 전체가 열려 있어 POST만 잠그면 DELETE·PATCH·조회가 남는다.** 기본 설계는 **전 엔드포인트 잠금**. POST만 원하면 회신 시 축소.
+## 재사용할 공통 모듈 (신설 아님 — 이미 있음)
+`from routers.auth import get_current_user`
+`from services.company_scope import _is_admin, _scope, _ensure_own_company, _forced_company_id`
+- `_is_admin(_scope(sb, role))` → `scope_type=="ALL"`(플랫폼 총관리자)만 True. 회사 안전관리자는 자기 회사로 스코프됨.
+- `_ensure_own_company(res_company_id, current, sb, not_found)` → 비-ALL이 타사/무회사면 **404**(무회사=token_cid None도 404).
+- `_forced_company_id(current, sb, company_id)` → 비-ALL이면 토큰 company_id 강제, ALL이면 클라 값 유지.
+
+## ★ 결정적 nuance — 목록 None-skip
+`services/construction_svc.run_list_query`는 `if value is None: continue` — **None 필터를 건너뛴다.** 따라서 무회사(company_id=None) 비-ALL에게 `_forced_company_id` 결과(None)를 그대로 넘기면 **전 회사가 노출된다.** 목록은 "무회사 → 빈 결과"를 라우터에서 명시 처리해야 한다.
 
 ## 변경 ① schemas/construction.py
-- `SiteCreate.company_id: str` → `company_id: Optional[str] = None` (서버가 토큰에서 주입, 클라이언트 값 무시).
+- `SiteCreate.company_id: str` → `company_id: Optional[str] = None` (서버가 토큰에서 주입, 클라 값은 무시/덮어씀).
 
 ## 변경 ② services/construction_sites_svc.py
-- `build_site_create_payload(body, now_iso_fn, company_id)` 로 파라미터 추가.
-  - 본문 첫 줄 뒤에 `data["company_id"] = company_id` 로 **강제 덮어쓰기**(body 값 무시, P13).
-- `list_sites(...)` 는 시그니처 불변 — 라우터가 인증된 company_id 를 넘긴다.
+- `build_site_create_payload(body, now_iso_fn, company_id)` 파라미터 추가 → 본문에서 `data["company_id"] = company_id` 로 **강제 덮어쓰기**(body 값 무시).
+- `list_sites(...)` 시그니처 불변.
 
-## 변경 ③ routers/construction_sites_router.py
-공통 import (diagnosis.py 와 동일):
-```python
-from fastapi import Depends
-from routers.auth import get_current_user
-from services.company_scope import _is_admin, _scope
-```
-헬퍼(파일 상단):
-```python
-def _site_company(supabase, site_id):
-    r = supabase.table("construction_sites").select("company_id").eq("id", site_id).limit(1).execute()
-    if not r.data:
-        raise HTTPException(status_code=404, detail="현장을 찾을 수 없습니다.")
-    return r.data[0].get("company_id")
+## 변경 ③ routers/construction_sites_router.py (엔드포인트별)
+공통: 각 함수 인자에 `current: dict = Depends(get_current_user)` 추가.
 
-def _assert_scope(supabase, current, company_id):
-    if _is_admin(_scope(supabase, current.get("role_code"))):
-        return
-    if str(company_id) != str(current.get("company_id")):
-        raise HTTPException(status_code=403, detail="타 회사 현장에 접근할 수 없습니다.")
-```
-엔드포인트별:
-- **POST /sites** — `current = Depends(get_current_user)` 추가. `build_site_create_payload(body, _now_iso, current.get("company_id"))` 로 호출(인증 회사 주입). body.company_id 무시.
-- **GET /sites** (목록) — `current` 추가. 비관리자면 `company_id = current.get("company_id")` 로 **강제**(쿼리 파라미터 무시). 관리자면 파라미터 허용.
-- **GET /sites/{id}** · **PATCH** · **DELETE** · **GET /sites/{id}/stats** · **POST /sites/{id}/diagnose** · **POST /sites/{id}/generate-schedules** — 각 함수에 `current` 추가하고, site_id 처리 전 `_assert_scope(supabase, current, _site_company(supabase, site_id))` 호출.
+- **POST /sites** — `company_id = current.get("company_id")`; `if not company_id: raise HTTPException(403, "회사 등록이 필요합니다.")`; `build_site_create_payload(body, _now_iso, company_id)`. (body.company_id 무시.)
+- **GET /sites** (목록) —
+  ```python
+  scoped_cid = _forced_company_id(current, supabase, company_id)
+  if not _is_admin(_scope(supabase, current.get("role_code"))) and not scoped_cid:
+      return {"status": "success", "data": {"items": [], "total": 0, "page": page, "size": size, "total_pages": 0}}
+  # scoped_cid 를 list_sites 의 company_id 로 전달
+  ```
+  (무회사 비-ALL → 빈 결과. None-skip 노출 차단.)
+- **GET /sites/{id}** · **PATCH** · **DELETE** · **GET /sites/{id}/stats** · **POST /sites/{id}/diagnose** · **POST /sites/{id}/generate-schedules** —
+  site_id 처리 전에 소유 현장 조회 후 가드:
+  ```python
+  srow = supabase.table("construction_sites").select("company_id").eq("id", site_id).limit(1).execute()
+  if not srow.data:
+      raise HTTPException(404, "현장을 찾을 수 없습니다.")
+  _ensure_own_company(srow.data[0].get("company_id"), current, supabase, "현장을 찾을 수 없습니다.")
+  ```
+  (무회사/타사 → 404. diagnose·generate 의 자동로직은 이 가드 통과 후 그대로.)
 
 ## 하지 말 것 (회귀 금지)
-- client 가 보낸 `company_id`/`factory_id` 를 신뢰해 스코프 완화 금지(P13).
-- 관리자 판정은 `_is_admin(_scope(...))` 로만. role_code 문자열 직접 비교 금지.
-- 자동 진단·일정(`create_factory_for_site`·`auto_diagnose_and_schedule`) 로직 불변 — 인증만 앞에 추가.
-- size 상한·다른 라우터 변경 금지.
+- 클라 `company_id`/`factory_id` 신뢰 금지(P13). 회사귀속은 토큰에서만.
+- 관리자 판정은 `_is_admin(_scope(...))` 로만. role_code 직접 비교 금지.
+- `_site_company`/`_assert_scope` 같은 개별 헬퍼 새로 만들지 말 것 — 공통 모듈만 사용(모듈화 목적).
+- 자동 진단·일정 로직(`create_factory_for_site`·`auto_diagnose_and_schedule`) 불변, 인증만 앞에.
+- 목록 무회사 케이스에서 None 을 `list_sites` 로 넘기지 말 것(전체 노출).
 
 ## 검증 (확인 한 줄)
-1. 비로그인 `POST /construction/sites` → 401/403 이면 통과.
-2. 로그인 후 body 에 **타 회사 company_id** 넣어 생성 → 저장된 행 company_id 가 **내 회사**면 통과(덮어쓰기 확인).
-3. 타 회사 현장 UUID 로 `DELETE /construction/sites/{id}` → 403 이면 통과. 자사 현장은 삭제 성공.
-4. 로그인 후 `GET /construction/sites` → **내 회사 현장만** 나오면 통과.
+1. 비로그인 `POST /construction/sites` → 401.
+2. 로그인+회사있음, body에 타사 company_id → 저장 행 company_id가 **내 회사**면 통과.
+3. 회사 미등록 계정으로 `GET /construction/sites` → **0건**이면 통과(전체 아님).
+4. 타사 현장 UUID `DELETE` → 404. 자사 현장 삭제 성공.
+5. 회사있는 계정 `GET /construction/sites` → 내 회사 현장만.
 
-## LEDGER
-§73(construction/sites 무인증). §80 과 동일 종류이나 라우터 전체가 대상. 관련: §59·§60·§62(건설 필드) 는 별건, 본 지시서는 인증·스코프만.
+## 맥락
+§73은 "전체 적용(모듈화)"의 **첫 케이스**. 이 라우터가 공통 모듈을 안 쓰던 것뿐. 완료 후 나머지 무모듈 safe 라우터 전수 스캔 → 동일 패턴 일괄 적용.
