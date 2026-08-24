@@ -55,7 +55,9 @@ META EXACT:
     · MAINTAIN 포함 8 privileges × 4 roles 일치 · is_grantable(boolean) 일치 · grantor 일치
 COMPANION 보존:
   work_assignments.factory_id 존재 · safety_inspections.factory_id 존재 (HASH 가 삭제 안 함)
-MATVIEW (CRITICAL-1):
+MATVIEW (CRITICAL-1 / CRITICAL-5):
+  [CRITICAL-5] _mig_ws_matview.definition trailing semicolon = false (§2 캡처 regexp_replace 정규화 확인)
+  [CRITICAL-5] §14-B CREATE MATERIALIZED VIEW ... AS <normalized def> WITH DATA 성공 (syntax error 없음)
   dashboard_stats 가 NEW canonical work_schedules OID 에 재결합 (pg_depend/pg_rewrite)
   dashboard_stats 가 work_schedules_old 를 더 이상 참조하지 않음
   dashboard_stats populated=true · unique idx idx_dashboard_stats_singleton 존재 · owner postgres
@@ -104,4 +106,38 @@ production apply = 별도 HASH EXECUTION gate 승인 후 (EXECUTION_RUNBOOK).
   → rollback-only dry-run 도 짧은 maintenance/write freeze 아래에서 수행한다.
      · direct anon path(equipment_checkins 등)는 DB LOCK 이 봉쇄.
      · application maintenance 는 사용자 lock wait/timeout 방지 목적(66 rows 라 작업은 짧지만 LEVEL-A 안전기준).
+```
+
+## 7. DRY-RUN 실행 이력
+```
+[ROLLBACK-ONLY DRY-RUN #1 · REV-3A @ SEALED UP] = FAIL / SAFE ROLLBACK
+  결과:
+    DRY-RUN HARNESS ATOMICITY = PASS (외부 tx + 강제 RAISE rollback 정상 동작)
+    FAILURE DETECTION         = PASS (§14-B 에서 즉시 검출)
+    ROLLBACK                  = PASS
+    PERMANENT MUTATION        = 0
+    HASH PACKAGE              = FAIL @ MATVIEW RECREATE (§14-B)
+  원인 = CRITICAL-5: pg_get_viewdef() terminal ';' 가 _mig_ws_matview.definition 에 그대로 저장되어
+        CREATE MATERIALIZED VIEW ... AS '... synced_at;' WITH DATA 조립 시 syntax error at end of input.
+  rollback 후 실측 재확인:
+    work_schedules = regular / 66 rows
+    old / new / _mig_* = absent
+    dashboard_stats = original restored
+    wa / si / ec = original
+    composite FK leak = 0
+  → dry-run 시스템 자체(atomicity/detection/rollback)는 정상. package 만 FAIL.
+
+[REV-3B 교정 반영]
+  UP §2 캡처 = regexp_replace(pg_get_viewdef(...), ';[[:space:]]*$', '') AS definition + fail-closed assertion.
+  DOWN §5 = normalized snapshot 공통 소비(별도 trim 없음, 계약 주석).
+  ARTIFACT = tai-api HEAD 27970b61 (UP blob 6a7dafb6 · DOWN blob a26859e5).
+  실측 검증 = normalized def 로 CREATE MATERIALIZED VIEW ... WITH DATA → create_success=t (probe, RAISE rollback).
+
+[ROLLBACK-ONLY DRY-RUN #2 재실행 PASS 기준 — CRITICAL-5 추가]
+  = §3 전 항목 + §4 원형 exact + 아래 3항목 필수:
+    (1) _mig_ws_matview.definition trailing semicolon = false
+    (2) §14-B dashboard_stats CREATE MATERIALIZED VIEW 성공 (syntax error 없음)
+    (3) NEW work_schedules OID dependency PASS (dashboard_stats → NEW canonical 결합, old 미참조)
+  ★ 재실행 원칙: 1차 실패 지점부터 이어서 실행 금지. SEALED UP 전체를 처음부터 rollback-only 로 재실행.
+    (REV-3B COMMIT → independent verify → RE-SEAL → maintenance/write freeze → 전체 재실행 → PASS receipt → production HASH Gate 별도 판정.)
 ```
