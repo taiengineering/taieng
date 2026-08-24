@@ -36,6 +36,7 @@ DEPENDENT MATVIEW (실측): public.dashboard_stats — owner postgres · populat
   · 정의 내 work_schedules 참조 12회(completed/overdue/upcoming 서브쿼리) · unique idx idx_dashboard_stats_singleton((1))
   · comment NULL · refresh_dashboard_stats()(SECURITY DEFINER, 이름기반 REFRESH ... CONCURRENTLY→fallback)
   · ACL(aclexplode 실측): anon/authenticated/service_role/postgres 각 arwdDxtm (owner-only 아님 — matview 도 direct write surface)
+  · 물리 metadata 실측: reloptions NULL · tablespace default · access method heap · persistence permanent (재생성 계약에 추가 보존 storage option 없음)
 DEFAULT ACL / PG17 (실측 aclexplode): work_schedules relacl = anon/authenticated/service_role/postgres 각 arwdDxtm(8 privileges)
   · 8 = SELECT/INSERT/UPDATE/DELETE/TRUNCATE/REFERENCES/TRIGGER + MAINTAIN(m, PG17 신규: VACUUM/ANALYZE/REFRESH MV/REINDEX)
   · ★ information_schema.role_table_grants 는 MAINTAIN 을 누락하고 matview 는 0 rows 반환 → ACL SoT 로 부적합.
@@ -86,6 +87,10 @@ REV-2 CRITICAL 추가 (물리설계 불변 · execution correctness/security):
     이유: role_table_grants 는 PG17 MAINTAIN privilege 누락 + matview 는 0 rows 반환 → exact preservation 이 default ACL 우연 재적용에 의존.
     UP/DOWN: _mig_ws_grants/_mig_ws_matview_grants 를 aclexplode(grantor/grantee/privilege/is_grantable, PUBLIC=oid0 매핑, is_grantable boolean)로 캡처.
     restore 는 REVOKE ALL(명시 ACL reset) → 스냅샷 재생. POSTCHECK 는 aclexplode 양방향 EXCEPT (MAINTAIN 포함 8 privileges × role).
+  CRITICAL-4 (acldefault object type): materialized view ACL fallback 도 acldefault('r') 사용; relkind='m' 과 acldefault object-type code 를 혼동하지 않음.
+    실측(PG17.6): acldefault('r',...) 정상 · acldefault('m',...) → ERROR unrecognized object type abbreviation: m. 'm' 은 pg_class.relkind 코드일 뿐 acldefault 인자가 아님.
+    dashboard_stats.relacl 이 non-NULL 이라 COALESCE fallback 이 현재 데이터에선 평가되지 않지만, sealed artifact 에 실행 불가 fallback 을 남기지 않도록 UP 3곳/DOWN 2곳 정정.
+    (matview 추가 물리 metadata 실측: reloptions NULL · tablespace default · access method heap · persistence permanent → 재생성 계약에 추가 보존 storage option 없음)
 ```
 
 ## 4. CHILD REWIRE TARGET (FIXED · canonical)
@@ -148,7 +153,7 @@ CHILD REWIRE            = CLOSED (§4 · wa/si MATCH FULL+CHECK, ec MATCH SIMPLE
 MATVIEW DEPENDENCY      = dashboard_stats 1 · REBIND CLOSED (UP §14-B DROP/재생성→NEW OID · DOWN §5 재결합 · POSTCHECK 검증)
 ROLLBACK ANCHOR ACCESS  = PRIVATE (_mig_* + work_schedules_old REVOKE ALL from anon/authenticated/service_role · POSTCHECK 검증)
 PHYSICAL PARTITION DIRECT ACCESS = CLOSED (p00~p15 REVOKE · logical parent 경유만 · POSTCHECK 검증)
-PG17 ACL EXACTNESS      = pg_class/aclexplode SoT · MAINTAIN 포함 · matview ACL(arwdDxtm×4) 캡처 · REVOKE ALL→재생→EXACT (UP §2/§14/§14-B/§15 · DOWN §5/§9)
+PG17 ACL EXACTNESS      = pg_class/aclexplode SoT · MAINTAIN 포함 · matview ACL(arwdDxtm×4) 캡처 · REVOKE ALL→재생→EXACT · matview fallback acldefault('r')(CRITICAL-4) (UP §2/§14/§14-B/§15 · DOWN §5/§9)
 ROLLBACK TARGET         = CURRENT PRE-HASH STATE (§7)
 DRY-RUN PLAN            = COMPLETE (별도 DRYRUN_PLAN)
 EXECUTION RUNBOOK       = COMPLETE (별도 EXECUTION_RUNBOOK)
