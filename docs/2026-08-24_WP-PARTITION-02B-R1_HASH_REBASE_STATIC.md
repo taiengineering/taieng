@@ -37,13 +37,14 @@ DEPENDENT MATVIEW (실측): public.dashboard_stats — owner postgres · populat
   · comment NULL · refresh_dashboard_stats()(SECURITY DEFINER, 이름기반 REFRESH ... CONCURRENTLY→fallback)
   · ACL(aclexplode 실측): anon/authenticated/service_role/postgres 각 arwdDxtm (owner-only 아님 — matview 도 direct write surface)
   · 물리 metadata 실측: reloptions NULL · tablespace default · access method heap · persistence permanent (재생성 계약에 추가 보존 storage option 없음)
+  · [REV-3B 실측] pg_get_viewdef(...,true) 반환 끝 = 'now() AS synced_at;' — terminal semicolon 존재 · 정의 내부 세미콜론 총 1개(=terminal 뿐)
 DEFAULT ACL / PG17 (실측 aclexplode): work_schedules relacl = anon/authenticated/service_role/postgres 각 arwdDxtm(8 privileges)
   · 8 = SELECT/INSERT/UPDATE/DELETE/TRUNCATE/REFERENCES/TRIGGER + MAINTAIN(m, PG17 신규: VACUUM/ANALYZE/REFRESH MV/REINDEX)
   · ★ information_schema.role_table_grants 는 MAINTAIN 을 누락하고 matview 는 0 rows 반환 → ACL SoT 로 부적합.
   · ACL SoT = pg_class.relacl + aclexplode(COALESCE(relacl, acldefault(...))). restore 는 REVOKE ALL → 스냅샷 재생 → aclexplode EXACT.
   · policies anon INSERT/SELECT/UPDATE/DELETE=true · authenticated ALL=true · service_role ALL=true
   → 신규 public table(스냅샷/파티션) 및 rename 된 old 가 동일 노출을 상속할 위험.
-판정 = 데이터 전부 clean. blocker 는 데이터가 아니라 (1) OLD package 낡은 rollback 기준점 (2) matview OID 고착 (3) anchor 변조 가능성 (4) ACL snapshot catalog 오선택(MAINTAIN 누락).
+판정 = 데이터 전부 clean. blocker 는 데이터가 아니라 (1) OLD package 낡은 rollback 기준점 (2) matview OID 고착 (3) anchor 변조 가능성 (4) ACL snapshot catalog 오선택(MAINTAIN 누락) (5) matview definition terminal semicolon.
 ```
 
 ## 2. OLD PACKAGE DRIFT (직독 근거)
@@ -91,6 +92,17 @@ REV-2 CRITICAL 추가 (물리설계 불변 · execution correctness/security):
     실측(PG17.6): acldefault('r',...) 정상 · acldefault('m',...) → ERROR unrecognized object type abbreviation: m. 'm' 은 pg_class.relkind 코드일 뿐 acldefault 인자가 아님.
     dashboard_stats.relacl 이 non-NULL 이라 COALESCE fallback 이 현재 데이터에선 평가되지 않지만, sealed artifact 에 실행 불가 fallback 을 남기지 않도록 UP 3곳/DOWN 2곳 정정.
     (matview 추가 물리 metadata 실측: reloptions NULL · tablespace default · access method heap · persistence permanent → 재생성 계약에 추가 보존 storage option 없음)
+  CRITICAL-5 (matview definition terminal semicolon) [REV-3B · dry-run #1 실측 검출]:
+    pg_get_viewdef('public.dashboard_stats'::regclass, true) 는 정의 끝에 terminal ';' 를 붙여 반환한다(실측 tail = 'now() AS synced_at;').
+    이 값을 그대로 _mig_ws_matview.definition 에 저장하면, UP §14-B / DOWN §5 의
+      EXECUTE format('CREATE MATERIALIZED VIEW ... AS %s WITH %s DATA', v_def, ...) 조립 시 '... synced_at; WITH DATA' 가 되어
+    PostgreSQL 파서가 첫 ';' 에서 문장을 종료 → 'syntax error at end of input'. (REV-3A rollback-only dry-run #1 §14-B 에서 실측 검출.)
+    교정 = (b) snapshot canonical normalization: §2 캡처를 regexp_replace(pg_get_viewdef(...), ';[[:space:]]*$', '') AS definition 으로 변경해
+      문자열 끝 ';' + trailing whitespace 1회만 제거(정의 내부 세미콜론 총 1개 = terminal 뿐 → 복합문 아님, 안전).
+    + 캡처 직후 fail-closed assertion: definition ~ ';[[:space:]]*$' 이면 RAISE EXCEPTION 'SNAPSHOT FAIL'.
+    이 normalized snapshot 이 UP §14-B / DOWN §5 공통 SoT. DOWN 은 별도 trim 로직을 추가하지 않고 동일 snapshot 을 그대로 소비(계약 주석 명시).
+    실측 검증: normalized definition 으로 CREATE MATERIALIZED VIEW ... WITH DATA → create_success=t (임시 probe, RAISE rollback).
+    permanent mutation 0. dry-run 시스템 자체는 PASS(atomicity/detection/rollback 정상) — package FAIL @ matview recreate 만.
 ```
 
 ## 4. CHILD REWIRE TARGET (FIXED · canonical)
@@ -154,9 +166,11 @@ MATVIEW DEPENDENCY      = dashboard_stats 1 · REBIND CLOSED (UP §14-B DROP/재
 ROLLBACK ANCHOR ACCESS  = PRIVATE (_mig_* + work_schedules_old REVOKE ALL from anon/authenticated/service_role · POSTCHECK 검증)
 PHYSICAL PARTITION DIRECT ACCESS = CLOSED (p00~p15 REVOKE · logical parent 경유만 · POSTCHECK 검증)
 PG17 ACL EXACTNESS      = pg_class/aclexplode SoT · MAINTAIN 포함 · matview ACL(arwdDxtm×4) 캡처 · REVOKE ALL→재생→EXACT · matview fallback acldefault('r')(CRITICAL-4) (UP §2/§14/§14-B/§15 · DOWN §5/§9)
+MATVIEW DEFINITION SYNTAX = CLOSED (CRITICAL-5 · REV-3B) · §2 캡처 regexp_replace terminal ';' 제거 + fail-closed assertion · UP §14-B/DOWN §5 normalized snapshot 공통 소비 · normalized def CREATE MATERIALIZED VIEW 실측 PASS
 ROLLBACK TARGET         = CURRENT PRE-HASH STATE (§7)
-DRY-RUN PLAN            = COMPLETE (별도 DRYRUN_PLAN)
+DRY-RUN PLAN            = COMPLETE (별도 DRYRUN_PLAN) · ROLLBACK-ONLY DRY-RUN #1 = FAIL/SAFE ROLLBACK (CRITICAL-5 검출, permanent mutation 0) → REV-3B 교정 후 재실행 필요
 EXECUTION RUNBOOK       = COMPLETE (별도 EXECUTION_RUNBOOK)
-DB/CODE/DEPLOY MUTATION = 0 · COMMIT = HOLD
-RESULT = READY FOR HASH PACKAGE REVIEW
+ARTIFACT PACKAGE        = REV-3B (UP blob 6a7dafb6 · DOWN blob a26859e5 · tai-api HEAD 27970b61)
+DB/CODE/DEPLOY MUTATION = 0 · COMMIT = HOLD (production HASH Gate 별도 판정)
+RESULT = REV-3B COMMITTED · SEALED UP 전체 rollback-only dry-run 재실행 대기
 ```
