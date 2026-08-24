@@ -1,4 +1,4 @@
-# WP-PARTITION-02B-R1 · HASH DRY-RUN PLAN  (rollback-only · production 미변경)
+# WP-PARTITION-02B-R1 · HASH DRY-RUN PLAN  (rollback-only · permanent mutation 0 · production lock impact 있음)
 
 ```
 UNIT = WP-PARTITION-02B-R1  work_schedules HASH rebased dry-run
@@ -95,5 +95,13 @@ anchor lockdown(dry-run 특성): dry-run 은 전체 rollback 이므로 lockdown 
 ```
 dry-run = Claude(DB owner) MCP execute_sql 단일 호출(외부 tx + 강제 RAISE rollback).
 production apply = 별도 HASH EXECUTION gate 승인 후 (EXECUTION_RUNBOOK).
-dry-run 은 production 을 변경하지 않으므로 maintenance/WRITE OFF 불요. 단 LOCK 획득은 순간적.
+
+[maintenance 계약 — 정정]
+  permanent mutation = 0 (전체 RAISE rollback).
+  BUT production lock impact 는 존재한다: dry-run 도 4개 핵심 테이블(work_schedules/work_assignments/
+    safety_inspections/equipment_checkins)에 ACCESS EXCLUSIVE LOCK 을 잡고, shadow copy·composite FK·
+    matview 재생성까지 실제 수행한 뒤 rollback 한다.
+  → rollback-only dry-run 도 짧은 maintenance/write freeze 아래에서 수행한다.
+     · direct anon path(equipment_checkins 등)는 DB LOCK 이 봉쇄.
+     · application maintenance 는 사용자 lock wait/timeout 방지 목적(66 rows 라 작업은 짧지만 LEVEL-A 안전기준).
 ```
