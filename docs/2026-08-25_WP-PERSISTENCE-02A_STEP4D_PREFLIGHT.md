@@ -2,7 +2,7 @@
 
 - 작성일: 2026-08-25
 - 모드: READ-ONLY APPROVAL PREPARATION. UPDATE/INSERT/DELETE/DDL/BRIDGE = 0.
-- docs SoT: taieng@`d90b462b` / SQL SoT: tai-api@`2c143311`
+- docs SoT: taieng@`d90b462b` / SQL SoT: tai-api@`35960ecf` (UP/VERIFY 방어 보강 2차)
 - GENERAL schema UUID: `dc79ac3c-388c-42dc-b029-3dd9bda54a47`
 
 ---
@@ -155,3 +155,31 @@ G10 silent-drop 없음: 금지필드 부재(0) + counts 5/0/0 + payload lossless
 [ ] DOWN 안전성 확보 불가                 → 아님 (promotion-only rollback + audit 보존)
 → STOP 조건 해당 없음.
 ```
+
+---
+
+## 8. UP/VERIFY 방어 보강 (2차) — tai-api@`35960ecf`
+
+STEP-4D-PREP 최초 SQL(tai-api@`2c143311`) 대비, 실행 직전 검수에서 확인된 안전구멍 2개를
+막기 위해 UP/VERIFY 두 파일에 assertion 6건 추가. DOWN 변경 없음.
+
+```
+UP (STEP4D_UP.sql):
+  ① precondition 에 total runtime_field count = 5 guard
+     (CANDIDATE/CANDIDATE_ONLY 5 + exact 5 만으로는 예상 밖 6번째 field 를 못 막음)
+  ② preexisting promotion audit = 0 guard (실행 순간 재확인, STEP-4A 중복 guard 패턴)
+  ③ audit INSERT 직후 GET DIAGNOSTICS rowcount = 1 assertion
+  ④ final promotion audit count = 1 assertion (source_table+source_id+action exact)
+
+VERIFY (STEP4D_VERIFY.sql):
+  ⑤ audit CTE 에 source_table='runtime_form_schema' exact 추가
+  ⑥ promotion_state_gate_status CASE 에 field_count=5 + schema_header_ok 편입
+     → 최종 gate 가 (schema header exact) + (actual field count=5) + (exact field contract=5)
+       를 모두 요구.
+
+DOWN (STEP4D_DOWN.sql):
+  변경 없음. promotion-only rollback + promotion audit 보존
+  (rollback_available true→false + ROLLBACK_RUNTIME_PROMOTION audit row 추가).
+```
+
+전부 NOT EXECUTED. DB mutation 0. 실행은 별도 "STEP-4D APPROVED" 후.

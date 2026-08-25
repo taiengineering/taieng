@@ -2,7 +2,7 @@
 
 - 작성일: 2026-08-25
 - 모드: READ-ONLY APPROVAL PREPARATION. DB MUTATION = 0.
-- docs SoT: taieng@`d90b462b` / SQL SoT: tai-api@`2c143311`
+- docs SoT: taieng@`d90b462b` / SQL SoT: tai-api@`35960ecf` (UP/VERIFY 방어 보강 2차)
 - 대상 schema UUID: `dc79ac3c-388c-42dc-b029-3dd9bda54a47`
 
 ---
@@ -90,7 +90,10 @@ schema approval ≠ mapping approval.
 ## 5. 실행 게이트 상태
 
 ```
-STEP-4D-PREP = SQL COMMITTED (tai-api@2c143311 SQL 3종 + taieng governance 2종)
+STEP-4D-PREP = SQL COMMITTED
+  최초:   tai-api@2c143311 (UP/VERIFY/DOWN 3종) + taieng@7b507838 (governance 2종)
+  보강2차: tai-api@35960ecf (UP/VERIFY 방어 보강, DOWN 불변)
+          + taieng governance 2종 SQL SoT SHA 갱신 (본 commit)
 STEP-4D 실행  = NOT APPROVED (대기)
 
 SQL DRAFT READY ≠ UPDATE APPROVED
@@ -101,16 +104,26 @@ SQL DRAFT READY ≠ UPDATE APPROVED
   →GATE→schema APPROVED_FOR_RUNTIME_USE→final assert→audit. 실패 시 전체 롤백.
 - 승격 완료 시 GEN-INSPECT-RESULT-001 = 시스템 최초 APPROVED_FOR_RUNTIME_USE runtime schema.
 
+### 5.1 UP/VERIFY 방어 보강 (2차) 요약 — tai-api@`35960ecf`
+
+```
+UP:     ① total runtime_field count=5 guard  ② preexisting promotion audit=0 guard
+        ③ audit INSERT rowcount=1 assertion   ④ final promotion audit count=1 assertion
+VERIFY: ⑤ audit CTE source_table exact         ⑥ gate CASE 에 field_count=5 + schema_header_ok
+DOWN:   변경 없음 (promotion-only rollback + audit 보존)
+```
+
 ---
 
 ## 6. STEP-4D 예정 실행 절차 (승인 후)
 
 ```
-1. tai-api HEAD=2c143311 확인 + UP.sql drift 없음 확인
+1. tai-api HEAD=35960ecf 확인 + UP.sql drift 없음 확인
 2. UP.sql 단일 execute_sql 1회 실행
 3. 즉시 VERIFY.sql SELECT → 전 항목 PASS 확인
-   (schema=APPROVED_FOR_RUNTIME_USE, field 5 APPROVED_BY_HUMAN,
-    required 3/2/0, exact 5, candidate=CANDIDATE, bridge/doc ref 0, audit 1, gate=PASS)
+   (schema=APPROVED_FOR_RUNTIME_USE, schema_header_ok=true, field_count=5,
+    field 5 APPROVED_BY_HUMAN, required 3/2/0, exact 5, candidate=CANDIDATE,
+    bridge/doc ref 0, audit 1, promotion_state_gate_status=PASS)
 4. PASS → STEP-4D = COMPLETE. GENERAL schema runtime 사용 가능.
 5. 불일치 → PROMOTION_MISMATCH → 결과 제출 후 STOP → 필요 시 DOWN(별도 승인)
 ```
