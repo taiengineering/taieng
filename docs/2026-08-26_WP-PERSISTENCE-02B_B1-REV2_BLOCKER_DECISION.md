@@ -45,9 +45,9 @@ architecture 결정이 아니라, **ELIGIBLE 1건(`7fee7518`)의 explicit mappin
 ## D4. 금지사항 (본 창 유지)
 
 ```
-commit                = documentation-only (operator 승인 범위)
+commit                = 금지 (COMMIT AUTHORIZATION NOT GRANTED)
 mapping mutation      = 금지 (bridge UPDATE 금지)
 composer/renderer/PDF = 착수 금지
 DB/CODE/BRIDGE/DEPLOY  = mutation 0
 ```
-REV-2 문서 + 327행 CSV 기록. bridge UPDATE는 별도 실행 게이트.
+REV-2 문서 + 327행 CSV 제출 후 STOP. NEXT = GPT 검증.
