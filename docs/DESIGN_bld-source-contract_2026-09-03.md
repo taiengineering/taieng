@@ -124,3 +124,35 @@ OVERRIDE: USER_INPUT_FIRST (자산화 시 SAFE_FIRST + 진단 override).
 BUILDING SOURCE DESIGN 설계 GATE A1~A6 = FROZEN. 이 문서 = SOURCE CONTRACT 정본(계약).
 값/매핑/컬럼/UI/route/구현 = 0 (후속 WO). CODE/DB/LEG write = 0. nexas = 0. prj = 0.
 Frozen 순서: DOC CLOSE ✅ → SOURCE DESIGN(이 문서) → SEMANTIC-PROOF → BUILDING-LEG(WP-3) → UI → 3-SECTOR CANARY(WP-2).
+
+---
+
+## SEMANTIC PROOF VERDICT (WO-BLD-SEMANTIC-PROOF-001, GPT 판정)
+> A4 REGISTER_CANDIDATE 9축 proof 수행 결과. read-only evidence → GPT 판정. append-only(A1~A7 수치 불변).
+
+전 9축 = PROOF_FAIL → OWNED_SEMANTIC_VERIFIED / OWNED_DERIVABLE 승격 0. FALLBACK = RUNTIME_USER_INPUT (또는 NEW_SAFE_UI). REGISTER_MATERIALIZED 확정 금지.
+
+CLASS-R (5, 대장 파생 컬럼 실측):
+- worker_count       = FAIL(SEMANTIC) — employee_count 99.96% 완전하나 worker≠employee 정의 미증명
+- total_floor_area   = FAIL(COMPLETENESS+SEMANTIC) — building_area 6.8%/arch_area 0.09% NULL + 건축면적≠연면적
+- building_use_type  = FAIL(DOMAIN, CRITICAL) — main_purpose_name(업무시설/공장/의료...) ≠ LEG atom "오피스텔" 외연 불일치, main_purpose_code NULL/오염
+- building_height_m  = FAIL(COMPLETENESS) — building_height 0.09% NULL
+- occupancy_capacity = FAIL(COMPLETENESS) — occupant_capacity 0.4% NULL
+
+CLASS-D (2, 층별개요 집계):
+- floor_area_sum_at_or_above_11f / performance_use_floor_area_sum = FAIL(DERIVATION)
+  source(factories.floor_outline_json raw) 있으나 11층집계·performance taxonomy·dedup·determinism 미정의(@727 전체합산 폴백만).
+
+CLASS-E (2, enum taxonomy):
+- building_use_category / building_activity_type = FAIL(ABSENT) — factories exact 컬럼 부재(building_use_code만 존재, 다른 축)
+
+VERDICT 반영 재분류 (48 불변, ownership만 이동):
+- OWNED_EXACT 3 = 유지 (floor_count/has_boiler/is_multi_use)
+- SEMANTIC_PROOF 9 → FALLBACK: RUNTIME_USER_INPUT / NEW_SAFE_UI (REGISTER 폐기)
+- SPECIAL 1 (has_gas) = 유지 (WP3-BLOCKER)
+- RUNTIME_UI 35 = 유지
+→ 실질 acquisition: OWNED_EXACT 3 + RUNTIME/UI 44(35+9) + SPECIAL 1 = 48
+
+함의: BUILDING SAFE 자산 재사용 = OWNED_EXACT 3축만. 나머지 45축 = runtime 입력/신규 UI.
+  (산업 factory자산·건설 현장자산과 달리 BUILDING은 대장 파생 실데이터 부재 + semantic 미증명.)
+building_use_type = 최대 난제 (LEG "오피스텔" enum ↔ 사용자 선택 정렬 = building-leg 설계 핵심).
