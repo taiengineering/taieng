@@ -156,3 +156,35 @@ VERDICT 반영 재분류 (48 불변, ownership만 이동):
 함의: BUILDING SAFE 자산 재사용 = OWNED_EXACT 3축만. 나머지 45축 = runtime 입력/신규 UI.
   (산업 factory자산·건설 현장자산과 달리 BUILDING은 대장 파생 실데이터 부재 + semantic 미증명.)
 building_use_type = 최대 난제 (LEG "오피스텔" enum ↔ 사용자 선택 정렬 = building-leg 설계 핵심).
+
+---
+
+## GAS/CHEMICAL DECISION (WO-BLD-GAS-CHEM-DECIDE-001, GPT/법령 판정)
+> GATE-A5 SEMANTIC_UNRESOLVED → RESOLVED. append-only. denominator 48 불변(정상계약 기준). auto alias 0.
+
+LEG-side mapped_field atom evidence (leg-prod 55 atom 실측):
+- has_gas (6, 도시가스사업법 §12/17/30/41 + 시행규칙 §15/20): 도시가스 공급·사용시설
+- has_high_pressure_gas (3, 고압가스법 §11/16/23): 고압가스 제조·저장·판매·배관
+- has_chemical_substance (1, 화학물질관리법 §31): 유해화학물질 도급
+- has_hazardous_material (45, 산업안전보건기준규칙 §430~511): 관리·허가·금지 유해물질 작업환경
+- (has_chemical = LEG mapped 부재 0)
+
+D-GAS = OPT-G1 INPUT_SPLIT:
+  TAI has_gas 폐기 → 도시가스(has_gas/도시가스법) + 고압가스(has_high_pressure_gas/고압가스법) 분리 수집.
+  별개 법령·외연(evidence 확정). fan-out 아님.
+D-CHEM = OPT-C1 INPUT_SPLIT:
+  TAI has_chemical 폐기 → 화관법 도급(has_chemical_substance) + 산안 유해물질(has_hazardous_material) 분리 수집.
+  별개 법령·외연. has_chemical_substance 통로 부재 → building-leg 시 CONSTRUCTION rename 패턴 적용.
+D-DEFINITION: "가스 사용"/"화학물질 취급" 마케팅 문구 → 법적 외연 명시 질문으로 재정의(building-leg UI 선행).
+D-AUTHORITY: 법령 판정 = GPT/법령(완료). Claude = evidence + 계약 반영.
+
+CONSUMPTION-IMPACT VERDICT:
+- audit R2 "48" = 정상계약(canonical) 기준 FROZEN 유지. denominator 재측정 불필요.
+- 현재 has_high_pressure_gas=body.has_gas / has_hazardous_material=body.has_chemical 발동 =
+  CONTRACT-VIOLATING OVER-CLAIM(부정 발동) DEFECT. 정당 소비 아님.
+
+WP3-BLOCKER (building-leg 진입 전 제거 필수):
+- WP3-BLOCKER-GAS-OVERCLAIM: has_high_pressure_gas=body.has_gas 제거 → G1 분리
+- WP3-BLOCKER-CHEM-OVERCLAIM: has_hazardous_material=body.has_chemical 제거 → C1 분리 (+ has_chemical_substance rename)
+
+STATUS: GAS/CHEMICAL = RESOLVED(G1/C1). building-leg 구현 대상(지금 코드변경 0).
