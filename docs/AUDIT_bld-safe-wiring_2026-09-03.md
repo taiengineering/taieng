@@ -12,7 +12,7 @@
   (paid-diagnosis-detail = CONSTRUCTION handoff, BUILDING 미사용. nexas 격리 0.)
 - LEG SoT DB = leg-prod wrfcedzgdrfupenzqhur. TAI DB(vwlahtguyggrhvslabax)=SAFE 자산(LEG SoT 아님). prj law 0.
 
-## TRACK A — TAI TRANSPORT (BUILDING 소비자 입력 → facility)
+## TRACK A — TAI TRANSPORT (PRE-WP1 AUDIT SNAPSHOT; BUILDING 소비자 입력 → facility)
 BUILDING CONSUMER DENOMINATOR = 67 (diagnosis_input_fields BUILDING/PAID/active)
 전송: form_data=formValues['paid'](setVal 평탄+facility 중첩, false/0 보존). body.input은 raw_structured_input 저장만(canonical 미경유).
 build_facility 분류 (L4 최종 facility값 기준):
@@ -36,9 +36,13 @@ BUILDING 67 정본 분류:
 - DIRECT_MAPPED_AND_CONSUMED = 12 (has_gas, has_boiler, is_multi_use, is_energy_intensive, has_water_tank,
   work_height_m, truck_loading_height_m, total_floor_area, manual_handling_weight_kg,
   has_emergency_gen, has_emergency_broadcast, has_hazmat_storage)
-- INDIRECT_LEAF_CONSUMED = 35 (N1 33 + safety composite 2: has_truck_loading_unloading, has_manual_heavy_handling)
-- NOT_CONSUMED = 20
-TOTAL = 67
+- INDIRECT_LEAF_CONSUMED = 36 (N1 33 + safety composite 2[has_truck_loading_unloading, has_manual_heavy_handling] + worker_count)
+  · worker_count: mapped_field 0 이나 산안19조 atom(0ce68131) 조건트리 Leaf(total_floor_area>=400 OR worker_count>=50)로 실제 소비.
+- NOT_CONSUMED = 19 (elevator_count 포함)
+TOTAL = 67 · LEG ACTUAL CONSUMED = 48 (R2 CORRECTION: 구버전 47 → worker_count 계상 정정)
+DERIVED LEG TARGET(67 denominator 밖): has_building_elevator (production mapped 7 atom, 승강기법).
+  SAFE elevator_count → TAI lossless derivation(WP-1: 0→False/>0→True) → LEG has_building_elevator.
+  ※ elevator_count 자체는 LEG condition Leaf 아님 → NOT_CONSUMED 유지(INDIRECT 아님).
 N1 33: INDIRECT_LEAF_CONSUMED = 33/33 (조건트리 Leaf로 전량 실제 소비). NOT_CONSUMED = 0.
 
 BLOCKER (TRACK A defect ∩ LEG 실제 소비):
@@ -49,36 +53,44 @@ BLOCKER (TRACK A defect ∩ LEG 실제 소비):
   LEG conditions에 has_chemical 키 부재 → UNKNOWN → 유해물질 조항 미적용. (semantic 동의 여부=GPT 판정, 자동 alias 금지)
 - B5 elevator DERIVATION GAP: LEG has_building_elevator(7 atom 승강기법) 소비 but paid path elevator_count top-level 미전송 → 파생 미실행 → 조항 미적용.
 
-## TRACK C — SAFE OWNERSHIP (LEG 소비 47축 ↔ SAFE 자산)
+## TRACK C — SAFE OWNERSHIP (LEG 소비 48축 ↔ SAFE 자산, ownership 5-class)
 SAFE BUILDING ASSET = factories(sector=BUILDING) + building_register(건축물대장 API 적재). buildings=식별용(진단자산 아님).
 REGISTER-MATERIALIZATION AUTHORITY: legal_context._factory_to_context(레거시), safe_industrial_canonical_assembler(산업),
   building_register.py(대장→factories 적재). ⚠️ BUILDING paid(run-leg) 경로는 어느 authority도 미호출 = 배선 미완.
-LEG 소비 47축 4-tier:
-- TIER-1 EXACT_COLUMN (factories 동일이름, CONSUMED) = 3 : floor_count, has_boiler, is_multi_use
-- TIER-2 REGISTER_MATERIALIZED (대장 원천+변환 authority 존재, exact-name 아님) = 6 :
-  building_use_type←main_purpose_name, total_floor_area←building_area/arch_area, basement_count←underground_floor_count,
-  main_structure←building_structure_name, building_height_m←building_height, occupancy_capacity←occupant_capacity
-- TIER-4 GENUINELY_ABSENT (대장·factories 원천 없음) = 38 :
-  N1 특수판정축 (floor_area_sum_at_or_above_11f, performance_use_floor_area_sum, has_performance_assembly_use,
-  is_target_facility_in_basement, cantilever_projection_m, column_span_m, flat_plate_column_section_ratio,
-  has_flat_plate_structure, authority_designated_special_structure, building_activity_type, building_use_category,
-  article32_3_alternative_confirmation_subject, has_gas_boiler_heating_system, has_centralized_gas_supply,
-  is_collapse_risk_land, has_land_preparation, has_building_construction_activity, has_wet_land, has_water_seepage_risk,
-  has_landfill_or_similar_ground, underground_connection_entrance_distance_m, has_wall_between_connection_entrances,
-  wall_between_connection_entrances_is_fire_resistant, connection_open_space_floor_area_m2,
-  connection_open_space_open_area_ratio, has_stair_or_ramp_in_open_space, stair_or_ramp_effective_width_m,
-  is_connected_to_subway_or_underground_mall, has_hazardous_material_in_out_event)
-  + 산업계열 소비축 (has_gas, has_water_tank, work_height_m, truck_loading_height_m, manual_handling_weight_kg,
-  has_emergency_gen, has_emergency_broadcast, has_hazmat_storage, has_truck_loading_unloading, has_manual_heavy_handling)
-47축 SUMMARY: EXACT 3 + REGISTER_MAT 6 + ABSENT 38 = 47.
+LEG 소비 48축 ownership 5-class (factories DB + 대장 실측; semantic 미증명은 PRESENT_UNVERIFIED):
+- OWNED_EXACT = 3 : floor_count, has_boiler, is_multi_use (factories exact-name + semantic 자명)
+- OWNED_SEMANTIC_VERIFIED = 0 (semantic/unit/provenance 증명 완료 축 없음)
+- OWNED_DERIVABLE = 0 (lossless deterministic derivation 증명 완료 축 없음)
+- PRESENT_UNVERIFIED = 7 : worker_count, total_floor_area, building_use_type, building_height_m,
+  occupancy_capacity, floor_area_sum_at_or_above_11f, performance_use_floor_area_sum
+  · SAFE 후보 컬럼 존재하나 semantic equivalence/단위/provenance 미증명:
+    worker_count↔factories.employee_count, total_floor_area↔building_area/arch_area,
+    building_use_type↔main_purpose_name, building_height_m↔building_height,
+    occupancy_capacity↔occupant_capacity (컬럼 존재 ≠ 의미 동일 증명)
+  · floor_area_sum/performance_use ↔ 층별개요(getBrFlrOulnInfo) 집계 후보이나 floor discriminator/
+    area 의미·단위/중복/동호 grouping/지하옥탑/pagination/performance-use taxonomy 미증명.
+- ABSENT_SOURCE = 38 : N1 특수판정축(cantilever/column_span/flat_plate/연결공지/토지지반/설계·운영) +
+  산업계열 안전축(has_gas, has_water_tank, work_height_m, truck_loading_height_m, manual_handling_weight_kg,
+  has_emergency_gen, has_emergency_broadcast, has_hazmat_storage, has_truck_loading_unloading,
+  has_manual_heavy_handling, is_energy_intensive) — SAFE asset/API/대장/derivation 후보 부재.
+48축 SUMMARY: OWNED_EXACT 3 + SEMANTIC_VERIFIED 0 + DERIVABLE 0 + PRESENT_UNVERIFIED 7 + ABSENT_SOURCE 38 = 48. (overlap 0, missing 0)
 
 ## 종합 (3 TRACK)
-- N1 33 = LEG 실제 소비(조건트리). SAFE 원천: floor_count(EXACT) + building_use_type/total_floor_area(REGISTER_MAT). 나머지 N1 30 = GENUINELY_ABSENT.
-- 즉시 배선 가능(SAFE 원천 존재) = 9축 (EXACT 3 + REGISTER_MAT 6).
-- 신규 수집 필요(GENUINELY_ABSENT) = 38축.
-- BLOCKER 5: B1/B2/B3/B5 = SAFE 원천 존재 → wiring으로 해소 가능. B4 = NAME_MISMATCH(GPT semantic 판정).
-- BUILDING SAFE wiring 실체: N1 특수 30축은 SAFE 수집 자체가 없어 LEG 소비하나 SAFE가 값 보유 못함(신규 입력/대장확장 필요).
+- N1 33 = LEG 실제 소비(조건트리). SAFE 원천: floor_count(OWNED_EXACT) + building_use_type/building_height_m/
+  occupancy_capacity/floor_area_sum/performance_use(PRESENT_UNVERIFIED — 후보 존재, semantic 미증명). 나머지 N1 특수축 = ABSENT_SOURCE.
+- ownership: OWNED_EXACT 3 · SEMANTIC_VERIFIED 0 · DERIVABLE 0 · PRESENT_UNVERIFIED 7 · ABSENT_SOURCE 38 = 48.
+- BLOCKER 5(POST-WP1): B1/B2/B3/B5 = WP-1 해소·배포 완료. B4 = NO ALIAS/SEMANTIC SPLIT(GPT 판정, OPEN).
+- 수집방식(existing/register/derivation/stable user fact/runtime/new UI) 선정은 AUDIT 범위 밖 → BUILDING SOURCE DESIGN.
+  AUDIT은 ownership(OWNED/UNVERIFIED/ABSENT)까지만. (구버전 "즉시 배선 9축/신규 38축" 확정 표기 폐기.)
+
+## POST-WP1 STATUS (2026-09-03)
+TRACK A DRIFT/DROPPED 은 PRE-WP1 SNAPSHOT. WP-1(tai-api b3e8c3b0/배포 SUCCESS)로 해소:
+- B1 building_use_type / B2 floor_count / B3 total_floor_area default overwrite = FIXED
+- B5 elevator 0 loss = FIXED (0→False/>0→True) · form_data persistence = FIXED · RAW→CANONICAL fallback = FIXED
+- WP-1 = FULL CLOSED (baseline b3e8c3b08c079c6f7e368f2698e63839c1373279)
+- B4 chemical = NO ALIAS / SEMANTIC SPLIT / OPEN (BUILDING SOURCE DESIGN 단계)
 
 ## STATUS
-AUDIT A/B/C = CLOSED (read-only). 구현/컬럼/매핑/파생/building-leg route/N1 승격 = NOT AUTHORIZED (별도 WO).
+AUDIT A/B/C = R2 (TRACK B 48 consumed / TRACK C ownership 5-class). read-only.
+구현/컬럼/매핑/파생/building-leg route/N1 승격 = NOT AUTHORIZED (별도 WO).
 CODE/DB/LEG WRITE = 0. nexas = 0. prj = 0.
