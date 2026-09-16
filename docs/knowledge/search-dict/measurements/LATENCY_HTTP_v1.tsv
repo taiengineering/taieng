@@ -1,0 +1,4 @@
+condition	n	mean_ms	p50_ms	p95_ms	p99_ms	max_ms
+http+normalize+tiers(T1-T3), 12 mixed queries, warm	500	0.911	0.874	1.091	1.384	6.290
+tier4(kiwi TOKEN) standalone, 6 mixed noun-phrase queries, warm	600	0.124	0.093	0.236	0.289	0.346
+tier6(pg_trgm scratch) standalone, 5 typo queries, warm	500	9.626	8.975	13.990	17.409	43.052

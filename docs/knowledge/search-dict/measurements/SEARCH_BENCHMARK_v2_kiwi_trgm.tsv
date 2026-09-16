@@ -1,0 +1,563 @@
+category	query	expected_subject	source_rule
+MORPHOLOGY	감전을	ACCIDENT_TERM::감전	subject_key + inflection
+MORPHOLOGY	감전이	ACCIDENT_TERM::감전	subject_key + inflection
+MORPHOLOGY	건설기계관리법을	LEGAL_TERM::건설기계관리법	subject_key + inflection
+MORPHOLOGY	건설기계관리법이	LEGAL_TERM::건설기계관리법	subject_key + inflection
+MORPHOLOGY	건설산업기본법을	LEGAL_TERM::건설산업기본법	subject_key + inflection
+MORPHOLOGY	건설산업기본법이	LEGAL_TERM::건설산업기본법	subject_key + inflection
+MORPHOLOGY	건축기본법을	LEGAL_TERM::건축기본법	subject_key + inflection
+MORPHOLOGY	건축기본법이	LEGAL_TERM::건축기본법	subject_key + inflection
+MORPHOLOGY	건축물관리법을	LEGAL_TERM::건축물관리법	subject_key + inflection
+MORPHOLOGY	건축물관리법이	LEGAL_TERM::건축물관리법	subject_key + inflection
+MORPHOLOGY	건축법을	LEGAL_TERM::건축법	subject_key + inflection
+MORPHOLOGY	건축법이	LEGAL_TERM::건축법	subject_key + inflection
+MORPHOLOGY	건축사법을	LEGAL_TERM::건축사법	subject_key + inflection
+MORPHOLOGY	건축사법이	LEGAL_TERM::건축사법	subject_key + inflection
+MORPHOLOGY	경찰청을	GENERAL_TERM::경찰청	subject_key + inflection
+MORPHOLOGY	경찰청이	GENERAL_TERM::경찰청	subject_key + inflection
+MORPHOLOGY	고시을	GENERAL_TERM::고시	subject_key + inflection
+MORPHOLOGY	고시이	GENERAL_TERM::고시	subject_key + inflection
+MORPHOLOGY	고용노동부을	GENERAL_TERM::고용노동부	subject_key + inflection
+MORPHOLOGY	고용노동부이	GENERAL_TERM::고용노동부	subject_key + inflection
+MORPHOLOGY	고용산재보험료징수법을	LEGAL_TERM::고용산재보험료징수법	subject_key + inflection
+MORPHOLOGY	고용산재보험료징수법이	LEGAL_TERM::고용산재보험료징수법	subject_key + inflection
+MORPHOLOGY	고용산재보험신고법을	LEGAL_TERM::고용산재보험신고법	subject_key + inflection
+MORPHOLOGY	고용산재보험신고법이	LEGAL_TERM::고용산재보험신고법	subject_key + inflection
+MORPHOLOGY	공고을	GENERAL_TERM::공고	subject_key + inflection
+MORPHOLOGY	공고이	GENERAL_TERM::공고	subject_key + inflection
+MORPHOLOGY	공동주택관리법을	LEGAL_TERM::공동주택관리법	subject_key + inflection
+MORPHOLOGY	공동주택관리법이	LEGAL_TERM::공동주택관리법	subject_key + inflection
+MORPHOLOGY	과학기술정보통신부을	GENERAL_TERM::과학기술정보통신부	subject_key + inflection
+MORPHOLOGY	과학기술정보통신부이	GENERAL_TERM::과학기술정보통신부	subject_key + inflection
+MORPHOLOGY	교육부을	GENERAL_TERM::교육부	subject_key + inflection
+MORPHOLOGY	교육부이	GENERAL_TERM::교육부	subject_key + inflection
+MORPHOLOGY	국가기술표준원을	GENERAL_TERM::국가기술표준원	subject_key + inflection
+MORPHOLOGY	국가기술표준원이	GENERAL_TERM::국가기술표준원	subject_key + inflection
+MORPHOLOGY	국립소방연구원을	GENERAL_TERM::국립소방연구원	subject_key + inflection
+MORPHOLOGY	국립소방연구원이	GENERAL_TERM::국립소방연구원	subject_key + inflection
+MORPHOLOGY	국립수산과학원을	GENERAL_TERM::국립수산과학원	subject_key + inflection
+MORPHOLOGY	국립수산과학원이	GENERAL_TERM::국립수산과학원	subject_key + inflection
+MORPHOLOGY	국립전파연구원을	GENERAL_TERM::국립전파연구원	subject_key + inflection
+MORPHOLOGY	국립전파연구원이	GENERAL_TERM::국립전파연구원	subject_key + inflection
+MORPHOLOGY	국립환경과학원을	GENERAL_TERM::국립환경과학원	subject_key + inflection
+MORPHOLOGY	국립환경과학원이	GENERAL_TERM::국립환경과학원	subject_key + inflection
+MORPHOLOGY	국방부을	GENERAL_TERM::국방부	subject_key + inflection
+MORPHOLOGY	국방부이	GENERAL_TERM::국방부	subject_key + inflection
+MORPHOLOGY	국소배기장치을	EQUIPMENT_TERM::국소배기장치	subject_key + inflection
+MORPHOLOGY	국소배기장치이	EQUIPMENT_TERM::국소배기장치	subject_key + inflection
+MORPHOLOGY	국토교통부을	GENERAL_TERM::국토교통부	subject_key + inflection
+MORPHOLOGY	국토교통부이	GENERAL_TERM::국토교통부	subject_key + inflection
+MORPHOLOGY	규정을	GENERAL_TERM::규정	subject_key + inflection
+MORPHOLOGY	규정이	GENERAL_TERM::규정	subject_key + inflection
+MORPHOLOGY	규칙을	GENERAL_TERM::규칙	subject_key + inflection
+MORPHOLOGY	규칙이	GENERAL_TERM::규칙	subject_key + inflection
+MORPHOLOGY	근로기준법을	LEGAL_TERM::근로기준법	subject_key + inflection
+MORPHOLOGY	근로기준법이	LEGAL_TERM::근로기준법	subject_key + inflection
+MORPHOLOGY	근로자을	GENERAL_TERM::근로자	subject_key + inflection
+MORPHOLOGY	근로자이	GENERAL_TERM::근로자	subject_key + inflection
+MORPHOLOGY	기계설비법을	LEGAL_TERM::기계설비법	subject_key + inflection
+MORPHOLOGY	기계설비법이	LEGAL_TERM::기계설비법	subject_key + inflection
+MORPHOLOGY	기후에너지환경부을	GENERAL_TERM::기후에너지환경부	subject_key + inflection
+MORPHOLOGY	기후에너지환경부이	GENERAL_TERM::기후에너지환경부	subject_key + inflection
+MORPHOLOGY	노인복지법을	LEGAL_TERM::노인복지법	subject_key + inflection
+MORPHOLOGY	노인복지법이	LEGAL_TERM::노인복지법	subject_key + inflection
+MORPHOLOGY	노후계획도시정비법을	LEGAL_TERM::노후계획도시정비법	subject_key + inflection
+MORPHOLOGY	노후계획도시정비법이	LEGAL_TERM::노후계획도시정비법	subject_key + inflection
+MORPHOLOGY	다중이용업소법을	LEGAL_TERM::다중이용업소법	subject_key + inflection
+MORPHOLOGY	다중이용업소법이	LEGAL_TERM::다중이용업소법	subject_key + inflection
+MORPHOLOGY	대기환경보전법을	LEGAL_TERM::대기환경보전법	subject_key + inflection
+MORPHOLOGY	대기환경보전법이	LEGAL_TERM::대기환경보전법	subject_key + inflection
+MORPHOLOGY	대법원을	GENERAL_TERM::대법원	subject_key + inflection
+MORPHOLOGY	대법원이	GENERAL_TERM::대법원	subject_key + inflection
+MORPHOLOGY	대통령령을	GENERAL_TERM::대통령령	subject_key + inflection
+MORPHOLOGY	대통령령이	GENERAL_TERM::대통령령	subject_key + inflection
+MORPHOLOGY	도시가스사업법을	LEGAL_TERM::도시가스사업법	subject_key + inflection
+MORPHOLOGY	도시가스사업법이	LEGAL_TERM::도시가스사업법	subject_key + inflection
+MORPHOLOGY	도시계획시설규칙을	LEGAL_TERM::도시계획시설규칙	subject_key + inflection
+MORPHOLOGY	도시계획시설규칙이	LEGAL_TERM::도시계획시설규칙	subject_key + inflection
+MORPHOLOGY	문화체육관광부을	GENERAL_TERM::문화체육관광부	subject_key + inflection
+MORPHOLOGY	문화체육관광부이	GENERAL_TERM::문화체육관광부	subject_key + inflection
+MORPHOLOGY	물질안전보건자료을	CHEM_TERM::물질안전보건자료	subject_key + inflection
+MORPHOLOGY	물질안전보건자료이	CHEM_TERM::물질안전보건자료	subject_key + inflection
+MORPHOLOGY	물환경보전법을	LEGAL_TERM::물환경보전법	subject_key + inflection
+MORPHOLOGY	물환경보전법이	LEGAL_TERM::물환경보전법	subject_key + inflection
+MORPHOLOGY	밀폐공간작업을	GENERAL_TERM::밀폐공간작업	subject_key + inflection
+MORPHOLOGY	밀폐공간작업이	GENERAL_TERM::밀폐공간작업	subject_key + inflection
+MORPHOLOGY	법률을	GENERAL_TERM::법률	subject_key + inflection
+MORPHOLOGY	법률이	GENERAL_TERM::법률	subject_key + inflection
+MORPHOLOGY	법무부을	GENERAL_TERM::법무부	subject_key + inflection
+MORPHOLOGY	법무부이	GENERAL_TERM::법무부	subject_key + inflection
+MORPHOLOGY	별지을	GENERAL_TERM::별지	subject_key + inflection
+MORPHOLOGY	별지이	GENERAL_TERM::별지	subject_key + inflection
+MORPHOLOGY	별표을	GENERAL_TERM::별표	subject_key + inflection
+MORPHOLOGY	별표이	GENERAL_TERM::별표	subject_key + inflection
+MORPHOLOGY	보건복지부을	GENERAL_TERM::보건복지부	subject_key + inflection
+MORPHOLOGY	보건복지부이	GENERAL_TERM::보건복지부	subject_key + inflection
+MORPHOLOGY	보호구을	EQUIPMENT_TERM::보호구	subject_key + inflection
+MORPHOLOGY	보호구이	EQUIPMENT_TERM::보호구	subject_key + inflection
+MORPHOLOGY	부령을	GENERAL_TERM::부령	subject_key + inflection
+MORPHOLOGY	부령이	GENERAL_TERM::부령	subject_key + inflection
+MORPHOLOGY	사업주을	GENERAL_TERM::사업주	subject_key + inflection
+MORPHOLOGY	사업주이	GENERAL_TERM::사업주	subject_key + inflection
+MORPHOLOGY	사회복지공동모금회법을	LEGAL_TERM::사회복지공동모금회법	subject_key + inflection
+MORPHOLOGY	사회복지공동모금회법이	LEGAL_TERM::사회복지공동모금회법	subject_key + inflection
+MORPHOLOGY	사회복지사업법을	LEGAL_TERM::사회복지사업법	subject_key + inflection
+MORPHOLOGY	사회복지사업법이	LEGAL_TERM::사회복지사업법	subject_key + inflection
+MORPHOLOGY	산림재난방지법을	LEGAL_TERM::산림재난방지법	subject_key + inflection
+MORPHOLOGY	산림재난방지법이	LEGAL_TERM::산림재난방지법	subject_key + inflection
+MORPHOLOGY	산림청을	GENERAL_TERM::산림청	subject_key + inflection
+MORPHOLOGY	산림청이	GENERAL_TERM::산림청	subject_key + inflection
+MORPHOLOGY	산업안전보건법을	LEGAL_TERM::산업안전보건법	subject_key + inflection
+MORPHOLOGY	산업안전보건법이	LEGAL_TERM::산업안전보건법	subject_key + inflection
+MORPHOLOGY	산업용로봇을	EQUIPMENT_TERM::산업용로봇	subject_key + inflection
+MORPHOLOGY	산업용로봇이	EQUIPMENT_TERM::산업용로봇	subject_key + inflection
+MORPHOLOGY	산업재해보상보험법을	LEGAL_TERM::산업재해보상보험법	subject_key + inflection
+MORPHOLOGY	산업재해보상보험법이	LEGAL_TERM::산업재해보상보험법	subject_key + inflection
+MORPHOLOGY	산재보험법을	LEGAL_TERM::산재보험법	subject_key + inflection
+MORPHOLOGY	산재보험법이	LEGAL_TERM::산재보험법	subject_key + inflection
+MORPHOLOGY	석면안전관리법을	LEGAL_TERM::석면안전관리법	subject_key + inflection
+MORPHOLOGY	석면안전관리법이	LEGAL_TERM::석면안전관리법	subject_key + inflection
+MORPHOLOGY	석면피해구제법을	LEGAL_TERM::석면피해구제법	subject_key + inflection
+MORPHOLOGY	석면피해구제법이	LEGAL_TERM::석면피해구제법	subject_key + inflection
+MORPHOLOGY	소방기본법을	LEGAL_TERM::소방기본법	subject_key + inflection
+MORPHOLOGY	소방기본법이	LEGAL_TERM::소방기본법	subject_key + inflection
+MORPHOLOGY	소방시설공사업법을	LEGAL_TERM::소방시설공사업법	subject_key + inflection
+MORPHOLOGY	소방시설공사업법이	LEGAL_TERM::소방시설공사업법	subject_key + inflection
+MORPHOLOGY	소방청을	GENERAL_TERM::소방청	subject_key + inflection
+MORPHOLOGY	소방청이	GENERAL_TERM::소방청	subject_key + inflection
+MORPHOLOGY	소음ㆍ진동관리법을	LEGAL_TERM::소음ㆍ진동관리법	subject_key + inflection
+MORPHOLOGY	소음ㆍ진동관리법이	LEGAL_TERM::소음ㆍ진동관리법	subject_key + inflection
+MORPHOLOGY	수도법을	LEGAL_TERM::수도법	subject_key + inflection
+MORPHOLOGY	수도법이	LEGAL_TERM::수도법	subject_key + inflection
+MORPHOLOGY	시행규칙을	GENERAL_TERM::시행규칙	subject_key + inflection
+MORPHOLOGY	시행규칙이	GENERAL_TERM::시행규칙	subject_key + inflection
+MORPHOLOGY	시행령을	GENERAL_TERM::시행령	subject_key + inflection
+MORPHOLOGY	시행령이	GENERAL_TERM::시행령	subject_key + inflection
+MORPHOLOGY	식품안전기본법을	LEGAL_TERM::식품안전기본법	subject_key + inflection
+MORPHOLOGY	식품안전기본법이	LEGAL_TERM::식품안전기본법	subject_key + inflection
+MORPHOLOGY	식품의약품안전처을	GENERAL_TERM::식품의약품안전처	subject_key + inflection
+MORPHOLOGY	식품의약품안전처이	GENERAL_TERM::식품의약품안전처	subject_key + inflection
+MORPHOLOGY	신재생에너지법을	LEGAL_TERM::신재생에너지법	subject_key + inflection
+MORPHOLOGY	신재생에너지법이	LEGAL_TERM::신재생에너지법	subject_key + inflection
+MORPHOLOGY	실내공기질법을	LEGAL_TERM::실내공기질법	subject_key + inflection
+MORPHOLOGY	실내공기질법이	LEGAL_TERM::실내공기질법	subject_key + inflection
+MORPHOLOGY	악취방지법을	LEGAL_TERM::악취방지법	subject_key + inflection
+MORPHOLOGY	악취방지법이	LEGAL_TERM::악취방지법	subject_key + inflection
+MORPHOLOGY	액화석유가스법을	LEGAL_TERM::액화석유가스법	subject_key + inflection
+MORPHOLOGY	액화석유가스법이	LEGAL_TERM::액화석유가스법	subject_key + inflection
+MORPHOLOGY	예규을	GENERAL_TERM::예규	subject_key + inflection
+MORPHOLOGY	예규이	GENERAL_TERM::예규	subject_key + inflection
+MORPHOLOGY	원자력안전위원회을	GENERAL_TERM::원자력안전위원회	subject_key + inflection
+MORPHOLOGY	원자력안전위원회이	GENERAL_TERM::원자력안전위원회	subject_key + inflection
+MORPHOLOGY	위험물관리법을	LEGAL_TERM::위험물관리법	subject_key + inflection
+MORPHOLOGY	위험물관리법이	LEGAL_TERM::위험물관리법	subject_key + inflection
+MORPHOLOGY	위험물안전관리법을	LEGAL_TERM::위험물안전관리법	subject_key + inflection
+MORPHOLOGY	위험물안전관리법이	LEGAL_TERM::위험물안전관리법	subject_key + inflection
+MORPHOLOGY	위험성평가을	GENERAL_TERM::위험성평가	subject_key + inflection
+MORPHOLOGY	위험성평가이	GENERAL_TERM::위험성평가	subject_key + inflection
+MORPHOLOGY	의료기기법을	LEGAL_TERM::의료기기법	subject_key + inflection
+MORPHOLOGY	의료기기법이	LEGAL_TERM::의료기기법	subject_key + inflection
+MORPHOLOGY	의료법을	LEGAL_TERM::의료법	subject_key + inflection
+MORPHOLOGY	의료법이	LEGAL_TERM::의료법	subject_key + inflection
+MORPHOLOGY	잔류성물질법을	LEGAL_TERM::잔류성물질법	subject_key + inflection
+MORPHOLOGY	잔류성물질법이	LEGAL_TERM::잔류성물질법	subject_key + inflection
+MORPHOLOGY	장애인복지법을	LEGAL_TERM::장애인복지법	subject_key + inflection
+MORPHOLOGY	장애인복지법이	LEGAL_TERM::장애인복지법	subject_key + inflection
+MORPHOLOGY	장애인연금법을	LEGAL_TERM::장애인연금법	subject_key + inflection
+MORPHOLOGY	장애인연금법이	LEGAL_TERM::장애인연금법	subject_key + inflection
+MORPHOLOGY	재난관리자원법을	LEGAL_TERM::재난관리자원법	subject_key + inflection
+MORPHOLOGY	재난관리자원법이	LEGAL_TERM::재난관리자원법	subject_key + inflection
+MORPHOLOGY	재난안전법을	LEGAL_TERM::재난안전법	subject_key + inflection
+MORPHOLOGY	재난안전법이	LEGAL_TERM::재난안전법	subject_key + inflection
+MORPHOLOGY	재난안전통신망법을	LEGAL_TERM::재난안전통신망법	subject_key + inflection
+MORPHOLOGY	재난안전통신망법이	LEGAL_TERM::재난안전통신망법	subject_key + inflection
+MORPHOLOGY	전기공사공제조합법을	LEGAL_TERM::전기공사공제조합법	subject_key + inflection
+MORPHOLOGY	전기공사공제조합법이	LEGAL_TERM::전기공사공제조합법	subject_key + inflection
+MORPHOLOGY	전기공사업법을	LEGAL_TERM::전기공사업법	subject_key + inflection
+MORPHOLOGY	전기공사업법이	LEGAL_TERM::전기공사업법	subject_key + inflection
+MORPHOLOGY	전기사업법을	LEGAL_TERM::전기사업법	subject_key + inflection
+MORPHOLOGY	전기사업법이	LEGAL_TERM::전기사업법	subject_key + inflection
+MORPHOLOGY	전기사업회계규칙을	LEGAL_TERM::전기사업회계규칙	subject_key + inflection
+MORPHOLOGY	전기사업회계규칙이	LEGAL_TERM::전기사업회계규칙	subject_key + inflection
+MORPHOLOGY	전기안전관리법을	LEGAL_TERM::전기안전관리법	subject_key + inflection
+MORPHOLOGY	전기안전관리법이	LEGAL_TERM::전기안전관리법	subject_key + inflection
+MORPHOLOGY	전기통신사업법을	LEGAL_TERM::전기통신사업법	subject_key + inflection
+MORPHOLOGY	전기통신사업법이	LEGAL_TERM::전기통신사업법	subject_key + inflection
+MORPHOLOGY	정보통신공사업법을	LEGAL_TERM::정보통신공사업법	subject_key + inflection
+MORPHOLOGY	정보통신공사업법이	LEGAL_TERM::정보통신공사업법	subject_key + inflection
+MORPHOLOGY	제품안전기본법을	LEGAL_TERM::제품안전기본법	subject_key + inflection
+MORPHOLOGY	제품안전기본법이	LEGAL_TERM::제품안전기본법	subject_key + inflection
+MORPHOLOGY	조달청을	GENERAL_TERM::조달청	subject_key + inflection
+MORPHOLOGY	조달청이	GENERAL_TERM::조달청	subject_key + inflection
+MORPHOLOGY	주차장법을	LEGAL_TERM::주차장법	subject_key + inflection
+MORPHOLOGY	주차장법이	LEGAL_TERM::주차장법	subject_key + inflection
+MORPHOLOGY	주택법을	LEGAL_TERM::주택법	subject_key + inflection
+MORPHOLOGY	주택법이	LEGAL_TERM::주택법	subject_key + inflection
+MORPHOLOGY	중대재해처벌법을	LEGAL_TERM::중대재해처벌법	subject_key + inflection
+MORPHOLOGY	중대재해처벌법이	LEGAL_TERM::중대재해처벌법	subject_key + inflection
+MORPHOLOGY	중소벤처기업부을	GENERAL_TERM::중소벤처기업부	subject_key + inflection
+MORPHOLOGY	중소벤처기업부이	GENERAL_TERM::중소벤처기업부	subject_key + inflection
+MORPHOLOGY	지진ㆍ화산재해대책법을	LEGAL_TERM::지진ㆍ화산재해대책법	subject_key + inflection
+MORPHOLOGY	지진ㆍ화산재해대책법이	LEGAL_TERM::지진ㆍ화산재해대책법	subject_key + inflection
+MORPHOLOGY	지진대책법을	LEGAL_TERM::지진대책법	subject_key + inflection
+MORPHOLOGY	지진대책법이	LEGAL_TERM::지진대책법	subject_key + inflection
+MORPHOLOGY	질병관리청을	GENERAL_TERM::질병관리청	subject_key + inflection
+MORPHOLOGY	질병관리청이	GENERAL_TERM::질병관리청	subject_key + inflection
+MORPHOLOGY	집단에너지법을	LEGAL_TERM::집단에너지법	subject_key + inflection
+MORPHOLOGY	집단에너지법이	LEGAL_TERM::집단에너지법	subject_key + inflection
+MORPHOLOGY	집단에너지사업법을	LEGAL_TERM::집단에너지사업법	subject_key + inflection
+MORPHOLOGY	집단에너지사업법이	LEGAL_TERM::집단에너지사업법	subject_key + inflection
+MORPHOLOGY	체외진단의료기기법을	LEGAL_TERM::체외진단의료기기법	subject_key + inflection
+MORPHOLOGY	체외진단의료기기법이	LEGAL_TERM::체외진단의료기기법	subject_key + inflection
+MORPHOLOGY	총리령을	GENERAL_TERM::총리령	subject_key + inflection
+MORPHOLOGY	총리령이	GENERAL_TERM::총리령	subject_key + inflection
+MORPHOLOGY	탄소중립기본법을	LEGAL_TERM::탄소중립기본법	subject_key + inflection
+MORPHOLOGY	탄소중립기본법이	LEGAL_TERM::탄소중립기본법	subject_key + inflection
+MORPHOLOGY	토양환경보전법을	LEGAL_TERM::토양환경보전법	subject_key + inflection
+MORPHOLOGY	토양환경보전법이	LEGAL_TERM::토양환경보전법	subject_key + inflection
+MORPHOLOGY	파견법을	LEGAL_TERM::파견법	subject_key + inflection
+MORPHOLOGY	파견법이	LEGAL_TERM::파견법	subject_key + inflection
+MORPHOLOGY	폐기물관리법을	LEGAL_TERM::폐기물관리법	subject_key + inflection
+MORPHOLOGY	폐기물관리법이	LEGAL_TERM::폐기물관리법	subject_key + inflection
+MORPHOLOGY	폭발을	ACCIDENT_TERM::폭발	subject_key + inflection
+MORPHOLOGY	폭발이	ACCIDENT_TERM::폭발	subject_key + inflection
+MORPHOLOGY	하수도법을	LEGAL_TERM::하수도법	subject_key + inflection
+MORPHOLOGY	하수도법이	LEGAL_TERM::하수도법	subject_key + inflection
+MORPHOLOGY	한국환경산업기술원법을	LEGAL_TERM::한국환경산업기술원법	subject_key + inflection
+MORPHOLOGY	한국환경산업기술원법이	LEGAL_TERM::한국환경산업기술원법	subject_key + inflection
+MORPHOLOGY	해사안전기본법을	LEGAL_TERM::해사안전기본법	subject_key + inflection
+MORPHOLOGY	해사안전기본법이	LEGAL_TERM::해사안전기본법	subject_key + inflection
+MORPHOLOGY	해양수산부을	GENERAL_TERM::해양수산부	subject_key + inflection
+MORPHOLOGY	해양수산부이	GENERAL_TERM::해양수산부	subject_key + inflection
+MORPHOLOGY	행정안전부을	GENERAL_TERM::행정안전부	subject_key + inflection
+MORPHOLOGY	행정안전부이	GENERAL_TERM::행정안전부	subject_key + inflection
+MORPHOLOGY	화재예방법을	LEGAL_TERM::화재예방법	subject_key + inflection
+MORPHOLOGY	화재예방법이	LEGAL_TERM::화재예방법	subject_key + inflection
+MORPHOLOGY	화재을	ACCIDENT_TERM::화재	subject_key + inflection
+MORPHOLOGY	화재이	ACCIDENT_TERM::화재	subject_key + inflection
+MORPHOLOGY	화학물질관리법을	LEGAL_TERM::화학물질관리법	subject_key + inflection
+MORPHOLOGY	화학물질관리법이	LEGAL_TERM::화학물질관리법	subject_key + inflection
+MORPHOLOGY	화학물질안전원을	GENERAL_TERM::화학물질안전원	subject_key + inflection
+MORPHOLOGY	화학물질안전원이	GENERAL_TERM::화학물질안전원	subject_key + inflection
+MORPHOLOGY	훈령을	GENERAL_TERM::훈령	subject_key + inflection
+MORPHOLOGY	훈령이	GENERAL_TERM::훈령	subject_key + inflection
+COMPOUND_NOUN	국소배기장치	EQUIPMENT_TERM::국소배기장치	KIWI_CANDIDATE compound
+COMPOUND_NOUN	국소배기장치 안전관리	EQUIPMENT_TERM::국소배기장치	KIWI_CANDIDATE compound
+COMPOUND_NOUN	국소배기장치 점검	EQUIPMENT_TERM::국소배기장치	KIWI_CANDIDATE compound
+COMPOUND_NOUN	밀폐공간작업	GENERAL_TERM::밀폐공간작업	KIWI_CANDIDATE compound
+COMPOUND_NOUN	밀폐공간작업 안전관리	GENERAL_TERM::밀폐공간작업	KIWI_CANDIDATE compound
+COMPOUND_NOUN	밀폐공간작업 점검	GENERAL_TERM::밀폐공간작업	KIWI_CANDIDATE compound
+COMPOUND_NOUN	산업용로봇	EQUIPMENT_TERM::산업용로봇	KIWI_CANDIDATE compound
+COMPOUND_NOUN	산업용로봇 안전관리	EQUIPMENT_TERM::산업용로봇	KIWI_CANDIDATE compound
+COMPOUND_NOUN	산업용로봇 점검	EQUIPMENT_TERM::산업용로봇	KIWI_CANDIDATE compound
+COMPOUND_NOUN	위험성평가	GENERAL_TERM::위험성평가	KIWI_CANDIDATE compound
+COMPOUND_NOUN	위험성평가 안전관리	GENERAL_TERM::위험성평가	KIWI_CANDIDATE compound
+COMPOUND_NOUN	위험성평가 점검	GENERAL_TERM::위험성평가	KIWI_CANDIDATE compound
+TYPO	건법	LEGAL_TERM::건축법	delete-1 or transpose-2
+TYPO	건법축	LEGAL_TERM::건축법	delete-1 or transpose-2
+TYPO	건설기관계리법	LEGAL_TERM::건설기계관리법	delete-1 or transpose-2
+TYPO	건설기관리법	LEGAL_TERM::건설기계관리법	delete-1 or transpose-2
+TYPO	건설산기본법	LEGAL_TERM::건설산업기본법	delete-1 or transpose-2
+TYPO	건설산기업본법	LEGAL_TERM::건설산업기본법	delete-1 or transpose-2
+TYPO	건축물리관법	LEGAL_TERM::건축물관리법	delete-1 or transpose-2
+TYPO	건축물리법	LEGAL_TERM::건축물관리법	delete-1 or transpose-2
+TYPO	건축법	LEGAL_TERM::건축사법	delete-1 or transpose-2
+TYPO	건축법사	LEGAL_TERM::건축사법	delete-1 or transpose-2
+TYPO	건축본기법	LEGAL_TERM::건축기본법	delete-1 or transpose-2
+TYPO	건축본법	LEGAL_TERM::건축기본법	delete-1 or transpose-2
+TYPO	경청	GENERAL_TERM::경찰청	delete-1 or transpose-2
+TYPO	경청찰	GENERAL_TERM::경찰청	delete-1 or transpose-2
+TYPO	고용동노부	GENERAL_TERM::고용노동부	delete-1 or transpose-2
+TYPO	고용동부	GENERAL_TERM::고용노동부	delete-1 or transpose-2
+TYPO	고용산재보료징수법	LEGAL_TERM::고용산재보험료징수법	delete-1 or transpose-2
+TYPO	고용산재보료험징수법	LEGAL_TERM::고용산재보험료징수법	delete-1 or transpose-2
+TYPO	고용산재험보신고법	LEGAL_TERM::고용산재보험신고법	delete-1 or transpose-2
+TYPO	고용산재험신고법	LEGAL_TERM::고용산재보험신고법	delete-1 or transpose-2
+TYPO	공동주관리법	LEGAL_TERM::공동주택관리법	delete-1 or transpose-2
+TYPO	공동주관택리법	LEGAL_TERM::공동주택관리법	delete-1 or transpose-2
+TYPO	과학기술보정통신부	GENERAL_TERM::과학기술정보통신부	delete-1 or transpose-2
+TYPO	과학기술보통신부	GENERAL_TERM::과학기술정보통신부	delete-1 or transpose-2
+TYPO	교부	GENERAL_TERM::교육부	delete-1 or transpose-2
+TYPO	교부육	GENERAL_TERM::교육부	delete-1 or transpose-2
+TYPO	국가기표술준원	GENERAL_TERM::국가기술표준원	delete-1 or transpose-2
+TYPO	국가기표준원	GENERAL_TERM::국가기술표준원	delete-1 or transpose-2
+TYPO	국립소연구원	GENERAL_TERM::국립소방연구원	delete-1 or transpose-2
+TYPO	국립소연방구원	GENERAL_TERM::국립소방연구원	delete-1 or transpose-2
+TYPO	국립수과산학원	GENERAL_TERM::국립수산과학원	delete-1 or transpose-2
+TYPO	국립수과학원	GENERAL_TERM::국립수산과학원	delete-1 or transpose-2
+TYPO	국립전연구원	GENERAL_TERM::국립전파연구원	delete-1 or transpose-2
+TYPO	국립전연파구원	GENERAL_TERM::국립전파연구원	delete-1 or transpose-2
+TYPO	국립환과경학원	GENERAL_TERM::국립환경과학원	delete-1 or transpose-2
+TYPO	국립환과학원	GENERAL_TERM::국립환경과학원	delete-1 or transpose-2
+TYPO	국부	GENERAL_TERM::국방부	delete-1 or transpose-2
+TYPO	국부방	GENERAL_TERM::국방부	delete-1 or transpose-2
+TYPO	국소배장기치	EQUIPMENT_TERM::국소배기장치	delete-1 or transpose-2
+TYPO	국소배장치	EQUIPMENT_TERM::국소배기장치	delete-1 or transpose-2
+TYPO	국토통교부	GENERAL_TERM::국토교통부	delete-1 or transpose-2
+TYPO	국토통부	GENERAL_TERM::국토교통부	delete-1 or transpose-2
+TYPO	근로준기법	LEGAL_TERM::근로기준법	delete-1 or transpose-2
+TYPO	근로준법	LEGAL_TERM::근로기준법	delete-1 or transpose-2
+TYPO	근자	GENERAL_TERM::근로자	delete-1 or transpose-2
+TYPO	근자로	GENERAL_TERM::근로자	delete-1 or transpose-2
+TYPO	기계비법	LEGAL_TERM::기계설비법	delete-1 or transpose-2
+TYPO	기계비설법	LEGAL_TERM::기계설비법	delete-1 or transpose-2
+TYPO	기후에너환경부	GENERAL_TERM::기후에너지환경부	delete-1 or transpose-2
+TYPO	기후에너환지경부	GENERAL_TERM::기후에너지환경부	delete-1 or transpose-2
+TYPO	노인지법	LEGAL_TERM::노인복지법	delete-1 or transpose-2
+TYPO	노인지복법	LEGAL_TERM::노인복지법	delete-1 or transpose-2
+TYPO	노후계획시도정비법	LEGAL_TERM::노후계획도시정비법	delete-1 or transpose-2
+TYPO	노후계획시정비법	LEGAL_TERM::노후계획도시정비법	delete-1 or transpose-2
+TYPO	다중이업소법	LEGAL_TERM::다중이용업소법	delete-1 or transpose-2
+TYPO	다중이업용소법	LEGAL_TERM::다중이용업소법	delete-1 or transpose-2
+TYPO	대기환보경전법	LEGAL_TERM::대기환경보전법	delete-1 or transpose-2
+TYPO	대기환보전법	LEGAL_TERM::대기환경보전법	delete-1 or transpose-2
+TYPO	대원	GENERAL_TERM::대법원	delete-1 or transpose-2
+TYPO	대원법	GENERAL_TERM::대법원	delete-1 or transpose-2
+TYPO	대통령	GENERAL_TERM::대통령령	delete-1 or transpose-2
+TYPO	도시가사스업법	LEGAL_TERM::도시가스사업법	delete-1 or transpose-2
+TYPO	도시가사업법	LEGAL_TERM::도시가스사업법	delete-1 or transpose-2
+TYPO	도시계획설규칙	LEGAL_TERM::도시계획시설규칙	delete-1 or transpose-2
+TYPO	도시계획설시규칙	LEGAL_TERM::도시계획시설규칙	delete-1 or transpose-2
+TYPO	문화체관광부	GENERAL_TERM::문화체육관광부	delete-1 or transpose-2
+TYPO	문화체관육광부	GENERAL_TERM::문화체육관광부	delete-1 or transpose-2
+TYPO	물질안전건보자료	CHEM_TERM::물질안전보건자료	delete-1 or transpose-2
+TYPO	물질안전건자료	CHEM_TERM::물질안전보건자료	delete-1 or transpose-2
+TYPO	물환경전법	LEGAL_TERM::물환경보전법	delete-1 or transpose-2
+TYPO	물환경전보법	LEGAL_TERM::물환경보전법	delete-1 or transpose-2
+TYPO	밀폐공작간업	GENERAL_TERM::밀폐공간작업	delete-1 or transpose-2
+TYPO	밀폐공작업	GENERAL_TERM::밀폐공간작업	delete-1 or transpose-2
+TYPO	법부	GENERAL_TERM::법무부	delete-1 or transpose-2
+TYPO	법부무	GENERAL_TERM::법무부	delete-1 or transpose-2
+TYPO	보건지복부	GENERAL_TERM::보건복지부	delete-1 or transpose-2
+TYPO	보건지부	GENERAL_TERM::보건복지부	delete-1 or transpose-2
+TYPO	보구	EQUIPMENT_TERM::보호구	delete-1 or transpose-2
+TYPO	보구호	EQUIPMENT_TERM::보호구	delete-1 or transpose-2
+TYPO	사주	GENERAL_TERM::사업주	delete-1 or transpose-2
+TYPO	사주업	GENERAL_TERM::사업주	delete-1 or transpose-2
+TYPO	사회복사업법	LEGAL_TERM::사회복지사업법	delete-1 or transpose-2
+TYPO	사회복사지업법	LEGAL_TERM::사회복지사업법	delete-1 or transpose-2
+TYPO	사회복지공모금회법	LEGAL_TERM::사회복지공동모금회법	delete-1 or transpose-2
+TYPO	사회복지공모동금회법	LEGAL_TERM::사회복지공동모금회법	delete-1 or transpose-2
+TYPO	산림재방난지법	LEGAL_TERM::산림재난방지법	delete-1 or transpose-2
+TYPO	산림재방지법	LEGAL_TERM::산림재난방지법	delete-1 or transpose-2
+TYPO	산업로봇	EQUIPMENT_TERM::산업용로봇	delete-1 or transpose-2
+TYPO	산업로용봇	EQUIPMENT_TERM::산업용로봇	delete-1 or transpose-2
+TYPO	산업안보건법	LEGAL_TERM::산업안전보건법	delete-1 or transpose-2
+TYPO	산업안보전건법	LEGAL_TERM::산업안전보건법	delete-1 or transpose-2
+TYPO	산업재해상보보험법	LEGAL_TERM::산업재해보상보험법	delete-1 or transpose-2
+TYPO	산업재해상보험법	LEGAL_TERM::산업재해보상보험법	delete-1 or transpose-2
+TYPO	산재험법	LEGAL_TERM::산재보험법	delete-1 or transpose-2
+TYPO	산재험보법	LEGAL_TERM::산재보험법	delete-1 or transpose-2
+TYPO	산청	GENERAL_TERM::산림청	delete-1 or transpose-2
+TYPO	산청림	GENERAL_TERM::산림청	delete-1 or transpose-2
+TYPO	석면안관리법	LEGAL_TERM::석면안전관리법	delete-1 or transpose-2
+TYPO	석면안관전리법	LEGAL_TERM::석면안전관리법	delete-1 or transpose-2
+TYPO	석면피구제법	LEGAL_TERM::석면피해구제법	delete-1 or transpose-2
+TYPO	석면피구해제법	LEGAL_TERM::석면피해구제법	delete-1 or transpose-2
+TYPO	소방본기법	LEGAL_TERM::소방기본법	delete-1 or transpose-2
+TYPO	소방본법	LEGAL_TERM::소방기본법	delete-1 or transpose-2
+TYPO	소방시설사공업법	LEGAL_TERM::소방시설공사업법	delete-1 or transpose-2
+TYPO	소방시설사업법	LEGAL_TERM::소방시설공사업법	delete-1 or transpose-2
+TYPO	소음ㆍ진관동리법	LEGAL_TERM::소음ㆍ진동관리법	delete-1 or transpose-2
+TYPO	소음ㆍ진관리법	LEGAL_TERM::소음ㆍ진동관리법	delete-1 or transpose-2
+TYPO	소청	GENERAL_TERM::소방청	delete-1 or transpose-2
+TYPO	소청방	GENERAL_TERM::소방청	delete-1 or transpose-2
+TYPO	수법	LEGAL_TERM::수도법	delete-1 or transpose-2
+TYPO	수법도	LEGAL_TERM::수도법	delete-1 or transpose-2
+TYPO	시령	GENERAL_TERM::시행령	delete-1 or transpose-2
+TYPO	시령행	GENERAL_TERM::시행령	delete-1 or transpose-2
+TYPO	시행칙	GENERAL_TERM::시행규칙	delete-1 or transpose-2
+TYPO	시행칙규	GENERAL_TERM::시행규칙	delete-1 or transpose-2
+TYPO	식품안기본법	LEGAL_TERM::식품안전기본법	delete-1 or transpose-2
+TYPO	식품안기전본법	LEGAL_TERM::식품안전기본법	delete-1 or transpose-2
+TYPO	식품의약안전처	GENERAL_TERM::식품의약품안전처	delete-1 or transpose-2
+TYPO	식품의약안품전처	GENERAL_TERM::식품의약품안전처	delete-1 or transpose-2
+TYPO	신재생너에지법	LEGAL_TERM::신재생에너지법	delete-1 or transpose-2
+TYPO	신재생너지법	LEGAL_TERM::신재생에너지법	delete-1 or transpose-2
+TYPO	실내공질기법	LEGAL_TERM::실내공기질법	delete-1 or transpose-2
+TYPO	실내공질법	LEGAL_TERM::실내공기질법	delete-1 or transpose-2
+TYPO	악취지방법	LEGAL_TERM::악취방지법	delete-1 or transpose-2
+TYPO	악취지법	LEGAL_TERM::악취방지법	delete-1 or transpose-2
+TYPO	액화석가스법	LEGAL_TERM::액화석유가스법	delete-1 or transpose-2
+TYPO	액화석가유스법	LEGAL_TERM::액화석유가스법	delete-1 or transpose-2
+TYPO	원자력안위원회	GENERAL_TERM::원자력안전위원회	delete-1 or transpose-2
+TYPO	원자력안위전원회	GENERAL_TERM::원자력안전위원회	delete-1 or transpose-2
+TYPO	위험물리관법	LEGAL_TERM::위험물관리법	delete-1 or transpose-2
+TYPO	위험물리법	LEGAL_TERM::위험물관리법	delete-1 or transpose-2
+TYPO	위험물안관리법	LEGAL_TERM::위험물안전관리법	delete-1 or transpose-2
+TYPO	위험물안관전리법	LEGAL_TERM::위험물안전관리법	delete-1 or transpose-2
+TYPO	위험평가	GENERAL_TERM::위험성평가	delete-1 or transpose-2
+TYPO	위험평성가	GENERAL_TERM::위험성평가	delete-1 or transpose-2
+TYPO	의료기법	LEGAL_TERM::의료기기법	delete-1 or transpose-2
+TYPO	의법	LEGAL_TERM::의료법	delete-1 or transpose-2
+TYPO	의법료	LEGAL_TERM::의료법	delete-1 or transpose-2
+TYPO	잔류성질물법	LEGAL_TERM::잔류성물질법	delete-1 or transpose-2
+TYPO	잔류성질법	LEGAL_TERM::잔류성물질법	delete-1 or transpose-2
+TYPO	장애인금법	LEGAL_TERM::장애인연금법	delete-1 or transpose-2
+TYPO	장애인금연법	LEGAL_TERM::장애인연금법	delete-1 or transpose-2
+TYPO	장애인지법	LEGAL_TERM::장애인복지법	delete-1 or transpose-2
+TYPO	장애인지복법	LEGAL_TERM::장애인복지법	delete-1 or transpose-2
+TYPO	재난관자리원법	LEGAL_TERM::재난관리자원법	delete-1 or transpose-2
+TYPO	재난관자원법	LEGAL_TERM::재난관리자원법	delete-1 or transpose-2
+TYPO	재난안전신망법	LEGAL_TERM::재난안전통신망법	delete-1 or transpose-2
+TYPO	재난안전신통망법	LEGAL_TERM::재난안전통신망법	delete-1 or transpose-2
+TYPO	재난전법	LEGAL_TERM::재난안전법	delete-1 or transpose-2
+TYPO	재난전안법	LEGAL_TERM::재난안전법	delete-1 or transpose-2
+TYPO	전기공사공제합법시행령	LEGAL_TERM::전기공사공제조합법시행령	delete-1 or transpose-2
+TYPO	전기공사공제합조법시행령	LEGAL_TERM::전기공사공제조합법시행령	delete-1 or transpose-2
+TYPO	전기공사제공조합법	LEGAL_TERM::전기공사공제조합법	delete-1 or transpose-2
+TYPO	전기공사제조합법	LEGAL_TERM::전기공사공제조합법	delete-1 or transpose-2
+TYPO	전기공업법	LEGAL_TERM::전기공사업법	delete-1 or transpose-2
+TYPO	전기공업사법	LEGAL_TERM::전기공사업법	delete-1 or transpose-2
+TYPO	전기사업계규칙	LEGAL_TERM::전기사업회계규칙	delete-1 or transpose-2
+TYPO	전기사업계회규칙	LEGAL_TERM::전기사업회계규칙	delete-1 or transpose-2
+TYPO	전기안관리법	LEGAL_TERM::전기안전관리법	delete-1 or transpose-2
+TYPO	전기안관전리법	LEGAL_TERM::전기안전관리법	delete-1 or transpose-2
+TYPO	전기업법	LEGAL_TERM::전기사업법	delete-1 or transpose-2
+TYPO	전기업사법	LEGAL_TERM::전기사업법	delete-1 or transpose-2
+TYPO	전기통사신업법	LEGAL_TERM::전기통신사업법	delete-1 or transpose-2
+TYPO	전기통사업법	LEGAL_TERM::전기통신사업법	delete-1 or transpose-2
+TYPO	정보통신사공업법	LEGAL_TERM::정보통신공사업법	delete-1 or transpose-2
+TYPO	정보통신사업법	LEGAL_TERM::정보통신공사업법	delete-1 or transpose-2
+TYPO	제품안기본법	LEGAL_TERM::제품안전기본법	delete-1 or transpose-2
+TYPO	제품안기전본법	LEGAL_TERM::제품안전기본법	delete-1 or transpose-2
+TYPO	조청	GENERAL_TERM::조달청	delete-1 or transpose-2
+TYPO	조청달	GENERAL_TERM::조달청	delete-1 or transpose-2
+TYPO	주법	LEGAL_TERM::주택법	delete-1 or transpose-2
+TYPO	주법택	LEGAL_TERM::주택법	delete-1 or transpose-2
+TYPO	주차법	LEGAL_TERM::주차장법	delete-1 or transpose-2
+TYPO	주차법장	LEGAL_TERM::주차장법	delete-1 or transpose-2
+TYPO	중대재처벌법	LEGAL_TERM::중대재해처벌법	delete-1 or transpose-2
+TYPO	중대재처해벌법	LEGAL_TERM::중대재해처벌법	delete-1 or transpose-2
+TYPO	중소벤기업부	GENERAL_TERM::중소벤처기업부	delete-1 or transpose-2
+TYPO	중소벤기처업부	GENERAL_TERM::중소벤처기업부	delete-1 or transpose-2
+TYPO	지진ㆍ화산해대책법	LEGAL_TERM::지진ㆍ화산재해대책법	delete-1 or transpose-2
+TYPO	지진ㆍ화산해재대책법	LEGAL_TERM::지진ㆍ화산재해대책법	delete-1 or transpose-2
+TYPO	지진책대법	LEGAL_TERM::지진대책법	delete-1 or transpose-2
+TYPO	지진책법	LEGAL_TERM::지진대책법	delete-1 or transpose-2
+TYPO	질병리관청	GENERAL_TERM::질병관리청	delete-1 or transpose-2
+TYPO	질병리청	GENERAL_TERM::질병관리청	delete-1 or transpose-2
+TYPO	집단에너사업법	LEGAL_TERM::집단에너지사업법	delete-1 or transpose-2
+TYPO	집단에너사지업법	LEGAL_TERM::집단에너지사업법	delete-1 or transpose-2
+TYPO	집단에지너법	LEGAL_TERM::집단에너지법	delete-1 or transpose-2
+TYPO	집단에지법	LEGAL_TERM::집단에너지법	delete-1 or transpose-2
+TYPO	체외진단료기기법	LEGAL_TERM::체외진단의료기기법	delete-1 or transpose-2
+TYPO	체외진단료의기기법	LEGAL_TERM::체외진단의료기기법	delete-1 or transpose-2
+TYPO	총령	GENERAL_TERM::총리령	delete-1 or transpose-2
+TYPO	총령리	GENERAL_TERM::총리령	delete-1 or transpose-2
+TYPO	탄소중기립본법	LEGAL_TERM::탄소중립기본법	delete-1 or transpose-2
+TYPO	탄소중기본법	LEGAL_TERM::탄소중립기본법	delete-1 or transpose-2
+TYPO	토양환보경전법	LEGAL_TERM::토양환경보전법	delete-1 or transpose-2
+TYPO	토양환보전법	LEGAL_TERM::토양환경보전법	delete-1 or transpose-2
+TYPO	파법	LEGAL_TERM::파견법	delete-1 or transpose-2
+TYPO	파법견	LEGAL_TERM::파견법	delete-1 or transpose-2
+TYPO	폐기물리관법	LEGAL_TERM::폐기물관리법	delete-1 or transpose-2
+TYPO	폐기물리법	LEGAL_TERM::폐기물관리법	delete-1 or transpose-2
+TYPO	하수법	LEGAL_TERM::하수도법	delete-1 or transpose-2
+TYPO	하수법도	LEGAL_TERM::하수도법	delete-1 or transpose-2
+TYPO	한국산업안보건공단법	LEGAL_TERM::한국산업안전보건공단법	delete-1 or transpose-2
+TYPO	한국산업안보전건공단법	LEGAL_TERM::한국산업안전보건공단법	delete-1 or transpose-2
+TYPO	한국원자력전기술원법	LEGAL_TERM::한국원자력안전기술원법	delete-1 or transpose-2
+TYPO	한국원자력전안기술원법	LEGAL_TERM::한국원자력안전기술원법	delete-1 or transpose-2
+TYPO	한국환경산기술원법	LEGAL_TERM::한국환경산업기술원법	delete-1 or transpose-2
+TYPO	한국환경산기업술원법	LEGAL_TERM::한국환경산업기술원법	delete-1 or transpose-2
+TYPO	해사안기본법	LEGAL_TERM::해사안전기본법	delete-1 or transpose-2
+TYPO	해사안기전본법	LEGAL_TERM::해사안전기본법	delete-1 or transpose-2
+TYPO	해양산부	GENERAL_TERM::해양수산부	delete-1 or transpose-2
+TYPO	해양산수부	GENERAL_TERM::해양수산부	delete-1 or transpose-2
+TYPO	행정전부	GENERAL_TERM::행정안전부	delete-1 or transpose-2
+TYPO	행정전안부	GENERAL_TERM::행정안전부	delete-1 or transpose-2
+TYPO	화재방법	LEGAL_TERM::화재예방법	delete-1 or transpose-2
+TYPO	화재방예법	LEGAL_TERM::화재예방법	delete-1 or transpose-2
+TYPO	화학물관리법	LEGAL_TERM::화학물질관리법	delete-1 or transpose-2
+TYPO	화학물관질리법	LEGAL_TERM::화학물질관리법	delete-1 or transpose-2
+TYPO	화학물안전원	GENERAL_TERM::화학물질안전원	delete-1 or transpose-2
+TYPO	화학물안질전원	GENERAL_TERM::화학물질안전원	delete-1 or transpose-2
+TRIGRAM	건설기리법	LEGAL_TERM::건설기계관리법	delete-2
+TRIGRAM	건설산본법	LEGAL_TERM::건설산업기본법	delete-2
+TRIGRAM	건축물법	LEGAL_TERM::건축물관리법	delete-2
+TRIGRAM	건축법	LEGAL_TERM::건축기본법	delete-2
+TRIGRAM	고용부	GENERAL_TERM::고용노동부	delete-2
+TRIGRAM	고용산재보징수법	LEGAL_TERM::고용산재보험료징수법	delete-2
+TRIGRAM	고용산재신고법	LEGAL_TERM::고용산재보험신고법	delete-2
+TRIGRAM	공동주리법	LEGAL_TERM::공동주택관리법	delete-2
+TRIGRAM	과학기술통신부	GENERAL_TERM::과학기술정보통신부	delete-2
+TRIGRAM	국가기준원	GENERAL_TERM::국가기술표준원	delete-2
+TRIGRAM	국립소구원	GENERAL_TERM::국립소방연구원	delete-2
+TRIGRAM	국립수학원	GENERAL_TERM::국립수산과학원	delete-2
+TRIGRAM	국립전구원	GENERAL_TERM::국립전파연구원	delete-2
+TRIGRAM	국립환학원	GENERAL_TERM::국립환경과학원	delete-2
+TRIGRAM	국소배치	EQUIPMENT_TERM::국소배기장치	delete-2
+TRIGRAM	국토부	GENERAL_TERM::국토교통부	delete-2
+TRIGRAM	근로법	LEGAL_TERM::근로기준법	delete-2
+TRIGRAM	기계법	LEGAL_TERM::기계설비법	delete-2
+TRIGRAM	기후에너경부	GENERAL_TERM::기후에너지환경부	delete-2
+TRIGRAM	노인법	LEGAL_TERM::노인복지법	delete-2
+TRIGRAM	노후계획정비법	LEGAL_TERM::노후계획도시정비법	delete-2
+TRIGRAM	다중이소법	LEGAL_TERM::다중이용업소법	delete-2
+TRIGRAM	대기환전법	LEGAL_TERM::대기환경보전법	delete-2
+TRIGRAM	도시가업법	LEGAL_TERM::도시가스사업법	delete-2
+TRIGRAM	도시계획규칙	LEGAL_TERM::도시계획시설규칙	delete-2
+TRIGRAM	문화체광부	GENERAL_TERM::문화체육관광부	delete-2
+TRIGRAM	물질안전자료	CHEM_TERM::물질안전보건자료	delete-2
+TRIGRAM	물환경법	LEGAL_TERM::물환경보전법	delete-2
+TRIGRAM	밀폐공업	GENERAL_TERM::밀폐공간작업	delete-2
+TRIGRAM	보건부	GENERAL_TERM::보건복지부	delete-2
+TRIGRAM	사회복업법	LEGAL_TERM::사회복지사업법	delete-2
+TRIGRAM	사회복지공금회법	LEGAL_TERM::사회복지공동모금회법	delete-2
+TRIGRAM	산림재지법	LEGAL_TERM::산림재난방지법	delete-2
+TRIGRAM	산업봇	EQUIPMENT_TERM::산업용로봇	delete-2
+TRIGRAM	산업안건법	LEGAL_TERM::산업안전보건법	delete-2
+TRIGRAM	산업재해보험법	LEGAL_TERM::산업재해보상보험법	delete-2
+TRIGRAM	산재법	LEGAL_TERM::산재보험법	delete-2
+TRIGRAM	석면안리법	LEGAL_TERM::석면안전관리법	delete-2
+TRIGRAM	석면피제법	LEGAL_TERM::석면피해구제법	delete-2
+TRIGRAM	소방법	LEGAL_TERM::소방기본법	delete-2
+TRIGRAM	소방시설업법	LEGAL_TERM::소방시설공사업법	delete-2
+TRIGRAM	소음ㆍ진리법	LEGAL_TERM::소음ㆍ진동관리법	delete-2
+TRIGRAM	식품안본법	LEGAL_TERM::식품안전기본법	delete-2
+TRIGRAM	식품의약전처	GENERAL_TERM::식품의약품안전처	delete-2
+TRIGRAM	신재생지법	LEGAL_TERM::신재생에너지법	delete-2
+TRIGRAM	실내공법	LEGAL_TERM::실내공기질법	delete-2
+TRIGRAM	악취법	LEGAL_TERM::악취방지법	delete-2
+TRIGRAM	액화석스법	LEGAL_TERM::액화석유가스법	delete-2
+TRIGRAM	원자력안원회	GENERAL_TERM::원자력안전위원회	delete-2
+TRIGRAM	위험가	GENERAL_TERM::위험성평가	delete-2
+TRIGRAM	위험물법	LEGAL_TERM::위험물관리법	delete-2
+TRIGRAM	위험물안리법	LEGAL_TERM::위험물안전관리법	delete-2
+TRIGRAM	의료법	LEGAL_TERM::의료기기법	delete-2
+TRIGRAM	잔류성법	LEGAL_TERM::잔류성물질법	delete-2
+TRIGRAM	장애인법	LEGAL_TERM::장애인복지법	delete-2
+TRIGRAM	장애인법	LEGAL_TERM::장애인연금법	delete-2
+TRIGRAM	재난관원법	LEGAL_TERM::재난관리자원법	delete-2
+TRIGRAM	재난법	LEGAL_TERM::재난안전법	delete-2
+TRIGRAM	재난안전망법	LEGAL_TERM::재난안전통신망법	delete-2
+TRIGRAM	전기공법	LEGAL_TERM::전기공사업법	delete-2
+TRIGRAM	전기공사공제법시행령	LEGAL_TERM::전기공사공제조합법시행령	delete-2
+TRIGRAM	전기공사조합법	LEGAL_TERM::전기공사공제조합법	delete-2
+TRIGRAM	전기법	LEGAL_TERM::전기사업법	delete-2
+TRIGRAM	전기사업규칙	LEGAL_TERM::전기사업회계규칙	delete-2
+TRIGRAM	전기안리법	LEGAL_TERM::전기안전관리법	delete-2
+TRIGRAM	전기통업법	LEGAL_TERM::전기통신사업법	delete-2
+TRIGRAM	정보통신업법	LEGAL_TERM::정보통신공사업법	delete-2
+TRIGRAM	제품안본법	LEGAL_TERM::제품안전기본법	delete-2
+TRIGRAM	중대재벌법	LEGAL_TERM::중대재해처벌법	delete-2
+TRIGRAM	중소벤업부	GENERAL_TERM::중소벤처기업부	delete-2
+TRIGRAM	지진ㆍ화산대책법	LEGAL_TERM::지진ㆍ화산재해대책법	delete-2
+TRIGRAM	지진법	LEGAL_TERM::지진대책법	delete-2
+TRIGRAM	질병청	GENERAL_TERM::질병관리청	delete-2
+TRIGRAM	집단에너업법	LEGAL_TERM::집단에너지사업법	delete-2
+TRIGRAM	집단에법	LEGAL_TERM::집단에너지법	delete-2
+TRIGRAM	체외진단기기법	LEGAL_TERM::체외진단의료기기법	delete-2
+TRIGRAM	탄소중본법	LEGAL_TERM::탄소중립기본법	delete-2
+TRIGRAM	토양환전법	LEGAL_TERM::토양환경보전법	delete-2
+TRIGRAM	폐기물법	LEGAL_TERM::폐기물관리법	delete-2
+TRIGRAM	한국산업안건공단법	LEGAL_TERM::한국산업안전보건공단법	delete-2
+TRIGRAM	한국원자력기술원법	LEGAL_TERM::한국원자력안전기술원법	delete-2
+TRIGRAM	한국환경산술원법	LEGAL_TERM::한국환경산업기술원법	delete-2
+TRIGRAM	해사안본법	LEGAL_TERM::해사안전기본법	delete-2
+TRIGRAM	해양부	GENERAL_TERM::해양수산부	delete-2
+TRIGRAM	행정부	GENERAL_TERM::행정안전부	delete-2
+TRIGRAM	화재법	LEGAL_TERM::화재예방법	delete-2
+TRIGRAM	화학물리법	LEGAL_TERM::화학물질관리법	delete-2
+TRIGRAM	화학물전원	GENERAL_TERM::화학물질안전원	delete-2
