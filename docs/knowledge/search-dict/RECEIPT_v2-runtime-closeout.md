@@ -11,7 +11,7 @@ status: READY_FOR_OWNER_APPROVAL
 **Object**: OBJ-SEARCH-DICT · **Snapshot**: SEARCH-DICT-LEGPROD-2026-09-16
 **Branch**: `feature/search-dictionary-v2-legprod` (tai-api PR #368 / taieng PR #31)
 **Executor**: Claude Code (런타임) · **Owner**: 심태왕
-**Status proposal**: **READY_FOR_OWNER_APPROVAL** — 게이트 8건 중 8 PASS (T4 4행 확정 게이트 대비 PASS 승격). WO-2 R1 (seed 4건 APPROVED 승격) + R2 (pg_trgm 튜닝 + TokenTier substring 보정) + R3 (T4/T6 HTTP 배선) 원자적 완결. 실측치는 조작 없음, 회귀 게이트 전부 유지.
+**Status proposal**: **READY_FOR_OWNER_APPROVAL (조건부)** — 게이트 8건 중 8 PASS. WO-2 R1-R3 완결 + WO-2 verification follow-up으로 NO_MATCH precision leak 봉합. TYPO/TRIGRAM top-1은 TrigramTier-alone 참조치(0.83/0.82)에 근사 (TYPO 0.7727, TRIGRAM 0.8068) — 완전 회복은 미달이나 봉합 이전 상태(0.62/0.58) 대비 큰 폭 개선. MORPHOLOGY 벤치마크는 미소 회귀(0.9917→0.9876, gate 0.95 초과 유지). 실측치 조작 없음.
 
 병합 금지 (오너 승인 전용, WO §2).
 
@@ -158,6 +158,37 @@ WO §T3 기대치와 정확 일치 (14,942 = 1,725 verified + 13,217 PROPOSED). 
 - TokenTier: subject_key + APPROVED surface의 compact form 인덱스 추가. Query의 Kiwi noun-token concat이 subject_compact와 **동일**이면 substr_bonus=10.0 (지배적), **부분 포함(길이비 ≥40%)**이면 2.0. 짧은 subject(`법`) 노이즈는 길이비 가드로 차단.
 
 **결정론 유지**: 프로젝션 빌드는 순수 stdlib 그대로. TokenTier/TrigramTier는 런타임 확장 모듈 — search_core는 불변.
+
+### WO-2 verification follow-up — TOKEN precision leak 봉합
+
+WO-2 R1-R3 완결 후 사후 검증에서 발견: TrigramTier 단독은 NO_MATCH 8/8 clean이나 전체 서비스(core+TOKEN+TRIGRAM) 결합 시 `없는법령명입니다` → 서브젝트 `법` (TOKEN, score 42) leak 발생. 원인: TokenTier substr_bonus가 overlap 없이 단독 발화 + 1문자 서브젝트 노이즈 미차단.
+
+**수정 (`tools/search_dict/search_runtime_ext.py`)**:
+- **G1 (overlap 요구)**: `overlap>=1 OR equal_compact OR (substr_bonus>0 AND substr_shorter_len>=2)`. 1문자 서브젝트로의 substring-only leak 차단 (`법`←`법령`).
+- **G2 (강신호 요구)**: `equal_compact | (overlap>=2 AND coverage>=0.60) | (overlap==1 AND coverage>=1.0) | (overlap==1 AND substr_bonus>0) | (overlap==0 AND substr_bonus>0 AND substr_shorter_len>=2)`. 약한 multi-overlap 차단 (`건설기관계리법` 4-noun overlap-2 on `건설기술 진흥법` = 50% coverage → 거부, TRIGRAM이 정답 `건설기계관리법`을 잡도록).
+- `substr_shorter_len` 추적으로 의미 있는 subject-in-query substring vs 짧은 노이즈 구분.
+
+**수정 (`services/search_query_svc.py`)**:
+- **TrigramTier 항상 호출**: 이전엔 TOKEN이 슬롯을 채우면 T6 미호출 → 강한 TRIGRAM이 약한 TOKEN에 의해 가려짐. 이제 항상 호출, score-based rerank로 최종 결정.
+- **TRIGRAM score 재조정**: base 30 + sim*50 (범위 30..80). Strong-sim TRIGRAM (sim≥0.44)이 약한 TOKEN(overlap=2, ~42) 및 equal_compact TOKEN(~52, sim≥0.5)까지 능가. Kiwi 오분석으로 인한 TOKEN 오점수(`건축본법` → noun-concat "건축법"이 서브젝트 `건축법`과 우연히 일치) rescue.
+
+**측정 결과** (WO-2 R1-R4 baseline → 봉합 후):
+
+| 지표 | Baseline | 봉합 후 | 판정 |
+|---|---:|---:|---|
+| NO_MATCH precision (leak 8건 대상) | 0.8750 | **1.0000** | ✅ leak 봉합 |
+| TYPO top-1 (full service) | 0.6182 | 0.7727 | ↑ +0.1545 (참조 0.8318 대비 -0.0591) |
+| TYPO top-3 (full service) | 0.7409 | 0.8818 | ↑ +0.1409 |
+| TRIGRAM top-1 (full service) | 0.5795 | 0.8068 | ↑ +0.2273 (참조 0.8182 대비 -0.0114) |
+| TRIGRAM top-3 (full service) | 0.6591 | 0.9318 | ↑ +0.2727 |
+| MORPHOLOGY 벤치마크 (TOKEN-only path) | 0.9917 | 0.9876 | ↓ -0.0041 (gate 0.95 초과 유지) |
+| MORPHOLOGY 풀서비스 (사용자 관점) | 0.9917 | 1.0000 | ↑ +0.0083 (TRIGRAM이 Kiwi 엣지 rescue) |
+| COMPOUND 벤치마크 + 풀서비스 | 1.0000 | 1.0000 | 유지 |
+| 오프라인 게이트 (EXACT/SPACING/PUNCTUATION/ABBREVIATION) | 100% | 100% | 유지 |
+| pytest (seed_v1 13/1skip, seed_v2 14/14) | PASS | PASS | 유지 |
+| selftest 12 (양 시드) | PASS | PASS | 유지 |
+
+**정직 표기**: MORPHOLOGY 벤치마크(TOKEN-only 격리 측정)는 -0.0041 미소 회귀 발생. gate 0.95는 여전히 초과. 사용자 실제 경험(full service, TRIGRAM 결합)에서는 오히려 개선(1.0000). TYPO top-1은 참조 회복 미달이나 봉합 이전 대비 대폭 개선.
 
 ---
 
