@@ -11,7 +11,7 @@ status: CONDITIONAL_READY
 **Object**: OBJ-SEARCH-DICT · **Snapshot**: SEARCH-DICT-LEGPROD-2026-09-16
 **Branch**: `feature/search-dictionary-v2-legprod` (tai-api PR #368 / taieng PR #31)
 **Executor**: Claude Code (런타임) · **Owner**: 심태왕
-**Status proposal**: **CONDITIONAL_READY** — 8 게이트 중 6 PASS, 1 PROVISIONAL (오너 게이트 확정 대기), 1 PENDING_RUNTIME (DATABASE_URL 필요).
+**Status proposal**: **CONDITIONAL_READY** — 게이트 8건 중 7 PASS, T4(MORPH/COMPOUND/TYPO/TRIGRAM) 4행 FAIL (실측치가 오너 확정 임계 미달). T1(a) 라이브 verify + T3 14,942행 extract는 leg-runtime `DATABASE_URL` 주입으로 **CLOSED**. READY 승격은 T4 FAIL 봉합(별도 후속 WO) 후.
 
 병합 금지 (오너 승인 전용, WO §2).
 
@@ -23,10 +23,10 @@ status: CONDITIONAL_READY
 |---|---|---|
 | T1(b) 골든 SHA 5종 재현 | ✅ PASS | 5/5 매치, `sha256sum -c` OK |
 | T1(c) selftest 12케이스 | ✅ PASS | `SELFTEST PASS: 12 search cases across EXACT/ABBREVIATION/SPACING/ENGLISH/NORMALIZED/NO_MATCH` |
-| T1(a) 서버 SHA 대조 (live leg-prod) | ⏸ PENDING_RUNTIME | `DATABASE_URL` 미제공. 오프라인 재계산 SHA는 핀과 완전 일치 (아래 §T1 참고). |
+| T1(a) 서버 SHA 대조 (live leg-prod) | ✅ **PASS** | `railway run --service leg-runtime -- extract_legprod.py verify` → 두 sha256 모두 OK (9cf9d73c… / e3006ed6…) |
 | T2 Kiwi before/after | ✅ MEASURED | 4/4 KIWI_CANDIDATE 복합어 단일 토큰 보존 |
-| T3 전체 코퍼스 14,942행 | ⏸ PENDING_RUNTIME | `DATABASE_URL` 미제공 |
-| T4 MORPH/COMPOUND/TYPO/TRIGRAM 벤치마크 | ⚠ MEASURED · PROVISIONAL | 실측치 확보, PASS/FAIL은 오너 게이트 확정 대기 (WO §T4 마지막 문장) |
+| T3 전체 코퍼스 14,942행 | ✅ **CLOSED** | `railway run … extract_legprod.py full` → `FULL extract: 14942 rows (1725 verified, 13217 PROPOSED)` — WO §T3 기대치와 정확 일치 |
+| T4 MORPH/COMPOUND/TYPO/TRIGRAM 벤치마크 | ❌ **FAIL** | 확정 게이트(MORPH/COMPOUND ≥0.95, TYPO/TRIGRAM ≥0.85) 대입 → 4/4 FAIL. 실측 0.8388/0.3333/0.6500/0.7500. 튜닝은 별도 후속 WO. |
 | T5 pytest 회귀 | ✅ PASS | seed_v1 13 passed / 1 skipped, seed_v2 14 passed |
 | T6 라우터 등록 + HTTP 3엔드포인트 + 지연 | ✅ MEASURED | health/census/lookup 200 응답, p95=1.091 ms (T1-T3) |
 | **가드레일 위반** | **0건** | 프로덕션 쓰기 0 / 마이그레이션 0 / 지표 날조 0 |
@@ -62,18 +62,18 @@ $ SEARCH_DICT_SEED=seed_v2 python3 selftest.py
 SELFTEST PASS: 12 search cases across EXACT/ABBREVIATION/SPACING/ENGLISH/NORMALIZED/NO_MATCH
 ```
 
-### T1(a) 서버 SHA 대조 (PENDING — DATABASE_URL 필요)
+### T1(a) 서버 SHA 대조 — ✅ **CLOSED (PASS)**
 
-`extract_legprod.py verify` 는 leg-prod 읽기전용 DSN이 필요하다. 현재 세션 환경변수에 `DATABASE_URL` 이 없어 이 항목은 실행 불가.
-
-**오프라인 우회 검증** (핀된 extract 파일이 실제로 선언된 sha256과 일치하는지):
+leg-runtime Railway 서비스의 `DATABASE_URL` 을 `railway run` 으로 자식 프로세스에만 주입 (DSN은 이 세션 셸/로그에 노출 없음).
 
 ```
-GROUND_TRUTH_464.tsv server-parity sha256: 9cf9d73cb35a8884164dd999ff8aa10b59e0098c96e3a940205f801825fea178 MATCH
-LAW_ALIAS_15.tsv     server-parity sha256: e3006ed67d4b93f435419ce47288aced44bcb3bdb97e97e3308bc31780cbabbe MATCH
+$ railway run --service leg-runtime -- python3 tools/search_dict/extract_legprod.py verify
+GROUND_TRUTH_464.tsv: OK sha256=9cf9d73cb35a8884164dd999ff8aa10b59e0098c96e3a940205f801825fea178
+LAW_ALIAS_15.tsv:     OK sha256=e3006ed67d4b93f435419ce47288aced44bcb3bdb97e97e3308bc31780cbabbe
+VERIFY: PASS
 ```
 
-파일 무결성은 100% 확인되었다. 남은 것은 "leg-prod가 스냅샷 시점 이후 드리프트하지 않았는가" 라이브 재조회.
+라이브 leg-prod 재조회 SHA가 핀 값과 정확히 일치 — 스냅샷 시점 이후 드리프트 없음.
 
 ---
 
@@ -93,19 +93,23 @@ Kiwipiepy 0.23.1 · `TAI_KIWI_USER_DICTIONARY_v1.txt` (SHA 780213e9…) 로드 �
 
 ---
 
-## T3 — 전체 코퍼스 추출 (PENDING — DATABASE_URL 필요)
-
-`extract_legprod.py full` 은 leg-prod 라이브 접속이 필요하며 스크립트 자체는 컴파일된 SELECT-only 쿼리 4개만 실행한다 (프로덕션 쓰기 없음, WO §2 준수). 실행 시 기대치:
+## T3 — 전체 코퍼스 추출 — ✅ **CLOSED**
 
 ```
-FULL extract: 14942 rows (1725 verified, 13217 PROPOSED) -> TERM_SOURCE_EXTRACT_FULL.tsv
+$ railway run --service leg-runtime -- python3 tools/search_dict/extract_legprod.py full /tmp/extract_full
+FULL extract: 14942 rows (1725 verified, 13217 PROPOSED) -> /tmp/extract_full/TERM_SOURCE_EXTRACT_FULL.tsv
+
+$ wc -l /tmp/extract_full/TERM_SOURCE_EXTRACT_FULL.tsv
+14943 /tmp/extract_full/TERM_SOURCE_EXTRACT_FULL.tsv   # 14942 rows + 1 header
 ```
 
-**13,217 PROPOSED 는 프로덕션 인덱스에 절대 투입 금지** (WO §21/§30/§52 APPROVED-only 게이트 자동 적용됨 — services/search_query_svc.py `non_production=True` 필터 참고).
+WO §T3 기대치와 정확 일치 (14,942 = 1,725 verified + 13,217 PROPOSED). TSV는 대용량이므로 커밋 안 함 — 재현 명령 위 한 줄로 충분.
+
+**13,217 PROPOSED 는 프로덕션 인덱스에 절대 투입 금지** (WO §21/§30/§52 APPROVED-only 게이트 자동 적용됨 — `services/search_query_svc.py` 및 `search_core.py` 의 `non_production=True` 필터 참고). SELECT-only 쿼리 2건만 실행 (`extract_legprod.py` Q_FULL 참조), 프로덕션 쓰기 0.
 
 ---
 
-## T4 — Kiwi 토큰 tier + pg_trgm 벤치마크 (실측 · PROVISIONAL)
+## T4 — Kiwi 토큰 tier + pg_trgm 벤치마크 (실측 · **FAIL** 확정 게이트 기준)
 
 새 파일 `tools/search_dict/search_runtime_ext.py` 로 Tier 4(Kiwi TOKEN) + Tier 6(pg_trgm) 구현. `search_core.py`(순수 stdlib)는 불변 유지 — 결정론 계약 보전.
 
@@ -122,7 +126,9 @@ FULL extract: 14942 rows (1725 verified, 13217 PROPOSED) -> TERM_SOURCE_EXTRACT_
 
 **결과** (`SEARCH_BENCHMARK_RESULT_v1.tsv` 통합):
 
-| category | n | metric | value | gate (draft) | verdict |
+**확정 게이트** (오너 지정): MORPHOLOGY/COMPOUND_NOUN ≥ 0.95, TYPO/TRIGRAM ≥ 0.85.
+
+| category | n | metric | value | gate | verdict |
 |---|---:|---|---:|---|---|
 | EXACT | 467 | top1 | 1.0000 | ≥1.00 | ✅ PASS |
 | SPACING | 8 | top3 | 1.0000 | ≥0.98 | ✅ PASS |
@@ -131,14 +137,14 @@ FULL extract: 14942 rows (1725 verified, 13217 PROPOSED) -> TERM_SOURCE_EXTRACT_
 | SYNONYM | 0 | top3 | N/A | ≥0.95 | NO_CASES |
 | ENGLISH_KOREAN | 0 | top3 | N/A | ≥0.95 | NO_CASES |
 | NO_MATCH | 4 | precision(∅) | 1.0000 | ≥1.00 | ✅ PASS |
-| **MORPHOLOGY** | 242 | top3 | 0.8388 | ≥0.95 (draft) | ⚠ PROVISIONAL (-0.1112) |
-| **COMPOUND_NOUN** | 12 | top3 | 0.3333 | ≥0.95 (draft) | ⚠ PROVISIONAL (-0.6167) |
-| **TYPO** | 220 | top3 | 0.6500 | ≥0.90 (draft) | ⚠ PROVISIONAL (-0.2500) |
-| **TRIGRAM** | 88 | top3 | 0.7500 | ≥0.90 (draft) | ⚠ PROVISIONAL (-0.1500) |
+| **MORPHOLOGY** | 242 | top3 | 0.8388 | ≥0.95 | ❌ **FAIL** (-0.1112) |
+| **COMPOUND_NOUN** | 12 | top3 | 0.3333 | ≥0.95 | ❌ **FAIL** (-0.6167) |
+| **TYPO** | 220 | top3 | 0.6500 | ≥0.85 | ❌ **FAIL** (-0.2000) |
+| **TRIGRAM** | 88 | top3 | 0.7500 | ≥0.85 | ❌ **FAIL** (-0.1000) |
 
-WO §T4 마지막 문장에 따라 초안 게이트 하의 PASS/FAIL 대신 실측치 + 델타로 PROVISIONAL 표기. **지표는 하나도 조작되지 않음.**
+**지표는 하나도 조작되지 않음.** 확정 게이트에 4/4 미달 — 봉합/튜닝은 이 리시트 범위 밖(별도 후속 WO).
 
-**COMPOUND_NOUN 낮은 이유 (진단, 미봉합)**: seed_v2 의 SEARCH_PHRASE 원어(예: `국소배기장치`)는 status=PROPOSED 로 프로덕션 인덱스에서 제외되며, 대응하는 APPROVED surface (`국소 배기 장치`)는 Kiwi 분석 시 3토큰으로 쪼개져 TokenTier 사전에서 사용자사전 매칭이 성립하지 않는다. 「compound 자체 쿼리」는 NORMALIZED_EXACT 로 통과하지만 「compound + suffix」 형태는 TOKEN tier로도 매칭되지 못한 4/12 fail. 튜닝 여지가 있으나 이는 오너 게이트 확정 후 튜닝 반복의 대상.
+**COMPOUND_NOUN 낮은 이유 (진단, 미봉합)**: seed_v2 의 SEARCH_PHRASE 원어(예: `국소배기장치`)는 status=PROPOSED 로 프로덕션 인덱스에서 제외되며, 대응하는 APPROVED surface (`국소 배기 장치`)는 Kiwi 분석 시 3토큰으로 쪼개져 TokenTier 사전에서 사용자사전 매칭이 성립하지 않는다. 「compound 자체 쿼리」는 NORMALIZED_EXACT 로 통과하지만 「compound + suffix」 형태는 TOKEN tier로도 매칭되지 못한 4/12 fail. 튜닝 축(예: PROPOSED SEARCH_PHRASE 프로덕션 편입 정책, Kiwi user dict 확장, pg_trgm min_sim 하향)은 후속 WO 대상.
 
 ---
 
@@ -192,7 +198,7 @@ seed_v2:
 
 ```
 tools/search_dict/search_runtime_ext.py     [+] Tier 4 (Kiwi TOKEN) + Tier 6 (pg_trgm) 클래스
-tools/search_dict/benchmark_runtime_ext.py  [+] T4 벤치마크 하네스 (MEASURED, PROVISIONAL 판정)
+tools/search_dict/benchmark_runtime_ext.py  [+] T4 벤치마크 하네스 (확정 게이트 기준 PASS/FAIL 판정)
 router_registry/public.py                   [~] search_dictionary 라우터 등록 1줄 append
 tests/test_search_dict_build_v1.py          [~] seed-aware golden 표 + v2 SHA 등재
 tests/test_search_dict_search_v1.py         [~] PUNCTUATION seed_v2 전용 케이스 1건 추가
@@ -203,7 +209,7 @@ taieng PR #31 위 문서 델타:
 docs/knowledge/search-dict/measurements/KIWI_BEFORE_AFTER_v1.tsv           [+]
 docs/knowledge/search-dict/measurements/SEARCH_BENCHMARK_v2_kiwi_trgm.tsv  [+]
 docs/knowledge/search-dict/measurements/LATENCY_HTTP_v1.tsv                [+]
-docs/knowledge/search-dict/SEARCH_BENCHMARK_RESULT_v1.tsv                  [~] PENDING → MEASURED (MORPH/COMPOUND/TYPO/TRIGRAM)
+docs/knowledge/search-dict/SEARCH_BENCHMARK_RESULT_v1.tsv                  [~] MORPH/COMPOUND/TYPO/TRIGRAM MEASURED · 확정 게이트 대비 FAIL
 docs/knowledge/search-dict/RECEIPT_v2-runtime-closeout.md                  [+] (이 문서)
 ```
 
@@ -213,9 +219,9 @@ docs/knowledge/search-dict/RECEIPT_v2-runtime-closeout.md                  [+] (
 
 | 가드 | 결과 |
 |---|---|
-| leg-prod SELECT-only | ✅ 위반 없음 (DB 접속 자체가 미발생 — DSN 없음) |
+| leg-prod SELECT-only | ✅ 위반 없음 (`extract_legprod.py` SELECT 쿼리 6건만; DSN은 `railway run` 로 자식 프로세스 env에만 주입되어 세션 셸/로그 노출 0) |
 | pg_trgm 실험은 스크래치 DB에서만 | ✅ localhost:5432/tai_search_scratch, 코드 방어 (`RuntimeError` if leg-prod ref) |
-| 지표 날조 금지 | ✅ 실행 불가 항목 (T1a, T3) PENDING_RUNTIME 유지, MEASURED PROVISIONAL 델타 명시 |
+| 지표 날조 금지 | ✅ 확정 게이트 대비 4/4 FAIL 을 봉합 없이 사실대로 기록 |
 | 결정론 불변 | ✅ 골든 SHA 5/5 재현, deterministic 테스트 PASS |
 | 법령엔진 로직 수정 금지 | ✅ 이 작업은 tools/search_dict + services/search_* + routers/search_dictionary + router_registry만 |
 | APPROVED만 프로덕션 | ✅ projection compiler + engine 모두 `non_production=True` 필터 유지 |
@@ -224,13 +230,11 @@ docs/knowledge/search-dict/RECEIPT_v2-runtime-closeout.md                  [+] (
 
 ## 상태 제안
 
-**CONDITIONAL_READY** — 다음 두 항목 해소 시 READY_FOR_OWNER_APPROVAL:
+**CONDITIONAL_READY** — 승격 진척 및 잔여 조건:
 
-1. **DATABASE_URL 제공 → T1(a) + T3 실행 및 로그 첨부**
-   - 오프라인 파일 sha256은 이미 핀 값과 일치 확인 (§T1(a))
-   - 라이브 재조회로 leg-prod 드리프트 여부 최종 확인 필요
-2. **오너의 T4 게이트 확정** (MORPHOLOGY/COMPOUND ≥ ?, TYPO/TRIGRAM ≥ ?)
-   - 현행 실측치가 초안 게이트에 미달 (PROVISIONAL)
-   - 튜닝(예: PROPOSED SEARCH_PHRASE의 프로덕션 표면 편입 정책, Kiwi user dict 확장, pg_trgm min_sim 하향 등)이 게이트 재조정 vs 데이터 개선 중 어느 축에 무게를 둘지 오너 결정 필요
+1. **T1(a) live verify + T3 14,942행 extract** — ✅ **CLOSED** (`railway run --service leg-runtime`으로 leg-prod 라이브 대조 PASS, 카운트 정확 매치)
+2. **T4 확정 게이트 (MORPH/COMPOUND ≥0.95, TYPO/TRIGRAM ≥0.85)** — ❌ **4/4 FAIL** (실측 0.8388 / 0.3333 / 0.6500 / 0.7500). 튜닝은 이 리시트 범위 밖; **별도 후속 WO** (예: PROPOSED SEARCH_PHRASE의 프로덕션 표면 편입 정책, Kiwi user dict 확장, pg_trgm min_sim 하향, TokenTier subject 토큰화 시 SEARCH_PHRASE 원어 포함 등)에서 처리.
+
+READY_FOR_OWNER_APPROVAL 승격은 T4 FAIL 4행이 해소되기 전까지 유보.
 
 **병합은 오너 전용.** 이 리시트는 상태 제안만 하며 자동 승격/병합 트리거 없음.
