@@ -1,0 +1,6 @@
+term	class	before_tokens	after_tokens	preserved	note
+국소배기장치	KIWI_CANDIDATE	국소/NNG|배기/NNG|장치/NNG	국소배기장치/NNP	true	compound preserved as single token
+위험성평가	KIWI_CANDIDATE	위험/NNG|성/XSN|평가/NNG	위험성평가/NNP	true	compound preserved as single token
+밀폐공간작업	KIWI_CANDIDATE	밀폐/NNG|공간/NNG|작업/NNG	밀폐공간작업/NNP	true	compound preserved as single token
+산업용로봇	KIWI_CANDIDATE	산업/NNG|용/XSN|로봇/NNG	산업용로봇/NNP	true	compound preserved as single token
+밀폐공간	SEARCH_PHRASE	밀폐/NNG|공간/NNG	밀폐/NNG|공간/NNG	false	compound still segmented in AFTER
