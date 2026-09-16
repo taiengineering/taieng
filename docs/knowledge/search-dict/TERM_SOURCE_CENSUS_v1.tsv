@@ -1,0 +1,10 @@
+source_id	source_db	source_object	row_count	term_bearing_columns	verified_subset	seed_use	notes
+SRC-LEG-DICT	leg-prod(wrfcedzgdrfupenzqhur)	public.dict_legal_terms	14942	term,pos_tag,term_type,frequency,score,source,verified	verified=true:1725 / verified=false:13217	PRIMARY_REUSE	Existing Kiwi-extracted + ground_truth legal-term dictionary. pos_tag NNG 11657 / NNP 3285. source breakdown: law_article_part.part_text:kiwi-extraction 14474 / law_master.law_name:ground_truth 366 / law_name_short 57 / ministry_name 30 / manual:whitelist 15. term_type GENERIC 14474 / LAW_NAME 423 / AGENCY_NAME 30 / TECH_TERM 15.
+SRC-LEG-ALIAS	leg-prod(wrfcedzgdrfupenzqhur)	public.law_alias	15	short_name,full_name	15/15 verified	SEED_ABBREVIATION_SPACING	Verified short<->full legal name pairs. Copied verbatim into seed as ABBREVIATION_OF / SPACING_VARIANT_OF relations. e.g. 산안법->산업안전보건법, 중대재해법->중대재해 처벌 등에 관한 법률.
+SRC-LEG-LAWMASTER	leg-prod(wrfcedzgdrfupenzqhur)	public.law_master	768	law_name,law_name_short	ground_truth	SEED_SOURCE_NAME	Canonical law names. Used as SOURCE_NAME anchors for legal subjects.
+SRC-DOMAIN-KOSHA	(domain research, no DB row)	KOSHA industrial-safety compound terms	n/a	term	n/a	SEED_SEARCH_PHRASE_KIWI	Compound safety terms that existing Kiwi OVER-SEGMENTS (국소배기장치, 위험성평가, 밀폐공간작업, 산업용로봇, 수변전설비, 방폭구조). Entered as SEARCH_PHRASE / KIWI_USER_WORD candidates ONLY - NOT fabricated canonical terms.
+SRC-LEG-INDUSTRY	leg-prod(wrfcedzgdrfupenzqhur)	public.industry_master	501	name	-	CENSUS_ONLY	Available for future expansion; not in v1 seed.
+SRC-LEG-KCSC	leg-prod(wrfcedzgdrfupenzqhur)	public.kcsc_process_master / kcsc_work_master	161 / 243	name	-	CENSUS_ONLY	Construction standard process/work terms; future expansion.
+SRC-LEG-KSIC	leg-prod(wrfcedzgdrfupenzqhur)	public.ksic_process_map	6957	name	-	CENSUS_ONLY	Industry classification map; future expansion.
+SRC-LEG-SYSCODES	leg-prod(wrfcedzgdrfupenzqhur)	public.system_codes	1805	code,label	-	CENSUS_ONLY	System code labels; future expansion.
+SRC-LEG-SEMCLAUSE	leg-prod(wrfcedzgdrfupenzqhur)	public.semantic_clause	59865	-	-	CENSUS_ONLY	Clause corpus; potential evidence source for future term extraction.
