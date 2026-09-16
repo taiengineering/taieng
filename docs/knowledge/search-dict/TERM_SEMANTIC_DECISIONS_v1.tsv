@@ -1,0 +1,10 @@
+decision_id	subject	decision	rationale	authority	wo_ref
+DEC-01	MSDS <-> 물질안전보건자료	ABBREVIATION_OF, status APPROVED	Established, unambiguous legal abbreviation present in domain usage; safe to approve.	CLAUDE_PROPOSED (owner to ratify)	§18
+DEC-02	SDS -> MSDS	SYNONYM_OF, status REVIEWED (not APPROVED)	SDS is the international term; mapping to MSDS is a curation judgment, held at REVIEWED pending owner.	CLAUDE_PROPOSED	§18,§52
+DEC-03	LEV -> 국소배기장치	ENGLISH_OF, status REVIEWED (not APPROVED)	English acronym mapping; deliberately NOT approved to prove the APPROVED-only production gate (LEV is excluded from index).	CLAUDE_PROPOSED	§52
+DEC-04	국소배기장치 / 위험성평가 / 밀폐공간작업 / 산업용로봇 / 수변전설비 / 방폭구조	term_type = SEARCH_PHRASE + KIWI_USER_WORD candidate	Existing Kiwi over-segments these compounds. Entered as search phrases + Kiwi user-dict candidates, NOT as fabricated canonical terms (WO §71/§124).	CLAUDE_PROPOSED	§71,§124
+DEC-05	law_alias short<->full (15 pairs)	Copied verbatim as ABBREVIATION_OF / SPACING_VARIANT_OF	Verified pairs from leg-prod; source-exact, no interpretation.	SOURCE_EXACT	§26
+DEC-06	Agency names subject_type	AGENCY_NAME -> GENERAL_TERM	AGENCY_NAME is not a valid subject_type enum in the Contract; corrected to GENERAL_TERM.	CLAUDE_CORRECTION	§11
+DEC-07	밀폐공간 term_type	NARROWER -> SEARCH_PHRASE	NARROWER is not a valid term_type enum; corrected to SEARCH_PHRASE.	CLAUDE_CORRECTION	§11
+DEC-08	No auto-merge of similar names	All similarity treated as candidate only	Morphological/trigram/LLM similarity != canonical merge; MERGE = OWNER DECISION.	WO_INVARIANT	HARD-STOP
+DEC-09	Kiwi before/after metrics	Left as PENDING_RUNTIME	kiwipiepy uninstallable in this environment; fabricating metrics forbidden.	ENVIRONMENT_BOUNDARY	§73

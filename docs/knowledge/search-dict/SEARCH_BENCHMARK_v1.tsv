@@ -1,0 +1,15 @@
+query_id	query	expected_subject	expected_tier	offline_result	runtime_result	notes
+BM-01	산안법	산업안전보건법	T1_EXACT(via ABBREVIATION)	PASS	PENDING_RUNTIME	Approved abbreviation resolves to canonical law subject.
+BM-02	중대재해법	중대재해 처벌 등에 관한 법률	T1_EXACT(via ABBREVIATION)	PASS	PENDING_RUNTIME	
+BM-03	MSDS	물질안전보건자료	T1_EXACT(via ABBREVIATION)	PASS	PENDING_RUNTIME	Approved.
+BM-04	고압가스안전관리법	고압가스 안전관리법	T2_NORMALIZED_EXACT	PASS	PENDING_RUNTIME	Spacing-insensitive match.
+BM-05	국소 배기 장치	국소배기장치	T2_NORMALIZED_EXACT	PASS	PENDING_RUNTIME	Approved spacing variant.
+BM-06	산업안전보건법시행령	산업안전보건법 시행령	T2_NORMALIZED_EXACT	PASS	PENDING_RUNTIME	Compact-form match.
+BM-07	LEV	(none - REVIEWED, excluded)	NO_MATCH	PASS	PENDING_RUNTIME	Proves APPROVED-only gate; REVIEWED term must NOT surface.
+BM-08	zzznotaterm	(none)	NO_MATCH	PASS	PENDING_RUNTIME	Junk query returns NO_MATCH.
+BM-09	위험성평가	위험성평가	T4_KIWI_TOKEN	N/A_OFFLINE	PENDING_RUNTIME	Requires Kiwi user-dict at runtime.
+BM-10	밀폐공간 작업 절차	밀폐공간작업	T4_KIWI_TOKEN / T6_PG_TRGM	N/A_OFFLINE	PENDING_RUNTIME	Requires Kiwi + pg_trgm.
+
+# Offline tiers (T1-T3) verified via selftest.py (12 cases PASS) and search_core over the runtime projection.
+# Kiwi (T4) and pg_trgm (T6) rows are N/A_OFFLINE: kiwipiepy/psycopg2 uninstallable in build env.
+# Latency (p50/p95/p99) = PENDING_RUNTIME. No latency numbers fabricated (WO §73).
